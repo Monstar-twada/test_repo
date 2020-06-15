@@ -59,6 +59,9 @@ export default {
     //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
+  router: {
+    base: process.env.BASE_URL,
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
