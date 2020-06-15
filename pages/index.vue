@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">nuxt-boilerplate</h1>
-      <h2 class="subtitle" />
+      <h1 class="title">its just a sample to show the applied fonts</h1>
+      <h2 class="subtitle">
+        サンプルサンプルサンプル
+      </h2>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green"
           >Documentation</a
@@ -37,19 +39,18 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Yantramanav';
   display: block;
-  font-weight: 300;
-  font-size: 100px;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 50px;
   color: $blue-100;
-  letter-spacing: 1px;
 }
 
 .subtitle {
+  font-family: 'Noto Sans JP';
   font-weight: 300;
-  font-size: 42px;
-  color: #526488;
+  font-size: 25px;
   word-spacing: 5px;
   padding-bottom: 15px;
 }
