@@ -55,10 +55,10 @@ export default {
     '@nuxtjs/style-resources',
     ['@nuxtjs/eslint-module', { fix: true }],
   ],
-  // env: {
-  //   APIServer: process.env.API_URL,
-  //   baseURL: process.env.baseURL,
-  // },
+  env: {
+    //   APIServer: process.env.API_URL,
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
