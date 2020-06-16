@@ -52,6 +52,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     // Doc: https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/axios',
+    '@nuxtjs/vuetify',
     '@nuxtjs/style-resources',
     ['@nuxtjs/eslint-module', { fix: true }],
   ],
