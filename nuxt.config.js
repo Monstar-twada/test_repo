@@ -53,6 +53,7 @@ export default {
     // Doc: https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/axios',
     '@nuxtjs/vuetify',
+    '@nuxtjs/svg',
     '@nuxtjs/style-resources',
     ['@nuxtjs/eslint-module', { fix: true }],
   ],
@@ -62,6 +63,13 @@ export default {
   },
   router: {
     base: process.env.BASE_URL,
+  },
+  vuetify: {
+    customVariables: ['~/assets/scss/variables.scss'],
+    treeShake: true,
+    theme: {
+      dark: false,
+    },
   },
   /*
    ** Axios module configuration
