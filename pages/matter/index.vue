@@ -4,6 +4,7 @@
     <div class="main-container">
       <Breadcrumbs :items="items" />
       <Searchbar />
+      <Searchresult />
     </div>
   </v-app>
 </template>
@@ -12,11 +13,13 @@
 import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import Searchbar from '~/components/Searchbar.vue'
+import Searchresult from '~/components/Searchresult.vue'
 export default {
   components: {
     Sidebar,
     Breadcrumbs,
     Searchbar,
+    Searchresult,
   },
   data() {
     return {
