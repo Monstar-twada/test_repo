@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="breadcrumbs">
-      <v-breadcrumbs :items="items" class="pa-0 bread">
+      <v-breadcrumbs :items="items" class="pa-0">
         <template v-slot:divider>
           <v-img :src="require('~/static/breadcrumbs/right.svg')" />
         </template>
@@ -33,14 +33,11 @@ export default {
 }
 </script>
 <style lang="scss">
-.v-breadcrumbs {
-  color: red !important;
+.v-breadcrumbs__item {
+  color: $white-100 !important;
 }
 </style>
 <style lang="scss" scoped>
-.bread {
-  display: none !important;
-}
 .breadcrumbs {
   display: flex;
   justify-content: space-between;
