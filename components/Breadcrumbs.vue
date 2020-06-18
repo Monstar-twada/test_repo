@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="breadcrumbs">
-      <v-breadcrumbs :items="items" class="pa-0">
+      <v-breadcrumbs :items="items" class="pa-0 bread">
         <template v-slot:divider>
           <v-img :src="require('~/static/breadcrumbs/right.svg')" />
         </template>
@@ -22,28 +22,25 @@
 <script>
 export default {
   name: 'Breadcrumbs',
-  data: () => ({
-    items: [
-      {
-        text: 'home',
-        disabled: false,
-        to: '/',
+  props: {
+    items: {
+      type: Array,
+      default() {
+        return []
       },
-      {
-        text: '案件管理',
-        disabled: false,
-        to: 'matter',
-      },
-    ],
-  }),
+    },
+  },
 }
 </script>
 <style lang="scss">
-.v-breadcrumbs__item {
-  color: $white-100 !important;
+.v-breadcrumbs {
+  color: red !important;
 }
 </style>
 <style lang="scss" scoped>
+.bread {
+  display: none !important;
+}
 .breadcrumbs {
   display: flex;
   justify-content: space-between;
