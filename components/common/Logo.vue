@@ -1,5 +1,9 @@
 <template>
-  <v-img class="logo" :src="require('~/static/logo.svg')" :width="logoWidth" />
+  <v-img
+    class="logo"
+    :src="require('~/static/common/logo.svg')"
+    :width="logoWidth"
+  />
 </template>
 <script>
 export default {

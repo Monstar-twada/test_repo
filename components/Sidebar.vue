@@ -20,7 +20,7 @@
       <v-list>
         <v-list-item-group v-model="model">
           <v-list-item v-for="(item, i) in items" :key="i">
-            <v-list-item-icon>
+            <v-list-item-icon class="mr-4">
               <v-img
                 :src="require(`~/static/sidebar/${item.icon}.svg`)"
               ></v-img>
