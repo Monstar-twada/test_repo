@@ -2,7 +2,7 @@
   <v-app>
     <Sidebar />
     <div class="main-container">
-      <Breadcrumbs />
+      <Breadcrumbs :items="items" />
       <Searchbar />
     </div>
   </v-app>
@@ -17,6 +17,20 @@ export default {
     Sidebar,
     Breadcrumbs,
     Searchbar,
+  },
+  data() {
+    return {
+      items: [
+        {
+          text: 'home',
+          to: '/',
+        },
+        {
+          text: '案件管理',
+          to: 'matter',
+        },
+      ],
+    }
   },
 }
 </script>
