@@ -16,6 +16,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isSize: {
+      type: Boolean,
+      default: false,
+    },
   },
 }
 </script>
