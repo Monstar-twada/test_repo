@@ -2,7 +2,7 @@
   <v-app>
     <Sidebar />
     <div class="main-container">
-      <Breadcrumbs />
+      <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
       <Searchbar />
     </div>
   </v-app>
@@ -11,12 +11,27 @@
 <script>
 import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
-import Searchbar from '~/components/Searchbar.vue'
+import Searchbar from '~/components/matter/Searchbar.vue'
 export default {
   components: {
     Sidebar,
     Breadcrumbs,
     Searchbar,
+  },
+  data() {
+    return {
+      page: '案件管理',
+      breadcrumbs: [
+        {
+          text: 'home',
+          to: '/',
+        },
+        {
+          text: '案件管理',
+          to: 'matter',
+        },
+      ],
+    }
   },
 }
 </script>
