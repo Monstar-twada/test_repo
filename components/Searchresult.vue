@@ -1,41 +1,65 @@
 <template>
-  <div class="searchresult">
-    <div class="pageinfo">
-      <div class="numofitems">
-        <h2>200</h2>
-        <h3>件中 21〜40件を表示</h3>
+  <div class="list">
+    <div class="list__paging">
+      <div class="list__paging--info">
+        <p class="total">200</p>
+        <p>件中 21〜40件を表示</p>
       </div>
       <v-pagination
-        v-model="page"
-        :length="5"
+        v-model="currentPage"
+        :length="getTotalPage"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
-        class="pagination"
+        class="list__paging--pagenation"
       ></v-pagination>
     </div>
-    <v-data-table
-      :headers="headers"
-      :items="items"
-      :page.sync="page"
-      :items-per-page="itemsPerPage"
-      :sort-by="['案件ID', '登録日', '最終更新日時', '顧客名']"
-      :sort-desc="[false, false, false, true]"
-      multi-sort
-      hide-default-footer
-      class="datatable"
-      @page-count="pageCount = $event"
-    ></v-data-table>
-    <div class="pageinfo">
-      <div class="numofitems">
-        <h2>200</h2>
-        <h3>件中 21〜40件を表示</h3>
+    <v-simple-table fixed-header height="300px" class="list__table">
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th
+              v-for="(head, i) in table.headers"
+              :key="`thead-${i}`"
+              class="text-center"
+            >
+              {{ head.text }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in table.items" :key="item.id" class="text-center">
+            <td>{{ item.id }}</td>
+            <td>{{ item.createdAt[0] }}<br />{{ item.createdAt[1] }}</td>
+            <td>{{ item.updatedAt[0] }}<br />{{ item.updatedAt[1] }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.subCategory }}</td>
+            <td>
+              <v-avatar :size="36">
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-avatar>
+              <span>{{ item.customer[1] }}</span>
+              <span>{{ item.customer[2] }}</span>
+            </td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.charge[0] }}<br />{{ item.charge[1] }}</td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <div class="list__paging">
+      <div class="list__paging--info">
+        <p class="total">200</p>
+        <p>件中 21〜40件を表示</p>
       </div>
       <v-pagination
-        v-model="page"
-        :length="5"
+        v-model="currentPage"
+        :length="getTotalPage"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
-        class="pagination"
+        class="list__paging--pagination"
       ></v-pagination>
     </div>
   </div>
@@ -46,152 +70,97 @@ export default {
   name: 'SearchResult',
   components: {},
   data: () => ({
-    page: 1,
+    currentPage: 1,
     itemsPerPage: 10,
     pageCount: 0,
-    headers: [
-      { text: '案件ID', sortable: true, value: 'col1' },
-      { text: '登録日', sortable: true, value: 'col2' },
-      { text: '最終更新日時', sortable: true, value: 'col3' },
-      { text: 'カテゴリー', sortable: false, value: 'col4' },
-      { text: 'サブカテゴリー', sortable: false, value: 'col5' },
-      { text: '顧客名', sortable: true, value: 'col6' },
-      { text: '連絡先電話番号', sortable: false, value: 'col7' },
-      { text: '担当者', sortable: false, value: 'col8' },
-    ],
-    items: [
-      {
-        col1: 'Frozen Yogurt',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt2',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt3',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt4',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt5',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt6',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt7',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt8',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt9',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-      {
-        col1: 'Frozen Yogurt10',
-        col2: 159,
-        col3: 6.0,
-        col4: 24,
-        col5: 4.0,
-        col6: '1%',
-        col7: '1%',
-        col8: '1%',
-      },
-    ],
+    table: {
+      headers: [
+        { text: '案件ID', sortable: true, value: 'col1' },
+        { text: '登録日', sortable: true, value: 'col2' },
+        { text: '最終更新日時', sortable: true, value: 'col3' },
+        { text: 'カテゴリー', sortable: false, value: 'col4' },
+        { text: 'サブカテゴリー', sortable: false, value: 'col5' },
+        { text: '顧客名', sortable: true, value: 'col6' },
+        { text: '連絡先電話番号', sortable: false, value: 'col7' },
+        { text: '担当者', sortable: false, value: 'col8' },
+      ],
+      items: [
+        {
+          id: 'AT-123',
+          createdAt: ['R2/11/31', '10:00'],
+          updatedAt: ['R2/11/31', '10:00'],
+          category: '買取',
+          subCategory: 'AA',
+          customer: ['url', '米田 道春', '（31歳）'],
+          phone: '080-1234-1234',
+          charge: ['cars足立店', '山田太郎'],
+        },
+      ],
+    },
   }),
+  computed: {
+    getTotalPage() {
+      return this.table.items.length / 10 + 1
+    },
+  },
+  methods: {},
 }
 </script>
 
 <style lang="scss" scoped>
-.searchresult {
+.list {
   width: 100%;
   height: 60px;
-}
-.pageinfo {
-  width: 100%;
-  padding-top: 18.5px;
-  padding-bottom: 9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  & .numofitems {
+
+  &__paging {
     width: 100%;
+    padding-top: 18.5px;
+    padding-bottom: 9px;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    h2 {
-      margin-right: 4.3px;
-      color: $white-300;
+    justify-content: space-between;
+    align-items: baseline;
+    &--info {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      p {
+        margin-bottom: 0;
+        color: $white-300;
+        font-size: 14px;
+        &.total {
+          margin-right: 4.3px;
+          font-size: 24px;
+          font-weight: bold;
+        }
+      }
     }
-    h3 {
-      color: $white-300;
+    &--pagination {
     }
   }
-  & .pagination {
+
+  &__table {
+    border-radius: 6px;
+    thead {
+      tr {
+        th {
+          color: $blue-200 !important;
+          &:first-child {
+            border-radius: 6px 0 0 0;
+          }
+          &:last-child {
+            border-radius: 0 6px 0 0;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          color: $blue-200 !important;
+        }
+      }
+    }
   }
 }
 </style>
