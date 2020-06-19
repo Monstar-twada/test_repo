@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="breadcrumbs">
-      <v-breadcrumbs :items="items" class="pa-0">
+      <v-breadcrumbs :items="breadcrumbs" class="pa-0">
         <template v-slot:divider>
           <v-img :src="require('~/static/breadcrumbs/right.svg')" />
         </template>
@@ -15,7 +15,7 @@
         class="titlepage_logo mr-2"
         :src="require('~/static/breadcrumbs/result.svg')"
       />
-      <h1>案件管理</h1>
+      <h1>{{ page }}</h1>
     </div>
   </div>
 </template>
@@ -23,11 +23,15 @@
 export default {
   name: 'Breadcrumbs',
   props: {
-    items: {
+    breadcrumbs: {
       type: Array,
       default() {
         return []
       },
+    },
+    page: {
+      type: String,
+      default: '',
     },
   },
 }
