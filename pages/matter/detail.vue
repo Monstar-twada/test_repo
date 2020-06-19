@@ -4,7 +4,7 @@
     <div class="main-container">
       <Breadcrumbs :items="items" />
       <Searchbar />
-      <MatterResult />
+      <MatterDetail />
     </div>
   </v-app>
 </template>
@@ -13,13 +13,13 @@
 import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import Searchbar from '~/components/Searchbar.vue'
-import MatterResult from '~/components/MatterResult.vue'
+import MatterDetail from '~/components/MatterDetail.vue'
 export default {
   components: {
     Sidebar,
     Breadcrumbs,
     Searchbar,
-    MatterResult,
+    MatterDetail,
   },
   data() {
     return {

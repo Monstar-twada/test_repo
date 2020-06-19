@@ -28,7 +28,9 @@
         </thead>
         <tbody>
           <tr v-for="item in table.items" :key="item.id" class="text-center">
-            <td>{{ item.id }}</td>
+            <td>
+              <nuxt-link to="/matter/detail">{{ item.id }}</nuxt-link>
+            </td>
             <td>{{ item.createdAt[0] }}<br />{{ item.createdAt[1] }}</td>
             <td>{{ item.updatedAt[0] }}<br />{{ item.updatedAt[1] }}</td>
             <td>{{ item.category }}</td>
@@ -67,7 +69,7 @@
 
 <script>
 export default {
-  name: 'SearchResult',
+  name: 'MatterResult',
   components: {},
   data: () => ({
     currentPage: 1,
