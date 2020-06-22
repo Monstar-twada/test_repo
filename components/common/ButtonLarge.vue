@@ -16,13 +16,6 @@ export default {
       type: Boolean,
       default: false,
     },
-<<<<<<< HEAD
-    isSize: {
-      type: Boolean,
-      default: false,
-    },
-=======
->>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
   },
 }
 </script>
