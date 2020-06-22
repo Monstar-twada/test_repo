@@ -1,11 +1,6 @@
 <template>
   <div class="container">
-    <div>
-      <h2>メッセージボックス</h2>
-      <div></div>
-      <textarea id="" name="" cols="30" rows="10"></textarea>
-      <button></button>
-    </div>
+    <ChatContainer />
     <CustomerInfo />
     <div>c</div>
     <SituationContainer />
@@ -13,12 +8,14 @@
 </template>
 
 <script>
+import ChatContainer from '~/components/matter/ChatContainer'
 import CustomerInfo from '~/components/matter/CustomerInfo.vue'
 import SituationContainer from '~/components/matter/SituationContainer.vue'
 
 export default {
   name: 'MatterDetail',
   components: {
+    ChatContainer,
     CustomerInfo,
     SituationContainer,
   },
@@ -29,7 +26,7 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 473px max-content;
+  grid-template-rows: 490px max-content;
   grid-gap: 30px;
   margin: 30px 0;
   & > div {

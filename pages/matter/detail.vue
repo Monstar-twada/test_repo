@@ -13,7 +13,7 @@
 import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import DetailSearchBar from '~/components/matter/DetailSearchBar.vue'
-import MatterDetail from '~/components/MatterDetail.vue'
+import MatterDetail from '~/components/matter/MatterDetail.vue'
 export default {
   components: {
     Sidebar,
