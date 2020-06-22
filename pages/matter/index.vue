@@ -49,7 +49,8 @@ export default {
 </style>
 <style lang="scss" scoped>
 .main-container {
-  padding: 30px 70px 0px;
-  width: 100%;
+  padding: 30px 0px;
+  margin: 0 75px;
+  max-width: 1080px;
 }
 </style>

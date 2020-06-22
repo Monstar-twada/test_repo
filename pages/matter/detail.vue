@@ -3,7 +3,7 @@
     <Sidebar />
     <div class="main-container">
       <Breadcrumbs :items="items" />
-      <Searchbar />
+      <DetailSearchBar />
       <MatterDetail />
     </div>
   </v-app>
@@ -12,13 +12,13 @@
 <script>
 import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
-import Searchbar from '~/components/Searchbar.vue'
+import DetailSearchBar from '~/components/matter/DetailSearchBar.vue'
 import MatterDetail from '~/components/MatterDetail.vue'
 export default {
   components: {
     Sidebar,
     Breadcrumbs,
-    Searchbar,
+    DetailSearchBar,
     MatterDetail,
   },
   data() {
@@ -37,19 +37,10 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.v-application {
-  background: url('~static/common/full.png') !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-}
-.v-application--wrap {
-  flex-direction: row !important;
-}
-</style>
 <style lang="scss" scoped>
 .main-container {
-  padding: 30px 70px 0px;
-  width: 100%;
+  padding: 30px 0px;
+  margin: 0 75px;
+  max-width: 1080px;
 }
 </style>
