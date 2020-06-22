@@ -75,7 +75,10 @@ export default {
 <style lang="scss">
 .v-navigation-drawer {
   max-width: 210px !important;
+<<<<<<< HEAD
   height: 800px !important;
+=======
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
 }
 .v-input__slot {
   box-shadow: none !important;

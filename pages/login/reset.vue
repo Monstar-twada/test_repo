@@ -17,14 +17,22 @@
             <Input
               class="mt20"
               name="new_password"
+<<<<<<< HEAD
               placeholder="新しいパスワード"
               :customwidth="270"
+=======
+              placeholder-text="新しいパスワード"
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
             />
             <Input
               class="mt20"
               name="new_password_confrim"
+<<<<<<< HEAD
               placeholder="新しいパスワード（確認）"
               :customwidth="270"
+=======
+              placeholder-text="新しいパスワード（確認）"
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
             />
             <ButtonLarge class="mt30" content="パスワード設定" />
           </v-row>

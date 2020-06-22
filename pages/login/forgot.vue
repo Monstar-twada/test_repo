@@ -14,12 +14,20 @@
             </h3>
           </v-row>
           <v-row justify="center" align="center">
+<<<<<<< HEAD
             <Input class="mt20" name="ID" placeholder="ID" :customwidth="270" />
             <Input
               class="mt20"
               name="mailaddress"
               placeholder="メールアドレス"
               :customwidth="270"
+=======
+            <Input class="mt20" name="ID" placeholder-text="ID" />
+            <Input
+              class="mt20"
+              name="mailaddress"
+              placeholder-text="メールアドレス"
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
             />
             <ButtonLarge class="mt30" content="送信する" />
             <nuxt-link class="mt20" to="../login">

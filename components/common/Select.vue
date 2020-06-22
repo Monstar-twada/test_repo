@@ -5,7 +5,10 @@
     class="selectStyle"
     searchable
     :components="{ OpenIndicator }"
+<<<<<<< HEAD
     :style="SelectStyle"
+=======
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
   >
   </VSelect>
 </template>
@@ -24,6 +27,17 @@ export default {
       type: String,
       default: 'Label',
     },
+<<<<<<< HEAD
+=======
+    bgColor: {
+      type: String,
+      default: '',
+    },
+    height: {
+      type: String,
+      default: '35',
+    },
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
     list: {
       type: Array,
       default: () => ['1', '2'],
@@ -32,6 +46,7 @@ export default {
       type: Boolean,
       default: false,
     },
+<<<<<<< HEAD
     customwidth: {
       type: Number,
       default: 120,
@@ -40,12 +55,15 @@ export default {
       type: Number,
       default: 20,
     },
+=======
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
   },
   data() {
     return {
       OpenIndicator: Dropdown,
     }
   },
+<<<<<<< HEAD
   computed: {
     SelectStyle() {
       return {
@@ -54,6 +72,8 @@ export default {
       }
     },
   },
+=======
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
 }
 </script>
 <style lang="scss">
@@ -65,7 +85,11 @@ export default {
   padding: 0 !important;
 }
 .vs__search {
+<<<<<<< HEAD
   height: var(--height);
+=======
+  margin: 6px 0 0;
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
 }
 .selectStyle .vs__search::placeholder,
 .selectStyle .vs__dropdown-toggle,
@@ -76,8 +100,12 @@ export default {
   text-transform: lowercase;
   font-variant: small-caps;
   font-family: 'Noto Sans JP';
+<<<<<<< HEAD
   width: var(--width);
   min-width: var(--width);
+=======
+  width: 120px;
+>>>>>>> 96bd11555c679a82bece25332cf943b965fc26b6
   font-size: 10px;
 }
 .vs__selected-options {
