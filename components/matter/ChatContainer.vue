@@ -13,22 +13,22 @@
         >
           <div class="message__context">
             {{ msg.text }}
+            <div class="message__context__edit">
+              <v-img
+                :max-width="30"
+                :max-height="30"
+                :src="require(`~/static/matter/pancel_icon.svg`)"
+                class="message__context__edit__btns--upload"
+              ></v-img>
+              <v-img
+                :max-width="30"
+                :max-height="30"
+                :src="require(`~/static/matter/trash_icon.svg`)"
+                class="message__context__edit__btns--upload"
+              ></v-img>
+            </div>
           </div>
           <p>{{ msg.created_at }}</p>
-          <div class="chatContainer__body__messages--left--edit">
-            <v-img
-              :max-width="30"
-              :max-height="30"
-              :src="require(`~/static/matter/pancel_icon.svg`)"
-              class="chatContainer__input__btns--upload"
-            ></v-img>
-            <v-img
-              :max-width="30"
-              :max-height="30"
-              :src="require(`~/static/matter/trash_icon.svg`)"
-              class="chatContainer__input__btns--upload"
-            ></v-img>
-          </div>
         </div>
         <div v-else class="chatContainer__body__messages--right">
           <div class="message__context">
@@ -125,7 +125,6 @@ export default {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 30px;
-      position: relative;
       & > div {
         width: max-content;
         max-width: 250px;
@@ -145,14 +144,15 @@ export default {
           background-color: $white-300;
           color: $blue-200;
           border-radius: 20px 20px 20px 0;
-        }
-        &--edit {
-          position: absolute;
-          top: 0;
-          transform: translateX(250px);
-          display: flex;
-          .v-image {
-            margin-right: 0;
+          position: relative;
+          &__edit {
+            position: absolute;
+            top: 50%;
+            transform: translateX(250px) translateY(-50%);
+            display: flex;
+            .v-image {
+              margin-right: 0;
+            }
           }
         }
       }
