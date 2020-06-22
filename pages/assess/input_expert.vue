@@ -5,7 +5,7 @@
       <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
       <AssessExpertBar />
       <div class="tab-container">
-        <v-row class="align-center">
+        <v-row class="align-center tab-container_position">
           <ButtonLarge
             class="button"
             content="QRコード読み込み"
@@ -29,8 +29,8 @@
             {{ i.title }}
           </v-tab>
           <v-tab-item value="tab-1">
-            <v-card>
-              <v-card-text>1</v-card-text>
+            <v-card class="first">
+              <h3 class="title">基本情報</h3>
             </v-card>
           </v-tab-item>
           <v-tab-item value="tab-2">
@@ -113,6 +113,9 @@ export default {
 .v-item-group {
   margin-bottom: 85px;
 }
+.v-tabs-items {
+  border-radius: 5px !important;
+}
 </style>
 <style lang="scss" scoped>
 .main-container {
@@ -145,8 +148,23 @@ export default {
       display: none;
     }
   }
+  &_position {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+  }
 }
 .tab-text {
   color: #fff !important;
+}
+//title
+.title {
+  font-size: 20px;
+  color: $blue-200;
+  font-weight: 600;
+}
+//first TAB
+.first {
+  padding: 30px;
 }
 </style>
