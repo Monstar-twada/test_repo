@@ -2,7 +2,7 @@
   <div class="container">
     <ChatContainer />
     <CustomerInfo />
-    <div>c</div>
+    <MatchingContainer />
     <SituationContainer />
   </div>
 </template>
@@ -10,6 +10,7 @@
 <script>
 import ChatContainer from '~/components/matter/ChatContainer'
 import CustomerInfo from '~/components/matter/CustomerInfo.vue'
+import MatchingContainer from '~/components/matter/MatchingContainer'
 import SituationContainer from '~/components/matter/SituationContainer.vue'
 
 export default {
@@ -17,6 +18,7 @@ export default {
   components: {
     ChatContainer,
     CustomerInfo,
+    MatchingContainer,
     SituationContainer,
   },
 }
