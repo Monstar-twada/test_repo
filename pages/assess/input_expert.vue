@@ -29,9 +29,9 @@
             {{ i.title }}
           </v-tab>
           <v-tab-item value="tab-1">
-            <v-card class="first">
-              <h3 class="title">基本情報</h3>
-            </v-card>
+            <BasictInformation />
+            <OwnershipInformation />
+            <OwnershipInformation />
           </v-tab-item>
           <v-tab-item value="tab-2">
             <v-card>
@@ -54,12 +54,16 @@ import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
+import BasictInformation from '~/components/assess/BasictInformation.vue'
+import OwnershipInformation from '~/components/assess/OwnershipInformation.vue'
 export default {
   components: {
     Sidebar,
     Breadcrumbs,
     AssessExpertBar,
     ButtonLarge,
+    BasictInformation,
+    OwnershipInformation,
   },
   data() {
     return {
@@ -156,15 +160,5 @@ export default {
 }
 .tab-text {
   color: #fff !important;
-}
-//title
-.title {
-  font-size: 20px;
-  color: $blue-200;
-  font-weight: 600;
-}
-//first TAB
-.first {
-  padding: 30px;
 }
 </style>
