@@ -5,7 +5,7 @@
       <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
       <AssessExpertBar />
       <div class="tab-container">
-        <v-row v-if="isTab1" class="align-center tab-container_position">
+        <v-row class="align-center tab-container_position">
           <ButtonLarge
             class="button-qr"
             content="QRコード読み込み"
@@ -25,7 +25,6 @@
             :key="i.count"
             class="tab-text"
             :href="`#tab-${i.tab}`"
-            @click="toggleTab"
           >
             {{ i.title }}
           </v-tab>
@@ -75,7 +74,6 @@ export default {
   },
   data() {
     return {
-      isTab1: true,
       page: '査定',
       breadcrumbs: [
         {
@@ -111,17 +109,6 @@ export default {
         },
       ],
     }
-  },
-  methods: {
-    toggleTab() {
-      console.log(this.isTab1)
-      console.log(this.tabs[0].tab)
-      if (this.tab === 'tab-1') {
-        this.isTab1 = true
-      } else {
-        this.isTab1 = false
-      }
-    },
   },
 }
 </script>
