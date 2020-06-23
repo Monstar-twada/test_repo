@@ -1,10 +1,10 @@
 <template>
   <div class="chatContainer">
     <h2 class="chatContainer__title">メッセージボックス</h2>
-    <div class="chatContainer__body">
+    <div ref="chatBody" class="chatContainer__body">
       <div
-        v-for="msg in messages"
-        :key="msg.id"
+        v-for="(msg, i) in messages"
+        :key="`msg-${i}`"
         class="chatContainer__body__messages"
       >
         <div
@@ -18,13 +18,14 @@
                 :max-width="30"
                 :max-height="30"
                 :src="require(`~/static/matter/pancel_icon.svg`)"
-                class="message__context__edit__btns--upload"
+                class="message__context__edit__btns--remake"
               ></v-img>
               <v-img
                 :max-width="30"
                 :max-height="30"
                 :src="require(`~/static/matter/trash_icon.svg`)"
-                class="message__context__edit__btns--upload"
+                class="message__context__edit__btns--trash"
+                @click="removeMessage(i)"
               ></v-img>
             </div>
           </div>
@@ -39,7 +40,11 @@
       </div>
     </div>
     <div class="chatContainer__input">
-      <textarea name="" placeholder="メッセージを入力してください。"></textarea>
+      <textarea
+        v-model="messageInput"
+        name=""
+        placeholder="メッセージを入力してください。"
+      ></textarea>
       <div class="chatContainer__input__btns">
         <v-img
           :max-width="13"
@@ -52,6 +57,7 @@
           :max-height="14"
           :src="require(`~/static/matter/sendMessage_icon.svg`)"
           class="chatContainer__input__btns--send"
+          @click="sendMessage"
         ></v-img>
       </div>
     </div>
@@ -74,30 +80,57 @@ export default {
   name: 'ChatContainer',
   data() {
     return {
+      messageInput: '',
+      editMessage: '',
       messages: [
         {
           id: 1,
           target: 'charge',
           text: 'AI査定ギガ買取のお申し込みありがとうございます。',
           created_at: '2020/02/25 10:24',
-          modify: false,
         },
         {
           id: 2,
           target: 'charge',
           text: '担当させていただく田中と申します。',
           created_at: '2020/02/25 10:24',
-          modify: false,
         },
         {
           id: 3,
           target: 'customer',
           text: 'よろしくお願いします。。',
           created_at: '2020/03/01 09:13',
-          modify: false,
         },
       ],
     }
+  },
+  mounted() {
+    this.scrollToBottom()
+  },
+  methods: {
+    sendMessage() {
+      const date = new Date()
+      const newMessage = {
+        id: Math.floor(Math.random() * 100),
+        target: 'charge',
+        text: this.messageInput,
+        created_at: `${date.getFullYear()}/${
+          date.getMonth() + 1
+        }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`,
+      }
+      this.messages = [...this.messages, newMessage]
+      this.messageInput = ''
+      setTimeout(() => {
+        this.scrollToBottom()
+      }, 100)
+    },
+    removeMessage(target) {
+      const result = this.messages.filter((msg, i) => target !== i)
+      this.messages = [...result]
+    },
+    scrollToBottom() {
+      this.$refs.chatBody.scrollTo(0, this.$refs.chatBody.scrollHeight)
+    },
   },
 }
 </script>
@@ -152,6 +185,7 @@ export default {
             display: flex;
             .v-image {
               margin-right: 0;
+              cursor: pointer;
             }
           }
         }
@@ -189,6 +223,9 @@ export default {
       bottom: 10px;
       right: 10px;
       display: flex;
+      & > .v-image {
+        cursor: pointer;
+      }
       &--upload {
         margin-right: 11px;
       }
@@ -208,6 +245,7 @@ export default {
       font-size: 11px;
       color: $blue-100;
       position: relative;
+      cursor: pointer;
       .v-image {
         position: absolute;
         left: 10px;

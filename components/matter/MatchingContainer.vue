@@ -20,7 +20,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in table.items" :key="item.id" class="text-center">
+          <tr
+            v-for="(item, i) in table.items"
+            :key="`item-${i}`"
+            class="text-center"
+          >
             <td class="table--id">
               <nuxt-link to="/matter/detail">{{ item.id }}</nuxt-link>
             </td>
@@ -35,7 +39,7 @@
               {{ item.purchaseTerm }}
             </td>
             <td class="table--remove">
-              <div class="remove--btn">
+              <div class="remove--btn" @click="removeItem(i)">
                 <v-img
                   :max-width="12"
                   :max-height="12"
@@ -85,6 +89,10 @@ export default {
     numberWithCommas(price) {
       return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     },
+    removeItem(index) {
+      const result = this.table.items.filter((item, i) => i !== index)
+      this.table.items = [...result]
+    },
   },
 }
 </script>
@@ -131,6 +139,7 @@ export default {
               border-radius: 16px;
               border: solid 1px #dfe6f0;
               padding: 3px 3px;
+              cursor: pointer;
               .v-image {
                 margin-right: 8px;
               }
