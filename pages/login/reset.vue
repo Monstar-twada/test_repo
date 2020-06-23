@@ -17,12 +17,14 @@
             <Input
               class="mt20"
               name="new_password"
-              placeholder-text="新しいパスワード"
+              placeholder="新しいパスワード"
+              :customwidth="270"
             />
             <Input
               class="mt20"
               name="new_password_confrim"
-              placeholder-text="新しいパスワード（確認）"
+              placeholder="新しいパスワード（確認）"
+              :customwidth="270"
             />
             <ButtonLarge class="mt30" content="パスワード設定" />
           </v-row>

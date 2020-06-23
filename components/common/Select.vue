@@ -5,6 +5,7 @@
     class="selectStyle"
     searchable
     :components="{ OpenIndicator }"
+    :style="SelectStyle"
   >
   </VSelect>
 </template>
@@ -23,14 +24,6 @@ export default {
       type: String,
       default: 'Label',
     },
-    bgColor: {
-      type: String,
-      default: '',
-    },
-    height: {
-      type: String,
-      default: '35',
-    },
     list: {
       type: Array,
       default: () => ['1', '2'],
@@ -39,11 +32,27 @@ export default {
       type: Boolean,
       default: false,
     },
+    customwidth: {
+      type: Number,
+      default: 120,
+    },
+    customheight: {
+      type: Number,
+      default: 20,
+    },
   },
   data() {
     return {
       OpenIndicator: Dropdown,
     }
+  },
+  computed: {
+    SelectStyle() {
+      return {
+        '--width': this.customwidth + 'px',
+        '--height': this.customheight + 'px',
+      }
+    },
   },
 }
 </script>
@@ -56,7 +65,7 @@ export default {
   padding: 0 !important;
 }
 .vs__search {
-  margin: 6px 0 0;
+  height: var(--height);
 }
 .selectStyle .vs__search::placeholder,
 .selectStyle .vs__dropdown-toggle,
@@ -67,7 +76,8 @@ export default {
   text-transform: lowercase;
   font-variant: small-caps;
   font-family: 'Noto Sans JP';
-  width: 120px;
+  width: var(--width);
+  min-width: var(--width);
   font-size: 10px;
 }
 .vs__selected-options {
