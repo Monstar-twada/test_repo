@@ -5,9 +5,9 @@
       <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
       <AssessExpertBar />
       <div class="tab-container">
-        <v-row class="align-center tab-container_position">
+        <v-row v-if="isTab1" class="align-center tab-container_position">
           <ButtonLarge
-            class="button"
+            class="button-qr"
             content="QRコード読み込み"
             :is-white="true"
           />
@@ -25,13 +25,18 @@
             :key="i.count"
             class="tab-text"
             :href="`#tab-${i.tab}`"
+            @click="toggleTab"
           >
             {{ i.title }}
           </v-tab>
           <v-tab-item value="tab-1">
             <BasictInformation />
             <OwnershipInformation />
-            <OwnershipInformation />
+            <ExpertInformation />
+            <div class="d-flex flex-column justify-center align-center mt40">
+              <ButtonLarge content="査定結果へ" is-white class="mb30" />
+              <ButtonLarge content="検索結果へ戻る" class="mb100" />
+            </div>
           </v-tab-item>
           <v-tab-item value="tab-2">
             <v-card>
@@ -56,6 +61,8 @@ import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
 import BasictInformation from '~/components/assess/BasictInformation.vue'
 import OwnershipInformation from '~/components/assess/OwnershipInformation.vue'
+import ExpertInformation from '~/components/assess/ExpertInformation.vue'
+
 export default {
   components: {
     Sidebar,
@@ -64,9 +71,11 @@ export default {
     ButtonLarge,
     BasictInformation,
     OwnershipInformation,
+    ExpertInformation,
   },
   data() {
     return {
+      isTab1: true,
       page: '査定',
       breadcrumbs: [
         {
@@ -103,6 +112,17 @@ export default {
       ],
     }
   },
+  methods: {
+    toggleTab() {
+      console.log(this.isTab1)
+      console.log(this.tabs[0].tab)
+      if (this.tab === 'tab-1') {
+        this.isTab1 = true
+      } else {
+        this.isTab1 = false
+      }
+    },
+  },
 }
 </script>
 <style lang="scss">
@@ -131,7 +151,7 @@ export default {
   h4 {
     color: $white-300;
   }
-  .button {
+  .button-qr {
     background-color: $white-300;
     width: 150px;
     font-size: 12px;
