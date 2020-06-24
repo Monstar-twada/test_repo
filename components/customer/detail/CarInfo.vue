@@ -2,7 +2,16 @@
   <v-row align="top" justify="center" class="customer-car ma-0 pa-0">
     <div class="title">
       <h2>顧客情報</h2>
-      <p><v-img :src="require('~/static/customer/btn-plus.svg')" /></p>
+      <p>
+        <v-img
+          class="car_more mr10"
+          :src="require('~/static/customer/car-more.svg')"
+        />
+        <v-img
+          class="car_plus"
+          :src="require('~/static/customer/btn-plus.svg')"
+        />
+      </p>
     </div>
     <v-col cols="8" class="p20">
       <v-row align="top" justify="center" class="customer-car__owner ma-0">
@@ -343,8 +352,12 @@ export default {
     p {
       float: right;
       margin: 20px;
-
-      img {
+      .car_more {
+        display: inline-block;
+        width: 90px;
+      }
+      .car_plus {
+        display: inline-block;
         width: 30px;
       }
     }

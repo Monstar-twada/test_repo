@@ -11,7 +11,8 @@
       <div class="customer-info customer-info__car mt20">
         <CarInfo />
       </div>
-      <div class="customer-info customer-info__memo mt20">
+      <!------------ Memo Table --------------->
+      <div class="customer-info customer-info__memo mt20 mb50">
         <MemoTable />
       </div>
     </div>
@@ -80,7 +81,7 @@ export default {
   }
 
   &__memo {
-    height: 400px;
+    overflow: hidden;
   }
 }
 </style>

@@ -46,8 +46,8 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="4">
-      <v-row align="center" justify="center" class="">
+    <v-col cols="4" class="pl20 pr20">
+      <v-row align="center" justify="center" class="ma-0 pa-0">
         <v-col cols="3">
           <v-avatar size="80" class="customer-profile__image">
             <v-img :src="require('~/static/customer/profile.png')"></v-img>
@@ -62,14 +62,16 @@
           </v-col>
         </v-col>
       </v-row>
-      <v-row justify="left" class="questionary">
-        <v-data-table
-          :headers="headers"
-          :items="itemlist"
-          hide-default-footer
-          class="itemlistTable"
-        >
-        </v-data-table>
+      <v-row align="center" justify="start" class="questionary ma-0">
+        <h3 class="mt10 mb10">アンケード情報</h3>
+        <v-col cols="12" class="px-0">
+          <v-data-table
+            :headers="headers"
+            :items="itemlist"
+            hide-default-footer
+          >
+          </v-data-table>
+        </v-col>
       </v-row>
     </v-col>
   </v-row>
@@ -126,28 +128,33 @@ export default {
 </script>
 
 <style lang="scss">
-.theme--light.v-data-table .v-data-table__wrapper table tbody tr td {
-  font-size: 12px !important;
-}
-.v-data-table {
-  &__wrapper {
+.questionary {
+  .v-data-table {
     table {
-      tbody {
+      border: 1px $gray-100 solid;
+      thead {
         tr {
-          font-size: 12px;
-          height: 40px !important;
-          color: $blue-500;
-          td {
-            height: 50px !important;
-            margin: 10px 0;
-            //border-right: 1px $gray-100 solid;
+          th {
+            height: 40px !important;
+            background: $white-100;
+            color: $blue-200 !important;
           }
         }
-        tr:nth-child(even) {
-          background-color: $white-100;
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 12px;
+            height: 40px !important;
+            color: $blue-200 !important;
+          }
         }
       }
     }
+  }
+  .theme--light.v-data-table table tbody tr td {
+    font-size: 12px;
+    color: $blue-200;
   }
 }
 </style>

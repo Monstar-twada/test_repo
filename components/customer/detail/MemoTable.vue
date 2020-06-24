@@ -88,35 +88,36 @@ export default {
 .customer-memo {
   .v-data-table {
     width: 100%;
-    &__wrapper {
-      table {
-        tbody {
-          tr {
-            font-size: 12px;
-            height: 70px !important;
-            color: $blue-500;
-            td {
-              height: 50px !important;
-              margin: 10px 0;
-              //border-right: 1px $gray-100 solid;
-            }
+    table {
+      thead {
+        tr {
+          th {
+            font-size: 12px !important;
+            height: 30px !important;
+            background: $white-100;
+            color: $blue-200 !important;
           }
-          tr:nth-child(even) {
-            background-color: $white-100;
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-size: 12px !important;
+            height: 70px !important;
+            color: $blue-200 !important;
           }
         }
       }
     }
   }
-}
-
-.theme--light.v-icon {
-  color: $blue-300 !important;
+  // .theme--light.v-data-table table thead tr th {
+  //   color: $blue-200;
+  //   font-weight: normal;
+  // }
 }
 </style>
 <style lang="scss" scoped>
 .customer-memo {
-  margin-left: 0 !important;
   .title {
     width: 100%;
     height: 60px;
