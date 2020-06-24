@@ -2,7 +2,7 @@
   <v-app>
     <Sidebar />
     <div class="main-container">
-      <Breadcrumbs :items="items" />
+      <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
       <Searchbar />
       <MatterResult />
     </div>
@@ -24,14 +24,15 @@ export default {
   },
   data() {
     return {
-      items: [
+      page: '案件管理',
+      breadcrumbs: [
         {
           text: 'home',
           to: '/',
         },
         {
           text: '案件管理',
-          to: 'matter',
+          to: '/matter',
         },
       ],
     }
