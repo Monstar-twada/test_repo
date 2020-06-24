@@ -111,6 +111,7 @@ export default {
         font-size: 14px;
         font-weight: bold;
         color: $blue-200;
+        margin-right: 1em;
       }
     }
     &__divider {
