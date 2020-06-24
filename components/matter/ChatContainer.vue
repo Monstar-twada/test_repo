@@ -12,13 +12,20 @@
           class="chatContainer__body__messages--left"
         >
           <div class="message__context">
-            {{ msg.text }}
+            <span v-if="editing !== i">{{ msg.text }}</span>
+            <input
+              v-else
+              v-model="msg.text"
+              type="text"
+              class="message__context__input"
+            />
             <div class="message__context__edit">
               <v-img
                 :max-width="30"
                 :max-height="30"
                 :src="require(`~/static/matter/pancel_icon.svg`)"
                 class="message__context__edit__btns--remake"
+                @click="editMessage(i)"
               ></v-img>
               <v-img
                 :max-width="30"
@@ -29,13 +36,13 @@
               ></v-img>
             </div>
           </div>
-          <p>{{ msg.created_at }}</p>
+          <p v-if="isLastTime(i)">{{ msg.created_at }}</p>
         </div>
         <div v-else class="chatContainer__body__messages--right">
           <div class="message__context">
             {{ msg.text }}
           </div>
-          <p>{{ msg.created_at }}</p>
+          <p v-if="isLastTime(i)">{{ msg.created_at }}</p>
         </div>
       </div>
     </div>
@@ -81,7 +88,7 @@ export default {
   data() {
     return {
       messageInput: '',
-      editMessage: '',
+      editing: null,
       messages: [
         {
           id: 1,
@@ -124,12 +131,29 @@ export default {
         this.scrollToBottom()
       }, 100)
     },
+    editMessage(target) {
+      if (this.messages[target].target === 'charge') {
+        if (this.editing === target) {
+          this.editing = null
+        } else {
+          this.editing = target
+        }
+      }
+    },
     removeMessage(target) {
       const result = this.messages.filter((msg, i) => target !== i)
       this.messages = [...result]
     },
     scrollToBottom() {
       this.$refs.chatBody.scrollTo(0, this.$refs.chatBody.scrollHeight)
+    },
+    isLastTime(target) {
+      if (
+        target + 1 < this.messages.length &&
+        this.messages[target].target === this.messages[target + 1].target
+      )
+        return false
+      return true
     },
   },
 }
@@ -153,6 +177,14 @@ export default {
     margin-bottom: 20px;
     padding: 21px;
     overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-color: $blue-100;
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $blue-100;
+    }
     &__messages {
       width: 100%;
       display: grid;
@@ -178,6 +210,12 @@ export default {
           color: $blue-200;
           border-radius: 20px 20px 20px 0;
           position: relative;
+          &__input {
+            width: max-content;
+            height: 100%;
+            font-size: 13px;
+            color: $blue-500;
+          }
           &__edit {
             position: absolute;
             top: 50%;
