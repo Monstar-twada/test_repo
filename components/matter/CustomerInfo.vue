@@ -59,7 +59,8 @@
         <div class="kind">
           <p>取引種別</p>
           <div class="items">
-            <span>車販</span>
+            <span class="items__blue">車販</span>
+            <span class="items__gray">鈑金</span>
           </div>
         </div>
       </div>
@@ -189,8 +190,13 @@ export default {
             font-size: 10px;
             color: $white-300;
             border-radius: 10px;
-            background-color: $blue-200;
             padding: 5px 10px;
+          }
+          &__blue {
+            background-color: $blue-200;
+          }
+          &__gray {
+            background-color: $gray-200;
           }
         }
       }
