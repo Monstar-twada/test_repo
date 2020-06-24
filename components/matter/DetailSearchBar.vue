@@ -80,11 +80,11 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      width: 10%;
       p:nth-child(1) {
         font-size: 14px;
         font-weight: bold;
         color: $blue-200;
+        margin-right: 1em;
       }
       p:nth-child(2) {
         font-size: 12px;
@@ -95,18 +95,17 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      width: 20%;
       p {
         font-size: 14px;
         font-weight: bold;
         color: $blue-200;
+        margin-right: 1em;
       }
     }
     &__category {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      width: 20%;
       color: $blue-200 !important;
       & > p {
         font-size: 14px;
