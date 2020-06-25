@@ -113,6 +113,8 @@
           <TextContent label="ガソリン代" content="¥10,000" />
           <TextContent label="保険料" content="¥8,540" />
           <TextContent label="駐車場代" content="¥12,000" />
+          <div class="line mt10 mb5"></div>
+          <div class="line md10"></div>
           <TextContent label="月間コスト" content="¥30,540" />
         </v-col>
       </v-row>
@@ -393,5 +395,10 @@ export default {
 .questionary {
   font-size: 12px;
   color: $blue-200;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background: $gray-100;
 }
 </style>
