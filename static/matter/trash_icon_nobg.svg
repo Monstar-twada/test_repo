@@ -1,0 +1,17 @@
+<svg id="구성_요소_165_2" data-name="구성 요소 165 – 2" xmlns="http://www.w3.org/2000/svg" width="12" height="12.874" viewBox="0 0 12 12.874">
+  <g id="그룹_2802" data-name="그룹 2802" transform="translate(0 2.416)">
+    <g id="그룹_2801" data-name="그룹 2801">
+      <g id="그룹_2800" data-name="그룹 2800">
+        <path id="패스_1727" data-name="패스 1727" d="M306.34,175.089l-1.26-.033-.273,5.326,1.26.033Z" transform="translate(-297.785 -172.506)" fill="#0786bd"/>
+        <rect id="사각형_2406" data-name="사각형 2406" width="1.26" height="5.312" transform="translate(5.37 2.573)" fill="#0786bd"/>
+        <path id="패스_1728" data-name="패스 1728" d="M159.952,180.375l-.273-5.326-1.26.033.273,5.326Z" transform="translate(-154.974 -172.499)" fill="#0786bd"/>
+        <path id="패스_1729" data-name="패스 1729" d="M17.379,76.867v.964H18.43l.834,9.054a.5.5,0,0,0,.5.44h7.21a.5.5,0,0,0,.5-.44l.834-9.054h1.068v-.964Zm9.135,9.494H20.227l-.785-8.53H27.3Z" transform="translate(-17.379 -76.867)" fill="#0786bd"/>
+      </g>
+    </g>
+  </g>
+  <g id="그룹_2804" data-name="그룹 2804" transform="translate(2.891)">
+    <g id="그룹_2803" data-name="그룹 2803">
+      <path id="패스_1730" data-name="패스 1730" d="M162.244,0h-4.118a1.052,1.052,0,0,0-1.05,1.05v2h1.26V1.26h3.7V3.046h1.26v-2A1.052,1.052,0,0,0,162.244,0Z" transform="translate(-157.076)" fill="#0786bd"/>
+    </g>
+  </g>
+</svg>
