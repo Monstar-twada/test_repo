@@ -1,79 +1,120 @@
 <template>
-  <v-app>
-    <Sidebar />
-    <div class="main-container">
-      <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
-      <AssessExpertBar />
-      <div class="tab-container">
-        <v-row class="align-center tab-container_position">
-          <ButtonLarge
-            class="button-qr"
-            content="QRコード読み込み"
-            :is-white="true"
-          />
-          <h4 class="ml10">ベーシック項目</h4>
-          <v-switch color="#fff" class="mx-2"></v-switch>
-          <h4 class="">エキスパート項目</h4>
-        </v-row>
-        <v-tabs
+  <div class="main-container">
+    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
+    <AssessExpertBar />
+    <div class="tab-container">
+      <v-row v-if="tab === 'tab-1'" class="align-center tab-container_position">
+        <ButtonLarge
+          class="button-qr"
+          content="QRコード読み込み"
+          :is-white="true"
+        />
+        <h4 class="ml10">ベーシック項目</h4>
+        <v-switch v-model="expert" color="#fff" class="mx-2"></v-switch>
+        <h4 class="">エキスパート項目</h4>
+      </v-row>
+      <v-tabs
+        v-model="tab"
+        :class="[tab === 'tab-1' ? 'show' : '']"
+        background-color="transparent"
+        slider-color="#fff"
+      >
+        <v-tab
+          v-for="i in tabs"
+          :key="i.count"
           v-model="tab"
-          background-color="transparent"
-          slider-color="#fff"
+          class="tab-text"
+          :href="`#tab-${i.tab}`"
         >
-          <v-tab
-            v-for="i in tabs"
-            :key="i.count"
-            class="tab-text"
-            :href="`#tab-${i.tab}`"
-          >
-            {{ i.title }}
-          </v-tab>
-          <v-tab-item value="tab-1">
-            <BasictInformation />
-            <OwnershipInformation />
-            <ExpertInformation />
-            <div class="d-flex flex-column justify-center align-center mt40">
-              <ButtonLarge content="査定結果へ" is-white class="mb30" />
-              <ButtonLarge content="検索結果へ戻る" class="mb100" />
-            </div>
-          </v-tab-item>
-          <v-tab-item value="tab-2">
-            <v-card>
-              <v-card-text>2</v-card-text>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item value="tab-3">
-            <v-card>
-              <v-card-text>3</v-card-text>
-            </v-card>
-          </v-tab-item>
-        </v-tabs>
-      </div>
+          {{ i.title }}
+        </v-tab>
+        <v-tab-item value="tab-1">
+          <BasicInformation />
+          <OwnershipInformation />
+          <ExpertInformation v-if="expert" />
+          <div class="d-flex flex-column justify-center align-center mt40">
+            <ButtonLarge
+              :customwidth="240"
+              content="査定結果へ"
+              is-white
+              class="mb30"
+              @click.native="move(2)"
+            />
+            <ButtonLarge
+              :customwidth="240"
+              content="検索結果へ戻る"
+              class="custombutton"
+              @click.native="move(3)"
+            />
+          </div>
+        </v-tab-item>
+        <v-tab-item value="tab-2">
+          <CarInterior />
+          <CarImage />
+          <div class="d-flex flex-column justify-center align-center mt40">
+            <ButtonLarge
+              :customwidth="240"
+              content="査定結果へ"
+              is-white
+              class="mb30"
+              @click.native="move(3)"
+            />
+            <ButtonLarge
+              :customwidth="240"
+              content="検索結果へ戻る"
+              class="custombutton"
+              @click.native="move(1)"
+            />
+          </div>
+        </v-tab-item>
+        <v-tab-item value="tab-3">
+          <Pricing />
+          <div class="d-flex flex-column justify-center align-center mt40">
+            <ButtonLarge
+              :customwidth="240"
+              content="査定結果へ"
+              is-white
+              class="mb30"
+              @click.native="move(3)"
+            />
+            <ButtonLarge
+              :customwidth="240"
+              content="検索結果へ戻る"
+              class="custombutton"
+              @click.native="move(2)"
+            />
+          </div>
+        </v-tab-item>
+      </v-tabs>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
-import BasictInformation from '~/components/assess/BasictInformation.vue'
+import BasicInformation from '~/components/assess/BasicInformation.vue'
 import OwnershipInformation from '~/components/assess/OwnershipInformation.vue'
 import ExpertInformation from '~/components/assess/ExpertInformation.vue'
-
+import CarInterior from '~/components/assess/CarInterior.vue'
+import CarImage from '~/components/assess/CarImage.vue'
+import Pricing from '~/components/assess/Pricing'
 export default {
   components: {
-    Sidebar,
     Breadcrumbs,
     AssessExpertBar,
     ButtonLarge,
-    BasictInformation,
+    BasicInformation,
     OwnershipInformation,
     ExpertInformation,
+    CarInterior,
+    CarImage,
+    Pricing,
   },
   data() {
     return {
+      expert: true,
       page: '査定',
       breadcrumbs: [
         {
@@ -93,7 +134,7 @@ export default {
           to: '査定入力',
         },
       ],
-      tab: null,
+      tab: 'tab-1',
       tabs: [
         {
           title: '車両基本情報',
@@ -110,22 +151,24 @@ export default {
       ],
     }
   },
+  methods: {
+    move(tab) {
+      this.tab = 'tab-' + tab
+    },
+  },
+  layout: 'loggedin',
 }
 </script>
 <style lang="scss">
-.v-application {
-  background: url('~static/common/full.png') !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-}
-.v-application--wrap {
-  flex-direction: row !important;
+.show .v-tabs-bar {
+  margin-bottom: 85px;
 }
 .v-item-group {
-  margin-bottom: 85px;
+  /* margin-bottom: 85px; */
 }
 .v-tabs-items {
   border-radius: 5px !important;
+  background: transparent !important;
 }
 </style>
 <style lang="scss" scoped>
@@ -158,6 +201,9 @@ export default {
     &::after {
       display: none;
     }
+  }
+  .custombutton {
+    border: 1px solid $white-300;
   }
   &_position {
     position: absolute;
