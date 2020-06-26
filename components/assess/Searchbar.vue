@@ -1,21 +1,22 @@
 <template>
   <div class="searchbar">
-    <Input class="searchbar_input mr20" placeholder="顧客名" />
-    <Select items="items" class="mr15" :list="list" placeholder="カテゴリー" />
-    <Select
-      items="items"
-      class="mr20"
-      :list="list"
-      placeholder="サブカテゴリー"
-    />
-    <Select items="items" :list="list" placeholder="担当者" />
-    <ButtonSearch class="searchbar_button" />
+    <v-row justify="left" align="center">
+      <Input class="searchbar_input mr20" placeholder="顧客名" />
+      <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
+      <Select items="items" class="mr20" :list="list" placeholder="車種" />
+      <Select items="items" class="mr20" :list="list" placeholder="担当者" />
+      <Calendar label="作成日" />
+      <span class="searchbar_space">~</span>
+      <Calendar />
+      <ButtonSearch class="searchbar_button" />
+    </v-row>
   </div>
 </template>
 
 <script>
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
+import Calendar from '~/components/common/Calendar.vue'
 import ButtonSearch from '~/components/common/ButtonSearch.vue'
 export default {
   name: 'Searchbar',
@@ -23,6 +24,7 @@ export default {
     Input,
     Select,
     ButtonSearch,
+    Calendar,
   },
   data: () => ({
     list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
@@ -37,7 +39,6 @@ export default {
   height: 70px;
   border-radius: 5px;
   background-color: $white-300;
-  display: flex;
   &_input {
     height: 30px;
     width: 120px;
@@ -48,6 +49,13 @@ export default {
       color: $blue-500;
       font-size: 10px;
     }
+  }
+  &_space {
+    display: block;
+    width: 20px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
   }
   &_button {
     margin-left: auto;
