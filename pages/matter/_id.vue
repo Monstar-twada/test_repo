@@ -3,8 +3,8 @@
     <Sidebar />
     <div class="main-container">
       <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
-      <Searchbar />
-      <MatterResult />
+      <DetailSearchBar />
+      <MatterDetail />
     </div>
   </v-app>
 </template>
@@ -12,15 +12,14 @@
 <script>
 import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
-import Searchbar from '~/components/Searchbar.vue'
-import MatterResult from '~/components/matter/MatterResult'
-
+import DetailSearchBar from '~/components/matter/DetailSearchBar.vue'
+import MatterDetail from '~/components/matter/MatterDetail.vue'
 export default {
   components: {
     Sidebar,
     Breadcrumbs,
-    Searchbar,
-    MatterResult,
+    DetailSearchBar,
+    MatterDetail,
   },
   data() {
     return {
@@ -33,6 +32,10 @@ export default {
         {
           text: '案件管理',
           to: '/matter',
+        },
+        {
+          text: '案件詳細',
+          to: '/matter/detail',
         },
       ],
     }
