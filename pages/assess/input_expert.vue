@@ -30,7 +30,6 @@
         </v-tab>
         <v-tab-item value="tab-1">
           <BasicInformation />
-          <OwnershipInformation />
           <ExpertInformation v-if="expert" />
           <div class="d-flex flex-column justify-center align-center mt40">
             <ButtonLarge
@@ -95,18 +94,16 @@ import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
 import BasicInformation from '~/components/assess/BasicInformation.vue'
-import OwnershipInformation from '~/components/assess/OwnershipInformation.vue'
 import ExpertInformation from '~/components/assess/ExpertInformation.vue'
 import CarInterior from '~/components/assess/CarInterior.vue'
 import CarImage from '~/components/assess/CarImage.vue'
-import Pricing from '~/components/assess/Pricing'
+import Pricing from '~/components/assess/Pricing.vue'
 export default {
   components: {
     Breadcrumbs,
     AssessExpertBar,
     ButtonLarge,
     BasicInformation,
-    OwnershipInformation,
     ExpertInformation,
     CarInterior,
     CarImage,
@@ -163,9 +160,6 @@ export default {
 .show .v-tabs-bar {
   margin-bottom: 85px;
 }
-.v-item-group {
-  /* margin-bottom: 85px; */
-}
 .v-tabs-items {
   border-radius: 5px !important;
   background: transparent !important;
@@ -173,7 +167,7 @@ export default {
 </style>
 <style lang="scss" scoped>
 .main-container {
-  padding: 30px 70px 0px;
+  padding: 30px 70px 100px;
   width: 100%;
 }
 .tab-container {

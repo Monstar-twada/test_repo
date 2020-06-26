@@ -272,7 +272,7 @@
 import Select from '~/components/common/Select.vue'
 import Input from '~/components/common/Input.vue'
 export default {
-  name: 'BasicInformation',
+  name: 'ExpertInformation',
   components: {
     Select,
     Input,

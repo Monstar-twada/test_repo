@@ -358,7 +358,7 @@
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
 export default {
-  name: 'BasicInformation',
+  name: 'CarInterior',
   components: {
     Input,
     Select,
