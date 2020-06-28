@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     toggleEdit() {
-      // this.$parent.methods.toggleEdit(this.stepInfo.step)
       this.$parent.toggleEdit(this.stepInfo.step)
     },
   },
