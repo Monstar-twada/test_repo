@@ -4,14 +4,18 @@
       <v-img
         :max-width="30"
         :max-height="30"
-        :src="require(`~/static/assess/step${step}_icon.svg`)"
+        :src="require(`~/static/assess/step${stepInfo.step + 1}_icon.svg`)"
       ></v-img>
-      {{ title }}
+      {{ stepInfo.title }}
     </div>
     <div class="stepContainer__part">
-      <div v-if="!editing" class="stepContainer__part__selected">
+      <div v-if="!this.stepInfo.editing" class="stepContainer__part__selected">
         <p>{{ selected }}</p>
-        <div v-if="selected" class="stepContainer__part__selected--btn">
+        <div
+          v-if="selected"
+          class="stepContainer__part__selected--btn"
+          @click="toggleEdit"
+        >
           <v-img
             :max-width="12"
             :max-height="12"
@@ -29,16 +33,12 @@
 export default {
   name: 'StepContainer',
   props: {
-    step: {
-      type: Number,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
     selected: {
       type: String,
+      required: true,
+    },
+    stepInfo: {
+      type: Object,
       required: true,
     },
   },
@@ -46,6 +46,12 @@ export default {
     return {
       editing: false,
     }
+  },
+  methods: {
+    toggleEdit() {
+      // this.$parent.methods.toggleEdit(this.stepInfo.step)
+      this.$parent.toggleEdit(this.stepInfo.step)
+    },
   },
 }
 </script>
@@ -59,7 +65,6 @@ export default {
   padding: 18px 23px;
   display: grid;
   grid-template-columns: 230px 1fr;
-  align-items: center;
   margin-bottom: 30px;
   &__info {
     width: 100%;
