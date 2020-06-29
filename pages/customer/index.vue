@@ -1,22 +1,17 @@
 <template>
-  <v-app>
-    <Sidebar />
-    <div class="main-container">
-      <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
-      <Searchbar />
-      <Itemlist class="mt30 mb30" />
-    </div>
-  </v-app>
+  <div class="main-container">
+    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
+    <Searchbar />
+    <Itemlist class="mt30 mb30" />
+  </div>
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import Searchbar from '~/components/customer/Searchbar.vue'
 import Itemlist from '~/components/customer/Itemlist.vue'
 export default {
   components: {
-    Sidebar,
     Breadcrumbs,
     Searchbar,
     Itemlist,
@@ -34,18 +29,9 @@ export default {
       },
     ],
   }),
+  layout: 'loggedin',
 }
 </script>
-<style lang="scss">
-.v-application {
-  background: url('~static/common/full.png') !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-}
-.v-application--wrap {
-  flex-direction: row !important;
-}
-</style>
 <style lang="scss" scoped>
 .main-container {
   padding: 30px 70px 0px;
