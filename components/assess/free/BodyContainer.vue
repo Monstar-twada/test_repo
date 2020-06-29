@@ -16,11 +16,21 @@
                 class="makerContainer__list__items--item"
                 @click="setSelected(item, stepList[0].step)"
               >
-                <v-img
-                  :max-width="12"
-                  :max-height="12"
-                  :src="require(`~/static/assess/checkbox_icon.svg`)"
-                ></v-img>
+                <div class="item__radio">
+                  <v-img
+                    :max-width="16"
+                    :max-height="16"
+                    :src="require(`~/static/assess/no_radio_icon.svg`)"
+                    class="item__radio__no"
+                  ></v-img>
+                  <v-img
+                    v-if="selected[stepList[0].stepName] === item"
+                    :max-width="10"
+                    :max-height="10"
+                    :src="require(`~/static/assess/radio_active_icon.svg`)"
+                    class="item__radio__active"
+                  ></v-img>
+                </div>
                 {{ item }}
               </div>
             </div>
@@ -44,11 +54,21 @@
                 class="makerContainer__list__items--item"
                 @click="setSelected(item, stepList[1].step)"
               >
-                <v-img
-                  :max-width="12"
-                  :max-height="12"
-                  :src="require(`~/static/assess/checkbox_icon.svg`)"
-                ></v-img>
+                <div class="item__radio">
+                  <v-img
+                    :max-width="16"
+                    :max-height="16"
+                    :src="require(`~/static/assess/no_radio_icon.svg`)"
+                    class="item__radio__no"
+                  ></v-img>
+                  <v-img
+                    v-if="selected[stepList[1].stepName] === item"
+                    :max-width="10"
+                    :max-height="10"
+                    :src="require(`~/static/assess/radio_active_icon.svg`)"
+                    class="item__radio__active"
+                  ></v-img>
+                </div>
                 {{ item }}
               </div>
             </div>
@@ -56,16 +76,74 @@
         </div>
       </template>
     </StepContainer>
-    <!-- <StepContainer :step="3" :title="titles.type" :selected="selected.type">
+    <StepContainer :step-info="stepList[2]" :selected="selected.type">
       <template>
-        <div></div>
+        <div class="typeContainer">
+          <div
+            v-for="(item, i) in stepList[2].itemList"
+            :key="`type-item-${i}`"
+            :class="[
+              'typeContainer__typeItem',
+              selected.type === item.id ? 'active' : null,
+            ]"
+            @click="setSelected(item.id, stepList[2].step)"
+          >
+            <div class="typeContainer__typeItem__info">
+              <div>{{ item.id }}</div>
+              <div>
+                <p>{{ item.movingType }}</p>
+                <p>{{ item.grade }}</p>
+              </div>
+            </div>
+            <div class="typeContainer__typeItem__series">
+              <p>{{ item.type }}</p>
+              <p>
+                <span v-for="(ser, j) in item.series" :key="`ser-${j}`">
+                  {{ ser.title.join('') }}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
       </template>
     </StepContainer>
-    <StepContainer :step="4" :title="titles.grade" :selected="selected.grade">
+    <StepContainer :step-info="stepList[3]" :selected="selected.grade">
       <template>
-        <div></div>
+        <div class="typeContainer">
+          <div v-for="(ser, i) in stepList[3].itemList" :key="`ser-${i}`">
+            <div
+              v-for="(item, i) in ser.series"
+              :key="`type-item-${i}`"
+              :class="[
+                'typeContainer__typeItem gradeItem',
+                selected.grade === getGradeTitle(item.title) ? 'active' : null,
+              ]"
+              @click="setSelected(getGradeTitle(item.title), stepList[3].step)"
+            >
+              <div class="typeContainer__typeItem__info">
+                <div class="itemTitle">
+                  <p v-for="(tit, z) in item.title" :key="`tit-${z}`">
+                    {{ tit }}
+                  </p>
+                </div>
+                <div>
+                  <p>型式</p>
+                  <p>駆動</p>
+                  <p>車両本体価格</p>
+                </div>
+              </div>
+              <div class="typeContainer__typeItem__series">
+                <p class="series__type">{{ item.type }}</p>
+                <p class="series__movingType">{{ item.movingType }}</p>
+                <p class="series__price">
+                  {{ numberWithCommas(item.price) }}円
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </template>
-    </StepContainer> -->
+    </StepContainer>
   </div>
 </template>
 
@@ -83,8 +161,8 @@ export default {
       selected: {
         maker: 'KIA',
         car: 'df',
-        type: '',
-        grade: '',
+        type: 'fg',
+        grade: 'df',
       },
       stepList: [
         {
@@ -200,10 +278,226 @@ export default {
             },
           ],
         },
+        {
+          step: 2,
+          stepName: 'type',
+          title: '型式選択',
+          editing: false,
+          itemList: [
+            {
+              id: 'ZVW51',
+              movingType: '駆動',
+              grade: '対象グレード',
+              type: 'FF',
+              series: [
+                {
+                  title: ['Aプレミアム', '”ツーリングセレクション”'],
+                  type: 'ZVW51-AHXHB(T)',
+                  movingType: 'FF',
+                  price: 3345100,
+                },
+                {
+                  title: ['Aプレミアム'],
+                  type: 'ZVW51-AHXHB',
+                  movingType: 'FF',
+                  price: 3234000,
+                },
+                {
+                  title: ['A', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 3062400,
+                },
+                {
+                  title: ['A'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2895200,
+                },
+                {
+                  title: ['S', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 2783000,
+                },
+                {
+                  title: ['S'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2612500,
+                },
+                {
+                  title: ['E'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2565200,
+                },
+              ],
+            },
+            {
+              id: 'ZVW55',
+              movingType: '駆動',
+              grade: '対象グレード',
+              type: 'E-Four',
+              series: [
+                {
+                  title: ['Aプレミアム', '”ツーリングセレクション”'],
+                  type: 'ZVW51-AHXHB(T)',
+                  movingType: 'FF',
+                  price: 3345100,
+                },
+                {
+                  title: ['Aプレミアム'],
+                  type: 'ZVW51-AHXHB',
+                  movingType: 'FF',
+                  price: 3234000,
+                },
+                {
+                  title: ['A', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 3062400,
+                },
+                {
+                  title: ['A'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2895200,
+                },
+                {
+                  title: ['S', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 2783000,
+                },
+                {
+                  title: ['S'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2612500,
+                },
+                {
+                  title: ['E'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2565200,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          step: 3,
+          stepName: 'grade',
+          title: 'グレード選択',
+          editing: false,
+          itemList: [
+            {
+              id: 'ZVW51',
+              series: [
+                {
+                  title: ['Aプレミアム', '”ツーリングセレクション”'],
+                  type: 'ZVW51-AHXHB(T)',
+                  movingType: 'FF',
+                  price: 3345100,
+                },
+                {
+                  title: ['Aプレミアム'],
+                  type: 'ZVW51-AHXHB',
+                  movingType: 'FF',
+                  price: 3234000,
+                },
+                {
+                  title: ['A', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 3062400,
+                },
+                {
+                  title: ['A'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2895200,
+                },
+                {
+                  title: ['S', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 2783000,
+                },
+                {
+                  title: ['S'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2612500,
+                },
+                {
+                  title: ['E'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2565200,
+                },
+              ],
+            },
+            {
+              id: 'ZVW55',
+              series: [
+                {
+                  title: ['Aプレミアム', '”ツーリングセレクション”'],
+                  type: 'ZVW51-AHXHB(T)',
+                  movingType: 'FF',
+                  price: 3345100,
+                },
+                {
+                  title: ['Aプレミアム'],
+                  type: 'ZVW51-AHXHB',
+                  movingType: 'FF',
+                  price: 3234000,
+                },
+                {
+                  title: ['A', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 3062400,
+                },
+                {
+                  title: ['A'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2895200,
+                },
+                {
+                  title: ['S', '“ツーリングセレクション”'],
+                  type: 'ZVW51-AHXGB(T)',
+                  movingType: 'FF',
+                  price: 2783000,
+                },
+                {
+                  title: ['S'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2612500,
+                },
+                {
+                  title: ['E'],
+                  type: 'ZVW51-AHXGB',
+                  movingType: 'FF',
+                  price: 2565200,
+                },
+              ],
+            },
+          ],
+        },
       ],
     }
   },
   methods: {
+    getGradeTitle(arr) {
+      return arr.join('')
+    },
+    numberWithCommas(price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    },
     setSelected(target, step) {
       this.selected[this.stepList[step].stepName] = target
       this.toggleEdit(step)
@@ -240,6 +534,90 @@ export default {
         font-weight: 500;
         color: $blue-200;
         margin-bottom: 21px;
+        cursor: pointer;
+        .item__radio {
+          width: 16px;
+          height: 16px;
+          position: relative;
+          margin-right: 5px;
+          &__no {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+          }
+          &__active {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.typeContainer {
+  &__typeItem {
+    border-radius: 4px;
+    background-color: $white-100;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    padding: 11px 14px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    cursor: pointer;
+    &.active {
+      opacity: 1;
+    }
+    &__info {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid $gray-100;
+      & > div:first-child {
+        width: 70px;
+        height: 70px;
+        border-radius: 4px;
+        background-color: $blue-100;
+        font-size: 14px;
+        font-weight: bold;
+        color: $white-300;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p {
+          margin: 0;
+        }
+      }
+      & > div:last-child {
+        font-size: 12px;
+        color: $blue-200;
+        margin: 0 20px;
+      }
+    }
+    &__series {
+      margin: 0 22px;
+      font-size: 12px;
+      color: $blue-200;
+      span {
+        margin-right: 10px;
+      }
+    }
+
+    &.gradeItem {
+      grid-template-columns: 327px 1fr;
+      .itemTitle {
+        width: 190px;
+      }
+      .series__price {
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }
