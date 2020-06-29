@@ -26,6 +26,7 @@ export default {
   },
   data: () => ({
     list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    page: 1,
   }),
 }
 </script>
