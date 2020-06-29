@@ -1,20 +1,24 @@
 <template>
   <div class="main-container">
-    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      title-image="customer.svg"
+      :page="page"
+    />
     <Searchbar />
-    <Itemlist class="mt30 mb30" />
+    <CustomerResult class="mt30 mb30" />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import Searchbar from '~/components/customer/Searchbar.vue'
-import Itemlist from '~/components/customer/Itemlist.vue'
+import CustomerResult from '~/components/customer/CustomerResult.vue'
 export default {
   components: {
     Breadcrumbs,
     Searchbar,
-    Itemlist,
+    CustomerResult,
   },
   data: () => ({
     page: '顧客管理',
@@ -25,7 +29,7 @@ export default {
       },
       {
         text: '顧客管理',
-        to: 'customer',
+        to: '',
       },
     ],
   }),
@@ -34,7 +38,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .main-container {
-  padding: 30px 70px 0px;
+  padding: 30px 0px;
+  margin: 0 75px;
   width: 100%;
 }
 </style>

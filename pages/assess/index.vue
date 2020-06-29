@@ -1,25 +1,20 @@
 <template>
-  <v-app>
-    <Sidebar />
-    <div class="main-container">
-      <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" is-title-btn />
-      <Searchbar />
-      <Itemlist class="mt30 mb30" />
-    </div>
-  </v-app>
+  <div class="main-container">
+    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" is-title-btn />
+    <Searchbar />
+    <AssessResult class="mt30 mb30" />
+  </div>
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import Searchbar from '~/components/assess/Searchbar.vue'
-import Itemlist from '~/components/assess/Itemlist.vue'
+import AssessResult from '~/components/assess/AssessResult.vue'
 export default {
   components: {
-    Sidebar,
     Breadcrumbs,
     Searchbar,
-    Itemlist,
+    AssessResult,
   },
   data: () => ({
     page: '査定',
@@ -30,10 +25,11 @@ export default {
       },
       {
         text: '査定管理',
-        to: 'customer',
+        to: '',
       },
     ],
   }),
+  layout: 'loggedin',
 }
 </script>
 <style lang="scss">
@@ -48,7 +44,8 @@ export default {
 </style>
 <style lang="scss" scoped>
 .main-container {
-  padding: 30px 70px 0px;
+  padding: 30px 0px;
+  margin: 0 75px;
   width: 100%;
 }
 </style>

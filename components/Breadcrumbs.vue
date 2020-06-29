@@ -16,7 +16,8 @@
           class="titlepage-title__logo mr-2"
           :src="require('~/static/breadcrumbs/' + titleImage)"
         />
-        <h1>{{ page }}</h1>
+        <h1 class="d-inline">{{ page }}</h1>
+        <h2 class="d-inline">{{ subTitle }}</h2>
       </div>
       <div v-if="isTitleBtn" class="titlepage-button">
         <h3>フリー車種入力から作成</h3>
@@ -45,6 +46,10 @@ export default {
       },
     },
     page: {
+      type: String,
+      default: '',
+    },
+    subTitle: {
       type: String,
       default: '',
     },
@@ -109,6 +114,11 @@ export default {
         height: 22px;
         max-width: 22px;
       }
+    }
+    h2 {
+      margin: 5px 0 0 10px;
+      color: $white-300;
+      font-size: 20px;
     }
   }
   &-button {

@@ -1,7 +1,7 @@
 <template>
   <div class="searchbar">
     <v-row justify="left" align="center">
-      <Input class="searchbar_input mr20" placeholder-text="顧客名" />
+      <Input class="searchbar_input mr20" placeholder="顧客名" />
       <Select
         items="items"
         class="mr20"
@@ -14,12 +14,12 @@
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
     </v-row>
     <v-row justify="center" align="center" class="mt20">
-      <Input class="searchbar_input mr20" placeholder-text="登録ナンバー" />
-      <Calendar />
+      <Input class="searchbar_input mr20" placeholder="登録ナンバー" />
+      <Calendar label="初度登録年月" />
       <span class="searchbar_space">~</span>
       <Calendar />
       <span class="searchbar_space"></span>
-      <Calendar />
+      <Calendar label="車検満了年月" />
       <span class="searchbar_space">~</span>
       <Calendar class="searchbar_calendar" />
       <ButtonSearch class="searchbar_button" />

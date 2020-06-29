@@ -59,12 +59,12 @@ export default {
 <style lang="scss">
 .calendar {
   .v-text-field--outlined {
-    width: 120px !important;
+    width: 122px !important;
     height: 30px !important;
-    margin-top: -1px;
+    margin-top: 0px;
     .v-input__control {
       .v-input__slot {
-        min-height: 31px !important;
+        min-height: 30px !important;
         margin-bottom: 0 !important;
         border: 1px $gray-100 solid !important;
         padding: 0 4px 0 8px !important;

@@ -44,7 +44,7 @@
 <script>
 import PaginationComponent from '~/components/common/PaginationComponent.vue'
 export default {
-  name: 'Itemlist',
+  name: 'AssessResult',
   components: {
     PaginationComponent,
   },
