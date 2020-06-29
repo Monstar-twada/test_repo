@@ -2,6 +2,7 @@
   <div class="main-container">
     <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
     <Searchbar />
+    <MatterResult />
   </div>
 </template>
 
