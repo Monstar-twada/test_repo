@@ -1,13 +1,36 @@
 <template>
   <div class="searchbar">
-    <v-row justify="left" align="center" class="mx-0">
-      <Input class="searchbar_input mr20" placeholder="顧客名" />
+    <v-row justify="left" align="center" class="ma-0">
       <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
-      <Select items="items" class="mr20" :list="list" placeholder="担当者" />
-      <Calendar label="作成日" />
-      <span class="searchbar_space">~</span>
-      <Calendar />
+      <Select items="items" class="mr20" :list="list" placeholder="グレード" />
+      <Select
+        items="items"
+        class="mr20"
+        :list="list"
+        placeholder="ボディタイプ"
+      />
+      <Select items="items" class="mr20" :list="list" placeholder="カラー" />
+      <Select items="items" class="mr20" :list="list" placeholder="車検残" />
+      <Select items="items" class="mr20" :list="list" placeholder="価格帯" />
+    </v-row>
+    <v-row justify="left" align="center" class="mt20 mx-0">
+      <Select
+        items="items"
+        class="mr20"
+        :list="list"
+        placeholder="仕入れ期間"
+      />
+      <Select
+        items="items"
+        class="mr20"
+        :list="list"
+        placeholder="ステータス"
+      />
+      <Select items="items" class="mr20" :list="list" placeholder="安全装備" />
+      <Select items="items" class="mr20" :list="list" placeholder="便利機能" />
+      <Select items="items" class="mr20" :list="list" placeholder="ナビ有無" />
+      <Input class="searchbar_input mr20" placeholder="出品者名" />
       <ButtonSearch class="searchbar_button" />
     </v-row>
   </div>
@@ -16,7 +39,6 @@
 <script>
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
-import Calendar from '~/components/common/Calendar.vue'
 import ButtonSearch from '~/components/common/ButtonSearch.vue'
 export default {
   name: 'Searchbar',
@@ -24,7 +46,6 @@ export default {
     Input,
     Select,
     ButtonSearch,
-    Calendar,
   },
   data: () => ({
     list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
@@ -36,7 +57,7 @@ export default {
 .searchbar {
   width: 100%;
   padding: 20px;
-  height: 70px;
+  height: 120px;
   border-radius: 5px;
   background-color: $white-300;
   &_input {
