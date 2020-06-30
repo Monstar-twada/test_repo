@@ -2,26 +2,12 @@
   <div class="searchbar">
     <v-row justify="left" align="center">
       <Input class="searchbar_input mr20" placeholder="顧客名" />
-      <Select
-        items="items"
-        class="mr20"
-        :list="list"
-        placeholder="顧客ランク"
-      />
-      <Select items="items" class="mr20" :list="list" placeholder="担当店舗" />
-      <Select items="items" class="mr20" :list="list" placeholder="担当者" />
       <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
-    </v-row>
-    <v-row justify="center" align="center" class="mt20">
-      <Input class="searchbar_input mr20" placeholder="登録ナンバー" />
-      <Calendar label="初度登録年月" />
+      <Select items="items" class="mr20" :list="list" placeholder="担当者" />
+      <Calendar label="作成日" />
       <span class="searchbar_space">~</span>
       <Calendar />
-      <span class="searchbar_space"></span>
-      <Calendar label="車検満了年月" />
-      <span class="searchbar_space">~</span>
-      <Calendar class="searchbar_calendar" />
       <ButtonSearch class="searchbar_button" />
     </v-row>
   </div>
@@ -50,7 +36,7 @@ export default {
 .searchbar {
   width: 100%;
   padding: 20px;
-  height: 120px;
+  height: 70px;
   border-radius: 5px;
   background-color: $white-300;
   &_input {

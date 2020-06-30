@@ -1,34 +1,30 @@
 <template>
   <div class="main-container">
-    <Breadcrumbs
-      :breadcrumbs="breadcrumbs"
-      title-image="customer.svg"
-      :page="page"
-    />
+    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" is-title-btn />
     <Searchbar />
-    <CustomerResult class="mt30 mb30" />
+    <AssessResult class="mt30 mb30" />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
-import Searchbar from '~/components/customer/Searchbar.vue'
-import CustomerResult from '~/components/customer/CustomerResult.vue'
+import Searchbar from '~/components/assess/Searchbar.vue'
+import AssessResult from '~/components/assess/AssessResult.vue'
 export default {
   components: {
     Breadcrumbs,
     Searchbar,
-    CustomerResult,
+    AssessResult,
   },
   data: () => ({
-    page: '顧客管理',
+    page: '査定',
     breadcrumbs: [
       {
         text: 'home',
         to: '/',
       },
       {
-        text: '顧客管理',
+        text: '査定管理',
         to: '',
       },
     ],
