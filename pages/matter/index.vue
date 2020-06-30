@@ -1,6 +1,10 @@
 <template>
   <div class="main-container">
-    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      :page="page"
+      title-image="result.svg"
+    />
     <Searchbar />
     <MatterResult />
   </div>
@@ -23,11 +27,11 @@ export default {
       breadcrumbs: [
         {
           text: 'home',
-          to: '/',
+          href: '/',
         },
         {
           text: '案件管理',
-          to: '/matter',
+          href: '/matter',
         },
       ],
     }

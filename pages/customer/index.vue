@@ -25,11 +25,11 @@ export default {
     breadcrumbs: [
       {
         text: 'home',
-        to: '/',
+        href: '/',
       },
       {
         text: '顧客管理',
-        to: '',
+        href: '',
       },
     ],
   }),
