@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ currentStep }}
     <StepContainer
       :step-info="stepList[0]"
       :selected="selected.maker"
