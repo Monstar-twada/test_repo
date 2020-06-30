@@ -15,6 +15,11 @@
       class="itemlistTable"
       :item-class="itemListClass"
     >
+      <template v-slot:item.id="{ item }">
+        <div class="id">
+          <nuxt-link to="/customer/detail">{{ item.id }}</nuxt-link>
+        </div>
+      </template>
       <template v-slot:item.name="{ item }">
         <div class="user">
           <v-avatar size="38" class="user__image">

@@ -2,6 +2,26 @@
   <div class="container">
     <div class="breadcrumbs">
       <v-breadcrumbs :items="breadcrumbs" class="pa-0">
+        <template v-slot:item="{ item }">
+          <v-breadcrumbs-item
+            v-if="item.text == 'home'"
+            :href="item.href"
+            :disabled="item.disabled"
+          >
+            <v-img
+              :src="require('~/static/breadcrumbs/home.svg')"
+              width="14"
+              height="14"
+            />
+          </v-breadcrumbs-item>
+          <v-breadcrumbs-item
+            v-else
+            :href="item.href"
+            :disabled="item.disabled"
+          >
+            {{ item.text }}
+          </v-breadcrumbs-item>
+        </template>
         <template v-slot:divider>
           <v-img :src="require('~/static/breadcrumbs/right.svg')" />
         </template>

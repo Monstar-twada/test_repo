@@ -1,6 +1,11 @@
 <template>
   <div class="main-container">
-    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" is-title-btn />
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      :page="page"
+      is-title-btn
+      title-image="assess.svg"
+    />
     <Searchbar />
     <AssessResult class="mt30 mb30" />
   </div>
@@ -21,11 +26,11 @@ export default {
     breadcrumbs: [
       {
         text: 'home',
-        to: '/',
+        href: '/',
       },
       {
         text: '査定管理',
-        to: '',
+        href: '',
       },
     ],
   }),

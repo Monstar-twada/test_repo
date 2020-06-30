@@ -1,0 +1,19 @@
+<svg id="コンポーネント_175_1" data-name="コンポーネント 175 – 1" xmlns="http://www.w3.org/2000/svg" width="63" height="24" viewBox="0 0 63 24">
+  <g id="長方形_21" data-name="長方形 21" fill="#fff" stroke="#ebf1f8" stroke-width="1">
+    <rect width="63" height="24" rx="12" stroke="none"/>
+    <rect x="0.5" y="0.5" width="62" height="23" rx="11.5" fill="none"/>
+  </g>
+  <text id="招待" transform="translate(39.279 16)" fill="#0786bd" font-size="12" font-family="HiraginoSans-W3, Hiragino Sans"><tspan x="-12" y="0">招待</tspan></text>
+  <g id="コンポーネント_228_1" data-name="コンポーネント 228 – 1" transform="translate(10 7.285)">
+    <g id="グループ_3116" data-name="グループ 3116" transform="translate(0.466)">
+      <g id="グループ_3115" data-name="グループ 3115" transform="translate(0 0)">
+        <path id="パス_2165" data-name="パス 2165" d="M29.135,68.267H17.067L23.1,73.258l6.1-4.977A.419.419,0,0,0,29.135,68.267Z" transform="translate(-17.067 -68.267)" fill="#0786bd"/>
+      </g>
+    </g>
+    <g id="グループ_3118" data-name="グループ 3118" transform="translate(0 0.823)">
+      <g id="グループ_3117" data-name="グループ 3117" transform="translate(0 0)">
+        <path id="パス_2166" data-name="パス 2166" d="M6.793,103.516a.464.464,0,0,1-.588,0L0,98.406v8a.464.464,0,0,0,.464.464H12.536A.464.464,0,0,0,13,106.4v-7.93Z" transform="translate(0 -98.406)" fill="#0786bd"/>
+      </g>
+    </g>
+  </g>
+</svg>
