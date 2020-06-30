@@ -1,6 +1,11 @@
 <template>
   <div>
-    <StepContainer :step-info="stepList[0]" :selected="selected.maker">
+    {{ currentStep }}
+    <StepContainer
+      :step-info="stepList[0]"
+      :selected="selected.maker"
+      :current-step="currentStep"
+    >
       <template>
         <div class="makerContainer">
           <div
@@ -38,7 +43,11 @@
         </div>
       </template>
     </StepContainer>
-    <StepContainer :step-info="stepList[1]" :selected="selected.car">
+    <StepContainer
+      :step-info="stepList[1]"
+      :selected="selected.car"
+      :current-step="currentStep"
+    >
       <template>
         <div class="makerContainer">
           <div
@@ -76,7 +85,11 @@
         </div>
       </template>
     </StepContainer>
-    <StepContainer :step-info="stepList[2]" :selected="selected.type">
+    <StepContainer
+      :step-info="stepList[2]"
+      :selected="selected.type"
+      :current-step="currentStep"
+    >
       <template>
         <div class="typeContainer">
           <div
@@ -107,7 +120,11 @@
         </div>
       </template>
     </StepContainer>
-    <StepContainer :step-info="stepList[3]" :selected="selected.grade">
+    <StepContainer
+      :step-info="stepList[3]"
+      :selected="selected.grade"
+      :current-step="currentStep"
+    >
       <template>
         <div class="typeContainer">
           <div v-for="(ser, i) in stepList[3].itemList" :key="`ser-${i}`">
@@ -144,6 +161,17 @@
         </div>
       </template>
     </StepContainer>
+    <div v-if="checkAllSelected" class="nextBtn">
+      <button class="nextBtn--btn">
+        査定入力へ
+        <v-img
+          :max-width="7"
+          :max-height="12"
+          :src="require(`~/static/assess/arrow_right_icon.svg`)"
+          class="item__radio__no"
+        ></v-img>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -159,10 +187,10 @@ export default {
     return {
       currentStep: 0,
       selected: {
-        maker: 'KIA',
-        car: 'df',
-        type: 'fg',
-        grade: 'df',
+        maker: '',
+        car: '',
+        type: '',
+        grade: '',
       },
       stepList: [
         {
@@ -491,6 +519,14 @@ export default {
       ],
     }
   },
+  computed: {
+    checkAllSelected() {
+      const result = Object.keys(this.selected).filter(
+        (key) => !this.selected[key]
+      )
+      return result.length === 0
+    },
+  },
   methods: {
     getGradeTitle(arr) {
       return arr.join('')
@@ -503,6 +539,8 @@ export default {
       this.toggleEdit(step)
     },
     toggleEdit(step) {
+      if (this.currentStep > step) this.currentStep = step
+      else this.currentStep += 1
       this.stepList[step].editing = !this.stepList[step].editing
     },
   },
@@ -619,6 +657,27 @@ export default {
         font-size: 20px;
         font-weight: bold;
       }
+    }
+  }
+}
+.nextBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  &--btn {
+    width: 240px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: $white-300;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    color: $blue-100;
+    .v-image {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
     }
   }
 }

@@ -9,7 +9,10 @@
       {{ stepInfo.title }}
     </div>
     <div class="stepContainer__part">
-      <div v-if="!this.stepInfo.editing" class="stepContainer__part__selected">
+      <div
+        v-if="currentStep !== stepInfo.step"
+        class="stepContainer__part__selected"
+      >
         <p>{{ selected }}</p>
         <div
           v-if="selected"
@@ -39,6 +42,10 @@ export default {
     },
     stepInfo: {
       type: Object,
+      required: true,
+    },
+    currentStep: {
+      type: Number,
       required: true,
     },
   },
