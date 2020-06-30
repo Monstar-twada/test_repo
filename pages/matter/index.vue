@@ -1,23 +1,22 @@
 <template>
-  <v-app>
-    <Sidebar />
-    <div class="main-container">
-      <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
-      <Searchbar />
-      <MatterResult />
-    </div>
-  </v-app>
+  <div class="main-container">
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      :page="page"
+      title-image="result.svg"
+    />
+    <Searchbar />
+    <MatterResult />
+  </div>
 </template>
 
 <script>
-import Sidebar from '~/components/Sidebar.vue'
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import Searchbar from '~/components/Searchbar.vue'
 import MatterResult from '~/components/matter/MatterResult'
 
 export default {
   components: {
-    Sidebar,
     Breadcrumbs,
     Searchbar,
     MatterResult,
@@ -28,27 +27,18 @@ export default {
       breadcrumbs: [
         {
           text: 'home',
-          to: '/',
+          href: '/',
         },
         {
           text: '案件管理',
-          to: '/matter',
+          href: '/matter',
         },
       ],
     }
   },
+  layout: 'loggedin',
 }
 </script>
-<style lang="scss">
-.v-application {
-  background: url('~static/common/full.png') !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-}
-.v-application--wrap {
-  flex-direction: row !important;
-}
-</style>
 <style lang="scss" scoped>
 .main-container {
   padding: 30px 0px;

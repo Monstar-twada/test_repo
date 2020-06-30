@@ -25,6 +25,11 @@ h5 {
   font-size: 10px;
 }
 
+//font size
+.fs16 {
+  font-size: 16px !important;
+}
+
 //font weight
 .fwb {
   font-weight: bold;
@@ -117,6 +122,14 @@ h5 {
   margin-bottom: 30px;
 }
 
+.mb35 {
+  margin-bottom: 35px;
+}
+
+.mb40 {
+  margin-bottom: 40px;
+}
+
 .mb50 {
   margin-bottom: 50px;
 }
@@ -173,6 +186,14 @@ h5 {
 
 .mr30 {
   margin-right: 30px
+}
+
+.mr40 {
+  margin-right: 40px;
+}
+
+.mr50 {
+  margin-right: 50px;
 }
 
 //padding
@@ -258,4 +279,12 @@ h5 {
 
 .pr20 {
   padding-right: 20px;
+}
+
+
+//centering
+.vh_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

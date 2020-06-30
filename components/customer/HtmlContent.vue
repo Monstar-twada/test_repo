@@ -58,11 +58,6 @@ export default {
   dd {
     width: 65%;
     display: inline-block;
-
-    dd >>> .family {
-      width: 300px;
-      background: #111;
-    }
   }
 }
 </style>

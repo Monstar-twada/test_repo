@@ -110,10 +110,6 @@ export default {
       }
     }
   }
-  // .theme--light.v-data-table table thead tr th {
-  //   color: $blue-200;
-  //   font-weight: normal;
-  // }
 }
 </style>
 <style lang="scss" scoped>

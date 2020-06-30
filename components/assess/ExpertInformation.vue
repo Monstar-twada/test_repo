@@ -272,7 +272,7 @@
 import Select from '~/components/common/Select.vue'
 import Input from '~/components/common/Input.vue'
 export default {
-  name: 'BasicInformation',
+  name: 'ExpertInformation',
   components: {
     Select,
     Input,
@@ -287,7 +287,10 @@ export default {
   margin-bottom: 25px;
 }
 .tab {
-  padding: 0 30px 30px 30px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 30px;
   p {
     font-size: 12px;
     font-family: 'Noto Sans JP';

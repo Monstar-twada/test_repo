@@ -1,15 +1,11 @@
 <template>
   <div class="list page mt10 mb10">
-    <div class="list__paging">
-      <div class="list__paging--info">
-        <p class="total">200</p>
-        <p>件中 21〜40件を表示</p>
-      </div>
-      <v-pagination
-        v-model="page"
-        :length="Math.ceil(table.items.length / itemsPerPage)"
-      ></v-pagination>
-    </div>
+    <PaginationComponent
+      :current-page.sync="currentPage"
+      :total="table.items.length"
+      :per-page="itemsPerPage"
+      @updateEvent="updatePageNumber"
+    />
     <v-data-table
       :headers="table.headers"
       :items="table.items"
@@ -46,27 +42,25 @@
         <div class="charge">{{ item.charge[0] }}<br />{{ item.charge[1] }}</div>
       </template>
     </v-data-table>
-    <div class="list__paging">
-      <div class="list__paging--info">
-        <p class="total">200</p>
-        <p>件中 21〜40件を表示</p>
-      </div>
-      <v-pagination
-        v-model="page"
-        :length="Math.ceil(table.items.length / itemsPerPage)"
-      ></v-pagination>
-    </div>
+    <PaginationComponent
+      :current-page.sync="currentPage"
+      :total="table.items.length"
+      :per-page="itemsPerPage"
+      @updateEvent="updatePageNumber"
+    />
   </div>
 </template>
 
 <script>
+import PaginationComponent from '~/components/common/PaginationComponent.vue'
 export default {
   name: 'MatterResult',
-  components: {},
+  components: {
+    PaginationComponent,
+  },
   data: () => ({
-    page: 1,
+    currentPage: 1,
     itemsPerPage: 10,
-    pageCount: 0,
     table: {
       headers: [
         { text: '案件ID', value: 'id', sortable: true },
@@ -292,12 +286,11 @@ export default {
       ],
     },
   }),
-  computed: {
-    getTotalPage() {
-      return this.table.items.length / 10 + 1
+  methods: {
+    updatePageNumber(newPage) {
+      this.currentPage = newPage
     },
   },
-  methods: {},
 }
 </script>
 <style lang="scss">
