@@ -1,6 +1,10 @@
 <template>
   <div class="main-container">
-    <Breadcrumbs :breadcrumbs="breadcrumbs" :page="page" />
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      :page="page"
+      title-image="assess.svg"
+    />
     <AssessExpertBar />
     <div class="tab-container">
       <v-row v-if="tab === 'tab-1'" class="align-center tab-container_position">
@@ -116,19 +120,19 @@ export default {
       breadcrumbs: [
         {
           text: 'home',
-          to: '/',
+          href: '/',
         },
         {
           text: '査定',
-          to: '/assess',
+          href: '/assess',
         },
         {
           text: '新規査定',
-          to: 'matter',
+          href: 'matter',
         },
         {
           text: '新規査定',
-          to: '査定入力',
+          href: '査定入力',
         },
       ],
       tab: 'tab-1',
