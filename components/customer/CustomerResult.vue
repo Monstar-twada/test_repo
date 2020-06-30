@@ -1,18 +1,11 @@
 <template>
-  <div>
-    <div class="page mt10 mb10">
-      <div class="page__text">
-        <h1>{{ itemlist.length }}</h1>
-        <h3>
-          件中{{ (page - 1) * itemsPerPage + 1 }} ~
-          {{ Math.min(itemlist.length, page * itemsPerPage) }}件を表示
-        </h3>
-      </div>
-      <v-pagination
-        v-model="page"
-        :length="Math.ceil(itemlist.length / itemsPerPage)"
-      ></v-pagination>
-    </div>
+  <div class="customer-list">
+    <PaginationComponent
+      :current-page.sync="currentPage"
+      :total="itemlist.length"
+      :per-page="itemsPerPage"
+      @updateEvent="updatePageNumber"
+    />
     <v-data-table
       :headers="headers"
       :items="itemlist"
@@ -22,6 +15,11 @@
       class="itemlistTable"
       :item-class="itemListClass"
     >
+      <template v-slot:item.id="{ item }">
+        <div class="id">
+          <nuxt-link to="/customer/detail">{{ item.id }}</nuxt-link>
+        </div>
+      </template>
       <template v-slot:item.name="{ item }">
         <div class="user">
           <v-avatar size="38" class="user__image">
@@ -41,24 +39,21 @@
         </div>
       </template>
     </v-data-table>
-    <div class="page mt10 mb20">
-      <div class="page__text">
-        <h1>{{ itemlist.length }}</h1>
-        <h3>
-          件中{{ (page - 1) * itemsPerPage + 1 }} ~
-          {{ Math.min(itemlist.length, page * itemsPerPage) }}件を表示
-        </h3>
-      </div>
-      <v-pagination
-        v-model="page"
-        :length="Math.ceil(itemlist.length / itemsPerPage)"
-      ></v-pagination>
-    </div>
+    <PaginationComponent
+      :current-page.sync="currentPage"
+      :total="itemlist.length"
+      :per-page="itemsPerPage"
+      @updateEvent="updatePageNumber"
+    />
   </div>
 </template>
 <script>
+import PaginationComponent from '~/components/common/PaginationComponent.vue'
 export default {
-  name: 'Itemlist',
+  name: 'CustomerResult',
+  components: {
+    PaginationComponent,
+  },
   data: () => ({
     headers: [
       {
@@ -352,70 +347,88 @@ export default {
         registration_date: 'R1/01/19',
       },
     ],
-    page: 1,
+    currentPage: 1,
     itemsPerPage: 10,
   }),
+  methods: {
+    updatePageNumber(newPage) {
+      this.currentPage = newPage
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.v-data-table {
-  table {
-    tbody {
-      tr {
-        font-size: 12px;
-        height: 70px !important;
-        color: $blue-500;
+.customer-list {
+  .v-data-table {
+    table {
+      thead {
+        tr {
+          th {
+            font-size: 12px;
+            font-weight: normal;
+            height: 40px !important;
+            color: $blue-200 !important;
+            text-align: center;
+          }
+        }
       }
-      tr:nth-child(even) {
-        background-color: $white-100;
+      tbody {
+        tr {
+          font-size: 12px;
+          height: 70px !important;
+          color: $blue-500;
+        }
+        tr:nth-child(even) {
+          background-color: $white-100;
+        }
       }
     }
   }
-}
 
-.theme--light.v-data-table
-  .v-data-table__wrapper
-  table
-  tbody
-  tr:not(:last-child)
-  td:not(.v-data-table__mobile-row) {
-  border-bottom: none !important;
-}
-
-.theme--light.v-pagination {
-  justify-content: flex-end !important;
-  display: inline-flex;
-  .v-pagination__navigation {
-    box-shadow: none !important;
-    width: 28px;
-    height: 24px;
-  }
-  .v-pagination__item {
-    display: inline-block;
-    font-size: 14px !important;
-    font-weight: bold !important;
-    min-width: 16px !important;
-    width: 20px !important;
-    height: 20px !important;
-    line-height: 20px !important;
-    background: none !important;
-    box-shadow: none !important;
-    color: $white-300 !important;
-    border-radius: 0px !important;
-    transition: none !important;
-  }
-  .v-pagination__item--active {
-    border-bottom: 1px $white-300 solid !important;
+  .theme--light.v-data-table
+    .v-data-table__wrapper
+    table
+    tbody
+    tr:not(:last-child)
+    td:not(.v-data-table__mobile-row) {
+    border-bottom: none !important;
   }
 
-  .v-pagination__item--active .primary {
-    border-color: none !important;
-  }
-}
+  .theme--light.v-pagination {
+    justify-content: flex-end !important;
+    display: inline-flex;
+    .v-pagination__navigation {
+      box-shadow: none !important;
+      width: 28px;
+      height: 24px;
+    }
+    .v-pagination__item {
+      display: inline-block;
+      font-size: 14px !important;
+      font-weight: bold !important;
+      min-width: 16px !important;
+      width: 20px !important;
+      height: 20px !important;
+      line-height: 20px !important;
+      background: none !important;
+      box-shadow: none !important;
+      color: $white-300 !important;
+      border-radius: 0px !important;
+      transition: none !important;
+    }
+    .v-pagination__item--active {
+      border-bottom: 1px $white-300 solid !important;
+    }
 
-.theme--light.v-icon {
-  color: $blue-300 !important;
+    .v-pagination__item--active .primary {
+      border-color: none !important;
+    }
+  }
+
+  .theme--light.v-icon {
+    color: $blue-300 !important;
+  }
 }
 </style>
 <style lang="scss" scoped>

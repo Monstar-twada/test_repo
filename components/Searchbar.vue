@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar">
-    <Input class="searchbar_input mr20" placeholder-text="顧客名" />
+    <Input class="searchbar_input mr20" placeholder="顧客名" />
     <Select items="items" class="mr15" :list="list" placeholder="カテゴリー" />
     <Select
       items="items"
