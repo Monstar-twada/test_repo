@@ -315,6 +315,38 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.radio-group {
+  .v-input__control {
+    margin: 5px 0;
+  }
+  .v-input__slot {
+    margin-bottom: 0 !important;
+  }
+  .v-messages {
+    display: none;
+  }
+  .v-input .v-label {
+    line-height: 20px;
+  }
+  .v-label {
+    font-size: 12px;
+  }
+  .v-input--selection-controls__ripple {
+    width: 16px !important;
+    height: 16px !important;
+    top: 2px !important;
+    left: 0px !important;
+    margin: 0 5px;
+  }
+  .v-input input {
+    max-height: 20px;
+  }
+  .v-icon.v-icon {
+    font-size: 16px;
+  }
+}
+</style>
 <style lang="scss" scoped>
 .regist-user {
   width: 712px;
