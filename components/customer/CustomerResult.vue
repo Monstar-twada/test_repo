@@ -9,11 +9,9 @@
     <v-data-table
       :headers="headers"
       :items="itemlist"
-      :items-per-page="10"
-      :page.sync="page"
+      :items-per-page="itemsPerPage"
+      :page.sync="currentPage"
       hide-default-footer
-      class="itemlistTable"
-      :item-class="itemListClass"
     >
       <template v-slot:item.id="{ item }">
         <div class="id">
@@ -359,6 +357,16 @@ export default {
 </script>
 
 <style lang="scss">
+.v-application--is-ltr
+  .customer-list
+  .v-data-table
+  .v-data-table__wrapper
+  table
+  thead
+  tr
+  th {
+  text-align: center;
+}
 .customer-list {
   .v-data-table {
     table {
@@ -369,7 +377,6 @@ export default {
             font-weight: normal;
             height: 40px !important;
             color: $blue-200 !important;
-            text-align: center;
           }
         }
       }

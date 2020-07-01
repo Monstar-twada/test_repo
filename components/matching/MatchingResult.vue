@@ -9,8 +9,8 @@
     <v-data-table
       :headers="headers"
       :items="itemlist"
-      :items-per-page="10"
-      :page.sync="page"
+      :items-per-page="itemsPerPage"
+      :page.sync="currentPage"
       hide-default-footer
     >
       <template v-slot:item.owner="{ item }">
@@ -647,7 +647,6 @@ export default {
             font-weight: normal;
             height: 40px !important;
             color: $blue-200 !important;
-            text-align: center;
           }
         }
       }

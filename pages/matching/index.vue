@@ -25,11 +25,11 @@ export default {
     breadcrumbs: [
       {
         text: 'home',
-        to: '/',
+        href: '/',
       },
       {
         text: 'マッチング',
-        to: '',
+        href: '',
       },
     ],
   }),
