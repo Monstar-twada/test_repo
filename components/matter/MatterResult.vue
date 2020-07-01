@@ -9,10 +9,9 @@
     <v-data-table
       :headers="table.headers"
       :items="table.items"
-      :items-per-page="10"
-      :page.sync="page"
+      :items-per-page="itemsPerPage"
+      :page.sync="currentPage"
       hide-default-footer
-      class="itemlistTable"
     >
       <template v-slot:item.id="{ item }">
         <div class="id">
