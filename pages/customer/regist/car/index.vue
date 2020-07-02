@@ -15,6 +15,7 @@
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import IndexBodyContainer from '~/components/customer/regist/car/IndexBodyContainer'
 export default {
+  layout: 'loggedin',
   components: {
     Breadcrumbs,
     IndexBodyContainer,
@@ -38,7 +39,6 @@ export default {
       ],
     }
   },
-  layout: 'loggedin',
 }
 </script>
 <style lang="scss" scoped>
