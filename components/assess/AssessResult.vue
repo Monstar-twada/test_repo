@@ -12,7 +12,6 @@
       :items-per-page="10"
       :page.sync="currentPage"
       hide-default-footer
-      class="itemlistTable"
     >
       <template v-slot:item.name="{ item }">
         <div class="user">

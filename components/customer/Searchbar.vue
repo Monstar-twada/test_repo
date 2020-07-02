@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar">
-    <v-row justify="left" align="center">
+    <v-row justify="left" align="center" class="mx-0">
       <Input class="searchbar_input mr20" placeholder="顧客名" />
       <Select
         items="items"
@@ -13,7 +13,7 @@
       <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
     </v-row>
-    <v-row justify="center" align="center" class="mt20">
+    <v-row justify="center" align="center" class="mt20 mx-0">
       <Input class="searchbar_input mr20" placeholder="登録ナンバー" />
       <Calendar label="初度登録年月" />
       <span class="searchbar_space">~</span>
