@@ -1,7 +1,13 @@
 <template>
   <div class="searchbar">
     <v-row justify="left" align="center" class="mx-0">
-      <Input class="searchbar_input mr20" placeholder="顧客名" />
+      <Input
+        class="mr20"
+        customwidth="120"
+        customheight="30"
+        customfontsize="10"
+        placeholder="顧客名"
+      />
       <Select
         items="items"
         class="mr20"
@@ -14,7 +20,13 @@
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
     </v-row>
     <v-row justify="center" align="center" class="mt20 mx-0">
-      <Input class="searchbar_input mr20" placeholder="登録ナンバー" />
+      <Input
+        class="mr20"
+        customwidth="120"
+        customheight="30"
+        customfontsize="10"
+        placeholder="登録ナンバー"
+      />
       <Calendar label="初度登録年月" />
       <span class="searchbar_space">~</span>
       <Calendar />
@@ -53,17 +65,6 @@ export default {
   height: 120px;
   border-radius: 5px;
   background-color: $white-300;
-  &_input {
-    height: 30px;
-    width: 120px;
-    line-height: 20px;
-    padding-bottom: 5px;
-    border: 1px solid $gray-100;
-    &::-webkit-input-placeholder {
-      color: $blue-500;
-      font-size: 10px;
-    }
-  }
   &_space {
     display: block;
     width: 20px;

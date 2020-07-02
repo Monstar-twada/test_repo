@@ -8,8 +8,8 @@
           <p>入庫予定日 ＊</p>
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="２週"
           />
         </div>
@@ -17,8 +17,8 @@
           <p>ボディタイプ ＊</p>
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="セダン"
           />
         </div>
@@ -26,31 +26,48 @@
           <p>運輸支局 ＊</p>
           <Select
             class="mr15"
-            :customwidth="150"
-            :customheight="30"
+            customwidth="150"
+            customheight="30"
             placeholder="品川"
           />
         </div>
         <div>
           <p>分類番号 ＊</p>
-          <Input class="mr15" :customwidth="70" placeholder="331" />
+          <Input
+            class="mr15"
+            customwidth="70"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="331"
+          />
         </div>
         <div>
           <p>用途判別 ＊</p>
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="た"
           />
         </div>
         <div>
           <p>指定番号 ＊</p>
-          <Input class="mr15" :customwidth="80" placeholder="3333" />
+          <Input
+            class="mr15"
+            customwidth="80"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="3333"
+          />
         </div>
         <div>
           <p>車台番号</p>
-          <Input :customwidth="130" placeholder="ZVW51 - 0123456" />
+          <Input
+            customwidth="130"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="ZVW51 - 0123456"
+          />
         </div>
       </div>
       <!-- 2nd -->
@@ -59,32 +76,32 @@
           <p>登録年月日 ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="平成"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="年"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="月"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="日"
           />
         </div>
@@ -92,24 +109,24 @@
           <p>初度登録年月 ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="平成"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="年"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="月"
           />
         </div>
@@ -117,32 +134,32 @@
           <p>車検満了日 ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="平成"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="年"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="月"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="日"
           />
         </div>
@@ -151,74 +168,133 @@
       <div class="d-flex mb20">
         <div class="mr15">
           <p>メーカー ＊</p>
-          <Select :customwidth="150" :customheight="30" placeholder="トヨタ" />
+          <Select customwidth="150" customheight="30" placeholder="トヨタ" />
         </div>
         <div class="mr15">
           <p>型式 ＊</p>
-          <Input :customwidth="200" placeholder="DAA - ZVW51 - AHXHB" />
+          <Input
+            customfontsize="10"
+            customwidth="200"
+            customtextalign="center"
+            placeholder="DAA - ZVW51 - AHXHB"
+          />
         </div>
         <div class="mr15">
           <p>車名 ＊</p>
-          <Input :customwidth="110" placeholder="プリウス" />
+          <Input
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="110"
+            placeholder="プリウス"
+          />
         </div>
         <div class="mr15">
           <p>グレード ＊</p>
-          <Input :customwidth="145" placeholder="Aプレミアム" />
+          <Input
+            customfontsize="10"
+            customwidth="145"
+            customtextalign="center"
+            placeholder="Aプレミアム"
+          />
         </div>
         <div class="mr15">
           <p>排気量 ＊</p>
-          <Input :customwidth="80" placeholder="1.79" />
+          <Input
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="80"
+            placeholder="1.79"
+          />
         </div>
         <div class="mr15">
           <p>型式指定番号 ＊</p>
-          <Input :customwidth="100" placeholder="18029" />
+          <Input
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="100"
+            placeholder="18029"
+          />
         </div>
         <div>
           <p>類別区分番号</p>
-          <Input :customwidth="100" placeholder="0011" />
+          <Input
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="100"
+            placeholder="0011"
+          />
         </div>
       </div>
       <!-- 4th -->
       <div class="d-flex mb20">
         <div class="mr15">
           <p>走行距離 ＊</p>
-          <Input class="mr5" :customwidth="80" placeholder="22573" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customwidth="80"
+            customtextalign="center"
+            placeholder="22573"
+          />
           <span>km</span>
         </div>
         <div class="mr15">
           <p>メーター交換 ＊</p>
-          <Input :customwidth="70" placeholder="有" />
+          <Input
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="70"
+            placeholder="有"
+          />
         </div>
         <div class="mr15">
           <p class="positionAbsolute">メーター交換前走行距離</p>
           <Select
             class="nolabel"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="平成"
           />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="70" :customheight="30" placeholder="年" />
+          <Select customwidth="70" customheight="30" placeholder="年" />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="70" :customheight="30" placeholder="月" />
+          <Select customwidth="70" customheight="30" placeholder="月" />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="70" :customheight="30" placeholder="日" />
+          <Select customwidth="70" customheight="30" placeholder="日" />
         </div>
         <div class="mr15 nolabel">
-          <Input class="mr5" :customwidth="80" placeholder="15573" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="80"
+            placeholder="15573"
+          />
           <span>km</span>
         </div>
         <div class="mr15">
           <p>合計走行距離</p>
-          <Input class="mr5" :customwidth="80" placeholder="37898" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customwidth="80"
+            customtextalign="center"
+            placeholder="37898"
+          />
           <span>km</span>
         </div>
         <div class="mr15">
           <p>乗員定数 ＊</p>
-          <Input class="mr5" :customwidth="50" placeholder="5" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customwidth="50"
+            customtextalign="center"
+            placeholder="5"
+          />
           <span>人</span>
         </div>
       </div>
@@ -226,36 +302,63 @@
       <div class="d-flex mb20">
         <div class="mr15">
           <p>最大積載量 ＊</p>
-          <Input class="mr5" :customwidth="80" placeholder="-" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customwidth="80"
+            customtextalign="center"
+            placeholder="-"
+          />
           <span>kg</span>
         </div>
         <div class="mr15">
           <p>車両重量 ＊</p>
-          <Input class="mr5" :customwidth="80" placeholder="1380" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customwidth="80"
+            customtextalign="center"
+            placeholder="1380"
+          />
           <span>kg</span>
         </div>
         <div class="mr15">
           <p>燃料 ＊</p>
-          <Input :customwidth="120" placeholder="ハイブリッド" />
+          <Input
+            customwidth="120"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="ハイブリッド"
+          />
         </div>
         <div class="mr15">
           <p>駆動</p>
-          <Input :customwidth="80" placeholder="FF" />
+          <Input
+            customwidth="80"
+            customtextalign="center"
+            customfontsize="10"
+            placeholder="FF"
+          />
         </div>
         <div class="mr15">
           <p>ドア数 ＊</p>
-          <Input :customwidth="80" placeholder="5ドア" />
+          <Input
+            customwidth="80"
+            customtextalign="center"
+            customfontsize="10"
+            placeholder="5ドア"
+          />
         </div>
         <div class="mr15">
           <p>スライドドア ＊</p>
-          <Select :customwidth="80" :customheight="30" placeholder="両側" />
+          <Select customwidth="80" customheight="30" placeholder="両側" />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="80" :customheight="30" placeholder="電動" />
+          <Select customwidth="80" customheight="30" placeholder="電動" />
         </div>
         <div class="mr15">
           <p>Pバックドア ＊</p>
-          <Select :customwidth="80" :customheight="30" placeholder="有" />
+          <Select customwidth="80" customheight="30" placeholder="有" />
         </div>
       </div>
       <!-- 6th -->
@@ -264,18 +367,30 @@
           <p>車歴 ＊</p>
           <Select
             class="mr5"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="自家用"
           />
         </div>
         <div class="mr15">
           <p>シフト ＊</p>
-          <Input class="mr5" :customwidth="120" placeholder="インパネ" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="120"
+            placeholder="インパネ"
+          />
         </div>
         <div class="mr15">
           <p>ミッション ＊</p>
-          <Input class="mr5" :customwidth="120" placeholder="インパネ" />
+          <Input
+            class="mr5"
+            customfontsize="10"
+            customtextalign="center"
+            customwidth="120"
+            placeholder="インパネ"
+          />
         </div>
       </div>
     </div>
@@ -286,8 +401,9 @@
           <p>所有者：氏名</p>
           <Input
             class="mr15"
-            :customwidth="120"
-            :customheight="30"
+            customwidth="120"
+            customheight="30"
+            customfontsize="10"
             placeholder="米田 道春"
           />
         </div>
@@ -295,8 +411,9 @@
           <p>所有者：住所</p>
           <Input
             class="mr15"
-            :customwidth="170"
-            :customheight="30"
+            customwidth="170"
+            customfontsize="10"
+            customheight="30"
             placeholder="東京都渋谷区渋谷2-11-5"
           />
         </div>
@@ -304,8 +421,9 @@
           <p>使用者：氏名</p>
           <Input
             class="mr15"
-            :customwidth="170"
-            :customheight="30"
+            customwidth="170"
+            customheight="30"
+            customfontsize="10"
             placeholder="所有者に同じ"
           />
         </div>
@@ -313,8 +431,9 @@
           <p>使用者：住所</p>
           <Input
             class="mr15"
-            :customwidth="170"
-            :customheight="30"
+            customwidth="170"
+            customheight="30"
+            customfontsize="10"
             placeholder="所有者に同じ"
           />
         </div>
@@ -327,8 +446,10 @@
           <p>ハンドル</p>
           <Input
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customheight="30"
+            customtextalign="center"
+            customfontsize="10"
             placeholder="ー"
           />
         </div>
@@ -336,8 +457,10 @@
           <p>VINコード</p>
           <Input
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customtextalign="center"
+            customheight="30"
+            customfontsize="10"
             placeholder="ー"
           />
         </div>
@@ -345,8 +468,10 @@
           <p>正規並行</p>
           <Input
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customheight="30"
+            customtextalign="center"
+            customfontsize="10"
             placeholder="ー"
           />
         </div>
@@ -354,8 +479,10 @@
           <p>登録年月</p>
           <Input
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customtextalign="center"
+            customheight="30"
+            customfontsize="10"
             placeholder="ー"
           />
         </div>
@@ -368,41 +495,65 @@
           <p>外板色 ✳︎</p>
           <Select
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customheight="30"
             placeholder="米田 道春"
           />
         </div>
         <div>
           <p>カラーコード ✳︎</p>
-          <Input class="mr15" :customwidth="80" placeholder="070" />
+          <Input
+            class="mr15"
+            customwidth="80"
+            customtextalign="center"
+            customfontsize="10"
+            placeholder="070"
+          />
         </div>
         <div>
           <p>ツートン</p>
           <Select
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customheight="30"
             placeholder="ルーフ"
           />
         </div>
         <div class="nolabel">
-          <Input class="mr15" :customwidth="120" placeholder="ブラック" />
+          <Input
+            class="mr15"
+            customwidth="120"
+            customtextalign="center"
+            customfontsize="10"
+            placeholder="ブラック"
+          />
         </div>
         <div>
           <p>トリムコード</p>
-          <Input class="mr15" :customwidth="100" placeholder="FA20" />
+          <Input
+            class="mr15"
+            customwidth="100"
+            customtextalign="center"
+            customfontsize="10"
+            placeholder="FA20"
+          />
         </div>
         <div>
           <p>内装色 ✳︎</p>
-          <Input class="mr15" :customwidth="100" placeholder="FA20" />
+          <Input
+            class="mr15"
+            customwidth="100"
+            customtextalign="center"
+            customfontsize="10"
+            placeholder="FA20"
+          />
         </div>
         <div>
           <p>革シート</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -445,14 +596,6 @@ export default {
   }
   .nolabel {
     margin-top: 28px;
-  }
-  input {
-    font-size: 12px;
-    font-family: 'Noto Sans JP';
-    &::-webkit-input-placeholder {
-      font-size: 12px !important;
-      font-family: 'Noto Sans JP';
-    }
   }
   span {
     font-size: 12px;

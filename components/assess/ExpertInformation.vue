@@ -6,14 +6,20 @@
       <div class="d-flex mb20">
         <div>
           <p>エアバッグ ＊</p>
-          <Input class="mr15" :customwidth="80" placeholder="サイド" />
+          <Input
+            class="mr15"
+            customwidth="80"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="サイド"
+          />
         </div>
         <div>
           <p>ABS ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -21,41 +27,47 @@
           <p>ホイール ＊</p>
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="純正"
           />
         </div>
         <div class="mr15 nolabel">
-          <Input class="mr5" :customwidth="80" placeholder="15" />
+          <Input
+            class="mr5"
+            customwidth="80"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="15"
+          />
           <span>inch</span>
         </div>
         <div>
           <p>ナビ ＊</p>
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="純正"
           />
         </div>
         <div class="nolabel">
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="SD"
           />
         </div>
         <div class="mr15">
           <p>TV ＊</p>
-          <Select :customwidth="70" :customheight="30" placeholder="有" />
+          <Select customwidth="70" customheight="30" placeholder="有" />
         </div>
         <div class="nolabel">
           <Select
             class="mr15"
-            :customwidth="120"
-            :customheight="30"
+            customwidth="120"
+            customheight="30"
             placeholder="フルセグ"
           />
         </div>
@@ -66,16 +78,16 @@
           <p>キー ＊</p>
           <Select
             class="mr15"
-            :customwidth="80"
-            :customheight="30"
+            customwidth="80"
+            customheight="30"
             placeholder="純正"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="120"
-            :customheight="30"
+            customwidth="120"
+            customheight="30"
             placeholder="スマートキー"
           />
         </div>
@@ -83,8 +95,8 @@
           <p>ETC ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -92,8 +104,8 @@
           <p>サンルーフ ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -101,8 +113,8 @@
           <p>バックカメラ ＊</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -110,8 +122,8 @@
           <p>ヘッドライト ＊</p>
           <Select
             class="mr15"
-            :customwidth="120"
-            :customheight="30"
+            customwidth="120"
+            customheight="30"
             placeholder="LED"
           />
         </div>
@@ -119,16 +131,16 @@
           <p>エアコン ＊</p>
           <Select
             class="mr15"
-            :customwidth="100"
-            :customheight="30"
+            customwidth="100"
+            customheight="30"
             placeholder="オート"
           />
         </div>
         <div>
           <Select
             class="mr15 nolabel"
-            :customwidth="120"
-            :customheight="30"
+            customwidth="120"
+            customheight="30"
             placeholder="シングル"
           />
         </div>
@@ -137,35 +149,41 @@
       <div class="d-flex mb20">
         <div class="mr15">
           <p>禁煙者</p>
-          <Select :customwidth="80" :customheight="30" placeholder="○" />
+          <Select customwidth="80" customheight="30" placeholder="○" />
         </div>
         <div class="mr15">
           <p>1オーナー ＊</p>
-          <Select :customwidth="80" :customheight="30" placeholder="複数" />
+          <Select customwidth="80" customheight="30" placeholder="複数" />
         </div>
         <div class="mr15">
           <p>保証書 ＊</p>
-          <Select :customwidth="70" :customheight="30" placeholder="有" />
+          <Select customwidth="70" customheight="30" placeholder="有" />
         </div>
         <div class="mr15">
           <p>取説 ＊</p>
-          <Select :customwidth="70" :customheight="30" placeholder="無" />
+          <Select customwidth="70" customheight="30" placeholder="無" />
         </div>
         <div class="mr15">
           <p>整備記録簿 ＊</p>
-          <Select :customwidth="80" :customheight="30" placeholder="有" />
+          <Select customwidth="80" customheight="30" placeholder="有" />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="70" :customheight="30" placeholder="年" />
+          <Select customwidth="70" customheight="30" placeholder="年" />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="70" :customheight="30" placeholder="月" />
+          <Select customwidth="70" customheight="30" placeholder="月" />
         </div>
         <div class="mr15 nolabel">
-          <Select :customwidth="70" :customheight="30" placeholder="日" />
+          <Select customwidth="70" customheight="30" placeholder="日" />
         </div>
         <div class="mr15 nolabel">
-          <Input class="mr5" :customwidth="80" placeholder="15600" />
+          <Input
+            class="mr5"
+            customwidth="80"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="15600"
+          />
           <span>円</span>
         </div>
       </div>
@@ -177,8 +195,8 @@
           <p>運転支援レベル ✳︎</p>
           <Select
             class="mr15"
-            :customwidth="120"
-            :customheight="30"
+            customwidth="120"
+            customheight="30"
             placeholder="レベルⅡ"
           />
         </div>
@@ -186,8 +204,8 @@
           <p>自動ブレーキ ✳︎</p>
           <Select
             class="mr30"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -195,8 +213,8 @@
           <p>ソナー ✳︎</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -204,8 +222,8 @@
           <p>BSM ✳︎</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -213,8 +231,8 @@
           <p>レーンキープ ✳︎</p>
           <Select
             class="mr30"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -222,8 +240,8 @@
           <p>自動ハイビーム ✳︎</p>
           <Select
             class="mr15"
-            :customwidth="70"
-            :customheight="30"
+            customwidth="70"
+            customheight="30"
             placeholder="有"
           />
         </div>
@@ -234,34 +252,82 @@
       <div class="d-flex mb20">
         <div>
           <p>社名1</p>
-          <Input class="mr15" :customwidth="120" placeholder="ビックモーター" />
+          <Input
+            class="mr15"
+            customwidth="120"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="ビックモーター"
+          />
         </div>
         <div class="nolabel mr15">
-          <Input class="mr5" :customwidth="70" placeholder="135" />
+          <Input
+            class="mr5"
+            customwidth="70"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="135"
+          />
           <span>万円</span>
         </div>
         <div>
           <p>社名2</p>
-          <Input class="mr15" :customwidth="120" placeholder="ビックモーター" />
+          <Input
+            class="mr15"
+            customwidth="120"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="ビックモーター"
+          />
         </div>
         <div class="nolabel mr15">
-          <Input class="mr5" :customwidth="70" placeholder="135" />
+          <Input
+            class="mr5"
+            customwidth="70"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="135"
+          />
           <span>万円</span>
         </div>
         <div>
           <p>社名3</p>
-          <Input class="mr15" :customwidth="120" placeholder="ビックモーター" />
+          <Input
+            class="mr15"
+            customwidth="120"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="ビックモーター"
+          />
         </div>
         <div class="nolabel mr15">
-          <Input class="mr5" :customwidth="70" placeholder="135" />
+          <Input
+            class="mr5"
+            customwidth="70"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="135"
+          />
           <span>万円</span>
         </div>
         <div>
           <p>社名4</p>
-          <Input class="mr15" :customwidth="120" placeholder="ビックモーター" />
+          <Input
+            class="mr15"
+            customwidth="120"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="ビックモーター"
+          />
         </div>
         <div class="nolabel mr15">
-          <Input class="mr5" :customwidth="70" placeholder="135" />
+          <Input
+            class="mr5"
+            customwidth="70"
+            customfontsize="10"
+            customtextalign="center"
+            placeholder="135"
+          />
           <span>万円</span>
         </div>
       </div>
@@ -302,14 +368,6 @@ export default {
   }
   .nolabel {
     margin-top: 28px;
-  }
-  input {
-    font-size: 12px;
-    font-family: 'Noto Sans JP';
-    &::-webkit-input-placeholder {
-      font-size: 12px !important;
-      font-family: 'Noto Sans JP';
-    }
   }
   span {
     font-size: 12px;
