@@ -1,19 +1,29 @@
 <template>
-  <div class="searchbar">
+  <div class="searchbar mb30">
     <v-row justify="left" align="center" class="mx-0">
+      <h3 class="searchbar_title">車両検索</h3>
+      <Select class="mr20" placeholder="運輸支局" />
       <Input
         class="mr20"
         customwidth="120"
         customheight="30"
         customfontsize="10"
-        placeholder="顧客名"
+        placeholder="分類番号"
       />
-      <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
-      <Select items="items" class="mr20" :list="list" placeholder="車種" />
-      <Select items="items" class="mr20" :list="list" placeholder="担当者" />
-      <Calendar label="作成日" />
-      <span class="searchbar_space">~</span>
-      <Calendar />
+      <Input
+        class="mr20"
+        customwidth="120"
+        customheight="30"
+        customfontsize="10"
+        placeholder="用途判別"
+      />
+      <Input
+        class="mr20"
+        customwidth="120"
+        customheight="30"
+        customfontsize="10"
+        placeholder="指定番号"
+      />
       <ButtonSearch class="searchbar_button" />
     </v-row>
   </div>
@@ -22,22 +32,16 @@
 <script>
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
-import Calendar from '~/components/common/Calendar.vue'
 import ButtonSearch from '~/components/common/ButtonSearch.vue'
 export default {
-  name: 'Searchbar',
+  name: 'VehicleSearch',
   components: {
     Input,
     Select,
     ButtonSearch,
-    Calendar,
   },
-  data: () => ({
-    list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-  }),
 }
 </script>
-<style lang="scss"></style>
 <style lang="scss" scoped>
 .searchbar {
   width: 100%;
@@ -45,12 +49,11 @@ export default {
   height: 70px;
   border-radius: 5px;
   background-color: $white-300;
-  &_space {
-    display: block;
-    width: 20px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
+  &_title {
+    font-size: 18px;
+    color: $blue-200;
+    font-weight: 600;
+    margin-right: 30px;
   }
   &_button {
     margin-left: auto;
