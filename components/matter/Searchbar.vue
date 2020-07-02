@@ -1,6 +1,12 @@
 <template>
   <div class="searchbar">
-    <Input class="searchbar_input mr20" placeholder="顧客名" />
+    <Input
+      class="mr20"
+      customwidth="120"
+      customheight="30"
+      customfontsize="10"
+      placeholder="顧客名"
+    />
     <Select items="items" class="mr15" :list="list" placeholder="カテゴリー" />
     <Select
       items="items"
@@ -39,17 +45,6 @@ export default {
   border-radius: 5px;
   background-color: $white-300;
   display: flex;
-  &_input {
-    height: 30px;
-    width: 120px;
-    line-height: 20px;
-    padding-bottom: 5px;
-    border: 1px solid $gray-100;
-    &::-webkit-input-placeholder {
-      color: $blue-500;
-      font-size: 10px;
-    }
-  }
   &_button {
     margin-left: auto;
   }
