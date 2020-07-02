@@ -67,7 +67,7 @@ export default {
       display: flex;
     }
     display: grid;
-    grid-template-columns: 130px 1fr;
+    grid-template-columns: 130px 440px;
     &--body {
       display: flex;
       flex-direction: column;

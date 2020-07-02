@@ -103,6 +103,7 @@ export default {
   border-radius: 6px;
   background-color: $white-300;
   padding: 24px 23.5px;
+  margin-bottom: 30px;
   h3 {
     font-size: 14px;
     font-weight: bold;
