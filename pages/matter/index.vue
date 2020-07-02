@@ -43,6 +43,6 @@ export default {
 .main-container {
   padding: 30px 0px;
   margin: 0 75px;
-  max-width: 1080px;
+  width: 100%;
 }
 </style>
