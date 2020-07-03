@@ -1,5 +1,9 @@
 <template>
-  <button class="button" :class="[isWhite ? 'white_style' : 'blue_style']">
+  <button
+    class="button"
+    :style="ButtonStyle"
+    :class="[isWhite ? 'white_style' : 'blue_style']"
+  >
     {{ content }}
   </button>
 </template>
@@ -16,13 +20,24 @@ export default {
       type: Boolean,
       default: false,
     },
+    customwidth: {
+      type: Number,
+      default: 220,
+    },
+  },
+  computed: {
+    ButtonStyle() {
+      return {
+        '--width': this.customwidth + 'px',
+      }
+    },
   },
 }
 </script>
 
 <style lang="scss">
 .button {
-  width: 220px;
+  width: var(--width);
   height: 40px;
   line-height: 40px;
   border-radius: 20px;
@@ -53,6 +68,7 @@ export default {
 
 .white_style {
   border: 1px solid $blue-100;
+  background: $white-300;
   color: $blue-100;
   &::after {
     border-top: 2px solid $blue-100;

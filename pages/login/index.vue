@@ -8,12 +8,13 @@
         <div class="login_form">
           <Logo />
           <v-row justify="center" align="center" class="mt50">
-            <Input name="ID" placeholder-text="ID" />
+            <Input name="ID" placeholder="ID" :customwidth="270" />
             <Input
               class="mt20"
               type="password"
               name="password"
-              placeholder-text="パスワード"
+              placeholder="パスワード"
+              :customwidth="270"
             />
             <ButtonLarge class="mt30" content="ログイン" />
             <nuxt-link class="mt25" to="/login/forgot"

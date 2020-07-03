@@ -78,6 +78,7 @@ export default {
 .v-navigation-drawer {
   background-color: transparent !important;
   max-width: 210px !important;
+  height: 800px !important;
 }
 .v-input__slot {
   box-shadow: none !important;
