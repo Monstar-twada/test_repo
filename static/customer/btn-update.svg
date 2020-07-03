@@ -1,0 +1,8 @@
+<svg id="コンポーネント_188_1" data-name="コンポーネント 188 – 1" xmlns="http://www.w3.org/2000/svg" width="64" height="24" viewBox="0 0 64 24">
+  <g id="長方形_201" data-name="長方形 201" fill="#fff" stroke="#dfe6f0" stroke-width="1">
+    <rect width="64" height="24" rx="12" stroke="none"/>
+    <rect x="0.5" y="0.5" width="63" height="23" rx="11.5" fill="none"/>
+  </g>
+  <text id="更新" transform="translate(51 15)" fill="#0786bd" font-size="11" font-family="HiraginoSans-W3, Hiragino Sans"><tspan x="-22" y="0">更新</tspan></text>
+  <path id="前面オブジェクトで型抜き_5" data-name="前面オブジェクトで型抜き 5" d="M4.9,10A5.014,5.014,0,0,1,0,6H1.028A4,4,0,0,0,8.774,6H9.8A5.013,5.013,0,0,1,4.9,10ZM1.026,4H0A5,5,0,0,1,9.8,4H8.774A4,4,0,0,0,1.026,4Z" transform="translate(11.937 6)" fill="#0786bd"/>
+</svg>
