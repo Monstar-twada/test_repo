@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer class="sidebar">
     <div class="sidebar_container">
-      <div class="sidebar_container_top pt20">
+      <div class="sidebar_container_top p20">
         <v-img
           class="sidebar_container_top_logo"
           :src="require('~/static/common/logo.svg')"
@@ -21,18 +21,31 @@
       </div>
       <v-list>
         <v-list-item-group v-model="model">
-          <v-list-item v-for="(item, i) in items" :key="i">
-            <v-list-item-icon class="mr-4">
-              <v-img
-                :src="require(`~/static/sidebar/${item.icon}.svg`)"
-              ></v-img>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :ref="`list${i}`"
+            @click="clickEvent"
+          >
+            <template v-slot:default="{ active }">
+              <v-list-item-icon class="mr-4">
+                <v-img
+                  v-if="!active"
+                  :src="require(`~/static/sidebar/${item.icon}.svg`)"
+                ></v-img>
+                <v-img
+                  v-else
+                  :src="require(`~/static/sidebar/${item.iconHover}.svg`)"
+                ></v-img>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.text"></v-list-item-title>
+              </v-list-item-content>
+            </template>
           </v-list-item>
         </v-list-item-group>
       </v-list>
+      <div class="space"></div>
     </div>
   </v-navigation-drawer>
 </template>
@@ -51,27 +64,38 @@ export default {
     items: [
       {
         icon: 'result',
+        iconHover: 'result-hover',
         text: '案件管理',
       },
       {
         icon: 'assessment',
+        iconHover: 'assessment-hover',
         text: '査定',
       },
       {
         icon: 'customer',
+        iconHover: 'customer-hover',
         text: '顧客管理',
       },
       {
         icon: 'matching',
+        iconHover: 'matching-hover',
         text: 'マッチング',
       },
       {
         icon: 'setting',
+        iconHover: 'setting-hover',
         text: '管理',
       },
     ],
     model: 1,
   }),
+
+  methods: {
+    clickEvent() {
+      console.log('dom', this.$refs)
+    },
+  },
 }
 </script>
 <style lang="scss">
@@ -95,9 +119,15 @@ export default {
 .v-list-item {
   background-color: $white-300 !important;
 }
+.v-list-item__title {
+  font-size: 14px !important;
+  color: $blue-200 !important;
+}
 .v-list-item--active {
-  color: $white-100 !important;
   background-color: transparent !important;
+  .v-list-item__title {
+    color: $white-100 !important;
+  }
 
   &::before {
     opacity: 0 !important;
@@ -128,8 +158,11 @@ export default {
         margin-bottom: 7px;
         font-weight: 400;
       }
-      &_select {
-      }
+    }
+    .space {
+      width: 100%;
+      height: 300px;
+      background: $white-300;
     }
   }
 }
