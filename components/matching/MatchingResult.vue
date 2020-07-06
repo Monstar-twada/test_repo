@@ -89,22 +89,7 @@ export default {
     ],
     itemlist: [
       {
-        id: 'AT-123',
-        name: '米田 道春',
-        image_path: 'person.png',
-        age: 31,
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        car_class: 'Sツーリングセレクション',
-        car_price: '¥1,500,000',
-        car_inspection: '7ヶ月',
-        place: '東京都渋谷区渋谷2丁目',
-        stock_period: '20日',
-        status: '出品中',
-        keep: true,
-      },
-      {
-        id: 'AT-123',
+        id: 'AT-101',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -119,7 +104,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-102',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -134,7 +119,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-103',
         name: '斎藤拓',
         image_path: 'person.png',
         age: 31,
@@ -149,7 +134,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-104',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
@@ -164,7 +149,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-105',
         name: '米田 道春',
         image_path: 'person.png',
         age: 31,
@@ -179,7 +164,7 @@ export default {
         keep: true,
       },
       {
-        id: 'AT-123',
+        id: 'AT-106',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -194,7 +179,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-107',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -209,7 +194,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-108',
         name: '斎藤拓',
         image_path: 'person.png',
         age: 31,
@@ -224,7 +209,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-109',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
@@ -239,7 +224,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-110',
         name: '米田 道春',
         image_path: 'person.png',
         age: 31,
@@ -254,7 +239,7 @@ export default {
         keep: true,
       },
       {
-        id: 'AT-123',
+        id: 'AT-111',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -269,7 +254,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-112',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -284,7 +269,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-113',
         name: '斎藤拓',
         image_path: 'person.png',
         age: 31,
@@ -299,7 +284,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-114',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
@@ -314,7 +299,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-115',
         name: '米田 道春',
         image_path: 'person.png',
         age: 31,
@@ -329,7 +314,7 @@ export default {
         keep: true,
       },
       {
-        id: 'AT-123',
+        id: 'AT-116',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -344,7 +329,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-117',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -359,7 +344,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-118',
         name: '斎藤拓',
         image_path: 'person.png',
         age: 31,
@@ -374,7 +359,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-119',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
@@ -389,7 +374,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-120',
         name: '米田 道春',
         image_path: 'person.png',
         age: 31,
@@ -404,7 +389,7 @@ export default {
         keep: true,
       },
       {
-        id: 'AT-123',
+        id: 'AT-121',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -419,7 +404,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-122',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -449,7 +434,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-124',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
@@ -464,7 +449,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-125',
         name: '米田 道春',
         image_path: 'person.png',
         age: 31,
@@ -479,7 +464,7 @@ export default {
         keep: true,
       },
       {
-        id: 'AT-123',
+        id: 'AT-126',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -494,7 +479,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-127',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -509,7 +494,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-128',
         name: '斎藤拓',
         image_path: 'person.png',
         age: 31,
@@ -524,7 +509,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-129',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
@@ -539,7 +524,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-130',
         name: '米田 道春',
         image_path: 'person.png',
         age: 31,
@@ -554,7 +539,7 @@ export default {
         keep: true,
       },
       {
-        id: 'AT-123',
+        id: 'AT-131',
         name: '山本篤',
         image_path: 'person.png',
         age: 31,
@@ -569,7 +554,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-132',
         name: '北中 真希子',
         image_path: 'person.png',
         age: 31,
@@ -584,7 +569,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-133',
         name: '斎藤拓',
         image_path: 'person.png',
         age: 31,
@@ -599,7 +584,7 @@ export default {
         keep: false,
       },
       {
-        id: 'AT-123',
+        id: 'AT-134',
         name: '島田一郎',
         image_path: 'person.png',
         age: 31,
