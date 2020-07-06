@@ -16,7 +16,9 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/vuetify": "^1.11.2",
+    "chart.js": "^2.9.3",
     "nuxt": "^2.0.0",
+    "vue-chartjs": "^3.5.0",
     "vue-select": "^3.10.3"
   },
   "devDependencies": {
