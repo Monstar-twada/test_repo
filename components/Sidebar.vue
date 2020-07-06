@@ -28,19 +28,21 @@
             @click="clickEvent"
           >
             <template v-slot:default="{ active }">
-              <v-list-item-icon class="mr-4">
-                <v-img
-                  v-if="!active"
-                  :src="require(`~/static/sidebar/${item.icon}.svg`)"
-                ></v-img>
-                <v-img
-                  v-else
-                  :src="require(`~/static/sidebar/${item.iconHover}.svg`)"
-                ></v-img>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
-              </v-list-item-content>
+              <nuxt-link :to="item.link">
+                <v-list-item-icon class="mr-4">
+                  <v-img
+                    v-if="!active"
+                    :src="require(`~/static/sidebar/${item.icon}.svg`)"
+                  ></v-img>
+                  <v-img
+                    v-else
+                    :src="require(`~/static/sidebar/${item.iconHover}.svg`)"
+                  ></v-img>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.text"></v-list-item-title>
+                </v-list-item-content>
+              </nuxt-link>
             </template>
           </v-list-item>
         </v-list-item-group>
@@ -65,26 +67,31 @@ export default {
       {
         icon: 'result',
         iconHover: 'result-hover',
+        link: '/matter',
         text: '案件管理',
       },
       {
         icon: 'assessment',
         iconHover: 'assessment-hover',
+        link: '/assess',
         text: '査定',
       },
       {
         icon: 'customer',
         iconHover: 'customer-hover',
+        link: '/customer',
         text: '顧客管理',
       },
       {
         icon: 'matching',
         iconHover: 'matching-hover',
+        link: '/matching',
         text: 'マッチング',
       },
       {
         icon: 'setting',
         iconHover: 'setting-hover',
+        link: '/admin',
         text: '管理',
       },
     ],
@@ -99,45 +106,52 @@ export default {
 }
 </script>
 <style lang="scss">
-.v-navigation-drawer {
+.v-application .sidebar a {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+}
+.v-navigation-drawer.sidebar {
   background-color: transparent !important;
   max-width: 210px !important;
   height: 800px !important;
 }
-.v-input__slot {
-  box-shadow: none !important;
-  .v-label {
+.sidebar {
+  .v-input__slot {
+    box-shadow: none !important;
+    .v-label {
+      color: $blue-100 !important;
+    }
+  }
+
+  .v-list {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .v-list-item {
+    background-color: $white-300 !important;
+  }
+  .v-list-item__title {
+    font-size: 14px !important;
+    color: $blue-200 !important;
+  }
+  .v-list-item--active {
+    background-color: transparent !important;
+    .v-list-item__title {
+      color: $white-100 !important;
+    }
+
+    &::before {
+      opacity: 0 !important;
+    }
+  }
+  .v-list-item__content {
+    //color: $blue-100 !important;
+  }
+  .theme--light.v-select .v-select__selection--comma {
     color: $blue-100 !important;
   }
-}
-
-.v-list {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.v-list-item {
-  background-color: $white-300 !important;
-}
-.v-list-item__title {
-  font-size: 14px !important;
-  color: $blue-200 !important;
-}
-.v-list-item--active {
-  background-color: transparent !important;
-  .v-list-item__title {
-    color: $white-100 !important;
-  }
-
-  &::before {
-    opacity: 0 !important;
-  }
-}
-.v-list-item__content {
-  //color: $blue-100 !important;
-}
-.theme--light.v-select .v-select__selection--comma {
-  color: $blue-100 !important;
 }
 </style>
 <style scoped lang="scss">
@@ -161,7 +175,7 @@ export default {
     }
     .space {
       width: 100%;
-      height: 300px;
+      height: 250px;
       background: $white-300;
     }
   }

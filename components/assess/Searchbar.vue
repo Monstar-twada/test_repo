@@ -3,9 +3,9 @@
     <v-row justify="left" align="center" class="mx-0">
       <Input
         class="mr20"
-        customwidth="120"
-        customheight="30"
-        customfontsize="10"
+        :customwidth="120"
+        :customheight="30"
+        :customfontsize="10"
         placeholder="顧客名"
       />
       <Select items="items" class="mr20" :list="list" placeholder="メーカー" />

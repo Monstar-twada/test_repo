@@ -3,9 +3,9 @@
     <v-row justify="left" align="center" class="mx-0">
       <Input
         class="mr20"
-        customwidth="120"
-        customheight="30"
-        customfontsize="10"
+        :customwidth="120"
+        :customheight="30"
+        :customfontsize="10"
         placeholder="顧客名"
       />
       <Select
@@ -22,9 +22,9 @@
     <v-row justify="center" align="center" class="mt20 mx-0">
       <Input
         class="mr20"
-        customwidth="120"
-        customheight="30"
-        customfontsize="10"
+        :customwidth="120"
+        :customheight="30"
+        :customfontsize="10"
         placeholder="登録ナンバー"
       />
       <Calendar label="初度登録年月" />
