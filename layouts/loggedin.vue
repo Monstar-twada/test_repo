@@ -12,11 +12,14 @@ export default {
   },
 }
 </script>
-<style>
+<style lang="scss">
 .background {
   background: url('~static/common/full.png') !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
+  .container {
+    padding: 0px !important;
+  }
 }
 .v-application--wrap {
   flex-direction: row !important;
