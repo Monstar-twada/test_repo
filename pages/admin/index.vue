@@ -24,11 +24,11 @@ export default {
       breadcrumbs: [
         {
           text: 'home',
-          to: '/',
+          href: '/',
         },
         {
           text: '管理',
-          to: '',
+          href: '/admin',
         },
       ],
     }
