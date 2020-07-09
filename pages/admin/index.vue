@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div>
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"
@@ -14,7 +14,6 @@ import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import BodyContainer from '~/components/admin/BodyContainer'
 
 export default {
-  layout: 'loggedin',
   components: {
     Breadcrumbs,
     BodyContainer,
@@ -36,11 +35,4 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-.main-container {
-  padding: 30px 0px;
-  margin: 0 75px;
-  width: 100%;
-  max-width: 1080px;
-}
-</style>
+<style lang="scss"></style>
