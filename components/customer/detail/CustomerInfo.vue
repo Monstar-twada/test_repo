@@ -2,7 +2,9 @@
   <v-row align="top" justify="center" class="customer-profile ma-0 pa-0">
     <div class="title">
       <h2>顧客情報</h2>
-      <p><v-img :src="require('~/static/customer/btn-edit.svg')" /></p>
+      <p>
+        <v-img :src="require('~/static/customer/btn-edit.svg')" />
+      </p>
     </div>
     <v-col cols="8" class="pl20 pr20">
       <v-row align="top" justify="center" class="ma-0">
@@ -63,20 +65,23 @@
         </v-col>
       </v-row>
       <v-row align="center" justify="start" class="questionary ma-0">
-        <h3 class="mt10 mb10">アンケード情報</h3>
+        <h3 class="mt10 mb10">アンケート情報</h3>
         <v-col cols="12" class="px-0">
           <v-data-table
             :headers="headers"
-            :items="itemlist"
+            :items="itemList"
             hide-default-footer
+            @click:row="handleClickRow"
           >
           </v-data-table>
         </v-col>
       </v-row>
     </v-col>
+    <QuestionnaireResultDialog v-model="qrVisible" />
   </v-row>
 </template>
 <script>
+import QuestionnaireResultDialog from './questionnaire-results-dialog/index'
 import SubTitle from '~/components/customer/SubTitle.vue'
 import TextContent from '~/components/customer/TextContent.vue'
 import HtmlContent from '~/components/customer/HtmlContent.vue'
@@ -86,6 +91,7 @@ export default {
     SubTitle,
     TextContent,
     HtmlContent,
+    QuestionnaireResultDialog,
   },
   data: () => ({
     headers: [
@@ -93,7 +99,7 @@ export default {
       { text: '回答日時', value: 'date', align: 'center' },
       { text: '店舗', value: 'shop', align: 'center' },
     ],
-    itemlist: [
+    itemList: [
       {
         id: 1,
         question_type: '車検',
@@ -123,7 +129,13 @@ export default {
       '<div>' +
       '<dl style="display:flex;"><dt style="width: 40px">配偶者</dt><dd class="ml10"><img class="mr5" src="/customer/profile-edit.svg" width="16" />米田直子（30歳）<a href=""><img src="/customer/link.svg" width="10"></a> </dd></dl> ' +
       '<dl style="display:flex;"><dt style="width: 40px">子供</dt><dd class="ml10">米田 拓実（11歳）<br />米田 咲（8歳）<br />米田あや（2歳）</dd></dl></div>',
+    qrVisible: false,
   }),
+  methods: {
+    handleClickRow() {
+      this.qrVisible = true
+    },
+  },
 }
 </script>
 
@@ -176,7 +188,6 @@ export default {
     p {
       float: right;
       margin: 20px;
-
       img {
         width: 60px;
       }
