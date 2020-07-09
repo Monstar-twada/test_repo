@@ -1,5 +1,10 @@
 <template>
-  <v-app :class="isCollapsed ? 'next-action-is-collapsed' : ''">
+  <v-app
+    :class="[
+      'default-layout-container',
+      isCollapsed ? 'next-action-is-collapsed' : '',
+    ]"
+  >
     <Sidebar />
     <div class="global-main-wrapper">
       <nuxt />
@@ -28,14 +33,10 @@ export default {
 $space: 60px;
 $sideWidth: 210px;
 
-body {
-  background: url('~static/common/full.png') no-repeat top center;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-.v-application {
-  background: none !important;
+.default-layout-container {
+  background: url('~static/common/full.png') no-repeat top center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
 }
 
 .global-main-wrapper {
