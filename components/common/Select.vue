@@ -1,5 +1,6 @@
 <template>
   <VSelect
+    v-model="selected"
     :placeholder="placeholder"
     :options="list"
     class="selectStyle"
@@ -40,10 +41,15 @@ export default {
       type: Number,
       default: 20,
     },
+    value: {
+      type: [String, Number],
+      default: '',
+    },
   },
   data() {
     return {
       OpenIndicator: Dropdown,
+      selected: this.value,
     }
   },
   computed: {
@@ -52,6 +58,16 @@ export default {
         '--width': this.customwidth + 'px',
         '--height': this.customheight + 'px',
       }
+    },
+  },
+  watch: {
+    value(val) {
+      if (this.selected !== val) {
+        this.selected = val
+      }
+    },
+    selected(val) {
+      this.$emit('input', val)
     },
   },
 }
