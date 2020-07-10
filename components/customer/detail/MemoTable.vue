@@ -2,14 +2,20 @@
   <v-row class="customer-memo ma-0 pa-0">
     <div class="title">
       <h2>活動メモ</h2>
-      <p><v-img :src="require('~/static/customer/btn-plus.svg')" /></p>
+      <p>
+        <v-img
+          class="edit-button"
+          :src="require('~/static/customer/btn-plus.svg')"
+          @click="editVisible = true"
+        />
+      </p>
     </div>
     <v-data-table
       :headers="headers"
       :items="itemlist"
       :page.sync="page"
       hide-default-footer
-      :item-class="1234"
+      :item-class="'1234'"
       class="memolistTable"
     >
       <template v-slot:item.responsible="{ item }">
@@ -29,11 +35,16 @@
         </div>
       </template>
     </v-data-table>
+    <MemoEditDialog v-model="editVisible" />
   </v-row>
 </template>
 <script>
+import MemoEditDialog from './memo-edit-dialog/index'
 export default {
   name: 'MemoTable',
+  components: {
+    MemoEditDialog,
+  },
   data: () => ({
     headers: [
       { text: '交流日', align: 'center', value: 'date' },
@@ -80,12 +91,17 @@ export default {
         responsible: ' 山田太郎',
       },
     ],
+    page: 1,
+    editVisible: false,
   }),
 }
 </script>
 
 <style lang="scss">
 .customer-memo {
+  .edit-button {
+    cursor: pointer;
+  }
   .v-data-table {
     width: 100%;
     table {
