@@ -40,6 +40,7 @@ import ButtonLarge from '~/components/common/ButtonLarge.vue'
 import Input from '~/components/common/Input.vue'
 
 export default {
+  layout: 'login',
   components: {
     LoginBg,
     Logo,
