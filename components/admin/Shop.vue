@@ -55,8 +55,10 @@ export default {
 
     const itemList = []
     for (let i = 0; i < 20; i++) {
-      item.id = item.id + i
-      itemList.push(item)
+      itemList.push({
+        ...item,
+        id: item.id + i,
+      })
     }
 
     return {
