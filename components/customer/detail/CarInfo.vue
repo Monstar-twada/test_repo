@@ -1,11 +1,12 @@
 <template>
   <v-row align="top" justify="center" class="customer-car ma-0 pa-0">
     <div class="title">
-      <h2>顧客情報</h2>
+      <h2>車両情報</h2>
       <p>
         <v-img
           class="car_more mr10"
           :src="require('~/static/customer/car-more.svg')"
+          @click="selectCarVisible = true"
         />
         <v-img
           class="car_plus"
@@ -315,9 +316,11 @@
         </v-card>
       </v-col>
     </v-col>
+    <SelectCarDialog v-model="selectCarVisible" />
   </v-row>
 </template>
 <script>
+import SelectCarDialog from './select-car-dialog/index'
 import SubTitle from '~/components/customer/SubTitle.vue'
 import TextContent from '~/components/customer/TextContent.vue'
 import HtmlContent from '~/components/customer/HtmlContent.vue'
@@ -327,12 +330,14 @@ export default {
     SubTitle,
     TextContent,
     HtmlContent,
+    SelectCarDialog,
   },
   data: () => ({
     tag:
       '839294813493' +
       '<a href=""><img class="ml5 mr10" src="/customer/link.svg" width="10"></a>' +
       '<span style="display: inline-block; background: #1e5199; color: #ffffff; width: 40px; height: 18px; border-radius: 9px; font-size: 12px; text-align: center;">自社</span>',
+    selectCarVisible: false,
   }),
 }
 </script>
@@ -357,10 +362,12 @@ export default {
       .car_more {
         display: inline-block;
         width: 90px;
+        cursor: pointer;
       }
       .car_plus {
         display: inline-block;
         width: 30px;
+        cursor: pointer;
       }
     }
   }
