@@ -20,19 +20,19 @@
         <v-col cols="3" class="px-0">
           <h4>所有者</h4>
           <v-avatar size="30" class="ml10">
-            <v-img :src="require('~/static/breadcrumbs/person.png')" />
+            <v-img :src="require('~/static/customer/profile-edit.svg')" />
           </v-avatar>
         </v-col>
         <v-col cols="3" class="px-0">
           <h4>意思決定者</h4>
           <v-avatar size="30" class="ml10">
-            <v-img :src="require('~/static/breadcrumbs/person.png')" />
+            <v-img :src="require('~/static/customer/profile-edit.svg')" />
           </v-avatar>
         </v-col>
         <v-col cols="3" class="px-0">
           <h4>利用者</h4>
           <v-avatar size="30" class="ml10">
-            <v-img :src="require('~/static/breadcrumbs/person.png')" />
+            <v-img :src="require('~/static/customer/profile-edit.svg')" />
           </v-avatar>
           <v-avatar size="30">
             <v-img :src="require('~/static/customer/profile-edit.svg')" />
