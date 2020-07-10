@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="visible" max-width="670px">
+  <v-dialog v-model="visible" persistent max-width="670px">
     <v-card class="customer-import-dialog-card">
       <DialogHeader title="インポート" @close="visible = false" />
       <v-card-text>
