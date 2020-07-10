@@ -17,7 +17,7 @@ export default {
       default: '',
     },
     customheight: {
-      type: Number,
+      type: [Number, String],
       default: 20,
     },
     customfontweight: {
