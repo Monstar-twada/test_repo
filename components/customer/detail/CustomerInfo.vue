@@ -1,5 +1,5 @@
 <template>
-  <v-row align="top" justify="center" class="customer-profile ma-0 pa-0">
+  <v-row justify="center" class="customer-profile ma-0 pa-0">
     <div class="title">
       <h2>顧客情報</h2>
       <p>
@@ -7,7 +7,7 @@
       </p>
     </div>
     <v-col cols="8" class="pl20 pr20">
-      <v-row align="top" justify="center" class="ma-0">
+      <v-row align="start" justify="center" class="ma-0">
         <SubTitle sub-title="基本情報" class="mt10" />
         <v-col cols="6" align-self="start" class="pa-0">
           <HtmlContent
@@ -36,7 +36,7 @@
           <TextContent label="個人/法人 " content="個人" />
         </v-col>
       </v-row>
-      <v-row align="top" justify="center" class="ma-0">
+      <v-row align="start" justify="center" class="ma-0">
         <SubTitle sub-title="その他の情報" class="mt10" />
         <v-col cols="6" class="pa-0">
           <TextContent label="ペット" content="猫 タマ（2才）" />
@@ -49,7 +49,7 @@
       </v-row>
     </v-col>
     <v-col cols="4" class="pl20 pr20">
-      <v-row align="center" justify="center" class="ma-0 pa-0">
+      <v-row justify="center" class="ma-0 pa-0">
         <v-col cols="3">
           <v-avatar size="80" class="customer-profile__image">
             <v-img :src="require('~/static/customer/profile.png')"></v-img>
@@ -64,7 +64,7 @@
           </v-col>
         </v-col>
       </v-row>
-      <v-row align="center" justify="start" class="questionary ma-0">
+      <v-row justify="start" class="questionary ma-0">
         <h3 class="mt10 mb10">アンケート情報</h3>
         <v-col cols="12" class="px-0">
           <v-data-table

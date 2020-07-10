@@ -1,5 +1,5 @@
 <template>
-  <v-row align="top" justify="center" class="customer-car ma-0 pa-0">
+  <v-row justify="center" class="customer-car ma-0 pa-0">
     <div class="title">
       <h2>車両情報</h2>
       <p>
@@ -15,7 +15,7 @@
       </p>
     </div>
     <v-col cols="8" class="p20">
-      <v-row align="top" justify="center" class="customer-car__owner ma-0">
+      <v-row justify="center" class="customer-car__owner ma-0">
         <SubTitle sub-title="プリウス" />
         <v-col cols="3" class="px-0">
           <h4>所有者</h4>
@@ -76,7 +76,7 @@
           <TextContent label="代替反応" content="あり" />
         </v-col>
       </v-row>
-      <v-row align="top" justify="top" class="ma-0">
+      <v-row class="ma-0">
         <SubTitle sub-title="売買情報" />
         <v-col cols="6" class="px-0">
           <TextContent label="小売価格" content="¥2,340,000（R1/1/1時点）" />
@@ -101,7 +101,7 @@
           <TextContent label="支払残債" content="¥510,000（H31/12/12時点）" />
         </v-col>
       </v-row>
-      <v-row align="top" justify="center" class="ma-0">
+      <v-row justify="center" class="ma-0">
         <v-col cols="6" class="px-0">
           <SubTitle sub-title="税金/諸費用" />
           <TextContent label="自動車税" content="¥36,000" />
@@ -119,7 +119,7 @@
           <TextContent label="月間コスト" content="¥30,540" />
         </v-col>
       </v-row>
-      <v-row align="top" justify="center" class="ma-0">
+      <v-row justify="center" class="ma-0">
         <SubTitle sub-title="車両基本情報" />
         <v-col cols="6" class="px-0">
           <TextContent label="メーカー" content="トヨタ" />
@@ -138,7 +138,7 @@
           <TextContent label="代替反応" content="あり" />
         </v-col>
       </v-row>
-      <v-row align="top" justify="center" class="ma-0">
+      <v-row justify="center" class="ma-0">
         <SubTitle sub-title="車両詳細情報" />
         <v-col cols="6" class="px-0">
           <TextContent label="車台番号" content="ZVW51-0123456" />
