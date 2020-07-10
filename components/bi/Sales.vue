@@ -1,5 +1,5 @@
 <template>
-  <div class="tab">
+  <div class="tab mb30">
     <div class="tab__header">
       <h3 class="tab__header--title">売上</h3>
       <ul class="tab__header__legend pa-0 ml10">
@@ -125,14 +125,6 @@ export default {
         ],
       },
       SalesGraphOptions: {
-        layout: {
-          padding: {
-            left: 50,
-            right: 0,
-            top: 0,
-            bottom: 0,
-          },
-        },
         responsive: true,
         legend: {
           display: false,
@@ -143,8 +135,7 @@ export default {
         scales: {
           xAxes: [
             {
-              categoryPercentage: 1.0,
-              barPercentage: 1.0,
+              offset: false,
               stacked: true,
               gridLines: {
                 display: false,
@@ -159,17 +150,17 @@ export default {
           yAxes: [
             {
               gridLines: {
-                display: false,
+                // display: false,
+                drawBorder: false,
               },
               ticks: {
-                mirror: true,
+                min: 0,
+                max: 200000000,
                 maxTicksLimit: 6,
-                padding: 50,
-                // drawTicks: false,
+                drawTicks: false,
                 beginAtZero: true,
                 fontColor: '#1258BC',
                 fontSize: 10,
-
                 callback(value, index, values) {
                   return '¥' + value
                 },

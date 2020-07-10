@@ -2,36 +2,34 @@
   <div class="container">
     <ul class="d-flex">
       <h3>新規</h3>
-      <li>3%</li>
-      <li>3%</li>
-      <li>3%</li>
-      <li>3%</li>
-      <li>3%</li>
-      <li>0%</li>
+      <li v-for="value in newData" :key="value.id">
+        {{ value + '%' }}
+      </li>
     </ul>
     <ul class="d-flex">
       <h3>リピート</h3>
-      <li>85%</li>
-      <li>85%</li>
-      <li>85%</li>
-      <li>85%</li>
-      <li>85%</li>
-      <li>0%</li>
+      <li v-for="value in repeatData" :key="value.id">
+        {{ value + '%' }}
+      </li>
     </ul>
     <ul class="d-flex">
       <h3>離脱</h3>
-      <li>12%</li>
-      <li>12%</li>
-      <li>12%</li>
-      <li>12%</li>
-      <li>12%</li>
-      <li>0%</li>
+      <li v-for="value in withrawData" :key="value.id">
+        {{ value + '%' }}
+      </li>
     </ul>
   </div>
 </template>
 <script>
 export default {
   name: 'SalesPercent',
+  data() {
+    return {
+      newData: ['3', '3', '3', '3', '3', '0'],
+      repeatData: ['85', '85', '85', '85', '85', '0'],
+      withrawData: ['12', '12', '12', '12', '12', '0'],
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>

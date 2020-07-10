@@ -17,18 +17,12 @@
           <h3>9,560,000</h3>
         </div>
         <div class="stats__right__percent d-flex">
-          <h4>前年比</h4>
-          <div class="d-flex align-center">
-            <ArrowUp />
-            <h3>1.35%</h3>
-          </div>
+          <h4 class="stats__right__percent--label">前年比</h4>
+          <Increase content="1.35%" />
         </div>
         <div class="stats__right__percent d-flex">
-          <h4>前々年比</h4>
-          <div class="d-flex align-center">
-            <ArrowDown />
-            <h3>1.35%</h3>
-          </div>
+          <h4 class="stats__right__percent--label">前々年比</h4>
+          <Increase content="1.35%" />
         </div>
       </div>
     </div>
@@ -36,22 +30,52 @@
       <div class="stats__left">
         <h3>総粗利</h3>
       </div>
+      <div class="stats__right">
+        <h1><span>¥</span>3,880,000</h1>
+        <div class="stats__right__target">
+          <h4>目標金額</h4>
+          <h3>4,880,000</h3>
+        </div>
+        <div class="stats__right__percent d-flex">
+          <h4 class="stats__right__percent--label">前年比</h4>
+          <Increase content="1.35%" />
+        </div>
+        <div class="stats__right__percent d-flex">
+          <h4 class="stats__right__percent--label">前々年比</h4>
+          <Increase content="1.35%" />
+        </div>
+      </div>
     </div>
     <div class="stats d-flex">
       <div class="stats__left">
         <h3>総顧客数</h3>
       </div>
+      <div class="stats__right">
+        <h1 class="text-alignR">30,000<span>件</span></h1>
+        <div class="stats__right__percent d-flex">
+          <h4 class="stats__right__percent--label">前年比</h4>
+          <Increase content="1.35%" />
+        </div>
+        <div class="stats__right__percent d-flex">
+          <h4 class="stats__right__percent--label">前々年比</h4>
+          <Increase content="1.35%" />
+        </div>
+      </div>
     </div>
+    <SalesCount />
   </div>
 </template>
 <script>
-import ArrowUp from '~components/common/ArrowUp.vue'
-import ArrowDown from '~components/common/ArrowDown.vue'
+import Increase from '../common/Increase.vue'
+// import Decrease from '../common/decrease.vue'
+import SalesCount from '~/components/bi/SalesCount.vue'
+
 export default {
   name: 'SalesStats',
   components: {
-    ArrowUp,
-    ArrowDown,
+    Increase,
+    // Decrease,
+    SalesCount,
   },
 }
 </script>
@@ -61,11 +85,13 @@ export default {
     padding: 20px 0px;
     height: 145px;
     border-bottom: 1px solid $gray-100;
-    &:last-child {
+    &:nth-child(3) {
       border-bottom: none;
+      padding-bottom: 0px;
+      height: auto;
     }
     &__left {
-      width: 80px;
+      width: 100px;
       h3 {
         margin-left: 15px;
         color: $blue-200;
@@ -79,6 +105,9 @@ export default {
     &__right {
       margin-left: 15px;
       width: 80%;
+      .text-alignR {
+        text-align: right;
+      }
       h1 {
         font-size: 30px;
         color: $blue-200;
@@ -111,11 +140,13 @@ export default {
       }
       &__percent {
         margin-top: 5px;
-        justify-content: right;
-        h3 {
-          font-size: 12px;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 42%;
+        &--label {
+          font-size: 10px;
+          color: $gray-500;
           font-weight: 400;
-          color: #db3394;
         }
       }
     }
