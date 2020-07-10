@@ -8,18 +8,12 @@
         <li>店舗：cars足立</li>
       </ul>
       <dl class="list-wrapper">
-        <dt>何か気になる点はありますか？</dt>
-        <dd>
-          <div>エアコンが弱い</div>
-        </dd>
-        <dt>お車の使用用途を教えてください。</dt>
-        <dd>
-          <div>お買い物、レジャー</div>
-        </dd>
-        <dt>あと何回車検を受けられますか？</dt>
-        <dd>
-          <div>エコ・燃費</div>
-        </dd>
+        <template v-for="(item, i) in questionnaireList">
+          <dt :key="i">{{ item.q }}</dt>
+          <dd :key="i">
+            <div>{{ item.w }}</div>
+          </dd>
+        </template>
       </dl>
     </v-card>
   </v-dialog>
@@ -47,6 +41,25 @@ export default {
       dataType: dataTypeList[0],
       visible: this.value,
       dataTypeList,
+      questionnaireList: [
+        {
+          q: '本日のご来店目的を教えて下さい。',
+          w:
+            '本日のご来店目的を教えて下さい。本日のご来店目的を教えて下さい。本日のご来店目的を教えて下さい。',
+        },
+        {
+          q: '気になる点はございますか？',
+          w: '気になる点はございますか？',
+        },
+        {
+          q: 'あと何回車検を受けられる予定でしょうか？',
+          w: 'あと何回車検を受けられる予定でしょうか？',
+        },
+        {
+          q: 'ご購入を検討されているお車があれば教えて下さい。',
+          w: 'ご購入を検討されているお車があれば教えて下さい。',
+        },
+      ],
     }
   },
   computed: {},
@@ -96,15 +109,15 @@ export default {
     dd {
       margin: 14px 23px 10px 47px;
       div {
+        padding: 10px 13px;
         background: $white-100;
         border-radius: 4px;
         display: flex;
         align-items: center;
         border: 1px solid $gray-100;
-        height: 40px;
         font-size: 12px;
-        text-indent: 13px;
         color: $blue-200;
+        text-align: justify;
       }
     }
   }
