@@ -11,7 +11,7 @@
     <div class="customer-info customer-info__car mt20">
       <CarInfo />
     </div>
-    <div class="customer-info customer-info__memo mt20 mb50">
+    <div class="customer-info customer-info__memo mt20">
       <MemoTable />
     </div>
   </div>

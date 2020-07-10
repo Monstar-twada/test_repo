@@ -35,7 +35,7 @@ export default {
     position: absolute;
     background-color: $blue-200;
     left: 0;
-    bottom: 0;
+    bottom: -1px;
   }
 }
 </style>
