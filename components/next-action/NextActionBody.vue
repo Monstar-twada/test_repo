@@ -1,6 +1,6 @@
 <template>
   <div class="next-action-body-wrapper">
-    <h4 class="title">新規顧客獲得</h4>
+    <h4 class="title">活動支援</h4>
     <Item v-for="(item, i) in list1" :key="'new' + i" :item="item" />
 
     <h4 class="title">オプションサービス</h4>
@@ -16,12 +16,6 @@ export default {
     Item,
   },
   data() {
-    const tempItem1 = {
-      title: 'リスティング広告',
-      tag: '¥3000',
-      contents: ['目的：リピート率向上', '効果：中'],
-      count: 20,
-    }
     const tempItem2 = {
       title: '車販サービス導入（兼業）',
       tag: '申し込む',
@@ -30,12 +24,21 @@ export default {
       ],
       isSmallTile: true,
     }
-    const list1 = []
-    for (let i = 0; i < 5; i++) {
-      list1.push({
-        ...tempItem1,
-      })
-    }
+    const list1 = [
+      {
+        title: '車検広告',
+        tag: '確認する',
+        contents: ['目的：来月車検獲得', '効果：大'],
+        count: '192件獲得',
+      },
+      {
+        title: '車販送客',
+        tag: '確認する',
+        contents: ['目的：売上向上（送客）', '効果：中'],
+        count: '132万円獲得',
+      },
+    ]
+
     const list2 = []
     for (let i = 0; i < 5; i++) {
       list2.push({
