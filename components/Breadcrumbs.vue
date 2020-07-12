@@ -98,6 +98,10 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.container {
+  margin-top: 28px;
+  padding: 0;
+}
 .breadcrumbs {
   display: flex;
   justify-content: space-between;
