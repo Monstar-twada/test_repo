@@ -6,6 +6,13 @@
     <div class="formContainer__bottom">
       <CustomerPart />
       <RequestKindPart />
+      <TextAreaInfo
+        :title="row3.title"
+        :value="row3.value"
+        :placeholder="row3.placeholder"
+        :customborderbottom="'none'"
+      />
+      <Submitbutton :title="'依頼する'" />
     </div>
   </div>
 </template>
@@ -13,12 +20,25 @@
 <script>
 import CustomerPart from '~/components/send/common/CustomerPart.vue'
 import RequestKindPart from '~/components/send/common/RequestKindPart.vue'
+import TextAreaInfo from '~/components/send/common/TextAreaInfo.vue'
+import Submitbutton from '~/components/send/common/Submitbutton.vue'
+
 export default {
   name: 'FormContainer',
   components: {
     CustomerPart,
     RequestKindPart,
+    TextAreaInfo,
+    Submitbutton,
   },
+  data: () => ({
+    row3: {
+      title: '依頼詳細',
+      value: '',
+      placeholder:
+        '・日時場所などの取り決めがある場合は記載してください\n・対応車両のメーカー・車種・ナンバー等の特徴はお書きください\n・対応してほしい作業内容',
+    },
+  }),
 }
 </script>
 
