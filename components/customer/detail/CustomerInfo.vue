@@ -34,6 +34,10 @@
             content='0123456789<img class="d-inline-block" src="/customer/mail.svg" width="63" height="17" />'
           />
           <TextContent label="個人/法人 " content="個人" />
+          <TextContent
+            label="その他システムID "
+            content="VerticeID : 0123456789"
+          />
         </v-col>
       </v-row>
       <v-row align="start" justify="center" class="ma-0">
@@ -50,13 +54,13 @@
     </v-col>
     <v-col cols="4" class="pl20 pr20">
       <v-row justify="center" class="ma-0 pa-0">
-        <v-col cols="3">
+        <v-col cols="3" class="pl-0">
           <v-avatar size="80" class="customer-profile__image">
             <v-img :src="require('~/static/customer/profile.png')"></v-img>
           </v-avatar>
         </v-col>
         <v-col cols="9" class="profile__info">
-          <v-col cols="12">
+          <v-col cols="12" class="pt-0">
             <h3>米田 道春 <span>（31歳）</span></h3>
             <h4>ヨネダ ミチハル</h4>
             <h4 class="pt10">ユーザー名:miche_yone</h4>
@@ -93,44 +97,73 @@ export default {
     HtmlContent,
     QuestionnaireResultDialog,
   },
-  data: () => ({
-    headers: [
-      { text: '取引種別', value: 'question_type', align: 'center' },
-      { text: '回答日時', value: 'date', align: 'center' },
-      { text: '店舗', value: 'shop', align: 'center' },
-    ],
-    itemList: [
+  data() {
+    const family = [
       {
-        id: 1,
-        question_type: '車検',
-        date: '2020/05/25 9:00',
-        shop: 'cars足立',
+        title: '配偶者',
+        list: ['米田直子（30歳）'],
+        link: true,
       },
       {
-        id: 2,
-        question_type: '車検',
-        date: '2020/05/25 9:00',
-        shop: 'cars足立',
+        title: '子供',
+        list: ['米田 拓実（11歳）', '米田 咲（8歳）', '米田あや（2歳）'],
+        link: false,
       },
-      {
-        id: 3,
-        question_type: '車検',
-        date: '2020/05/25 9:00',
-        shop: 'cars足立',
-      },
-      {
-        id: 4,
-        question_type: '車検',
-        date: '2020/05/25 9:00',
-        shop: 'cars足立',
-      },
-    ],
-    family:
-      '<div>' +
-      '<dl style="display:flex;"><dt style="width: 40px">配偶者</dt><dd class="ml10"><img class="mr5" src="/customer/profile-edit.svg" width="16" />米田直子（30歳）<a href=""><img src="/customer/link.svg" width="10"></a> </dd></dl> ' +
-      '<dl style="display:flex;"><dt style="width: 40px">子供</dt><dd class="ml10">米田 拓実（11歳）<br />米田 咲（8歳）<br />米田あや（2歳）</dd></dl></div>',
-    qrVisible: false,
-  }),
+    ]
+    let familyContent = '<div>'
+    family.forEach((item) => {
+      familyContent += `<dl style="display:flex;"><dt style="width: 40px">${item.title}</dt><dd class="ml10">`
+      item.list.forEach((child) => {
+        familyContent += `<div><img class="mr5" src="/customer/profile-edit.svg" width="16" />${child}${
+          item.link
+            ? '<a href=""><img src="/customer/link.svg" width="10"></a>'
+            : ''
+        }</div>`
+      })
+      familyContent += '</dd></dl>'
+    })
+    familyContent += '</div>'
+    return {
+      headers: [
+        {
+          text: '取引種別',
+          value: 'question_type',
+          align: 'center',
+          sortable: false,
+        },
+        { text: '回答日時', value: 'date', align: 'center', sortable: false },
+        { text: '店舗', value: 'shop', align: 'center', sortable: false },
+      ],
+      itemList: [
+        {
+          id: 1,
+          question_type: '車検',
+          date: '2020/05/25 9:00',
+          shop: 'cars足立',
+        },
+        {
+          id: 2,
+          question_type: '車検',
+          date: '2020/05/25 9:00',
+          shop: 'cars足立',
+        },
+        {
+          id: 3,
+          question_type: '車検',
+          date: '2020/05/25 9:00',
+          shop: 'cars足立',
+        },
+        {
+          id: 4,
+          question_type: '車検',
+          date: '2020/05/25 9:00',
+          shop: 'cars足立',
+        },
+      ],
+      family: familyContent,
+      qrVisible: false,
+    }
+  },
   methods: {
     handleClickRow() {
       this.qrVisible = true

@@ -9,7 +9,7 @@
       </ul>
       <dl class="list-wrapper">
         <template v-for="(item, i) in questionnaireList">
-          <dt :key="i">{{ item.q }}</dt>
+          <dt :key="item.q">{{ item.q }}</dt>
           <dd :key="i">
             <div>{{ item.w }}</div>
           </dd>

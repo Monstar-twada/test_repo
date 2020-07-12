@@ -49,14 +49,14 @@ export default {
   overflow: hidden;
 
   dt {
-    width: 30%;
-    height: var(--height);
+    flex: 0 0 80px;
+    /*height: var(--height);*/
     display: inline-block;
     font-weight: var(--weight);
   }
 
   dd {
-    width: 65%;
+    flex: 1;
     display: inline-block;
   }
 }
