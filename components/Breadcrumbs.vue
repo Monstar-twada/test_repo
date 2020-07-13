@@ -33,11 +33,30 @@
     <div class="titlepage">
       <div class="titlepage-title">
         <v-img
+          v-if="isManager"
+          class="titlepage-title__manager mr-2"
+          :src="require('~/static/breadcrumbs/' + titleImage)"
+        />
+        <v-img
+          v-else
           class="titlepage-title__logo mr-2"
           :src="require('~/static/breadcrumbs/' + titleImage)"
         />
         <h1 class="d-inline">{{ page }}</h1>
         <h2 class="d-inline">{{ subTitle }}</h2>
+        <div v-if="isDate" class="titlepage__datepick ml25">
+          <div>
+            <h5>2020年1月-2020年6月</h5>
+          </div>
+          <Select
+            :customwidth="120"
+            :customheight="25"
+            custombackground="transparent"
+            placeholder="過去6ヶ月"
+            disabled
+            class="titlepage__datepick--select ml25"
+          />
+        </div>
       </div>
       <div v-if="isTitleBtn" class="titlepage-button">
         <h3>フリー車種入力から作成</h3>
@@ -56,8 +75,12 @@
   </div>
 </template>
 <script>
+import Select from '~/components/common/Select.vue'
 export default {
   name: 'Breadcrumbs',
+  components: {
+    Select,
+  },
   props: {
     breadcrumbs: {
       type: Array,
@@ -80,6 +103,14 @@ export default {
     personImage: {
       type: String,
       default: 'person.png',
+    },
+    isManager: {
+      type: Boolean,
+      default: false,
+    },
+    isDate: {
+      type: Boolean,
+      default: false,
     },
     isTitleBtn: {
       type: Boolean,
@@ -130,6 +161,11 @@ export default {
       height: 22px;
       max-width: 22px;
     }
+    &__manager {
+      margin-top: 13px;
+      height: 12px;
+      max-width: 30px;
+    }
     h1 {
       color: $white-300;
       display: flex;
@@ -143,6 +179,17 @@ export default {
       margin: 5px 0 0 10px;
       color: $white-300;
       font-size: 20px;
+    }
+  }
+  &__datepick {
+    display: flex;
+    align-items: center;
+    h5 {
+      font-size: 12px;
+      color: $white-300;
+      font-weight: 400;
+    }
+    &--select {
     }
   }
   &-button {

@@ -62,7 +62,7 @@ export default {
       {
         icon: 'result',
         iconHover: 'result-hover',
-        link: '/matter',
+        link: '/bi',
         text: '経営状況',
       },
       {
