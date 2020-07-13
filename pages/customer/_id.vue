@@ -1,19 +1,18 @@
 <template>
-  <div>
+  <div class="customer-detail-wrapper">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"
       title-image="customer.svg"
-    />
-    <div class="customer-info customer-info__profile">
-      <CustomerInfo />
-    </div>
-    <div class="customer-info customer-info__car mt20">
-      <CarInfo />
-    </div>
-    <div class="customer-info customer-info__memo mt20">
-      <MemoTable />
-    </div>
+    >
+      <template v-slot:right>
+        <SendingRequestButton @click="sendingRequestClick" />
+      </template>
+    </Breadcrumbs>
+
+    <CustomerInfo class="customer-info" />
+    <CarInfo class="customer-info mt30" />
+    <MemoTable class="customer-info mt30" />
   </div>
 </template>
 
@@ -22,12 +21,14 @@ import Breadcrumbs from '~/components/Breadcrumbs.vue'
 import CustomerInfo from '~/components/customer/detail/CustomerInfo.vue'
 import CarInfo from '~/components/customer/detail/CarInfo.vue'
 import MemoTable from '~/components/customer/detail/MemoTable.vue'
+import SendingRequestButton from '~/components/customer/detail/button/SendingRequest'
 export default {
   components: {
     Breadcrumbs,
     CustomerInfo,
     CarInfo,
     MemoTable,
+    SendingRequestButton,
   },
   data: () => ({
     page: '顧客管理',
@@ -46,21 +47,32 @@ export default {
       },
     ],
   }),
+  methods: {
+    sendingRequestClick() {},
+  },
 }
 </script>
 <style lang="scss">
-.customer-info {
-  width: 100%;
-  background-color: $white-300;
-  border-radius: 5px;
-  &__profile {
-    overflow: hidden;
+.customer-detail-wrapper {
+  .high-light {
+    color: $blue-100;
   }
-  &__car {
-    overflow: hidden;
+  .right-border {
+    position: relative;
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      content: '';
+      width: 1px;
+      height: 100%;
+      background: #e5edf6;
+    }
   }
-
-  &__memo {
+  .customer-info {
+    width: 100%;
+    background-color: $white-300;
+    border-radius: 5px;
     overflow: hidden;
   }
 }

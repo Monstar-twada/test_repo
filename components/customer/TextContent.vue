@@ -1,7 +1,11 @@
 <template>
   <dl class="text-content pt5 pb5">
     <dt :style="TextStyle">{{ label }}</dt>
-    <dd>{{ content }}</dd>
+    <dd :class="{ 'high-light': highLight, flex: flex }">
+      {{ content }}
+      <img v-if="copyable" src="./img/link.svg" width="10" />
+      <slot></slot>
+    </dd>
   </dl>
 </template>
 <script>
@@ -16,20 +20,36 @@ export default {
       type: String,
       default: '',
     },
-    customheight: {
+    customHeight: {
       type: [Number, String],
       default: 20,
     },
-    customfontweight: {
+    customFontWeight: {
       type: String,
       default: 'bold',
+    },
+    highLight: {
+      type: Boolean,
+      default: false,
+    },
+    copyable: {
+      type: Boolean,
+      default: false,
+    },
+    flex: {
+      type: Boolean,
+      default: false,
+    },
+    light: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
     TextStyle() {
       return {
-        '--height': this.customheight + 'px',
-        '--weight': this.customfontweight,
+        '--height': this.customHeight + 'px',
+        '--weight': this.customFontWeight,
       }
     },
   },
@@ -57,6 +77,10 @@ export default {
   dd {
     flex: 1;
     display: inline-block;
+    &.flex {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 </style>

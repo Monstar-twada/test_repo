@@ -1,7 +1,7 @@
 <template>
   <dl class="text-content pt5 pb5">
     <dt :style="TextStyle" v-html="label"></dt>
-    <dd v-html="content"></dd>
+    <dd :class="highLight ? 'high-light' : ''" v-html="content"></dd>
   </dl>
 </template>
 <script>
@@ -16,20 +16,24 @@ export default {
       type: String,
       default: '',
     },
-    customheight: {
+    customHeight: {
       type: [Number, String],
       default: 20,
     },
-    customfontweight: {
+    customFontWeight: {
       type: String,
       default: 'bold',
+    },
+    highLight: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
     TextStyle() {
       return {
-        '--height': this.customheight + 'px',
-        '--weight': this.customfontweight,
+        '--height': this.customHeight + 'px',
+        '--weight': this.customFontWeight,
       }
     },
   },

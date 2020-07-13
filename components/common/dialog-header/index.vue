@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-header-wrapper">
+  <div class="dialog-header-wrapper" :class="noBorder ? '' : 'border'">
     <h2>{{ title }}</h2>
     <CloseButton @click="$emit('close')" />
   </div>
@@ -17,6 +17,10 @@ export default {
       type: String,
       default: '',
     },
+    noBorder: {
+      type: Boolean,
+      default: false,
+    },
   },
 }
 </script>
@@ -26,8 +30,10 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  &.border {
+    border-bottom: 1px solid $gray-100;
+  }
   height: 58px;
-  border-bottom: 1px solid $gray-100;
   h2 {
     margin-left: 24px;
     color: $blue-200;
