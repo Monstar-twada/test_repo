@@ -53,6 +53,7 @@
             :customheight="25"
             custombackground="transparent"
             placeholder="過去6ヶ月"
+            disabled
             class="titlepage__datepick--select ml25"
           />
         </div>

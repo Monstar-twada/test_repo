@@ -34,17 +34,9 @@ export default {
       },
       {
         text: '経営状況',
-        href: '',
+        href: '/admin',
       },
     ],
   }),
-  layout: 'loggedin',
 }
 </script>
-<style lang="scss" scoped>
-.main-container {
-  padding: 30px 0px;
-  margin: 0 60px;
-  width: 100%;
-}
-</style>

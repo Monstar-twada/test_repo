@@ -25,7 +25,7 @@
         </li>
       </ul>
     </div>
-    <div class="d-flex">
+    <div class="sales_container d-flex">
       <div class="left">
         <SalesGraph
           :data="SalesGraphData"
@@ -59,26 +59,19 @@ export default {
         datasets: [
           {
             type: 'bar',
-            label: 'Visits',
+            label: '売上',
             barThickness: 10,
-            data: [9386993, 9403206, 10446846, 7215544, 7527339, 7527339],
+            data: [131567610, 137020890, 148572160, 105520740, 110337330, 0],
             backgroundColor: '#1258BC',
-            order: 3,
+            order: 2,
           },
           {
             type: 'bar',
             label: '売上',
             barThickness: 10,
-            data: [
-              131567610,
-              137020890,
-              148572160,
-              105520740,
-              110337330,
-              131567610,
-            ],
+            data: [9386993, 9403206, 10446846, 7215544, 7527339, 0],
             backgroundColor: '#07B4FF',
-            order: 3,
+            order: 2,
           },
           {
             type: 'line',
@@ -94,26 +87,26 @@ export default {
               110337330,
               10446846,
             ],
-            order: 1,
             pointRadius: 0,
             lineTension: 0,
+            order: 1,
           },
           {
             type: 'line',
             label: '粗利',
-            data: [15000000, 30000000, 40000000, 20000000, 60000000, 10446846],
+            data: [9386993, 9403206, 10446846, 7215544, 7527339, 0],
             pointRadius: 0,
             borderColor: '#0DBEA9',
             backgroundColor: 'transparent',
             borderWidth: 1.5,
-            order: 1,
             lineTension: 0,
             fill: 1,
+            order: 1,
           },
           {
             type: 'line',
             label: '目標',
-            data: [8800000, 10500000, 12250000, 9050000, 9000000, 10446846],
+            data: [8800000, 10500000, 12250000, 9050000, 9000000, 0],
             borderColor: '#DB3394',
             pointRadius: 0,
             backgroundColor: 'transparent',
@@ -125,6 +118,14 @@ export default {
         ],
       },
       SalesGraphOptions: {
+        // layout: {
+        //   padding: {
+        //     left: 10,
+        //     right: 0,
+        //     top: 0,
+        //     bottom: 0,
+        //   },
+        // },
         responsive: true,
         legend: {
           display: false,
@@ -135,7 +136,7 @@ export default {
         scales: {
           xAxes: [
             {
-              offset: false,
+              // offset: false,
               stacked: true,
               gridLines: {
                 display: false,
@@ -149,6 +150,7 @@ export default {
           ],
           yAxes: [
             {
+              stacked: true,
               gridLines: {
                 // display: false,
                 drawBorder: false,
@@ -191,20 +193,21 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.left {
-  width: auto;
+.sales_container {
   padding: 20px;
 }
+.left {
+  width: auto;
+  padding-top: 10px;
+}
 .right {
-  margin-left: 30px;
-  margin-right: 20px;
-  width: 250px;
-  display: block;
+  width: auto;
+  margin-left: 20px;
 }
 .tab {
   background: #fff;
   border-radius: 5px;
-  height: 550px;
+  height: auto;
   width: 900px;
   &__header {
     height: 65px;

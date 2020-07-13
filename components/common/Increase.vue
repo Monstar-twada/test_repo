@@ -6,7 +6,7 @@
       contain
       :src="require('~/static/bi/arrowup.svg')"
     ></v-img>
-    <h3 class="text">{{ content }}</h3>
+    <h3 class="percentage">{{ content }}</h3>
   </div>
 </template>
 <script>
@@ -20,10 +20,10 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.text {
+<style lang="scss" scoped>
+.percentage {
   font-size: 12px;
   font-weight: 400;
-  color: $pink-100;
+  color: $pink-100 !important;
 }
 </style>

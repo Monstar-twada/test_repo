@@ -4,109 +4,32 @@
       <h3>業務別内訳</h3>
       <h5>※カッコ内は目標乖離金額</h5>
     </div>
-    <!-- <div class="d-flex tab__labels">
-      <ul class="pa-0">
-        <li>売上</li>
-        <li>売上</li>
-        <li>粗利</li>
-        <li>台数</li>
-        <li>台粗利</li>
-      </ul>
-    </div>
-    <div class="d-flex tab__lists">
-      <ul class="pa-0">
-        <li>車検</li>
-        <li>
-          ¥4,000,000<br />
-          <span>(-¥100,000)</span>
-        </li>
-        <li>
-          ¥1,000,000<br />
-          <span>(-¥100,000)</span>
-        </li>
-        <li>4000</li>
-        <li>¥200,000</li>
-      </ul>
-    </div>
-    <div class="d-flex tab__lists">
-      <ul class="pa-0">
-        <li>点検</li>
-        <li>
-          ¥2,000,000<br />
-          <span>(-¥100,000)</span>
-        </li>
-        <li>
-          ¥500,000<br />
-          <span>(-¥100,000)</span>
-        </li>
-        <li>1000</li>
-        <li>¥50,000</li>
-      </ul>
-    </div>
-    <div class="d-flex tab__lists">
-      <ul class="pa-0">
-        <li>一般</li>
-        <li>
-          ¥1,000,000<br />
-          <span>(-¥100,000)</span>
-        </li>
-        <li>
-          ¥200,000<br />
-          <span>(-¥100,000)</span>
-        </li>
-        <li>800</li>
-        <li>¥20,000</li>
-      </ul>
-    </div> -->
     <table class="tab__table">
       <thead>
         <tr>
-          <th>&nbsp;</th>
-          <th>売上</th>
-          <th>粗利</th>
-          <th>台数</th>
-          <th>台粗利</th>
+          <th v-for="value in label" :key="value.id">
+            {{ value }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>車検</td>
-          <td>
-            ¥4,000,000<br />
-            <span>(-¥100,000)</span>
+          <td v-for="value in carData" :key="value.id">
+            {{ value }}
           </td>
-          <td>
-            ¥1,000,000<br />
-            <span>(-¥100,000)</span>
-          </td>
-          <td>4000</td>
-          <td>¥200,000</td>
         </tr>
         <tr>
           <td>点検</td>
-          <td>
-            ¥2,000,000<br />
-            <span>(-¥100,000)</span>
+          <td v-for="value in inspectionData" :key="value.id">
+            {{ value }}
           </td>
-          <td>
-            ¥500,000<br />
-            <span>(-¥100,000)</span>
-          </td>
-          <td>1000</td>
-          <td>¥50,000</td>
         </tr>
         <tr>
           <td>一般</td>
-          <td>
-            ¥1,000,000<br />
-            <span>(-¥100,000)</span>
+          <td v-for="value in generalData" :key="value.id">
+            {{ value }}
           </td>
-          <td>
-            ¥200,000<br />
-            <span>(-¥100,000)</span>
-          </td>
-          <td>800</td>
-          <td>¥20,000</td>
         </tr>
       </tbody>
     </table>
@@ -117,7 +40,12 @@ export default {
   name: 'SalesBreakdown',
   components: {},
   data() {
-    return {}
+    return {
+      label: ['', '売上', '粗利', '台数', '台粗利'],
+      carData: ['¥34,731,428', '¥27,516,509', '952', '¥28,904'],
+      inspectionData: ['¥3,506,967', '¥2,088,841', '941', '¥2,220'],
+      generalData: ['¥23,671,724', ' ¥14,374,578', '2,266', '¥6,344'],
+    }
   },
 }
 </script>
@@ -126,7 +54,7 @@ export default {
   background: #fff;
   border-radius: 5px;
   height: auto;
-  width: 900px;
+  width: 100%;
   &__header {
     height: 65px;
     padding: 0px 20px;

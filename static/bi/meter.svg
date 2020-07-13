@@ -73,7 +73,6 @@
         <circle cx="2.33" cy="2.33" r="1.33" fill="none"/>
       </g>
     </g>
-    <text id="_90_" data-name="90%" transform="translate(671.609 830.783)" fill="#0786bd" font-size="16" font-family="AvenirNext-Bold, Avenir Next" font-weight="700" letter-spacing="0.1em"><tspan x="-14.891" y="0">90</tspan><tspan y="0" font-size="10">%</tspan></text>
     <text id="達成" transform="translate(671.609 845)" fill="#0786bd" font-size="10" font-family="HiraginoSans-W6, Hiragino Sans" letter-spacing="0.1em"><tspan x="-10.5" y="0">達成</tspan></text>
   </g>
 </svg>

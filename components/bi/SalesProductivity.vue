@@ -4,7 +4,7 @@
       <h3 class="tab__header--left">生産性</h3>
       <div class="tab__header__right d-flex align-baseline">
         <h4>平均粗利</h4>
-        <h3><span>¥</span>7,037<span>/時</span></h3>
+        <h3><span>¥</span>5,340<span>/時</span></h3>
       </div>
     </div>
     <div class="d-flex">
@@ -32,14 +32,14 @@ export default {
   data() {
     return {
       gradient: '',
-      labelsIncome: ['10,438', '6,945', '7,730', '5,970', '7,037', '7,427'],
+      labelsIncome: ['6,313', '5,582', '5,421', '4,287', '5,098', '0'],
       data: {
         labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
         datasets: [
           {
             type: 'line',
             label: '目標',
-            data: [0, 180, 205, 430, 230, 500],
+            data: [6313, 5582, 5421, 4287, 5098, 0],
             borderColor: '#696DD9',
             pointRadius: 0,
             backgroundColor: 'transparent',
@@ -88,6 +88,9 @@ export default {
                 beginAtZero: true,
                 fontColor: '#1258BC',
                 fontSize: 10,
+                callback(value, index, values) {
+                  return '¥' + value
+                },
               },
             },
           ],
@@ -137,7 +140,7 @@ export default {
   .graphlabel {
     justify-content: space-between;
     list-style: none;
-    margin: 0 25px;
+    margin: 0 40px;
     li {
       font-size: 12px;
       color: $blue-200;

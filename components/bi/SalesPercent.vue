@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pa-0">
     <ul class="d-flex">
       <h3>新規</h3>
       <li v-for="value in newData" :key="value.id">
@@ -25,9 +25,9 @@ export default {
   name: 'SalesPercent',
   data() {
     return {
-      newData: ['3', '3', '3', '3', '3', '0'],
-      repeatData: ['85', '85', '85', '85', '85', '0'],
-      withrawData: ['12', '12', '12', '12', '12', '0'],
+      newData: ['12', '16', '19', '20', '18', '0'],
+      repeatData: ['88', '84', '81', '80', '82', '0'],
+      withrawData: ['5', '7', '5', '9', '12', '0'],
     }
   },
 }

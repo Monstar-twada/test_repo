@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="stats d-flex">
+  <div class="container pa-0">
+    <div class="stats d-flex pa-0">
       <div class="stats__left">
         <h3 class="mb10">総売上</h3>
         <v-img
@@ -9,20 +9,21 @@
           contain
           :src="require('~/static/bi/meter.svg')"
         ></v-img>
+        <p class="stats__left--percentage">88<span>%</span></p>
       </div>
       <div class="stats__right">
-        <h1><span>¥</span>8,560,000</h1>
+        <h1><span>¥</span>633,018,730</h1>
         <div class="stats__right__target">
           <h4>目標金額</h4>
-          <h3>9,560,000</h3>
+          <h3>713,500,000</h3>
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前年比</h4>
-          <Increase content="1.35%" />
+          <Increase content="3.2%" />
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前々年比</h4>
-          <Increase content="1.35%" />
+          <Decrease content="5.8%" />
         </div>
       </div>
     </div>
@@ -31,18 +32,18 @@
         <h3>総粗利</h3>
       </div>
       <div class="stats__right">
-        <h1><span>¥</span>3,880,000</h1>
+        <h1><span>¥</span>43,979,928</h1>
         <div class="stats__right__target">
           <h4>目標金額</h4>
-          <h3>4,880,000</h3>
+          <h3>49,600,000</h3>
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前年比</h4>
-          <Increase content="1.35%" />
+          <Increase content="4.5%" />
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前々年比</h4>
-          <Increase content="1.35%" />
+          <Decrease content="3.5%" />
         </div>
       </div>
     </div>
@@ -51,14 +52,14 @@
         <h3>総顧客数</h3>
       </div>
       <div class="stats__right">
-        <h1 class="text-alignR">30,000<span>件</span></h1>
+        <h1 class="text-alignR">61,265<span>件</span></h1>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前年比</h4>
-          <Increase content="1.35%" />
+          <Increase content="2.1%" />
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前々年比</h4>
-          <Increase content="1.35%" />
+          <Increase content="3.4%" />
         </div>
       </div>
     </div>
@@ -67,20 +68,21 @@
 </template>
 <script>
 import Increase from '../common/Increase.vue'
-// import Decrease from '../common/decrease.vue'
+import Decrease from '../common/decrease.vue'
 import SalesCount from '~/components/bi/SalesCount.vue'
 
 export default {
   name: 'SalesStats',
   components: {
     Increase,
-    // Decrease,
+    Decrease,
     SalesCount,
   },
 }
 </script>
 <style lang="scss" scoped>
 .container {
+  padding: 0px;
   .stats {
     padding: 20px 0px;
     height: 145px;
@@ -91,7 +93,8 @@ export default {
       height: auto;
     }
     &__left {
-      width: 100px;
+      width: 35%;
+      position: relative;
       h3 {
         margin-left: 15px;
         color: $blue-200;
@@ -100,6 +103,18 @@ export default {
       }
       &__img {
         margin-right: 20px;
+      }
+      &--percentage {
+        position: absolute;
+        left: 20px;
+        top: 65px;
+        font-size: 16px;
+        color: #0786bd;
+        font-weight: 900;
+        position: absolute;
+        span {
+          font-size: 10px;
+        }
       }
     }
     &__right {
@@ -113,6 +128,7 @@ export default {
         color: $blue-200;
         font-weight: 800;
         line-height: 28px;
+        text-align: right;
         span {
           font-size: 14px;
           margin-right: 5px;
