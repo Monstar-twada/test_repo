@@ -3,7 +3,8 @@
     <div class="title">
       <h2>顧客情報</h2>
       <p>
-        <v-img :src="require('~/static/customer/btn-edit.svg')" />
+        <EditButton />
+        <!--        <v-img :src="require('~/static/customer/btn-edit.svg')" />-->
       </p>
     </div>
     <v-col cols="8" class="pl20 pr20">
@@ -18,7 +19,7 @@
           <TextContent label="性別" content="男性" />
           <TextContent label="携帯電話" content="080-1234-1234" />
           <TextContent label="電話番号" content="03-1234-1234" />
-          <TextContent label="メール" content="080-1234-1234" />
+          <TextContent label="メール" content="myoneda@gmail.com" />
           <TextContent label="生年月日" content="昭和63年1月1日" />
           <HtmlContent label="家族構成 " :content="family" />
         </v-col>
@@ -27,7 +28,11 @@
           <TextContent label="勤続年数" content="3年" />
           <TextContent label="年収" content="500万円" />
           <TextContent label="住宅" content="持家（家族所有）11年" />
-          <TextContent label="免許証" content="ゴールド 839294813493" />
+          <TextContent
+            label="免許証"
+            content="ゴールド 839294813493"
+            high-light
+          />
           <TextContent label="銀行口座" content="みずほ銀行" />
           <HtmlContent
             label="cars ID "
@@ -89,6 +94,7 @@ import QuestionnaireResultDialog from './questionnaire-results-dialog/index'
 import SubTitle from '~/components/customer/SubTitle.vue'
 import TextContent from '~/components/customer/TextContent.vue'
 import HtmlContent from '~/components/customer/HtmlContent.vue'
+import EditButton from '~/components/customer/detail/button/EditButton'
 export default {
   name: 'CustomerInfo',
   components: {
@@ -96,6 +102,7 @@ export default {
     TextContent,
     HtmlContent,
     QuestionnaireResultDialog,
+    EditButton,
   },
   data() {
     const family = [
