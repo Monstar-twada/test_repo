@@ -16,14 +16,6 @@ export default {
     Item,
   },
   data() {
-    const tempItem2 = {
-      title: '車販サービス導入（兼業）',
-      tag: '申し込む',
-      contents: [
-        '2ヶ月間粗利が低いようです。利益率を向上させるために、carsコンサルティング チームに相談してみませんか？',
-      ],
-      isSmallTile: true,
-    }
     const list1 = [
       {
         title: '車検広告',
@@ -39,12 +31,38 @@ export default {
       },
     ]
 
-    const list2 = []
-    for (let i = 0; i < 5; i++) {
-      list2.push({
-        ...tempItem2,
-      })
-    }
+    const list2 = [
+      {
+        title: '車販サービス導入（兼業）',
+        tag: '申し込む',
+        contents: ['目的：新規顧客獲得', '効果：中'],
+        isSmallTile: true,
+      },
+      {
+        title: 'おまかせコンサルティング ',
+        tag: '申し込む',
+        contents: [
+          '2ヶ月間粗利が低いようです。利益率を向上させるために、carsコンサルティング チームに相談してみませんか？',
+        ],
+        isSmallTile: true,
+      },
+      {
+        title: 'おまかせコンサルティング ',
+        tag: '申し込む',
+        contents: [
+          '2ヶ月間粗利が低いようです。利益率を向上させるために、carsコンサルティング チームに相談してみませんか？',
+        ],
+        isSmallTile: true,
+      },
+      {
+        title: 'おまかせコンサルティング ',
+        tag: '申し込む',
+        contents: [
+          '2ヶ月間粗利が低いようです。利益率を向上させるために、carsコンサルティング チームに相談してみませんか？',
+        ],
+        isSmallTile: true,
+      },
+    ]
     return {
       list1,
       list2,
