@@ -19,7 +19,7 @@
 </template>
 <script>
 import Increase from '../common/Increase.vue'
-import Decrease from '../common/decrease.vue'
+import Decrease from '../common/Decrease.vue'
 
 export default {
   name: 'SalesStats',
