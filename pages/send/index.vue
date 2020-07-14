@@ -7,21 +7,21 @@
       :is-title-plus="true"
     />
     <CustomerInfo class="mt10 mb30" />
-    <Searchbar />
+    <SearchBar />
     <SendList />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/Breadcrumbs.vue'
-import Searchbar from '~/components/send/Searchbar.vue'
+import SearchBar from '~/components/send/SearchBar.vue'
 import CustomerInfo from '~/components/send/CustomerInfo'
 import SendList from '~/components/send/SendList'
 
 export default {
   components: {
     Breadcrumbs,
-    Searchbar,
+    SearchBar,
     CustomerInfo,
     SendList,
   },
