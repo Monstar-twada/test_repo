@@ -74,7 +74,7 @@ export default {
   }
   &__user {
     display: flex;
-    border-right: solid 1px $gray-400;
+    border-right: solid 1px $gray-600;
     padding: 0 30px;
     &__img {
       margin-right: 10px;

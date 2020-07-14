@@ -89,8 +89,8 @@ export default {
   grid-template-columns: 140px 1fr;
   padding: 30px 0;
   margin: 0 120px;
-  border-top: solid 1px $gray-400;
-  border-bottom: solid 1px $gray-400;
+  border-top: solid 1px $gray-600;
+  border-bottom: solid 1px $gray-600;
   &__title {
     display: flex;
     align-items: center;

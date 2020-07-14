@@ -76,7 +76,7 @@ export default {
   color: $blue-200;
   &__top {
     padding: 25px 20px;
-    border-bottom: 1px solid $gray-400;
+    border-bottom: 1px solid $gray-600;
     display: flex;
     justify-content: space-between;
     h3 {

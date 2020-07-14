@@ -50,7 +50,7 @@ export default {
   color: $blue-200;
   &__top {
     padding: 25px 20px;
-    border-bottom: 1px solid $gray-400;
+    border-bottom: 1px solid $gray-600;
     h3 {
       font-size: 18px;
       font-weight: bold;
