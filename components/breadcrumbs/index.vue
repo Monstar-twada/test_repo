@@ -57,12 +57,6 @@ export default {
       default: 'result.svg',
     },
   },
-  data() {
-    return {
-      isManager: true,
-    }
-  },
-  methods: {},
 }
 </script>
 
