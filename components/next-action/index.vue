@@ -74,7 +74,8 @@ $sideWidth: 210px;
     }
     .badge {
       margin: 7px 0 0 4px;
-      padding: 0 10px;
+      padding: 0 5px;
+      min-width: 30px;
       display: inline-block;
       background: $pink-100;
       font-size: 10px;

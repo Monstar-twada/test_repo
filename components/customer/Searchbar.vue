@@ -16,8 +16,20 @@
       />
       <Select items="items" class="mr20" :list="list" placeholder="担当店舗" />
       <Select items="items" class="mr20" :list="list" placeholder="担当者" />
-      <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
-      <Select items="items" class="mr20" :list="list" placeholder="車種" />
+      <Select
+        v-model="manufacturer"
+        items="items"
+        class="mr20"
+        :list="manufacturers"
+        placeholder="メーカー"
+      />
+      <Select
+        v-model="carModel"
+        items="items"
+        class="mr20"
+        :list="carModels"
+        placeholder="車種"
+      />
     </v-row>
     <v-row justify="center" align="center" class="mt20 mx-0">
       <Input
@@ -40,6 +52,7 @@
 </template>
 
 <script>
+import { manufacturerList } from './manufacturers'
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
 import Calendar from '~/components/common/Calendar.vue'
@@ -52,12 +65,28 @@ export default {
     ButtonSearch,
     Calendar,
   },
-  data: () => ({
-    list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-  }),
+  data() {
+    return {
+      list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      manufacturers: manufacturerList.map((item) => item.text),
+      manufacturer: '',
+      carModel: '',
+    }
+  },
+  computed: {
+    carModels() {
+      const data =
+        manufacturerList.find((item) => item.text === this.manufacturer) || {}
+      return data.child || []
+    },
+  },
+  watch: {
+    manufacturer(val) {
+      this.carModel = ''
+    },
+  },
 }
 </script>
-<style lang="scss"></style>
 <style lang="scss" scoped>
 .searchbar {
   width: 100%;
