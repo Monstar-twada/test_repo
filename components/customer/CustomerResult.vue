@@ -2,44 +2,51 @@
   <div class="customer-list">
     <PaginationComponent
       :current-page.sync="currentPage"
-      :total="itemlist.length"
+      :total="itemList.length"
       :per-page="itemsPerPage"
       @updateEvent="updatePageNumber"
     />
-    <v-data-table
-      :headers="headers"
-      :items="itemlist"
-      :items-per-page="itemsPerPage"
-      :page.sync="currentPage"
-      hide-default-footer
-    >
-      <template v-slot:item.id="{ item }">
-        <div class="id">
-          <nuxt-link to="/customer/detail">{{ item.id }}</nuxt-link>
-        </div>
-      </template>
-      <template v-slot:item.name="{ item }">
-        <div class="user">
-          <v-avatar size="38" class="user__image">
-            <v-img
-              :src="require('~/static/breadcrumbs/' + item.image_path)"
-            ></v-img>
-          </v-avatar>
-          <h3 class="pl5">{{ item.name }}</h3>
-          <span>（{{ item.age }}際）</span>
-        </div>
-      </template>
-      <template v-slot:item.maker="{ item }">
-        <div class="car">
-          <h3>{{ item.car_maker }}</h3>
-          <h4>{{ item.car_type }}</h4>
-          <h4 class="car__more">+1</h4>
-        </div>
-      </template>
-    </v-data-table>
+    <CustomTable
+      :list="itemList.slice(0, 10)"
+      rounded
+      head-bottom-border
+      head-font-weight-normal
+      @click:row="clickRow"
+    />
+    <!--    <v-data-table-->
+    <!--      :headers="headers"-->
+    <!--      :items="itemList"-->
+    <!--      :items-per-page="itemsPerPage"-->
+    <!--      :page.sync="currentPage"-->
+    <!--      hide-default-footer-->
+    <!--    >-->
+    <!--      <template v-slot:item.id="{ item }">-->
+    <!--        <div class="id">-->
+    <!--          <nuxt-link to="/customer/detail">{{ item.id }}</nuxt-link>-->
+    <!--        </div>-->
+    <!--      </template>-->
+    <!--      <template v-slot:item.name="{ item }">-->
+    <!--        <div class="user">-->
+    <!--          <v-avatar size="38" class="user__image">-->
+    <!--            <v-img-->
+    <!--              :src="require('~/static/breadcrumbs/' + item.image_path)"-->
+    <!--            ></v-img>-->
+    <!--          </v-avatar>-->
+    <!--          <h3 class="pl5">{{ item.name }}</h3>-->
+    <!--          <span>（{{ item.age }}際）</span>-->
+    <!--        </div>-->
+    <!--      </template>-->
+    <!--      <template v-slot:item.maker="{ item }">-->
+    <!--        <div class="car">-->
+    <!--          <h3>{{ item.car_maker }}</h3>-->
+    <!--          <h4>{{ item.car_type }}</h4>-->
+    <!--          <h4 class="car__more">+1</h4>-->
+    <!--        </div>-->
+    <!--      </template>-->
+    <!--    </v-data-table>-->
     <PaginationComponent
       :current-page.sync="currentPage"
-      :total="itemlist.length"
+      :total="itemList.length"
       :per-page="itemsPerPage"
       @updateEvent="updatePageNumber"
     />
@@ -47,10 +54,12 @@
 </template>
 <script>
 import PaginationComponent from '~/components/common/PaginationComponent.vue'
+import CustomTable from '~/components/customer/custom-table/index'
 export default {
   name: 'CustomerResult',
   components: {
     PaginationComponent,
+    CustomTable,
   },
   data: () => ({
     headers: [
@@ -67,7 +76,7 @@ export default {
       { text: '車検満了日', value: 'inspection_finish_date', align: 'center' },
       { text: '初度登録年月', value: 'registration_date', align: 'center' },
     ],
-    itemlist: [
+    itemList: [
       {
         id: 10000001,
         name: '米田　道春',
@@ -76,6 +85,7 @@ export default {
         tel: '080-1234-1234',
         car_maker: 'トヨタ',
         car_type: 'プリンス',
+        car_total: '+1',
         car_number: '品川 300 あ 1234',
         inspection_finish_date: 'R2/02/24',
         registration_date: 'R1/01/19',
@@ -351,6 +361,10 @@ export default {
   methods: {
     updatePageNumber(newPage) {
       this.currentPage = newPage
+    },
+    clickRow(item) {
+      console.log(item)
+      location.href = `/customer/detail/`
     },
   },
 }

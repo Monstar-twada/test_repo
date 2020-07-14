@@ -26,11 +26,11 @@
               <v-list-item-icon class="mr-4">
                 <v-img
                   v-if="!active"
-                  :src="require(`~/static/sidebar/${item.icon}.svg`)"
+                  :src="require(`./img/${item.icon}.svg`)"
                 ></v-img>
                 <v-img
                   v-else
-                  :src="require(`~/static/sidebar/${item.iconHover}.svg`)"
+                  :src="require(`./img/${item.iconHover}.svg`)"
                 ></v-img>
               </v-list-item-icon>
               <v-list-item-content>
@@ -54,75 +54,52 @@ export default {
     AsideSelector,
     Logo,
   },
-  data: () => ({
-    selectedResult: 1,
-    // item's index in menu
-    index: 0,
-    menuItems: [
-      {
-        icon: 'result',
-        iconHover: 'result-hover',
-        link: '/bi',
-        text: '経営状況',
-      },
-      {
-        icon: 'assessment',
-        iconHover: 'assessment-hover',
-        link: '/assess',
-        text: '集客',
-      },
-      {
-        icon: 'customer',
-        iconHover: 'customer-hover',
-        link: '/send',
-        text: '顧客管理',
-      },
-      {
-        icon: 'matching',
-        iconHover: 'matching-hover',
-        link: '/matching',
-        text: '送客',
-      },
-      {
-        icon: 'setting',
-        iconHover: 'setting-hover',
-        link: '/admin',
-        text: '管理',
-      },
-    ],
-    selectList: [
-      {
-        title: '営業管理',
-      },
-      {
-        text: 'cars全店',
-        value: 1,
-      },
-      {
-        text: '関西エリア',
-        value: 2,
-      },
-      {
-        text: '関東エリア',
-        value: 3,
-      },
-      {
-        title: '店舗管理',
-      },
-      {
-        text: 'cars奈良中央',
-        value: 5,
-      },
-      {
-        text: 'cars大阪',
-        value: 6,
-      },
-      {
-        text: 'cars足立',
-        value: 7,
-      },
-    ],
-  }),
+  props: {
+    menu: {
+      type: Array,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      selectedResult: 1,
+      // item's index in menu
+      index: 0,
+      menuItems: this.menu,
+      selectList: [
+        {
+          title: '営業管理',
+        },
+        {
+          text: 'cars全店',
+          value: 1,
+        },
+        {
+          text: '関西エリア',
+          value: 2,
+        },
+        {
+          text: '関東エリア',
+          value: 3,
+        },
+        {
+          title: '店舗管理',
+        },
+        {
+          text: 'cars奈良中央',
+          value: 5,
+        },
+        {
+          text: 'cars大阪',
+          value: 6,
+        },
+        {
+          text: 'cars足立',
+          value: 7,
+        },
+      ],
+    }
+  },
   computed: {
     isFirstIndex() {
       return this.index === 0
@@ -138,7 +115,11 @@ export default {
     '$nuxt._route'() {
       this.resetRouteIndex()
     },
+    menu(val, oldVal) {
+      this.menuItem = val
+    },
   },
+
   created() {
     this.resetRouteIndex()
   },

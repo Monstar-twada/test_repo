@@ -2,6 +2,9 @@
   <div class="sub-title">
     <h3>{{ subTitle }}</h3>
     <span class="sub-title__line"></span>
+    <div class="right-wrapper">
+      <slot></slot>
+    </div>
   </div>
 </template>
 <script>
@@ -15,7 +18,6 @@ export default {
   },
 }
 </script>
-<style lang="scss"></style>
 <style lang="scss" scoped>
 .sub-title {
   width: 100%;
@@ -35,7 +37,15 @@ export default {
     position: absolute;
     background-color: $blue-200;
     left: 0;
-    bottom: 0;
+    bottom: -1px;
+  }
+  .right-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
   }
 }
 </style>

@@ -1,39 +1,67 @@
 <template>
-  <v-row class="customer-memo ma-0 pa-0">
-    <div class="title">
-      <h2>活動メモ</h2>
-      <p><v-img :src="require('~/static/customer/btn-plus.svg')" /></p>
-    </div>
-    <v-data-table
-      :headers="headers"
-      :items="itemlist"
-      :page.sync="page"
-      hide-default-footer
-      :item-class="1234"
-      class="memolistTable"
+  <div class="customer-detail-memo-wrapper">
+    <ColumnTitle title="活動メモ">
+      <PlusButton border @click="editVisible = true" />
+    </ColumnTitle>
+
+    <table
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      class="memo-custom-table-wrapper"
     >
-      <template v-slot:item.responsible="{ item }">
-        <div class="">
-          <h4>{{ item.shop }}</h4>
-          <h4>{{ item.responsible }}</h4>
-        </div>
-      </template>
-      <template v-slot:item.edit="{ item }">
-        <div class="">
-          <a :src="item.id">
-            <v-img
-              :src="require('~/static/customer/btn-edit.svg')"
-              width="60"
-            />
-          </a>
-        </div>
-      </template>
-    </v-data-table>
-  </v-row>
+      <colgroup width="120"></colgroup>
+      <colgroup width="120"></colgroup>
+      <colgroup></colgroup>
+      <colgroup width="120"></colgroup>
+      <colgroup width="120"></colgroup>
+      <thead>
+        <tr>
+          <th>交流日</th>
+          <th>車種</th>
+          <th>コメント</th>
+          <th>担当者</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, i) in itemList" :key="i">
+          <td>{{ item.date }}</td>
+          <td>{{ item.car_type }}</td>
+          <td>
+            {{ item.comment }}
+          </td>
+          <td>
+            <div class="">
+              <div>{{ item.shop }}</div>
+              <div>{{ item.responsible }}</div>
+            </div>
+          </td>
+          <td>
+            <div class="flex">
+              <RoundBorderButton />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <MemoEditDialog v-model="editVisible" />
+  </div>
 </template>
 <script>
+import MemoEditDialog from './memo-edit-dialog/index'
+import ColumnTitle from '~/components/customer/ColumnTitle'
+import PlusButton from '~/components/breadcrumbs/PlusButton'
+import RoundBorderButton from '~/components/customer/detail/button/RoundBorderButton'
 export default {
   name: 'MemoTable',
+  components: {
+    MemoEditDialog,
+    ColumnTitle,
+    PlusButton,
+    RoundBorderButton,
+  },
   data: () => ({
     headers: [
       { text: '交流日', align: 'center', value: 'date' },
@@ -42,7 +70,7 @@ export default {
       { text: '担当者', value: 'responsible', align: 'center' },
       { text: '', value: 'edit', align: 'center' },
     ],
-    itemlist: [
+    itemList: [
       {
         id: 1,
         date: 'R2/11/31',
@@ -80,59 +108,60 @@ export default {
         responsible: ' 山田太郎',
       },
     ],
+    page: 1,
+    editVisible: false,
   }),
 }
 </script>
 
 <style lang="scss">
-.customer-memo {
-  .v-data-table {
-    width: 100%;
-    table {
-      thead {
-        tr {
-          th {
-            font-size: 12px !important;
-            height: 30px !important;
-            background: $white-100;
-            color: $blue-200 !important;
-          }
-        }
-      }
-      tbody {
-        tr {
-          td {
-            font-size: 12px !important;
-            height: 70px !important;
-            color: $blue-200 !important;
-          }
-        }
-      }
-    }
+.customer-detail-memo-wrapper {
+  .edit-button {
+    cursor: pointer;
   }
-}
-</style>
-<style lang="scss" scoped>
-.customer-memo {
-  .title {
+  .memo-custom-table-wrapper {
     width: 100%;
-    height: 60px;
-    border-bottom: 1px $gray-100 solid;
-    color: $blue-200;
-
-    h2 {
-      float: left;
-      line-height: 20px;
-      margin: 20px auto 20px 20px;
-    }
-
-    p {
-      float: right;
-      margin: 20px;
-
-      img {
-        width: 30px;
+    tr {
+      th {
+        background: $white-100;
+        height: 40px;
+        text-align: center;
+        font-size: 12px;
+        color: $blue-200;
       }
+      td {
+        height: 70px;
+        text-align: center;
+        font-size: 12px;
+        color: $blue-200;
+        position: relative;
+        &:before {
+          position: absolute;
+          top: 15%;
+          left: 0;
+          content: '';
+          background: $gray-100;
+          width: 1px;
+          height: 70%;
+        }
+        &:first-child {
+          &:before {
+            background: none;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        &:nth-child(2n) td {
+          background: $white-100;
+        }
+      }
+    }
+    .flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

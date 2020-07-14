@@ -42,8 +42,11 @@
           class="titlepage-title__logo mr-2"
           :src="require('~/static/breadcrumbs/' + titleImage)"
         />
-        <h1 class="d-inline">{{ page }}</h1>
-        <h2 class="d-inline">{{ subTitle }}</h2>
+        <h1>{{ page }}</h1>
+        <div>
+          <slot name="left"></slot>
+        </div>
+        <!--h2 class="d-inline">{{ subTitle }}</h2-->
         <div v-if="isDate" class="titlepage__datepick ml25">
           <div>
             <h5>2020年1月-2020年6月</h5>
