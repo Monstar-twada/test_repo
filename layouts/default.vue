@@ -10,16 +10,19 @@
       <nuxt />
     </div>
     <NextAction v-model="isCollapsed" />
+    <OnePointAdvice />
   </v-app>
 </template>
 
 <script>
 import Sidebar from '~/components/siderbar/index'
 import NextAction from '~/components/next-action/index'
+import OnePointAdvice from '~/components/one-point-advice/index'
 export default {
   components: {
     Sidebar,
     NextAction,
+    OnePointAdvice,
   },
   data() {
     return {
