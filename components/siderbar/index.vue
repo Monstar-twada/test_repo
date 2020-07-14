@@ -74,7 +74,7 @@ export default {
       {
         icon: 'customer',
         iconHover: 'customer-hover',
-        link: '/customer',
+        link: '/send',
         text: '顧客管理',
       },
       {
