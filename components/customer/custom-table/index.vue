@@ -37,7 +37,6 @@
         <th>登録ナンバー</th>
         <th>車検満了日</th>
         <th>初度登録年月</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
