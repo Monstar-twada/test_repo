@@ -11,7 +11,7 @@
               :src="require(`~/static/send/send_arrow_left.svg`)"
               class="arrow-left"
             ></v-img>
-            <p>2020年5月-2020年11月</p>
+            <p>2020年1月-2020年6月</p>
             <v-img
               :max-width="7"
               :max-height="11"

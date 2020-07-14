@@ -2,7 +2,7 @@
   <div class="main-container">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
-      title-image="send.svg"
+      :title-image="`send.svg`"
       :page="page"
       :is-title-plus="true"
     />

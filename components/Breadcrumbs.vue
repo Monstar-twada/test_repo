@@ -128,7 +128,7 @@ export default {
     &__logo {
       margin-top: 8px;
       height: 22px;
-      max-width: 22px;
+      max-width: 50px;
     }
     h1 {
       color: $white-300;

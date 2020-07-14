@@ -30,7 +30,7 @@
       <Select
         items="items"
         class="mr20"
-        :list="list"
+        :list="status"
         placeholder="ステータス"
       />
       <ButtonSearch class="searchbar_button" />
@@ -51,6 +51,7 @@ export default {
   },
   data: () => ({
     list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    status: ['送客中', '対応中', '成約済', '見送済'],
   }),
 }
 </script>

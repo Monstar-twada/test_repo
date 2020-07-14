@@ -62,7 +62,7 @@ export default {
     },
     row5: {
       placeholder: '送客中',
-      list: ['送客中'],
+      list: ['送客中', '対応中', '成約済', '見送済'],
     },
   }),
 }
