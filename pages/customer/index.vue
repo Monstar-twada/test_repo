@@ -11,7 +11,7 @@
       </template>
     </Breadcrumbs>
     <Searchbar />
-    <CustomerResult class="mt30 mb30" />
+    <CustomerResult class="mt30" />
 
     <ImportDialog v-model="importVisible" />
   </div>

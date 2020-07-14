@@ -8,7 +8,7 @@
       border="0"
       cellpadding="0"
       cellspacing="0"
-      class="custom-table-wrapper"
+      class="memo-custom-table-wrapper"
     >
       <colgroup width="120"></colgroup>
       <colgroup width="120"></colgroup>
@@ -119,7 +119,7 @@ export default {
   .edit-button {
     cursor: pointer;
   }
-  .custom-table-wrapper {
+  .memo-custom-table-wrapper {
     width: 100%;
     tr {
       th {
@@ -162,30 +162,6 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-  }
-  .v-data-table {
-    width: 100%;
-    table {
-      thead {
-        tr {
-          th {
-            font-size: 12px !important;
-            height: 30px !important;
-            background: $white-100;
-            color: $blue-200 !important;
-          }
-        }
-      }
-      tbody {
-        tr {
-          td {
-            font-size: 12px !important;
-            height: 70px !important;
-            color: $blue-200 !important;
-          }
-        }
-      }
     }
   }
 }
