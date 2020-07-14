@@ -162,7 +162,7 @@ export default {
     &__logo {
       margin-top: 8px;
       height: 22px;
-      max-width: 22px;
+      max-width: 50px;
     }
     &__manager {
       margin-top: 13px;
