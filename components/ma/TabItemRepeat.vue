@@ -28,7 +28,7 @@
           <v-col cols="5">
             <v-row align="center" justify="start" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./list" class="mt20">
+              <nuxt-link to="./ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -68,7 +68,7 @@
           <v-col cols="5">
             <v-row align="center" justify="start" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./list" class="mt20">
+              <nuxt-link to="./ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -108,7 +108,7 @@
           <v-col cols="5">
             <v-row align="center" justify="start" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./list" class="mt20">
+              <nuxt-link to="../ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -148,7 +148,7 @@
           <v-col cols="5">
             <v-row align="center" justify="center" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./list" class="mt20">
+              <nuxt-link to="./ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"

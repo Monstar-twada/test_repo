@@ -6,8 +6,7 @@
     searchable
     :components="{ OpenIndicator }"
     :style="SelectStyle"
-  >
-  </VSelect>
+  />
 </template>
 
 <script>
@@ -40,6 +39,14 @@ export default {
       type: Number,
       default: 20,
     },
+    isTransparent: {
+      type: Boolean,
+      default: false,
+    },
+    custombackground: {
+      type: String,
+      default: 'white',
+    },
   },
   data() {
     return {
@@ -51,6 +58,7 @@ export default {
       return {
         '--width': this.customwidth + 'px',
         '--height': this.customheight + 'px',
+        '--background': this.custombackground,
       }
     },
   },
@@ -70,9 +78,9 @@ export default {
 .selectStyle .vs__search::placeholder,
 .selectStyle .vs__dropdown-toggle,
 .selectStyle .vs__dropdown-menu {
-  background: $white-300;
+  background: var(--background);
   border: none;
-  color: $blue-500;
+  color: $blue-400;
   text-transform: lowercase;
   font-variant: small-caps;
   font-family: 'Noto Sans JP';
@@ -80,6 +88,7 @@ export default {
   min-width: var(--width);
   font-size: 10px;
 }
+
 .vs__selected-options {
   padding: 0px;
 }

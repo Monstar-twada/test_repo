@@ -1,15 +1,11 @@
 <template>
   <div>
-    <Breadcrumbs
-      :breadcrumbs="breadcrumbs"
-      title-image="customer.svg"
-      :page="page"
-    >
-      <div class="subTitle">
-        <span> &lt; </span>
-        2020年6月
-        <span> &gt; </span>
-      </div>
+    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page">
+      <template v-slot:left>
+        <div class="subTitle">
+          <h3>[ 6月満期車検 対象者リスト ]</h3>
+        </div>
+      </template>
     </Breadcrumbs>
     <Searchbar />
     <MaResult class="mt30 mb30" />
@@ -44,10 +40,9 @@ export default {
 <style lang="scss" scoped>
 .subTitle {
   color: $white-300;
-  font-size: 12px;
-  margin: 10px 0 0 20px;
-  span {
-    margin: 0 5px;
+  margin: 5px 0 0 20px;
+  h3 {
+    font-size: 20px;
   }
 }
 </style>
