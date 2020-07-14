@@ -80,7 +80,7 @@ export default {
 .selectStyle .vs__dropdown-menu {
   background: var(--background);
   border: none;
-  color: $white-300;
+  color: $blue-400;
   text-transform: lowercase;
   font-variant: small-caps;
   font-family: 'Noto Sans JP';

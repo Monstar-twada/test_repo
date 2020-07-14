@@ -97,12 +97,6 @@ export default {
     ],
     model: 1,
   }),
-
-  methods: {
-    clickEvent() {
-      console.log('dom', this.$refs)
-    },
-  },
 }
 </script>
 <style lang="scss">
