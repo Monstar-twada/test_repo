@@ -104,6 +104,9 @@ export default {
     .v-pagination__item--active .primary {
       border-color: none !important;
     }
+    button {
+      outline: none;
+    }
   }
 }
 </style>

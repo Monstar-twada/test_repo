@@ -9,7 +9,7 @@
     <dd class="footer">
       <span class="left">
         <template v-if="item.count">
-          <span class="text">{{ item.count }}件獲得</span>
+          <span class="text">{{ item.count }}</span>
           <i class="icon-arrow-right-top"></i>
         </template>
       </span>
@@ -60,7 +60,6 @@ export default {
           display: inline-block;
           font-size: 11px;
           line-height: 13px;
-          margin-right: 2px;
         }
         .icon-arrow-right-top {
           display: inline-block;
@@ -76,7 +75,7 @@ export default {
         border-radius: 12px;
         background: $blue-100;
         min-width: 42px;
-        padding: 0 15px;
+        padding: 0 12px;
         font-size: 12px;
         color: #fff;
         font-weight: bold;
