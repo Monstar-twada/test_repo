@@ -27,7 +27,7 @@
         :placeholder="row4.placeholder"
       />
       <StatusPart :list="row5.list" :placeholder="row5.placeholder" />
-      <Submitbutton :title="'更新'" />
+      <SubmitButton :title="'更新'" />
     </div>
   </div>
 </template>
@@ -36,7 +36,7 @@
 import CustomerPart from '~/components/send/common/CustomerPart.vue'
 import RequestKindPart from '~/components/send/common/RequestKindPart.vue'
 import TextAreaInfo from '~/components/send/common/TextAreaInfo.vue'
-import Submitbutton from '~/components/send/common/Submitbutton.vue'
+import SubmitButton from '~/components/send/common/SubmitButton.vue'
 import StatusPart from '~/components/send/common/StatusPart.vue'
 
 export default {
@@ -45,7 +45,7 @@ export default {
     CustomerPart,
     RequestKindPart,
     TextAreaInfo,
-    Submitbutton,
+    SubmitButton,
     StatusPart,
   },
   data: () => ({

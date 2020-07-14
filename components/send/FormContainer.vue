@@ -12,7 +12,7 @@
         :placeholder="row3.placeholder"
         :customborderbottom="'none'"
       />
-      <Submitbutton :title="'依頼する'" />
+      <SubmitButton :title="'依頼する'" />
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 import CustomerPart from '~/components/send/common/CustomerPart.vue'
 import RequestKindPart from '~/components/send/common/RequestKindPart.vue'
 import TextAreaInfo from '~/components/send/common/TextAreaInfo.vue'
-import Submitbutton from '~/components/send/common/Submitbutton.vue'
+import SubmitButton from '~/components/send/common/SubmitButton.vue'
 
 export default {
   name: 'FormContainer',
@@ -29,7 +29,7 @@ export default {
     CustomerPart,
     RequestKindPart,
     TextAreaInfo,
-    Submitbutton,
+    SubmitButton,
   },
   data: () => ({
     row3: {

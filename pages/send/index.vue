@@ -40,3 +40,11 @@ export default {
   }),
 }
 </script>
+<style lang="scss" scoped>
+.main-container {
+  padding: 30px 0px;
+  margin: 0 75px;
+  width: 100%;
+  max-width: 900px;
+}
+</style>
