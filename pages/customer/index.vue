@@ -20,7 +20,7 @@
 <script>
 import PlusButton from '~/components/breadcrumbs/PlusButton'
 import ImportButton from '~/components/customer/ImportButton'
-import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import Breadcrumbs from '~/components/breadcrumbs/index'
 import Searchbar from '~/components/customer/Searchbar.vue'
 import CustomerResult from '~/components/customer/CustomerResult.vue'
 import ImportDialog from '~/components/customer/import-dialog/index'

@@ -1,21 +1,18 @@
 <template>
-  <div class="main-container">
+  <div>
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"
       title-image="result.svg"
     />
-    <div>
-      <IndexBodyContainer />
-    </div>
+    <IndexBodyContainer />
   </div>
 </template>
 
 <script>
-import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import Breadcrumbs from '~/components/breadcrumbs/index'
 import IndexBodyContainer from '~/components/customer/regist/car/IndexBodyContainer'
 export default {
-  layout: 'loggedin',
   components: {
     Breadcrumbs,
     IndexBodyContainer,
@@ -41,11 +38,4 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-.main-container {
-  padding: 30px 0px;
-  margin: 0 75px;
-  width: 100%;
-  max-width: 1080px;
-}
-</style>
+<style lang="scss"></style>

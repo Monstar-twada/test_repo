@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import Breadcrumbs from '~/components/breadcrumbs/index'
 import CustomerInfo from '~/components/customer/detail/CustomerInfo.vue'
 import CarInfo from '~/components/customer/detail/CarInfo.vue'
 import MemoTable from '~/components/customer/detail/MemoTable.vue'
