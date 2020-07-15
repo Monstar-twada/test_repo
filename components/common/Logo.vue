@@ -1,7 +1,7 @@
 <template>
   <v-img
     class="logo"
-    :src="require(`~/components/siderbar/img/logo-${logoName}.svg`)"
+    :src="require(`~/components/sidebar/img/logo-${logoName}.svg`)"
     :width="logoWidth"
   />
 </template>
