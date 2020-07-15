@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/Breadcrumbs.vue'
+import Breadcrumbs from '~/components/breadcrumbs/index'
 import BodyContainer from '~/components/admin/BodyContainer'
 
 export default {
