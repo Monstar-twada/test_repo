@@ -2,7 +2,7 @@
   <div class="aside-selector-wrapper" @mouseleave="mouseLeaved">
     <div class="result" @click="toggleList($event)">
       <span>{{ text }}</span>
-      <i></i>
+      <i :class="optionsVisible ? 'is-show' : ''"></i>
     </div>
     <dl
       v-show="optionsVisible"
@@ -123,6 +123,10 @@ export default {
       width: 12px;
       height: 12px;
       background: url('./img/selector-arrow.svg') no-repeat center center;
+      transition: transform 0.2s ease-in-out;
+      &.is-show {
+        transform: rotate(-180deg);
+      }
     }
   }
   dl {

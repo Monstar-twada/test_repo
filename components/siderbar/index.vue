@@ -25,12 +25,9 @@
             <nuxt-link :to="item.link">
               <v-list-item-icon class="mr-4">
                 <v-img
-                  v-if="!active"
-                  :src="require(`./img/${item.icon}.svg`)"
-                ></v-img>
-                <v-img
-                  v-else
-                  :src="require(`./img/${item.iconHover}.svg`)"
+                  :src="
+                    require(`./img/${active ? item.iconHover : item.icon}.svg`)
+                  "
                 ></v-img>
               </v-list-item-icon>
               <v-list-item-content>
@@ -64,7 +61,7 @@ export default {
     return {
       selectedResult: 1,
       // item's index in menu
-      index: 0,
+      index: -1,
       menuItems: this.menu,
       selectList: [
         {
