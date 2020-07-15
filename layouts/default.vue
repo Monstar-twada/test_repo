@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Sidebar from '~/components/siderbar/index'
+import Sidebar from '~/components/sidebar/index'
 import NextAction from '~/components/next-action/index'
 import OnePointAdvice from '~/components/one-point-advice/index'
 export default {
