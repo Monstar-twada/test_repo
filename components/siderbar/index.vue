@@ -64,7 +64,7 @@ export default {
     return {
       selectedResult: 1,
       // item's index in menu
-      index: 0,
+      index: -1,
       menuItems: this.menu,
       selectList: [
         {
