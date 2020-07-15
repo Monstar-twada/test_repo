@@ -5,6 +5,7 @@
       :title-image="`send.svg`"
       :page="page"
       :is-title-plus="true"
+      :title-plus-work="'/send/form'"
     />
     <CustomerInfo class="mt10 mb30" />
     <SearchBar />
@@ -40,3 +41,8 @@ export default {
   }),
 }
 </script>
+<style lang="scss" scoped>
+.main-container {
+  max-width: 900px;
+}
+</style>

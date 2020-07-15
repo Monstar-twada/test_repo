@@ -6,7 +6,7 @@
     <div class="customerContainer__user">
       <div class="customerContainer__user__img">
         <v-avatar :size="60">
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          <img :src="require(`~/static/send/person_default.svg`)" alt="John" />
         </v-avatar>
       </div>
       <div class="customerContainer__user__content">
@@ -75,7 +75,7 @@ export default {
   &__user {
     display: flex;
     border-right: solid 1px $gray-600;
-    padding: 0 30px;
+    padding: 0 30px 0 0;
     &__img {
       margin-right: 10px;
     }
