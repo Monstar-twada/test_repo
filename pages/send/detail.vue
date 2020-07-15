@@ -37,3 +37,8 @@ export default {
   }),
 }
 </script>
+<style lang="scss" scoped>
+.main-container {
+  max-width: 900px;
+}
+</style>

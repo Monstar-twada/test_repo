@@ -68,7 +68,7 @@
           :src="require('~/static/common/btn-plus.svg')"
         />
       </div>
-      <div v-if="isTitlePlus" class="titlepage-plus">
+      <div v-if="isTitlePlus" class="titlepage-plus" @click="setPlusIconWork">
         <v-img
           class="titlepage-plus__plus"
           :src="require('~/static/common/btn-plus.svg')"
@@ -122,6 +122,18 @@ export default {
     isTitlePlus: {
       type: Boolean,
       default: false,
+    },
+    titlePlusWork: {
+      type: String,
+      default: '',
+    },
+  },
+  methods: {
+    setPlusIconWork() {
+      this.$router.push({
+        path: this.titlePlusWork,
+        query: {},
+      })
     },
   },
 }
@@ -215,6 +227,7 @@ export default {
     background: $white-100;
     padding: 0;
     border-radius: 15px;
+    cursor: pointer;
     &__plus {
       height: 30px;
       max-width: 30px;

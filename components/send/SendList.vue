@@ -15,13 +15,13 @@
     >
       <template v-slot:item.id="{ item }">
         <div class="id">
-          <nuxt-link to="/matter/detail">{{ item.id }}</nuxt-link>
+          <nuxt-link to="/send/detail">{{ item.id }}</nuxt-link>
         </div>
       </template>
       <template v-slot:item.customerName="{ item }">
         <div class="customerName">
           <v-avatar :size="36">
-            <img :src="require(`~/static/send/${item.img}.png`)" alt="John" />
+            <img :src="require(`~/static/send/${item.img}`)" alt="John" />
           </v-avatar>
           <div class="customerName--content">
             <span>{{ item.customerName[0] }}</span>
@@ -73,7 +73,7 @@ export default {
           customerName: ['米田 道春', '（31歳）'],
           tel: '080-1234-1234',
           carInfo: ['トヨタ', 'プリウス', ''],
-          img: 'person_1',
+          img: 'person_default.svg',
           number: '足立 310 あ 1234',
           kind: '購入',
           status: '送客中',
@@ -83,7 +83,7 @@ export default {
           customerName: ['山本篤', '（42歳）'],
           tel: '090-2323-4455',
           carInfo: ['マツダ', 'CX-5', ''],
-          img: 'person_2',
+          img: 'person_default.svg',
           number: '品川 500 さ 3423',
           kind: '売却',
           status: '対応中',
@@ -93,7 +93,7 @@ export default {
           customerName: ['北中真希子', '（36歳）'],
           tel: '080-8888-2040',
           carInfo: ['フォルクスワーゲン', 'ポロ', ''],
-          img: 'person_3',
+          img: 'person_default.svg',
           number: '大阪 103 す 4785',
           kind: '整備',
           status: '対応中',
@@ -103,7 +103,7 @@ export default {
           customerName: ['斎藤拓', '（58歳）'],
           tel: '080-7490-2041',
           carInfo: ['メルセデスベンツ', 'Aクラス', ''],
-          img: 'person_4',
+          img: 'person_default.svg',
           number: '神奈川 211 う 3984',
           kind: '鈑金',
           status: '対応中',
@@ -113,7 +113,7 @@ export default {
           customerName: ['島田一郎', '（47歳）'],
           tel: '080-5454-9745',
           carInfo: ['スバル', 'レガシー', ''],
-          img: 'person_5',
+          img: 'person_default.svg',
           number: '高松 659 ろ 3030',
           kind: '保険',
           status: '成約済',
@@ -123,7 +123,7 @@ export default {
           customerName: ['長谷川宏美', '（30歳）'],
           tel: '080-0090-3090',
           carInfo: ['ホンダ', 'N-BOX', ''],
-          img: 'person_6',
+          img: 'person_default.svg',
           number: '熊本 540 あ 2094',
           kind: 'アクセサリー',
           status: '成約済',
@@ -133,7 +133,7 @@ export default {
           customerName: ['森下千絵', '（29歳）'],
           tel: '090-2323-4455',
           carInfo: ['日産', 'ノート', ''],
-          img: 'person_7',
+          img: 'person_default.svg',
           number: '成田 870 ろ 2354',
           kind: '購入',
           status: '成約済',
@@ -143,7 +143,7 @@ export default {
           customerName: ['加藤雅之', '（39歳）'],
           tel: '080-8888-2040',
           carInfo: ['トヨタ', 'ヴェルファイア', ''],
-          img: 'person_8',
+          img: 'person_default.svg',
           number: '松戸 599 あ 2020',
           kind: '売却',
           status: '成約済',
@@ -153,7 +153,7 @@ export default {
           customerName: ['平岡和正', '（56歳）'],
           tel: '080-7490-2041',
           carInfo: ['BMW', 'Z4', ''],
-          img: 'person_9',
+          img: 'person_default.svg',
           number: '船橋 890 い 3294',
           kind: '整備',
           status: '成約済',
@@ -163,7 +163,7 @@ export default {
           customerName: ['鈴木翔子', '（46歳）'],
           tel: '080-5454-9745',
           carInfo: ['レクサス', 'NX', ''],
-          img: 'person_10',
+          img: 'person_default.svg',
           number: '市原 498 お 6931',
           kind: '鈑金',
           status: '見送済',
@@ -267,7 +267,7 @@ export default {
             }
             .carInfo {
               position: relative;
-              width: 100px;
+              width: max-content;
               text-align: left;
               &--badge {
                 position: absolute;
@@ -275,7 +275,7 @@ export default {
                 bottom: 0;
                 padding: 1px 8px;
                 border-radius: 10px;
-                background-color: #1e5199;
+                background-color: $blue-200;
                 font-size: 12px;
                 color: $white-300;
               }
