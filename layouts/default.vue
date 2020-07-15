@@ -5,7 +5,7 @@
       isCollapsed ? 'next-action-is-collapsed' : '',
     ]"
   >
-    <Sidebar :menu="menuList" />
+    <Sidebar />
     <div class="global-main-wrapper">
       <nuxt />
     </div>
@@ -27,38 +27,6 @@ export default {
   data() {
     return {
       isCollapsed: false,
-      menuList: [
-        {
-          icon: 'bi',
-          iconHover: 'bi-hover',
-          link: '/bi',
-          text: '経営状況',
-        },
-        {
-          icon: 'ma',
-          iconHover: 'ma-hover',
-          link: '/ma',
-          text: '集客',
-        },
-        {
-          icon: 'customer',
-          iconHover: 'customer-hover',
-          link: '/customer',
-          text: '顧客管理',
-        },
-        {
-          icon: 'send',
-          iconHover: 'send-hover',
-          link: '/send',
-          text: '送客',
-        },
-        {
-          icon: 'setting',
-          iconHover: 'setting-hover',
-          link: '/admin',
-          text: '管理',
-        },
-      ],
     }
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <header class="breadcrumbs-container">
     <div class="breadcrumbs-wrapper">
-      <v-breadcrumbs :items="breadcrumbs" class="pa-0">
+      <v-breadcrumbs :items="items" class="pa-0">
         <template v-slot:item="{ item }">
           <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
             <i v-if="item.text === 'home'" class="icon-home"></i>
@@ -16,7 +16,7 @@
     </div>
     <div class="page-title-wrapper">
       <div class="left-wrapper">
-        <v-img
+        <img
           class="title-icon mr-2"
           :src="require('~/static/breadcrumbs/' + titleImage)"
         />
@@ -55,6 +55,17 @@ export default {
     titleImage: {
       type: String,
       default: 'result.svg',
+    },
+  },
+  computed: {
+    items() {
+      return [
+        {
+          text: 'home',
+          href: '/',
+        },
+        ...this.breadcrumbs,
+      ]
     },
   },
 }

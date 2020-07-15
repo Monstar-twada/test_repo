@@ -2,7 +2,7 @@
   <div class="global-sidebar-wrapper">
     <div :class="['top-wrapper', isFirstIndex ? 'radius-br' : '']">
       <div class="logo">
-        <Logo />
+        <img :src="require(`./img/logo-${logoName}.svg`)" alt="" />
       </div>
       <h5>株式会社ファーストグループ</h5>
 
@@ -44,25 +44,22 @@
 
 <script>
 import AsideSelector from './AsideSelector'
-import Logo from './Logo'
+import { managerMenuItems } from './menu-manager'
+import { dashboardMenuItems } from './menu-dashboard'
+
 export default {
   name: 'Sidebar',
   components: {
     AsideSelector,
-    Logo,
-  },
-  props: {
-    menu: {
-      type: Array,
-      default: null,
-    },
   },
   data() {
+    const isManager = this.$isManager
     return {
       selectedResult: 1,
       // item's index in menu
       index: -1,
-      menuItems: this.menu,
+      menuItems: isManager ? managerMenuItems : dashboardMenuItems,
+      logoName: isManager ? 'manager' : 'dashboard',
       selectList: [
         {
           title: '営業管理',
@@ -112,9 +109,6 @@ export default {
     '$nuxt._route'() {
       this.resetRouteIndex()
     },
-    menu(val, oldVal) {
-      this.menuItem = val
-    },
   },
 
   created() {
@@ -161,6 +155,9 @@ export default {
     .logo {
       margin: 0 auto;
       width: 110px;
+      img {
+        max-width: 100%;
+      }
     }
     h5 {
       margin: 25px 15px 7px 15px;
