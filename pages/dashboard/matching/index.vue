@@ -4,6 +4,7 @@
       :breadcrumbs="breadcrumbs"
       title-image="matching.svg"
       :page="page"
+      icon-width="27"
     />
     <Searchbar />
     <CustomerResult class="mt30" />

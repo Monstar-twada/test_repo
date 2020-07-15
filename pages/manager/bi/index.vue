@@ -3,8 +3,7 @@
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"
-      is-manager
-      is-date
+      icon-width="30"
       title-image="buisnessinformation.svg"
     >
       <template v-slot:left>

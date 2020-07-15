@@ -23,12 +23,13 @@
         >
           <template v-slot:default="{ active }">
             <nuxt-link :to="item.link">
-              <v-list-item-icon class="mr-4">
-                <v-img
+              <v-list-item-icon>
+                <img
+                  :width="item.width"
                   :src="
                     require(`./img/${active ? item.iconHover : item.icon}.svg`)
                   "
-                ></v-img>
+                />
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="item.text"></v-list-item-title>
@@ -170,12 +171,6 @@ export default {
     }
   }
 
-  a {
-    display: flex;
-    width: 100%;
-    text-decoration: none;
-  }
-
   .bottom-space {
     flex-grow: 1;
     background: #fff;
@@ -193,6 +188,26 @@ export default {
 
     .v-list-item {
       background: $white-300;
+      a {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        width: 100%;
+        text-decoration: none;
+        .v-list-item__icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          align-self: auto;
+          margin: 0 12px 0 0;
+          width: 24px;
+          height: 24px;
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
       // remove black background when on click
       .v-ripple__container {
         display: none;
@@ -207,10 +222,6 @@ export default {
       &::before {
         opacity: 0 !important;
       }
-    }
-
-    .theme--light.v-select .v-select__selection--comma {
-      color: $blue-100 !important;
     }
   }
 }

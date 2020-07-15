@@ -1,6 +1,11 @@
 <template>
   <div>
-    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="send.svg" :page="page">
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      title-image="send.svg"
+      :page="page"
+      icon-width="30"
+    >
       <template v-slot:right>
         <PlusButton @click="$router.push('/send/form')" />
       </template>

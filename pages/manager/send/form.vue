@@ -4,6 +4,7 @@
       :breadcrumbs="breadcrumbs"
       title-image="send.svg"
       :page="page"
+      icon-width="30"
     />
     <FormContainer />
   </div>
