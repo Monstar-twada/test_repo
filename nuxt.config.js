@@ -88,7 +88,7 @@ export default {
    ** Build configuration
    */
   build: {
-    publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
+    // publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
     /*
      ** You can extend webpack config here
      */
