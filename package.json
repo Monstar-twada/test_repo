@@ -5,11 +5,15 @@
   "author": "",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "dashboard": "nuxt -c ./build/config.dashboard.js",
+    "manager": "nuxt -c ./build/config.manager.js",
+    "dev:d": "npm run dashboard",
+    "dev:m": "npm run manager",
+    "build:d": "nuxt build -c ./build/config.dashboard.js",
+    "build:m": "nuxt build -c ./build/config.manager.js",
+    "build": "npm run build:d && npm run build:m",
+    "start:d": "nuxt start -c ./build/config.dashboard.js -p 3000",
+    "start:m": "nuxt start -c ./build/config.manager.js -p 3001"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",

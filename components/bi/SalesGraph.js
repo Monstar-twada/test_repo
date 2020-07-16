@@ -14,23 +14,41 @@ export default {
   },
   data() {
     return {
-      gradient: null,
+      gradientGreen: null,
+      gradientViolet: null,
     }
   },
-  methods: {
-    emitToParent(event) {
-      this.$parent.childToParent(event)
-    },
-  },
   mounted() {
-    this.gradient = this.$refs.canvas
-      .getContext('2d')
-      .createLinearGradient(0, 0, 0, 450)
+    //! error WIP
+    // this.addPlugin({
+    //   afterUpdate(chart) {
+    //     const dataset = chart.config.data.datasets
+    //     const offset = 5
 
-    this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
-    this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)')
-    this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)')
-    this.emitToParent(this.gradient)
+    //     for (let i = 0; i < dataset.length; i++) {
+    //       for (let j = 0; j < dataset[i]._meta[0].data.length; j++) {
+    //         const model = dataset[i]._meta[0].data[j]._model
+    //         model.x += offset
+    //         model.controlPointNextX += offset
+    //         model.controlPointPreviousX += offset
+    //       }
+    //     }
+    //   },
+    // })
+    this.gradientGreen = this.$refs.canvas
+      .getContext('2d')
+      .createLinearGradient(0, 0, 0, 200)
+    this.gradientGreen.addColorStop(0, 'rgba(13,190,169,0.4023810207676821)')
+    this.gradientGreen.addColorStop(1, 'rgba(255, 255, 255, 0.5)')
+
+    this.gradientViolet = this.$refs.canvas
+      .getContext('2d')
+      .createLinearGradient(0, 0, 0, 200)
+    this.gradientViolet.addColorStop(0, 'rgb(105, 109, 217)')
+    this.gradientViolet.addColorStop(1, 'rgba(255, 255, 255, 0.5)')
+
+    this.data.datasets[2].backgroundColor = this.gradientViolet
+    this.data.datasets[3].backgroundColor = this.gradientGreen
     this.renderChart(this.data, this.options)
   },
 }
