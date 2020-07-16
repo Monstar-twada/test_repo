@@ -1,35 +1,13 @@
 <template>
-  <div>
-    <Breadcrumbs
-      :breadcrumbs="breadcrumbs"
-      :page="page"
-      title-image="setting.svg"
-    />
-    <BodyContainer />
-  </div>
+  <Admin />
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index'
-import BodyContainer from '~/components/admin/BodyContainer'
-
+import Admin from '~/components/admin/index'
 export default {
   layout: 'dashboard',
   components: {
-    Breadcrumbs,
-    BodyContainer,
-  },
-  data() {
-    return {
-      page: '管理',
-      breadcrumbs: [
-        {
-          text: '管理',
-          href: '/admin',
-        },
-      ],
-    }
+    Admin,
   },
 }
 </script>
-<style lang="scss"></style>
