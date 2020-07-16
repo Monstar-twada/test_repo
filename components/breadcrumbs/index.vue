@@ -68,7 +68,6 @@ export default {
       return [
         {
           text: 'home',
-          href: '/',
         },
         ...this.breadcrumbs,
       ]
