@@ -1,6 +1,6 @@
-# Feature System Demo
+# First Group
 
-> Feature System Demo
+> The cars Dashboard and Manager's front-end system.
 
 ![](./docs/system.png)
 
@@ -29,7 +29,7 @@ $ npm run manager
 $ npm run dev:m
 ```
 
-#### Build
+#### Build and Launch server
 
 ```bash
 # build for production
@@ -39,12 +39,7 @@ $ npm run build
 $ npm run build:d
 # manager only
 $ npm run build:m
-```
-
-
-#### Launch server
-
-```bash
+#
 # launch server dashboard, at localhost:3000
 $ npm run start:d
 # launch server manager, at localhost:3001
