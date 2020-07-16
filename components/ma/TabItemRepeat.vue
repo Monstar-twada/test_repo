@@ -8,10 +8,11 @@
         <Title
           title="車検"
           sub-title1="¥100/顧客"
-          content="既存顧客に対して車検のお知らせをいたします。車検３ヶ月前から以下のスケジュールで各種連絡を行います。"
-          start-date="2020/02/19 14:00"
+          content="既存顧客に対して車検のお知らせをいたします。<br />車検３ヶ月前から以下のスケジュールで各種連絡を行います。"
+          start-date="2020/07/10 14:00"
           target="既存顧客"
           conditions="なし"
+          :select-item="list1"
           is-select-comp
         />
         <v-row class="ma-0" justify="start">
@@ -28,7 +29,7 @@
           <v-col cols="5">
             <v-row align="center" justify="start" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./ma/list" class="mt20">
+              <nuxt-link to="/ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -48,10 +49,11 @@
         <Title
           title="6ヶ月点検 "
           sub-title1="¥100/顧客"
-          content="車検の連絡時に車検を受ける気がないかたに車販を進めるプランです。車検の広告とセットで契約すると効果が最大化されます。"
-          start-date="2020/02/19 14:00"
+          content="既存顧客に対して点検のお知らせをいたします。<br />点検3ヶ月前から以下のスケジュールで各種連絡を行います。"
+          start-date="2020/07/10 14:00"
           target="既存顧客"
           conditions="なし"
+          :select-item="list2"
           is-select-comp
         />
         <v-row class="ma-0">
@@ -68,7 +70,7 @@
           <v-col cols="5">
             <v-row align="center" justify="start" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./ma/list" class="mt20">
+              <nuxt-link to="/ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -88,10 +90,11 @@
         <Title
           title="12ヶ月点検 "
           sub-title1="¥100/顧客"
-          content="車検の連絡時に車検を受ける気がないかたに車販を進めるプランです。車検の広告とセットで契約すると効果が最大化されます。"
-          start-date="2020/02/19 14:00"
+          content="既存顧客に対して点検のお知らせをいたします。<br />点検3ヶ月前から以下のスケジュールで各種連絡を行います。"
+          start-date="2020/07/10 14:00"
           target="既存顧客"
           conditions="なし"
+          :select-item="list2"
           is-select-comp
         />
         <v-row class="ma-0">
@@ -108,7 +111,7 @@
           <v-col cols="5">
             <v-row align="center" justify="start" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="../ma/list" class="mt20">
+              <nuxt-link to="/ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -128,10 +131,11 @@
         <Title
           title="18ヶ月点検 "
           sub-title1="¥100/顧客"
-          content="車検の連絡時に車検を受ける気がないかたに車販を進めるプランです。車検の広告とセットで契約すると効果が最大化されます。"
-          start-date="2020/02/19 14:00"
+          content="既存顧客に対して点検のお知らせをいたします。<br />点検3ヶ月前から以下のスケジュールで各種連絡を行います。"
+          start-date="2020/07/10 14:00"
           target="既存顧客"
           conditions="なし"
+          :select-item="list2"
           is-select-comp
         />
         <v-row class="ma-0">
@@ -148,7 +152,7 @@
           <v-col cols="5">
             <v-row align="center" justify="center" class="flex-column">
               <TableCalendar />
-              <nuxt-link to="./ma/list" class="mt20">
+              <nuxt-link to="/ma/list" class="mt20">
                 <v-img
                   :src="require('./img/list.svg')"
                   :max-width="120"
@@ -163,11 +167,12 @@
   </div>
 </template>
 <script>
-import Title from '~/components/ma/Title.vue'
-import DataColSmall from '~/components/ma/DataColSmall.vue'
-import TableCalendar from '~/components/ma/TableCalendar.vue'
-import SwitchButton from '~/components/ma/SwitchButton.vue'
+import Title from '~/components/ma/tab/Title.vue'
+import DataColSmall from '~/components/ma/tab/DataColSmall.vue'
+import TableCalendar from '~/components/ma/tab/TableCalendar.vue'
+import SwitchButton from '~/components/ma/tab/SwitchButton.vue'
 export default {
+  name: 'Inspection',
   components: {
     Title,
     DataColSmall,
@@ -176,6 +181,18 @@ export default {
   },
   data() {
     return {
+      list1: [
+        '2020年9月満期対象',
+        '2020年10月満期対象',
+        '2020年11月満期対象',
+        '2020年12月満期対象',
+      ],
+      list2: [
+        '2020年9月対象',
+        '2020年10月対象',
+        '2020年11月対象',
+        '2020年12月対象',
+      ],
       vehicleInspection: {
         reach: {
           value: 1034,
@@ -208,74 +225,6 @@ export default {
           value: 133,
           isUp: true,
           rate: '1.1',
-        },
-      },
-      instagramAD: {
-        reach: {
-          value: 0,
-          isUp: true,
-          rate: '0',
-        },
-        contacts: {
-          value: 0,
-          isUp: true,
-          rate: '0',
-        },
-        order: {
-          value: 0,
-          isUp: true,
-          rate: '0',
-        },
-      },
-      facebookAD: {
-        reach: {
-          value: 573071,
-          isUp: false,
-          rate: '14.4',
-        },
-        contacts: {
-          value: 1386,
-          isUp: false,
-          rate: '14.2',
-        },
-        order: {
-          value: 22,
-          isUp: false,
-          rate: '45.5',
-        },
-      },
-      displayAD: {
-        reach: {
-          value: 2313810,
-          isUp: false,
-          rate: '18.4',
-        },
-        contacts: {
-          value: 5298,
-          isUp: false,
-          rate: '13.1',
-        },
-        order: {
-          value: 26,
-          isUp: false,
-          rate: '3.6',
-        },
-      },
-      listingAD: {
-        reach: {
-          value: 7834,
-          isUp: true,
-          rate: '29.2',
-        },
-        contacts: {
-          value: 814,
-          isUp: true,
-          rate: '26.0',
-        },
-        order: {
-          value: 26,
-          isUp: true,
-          rate: '55.8',
         },
       },
     }

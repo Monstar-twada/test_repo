@@ -33,7 +33,7 @@ export default {
 
     &:not(:last-child)::after {
       content: '';
-      background-image: url('./img/arrow-bg.svg');
+      background-image: url('../img/arrow-bg.svg');
       position: absolute;
       width: 20px;
       height: 100px;

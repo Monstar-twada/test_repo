@@ -21,7 +21,7 @@
 import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import Chart from '~/components/ma/Chart.vue'
 import MaTabs from '~/components/ma/MaTabs.vue'
-import DataCol from '~/components/ma/DataCol'
+import DataCol from '~/components/ma/tab/DataCol.vue'
 export default {
   layout: 'manager',
   components: {

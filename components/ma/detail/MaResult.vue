@@ -25,7 +25,7 @@
           </v-avatar>
           <div class="user__name ml10">
             <h3>{{ item.name }}</h3>
-            <span>（{{ item.age }}際）</span>
+            <span>({{ item.age }}歳)</span>
           </div>
         </div>
       </template>
@@ -67,7 +67,7 @@
 </template>
 <script>
 import PaginationComponent from '~/components/common/PaginationComponent.vue'
-import BooleanFlg from '~/components/ma/BooleanFlg.vue'
+import BooleanFlg from '~/components/ma/detail/BooleanFlg.vue'
 export default {
   name: 'CustomerResult',
   components: {
@@ -81,18 +81,65 @@ export default {
         sortable: true,
         align: 'center',
         value: 'id',
-        width: '30px',
+        width: '50px',
       },
-      { text: '顧客名', value: 'name', align: 'center', width: '160px' },
-      { text: '住所', value: 'address', align: 'start', width: '100px' },
-      { text: '対象車両', value: 'maker', align: 'start', width: '100px' },
-      { text: '電話番号', value: 'tel', align: 'center' },
-      { text: 'メールアドレス', value: 'mail', align: 'center' },
-      { text: 'コール', value: 'call', align: 'center', width: '80px' },
-      { text: 'DM', value: 'dm', align: 'center', width: '60px' },
-      { text: 'SMS', value: 'sms', align: 'center', width: '0px' },
-      { text: '予約', value: 'order', align: 'center', width: '60px' },
-      { text: '入庫', value: 'storing', align: 'center', width: '60px' },
+      { text: '顧客名', value: 'name', align: 'center', width: '180px' },
+      {
+        text: '住所',
+        value: 'address',
+        align: 'start',
+        width: '100px',
+        sortable: false,
+      },
+      {
+        text: '対象車両',
+        value: 'maker',
+        align: 'start',
+        width: '80px',
+        sortable: false,
+      },
+      { text: '電話番号', value: 'tel', align: 'start', sortable: false },
+      {
+        text: 'メールアドレス',
+        value: 'mail',
+        align: 'center',
+        sortable: false,
+      },
+      {
+        text: 'コール',
+        value: 'call',
+        align: 'center',
+        width: '60px',
+        sortable: false,
+      },
+      {
+        text: 'DM',
+        value: 'dm',
+        align: 'center',
+        width: '60px',
+        sortable: false,
+      },
+      {
+        text: 'SMS',
+        value: 'sms',
+        align: 'center',
+        width: '60px',
+        sortable: false,
+      },
+      {
+        text: '予約',
+        value: 'order',
+        align: 'center',
+        width: '60px',
+        sortable: false,
+      },
+      {
+        text: '入庫',
+        value: 'storing',
+        align: 'center',
+        width: '60px',
+        sortable: false,
+      },
     ],
     itemlist: [
       {
@@ -333,6 +380,51 @@ export default {
             height: 40px !important;
             color: $blue-200 !important;
             padding: 0 2px !important;
+            i {
+              display: none;
+            }
+          }
+          th.sortable {
+            span {
+              position: relative;
+              &:before {
+                content: '';
+                position: absolute;
+                top: calc(50% - 4px);
+                right: -10px;
+                width: 7px;
+                height: 4px;
+                background: url('../../customer/custom-table/img/table-sort-arrow-normal.svg')
+                  no-repeat 0 0;
+                transform: rotate(180deg);
+              }
+              &:after {
+                content: '';
+                position: absolute;
+                top: calc(50% + 2px);
+                right: -10px;
+                width: 7px;
+                height: 4px;
+                background: url('../../customer/custom-table/img/table-sort-arrow-normal.svg')
+                  no-repeat 0 0;
+              }
+            }
+          }
+          th.asc {
+            span {
+              font-weight: bold;
+              &:before {
+                background: url('../../customer/custom-table/img/table-sort-arrow.svg');
+              }
+            }
+          }
+          th.desc {
+            span {
+              font-weight: bold;
+              &:after {
+                background: url('../../customer/custom-table/img/table-sort-arrow.svg');
+              }
+            }
           }
         }
       }
@@ -342,8 +434,18 @@ export default {
           height: 70px !important;
           color: $blue-500;
           td {
-            padding: 0 5px !important;
+            padding: 0 8px !important;
             font-size: 12px !important;
+            position: relative;
+            &:not(:last-child):after {
+              content: '';
+              position: absolute;
+              width: 1px;
+              height: 70%;
+              top: 15%;
+              right: 0;
+              background: $gray-100;
+            }
           }
         }
         tr:nth-child(even) {
@@ -367,21 +469,19 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.id a {
+  text-decoration: none;
+}
 .user {
   display: flex;
+  justify-content: center;
   align-items: center;
 
-  &__image {
-    display: inline-block;
-  }
-
   &__name {
-    display: inline-block;
-
-    h3 {
-    }
+    text-align: left;
     span {
-      font-size: 12px;
+      font-size: 10px;
+      font-weight: bold;
     }
   }
 }
@@ -401,18 +501,21 @@ export default {
     color: $white-300;
   }
 }
+.tel {
+  .fixed-tel:before {
+    content: url('../img/fixed_tel.svg');
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    margin-right: 5px;
+  }
 
-.fixed-tel:before {
-  content: url('./img/fixed_tel.svg');
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.mobile-tel:before {
-  content: url('./img/mobile_tel.svg');
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+  .mobile-tel:before {
+    content: url('../img/mobile_tel.svg');
+    display: inline-block;
+    width: 8px;
+    height: 11px;
+    margin: 0 5px 0 1px;
+  }
 }
 </style>

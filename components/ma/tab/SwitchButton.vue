@@ -30,7 +30,7 @@ export default {
     padding-top: 0 !important;
   }
   .v-input--selection-controls__input {
-    width: 60px !important;
+    width: 68px !important;
     height: 26px;
   }
   .v-input--switch--inset .v-input--switch__track {
@@ -52,8 +52,34 @@ export default {
     left: -8px !important;
     top: calc(50% - 22px);
   }
+  .v-input--switch__thumb {
+    &:before {
+      content: 'OFF';
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.5;
+      position: absolute;
+      top: 0;
+      right: -25px;
+      width: 20px;
+      height: 16px;
+      color: $blue-200;
+    }
+  }
   .v-input--switch__thumb.primary--text {
     color: $white-300 !important;
+    &:before {
+      content: 'ON';
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1.5;
+      position: absolute;
+      top: 0;
+      left: -25px;
+      width: 20px;
+      height: 16px;
+      color: $white-300;
+    }
   }
   .v-input--switch__thumb {
     top: calc(50% - 11px);
