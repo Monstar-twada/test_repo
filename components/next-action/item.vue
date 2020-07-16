@@ -49,10 +49,12 @@ export default {
     color: $blue-300;
     font-size: 12px;
     line-height: 18px;
+    text-align: justify;
     &.footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: 5px;
       .left {
         display: flex;
         color: $pink-100;
