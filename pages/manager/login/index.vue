@@ -16,7 +16,11 @@
               placeholder="パスワード"
               :customwidth="270"
             />
-            <ButtonLarge class="mt30" content="ログイン" />
+            <ButtonLarge
+              class="mt30"
+              content="ログイン"
+              @click.native="login"
+            />
             <nuxt-link class="mt25" to="/login/forgot"
               ><h3>パスワードを忘れた方はこちら</h3>
             </nuxt-link>
@@ -46,6 +50,11 @@ export default {
     Logo,
     ButtonLarge,
     Input,
+  },
+  methods: {
+    login() {
+      this.$store.commit('user/signIn', true)
+    },
   },
 }
 </script>
