@@ -154,6 +154,7 @@ export default {
       p:nth-child(3) {
         font-size: 26px;
         font-weight: bold;
+        font-family: 'Avenir Next';
       }
     }
   }
