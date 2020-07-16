@@ -105,7 +105,6 @@ export default {
 
 <style lang="scss">
 .admin-body-container-wrapper {
-  min-width: 900px;
   display: flex;
   .left-wrapper {
     flex: 1;

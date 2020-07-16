@@ -102,7 +102,7 @@ export default {
 }
 .next-action-is-collapsed {
   .one-point-advice-wrapper {
-    right: 0;
+    right: 2px;
   }
 }
 </style>
