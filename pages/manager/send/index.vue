@@ -24,6 +24,7 @@ import SendList from '~/components/send/SendList'
 import PlusButton from '~/components/breadcrumbs/PlusButton'
 
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     SearchBar,

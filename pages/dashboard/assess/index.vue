@@ -20,6 +20,7 @@ import Searchbar from '~/components/assess/Searchbar.vue'
 import AssessResult from '~/components/assess/AssessResult.vue'
 import FreeCarInputButton from '~/components/assess/free-car-input-button/index'
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     Searchbar,

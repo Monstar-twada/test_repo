@@ -103,6 +103,7 @@ import CarInterior from '~/components/assess/CarInterior.vue'
 import CarImage from '~/components/assess/CarImage.vue'
 import Pricing from '~/components/assess/Pricing.vue'
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     AssessExpertBar,

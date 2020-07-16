@@ -15,6 +15,7 @@ import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import FormContainer from '~/components/send/FormContainer.vue'
 
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     FormContainer,

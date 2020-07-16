@@ -10,6 +10,7 @@ import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import BodyContainer from '~/components/assess/free/BodyContainer'
 
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     BodyContainer,

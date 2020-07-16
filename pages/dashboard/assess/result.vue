@@ -15,6 +15,7 @@ import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ResultInformation from '~/components/assess/ResultInformation.vue'
 import ResultPrice from '~/components/assess/ResultPrice.vue'
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     AssessExpertBar,

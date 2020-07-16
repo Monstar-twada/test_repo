@@ -14,6 +14,7 @@ import Breadcrumbs from '~/components/breadcrumbs/index'
 import BodyContainer from '~/components/admin/BodyContainer'
 
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     BodyContainer,

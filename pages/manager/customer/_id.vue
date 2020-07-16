@@ -23,6 +23,7 @@ import CarInfo from '~/components/customer/detail/CarInfo.vue'
 import MemoTable from '~/components/customer/detail/MemoTable.vue'
 import SendingRequestButton from '~/components/customer/detail/button/SendingRequest'
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     CustomerInfo,
