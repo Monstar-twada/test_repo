@@ -16,6 +16,7 @@ import Searchbar from '~/components/matter/Searchbar.vue'
 import MatterResult from '~/components/matter/MatterResult'
 
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     Searchbar,

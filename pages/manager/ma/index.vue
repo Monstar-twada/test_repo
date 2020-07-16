@@ -23,7 +23,7 @@ import Chart from '~/components/ma/Chart.vue'
 import MaTabs from '~/components/ma/MaTabs.vue'
 import DataCol from '~/components/ma/DataCol'
 export default {
-  name: 'Index',
+  layout: 'manager',
   components: {
     Breadcrumbs,
     Chart,

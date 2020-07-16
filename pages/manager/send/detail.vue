@@ -15,6 +15,7 @@ import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import DetailContainer from '~/components/send/DetailContainer.vue'
 
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     DetailContainer,

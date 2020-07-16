@@ -13,6 +13,7 @@
 import Breadcrumbs from '~/components/breadcrumbs/index'
 import IndexBodyContainer from '~/components/customer/regist/car/IndexBodyContainer'
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     IndexBodyContainer,

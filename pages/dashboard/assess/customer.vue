@@ -17,6 +17,7 @@ import CustomerSearch from '~/components/assess/customer/CustomerSearch.vue'
 import VehicleSearch from '~/components/assess/customer/VehicleSearch.vue'
 import AssessResult from '~/components/assess/AssessResult.vue'
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     VehicleSearch,

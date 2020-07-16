@@ -33,6 +33,7 @@ import SalesProductivity from '~/components/bi/SalesProductivity.vue'
 import SalesBreakdown from '~/components/bi/SalesBreakdown.vue'
 import Select from '~/components/common/Select.vue'
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     Sales,

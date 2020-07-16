@@ -16,6 +16,7 @@ import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import Searchbar from '~/components/matching/Searchbar.vue'
 import CustomerResult from '~/components/matching/MatchingResult.vue'
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     Searchbar,

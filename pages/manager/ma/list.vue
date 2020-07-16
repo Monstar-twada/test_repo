@@ -17,6 +17,7 @@ import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import Searchbar from '~/components/ma/Searchbar.vue'
 import MaResult from '~/components/ma/MaResult.vue'
 export default {
+  layout: 'manager',
   components: {
     Breadcrumbs,
     Searchbar,

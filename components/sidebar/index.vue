@@ -45,13 +45,18 @@
 
 <script>
 import AsideSelector from './AsideSelector'
-import { managerMenuItems } from './menu-manager'
-import { dashboardMenuItems } from './menu-dashboard'
 
 export default {
-  name: 'Sidebar',
   components: {
     AsideSelector,
+  },
+  props: {
+    menuItems: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
   },
   data() {
     const isManager = this.$isManager
@@ -59,7 +64,6 @@ export default {
       selectedResult: 1,
       // item's index in menu
       index: -1,
-      menuItems: isManager ? managerMenuItems : dashboardMenuItems,
       logoName: isManager ? 'manager' : 'dashboard',
       selectList: [
         {

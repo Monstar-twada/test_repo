@@ -4,9 +4,14 @@
 
 ```
 /layouts
-  |- default
+  |- dashboard
     |- assess
-    |- matter
+    |- matching
+    |- ...
+    |- admin
+  |- manager
+    |- bi
+    |- ma
     |- ...
     |- admin
   |- login
@@ -16,7 +21,7 @@
 
 ### Usage
 
-/pages/login/index.vue
+/pages/**/login/index.vue
 
 ```vue
 <template>
@@ -27,12 +32,12 @@
 
 <script>
 export default {
-  layout: 'loggedin',
+  layout: 'login',
 }
 </script>
 ```
 
-/pages/assess/index.vue
+/pages/dashboard/assess/index.vue
 
 ```vue
 <template>
@@ -43,8 +48,7 @@ export default {
 
 <script>
 export default {
-  // layoutを指定する必要はない
-  // layout: 'default',
+  layout: 'dashboard',
 }
 </script>
 ```
