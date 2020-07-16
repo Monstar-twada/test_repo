@@ -18,6 +18,7 @@ import Searchbar from '~/components/ma/Searchbar.vue'
 import MaResult from '~/components/ma/MaResult.vue'
 export default {
   layout: 'manager',
+  middleware: 'authenticated',
   components: {
     Breadcrumbs,
     Searchbar,

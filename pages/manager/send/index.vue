@@ -25,6 +25,7 @@ import PlusButton from '~/components/breadcrumbs/PlusButton'
 
 export default {
   layout: 'manager',
+  middleware: 'authenticated',
   components: {
     Breadcrumbs,
     SearchBar,

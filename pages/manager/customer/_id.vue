@@ -24,6 +24,7 @@ import MemoTable from '~/components/customer/detail/MemoTable.vue'
 import SendingRequestButton from '~/components/customer/detail/button/SendingRequest'
 export default {
   layout: 'manager',
+  middleware: 'authenticated',
   components: {
     Breadcrumbs,
     CustomerInfo,
