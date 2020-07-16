@@ -24,6 +24,7 @@ import MaTabs from '~/components/ma/MaTabs.vue'
 import DataCol from '~/components/ma/DataCol'
 export default {
   layout: 'manager',
+  middleware: 'authenticated',
   components: {
     Breadcrumbs,
     Chart,

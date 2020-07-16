@@ -26,7 +26,7 @@
 export default {
   data() {
     return {
-      userAvatar: '/breadcrumbs/person.png',
+      userAvatar: '/breadcrumbs/person_default.svg',
       userDropdownVisible: false,
     }
   },
@@ -70,7 +70,7 @@ export default {
       this.userDropdownVisible = false
     },
     handleLogout() {
-      alert('logout')
+      this.$store.commit('user/signOut', false)
     },
   },
 }

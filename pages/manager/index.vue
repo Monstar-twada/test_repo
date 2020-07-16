@@ -24,8 +24,11 @@
 // import Logo from '~/components/Logo.vue'
 
 export default {
+  middleware: 'authenticated',
   layout: 'login',
-  components: {},
+  mounted() {
+    this.$router.push('/bi')
+  },
 }
 </script>
 

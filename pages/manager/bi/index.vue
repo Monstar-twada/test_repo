@@ -34,6 +34,7 @@ import SalesBreakdown from '~/components/bi/SalesBreakdown.vue'
 import Select from '~/components/common/Select.vue'
 export default {
   layout: 'manager',
+  middleware: 'authenticated',
   components: {
     Breadcrumbs,
     Sales,

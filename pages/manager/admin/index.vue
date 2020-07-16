@@ -15,6 +15,7 @@ import BodyContainer from '~/components/admin/BodyContainer'
 
 export default {
   layout: 'manager',
+  middleware: 'authenticated',
   components: {
     Breadcrumbs,
     BodyContainer,

@@ -97,10 +97,8 @@ export default {
             data: [9386993, 9403206, 10446846, 7215544, 7527339, 0],
             pointRadius: 0,
             borderColor: '#0DBEA9',
-            backgroundColor: this.gradient,
             borderWidth: 1.5,
             lineTension: 0,
-            fill: 1,
             order: 1,
           },
           {
