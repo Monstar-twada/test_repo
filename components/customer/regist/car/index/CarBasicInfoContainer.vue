@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import ContentRowContainer from '~/components/customer/regist/car/ContentRowContainer'
+import ContentRowContainer from '~/components/customer/regist/car/index/ContentRowContainer'
 import Select from '~/components/common/Select'
 import Checkbox from '~/components/common/Checkbox'
 

@@ -5,29 +5,20 @@
       <div class="ownerInfoContainer__content--row">
         <div class="content__row--title">所有者</div>
         <div class="content__row--body">
-          <UserAvatarWithChangeBtn :kind="'base'" />
+          <UserAvatarWithChangeBtn :kind="'base'" :is-confirm="true" />
         </div>
       </div>
       <div class="ownerInfoContainer__content--row">
         <div class="content__row--title">意思決定者</div>
         <div class="content__row--body">
-          <div class="content__row--body--same">
-            <v-img
-              :max-width="30"
-              :max-height="30"
-              :src="require(`~/static/common/btn-plus.svg`)"
-              class="content__row--body--same--btn"
-            ></v-img>
-            <input type="checkbox" />
-            <p>所有者と同じ</p>
-          </div>
+          <UserAvatarWithChangeBtn :kind="'same'" :is-confirm="true" />
         </div>
       </div>
       <div class="ownerInfoContainer__content--row">
         <div class="content__row--title">利用者</div>
         <div class="content__row--body">
-          <UserAvatarWithChangeBtn :kind="'same'" />
-          <UserAvatarWithChangeBtn :kind="'edit'" />
+          <UserAvatarWithChangeBtn :kind="'same'" :is-confirm="true" />
+          <UserAvatarWithChangeBtn :kind="'edit'" :is-confirm="true" />
         </div>
       </div>
       <div class="ownerInfoContainer__content--row">
@@ -37,7 +28,6 @@
             <div class="badges--blue">車出勤</div>
             <div class="badges--blue">買い物</div>
             <div class="badges--blue">部活送迎</div>
-            <div class="badges--white">習い事送迎</div>
           </div>
         </div>
       </div>
@@ -46,7 +36,7 @@
 </template>
 
 <script>
-import UserAvatarWithChangeBtn from '~/components/customer/regist/car/UserAvatarWithChangeBtn'
+import UserAvatarWithChangeBtn from '~/components/customer/regist/car/common/UserAvatarWithChangeBtn'
 
 export default {
   name: 'OwnerInfoContainer',

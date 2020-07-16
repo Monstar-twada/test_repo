@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import ContentRowContainer from '~/components/customer/regist/car/ContentRowContainer'
+import ContentRowContainer from '~/components/customer/regist/car/index/ContentRowContainer'
 
 export default {
   name: 'CostInfoContainer',

@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import OwnerInfoContainer from '~/components/customer/regist/car/OwnerInfoContainer'
-import CarBasicInfoContainer from '~/components/customer/regist/car/CarBasicInfoContainer'
-import TexInfoContainer from '~/components/customer/regist/car/TexInfoContainer'
-import CostInfoContainer from '~/components/customer/regist/car/CostInfoContainer'
-import EquipmentInfoContainer from '~/components/customer/regist/car/EquipmentInfoContainer'
+import OwnerInfoContainer from '~/components/customer/regist/car/index/OwnerInfoContainer'
+import CarBasicInfoContainer from '~/components/customer/regist/car/index/CarBasicInfoContainer'
+import TexInfoContainer from '~/components/customer/regist/car/index/TexInfoContainer'
+import CostInfoContainer from '~/components/customer/regist/car/index/CostInfoContainer'
+import EquipmentInfoContainer from '~/components/customer/regist/car/index/EquipmentInfoContainer'
 
 import ButtonLarge from '~/components/common/ButtonLarge'
 
@@ -513,7 +513,7 @@ export default {
 <style lang="scss" scoped>
 .bodyContainer {
   width: 100%;
-  /*max-width: 712px;*/
+  max-width: 712px;
   margin: 0 auto;
   color: $blue-200;
   &__btns {

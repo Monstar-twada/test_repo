@@ -4,7 +4,7 @@
       <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
     </v-avatar>
     <p class="userAvatarContainer__userName">米田 道春 <span>（31歳）</span></p>
-    <button class="userAvatarContainer__changeBtn">
+    <button v-if="!isConfirm" class="userAvatarContainer__changeBtn">
       <v-img
         :max-width="14"
         :max-height="10"
@@ -12,7 +12,10 @@
       ></v-img>
       変更
     </button>
-    <div v-if="kind === 'edit'" class="userAvatarContainer__editPart">
+    <div
+      v-if="kind === 'edit' && !isConfirm"
+      class="userAvatarContainer__editPart"
+    >
       <v-img
         :max-width="24"
         :max-height="24"
@@ -26,7 +29,10 @@
         class="userAvatarContainer__editPart--add"
       ></v-img>
     </div>
-    <div v-if="kind === 'same'" class="userAvatarContainer__samePart">
+    <div
+      v-if="kind === 'same' && !isConfirm"
+      class="userAvatarContainer__samePart"
+    >
       <input type="checkbox" />
       <p>所有者と同じ</p>
     </div>
@@ -37,6 +43,10 @@
 export default {
   name: 'UserAvatarWithChangeBtn',
   props: {
+    isConfirm: {
+      type: Boolean,
+      default: false,
+    },
     kind: {
       type: String,
       require: true,

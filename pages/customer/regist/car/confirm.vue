@@ -5,17 +5,17 @@
       :page="page"
       title-image="result.svg"
     />
-    <IndexBodyContainer />
+    <ConfirmBodyContainer />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/breadcrumbs/index'
-import IndexBodyContainer from '~/components/customer/regist/car/index/IndexBodyContainer'
+import ConfirmBodyContainer from '~/components/customer/regist/car/confirm/ConfirmBodyContainer.vue'
 export default {
   components: {
     Breadcrumbs,
-    IndexBodyContainer,
+    ConfirmBodyContainer,
   },
   data() {
     return {
