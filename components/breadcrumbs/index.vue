@@ -1,7 +1,7 @@
 <template>
   <header class="breadcrumbs-container">
     <div class="breadcrumbs-wrapper">
-      <v-breadcrumbs :items="breadcrumbs" class="pa-0">
+      <v-breadcrumbs :items="items" class="pa-0">
         <template v-slot:item="{ item }">
           <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
             <i v-if="item.text === 'home'" class="icon-home"></i>
@@ -16,10 +16,12 @@
     </div>
     <div class="page-title-wrapper">
       <div class="left-wrapper">
-        <v-img
-          class="title-icon mr-2"
-          :src="require('~/static/breadcrumbs/' + titleImage)"
-        />
+        <i class="title-prefix-icon">
+          <img
+            :width="iconWidth"
+            :src="require('~/static/breadcrumbs/' + titleImage)"
+          />
+        </i>
         <h1 class="d-inline">{{ page }}</h1>
         <h2 class="d-inline">{{ subTitle }}</h2>
         <slot name="left"></slot>
@@ -55,6 +57,20 @@ export default {
     titleImage: {
       type: String,
       default: 'result.svg',
+    },
+    iconWidth: {
+      type: [String, Number],
+      default: 22,
+    },
+  },
+  computed: {
+    items() {
+      return [
+        {
+          text: 'home',
+        },
+        ...this.breadcrumbs,
+      ]
     },
   },
 }
@@ -101,12 +117,20 @@ header.breadcrumbs-container {
 
     .left-wrapper {
       display: flex;
+      align-items: center;
       justify-content: flex-start;
 
-      .title-icon {
-        margin-top: 8px;
-        height: 22px;
-        max-width: 22px;
+      .title-prefix-icon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-right: 10px;
+        height: 24px;
+        width: 30px;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
       }
 
       h1 {
