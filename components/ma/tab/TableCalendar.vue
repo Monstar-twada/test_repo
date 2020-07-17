@@ -119,6 +119,11 @@ export default {
     width: 24px !important;
     height: 14px !important;
   }
+  .v-input--selection-controls__input input[role='switch'] {
+    top: 10px;
+    left: 10px;
+    height: 15px !important;
+  }
   .v-input--switch--inset .v-input--switch__track {
     width: 24px !important;
     height: 14px !important;

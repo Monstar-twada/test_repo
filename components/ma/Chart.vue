@@ -1,7 +1,7 @@
 <template>
   <div chass="ma-chart">
     <v-row class="ma-0" justify="start" align="center">
-      <h3 class="ma-chart__title">総合効果</h3>
+      <h3 class="ma-chart__title">集客効果</h3>
       <ul class="ma-chart__legend pa-0 ml10">
         <li>
           <span />
@@ -79,7 +79,7 @@ export default {
         },
       },
       stackedData: {
-        labels: ['新規＋リピート', 'リーチ数', 'クリック数', '予約件数'],
+        labels: ['新規＋リピート', 'リーチ数', 'コンタクト数', '予約件数'],
         datasets: [
           {
             label: '車検',

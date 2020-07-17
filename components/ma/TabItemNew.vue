@@ -28,8 +28,8 @@
           <v-col cols="5">
             <v-img
               :src="require('~/static/ma/display.png')"
-              :max-width="280"
-              :max-height="140"
+              :max-width="240"
+              :max-height="240"
             />
           </v-col>
         </v-row>
