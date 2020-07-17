@@ -14,8 +14,8 @@
 
 <script>
 import Breadcrumbs from '~/components/breadcrumbs/index.vue'
-import Searchbar from '~/components/ma/Searchbar.vue'
-import MaResult from '~/components/ma/MaResult.vue'
+import Searchbar from '~/components/ma/detail/Searchbar.vue'
+import MaResult from '~/components/ma/detail/MaResult.vue'
 export default {
   layout: 'manager',
   middleware: 'authenticated',

@@ -22,7 +22,7 @@
             ></v-img>
           </v-avatar>
           <h3 class="pl5 d-inline">{{ item.name }}</h3>
-          <h4 class="pl5 d-inline">（{{ item.age }}際）</h4>
+          <h4 class="pl5 d-inline">（{{ item.age }}歳）</h4>
         </div>
       </template>
       <template v-slot:item.responsible="{ item }">
@@ -518,7 +518,6 @@ export default {
             font-weight: normal;
             height: 40px !important;
             color: $blue-200 !important;
-            text-align: center;
           }
         }
       }
@@ -527,7 +526,7 @@ export default {
           td {
             font-size: 12px;
             height: 70px !important;
-            color: $blue-200 !important;
+            color: $blue-400 !important;
           }
         }
         tr:nth-child(even) {

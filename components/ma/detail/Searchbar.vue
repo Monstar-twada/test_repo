@@ -15,7 +15,13 @@
         :customfontsize="10"
         placeholder="住所"
       />
-      <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
+      <Select
+        v-model="manufacturers"
+        items="items"
+        class="mr20"
+        :list="manufacturers"
+        placeholder="メーカー"
+      />
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
       <Input
         class="mr20"
@@ -72,6 +78,7 @@
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
 import ButtonSearch from '~/components/common/ButtonSearch.vue'
+import { manufacturerList } from '~/components/customer/manufacturers'
 export default {
   name: 'Searchbar',
   components: {
@@ -81,6 +88,7 @@ export default {
   },
   data: () => ({
     list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    manufacturers: manufacturerList.map((item) => item.text),
   }),
 }
 </script>

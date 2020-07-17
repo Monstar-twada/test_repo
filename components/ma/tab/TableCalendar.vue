@@ -15,7 +15,7 @@
         <td class="td-title">SMS</td>
         <td>
           <v-img
-            :src="require('./img/sms.svg')"
+            :src="require('../img/sms.svg')"
             :max-width="20"
             :max-height="20"
           />
@@ -23,7 +23,7 @@
         <td>ー</td>
         <td>
           <v-img
-            :src="require('./img/sms.svg')"
+            :src="require('../img/sms.svg')"
             :max-width="20"
             :max-height="20"
           />
@@ -39,28 +39,28 @@
         <td class="td-title">DM</td>
         <td>
           <v-img
-            :src="require('./img/mail.svg')"
+            :src="require('../img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
         </td>
         <td>
           <v-img
-            :src="require('./img/mail.svg')"
+            :src="require('../img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
         </td>
         <td>
           <v-img
-            :src="require('./img/mail.svg')"
+            :src="require('../img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
         </td>
         <td>
           <v-img
-            :src="require('./img/mail.svg')"
+            :src="require('../img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
@@ -75,14 +75,14 @@
         <td class="td-title">TEL</td>
         <td>
           <v-img
-            :src="require('./img/tel.svg')"
+            :src="require('../img/tel.svg')"
             :max-width="20"
             :max-height="20"
           />
         </td>
         <td>
           <v-img
-            :src="require('./img/tel.svg')"
+            :src="require('../img/tel.svg')"
             :max-width="20"
             :max-height="20"
           />
@@ -125,6 +125,7 @@ export default {
     border-radius: 12px;
     left: 10px !important;
     top: 10px !important;
+    opacity: 1 !important;
   }
   .v-input--switch__thumb {
     width: 10px;
@@ -144,6 +145,12 @@ export default {
     width: 10px !important;
     left: 5px !important;
     top: calc(50% - 1px);
+  }
+  .v-input--switch__thumb.primary--text {
+    color: $white-300 !important;
+  }
+  .theme--light.v-input--switch .v-input--switch__track {
+    color: #e5edf6;
   }
 }
 .v-application--is-ltr

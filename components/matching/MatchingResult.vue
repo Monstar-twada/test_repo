@@ -21,7 +21,7 @@
             ></v-img>
           </v-avatar>
           <h3 class="pl5">{{ item.name }}</h3>
-          <span>（{{ item.age }}際）</span>
+          <span>（{{ item.age }}歳）</span>
         </div>
       </template>
       <template v-slot:item.car_info="{ item }">

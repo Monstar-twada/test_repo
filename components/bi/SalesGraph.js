@@ -20,21 +20,23 @@ export default {
   },
   mounted() {
     //! error WIP
-    // this.addPlugin({
-    //   afterUpdate(chart) {
-    //     const dataset = chart.config.data.datasets
-    //     const offset = 5
+    this.addPlugin({
+      afterUpdate(chart) {
+        const dataset = chart.config.data.datasets
+        const offset = 5
 
-    //     for (let i = 0; i < dataset.length; i++) {
-    //       for (let j = 0; j < dataset[i]._meta[0].data.length; j++) {
-    //         const model = dataset[i]._meta[0].data[j]._model
-    //         model.x += offset
-    //         model.controlPointNextX += offset
-    //         model.controlPointPreviousX += offset
-    //       }
-    //     }
-    //   },
-    // })
+        for (let i = 0; i < dataset.length; i++) {
+          for (let j = 0; j < dataset[i].data.length; j++) {
+            for (const key in dataset[i]._meta) {
+              const model = dataset[i]._meta[key].data[j]._model
+              model.x += offset
+              model.controlPointNextX += offset
+              model.controlPointPreviousX += offset
+            }
+          }
+        }
+      },
+    })
     this.gradientGreen = this.$refs.canvas
       .getContext('2d')
       .createLinearGradient(0, 0, 0, 200)
