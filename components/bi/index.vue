@@ -11,7 +11,7 @@
         <MonthSelector v-model="selectedMonth" :items="monthItems" disabled />
       </template>
       <template v-slot:right>
-        <TopRightTab v-model="tabIndex" :items="tabItems" />
+        <TopRightTab v-model="tabIndex" :items="tabItems" disabled />
       </template>
     </Breadcrumbs>
     <keep-alive>

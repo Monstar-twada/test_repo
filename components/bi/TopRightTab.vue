@@ -25,6 +25,7 @@ export default {
         return []
       },
     },
+    disabled: Boolean,
   },
   data() {
     return {
@@ -52,7 +53,7 @@ export default {
       this.elItems = Array.prototype.slice.call(el.querySelectorAll('.item'), 0)
     },
     handleClick(i) {
-      if (this.index === i) return
+      if (this.disabled || this.index === i) return
       this.index = i
       this.resetLinePosition()
     },
