@@ -1,5 +1,5 @@
 <template>
-  <div class="business-information-container">
+  <div class="business-information-page-container">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"
