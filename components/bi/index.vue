@@ -31,8 +31,8 @@ import SalesProductivity from './SalesProductivity.vue'
 import SalesBreakdown from './SalesBreakdown.vue'
 import TopRightTab from './TopRightTab'
 import CarSales from './car-sales/index'
-import DateViewer from './column-top-items/DateViewer'
-import MonthSelector from './column-top-items/MonthSelector'
+import DateViewer from '~/components/common/date-viewer/index'
+import MonthSelector from '~/components/common/month-selector/index'
 import Breadcrumbs from '~/components/breadcrumbs/index'
 export default {
   layout: 'manager',
