@@ -15,7 +15,8 @@
     </div>
     <div class="costItem__bottom">
       <p>
-        {{ item.cost }}
+        <span>¥</span>
+        <span>{{ item.cost }}</span>
         <span>/件</span>
       </p>
     </div>
@@ -78,7 +79,11 @@ export default {
       font-size: 14px;
       font-weight: bold;
       margin: 0;
-      & > span {
+      span:nth-child(1),
+      span:nth-child(2) {
+        font-family: 'Avenir Next';
+      }
+      span:nth-child(3) {
         font-size: 12px;
       }
     }

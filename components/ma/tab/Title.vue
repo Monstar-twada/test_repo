@@ -9,15 +9,14 @@
       <div v-if="isSelectComp" class="Title__title-select">
         <Select
           items="items"
-          :customheight="30"
           :customwidth="160"
-          :list="list"
-          placeholder="2020年9月満期対象"
+          :list="selectItem"
+          :placeholder="selectItem[0]"
         />
       </div>
     </div>
     <div class="Title__content" :class="isSelectComp ? 'short' : 'long'">
-      <p>{{ content }}</p>
+      <p v-html="content"></p>
       <ul class="px-0">
         <li>配信開始日：{{ startDate }}</li>
         <li>ターゲット：{{ target }}</li>
@@ -66,16 +65,12 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  data() {
-    return {
-      list: [
-        '2020年9月満期対象',
-        '2020年10月満期対象',
-        '2020年11月満期対象',
-        '2020年12月満期対象',
-      ],
-    }
+    selectItem: {
+      type: Array,
+      default: () => {
+        return []
+      },
+    },
   },
 }
 </script>
@@ -104,6 +99,7 @@ export default {
 
     p {
       font-size: 12px;
+      margin-bottom: 5px;
     }
     ul {
       display: flex;
@@ -113,14 +109,15 @@ export default {
       li {
         list-style: none;
         font-size: 10px;
+        margin-right: 10px;
       }
     }
   }
   &__content.short {
-    width: 500px;
+    width: 400px;
   }
   &__content.long {
-    width: 600px;
+    width: 500px;
   }
 }
 </style>

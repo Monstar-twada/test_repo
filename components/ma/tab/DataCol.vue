@@ -7,27 +7,27 @@
     <div class="data-col__item">
       <h4>リーチ数</h4>
       <p class="data">3,779</p>
-      <Rate is-up rate="1.35%" />
+      <Rate is-up :rate="Number(1.35)" />
     </div>
     <div class="data-col__item">
       <h4>コンタクト数</h4>
       <p class="data">2,447</p>
-      <Rate rate="1.2%" />
+      <Rate :rate="Number(1.2)" />
     </div>
     <div class="data-col__item">
       <h4>予約件数</h4>
       <p class="data">595</p>
-      <Rate is-up rate="2.0%" />
+      <Rate is-up :rate="Number(2.0)" />
     </div>
     <div class="data-col__item">
       <h4>予約獲得単価</h4>
       <p class="data">¥1,278</p>
-      <Rate rate="3.5%" />
+      <Rate :rate="Number(3.5)" />
     </div>
   </v-row>
 </template>
 <script>
-import Rate from '~/components/ma/Rate.vue'
+import Rate from '~/components/ma/tab/Rate.vue'
 export default {
   name: 'DataCol',
   components: {
@@ -58,7 +58,7 @@ export default {
 
     &:not(:last-child)::after {
       content: '';
-      background-image: url('./img/arrow-bg.svg');
+      background-image: url('../img/arrow-bg.svg');
       position: absolute;
       width: 20px;
       height: 100px;

@@ -20,7 +20,8 @@
 </template>
 
 <script>
-const DEFAULT_TEXT = '選択して下さい'
+// const DEFAULT_TEXT = '選択して下さい'
+const DEFAULT_TEXT = 'cars足立'
 export default {
   name: 'AsideSelector',
   props: {
@@ -65,7 +66,7 @@ export default {
       this.optionsVisible = !this.optionsVisible
     },
     handleSelect(item) {
-      this.text = item.text
+      // this.text = item.text
       this.val = item.value
     },
     mouseLeaved() {

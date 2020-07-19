@@ -1,21 +1,24 @@
 <template>
   <div class="">
-    <p class="rate" :class="isUp ? 'rate-red' : 'rate-blue'">
+    <p
+      class="rate"
+      :class="isUp ? 'rate-red' : rate == 0 ? 'rate-gray' : 'rate-blue'"
+    >
       <v-img
         v-if="isUp"
         class="d-inline-block rate-img"
         :max-width="10"
         :max-height="10"
-        :src="require(`./img/arrow-up.svg`)"
+        :src="require(`../img/arrow-up.svg`)"
       ></v-img>
       <v-img
-        v-else
+        v-else-if="rate !== 0"
         class="d-inline-block rate-img"
         :max-width="10"
         :max-height="10"
-        :src="require(`./img/arrow-down.svg`)"
+        :src="require(`../img/arrow-down.svg`)"
       ></v-img>
-      <span class="d-inline">{{ rate }}%</span>
+      <span class="d-inline">{{ rate !== 0 ? `${rate}%` : 'ー' }}</span>
     </p>
   </div>
 </template>
@@ -28,8 +31,8 @@ export default {
       default: false,
     },
     rate: {
-      type: String,
-      default: '',
+      type: Number,
+      default: 0,
     },
   },
 }
@@ -49,5 +52,9 @@ export default {
   .rate-img {
     transform: rotate(135deg);
   }
+}
+
+.rate-gray {
+  color: $gray-500;
 }
 </style>

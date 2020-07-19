@@ -10,8 +10,8 @@
           sub-title1="初期費用¥ 20,000"
           sub-title2="月額¥30,000"
           content="広告を見てタップした顧客が遷移するWebサイトをお持ちでない方のためにサイト構築と広告素材作成を含むプランです。"
-          start-date="2020/02/19 14:00"
-          target="既存顧客"
+          start-date="2020/07/10 14:00"
+          target="新規顧客"
           conditions="なし"
         />
         <v-row class="ma-0">
@@ -45,8 +45,8 @@
           sub-title1="初期費用¥ 20,000"
           sub-title2="月額¥30,000"
           content="広告を見てタップした顧客が遷移するWebサイトをお持ちでない方のためにサイト構築と広告素材作成を含むプランです。"
-          start-date="2020/02/19 14:00"
-          target="既存顧客"
+          start-date="2020/07/10 14:00"
+          target="新規顧客"
           conditions="なし"
         />
         <v-row class="ma-0">
@@ -82,8 +82,8 @@
           sub-title1="初期費用¥ 20,000"
           sub-title2="月額¥30,000"
           content="広告を見てタップした顧客が遷移するWebサイトをお持ちでない方のためにサイト構築と広告素材作成を含むプランです。"
-          start-date="2020/02/19 14:00"
-          target="既存顧客"
+          start-date="2020/07/10 14:00"
+          target="新規顧客"
           conditions="なし"
         />
         <v-row class="ma-0">
@@ -117,8 +117,8 @@
           sub-title1="初期費用¥ 20,000"
           sub-title2="月額¥30,000"
           content="広告を見てタップした顧客が遷移するWebサイトをお持ちでない方のためにサイト構築と広告素材作成を含むプランです。"
-          start-date="2020/02/19 14:00"
-          target="既存顧客"
+          start-date="-"
+          target="新規顧客"
           conditions="なし"
         />
         <v-row class="ma-0">
@@ -135,8 +135,8 @@
           <v-col cols="5">
             <v-img
               :src="require('~/static/ma/instagram.png')"
-              :max-width="280"
-              :max-height="140"
+              :max-width="240"
+              :max-height="182"
             />
           </v-col>
         </v-row>
@@ -145,10 +145,11 @@
   </div>
 </template>
 <script>
-import Title from '~/components/ma/Title.vue'
-import DataColSmall from '~/components/ma/DataColSmall.vue'
-import SwitchButton from '~/components/ma/SwitchButton.vue'
+import Title from '~/components/ma/tab/Title.vue'
+import DataColSmall from '~/components/ma/tab/DataColSmall.vue'
+import SwitchButton from '~/components/ma/tab/SwitchButton.vue'
 export default {
+  name: 'Advertisement',
   components: {
     Title,
     DataColSmall,
@@ -156,54 +157,20 @@ export default {
   },
   data() {
     return {
-      vehicleInspection: {
-        reach: {
-          value: 1034,
-          isUp: true,
-          rate: '5.2',
-        },
-        contacts: {
-          value: 707,
-          isUp: true,
-          rate: '3.3',
-        },
-        order: {
-          value: 198,
-          isUp: true,
-          rate: '2.3',
-        },
-      },
-      sixMonthInspection: {
-        reach: {
-          value: 825,
-          isUp: true,
-          rate: '4.1',
-        },
-        contacts: {
-          value: 580,
-          isUp: true,
-          rate: '2.6',
-        },
-        order: {
-          value: 133,
-          isUp: true,
-          rate: '1.1',
-        },
-      },
       instagramAD: {
         reach: {
           value: 0,
-          isUp: true,
+          isUp: false,
           rate: '0',
         },
         contacts: {
           value: 0,
-          isUp: true,
+          isUp: false,
           rate: '0',
         },
         order: {
           value: 0,
-          isUp: true,
+          isUp: false,
           rate: '0',
         },
       },

@@ -1,30 +1,31 @@
 <template>
   <div chass="ma-chart">
-    <h3 class="ma-chart__title">総合効果</h3>
-    <ul class="ma-chart__legend pa-0 ml10">
-      <li>
-        <span />
-        <h5>一般整備</h5>
-      </li>
-      <li>
-        <span />
-        <h5>車販</h5>
-      </li>
-      <li>
-        <span />
-        <h5>オイル会員</h5>
-      </li>
-      <li>
-        <span />
-        <h5>車検</h5>
-      </li>
-    </ul>
+    <v-row class="ma-0" justify="start" align="center">
+      <h3 class="ma-chart__title">総合効果</h3>
+      <ul class="ma-chart__legend pa-0 ml10">
+        <li>
+          <span />
+          <h5>一般整備</h5>
+        </li>
+        <li>
+          <span />
+          <h5>車販</h5>
+        </li>
+        <li>
+          <span />
+          <h5>オイル会員</h5>
+        </li>
+        <li>
+          <span />
+          <h5>車検</h5>
+        </li>
+      </ul>
+    </v-row>
     <v-row class="mx-0 mt20" justify="start" align="center">
       <div class="stacked-chart">
         <StackedBar
           :data="stackedData"
           :options="stackedOptions"
-          :width="700"
           :height="250"
         />
       </div>
@@ -32,8 +33,6 @@
         <Doughnut
           :data="doughnutData"
           :options="doughnutOptions"
-          :width="200"
-          :height="200"
           :text-data="595"
         />
       </div>
@@ -42,8 +41,8 @@
 </template>
 
 <script>
-import Doughnut from '~/components/ma/Doughnut'
-import StackedBar from '~/components/ma/StackedBar'
+import Doughnut from '~/components/ma/chart/Doughnut'
+import StackedBar from '~/components/ma/chart/StackedBar'
 
 export default {
   components: {
@@ -61,7 +60,7 @@ export default {
           {
             // label: 'Income',
             // backgroundColor: ["red", "orange", "yellow"],
-            backgroundColor: ['#1DC9D7', '#3aa8d9', '#4d8bd2', '#878ae0'],
+            backgroundColor: ['#696DD9', '#216EC7', '#1DC9D7', '#0D9CBE'],
             borderWidth: 1,
             data: [238, 238, 60, 60],
             weight: 1,
@@ -69,7 +68,7 @@ export default {
         ],
       },
       doughnutOptions: {
-        responsive: false,
+        responsive: true,
         cutoutPercentage: 80,
         legend: {
           display: false,
@@ -85,38 +84,39 @@ export default {
           {
             label: '車検',
             type: 'bar',
-            backgroundColor: '#696DD9',
+            backgroundColor: 'rgba(105, 109, 217, 0.8)',
             data: [680, 1512, 979, 238],
           },
           {
             label: '車販',
             type: 'bar',
-            backgroundColor: '#0993D0',
+            backgroundColor: 'rgba(33,110,199, 0.8)',
             data: [3099, 1512, 979, 238],
           },
           {
             label: 'オイル会員',
             type: 'bar',
-            backgroundColor: '#216EC7',
+            backgroundColor: 'rgba(13,156,190,0.8)',
             data: [0, 378, 245, 60],
           },
           {
             label: '一般整備',
             type: 'bar',
-            backgroundColor: '#1DC9D7',
+            backgroundColor: 'rgba(29,201,215, 0.8)',
             data: [0, 378, 245, 60],
           },
           {
             type: 'line',
             fill: false,
-            borderDash: [3, 6],
-            borderColor: '#ccc',
+            borderDash: [2, 5],
+            borderColor: '#aaa',
+            borderWidth: 1,
             data: [3779, 3779, 2447, 595],
           },
         ],
       },
       stackedOptions: {
-        responsive: false,
+        responsive: true,
         barThickness: 90,
         maintainAspectRatio: false,
         legend: {
@@ -147,6 +147,9 @@ export default {
               ticks: {
                 fontSize: 10,
                 fontColor: '#1E5199',
+                callback(value, index, values) {
+                  return value.toLocaleString()
+                },
               },
             },
           ],
@@ -161,25 +164,13 @@ export default {
 .ma-chart {
   background: $white-300;
 
-  .stacked-chart {
-    background: $white-300;
-    width: 700px;
-    height: 200px;
-  }
-  .doughnut-chart {
-    background: $white-300;
-    width: 200px;
-    height: 200px;
-  }
-
   &__title {
     color: $blue-200;
     font-size: 18px;
-    display: inline-block;
   }
 
   &__legend {
-    width: 300px;
+    width: 250px;
     display: inline-flex;
     list-style: none;
     li {
@@ -190,19 +181,19 @@ export default {
         background: #1dc9d7;
       }
       &:nth-child(2) span {
-        background: #3aa8d9;
+        background: #216ec7;
       }
       &:nth-child(3) span {
-        background: #4d8bd2;
+        background: #0d9cbe;
       }
       &:nth-child(4) span {
-        background: #878ae0;
+        background: #696dd9;
       }
       span {
         width: 10px;
         height: 3px;
         display: block;
-        margin-right: 5px;
+        margin: 2px 5px 0 0;
       }
       h5 {
         font-weight: 400;
@@ -211,5 +202,15 @@ export default {
       }
     }
   }
+}
+
+.stacked-chart {
+  width: 70%;
+  height: 250px;
+}
+.doughnut-chart {
+  background: $white-300;
+  width: 200px;
+  height: 200px;
 }
 </style>
