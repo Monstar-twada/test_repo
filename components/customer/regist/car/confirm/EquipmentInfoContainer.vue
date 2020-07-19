@@ -1,42 +1,15 @@
 <template>
   <div class="bodyContainer__equipmentInfo equipmentInfoContainer">
-    <h3>車両基本情報</h3>
+    <h3>{{ itemInfo.title }}</h3>
     <div class="equipmentInfoContainer__content">
       <ConfirmRowContainer
-        :title="'エアバッグ ✳︎'"
-        :kind="'base'"
-        :value="'サイド'"
-      />
-      <ConfirmRowContainer :title="'ABS ✳︎'" :kind="'base'" :value="'有'" />
-      <ConfirmRowContainer :title="'ホイール ✳︎'">
+        v-for="item in itemInfo.inputs"
+        :key="`item-${item.id}`"
+        :title="item.title"
+      >
         <template>
           <div class="row--body">
-            <p>純正</p>
-            <p>15inch</p>
-          </div>
-        </template>
-      </ConfirmRowContainer>
-      <ConfirmRowContainer :title="'ナビ ✳︎'">
-        <template>
-          <div class="row--body">
-            <p>純正</p>
-            <p>SD</p>
-          </div>
-        </template>
-      </ConfirmRowContainer>
-      <ConfirmRowContainer :title="'TV ✳︎'">
-        <template>
-          <div class="row--body">
-            <p>有</p>
-            <p>フルセグ</p>
-          </div>
-        </template>
-      </ConfirmRowContainer>
-      <ConfirmRowContainer :title="'キー'">
-        <template>
-          <div class="row--body">
-            <p>純正</p>
-            <p>スマートキー</p>
+            <p v-for="(val, j) in item.items" :key="`val=${j}`">{{ val }}</p>
           </div>
         </template>
       </ConfirmRowContainer>
@@ -51,6 +24,12 @@ export default {
   name: 'EquipmentInfoContainer',
   components: {
     ConfirmRowContainer,
+  },
+  props: {
+    itemInfo: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

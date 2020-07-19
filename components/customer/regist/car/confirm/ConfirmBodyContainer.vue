@@ -5,8 +5,8 @@
     <TexInfoContainer />
     <RunningCostContainer />
     <CostInfoContainer />
-    <EquipmentInfoContainer />
-    <!-- <EquipmentInfoContainer :item-info="safetyEquipment" /> -->
+    <EquipmentInfoContainer :item-info="basicEquipment" />
+    <EquipmentInfoContainer :item-info="safetyEquipment" />
     <div class="bodyContainer__btns">
       <ButtonLarge :content="'保存'" :is-white="true" />
       <ButtonLarge :content="'戻る'" :is-white="false" />
@@ -39,71 +39,126 @@ export default {
     return {
       basicEquipment: {
         title: '基本装備情報',
-        results: [
-          'サイド',
-          '有',
-          '純正',
-          '15',
-          '純正',
-          'SD',
-          '有',
-          'フルセグ',
-          '純正',
-          'スマートキー',
-          '有',
-          '有',
-          '有',
-          'LED',
-          'オート',
-          'シングル',
-          '○',
-          '複数',
-          '有',
-          '無',
-          '有',
-          '年',
-          '月',
-          '日',
-          '15600',
-        ],
         inputs: [
           {
             id: '1',
-            title: 'エアバッグ',
-            require: true,
-            items: [
-              {
-                index: 0,
-                placeholder: 'サイド',
-                type: 'text',
-                items: [],
-                width: 80,
-                height: 40,
-                otherText: '',
-              },
-            ],
+            title: 'エアバッグ ✳︎',
+            items: ['サイド'],
+          },
+          {
+            id: '2',
+            title: 'ABS ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '3',
+            title: 'ホイール ✳︎',
+            items: ['純正', '15inch'],
+          },
+          {
+            id: '4',
+            title: 'ナビ ✳︎',
+            items: ['純正', 'SD'],
+          },
+          {
+            id: '5',
+            title: 'TV ✳︎',
+            items: ['有', 'フルセグ'],
+          },
+          {
+            id: '6',
+            title: 'TV ✳︎',
+            items: ['有', 'フルセグ'],
+          },
+          {
+            id: '7',
+            title: 'キー',
+            items: ['純正', 'スマートキー'],
+          },
+          {
+            id: '8',
+            title: 'ETC ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '9',
+            title: 'サンルーフ ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '10',
+            title: 'バックカメラ ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '11',
+            title: 'ヘッドライト ✳︎',
+            items: ['LED'],
+          },
+          {
+            id: '12',
+            title: 'エアコン ✳︎',
+            items: ['オート', 'シングル'],
+          },
+          {
+            id: '13',
+            title: '禁煙者',
+            items: ['○'],
+          },
+          {
+            id: '14',
+            title: '1オーナー ＊',
+            items: ['複数'],
+          },
+          {
+            id: '15',
+            title: '保証書 ＊',
+            items: ['有'],
+          },
+          {
+            id: '16',
+            title: '取説 ＊',
+            items: ['無'],
+          },
+          {
+            id: '17',
+            title: '整備記録簿 ✳︎',
+            items: ['有', '2020年1月1日', '15600円'],
           },
         ],
       },
       safetyEquipment: {
         title: '先進安全装備情報',
-        results: ['レベルⅡ', '有', '有', '有', '有', '有'],
         inputs: [
           {
             id: '1',
-            title: '運転支援レベル',
-            require: true,
-            items: [
-              {
-                index: 0,
-                placeholder: 'レベルⅡ',
-                type: 'select',
-                items: ['レベルⅡ'],
-                width: 118,
-                height: 31,
-                otherText: '',
-              },
-            ],
+            title: '運転支援レベル ✳︎',
+            items: ['レベルⅡ'],
+          },
+          {
+            id: '2',
+            title: '自動ブレーキ ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '3',
+            title: 'ソナー ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '4',
+            title: 'BSM ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '5',
+            title: '自動ハイビーム ✳︎',
+            items: ['有'],
+          },
+          {
+            id: '6',
+            title: 'レーンキープ ✳︎',
+            items: ['有'],
           },
         ],
       },

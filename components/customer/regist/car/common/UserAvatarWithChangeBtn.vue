@@ -1,7 +1,7 @@
 <template>
   <div class="userAvatarContainer">
     <v-avatar :size="30" class="userAvatarContainer__avatar">
-      <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+      <img :src="require('~/static/customer/person_default.svg')" alt="John" />
     </v-avatar>
     <p class="userAvatarContainer__userName">米田 道春 <span>（31歳）</span></p>
     <button v-if="!isConfirm" class="userAvatarContainer__changeBtn">
