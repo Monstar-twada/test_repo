@@ -41,7 +41,7 @@ export default {
   padding: 24px 23.5px;
   margin-bottom: 30px;
   h3 {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 12px;
   }
