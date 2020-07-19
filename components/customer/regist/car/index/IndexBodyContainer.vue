@@ -3,6 +3,7 @@
     <OwnerInfoContainer />
     <CarBasicInfoContainer />
     <TexInfoContainer />
+    <RunningCostContainer />
     <CostInfoContainer />
     <EquipmentInfoContainer :item-info="basicEquipment" />
     <EquipmentInfoContainer :item-info="safetyEquipment" />
@@ -18,6 +19,7 @@
 import OwnerInfoContainer from '~/components/customer/regist/car/index/OwnerInfoContainer'
 import CarBasicInfoContainer from '~/components/customer/regist/car/index/CarBasicInfoContainer'
 import TexInfoContainer from '~/components/customer/regist/car/index/TexInfoContainer'
+import RunningCostContainer from '~/components/customer/regist/car/index/RunningCostContainer'
 import CostInfoContainer from '~/components/customer/regist/car/index/CostInfoContainer'
 import EquipmentInfoContainer from '~/components/customer/regist/car/index/EquipmentInfoContainer'
 
@@ -29,6 +31,7 @@ export default {
     OwnerInfoContainer,
     CarBasicInfoContainer,
     TexInfoContainer,
+    RunningCostContainer,
     CostInfoContainer,
     EquipmentInfoContainer,
     ButtonLarge,

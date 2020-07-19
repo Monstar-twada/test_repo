@@ -1,26 +1,21 @@
 <template>
-  <div class="bodyContainer__TexInfo texInfoContainer">
-    <h3>税金/諸費用</h3>
+  <div class="bodyContainer__RunningCost runningCostContainer">
+    <h3>ランニングコスト/月</h3>
     <div>
       <ContentRowContainer
-        :title="'自動車税'"
+        :title="'ガソリン代'"
         :kind="'input'"
-        :placeholder="'36,000'"
+        :placeholder="'10,000'"
       />
       <ContentRowContainer
-        :title="'自賠責保険'"
+        :title="'保険料'"
         :kind="'input'"
-        :placeholder="'27,840'"
+        :placeholder="'8,540'"
       />
       <ContentRowContainer
-        :title="'重量税'"
+        :title="'駐車場代'"
         :kind="'input'"
-        :placeholder="'24,600'"
-      />
-      <ContentRowContainer
-        :title="'リサイクル'"
-        :kind="'input'"
-        :placeholder="'11,350'"
+        :placeholder="'12,000'"
       />
     </div>
   </div>
@@ -37,7 +32,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.texInfoContainer {
+.runningCostContainer {
   width: 100%;
   border-radius: 6px;
   background-color: $white-300;

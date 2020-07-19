@@ -13,6 +13,7 @@
 import Breadcrumbs from '~/components/breadcrumbs/index'
 import ConfirmBodyContainer from '~/components/customer/regist/car/confirm/ConfirmBodyContainer.vue'
 export default {
+  layout: 'dashboard',
   components: {
     Breadcrumbs,
     ConfirmBodyContainer,

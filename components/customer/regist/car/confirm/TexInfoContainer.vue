@@ -2,37 +2,37 @@
   <div class="bodyContainer__TexInfo texInfoContainer">
     <h3>税金/諸費用</h3>
     <div>
-      <ContentRowContainer
+      <ConfirmRowContainer
         :title="'自動車税'"
-        :kind="'input'"
-        :placeholder="'36,000'"
+        :kind="'base'"
+        :value="'¥36,000'"
       />
-      <ContentRowContainer
+      <ConfirmRowContainer
         :title="'自賠責保険'"
-        :kind="'input'"
-        :placeholder="'27,840'"
+        :kind="'base'"
+        :value="'¥27,840'"
       />
-      <ContentRowContainer
+      <ConfirmRowContainer
         :title="'重量税'"
-        :kind="'input'"
-        :placeholder="'24,600'"
+        :kind="'base'"
+        :value="'¥24,600'"
       />
-      <ContentRowContainer
+      <ConfirmRowContainer
         :title="'リサイクル'"
-        :kind="'input'"
-        :placeholder="'11,350'"
+        :kind="'base'"
+        :value="'¥11,350'"
       />
     </div>
   </div>
 </template>
 
 <script>
-import ContentRowContainer from '~/components/customer/regist/car/index/ContentRowContainer'
+import ConfirmRowContainer from '~/components/customer/regist/car/confirm/ConfirmRowContainer.vue'
 
 export default {
   name: 'TexInfoContainer',
   components: {
-    ContentRowContainer,
+    ConfirmRowContainer,
   },
 }
 </script>

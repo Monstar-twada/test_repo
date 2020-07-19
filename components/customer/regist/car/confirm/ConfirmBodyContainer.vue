@@ -2,10 +2,11 @@
   <div class="bodyContainer">
     <OwnerInfoContainer />
     <CarBasicInfoContainer />
-    <!-- <TexInfoContainer />
+    <TexInfoContainer />
+    <RunningCostContainer />
     <CostInfoContainer />
-    <EquipmentInfoContainer :item-info="basicEquipment" />
-    <EquipmentInfoContainer :item-info="safetyEquipment" /> -->
+    <EquipmentInfoContainer />
+    <!-- <EquipmentInfoContainer :item-info="safetyEquipment" /> -->
     <div class="bodyContainer__btns">
       <ButtonLarge :content="'保存'" :is-white="true" />
       <ButtonLarge :content="'戻る'" :is-white="false" />
@@ -16,6 +17,10 @@
 <script>
 import OwnerInfoContainer from '~/components/customer/regist/car/confirm/OwnerInfoContainer'
 import CarBasicInfoContainer from '~/components/customer/regist/car/confirm/CarBasicInfoContainer'
+import TexInfoContainer from '~/components/customer/regist/car/confirm/TexInfoContainer.vue'
+import RunningCostContainer from '~/components/customer/regist/car/confirm/RunningCostContainer.vue'
+import CostInfoContainer from '~/components/customer/regist/car/confirm/CostInfoContainer.vue'
+import EquipmentInfoContainer from '~/components/customer/regist/car/confirm/EquipmentInfoContainer.vue'
 
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
 
@@ -25,6 +30,10 @@ export default {
     ButtonLarge,
     OwnerInfoContainer,
     CarBasicInfoContainer,
+    TexInfoContainer,
+    RunningCostContainer,
+    CostInfoContainer,
+    EquipmentInfoContainer,
   },
   data() {
     return {
