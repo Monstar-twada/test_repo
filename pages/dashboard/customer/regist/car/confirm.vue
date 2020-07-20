@@ -23,10 +23,6 @@ export default {
       page: '顧客管理 [ 車両登録 ]',
       breadcrumbs: [
         {
-          text: 'home',
-          href: '/',
-        },
-        {
           text: '顧客管理',
           href: '/customer',
         },
