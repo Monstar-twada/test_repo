@@ -17,10 +17,7 @@
     <div class="page-title-wrapper">
       <div class="left-wrapper">
         <i class="title-prefix-icon">
-          <img
-            :width="iconWidth"
-            :src="require('~/static/breadcrumbs/' + titleImage)"
-          />
+          <img :width="iconWidth" :src="require('./img/' + titleImage)" />
         </i>
         <h1 class="d-inline">{{ page }}</h1>
         <h2 class="d-inline">{{ subTitle }}</h2>
