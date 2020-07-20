@@ -26,7 +26,7 @@ import CustomerResult from '~/components/customer/CustomerResult.vue'
 import ImportDialog from '~/components/customer/import-dialog/index'
 
 export default {
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   layout: 'manager',
   components: {
     Breadcrumbs,
