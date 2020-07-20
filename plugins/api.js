@@ -62,7 +62,7 @@ export class RequestApi {
     }
     return new Promise((resolve, reject) => {
       Axios.request({
-        url: api,
+        url: '/api' + api,
         method,
         headers: {
           ...this.getHeaders(),
