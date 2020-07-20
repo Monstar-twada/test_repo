@@ -82,7 +82,6 @@ export default {
         {
           text: '関西エリア',
           value: 2,
-          disabled: true,
         },
         {
           text: '関東エリア',
