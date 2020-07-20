@@ -191,7 +191,7 @@ $normalHeight: 24px;
   .first-page,
   .last-page {
     display: inline-block;
-    margin-top: -4px;
+    margin-top: -3px;
     width: 20px;
     height: $normalHeight;
     text-align: center;
@@ -248,7 +248,6 @@ $normalHeight: 24px;
       svg {
         display: inline-block;
         vertical-align: middle;
-        margin-top: -1px;
       }
       &.__prev,
       &.__next {
