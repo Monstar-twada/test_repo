@@ -5,7 +5,7 @@
 ```javascript
 export default {
   created() {
-    this.$api.post('/api/customer', {offset: 20, limit: 10})
+    this.$api.post('/v1/customer', {offset: 20, limit: 10})
       .then(data => {
         console.log(data)
       })
