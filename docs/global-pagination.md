@@ -17,7 +17,7 @@ import OnlyPagination from '~/components/common/global-pagination/Pagination'
 |page-size|Number|Number of data items displayed per page|
 |theme|String|`white/blue`, default `white`|
 |size|String|`middle/small`, default `middle`|
-|show-number|Nuber|default `10`, show page item number|
+|show-number|Number|default `10`, show page item number|
 
 ## Usage
 
