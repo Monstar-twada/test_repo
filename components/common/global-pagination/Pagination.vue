@@ -70,7 +70,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'middle',
+      default: 'medium',
     },
   },
   data() {
