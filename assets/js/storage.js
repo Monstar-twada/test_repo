@@ -3,23 +3,25 @@
  * https://github.com/capricorncd
  * Date: 2020-07-20 11:54
  */
-const PREFIX = 'first_group_'
+const PREFIX = 'fg_'
 export const storage = {
-  get (key) {
+  get(key) {
     let result = localStorage.getItem(PREFIX + key)
     try {
       result = JSON.parse(result)
-    } catch (e) {
-    }
+    } catch (e) {}
     return result
   },
-  set (key, value) {
-    localStorage.setItem(PREFIX + key, typeof value === 'string' ? value : JSON.stringify(value))
+  set(key, value) {
+    localStorage.setItem(
+      PREFIX + key,
+      typeof value === 'string' ? value : JSON.stringify(value)
+    )
   },
   remove(key) {
     localStorage.removeItem(PREFIX + key)
   },
   clear() {
     localStorage.clear()
-  }
+  },
 }
