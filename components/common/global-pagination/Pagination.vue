@@ -139,9 +139,10 @@ export default {
       this.$emit('input', val)
       this.resetLinePosition()
     },
-  },
-  mounted() {
-    this.resetLinePosition()
+    total() {
+      // データ数が変わった時
+      this.resetLinePosition()
+    },
   },
   methods: {
     handleClick(page) {
