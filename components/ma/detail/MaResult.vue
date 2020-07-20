@@ -12,12 +12,12 @@
       :items-per-page="itemsPerPage"
       :page.sync="currentPage"
       hide-default-footer
+      @click:row="
+        (itemlist) => {
+          $router.push(`/customer/detail/`)
+        }
+      "
     >
-      <template v-slot:item.id="{ item }">
-        <div class="id">
-          <nuxt-link to="/customer/detail">{{ item.id }}</nuxt-link>
-        </div>
-      </template>
       <template v-slot:item.name="{ item }">
         <div class="user">
           <v-avatar size="38" class="user__image">
@@ -432,7 +432,8 @@ export default {
         tr {
           font-size: 12px;
           height: 70px !important;
-          color: $blue-500;
+          color: $blue-200;
+          cursor: pointer;
           td {
             padding: 0 8px !important;
             font-size: 12px !important;
