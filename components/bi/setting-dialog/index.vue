@@ -1,166 +1,29 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="450px">
+  <v-dialog v-model="visible" persistent :max-width="maxWidth()">
     <v-card class="setting-dialog-card">
-      <SettingDialogHeader title="目標設定" @close="visible = false" />
-      <v-card-text>
-        <div class="setting-dialog-wrapper">
-          <div class="setting-dialog-wrapper__box">
-            <h4>年間利益目標</h4>
-            <div>
-              <Input :customheight="30" />
-              <span>円</span>
-            </div>
-          </div>
-          <div class="check-info mt10">
-            <v-img
-              class="mr5"
-              :src="require('~/static/customer/warning.svg')"
-            ></v-img>
-            年間利益目標に到達していません。目標設定を再入力願います。
-          </div>
-        </div>
-      </v-card-text>
-      <div class="d-flex">
-        <v-card-text class="pa-0 card-padding setting-dialog-border">
-          <div class="setting-dialog-wrapper flex-column">
-            <h4 class="mb15">過去2年の車検台数</h4>
-            <div class="setting-dialog-wrapper__left">
-              <h5>前年</h5>
-              <div class="mb10">
-                <Input :customheight="30" />
-                <span>台</span>
-              </div>
-            </div>
-            <div class="setting-dialog-wrapper__right">
-              <h5>前々年</h5>
-              <div>
-                <Input :customheight="30" />
-                <span>台</span>
-              </div>
-            </div>
-          </div>
-        </v-card-text>
-        <v-card-text>
-          <div class="setting-dialog-wrapper flex-column">
-            <h4 class="mb15">車検</h4>
-            <div class="setting-dialog-wrapper__left">
-              <h5>単価</h5>
-              <div class="mb10">
-                <Input :customheight="30" />
-                <span>円</span>
-              </div>
-            </div>
-            <div class="setting-dialog-wrapper__right">
-              <h5>原価</h5>
-              <div>
-                <Input :customheight="30" />
-                <span>円</span>
-              </div>
-            </div>
-          </div>
-        </v-card-text>
-      </div>
-      <div class="d-flex">
-        <v-card-text class="pa-0 card-padding setting-dialog-border">
-          <div class="setting-dialog-wrapper flex-column">
-            <h4 class="mb15">点検</h4>
-            <div class="setting-dialog-wrapper__left">
-              <h5>台数</h5>
-              <div class="mb10">
-                <Input
-                  :customheight="30"
-                  :customfontsize="11"
-                  placeholder="前年度の点検数"
-                />
-                <span>台</span>
-              </div>
-            </div>
-            <div class="setting-dialog-wrapper__left">
-              <h5>単価</h5>
-              <div class="mb10">
-                <Input :customheight="30" />
-                <span>円</span>
-              </div>
-            </div>
-            <div class="setting-dialog-wrapper__right">
-              <h5>原価</h5>
-              <div>
-                <Input :customheight="30" />
-                <span>円</span>
-              </div>
-            </div>
-          </div>
-        </v-card-text>
-        <v-card-text>
-          <div class="setting-dialog-wrapper flex-column">
-            <h4 class="mb15">点検</h4>
-            <div class="setting-dialog-wrapper__left">
-              <h5>整備</h5>
-              <div class="mb10">
-                <Input
-                  :customheight="30"
-                  :customfontsize="11"
-                  placeholder="目標台数"
-                />
-                <span>台</span>
-              </div>
-            </div>
-            <div class="setting-dialog-wrapper__left">
-              <h5>単価</h5>
-              <div class="mb10">
-                <Input :customheight="30" />
-                <span>円</span>
-              </div>
-            </div>
-            <div class="setting-dialog-wrapper__right">
-              <h5>原価</h5>
-              <div>
-                <Input :customheight="30" />
-                <span>円</span>
-              </div>
-            </div>
-          </div>
-        </v-card-text>
-      </div>
-      <v-card-text>
-        <div class="setting-dialog-wrapper">
-          <div class="setting-dialog-wrapper__box mt5 m5">
-            <h4>顧客維持率</h4>
-            <div>
-              <Input :customheight="30" />
-              <span>%</span>
-            </div>
-          </div>
-        </div>
-      </v-card-text>
-      <v-card-text>
-        <div class="setting-dialog-wrapper">
-          <div class="setting-dialog-wrapper__box mt5 m5">
-            <h4>新規獲得率</h4>
-            <div>
-              <Input :customheight="30" />
-              <span>%</span>
-            </div>
-          </div>
-        </div>
-      </v-card-text>
-      <v-card-actions align="center">
-        <v-btn color="#1295CE" depressed rounded @click="handleImport"
-          >目標を設定する</v-btn
-        >
-      </v-card-actions>
+      <SettingDialogHeader
+        title="目標設定"
+        @close="visible = false"
+        @eventtriggered="performAction"
+      />
+      <keep-alive>
+        <DetailsCard v-if="toggle" />
+        <SimpleCard v-else />
+      </keep-alive>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import DetailsCard from './DetailsCard'
+import SimpleCard from './SimpleCard'
 import SettingDialogHeader from '~/components/bi/setting-dialog/SettingDialogHeader.vue'
-import Input from '~/components/common/Input.vue'
 export default {
   name: 'ImportDialog',
   components: {
     SettingDialogHeader,
-    Input,
+    DetailsCard,
+    SimpleCard,
   },
   props: {
     value: Boolean,
@@ -171,7 +34,9 @@ export default {
   },
   data() {
     return {
+      toggle: false,
       visible: this.value,
+      width: '450px',
     }
   },
   watch: {
@@ -180,6 +45,20 @@ export default {
     },
     visible(val) {
       this.$emit('input', val)
+    },
+  },
+  methods: {
+    performAction() {
+      this.toggle = !this.toggle
+    },
+    maxWidth() {
+      if (this.toggle) {
+        this.width = '950px'
+        return this.width
+      } else {
+        this.width = '450px'
+        return this.width
+      }
     },
   },
 }
@@ -217,8 +96,6 @@ export default {
           }
         }
       }
-    }
-    .card-padding {
     }
     .setting-dialog-border {
       border-right: 1px solid $gray-100;
