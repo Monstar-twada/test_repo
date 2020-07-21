@@ -12,6 +12,8 @@
       tdSpaceVerticalLine ? 'td-space-vertical-line' : '',
       '__' + size,
       bottomRounded ? 'bottom-rounded' : '',
+      tdBottomBorder ? 'td-bottom-border' : '',
+      smallHeader ? 'small-header' : '',
     ]"
   >
     <div class="table-head-wrapper" :style="{ paddingRight: headOffsetRight }">
@@ -42,7 +44,11 @@
     </div>
     <div
       class="table-body-wrapper"
-      :style="{ height: bodyHeight, minHeight: bodyMinHeight }"
+      :style="{
+        height: bodyHeight,
+        minHeight: bodyMinHeight,
+        maxHeight: bodyMaxHeight,
+      }"
     >
       <div v-show="isEmpty" class="empty-content-wrapper">
         {{ emptyContent }}
@@ -73,12 +79,7 @@ export default {
         return []
       },
     },
-    list: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
+    isEmpty: Boolean,
     rounded: {
       type: Boolean,
       default: false,
@@ -103,6 +104,10 @@ export default {
       type: String,
       default: null,
     },
+    bodyMaxHeight: {
+      type: String,
+      default: null,
+    },
     padding: {
       type: String,
       default: 'lr10',
@@ -110,6 +115,7 @@ export default {
     border: Boolean,
     stripe: Boolean,
     tdSpaceVerticalLine: Boolean,
+    tdBottomBorder: Boolean,
     size: {
       type: String,
       default: 'medium',
@@ -117,8 +123,9 @@ export default {
     bottomRounded: Boolean,
     emptyContent: {
       type: String,
-      default: '検索結果はありません',
+      default: 'データはありません',
     },
+    smallHeader: Boolean,
   },
   data() {
     const headWidthList = this.headers.map((item) => item.width)
@@ -137,9 +144,6 @@ export default {
       })
       return items
     },
-    isEmpty() {
-      return !this.list || this.list.length === 0
-    },
   },
   watch: {
     list() {
@@ -154,6 +158,7 @@ export default {
     initTableItemWidth() {
       this.$nextTick(() => {
         const head = this.$refs.head
+        if (!head) return
         const headWidth = head.offsetWidth
         const body = this.$refs.body
         const bodyWidth = body.offsetWidth
@@ -185,8 +190,21 @@ export default {
   // tbody wrapper
   .table-body-wrapper {
     position: relative;
+    overflow-x: hidden;
     overflow-y: auto;
     background: $white-300;
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray-400;
+      cursor: pointer;
+      border-radius: 2px;
+      border: 1px solid $white-300;
+    }
     .empty-content-wrapper {
       position: absolute;
       z-index: 10;
@@ -194,7 +212,6 @@ export default {
       left: 0;
       bottom: 0;
       width: 100%;
-      min-height: 200px;
       background: $white-300;
       display: flex;
       align-items: center;
@@ -247,7 +264,7 @@ export default {
   }
   tbody {
     tr {
-      &:hover {
+      &:hover td {
         background: $gray-100;
       }
     }
@@ -292,6 +309,17 @@ export default {
     }
   }
 
+  &.td-bottom-border {
+    tr {
+      td {
+        border-bottom: 1px solid $gray-100;
+      }
+      &:last-child td {
+        border-bottom: 0;
+      }
+    }
+  }
+
   &.__stripe {
     tbody {
       tr {
@@ -331,8 +359,18 @@ export default {
   }
 
   &.__small {
+    .empty-content-wrapper {
+      font-size: 12px;
+    }
     td {
       height: 40px;
+    }
+  }
+
+  &.small-header {
+    th {
+      height: 30px;
+      font-size: 12px;
     }
   }
 
@@ -352,6 +390,11 @@ export default {
       padding-left: 10px;
       padding-right: 10px;
     }
+  }
+
+  // is-selected
+  .is-selected td {
+    background: $gray-100;
   }
 }
 </style>

@@ -1,15 +1,18 @@
 <template>
   <div class="table-td-user-info-wrapper">
     <v-avatar size="37">
-      <v-img :src="require('~/static/customer/profile-edit.svg')"></v-img>
+      <v-img
+        :src="item.photoKey || require('~/static/customer/profile-edit.svg')"
+      ></v-img>
     </v-avatar>
     <div class="text">
-      <h3>{{ fmtName(item) }}</h3>
-      <strong v-if="item.age" class="age">（{{ item.age }}歳）</strong>
+      <h3>{{ fmtCustomerName(item) }}</h3>
+      <strong class="age">（{{ item.age || '-' }}歳）</strong>
     </div>
   </div>
 </template>
 <script>
+import { fmtCustomerName } from '../helper'
 export default {
   props: {
     item: {
@@ -20,9 +23,7 @@ export default {
     },
   },
   methods: {
-    fmtName(item) {
-      return (item.firstName + ' ' + item.lastName).trim()
-    },
+    fmtCustomerName,
   },
 }
 </script>
