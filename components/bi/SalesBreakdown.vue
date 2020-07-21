@@ -44,7 +44,7 @@ export default {
       label: ['', '売上', '粗利', '台数', '台粗利'],
       carData: ['¥34,731,428', '¥27,516,509', '952', '¥28,904'],
       inspectionData: ['¥3,506,967', '¥2,088,841', '941', '¥2,220'],
-      generalData: ['¥23,671,724', ' ¥14,374,578', '2,266', '¥6,344'],
+      generalData: ['¥25,063,478', ' ¥14,374,578', '2,266', '¥6,344'],
     }
   },
 }
@@ -92,10 +92,11 @@ export default {
       border-bottom: 1px solid $gray-100;
       td {
         height: 60px;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 800;
         color: $blue-200;
         text-align: center;
+        font-family: 'Yantramanav';
         span {
           font-size: 12px;
           font-weight: 400;

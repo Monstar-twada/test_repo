@@ -70,44 +70,38 @@ export default {
   data() {
     return {
       gradient: '',
+      isMounted: false,
       importVisible: false,
       SettingsVisible: false,
       SalesGraphData: {
         labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+        type: 'bar',
         datasets: [
           {
-            type: 'bar',
-            label: '売上',
+            label: 'リピート',
             barThickness: 10,
-            data: [131567610, 137020890, 148572160, 105520740, 110337330, 0],
+            data: [12100761, 11509755, 12034345, 8441659, 9047661, 0],
             backgroundColor: '#1258BC',
-            order: 2,
+            yAxisID: 'y-axis-0',
+            order: 1,
           },
           {
-            type: 'bar',
-            label: '売上',
+            label: '新規',
             barThickness: 10,
-            data: [9386993, 9403206, 10446846, 7215544, 7527339, 0],
+            data: [1056000, 2192334, 2822871, 2110415, 1986072, 0],
             backgroundColor: '#07B4FF',
-            order: 2,
+            yAxisID: 'y-axis-0',
+            order: 1,
           },
           {
             type: 'line',
             label: '売上',
             borderColor: '#696DD9',
-            backgroundColor: 'transparent',
             borderWidth: 1.5,
-            data: [
-              131567610,
-              137020890,
-              148572160,
-              105520740,
-              110337330,
-              10446846,
-            ],
+            data: [13156761, 13702089, 14857216, 10552074, 11033733, 0],
             pointRadius: 0,
             lineTension: 0,
-            order: 1,
+            yAxisID: 'y-axis-1',
           },
           {
             type: 'line',
@@ -117,7 +111,7 @@ export default {
             borderColor: '#0DBEA9',
             borderWidth: 1.5,
             lineTension: 0,
-            order: 1,
+            yAxisID: 'y-axis-1',
           },
           {
             type: 'line',
@@ -129,7 +123,7 @@ export default {
             borderDash: [5, 6],
             borderWidth: 1.5,
             lineTension: 0,
-            order: 1,
+            yAxisID: 'y-axis-1',
           },
         ],
       },
@@ -159,14 +153,15 @@ export default {
           yAxes: [
             {
               stacked: true,
+              id: 'y-axis-0',
               gridLines: {
                 // display: false,
                 drawBorder: false,
               },
               ticks: {
+                max: 20000000,
                 min: 0,
-                max: 200000000,
-                maxTicksLimit: 6,
+                maxTicksLimit: 5,
                 drawTicks: false,
                 beginAtZero: true,
                 fontColor: '#1258BC',
@@ -174,6 +169,21 @@ export default {
                 callback(value, index, values) {
                   return '¥' + value
                 },
+              },
+            },
+            {
+              display: false,
+              stacked: false,
+              // position: 'right',
+              id: 'y-axis-1',
+              ticks: {
+                max: 20000000,
+                min: 0,
+                maxTicksLimit: 5,
+                drawTicks: false,
+                beginAtZero: true,
+                fontColor: '#1258BC',
+                fontSize: 10,
               },
             },
           ],

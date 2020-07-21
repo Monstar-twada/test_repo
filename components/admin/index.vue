@@ -26,7 +26,6 @@ export default {
       breadcrumbs: [
         {
           text: '管理',
-          href: '/admin',
         },
       ],
     }

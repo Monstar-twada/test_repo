@@ -19,7 +19,6 @@ export default {
     }
   },
   mounted() {
-    //! error WIP
     this.addPlugin({
       afterUpdate(chart) {
         const dataset = chart.config.data.datasets
@@ -39,7 +38,7 @@ export default {
     })
     this.gradientGreen = this.$refs.canvas
       .getContext('2d')
-      .createLinearGradient(0, 0, 0, 200)
+      .createLinearGradient(0, 0, 0, 300)
     this.gradientGreen.addColorStop(0, 'rgba(13,190,169,0.4023810207676821)')
     this.gradientGreen.addColorStop(1, 'rgba(255, 255, 255, 0.5)')
 

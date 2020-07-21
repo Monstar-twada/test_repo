@@ -16,7 +16,7 @@
     </Breadcrumbs>
     <keep-alive>
       <div v-if="tabIndex === 0">
-        <Sales />
+        <Sales v-if="isMounted" />
         <SalesProductivity />
         <SalesBreakdown />
       </div>
@@ -49,10 +49,10 @@ export default {
   },
   data: () => ({
     page: '経営状況',
+    isMounted: false,
     breadcrumbs: [
       {
         text: '経営状況',
-        href: '/admin',
       },
     ],
     tabIndex: 0,
@@ -73,5 +73,8 @@ export default {
     ],
     selectedMonth: 1,
   }),
+  mounted() {
+    this.isMounted = true
+  },
 }
 </script>

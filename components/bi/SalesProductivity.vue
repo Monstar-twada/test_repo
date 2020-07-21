@@ -128,11 +128,13 @@ export default {
         color: $blue-200;
       }
       h3 {
-        font-size: 30px;
+        font-size: 34px;
         color: $blue-200;
         font-weight: 800;
+        font-family: 'Yantramanav';
       }
       span {
+        margin-left: 5px;
         font-size: 14px;
       }
     }
@@ -140,11 +142,12 @@ export default {
   .graphlabel {
     justify-content: space-between;
     list-style: none;
-    margin: 0 40px;
+    margin: 0 36px;
     li {
-      font-size: 12px;
+      font-size: 14px;
       color: $blue-200;
       font-weight: 800;
+      font-family: 'Yantramanav';
     }
   }
 }
