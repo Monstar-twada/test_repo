@@ -16,7 +16,7 @@
         @click="handleClick(item)"
         >{{ item }}</i
       >
-      <div ref="line" class="__line" />
+      <div v-show="total > 0" ref="line" class="__line" />
     </div>
     <i
       :class="['last-page', isLastPage ? 'disabled' : 'cur']"
