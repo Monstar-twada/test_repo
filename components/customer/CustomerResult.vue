@@ -13,6 +13,9 @@
       rounded
       head-bottom-border
       head-font-weight-normal
+      stripe
+      td-space-vertical-line
+      body-min-height="300px"
     >
       <tr v-for="(item, i) in list" :key="i">
         <td class="high-light cur" @click="clickRow(item)">
@@ -28,7 +31,7 @@
             <dd>{{ item.class || '-' }}</dd>
           </dl>
         </td>
-        <td>{{ fmtCar(item) }}</td>
+        <td>{{ fmtCarNumber(item) }}</td>
         <td>{{ item.inspectionExpirationDate }}</td>
         <td>{{ item.firstRegistrationDate }}</td>
       </tr>
@@ -46,6 +49,7 @@
 import CustomTable from './custom-table/index'
 import TdUserInfo from './custom-table/TdUserInfo'
 import GlobalPagination from '~/components/common/global-pagination/index'
+import { fmtCarNumber } from '~/components/customer/helper'
 
 export default {
   name: 'CustomerResult',
@@ -97,12 +101,13 @@ export default {
   },
   methods: {
     clickRow(item) {
-      console.log(item)
-      this.$router.push(`/customer/detail/`)
+      // console.log(JSON.stringify(item, null, 2))
+      this.$router.push({
+        path: `/customer/detail/`,
+        query: { id: item.customerId },
+      })
     },
-    fmtCar(item) {
-      return [item.vinLTO, item.vinNumber, item.vinKana, item.vin].join(' ')
-    },
+    fmtCarNumber,
   },
 }
 </script>

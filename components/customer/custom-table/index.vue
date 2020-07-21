@@ -7,6 +7,11 @@
       headFontWeightNormal ? 'head-font-weight-normal' : '',
       headBackground ? 'head-background' : '',
       '__' + padding,
+      stripe ? '__stripe' : '',
+      border ? '__border' : '',
+      tdSpaceVerticalLine ? 'td-space-vertical-line' : '',
+      '__' + size,
+      bottomRounded ? 'bottom-rounded' : '',
     ]"
   >
     <div class="table-head-wrapper" :style="{ paddingRight: headOffsetRight }">
@@ -35,7 +40,13 @@
         </thead>
       </table>
     </div>
-    <div class="table-body-wrapper" :style="{ height: bodyHeight }">
+    <div
+      class="table-body-wrapper"
+      :style="{ height: bodyHeight, minHeight: bodyMinHeight }"
+    >
+      <div v-show="isEmpty" class="empty-content-wrapper">
+        {{ emptyContent }}
+      </div>
       <table cellpadding="0" cellspacing="0">
         <colgroup>
           <col v-for="(width, i) in headWidthList" :key="i" :width="width" />
@@ -88,9 +99,25 @@ export default {
       type: String,
       default: null,
     },
+    bodyMinHeight: {
+      type: String,
+      default: null,
+    },
     padding: {
       type: String,
       default: 'lr10',
+    },
+    border: Boolean,
+    stripe: Boolean,
+    tdSpaceVerticalLine: Boolean,
+    size: {
+      type: String,
+      default: 'medium',
+    },
+    bottomRounded: Boolean,
+    emptyContent: {
+      type: String,
+      default: '検索結果はありません',
     },
   },
   data() {
@@ -109,6 +136,9 @@ export default {
         }
       })
       return items
+    },
+    isEmpty() {
+      return !this.list || this.list.length === 0
     },
   },
   watch: {
@@ -154,8 +184,24 @@ export default {
   }
   // tbody wrapper
   .table-body-wrapper {
+    position: relative;
     overflow-y: auto;
     background: $white-300;
+    .empty-content-wrapper {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      min-height: 200px;
+      background: $white-300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $blue-100;
+      font-size: 14px;
+    }
   }
   // inner common style
   .cur {
@@ -163,6 +209,10 @@ export default {
   }
   .high-light {
     color: $blue-100;
+    td,
+    th {
+      color: $blue-100;
+    }
   }
   .flex {
     display: flex;
@@ -191,38 +241,26 @@ export default {
     color: $blue-200;
   }
   td {
-    height: 70px;
     font-size: 12px;
     color: $blue-200;
     position: relative;
-    &:before {
-      position: absolute;
-      top: 15%;
-      left: 0;
-      content: '';
-      background: $gray-100;
-      width: 1px;
-      height: 70%;
-    }
-    &:first-child {
-      &:before {
-        background: none;
-      }
-    }
   }
   tbody {
     tr {
-      &:nth-child(2n) {
-        background: $white-100;
-      }
       &:hover {
         background: $gray-100;
       }
     }
   }
 
+  // border radius
   &.rounded {
     border-radius: 5px;
+    overflow: hidden;
+  }
+
+  &.bottom-rounded {
+    border-radius: 0 0 4px 4px;
     overflow: hidden;
   }
 
@@ -240,7 +278,62 @@ export default {
   }
 
   &.head-background {
-    background: $white-100;
+    th {
+      background: $white-100;
+    }
+  }
+
+  &.__border {
+    border: 1px solid $gray-100;
+    border-top: 0;
+    th,
+    td {
+      border-top: 1px solid $gray-100;
+    }
+  }
+
+  &.__stripe {
+    tbody {
+      tr {
+        &:nth-child(2n) {
+          background: $white-100;
+        }
+      }
+    }
+  }
+
+  &.td-space-vertical-line {
+    tbody {
+      td {
+        &:before {
+          position: absolute;
+          top: 15%;
+          left: 0;
+          content: '';
+          background: $gray-100;
+          width: 1px;
+          height: 70%;
+        }
+        &:first-child {
+          &:before {
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
+  // size
+  &.__medium {
+    td {
+      height: 70px;
+    }
+  }
+
+  &.__small {
+    td {
+      height: 40px;
+    }
   }
 
   .table-th-item {
