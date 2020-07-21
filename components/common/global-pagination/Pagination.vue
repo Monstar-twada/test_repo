@@ -24,17 +24,19 @@
       ><FirstIconSvg :theme="theme"
     /></i>
     <div class="prev-next-group">
-      <span
+      <button
         :class="['__prev', isFirstPage ? 'disabled' : 'cur']"
         @click="changePage('prev')"
-        ><PrevNextIcon :theme="theme"
-      /></span>
+      >
+        <PrevNextIcon :theme="theme" />
+      </button>
       <span class="__line"></span>
-      <span
+      <button
         :class="['__next', isLastPage ? 'disabled' : 'cur']"
         @click="changePage('next')"
-        ><PrevNextIcon :theme="theme"
-      /></span>
+      >
+        <PrevNextIcon :theme="theme" />
+      </button>
     </div>
   </div>
 </template>
@@ -240,12 +242,14 @@ $normalHeight: 24px;
     width: 57px;
     height: $normalHeight;
     font-size: 0;
-    span {
+    span,
+    button {
       display: inline-block;
       height: $normalHeight;
       text-align: center;
       vertical-align: top;
       line-height: $normalHeight;
+      outline: none;
       svg {
         display: inline-block;
         vertical-align: middle;
