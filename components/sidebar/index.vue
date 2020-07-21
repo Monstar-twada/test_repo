@@ -7,7 +7,13 @@
       <h5>株式会社ファーストグループ</h5>
 
       <div class="select-wrapper">
-        <AsideSelector v-model="selectedResult" :list="selectList" />
+        <GlobalSelector
+          v-model="selectedResult"
+          :options="selectList"
+          theme="light-blue"
+          size="medium"
+          item-prefix="- "
+        />
       </div>
     </div>
     <v-list>
@@ -44,11 +50,11 @@
 </template>
 
 <script>
-import AsideSelector from './AsideSelector'
+import GlobalSelector from '~/components/common/global-selector/index'
 
 export default {
   components: {
-    AsideSelector,
+    GlobalSelector,
   },
   props: {
     menuItems: {
@@ -61,7 +67,7 @@ export default {
   data() {
     const isManager = this.$isManager
     return {
-      selectedResult: 1,
+      selectedResult: 7,
       // item's index in menu
       index: -1,
       logoName: isManager ? 'manager' : 'dashboard',

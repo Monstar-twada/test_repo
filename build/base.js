@@ -1,5 +1,8 @@
 require('dotenv').config()
 
+// development
+let isDevelopment = process.env.NODE_ENV === 'development'
+
 export const baseConfig = {
   // we need to have universal
   mode: 'spa',
@@ -75,7 +78,12 @@ export const baseConfig = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true,
+  },
+  proxy: {
+    '/api/': isDevelopment ? 'https://manager.cars-enjoy.com' : 'https://manager.cars-enjoy.com',
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
