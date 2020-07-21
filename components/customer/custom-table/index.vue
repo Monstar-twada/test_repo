@@ -50,6 +50,7 @@
 
 <script>
 import SortIcon from './SortIcon'
+import { slice } from '~/assets/js/utils'
 export default {
   components: {
     SortIcon,
@@ -111,9 +112,9 @@ export default {
     },
   },
   watch: {
-    data() {
-      console.log('watch data')
-      // this.initTableItemWidth()
+    list() {
+      console.log('watch list changed')
+      this.initTableItemWidth()
     },
   },
   mounted() {
@@ -128,10 +129,17 @@ export default {
         const bodyWidth = body.offsetWidth
         // reset head offset right when body has scroll bar
         this.headOffsetRight = headWidth - bodyWidth + 'px'
-        // reset th and td width
-        this.headWidthList = Array.prototype.slice
-          .call(head.querySelectorAll('th'), 0)
-          .map((el) => el.offsetWidth)
+        // reset th and td width from th width
+        // this.headWidthList = slice(head.querySelectorAll('th'), 0).map(
+        //   (el) => el.offsetWidth
+        // )
+        if (body.children[0]) {
+          // from td width
+          this.headWidthList = slice(
+            body.children[0].querySelectorAll('td'),
+            0
+          ).map((el) => el.offsetWidth)
+        }
       })
     },
   },
