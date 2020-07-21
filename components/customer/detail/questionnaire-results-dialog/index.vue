@@ -3,15 +3,15 @@
     <v-card class="questionnaire-results-dialog-card">
       <DialogHeader title="アンケート結果" @close="visible = false" />
       <ul class="remark">
-        <li>取引種別：車検</li>
-        <li>回答日時：2020/05/25 9:00</li>
-        <li>店舗：cars足立</li>
+        <li>取引種別：{{ item.transactionType }}</li>
+        <li>回答日時：{{ item.inputDate }}</li>
+        <li>店舗：{{ item.storeName }}</li>
       </ul>
       <dl class="list-wrapper">
-        <template v-for="(item, i) in questionnaireList">
+        <template v-for="(item, i) in list">
           <dt :key="item.q">{{ item.q }}</dt>
           <dd :key="i">
-            <div>{{ item.w }}</div>
+            <div>{{ item.a }}</div>
           </dd>
         </template>
       </dl>
@@ -27,42 +27,37 @@ export default {
   },
   props: {
     value: Boolean,
+    item: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
   },
   data() {
-    const dataTypeList = [
-      '顧客データ（Vertice）',
-      '車両データ（Vertice）',
-      '顧客データ（ブロードリーフ NSクラウド）',
-      '車両データ（ブロードリーフ NSクラウド）',
-      '顧客データ（ブロードリーフ NSオンプレ）',
-      '車両データ（ブロードリーフ NSオンプレ）',
-    ]
     return {
-      dataType: dataTypeList[0],
       visible: this.value,
-      dataTypeList,
-      questionnaireList: [
-        {
-          q: '本日のご来店目的を教えて下さい。',
-          w:
-            '本日のご来店目的を教えて下さい。本日のご来店目的を教えて下さい。本日のご来店目的を教えて下さい。',
-        },
-        {
-          q: '気になる点はございますか？',
-          w: '気になる点はございますか？',
-        },
-        {
-          q: 'あと何回車検を受けられる予定でしょうか？',
-          w: 'あと何回車検を受けられる予定でしょうか？',
-        },
-        {
-          q: 'ご購入を検討されているお車があれば教えて下さい。',
-          w: 'ご購入を検討されているお車があれば教えて下さい。',
-        },
-      ],
     }
   },
-  computed: {},
+  computed: {
+    list() {
+      const item = this.item || {}
+      const answers = ['a1', 'a2', 'a3', 'a4', 'a5']
+      const questions = {
+        q1: '本日のご来店目的を教えて下さい。',
+        q2: '気になる点はございますか？',
+        q3: 'あと何回車検を受けられる予定でしょうか？',
+        q4: 'ご購入を検討されているお車があれば教えて下さい。',
+        q5: '',
+      }
+      return ['q1', 'q2', 'q3', 'q4'].map((q, i) => {
+        return {
+          q: item[q] || questions[q],
+          a: item[answers[i]] || '-',
+        }
+      })
+    },
+  },
   watch: {
     value(val) {
       this.visible = val

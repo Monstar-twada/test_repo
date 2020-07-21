@@ -203,7 +203,7 @@
         <div class="mt20 ml20">
           <SubTitle sub-title="車両詳細情報">
             <button class="car-info-arrow-down-button">
-              <img src="../img/arr-down.svg" alt="" />
+              <img src="../../img/arr-down.svg" alt="" />
             </button>
           </SubTitle>
         </div>
@@ -250,7 +250,12 @@
         </div>
         <CarInfoSide />
       </v-col>
-      <SelectCarDialog v-model="selectCarVisible" />
+      <SelectCarDialog
+        v-model="selectCarVisible"
+        :data="carListData"
+        :current-car="currentCar"
+        @change="changeCar"
+      />
       <EditReservationDialog v-model="reservationVisible" />
     </v-row>
   </div>
@@ -278,10 +283,58 @@ export default {
     EditReservationDialog,
     CarInfoSide,
   },
+  props: {
+    customerId: {
+      type: [String, Number],
+      default: 0,
+    },
+  },
   data: () => ({
     selectCarVisible: false,
     reservationVisible: false,
+    carListData: {},
+    currentCar: {},
   }),
+  created() {
+    this.getCarList()
+  },
+  methods: {
+    async getCarList() {
+      const params = {
+        limit: 50,
+        offset: 0,
+      }
+      try {
+        const res = await this.$api.get(
+          `/v1/customer/${this.customerId}/car`,
+          params
+        )
+        console.log('getCarList', res)
+        this.carListData = res || {}
+        const carList = this.carListData.results || []
+        this.currentCar = carList[0] || {}
+        await this.getCarInfo()
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async getCarInfo() {
+      try {
+        const res = await this.$api.get(
+          `/v1/customer/${this.customerId}/car/${this.currentCar.carId}`
+        )
+        console.log('getCarInfo', res)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    changeCar(item) {
+      this.currentCar = {
+        ...item,
+      }
+      this.getCarInfo()
+    },
+  },
 }
 </script>
 

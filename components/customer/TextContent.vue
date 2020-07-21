@@ -1,6 +1,9 @@
 <template>
   <dl class="text-content pt5 pb5">
-    <dt :style="TextStyle">{{ label }}</dt>
+    <dt :style="TextStyle">
+      {{ label }}
+      <div v-if="subLabel">{{ subLabel }}</div>
+    </dt>
     <dd :class="{ 'high-light': highLight, flex: flex }">
       {{ content }}
       <img v-if="copyable" src="./img/link.svg" width="10" />
@@ -13,6 +16,10 @@ export default {
   name: 'TextContent',
   props: {
     label: {
+      type: String,
+      default: '',
+    },
+    subLabel: {
       type: String,
       default: '',
     },

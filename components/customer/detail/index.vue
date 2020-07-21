@@ -1,5 +1,5 @@
 <template>
-  <div class="customer-detail-wrapper">
+  <div class="customer-detail-page-wrapper">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"
@@ -10,16 +10,16 @@
       </template>
     </Breadcrumbs>
 
-    <CustomerInfo class="customer-info" />
-    <CarInfo class="customer-info mt30" />
-    <MemoTable class="customer-info mt30" />
+    <CustomerInfo class="customer-info" :data="customerData" />
+    <CarInfo class="customer-info mt30" :customer-id="query.id" />
+    <MemoTable class="customer-info mt30" :customer-id="query.id" />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/breadcrumbs/index'
 import CustomerInfo from '~/components/customer/detail/CustomerInfo.vue'
-import CarInfo from '~/components/customer/detail/CarInfo.vue'
+import CarInfo from '~/components/customer/detail/car-info/index.vue'
 import MemoTable from '~/components/customer/detail/MemoTable.vue'
 import SendingRequestButton from '~/components/customer/detail/button/SendingRequest'
 export default {
@@ -32,26 +32,47 @@ export default {
     MemoTable,
     SendingRequestButton,
   },
-  data: () => ({
-    page: '顧客管理',
-    breadcrumbs: [
-      {
-        text: '顧客管理',
-        href: '/customer',
+  data() {
+    return {
+      page: '顧客管理',
+      breadcrumbs: [
+        {
+          text: '顧客管理',
+          href: '/customer',
+        },
+        {
+          text: '顧客詳細',
+          href: '',
+        },
+      ],
+      query: $nuxt.$route.query || {},
+      customerData: {
+        enquete: {},
       },
-      {
-        text: '顧客詳細',
-        href: '',
-      },
-    ],
-  }),
+    }
+  },
+  created() {
+    this.getDetail()
+  },
   methods: {
     sendingRequestClick() {},
+    async getDetail() {
+      try {
+        const res = await this.$api.get(`/v1/customer/${this.query.id}`)
+        // console.log('customer detail index.vue', res)
+        this.customerData = {
+          ...res.customer,
+          enquete: res.enquete || {},
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    },
   },
 }
 </script>
 <style lang="scss">
-.customer-detail-wrapper {
+.customer-detail-page-wrapper {
   .high-light {
     color: $blue-100;
   }

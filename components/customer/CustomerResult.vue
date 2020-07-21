@@ -8,7 +8,7 @@
     />
     <CustomTable
       :headers="headers"
-      :list="list"
+      :is-empty="tableData.total === 0"
       padding="lr10"
       rounded
       head-bottom-border
@@ -16,6 +16,7 @@
       stripe
       td-space-vertical-line
       body-min-height="300px"
+      empty-content="検索結果はありません"
     >
       <tr v-for="(item, i) in list" :key="i">
         <td class="high-light cur" @click="clickRow(item)">
