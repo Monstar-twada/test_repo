@@ -36,7 +36,7 @@ import MonthSelector from '~/components/common/month-selector/index'
 import Breadcrumbs from '~/components/breadcrumbs/index'
 export default {
   layout: 'manager',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     Sales,

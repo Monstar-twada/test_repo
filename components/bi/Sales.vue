@@ -1,29 +1,35 @@
 <template>
   <div class="tab mb30">
     <div class="tab__header">
-      <h3 class="tab__header--title">売上</h3>
-      <ul class="tab__header__legend pa-0 ml10">
-        <li>
-          <span />
-          <h5>リピート</h5>
-        </li>
-        <li>
-          <span />
-          <h5>新規</h5>
-        </li>
-        <li>
-          <span />
-          <h5>粗利</h5>
-        </li>
-        <li>
-          <span />
-          <h5>売上</h5>
-        </li>
-        <li>
-          <span />
-          <h5>目標</h5>
-        </li>
-      </ul>
+      <div class="d-flex">
+        <h3 class="tab__header--title">売上</h3>
+        <ul class="tab__header__legend pa-0 ml10">
+          <li>
+            <span />
+            <h5>リピート</h5>
+          </li>
+          <li>
+            <span />
+            <h5>新規</h5>
+          </li>
+          <li>
+            <span />
+            <h5>粗利</h5>
+          </li>
+          <li>
+            <span />
+            <h5>売上</h5>
+          </li>
+          <li>
+            <span />
+            <h5>目標</h5>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <ImportButton class="importbutton" @click="handleImportClick" />
+        <SettingsButton class="importbutton" @click="handleSettingsClick" />
+      </div>
     </div>
     <div class="sales_container d-flex">
       <div class="left">
@@ -38,22 +44,34 @@
         <SalesStats />
       </div>
     </div>
+    <SettingsDialog v-model="SettingsVisible" />
+    <ImportDialog v-model="importVisible" is-bi />
   </div>
 </template>
 <script>
 import SalesGraph from '~/components/bi/SalesGraph.js'
 import SalesPercent from '~/components/bi/SalesPercent.vue'
 import SalesStats from '~/components/bi/SalesStats.vue'
+import ImportButton from '~/components/customer/ImportButton'
+import SettingsButton from '~/components/bi/SettingsButton'
+import SettingsDialog from '~/components/bi/setting-dialog/index'
+import ImportDialog from '~/components/customer/import-dialog/index'
 export default {
   name: 'Sales',
   components: {
     SalesGraph,
     SalesPercent,
     SalesStats,
+    ImportButton,
+    ImportDialog,
+    SettingsButton,
+    SettingsDialog,
   },
   data() {
     return {
       gradient: '',
+      importVisible: false,
+      SettingsVisible: false,
       SalesGraphData: {
         labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
         datasets: [
@@ -116,14 +134,6 @@ export default {
         ],
       },
       SalesGraphOptions: {
-        // layout: {
-        //   padding: {
-        //     left: 10,
-        //     right: 0,
-        //     top: 0,
-        //     bottom: 0,
-        //   },
-        // },
         responsive: true,
         legend: {
           display: false,
@@ -171,21 +181,12 @@ export default {
       },
     }
   },
-  //   async mounted() {
-  //     this.loaded = false
-  //     try {
-  //       const { employeelist } = await fetch(
-  //         'http://dummy.restapiexample.com/api/v1/employees'
-  //       )
-  //       this.users = employeelist
-  //       this.loaded = true
-  //     } catch (e) {
-  //       console.errr(e)
-  //     }
-  //   },
   methods: {
-    childToParent(value) {
-      this.gradient = value
+    handleImportClick() {
+      this.importVisible = true
+    },
+    handleSettingsClick() {
+      this.SettingsVisible = true
     },
   },
 }
@@ -193,6 +194,9 @@ export default {
 <style lang="scss" scoped>
 .sales_container {
   padding: 20px;
+}
+.importbutton {
+  border: 1px solid $gray-100;
 }
 .left {
   width: auto;
@@ -213,6 +217,7 @@ export default {
     padding: 0px 20px;
     align-items: center;
     display: flex;
+    justify-content: space-between;
     &--title {
       font-size: 18px;
       color: $blue-200;

@@ -6,7 +6,13 @@
         <div class="remark">
           インポートするデータの種類とファイルを選択してください。
         </div>
-        <v-radio-group v-model="dataType" column>
+        <v-radio-group v-if="isBi" v-model="dataType" column>
+          <v-radio
+            label="売上データ（ブロードリーフ NSオンプレ）"
+            value="売上データ（ブロードリーフ NSオンプレ）"
+          ></v-radio>
+        </v-radio-group>
+        <v-radio-group v-else v-model="dataType" column>
           <v-radio
             v-for="(item, i) in dataTypeList"
             :key="i"
@@ -32,7 +38,7 @@
         >
       </v-card-actions>
       <Progress v-show="isUploading" :value="progress" />
-      <Success v-if="isSuccess" @close="visible = false" />
+      <Success v-if="isSuccess" is-bi @close="visible = false" />
     </v-card>
   </v-dialog>
 </template>
@@ -50,6 +56,10 @@ export default {
   },
   props: {
     value: Boolean,
+    isBi: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     const dataTypeList = [
