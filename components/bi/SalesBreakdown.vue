@@ -92,10 +92,11 @@ export default {
       border-bottom: 1px solid $gray-100;
       td {
         height: 60px;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 800;
         color: $blue-200;
         text-align: center;
+        font-family: 'Yantramanav';
         span {
           font-size: 12px;
           font-weight: 400;

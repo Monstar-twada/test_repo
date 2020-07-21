@@ -124,9 +124,10 @@ export default {
         text-align: right;
       }
       h1 {
-        font-size: 30px;
+        font-size: 36px;
+        font-family: 'Yantramanav';
         color: $blue-200;
-        font-weight: 800;
+        font-weight: 900;
         line-height: 28px;
         text-align: right;
         span {
@@ -149,8 +150,9 @@ export default {
           font-weight: 300;
         }
         h3 {
+          font-family: 'Yantramanav';
           color: $blue-500;
-          font-size: 15px;
+          font-size: 17px;
           font-weight: 400;
         }
       }

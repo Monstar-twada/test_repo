@@ -70,9 +70,11 @@ export default {
     }
 
     .data {
-      font-size: 22px;
+      font-size: 25px;
       margin-top: 5px;
       margin-bottom: 5px;
+      font-weight: 900;
+      font-family: 'Yantramanav';
     }
 
     .rate {
