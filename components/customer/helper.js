@@ -9,8 +9,13 @@ export function fmtCarNumber(item) {
   return [item.vinLTO, item.vinNumber, item.vinKana, item.vin].join(' ')
 }
 
+/**
+ * format customer name
+ * @param item
+ * @returns {string}
+ */
 export function fmtCustomerName(item) {
-  return (item.firstName + ' ' + item.lastName).trim()
+  return [item.lastName, item.firstName].join(' ')
 }
 
 /**
