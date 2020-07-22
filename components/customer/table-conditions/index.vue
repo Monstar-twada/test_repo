@@ -2,22 +2,29 @@
   <div class="customer-search-bar-wrapper">
     <v-row>
       <v-col cols="2">
-        <Input v-model="form.name" placeholder="顧客苗字" />
+        <Input
+          v-model="form.name"
+          placeholder="顧客苗字"
+          clearable
+          text-size="mini"
+        />
       </v-col>
       <v-col cols="2">
-        <GlobalSelector placeholder="顧客ランク" />
+        <GlobalSelector placeholder="顧客ランク" text-size="mini" clearable />
       </v-col>
       <v-col cols="2">
-        <GlobalSelector placeholder="担当店舗" />
+        <GlobalSelector placeholder="担当店舗" text-size="mini" clearable />
       </v-col>
       <v-col cols="2">
-        <GlobalSelector placeholder="担当者" />
+        <GlobalSelector placeholder="担当者" text-size="mini" clearable />
       </v-col>
       <v-col cols="2">
         <GlobalSelector
           v-model="form.maker"
           placeholder="メーカー"
           :options="manufacturers"
+          text-size="mini"
+          clearable
         />
       </v-col>
       <v-col cols="2">
@@ -25,10 +32,17 @@
           v-model="form.class"
           :options="carModels"
           placeholder="車種"
+          text-size="mini"
+          clearable
         />
       </v-col>
       <v-col cols="2">
-        <Input v-model="form.vin" placeholder="登録ナンバー" />
+        <Input
+          v-model="form.vin"
+          placeholder="登録ナンバー"
+          clearable
+          text-size="mini"
+        />
       </v-col>
       <v-col cols="2">
         <Calendar
@@ -97,6 +111,9 @@ export default {
   watch: {
     'form.maker'() {
       this.form.class = ''
+    },
+    'form.name'(val) {
+      console.log(val)
     },
   },
   methods: {
