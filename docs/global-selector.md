@@ -14,7 +14,9 @@ import GlobalSelector from '~/components/common/global-selector/index'
 |placeholder|String|placeholder|
 |theme|String|`light-blue/default/transparent`, default `default`|
 |size|String|`medium(35px)/small(28px)`, default `small`|
-|disabled|Bollean|can't select|
+|text-size|String|`mini`, default `''`|
+|disabled|Boolean|can't select|
+|clearable|Boolean|select value clearable|
 |item-prefix|String|option prefix|
 |width|String|selector width, default '100%'|
 
