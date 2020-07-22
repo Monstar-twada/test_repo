@@ -7,7 +7,7 @@
     <div class="data-col__item">
       <h4>リーチ数</h4>
       <p class="data">3,779</p>
-      <Rate is-up :rate="Number(1.35)" />
+      <Rate is-up :rate="Number(4.8)" />
     </div>
     <div class="data-col__item">
       <h4>コンタクト数</h4>

@@ -2,7 +2,7 @@
   <div class="tab-all">
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="inspectionFlg" />
       </v-col>
       <v-col cols="11" class="pa-0">
         <Title
@@ -50,7 +50,7 @@
     </v-row>
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="SixMInspectionFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -98,7 +98,7 @@
     </v-row>
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="TwelveMInspectionFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -146,7 +146,7 @@
     </v-row>
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="EighteenMInspectionFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -233,7 +233,7 @@ export default {
           rate: '3.3',
         },
         order: {
-          value: 198,
+          value: 196,
           isUp: true,
           rate: '2.3',
         },
@@ -247,7 +247,7 @@ export default {
         contacts: {
           value: 580,
           isUp: true,
-          rate: '2.6',
+          rate: '2.8',
         },
         order: {
           value: 133,
@@ -259,7 +259,16 @@ export default {
       SixMInspection: '',
       TwelveMInspection: '',
       EighteenMInspection: '',
+      inspectionFlg: true,
+      SixMInspectionFlg: true,
+      TwelveMInspectionFlg: true,
+      EighteenMInspectionFlg: true,
     }
+  },
+  watch: {
+    inspectionFlg(val) {
+      this.inspectionFlg = val
+    },
   },
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="tab-all">
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="displayADFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -37,7 +37,7 @@
     </v-row>
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="listingADFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -62,11 +62,7 @@
           </v-col>
           <v-col cols="5">
             <v-col cols="5">
-              <v-img
-                :src="require('~/static/ma/google.png')"
-                :max-width="240"
-                :max-height="186"
-              />
+              <img src="/ma/google.png" width="240" height="182" />
             </v-col>
           </v-col>
         </v-row>
@@ -74,7 +70,7 @@
     </v-row>
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="facebookADFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -109,7 +105,7 @@
     </v-row>
     <v-row class="ma-0 tab-all__item" align="start">
       <v-col cols="1" class="py-0 my-0">
-        <SwitchButton />
+        <SwitchButton v-model="instagramADFlg" />
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
@@ -203,7 +199,7 @@ export default {
           rate: '13.1',
         },
         order: {
-          value: 26,
+          value: 28,
           isUp: false,
           rate: '3.6',
         },
@@ -220,11 +216,15 @@ export default {
           rate: '26.0',
         },
         order: {
-          value: 26,
+          value: 34,
           isUp: true,
           rate: '55.8',
         },
       },
+      instagramADFlg: false,
+      facebookADFlg: true,
+      displayADFlg: true,
+      listingADFlg: true,
     }
   },
 }
