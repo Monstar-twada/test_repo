@@ -83,9 +83,11 @@ export default {
     }
 
     .data {
-      font-size: 22px;
+      font-size: 24px;
+      font-weight: 900;
       margin-top: 0px;
       margin-bottom: 0px;
+      font-family: 'Yantramanav';
     }
   }
 }

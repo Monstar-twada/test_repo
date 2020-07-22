@@ -12,10 +12,10 @@
         <p class="stats__left--percentage">88<span>%</span></p>
       </div>
       <div class="stats__right">
-        <h1><span>¥</span>633,018,730</h1>
+        <h1><span>¥</span>63,301,873</h1>
         <div class="stats__right__target">
           <h4>目標金額</h4>
-          <h3>713,500,000</h3>
+          <h3>71,350,000</h3>
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前年比</h4>
@@ -124,9 +124,10 @@ export default {
         text-align: right;
       }
       h1 {
-        font-size: 30px;
+        font-size: 36px;
+        font-family: 'Yantramanav';
         color: $blue-200;
-        font-weight: 800;
+        font-weight: 900;
         line-height: 28px;
         text-align: right;
         span {
@@ -149,8 +150,9 @@ export default {
           font-weight: 300;
         }
         h3 {
+          font-family: 'Yantramanav';
           color: $blue-500;
-          font-size: 15px;
+          font-size: 17px;
           font-weight: 400;
         }
       }

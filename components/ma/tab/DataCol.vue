@@ -21,7 +21,7 @@
     </div>
     <div class="data-col__item">
       <h4>予約獲得単価</h4>
-      <p class="data">¥1,278</p>
+      <p class="data">¥1,270</p>
       <Rate :rate="Number(3.5)" />
     </div>
   </v-row>
@@ -70,9 +70,11 @@ export default {
     }
 
     .data {
-      font-size: 22px;
+      font-size: 25px;
       margin-top: 5px;
       margin-bottom: 5px;
+      font-weight: 900;
+      font-family: 'Yantramanav';
     }
 
     .rate {

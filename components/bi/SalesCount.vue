@@ -38,9 +38,10 @@ export default {
     font-weight: 400;
   }
   &--number {
-    font-size: 20px;
+    font-family: 'Yantramanav';
+    font-size: 24px;
     color: $blue-200;
-    font-weight: 800;
+    font-weight: 900;
     span {
       font-size: 12px;
     }
