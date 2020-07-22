@@ -115,7 +115,7 @@
               />
               <TextContent
                 label="登録年月日"
-                :content="carBase.registrationDate | fmtHyphen"
+                :content="carBase.registrationDate | fmtDate"
               />
               <TextContent
                 label="新中区分"
@@ -154,11 +154,11 @@
               />
               <TextContent
                 label="初度登録年月"
-                :content="carBase.firstRegistrationDate | fmtHyphen"
+                :content="carBase.firstRegistrationDate | fmtDate"
               />
               <TextContent
                 label="車検満了日"
-                :content="carBase.inspectionExpirationDate | fmtHyphen"
+                :content="carBase.inspectionExpirationDate | fmtDate"
                 flex
               >
                 <RoundBorderButton
@@ -400,6 +400,7 @@ import {
   sumCost,
   fmtCarSize,
   fmtCarWeight,
+  fmtDate,
 } from '~/components/customer/helper'
 
 export default {
@@ -412,6 +413,7 @@ export default {
     sumCost,
     fmtCarSize,
     fmtCarWeight,
+    fmtDate,
   },
   components: {
     SubTitle,

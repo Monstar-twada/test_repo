@@ -16,7 +16,7 @@
       body-min-height="70px"
     >
       <tr v-for="(item, i) in list" :key="i">
-        <td>{{ item.activityDate }}</td>
+        <td>{{ item.activityDate | fmtDate }}</td>
         <td>{{ item.class }}</td>
         <td>{{ item.comment }}</td>
         <td>
@@ -46,7 +46,12 @@ import ColumnTitle from '~/components/customer/ColumnTitle'
 import PlusButton from '~/components/breadcrumbs/PlusButton'
 import RoundBorderButton from '~/components/customer/detail/button/RoundBorderButton'
 import GlobalTable from '~/components/customer/custom-table/index'
+import { fmtDate } from '~/components/customer/helper'
+
 export default {
+  filters: {
+    fmtDate,
+  },
   components: {
     MemoEditDialog,
     ColumnTitle,

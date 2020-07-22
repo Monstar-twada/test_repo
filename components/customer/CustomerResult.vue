@@ -33,8 +33,8 @@
           </dl>
         </td>
         <td>{{ fmtCarNumber(item) }}</td>
-        <td>{{ item.inspectionExpirationDate }}</td>
-        <td>{{ item.firstRegistrationDate }}</td>
+        <td>{{ item.inspectionExpirationDate | fmtDate }}</td>
+        <td>{{ item.firstRegistrationDate | fmtDate }}</td>
       </tr>
     </CustomTable>
 
@@ -50,10 +50,13 @@
 import CustomTable from './custom-table/index'
 import TdUserInfo from './custom-table/TdUserInfo'
 import GlobalPagination from '~/components/common/global-pagination/index'
-import { fmtCarNumber } from '~/components/customer/helper'
+import { fmtCarNumber, fmtDate } from '~/components/customer/helper'
 
 export default {
   name: 'CustomerResult',
+  filters: {
+    fmtDate,
+  },
   components: {
     GlobalPagination,
     CustomTable,
