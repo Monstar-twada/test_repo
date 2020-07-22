@@ -4,7 +4,7 @@
       <v-col cols="2">
         <GlobalInput
           v-model="search.name"
-          :customheight="30"
+          :customheight="28"
           :customfontsize="10"
           placeholder="顧客名"
         />
@@ -12,8 +12,7 @@
       <v-col cols="2">
         <GlobalInput
           v-model="search.city"
-          :customwidth="120"
-          :customheight="30"
+          :customheight="28"
           :customfontsize="10"
           placeholder="住所"
         />
@@ -23,6 +22,8 @@
           v-model="search.maker"
           :options="manufacturers"
           placeholder="メーカー"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <v-col cols="2">
@@ -30,13 +31,15 @@
           v-model="search.class"
           placeholder="車種"
           :options="carModels"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <v-col cols="2">
         <GlobalInput
           v-model="search.tel"
           :customwidth="120"
-          :customheight="30"
+          :customheight="28"
           :customfontsize="10"
           placeholder="電話番号"
         />
@@ -44,7 +47,6 @@
       <v-col cols="2">
         <GlobalInput
           v-model="search.email"
-          :customwidth="120"
           :customheight="30"
           :customfontsize="10"
           placeholder="メールアドレス"
@@ -57,6 +59,8 @@
           v-model="search.statusCall"
           :options="statusList"
           placeholder="コールステータス"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <v-col cols="2">
@@ -64,6 +68,8 @@
           v-model="search.statusDM"
           :options="statusList"
           placeholder="DMステータス"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <v-col cols="2">
@@ -71,6 +77,8 @@
           v-model="search.statusSMS"
           :options="statusList"
           placeholder="SMSステータス"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <v-col cols="2">
@@ -78,6 +86,8 @@
           v-model="search.reserve"
           :options="statusList"
           placeholder="予約ステータス"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <v-col cols="2">
@@ -85,6 +95,8 @@
           v-model="search.warehouse"
           :options="statusList"
           placeholder="入庫ステータス"
+          clearable
+          text-size="mini"
         />
       </v-col>
       <ButtonSearch class="searchbar_button" @clickEvent="searchButtonClick" />
@@ -97,13 +109,6 @@ import { getManufacturerList } from '~/components/customer/manufacturers.js'
 import GlobalInput from '~/components/common/global-input/index'
 import ButtonSearch from '~/components/common/ButtonSearch.vue'
 import GlobalSelector from '~/components/common/global-selector/index'
-
-const SELECT_DEFAULT = [
-  {
-    text: '選択しません',
-    value: null,
-  },
-]
 
 export default {
   name: 'Searchbar',
@@ -135,8 +140,7 @@ export default {
       search: {
         ...this.searchParams,
       },
-      Default: [{ text: '選択なし', value: '' }],
-      manufacturers: [...SELECT_DEFAULT, ...getManufacturerList()],
+      manufacturers: [...getManufacturerList()],
     }
   },
   computed: {

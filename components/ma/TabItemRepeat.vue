@@ -150,7 +150,7 @@
       </v-col>
       <v-col cols="11" class="pa-0 ma-0">
         <Title
-          v-model="EighteenMonthInspection"
+          v-model="EighteenMInspection"
           title="18ヶ月点検 "
           sub-title1="¥100/顧客"
           content="既存顧客に対して点検のお知らせをいたします。<br />点検3ヶ月前から以下のスケジュールで各種連絡を行います。"
