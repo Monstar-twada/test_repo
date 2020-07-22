@@ -16,19 +16,25 @@
         <tr>
           <td>車検</td>
           <td v-for="value in carData" :key="value.id">
-            {{ value }}
+            {{ value.profit }}
+            <br />
+            <span v-if="value.loss">({{ value.loss }})</span>
           </td>
         </tr>
         <tr>
           <td>点検</td>
           <td v-for="value in inspectionData" :key="value.id">
-            {{ value }}
+            {{ value.profit }}
+            <br />
+            <span v-if="value.loss">({{ value.loss }})</span>
           </td>
         </tr>
         <tr>
           <td>一般</td>
           <td v-for="value in generalData" :key="value.id">
-            {{ value }}
+            {{ value.profit }}
+            <br />
+            <span v-if="value.loss">({{ value.loss }})</span>
           </td>
         </tr>
       </tbody>
@@ -42,9 +48,24 @@ export default {
   data() {
     return {
       label: ['', '売上', '粗利', '台数', '台粗利'],
-      carData: ['¥34,731,428', '¥27,516,509', '952', '¥28,904'],
-      inspectionData: ['¥3,506,967', '¥2,088,841', '941', '¥2,220'],
-      generalData: ['¥25,063,478', ' ¥14,374,578', '2,266', '¥6,344'],
+      carData: [
+        { profit: '¥34,731,428', loss: '-¥5,268,572' },
+        { profit: '¥27,516,509', loss: '-¥3,483,491' },
+        { profit: '952', loss: '' },
+        { profit: '¥28,904', loss: '' },
+      ],
+      inspectionData: [
+        { profit: '¥3,506,967', loss: '-¥543,033' },
+        { profit: '¥2,088,841', loss: '-411,159' },
+        { profit: '941', loss: '' },
+        { profit: '¥2,220', loss: '' },
+      ],
+      generalData: [
+        { profit: '¥25,063,478', loss: '-¥2,236,522' },
+        { profit: '¥14,374,578', loss: '-¥1,725,422' },
+        { profit: '2,266', loss: '' },
+        { profit: '¥6,344', loss: '' },
+      ],
     }
   },
 }
