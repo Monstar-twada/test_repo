@@ -53,7 +53,10 @@ export default {
   },
   computed: {
     currentPageText() {
-      const start = (this.page - 1) * this.pageSize
+      let start = (this.page - 1) * this.pageSize
+      if (this.total) {
+        start += 1
+      }
       const end = Math.min(this.page * this.pageSize, this.total)
       return `${start}〜${end}`
     },

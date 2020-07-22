@@ -1,96 +1,85 @@
 <template>
-  <table
-    border="0"
-    cellpadding="0"
-    cellspacing="0"
-    class="custom-table-wrapper"
+  <div
     :class="[
+      'customer-table-wrapper',
       rounded ? 'rounded' : '',
       headBottomBorder ? 'head-bottom-border' : '',
       headFontWeightNormal ? 'head-font-weight-normal' : '',
       headBackground ? 'head-background' : '',
+      '__' + padding,
+      stripe ? '__stripe' : '',
+      border ? '__border' : '',
+      tdSpaceVerticalLine ? 'td-space-vertical-line' : '',
+      '__' + size,
+      bottomRounded ? 'bottom-rounded' : '',
+      tdBottomBorder ? 'td-bottom-border' : '',
+      smallHeader ? 'small-header' : '',
     ]"
   >
-    <colgroup width="120"></colgroup>
-    <colgroup width="180"></colgroup>
-    <colgroup></colgroup>
-    <colgroup width="120"></colgroup>
-    <colgroup width="120"></colgroup>
-    <colgroup></colgroup>
-    <colgroup></colgroup>
-    <thead>
-      <tr>
-        <th>
-          <div class="table-th-item">
-            <span :class="sortId ? 'bold' : ''">顧客ID</span>
-            <SortIcon v-model="sortId" />
-          </div>
-        </th>
-        <th>
-          <div class="table-th-item">
-            <span :class="sortName ? 'bold' : ''">顧客名</span>
-            <SortIcon v-model="sortName" />
-          </div>
-        </th>
-        <th>連絡先情報</th>
-        <th>所有車</th>
-        <th>登録ナンバー</th>
-        <th>車検満了日</th>
-        <th>初度登録年月</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item, i) in list" :key="i" @click="$emit('click:row', item)">
-        <td class="cur high-light">{{ item.id }}</td>
-        <td>
-          <div class="user-item">
-            <v-avatar size="37">
-              <v-img
-                :src="require('~/static/customer/profile-edit.svg')"
-              ></v-img>
-            </v-avatar>
-            <h3>{{ item.name }}</h3>
-            <h5>（{{ item.age }}際）</h5>
-          </div>
-        </td>
-        <td>{{ item.tel }}</td>
-        <td>
-          <div style="text-align: left; display: inline-block;">
-            {{ item.car_maker }}
-            <div>
-              {{ item.car_type }}
-              <!--              <v-chip-->
-              <!--                v-if="item.car_total"-->
-              <!--                x-small-->
-              <!--                text-color="white"-->
-              <!--                color="#1E5199"-->
-              <!--                class="ml5"-->
-              <!--                >{{ item.car_total }}</v-chip-->
-              <!--              >-->
-            </div>
-          </div>
-        </td>
-        <td>{{ item.car_number }}</td>
-        <td>{{ item.inspection_finish_date }}</td>
-        <td>{{ item.registration_date }}</td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="table-head-wrapper" :style="{ paddingRight: headOffsetRight }">
+      <table cellpadding="0" cellspacing="0">
+        <colgroup>
+          <col v-for="(width, i) in headWidthList" :key="i" :width="width" />
+        </colgroup>
+        <thead ref="head">
+          <tr>
+            <th
+              v-for="(item, i) in headers"
+              :key="i"
+              :class="[item.align ? 'is-' + item.align : 'is-center']"
+            >
+              <div class="table-th-item">
+                <span :class="sortItems[item.value] ? 'bold' : ''">{{
+                  item.text
+                }}</span>
+                <SortIcon
+                  v-if="item.sortable"
+                  v-model="sortItems[item.value]"
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div
+      class="table-body-wrapper"
+      :style="{
+        height: bodyHeight,
+        minHeight: bodyMinHeight,
+        maxHeight: bodyMaxHeight,
+      }"
+    >
+      <div v-show="isEmpty" class="empty-content-wrapper">
+        {{ emptyContent }}
+      </div>
+      <table cellpadding="0" cellspacing="0">
+        <colgroup>
+          <col v-for="(width, i) in headWidthList" :key="i" :width="width" />
+        </colgroup>
+        <tbody ref="body">
+          <slot></slot>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script>
 import SortIcon from './SortIcon'
+import { slice } from '~/assets/js/utils'
 export default {
   components: {
     SortIcon,
   },
   props: {
-    list: {
+    headers: {
       type: Array,
       default() {
         return []
       },
     },
+    isEmpty: Boolean,
     rounded: {
       type: Boolean,
       default: false,
@@ -107,68 +96,139 @@ export default {
       type: Boolean,
       default: false,
     },
+    bodyHeight: {
+      type: String,
+      default: null,
+    },
+    bodyMinHeight: {
+      type: String,
+      default: null,
+    },
+    bodyMaxHeight: {
+      type: String,
+      default: null,
+    },
+    padding: {
+      type: String,
+      default: 'lr10',
+    },
+    border: Boolean,
+    stripe: Boolean,
+    tdSpaceVerticalLine: Boolean,
+    tdBottomBorder: Boolean,
+    size: {
+      type: String,
+      default: 'medium',
+    },
+    bottomRounded: Boolean,
+    emptyContent: {
+      type: String,
+      default: 'データはありません',
+    },
+    smallHeader: Boolean,
   },
   data() {
+    const headWidthList = this.headers.map((item) => item.width)
     return {
-      sortId: '',
-      sortName: '',
+      headWidthList,
+      headOffsetRight: '0',
     }
   },
-  methods: {},
+  computed: {
+    sortItems() {
+      const items = {}
+      this.headers.forEach((item) => {
+        if (item.sortable) {
+          items[item.value] = ''
+        }
+      })
+      return items
+    },
+  },
+  watch: {
+    list() {
+      // console.log('watch list changed')
+      this.initTableItemWidth()
+    },
+  },
+  mounted() {
+    this.initTableItemWidth()
+  },
+  methods: {
+    initTableItemWidth() {
+      this.$nextTick(() => {
+        const head = this.$refs.head
+        if (!head) return
+        const headWidth = head.offsetWidth
+        const body = this.$refs.body
+        const bodyWidth = body.offsetWidth
+        // reset head offset right when body has scroll bar
+        this.headOffsetRight = headWidth - bodyWidth + 'px'
+        // reset th and td width from th width
+        // this.headWidthList = slice(head.querySelectorAll('th'), 0).map(
+        //   (el) => el.offsetWidth
+        // )
+        if (body.children[0]) {
+          // from td width
+          this.headWidthList = slice(
+            body.children[0].querySelectorAll('td'),
+            0
+          ).map((el) => el.offsetWidth)
+        }
+      })
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.custom-table-wrapper {
-  width: 100%;
-  background: $white-300;
+.customer-table-wrapper {
+  // thead wrapper
+  .table-head-wrapper {
+    background: $white-300;
+  }
+  // tbody wrapper
+  .table-body-wrapper {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: $white-300;
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $gray-400;
+      cursor: pointer;
+      border-radius: 2px;
+      border: 1px solid $white-300;
+    }
+    .empty-content-wrapper {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: $white-300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $blue-100;
+      font-size: 14px;
+    }
+  }
+  // inner common style
   .cur {
     cursor: pointer;
   }
   .high-light {
     color: $blue-100;
-  }
-  &.rounded {
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  tr {
-    font-size: 0;
+    td,
     th {
-      height: 40px;
-      text-align: center;
-      font-size: 12px;
-      color: $blue-200;
-      padding: 0 5px;
-    }
-    td {
-      padding: 0 5px;
-      height: 70px;
-      text-align: center;
-      font-size: 12px;
-      color: $blue-200;
-      position: relative;
-      &:before {
-        position: absolute;
-        top: 15%;
-        left: 0;
-        content: '';
-        background: $gray-100;
-        width: 1px;
-        height: 70%;
-      }
-      &:first-child {
-        &:before {
-          background: none;
-        }
-      }
-    }
-  }
-  tbody {
-    tr {
-      &:nth-child(2n) {
-        background: $white-100;
-      }
+      color: $blue-100;
     }
   }
   .flex {
@@ -176,22 +236,142 @@ export default {
     align-items: center;
     justify-content: center;
   }
+  // table
+  table {
+    width: 100%;
+    border: 0;
+    th,
+    td {
+      text-align: center;
+      &.is-left {
+        text-align: left;
+      }
+      &.is-right {
+        text-align: right;
+      }
+    }
+  }
+
+  th {
+    height: 40px;
+    font-size: 12px;
+    color: $blue-200;
+  }
+  td {
+    font-size: 12px;
+    color: $blue-200;
+    position: relative;
+  }
+  tbody {
+    tr {
+      &:hover td {
+        background: $gray-100;
+      }
+    }
+  }
+
+  // border radius
+  &.rounded {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  &.bottom-rounded {
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+  }
 
   // head-bottom-border
   &.head-bottom-border {
-    tr th {
+    .table-head-wrapper {
       border-bottom: 1px solid $gray-100;
     }
   }
   // head font weight normal
   &.head-font-weight-normal {
-    tr th {
+    th {
       font-weight: normal;
     }
   }
 
   &.head-background {
-    background: $white-100;
+    th {
+      background: $white-100;
+    }
+  }
+
+  &.__border {
+    border: 1px solid $gray-100;
+    border-top: 0;
+    th,
+    td {
+      border-top: 1px solid $gray-100;
+    }
+  }
+
+  &.td-bottom-border {
+    tr {
+      td {
+        border-bottom: 1px solid $gray-100;
+      }
+      &:last-child td {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  &.__stripe {
+    tbody {
+      tr {
+        &:nth-child(2n) {
+          background: $white-100;
+        }
+      }
+    }
+  }
+
+  &.td-space-vertical-line {
+    tbody {
+      td {
+        &:before {
+          position: absolute;
+          top: 15%;
+          left: 0;
+          content: '';
+          background: $gray-100;
+          width: 1px;
+          height: 70%;
+        }
+        &:first-child {
+          &:before {
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
+  // size
+  &.__medium {
+    td {
+      height: 70px;
+    }
+  }
+
+  &.__small {
+    .empty-content-wrapper {
+      font-size: 12px;
+    }
+    td {
+      height: 40px;
+    }
+  }
+
+  &.small-header {
+    th {
+      height: 30px;
+      font-size: 12px;
+    }
   }
 
   .table-th-item {
@@ -203,19 +383,18 @@ export default {
     }
   }
 
-  .user-item {
-    display: inline-block;
-    position: relative;
-    padding-left: 47px;
-    text-align: left;
-    .v-avatar {
-      position: absolute;
-      top: 0;
-      left: 0;
+  // padding
+  &.__lr10 {
+    th,
+    td {
+      padding-left: 10px;
+      padding-right: 10px;
     }
-    h5 {
-      text-indent: -6px;
-    }
+  }
+
+  // is-selected
+  .is-selected td {
+    background: $gray-100;
   }
 }
 </style>

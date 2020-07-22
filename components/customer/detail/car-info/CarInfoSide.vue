@@ -1,6 +1,8 @@
 <template>
-  <div class="ml20 mr20">
-    <v-img :src="require('~/static/customer/car.png')" />
+  <div class="customer-car-info-right-side-wrapper ml20 mr20">
+    <div class="car-photos-wrapper">
+      <v-img v-if="carSummary.photoKey" :src="carSummary.photoKey" />
+    </div>
 
     <h3>
       マッチング情報
@@ -126,18 +128,71 @@
         custom-font-weight="normal"
       />
     </v-card>
+
+    <h3>車検予約状況</h3>
+    <v-card outlined>
+      <ReservationTable :list="reservationList" />
+    </v-card>
   </div>
 </template>
 
 <script>
+import ReservationTable from './edit-reservation-dialog/ReservationTable'
 import TextContent from '~/components/customer/TextContent.vue'
 import HtmlContent from '~/components/customer/HtmlContent.vue'
 export default {
   components: {
     TextContent,
     HtmlContent,
+    ReservationTable,
+  },
+  props: {
+    carSummary: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+  },
+  data() {
+    return {
+      reservationList: [
+        {
+          type: '6ヶ月',
+          tentativeReservation: true,
+          reservation: true,
+          warehousing: true,
+        },
+        {
+          type: '12ヶ月',
+          tentativeReservation: false,
+          reservation: false,
+          warehousing: true,
+        },
+        {
+          type: '18ヶ月',
+          tentativeReservation: true,
+          reservation: true,
+          warehousing: true,
+        },
+        {
+          type: '車検',
+          tentativeReservation: true,
+          reservation: true,
+          warehousing: true,
+        },
+      ],
+    }
   },
 }
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.customer-car-info-right-side-wrapper {
+  .car-photos-wrapper {
+    width: 100%;
+    height: 210px;
+    background: $white-100 url('./img/car-photo.svg') no-repeat center center;
+  }
+}
+</style>
