@@ -67,6 +67,8 @@ export class RequestApi {
         headers: {
           ...this.getHeaders(),
           ...headers,
+          // 一時的テストのため
+          'X-CARS-MANAGER': 'textX-CARS-MANAGER',
         },
         data: _params,
       })
