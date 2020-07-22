@@ -1,0 +1,13 @@
+<template>
+  <Customer />
+</template>
+
+<script>
+import Customer from '~/components/customer/index'
+export default {
+  layout: 'manager',
+  components: {
+    Customer,
+  },
+}
+</script>
