@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button class="button" @click="$emit('clickEvent')">
     <v-img :src="require('~/static/common/search.svg')" />
   </button>
 </template>
@@ -10,4 +10,8 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+button {
+  outline: none;
+}
+</style>
