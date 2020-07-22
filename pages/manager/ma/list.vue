@@ -6,6 +6,9 @@
           <h3>[ 6月満期車検 対象者リスト ]</h3>
         </div>
       </template>
+      <template v-slot:right>
+        <ExportButton @click="handleImportClick" />
+      </template>
     </Breadcrumbs>
     <Searchbar :search-params="searchParams" @searchEvent="updateSearch" />
     <MaResult
@@ -13,6 +16,7 @@
       class="mt30"
       :item-list="maResultList"
     />
+    <ExportDialog v-model="importVisible" />
   </div>
 </template>
 
@@ -20,6 +24,8 @@
 import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import Searchbar from '~/components/ma/detail/Searchbar.vue'
 import MaResult from '~/components/ma/detail/MaResult.vue'
+import ExportButton from '~/components/ma/detail/ExportButton.vue'
+import ExportDialog from '~/components/ma/detail/export-dialog/index'
 
 const SEARCH_PARAMS = {
   offset: 0,
@@ -44,6 +50,8 @@ export default {
     Breadcrumbs,
     Searchbar,
     MaResult,
+    ExportButton,
+    ExportDialog,
   },
   data: () => ({
     page: '集客',
@@ -57,10 +65,7 @@ export default {
       ...SEARCH_PARAMS,
     },
     maResultList: {},
-    apiParams: {
-      categoryType: '0000',
-      targetDate: '202009',
-    },
+    importVisible: false,
   }),
   watch: {
     searchParams: {
@@ -100,6 +105,9 @@ export default {
         ...params,
         page: 1,
       }
+    },
+    handleImportClick() {
+      this.importVisible = true
     },
   },
 }
