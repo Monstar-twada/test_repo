@@ -74,11 +74,11 @@
               label="個人/法人 "
               :content="data.customerType | fmtHyphen"
             />
-            <TextContent
-              label="その他"
-              sub-label="システムID"
-              :content="'VerticeID : ' + (data.otherSystemId || '-')"
-            />
+            <TextContent label="その他" sub-label="システムID">
+              <div v-if="data.otherSystemId">
+                車両管理番号: {{ data.otherSystemId }}
+              </div>
+            </TextContent>
           </v-col>
         </v-row>
         <v-row class="ma-0 pb20">

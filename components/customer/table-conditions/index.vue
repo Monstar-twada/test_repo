@@ -32,26 +32,26 @@
       </v-col>
       <v-col cols="2">
         <Calendar
-          v-model="form.firstRegistrationDateFrom"
           label="初度登録年月 自"
+          @change="(date) => (form.firstRegistrationDateFrom = date)"
         />
       </v-col>
       <v-col cols="2">
         <Calendar
-          v-model="form.firstRegistrationDateTo"
           label="初度登録年月 至"
+          @change="(date) => (form.firstRegistrationDateTo = date)"
         />
       </v-col>
       <v-col cols="2">
         <Calendar
-          v-model="form.inspectionExpirationDateFrom"
           label="車検満了年月 自"
+          @change="(date) => (form.inspectionExpirationDateFrom = date)"
         />
       </v-col>
       <v-col cols="2">
         <Calendar
-          v-model="form.inspectionExpirationDateTo"
           label="車検満了年月 至"
+          @change="(date) => (form.inspectionExpirationDateTo = date)"
         />
       </v-col>
     </v-row>
@@ -102,7 +102,6 @@ export default {
   methods: {
     search() {
       this.$emit('change', this.form)
-      console.log(JSON.stringify(this.form, null, 2))
     },
   },
 }

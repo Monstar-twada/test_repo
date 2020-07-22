@@ -64,11 +64,36 @@
             <h4>取引種別</h4>
           </v-col>
           <v-col cols="10" class="px-0">
-            <v-chip small text-color="white" color="#1E5199">車販</v-chip>
-            <v-chip small text-color="white" color="#1E5199">整備</v-chip>
-            <v-chip small text-color="white" color="#aaa">車検</v-chip>
-            <v-chip small text-color="white" color="#aaa">鈑金</v-chip>
-            <v-chip small text-color="white" color="#aaa">保険</v-chip>
+            <v-chip
+              small
+              text-color="white"
+              :color="carSummary.tradeSales | fmtTransactionType"
+              >車販</v-chip
+            >
+            <v-chip
+              small
+              text-color="white"
+              :color="carSummary.tradeMaintenance | fmtTransactionType"
+              >整備</v-chip
+            >
+            <v-chip
+              small
+              text-color="white"
+              :color="carSummary.tradeInspection | fmtTransactionType"
+              >車検</v-chip
+            >
+            <v-chip
+              small
+              text-color="white"
+              :color="carSummary.tradeSheetMetal | fmtTransactionType"
+              >鈑金</v-chip
+            >
+            <v-chip
+              small
+              text-color="white"
+              :color="carSummary.tradeInsurance | fmtTransactionType"
+              >保険</v-chip
+            >
           </v-col>
         </v-row>
 
@@ -79,32 +104,63 @@
         <v-row no-gutters>
           <v-col cols="6">
             <div class="right-border pt10 pl20 pr20">
-              <TextContent label="メーカー" content="トヨタ" />
-              <TextContent label="車種" content="プリウス" />
-              <TextContent label="登録ナンバー" content="足立 310 あ 1234" />
-              <TextContent label="登録年月日" content="H30/12/01" />
-              <TextContent label="新中区分" content="中古車" />
+              <TextContent
+                label="メーカー"
+                :content="carBase.maker | fmtHyphen"
+              />
+              <TextContent label="車種" :content="carBase.class | fmtHyphen" />
+              <TextContent
+                label="登録ナンバー"
+                :content="carBase | fmtCarNumber"
+              />
+              <TextContent
+                label="登録年月日"
+                :content="carBase.registrationDate | fmtHyphen"
+              />
+              <TextContent
+                label="新中区分"
+                :content="carBase.newOldType | fmtHyphen"
+              />
               <TextContent
                 label="保険情報有無"
-                content="839294813493"
+                :content="carBase.insuranceNumber"
                 copyable
                 high-light
               >
-                <v-chip x-small text-color="white" color="#1E5199" class="ml5"
-                  >自社</v-chip
+                <v-chip
+                  v-if="carBase.insuranceType"
+                  x-small
+                  text-color="white"
+                  color="#1E5199"
+                  class="ml5"
+                  >{{ carBase.insuranceType }}</v-chip
                 >
               </TextContent>
-              <TextContent
-                label="その他システムID"
-                content="VerticeID : 0123456789"
-              />
+              <TextContent label="その他" sub-label="システムID">
+                <div v-if="carBase.otherSystemId">
+                  車両管理番号: {{ carBase.otherSystemId }}
+                </div>
+                <div v-if="carBase.otherSystemIdRelation">
+                  得意先コード: {{ carBase.otherSystemIdRelation }}
+                </div>
+              </TextContent>
             </div>
           </v-col>
           <v-col cols="6">
             <div class="pt10 pl20 pr20">
-              <TextContent label="グレード" content="Sツーリングセレクション" />
-              <TextContent label="初度登録年月" content="H29/02" />
-              <TextContent label="車検満了日" content="R2/03/24" flex>
+              <TextContent
+                label="グレード"
+                :content="carBase.grade | fmtHyphen"
+              />
+              <TextContent
+                label="初度登録年月"
+                :content="carBase.firstRegistrationDate | fmtHyphen"
+              />
+              <TextContent
+                label="車検満了日"
+                :content="carBase.inspectionExpirationDate | fmtHyphen"
+                flex
+              >
                 <RoundBorderButton
                   icon="calendar"
                   class="ml5"
@@ -114,18 +170,18 @@
               </TextContent>
               <TextContent
                 label="車検証有無"
-                content="839294813493"
-                copyable
+                :content="carBase.inspectionCertificate | fmtHyphen"
+                :copyable="!!carBase.inspectionCertificate"
                 high-light
               />
               <TextContent
                 label="代替対象"
-                content="対象"
+                :content="carBase.alternativeTarget | fmtAlternative"
                 custom-font-weight="normal"
               />
               <TextContent
                 label="代替反応"
-                content="あり"
+                :content="carBase.alternativeReaction"
                 custom-font-weight="normal"
               />
             </div>
@@ -141,17 +197,19 @@
             <div class="right-border pt10 pl20 pr20">
               <TextContent
                 label="小売価格"
-                content="¥2,340,000（R1/1/1時点）"
+                :content="carTrade.retailPrice | fmtHyphen"
               />
               <TextContent
                 label="本査定額"
-                content="¥910,000（H31/12/12時点）"
-                customheight="35"
+                :content="carTrade.assessmentAmount | fmtHyphen"
               />
-              <TextContent label="支払区分" content="ローン" />
+              <TextContent
+                label="支払区分"
+                :content="carTrade.paymentType | fmtHyphen"
+              />
               <TextContent
                 label="月々返済"
-                content="¥30,000（ボーナス時 ¥100,000）"
+                :content="carTrade.repaymentMonthly | fmtHyphen"
               />
             </div>
           </v-col>
@@ -159,16 +217,17 @@
             <div class="pt10 pl20 pr20">
               <TextContent
                 label="AI査定額"
-                content="¥1,594,000（R1/1/1時点）"
+                :content="carTrade.aiAssessmentAmount | fmtHyphen"
               />
-              <HtmlContent
-                label="<h3>予想価格</h3><h4>(マッチング)</h4>"
-                content="¥1,900,000（H31/12/12時点）"
-                customheight="35"
+              <TextContent
+                label="予想価格"
+                sub-label="(マッチング)"
+                is-small-sub-label
+                :content="carTrade.estimatedPrice | fmtHyphen"
               />
               <TextContent
                 label="支払残債"
-                content="¥510,000（H31/12/12時点）"
+                :content="carTrade.remainingAmount | fmtHyphen"
               />
             </div>
           </v-col>
@@ -180,10 +239,22 @@
               <SubTitle sub-title="税金/諸費用" />
             </div>
             <div class="pt10 pl20 pr20">
-              <TextContent label="自動車税" content="¥36,000" />
-              <TextContent label="自賠責保険" content="¥27,840" />
-              <TextContent label="重量税" content="¥24,600" />
-              <TextContent label="リサイクル" content="¥11,350" />
+              <TextContent
+                label="自動車税"
+                :content="carExpense.carTax | fmtMoney"
+              />
+              <TextContent
+                label="自賠責保険"
+                :content="carExpense.carInsurance | fmtMoney"
+              />
+              <TextContent
+                label="重量税"
+                :content="carExpense.weightTax | fmtMoney"
+              />
+              <TextContent
+                label="リサイクル"
+                :content="carExpense.recycleFee | fmtMoney"
+              />
             </div>
           </v-col>
           <v-col cols="6">
@@ -191,11 +262,20 @@
               <SubTitle sub-title="ランニングコスト/月" />
             </div>
             <div class="pt10 pl20 pr20">
-              <TextContent label="ガソリン代" content="¥10,000" />
-              <TextContent label="保険料" content="¥8,540" />
-              <TextContent label="駐車場代" content="¥12,000" />
+              <TextContent
+                label="ガソリン代"
+                :content="carCost.gasFee | fmtMoney"
+              />
+              <TextContent
+                label="保険料"
+                :content="carCost.insuranceFee | fmtMoney"
+              />
+              <TextContent
+                label="駐車場代"
+                :content="carCost.parkingFee | fmtMoney"
+              />
               <div class="double-line mt10 mb5"></div>
-              <TextContent label="月間コスト" content="¥30,540" />
+              <TextContent label="月間コスト" :content="carCost | sumCost" />
             </div>
           </v-col>
         </v-row>
@@ -211,35 +291,77 @@
         <v-row no-gutters>
           <v-col cols="6">
             <div class="right-border pt10 pl20 pr20 pb20">
-              <TextContent label="車台番号" content="ZVW51-0123456" />
-              <TextContent label="通称型式" content="ZVW51-AHXGB(T)" />
-              <TextContent label="エンジン型式" content="2ZR-1NM" />
-              <TextContent label="最大出力" content="72kW(98PS)" />
-              <TextContent label="最大トルク" content="142N･m" />
-              <TextContent label="タイヤサイズ" content="215/45R17" />
-              <TextContent label="バッテリーサイズ" content="LN1" />
-              <TextContent label="燃料タンク" content="43L" />
+              <TextContent
+                label="車台番号"
+                :content="carDetail.chassisNumber | fmtHyphen"
+              />
+              <TextContent
+                label="通称型式"
+                :content="carDetail.fullModel | fmtHyphen"
+              />
+              <TextContent
+                label="エンジン型式"
+                :content="carDetail.engineType | fmtHyphen"
+              />
+              <TextContent
+                label="最大出力"
+                :content="carDetail.maxOutput | fmtHyphen"
+              />
+              <TextContent
+                label="最大トルク"
+                :content="carDetail.maxTorque | fmtHyphen"
+              />
+              <TextContent
+                label="タイヤサイズ"
+                :content="carDetail.tireSize | fmtHyphen"
+              />
+              <TextContent
+                label="バッテリーサイズ"
+                :content="carDetail.batterySize | fmtHyphen"
+              />
+              <TextContent
+                label="燃料タンク"
+                :content="carDetail.fuelTank | fmtHyphen"
+              />
             </div>
           </v-col>
           <v-col cols="6">
             <div class="pt10 pl20 pr20">
               <TextContent
                 label="カラーコード"
-                content="3T7(サーモテクトライムグリーン)"
+                :content="carDetail.colorCode | fmtHyphen"
               />
-              <TextContent label="トリムコード" content="FA22(ブラック)" />
-              <TextContent label="モデル" content="後期型" />
-              <TextContent label="販売期間" content="2018/12~" />
-              <TextContent label="保証期間" content="~R4/2/24" />
-              <HtmlContent
-                label="<h3>燃費</h3><h4>(JC08モード)</h4>"
-                content="37.2km/L"
+              <TextContent
+                label="トリムコード"
+                :content="carDetail.trimCode | fmtHyphen"
               />
-              <TextContent label="車両重量" content="1,360Kg" />
-              <HtmlContent
-                label="車両寸法"
-                content="全長 4,575mm<br />全幅 1,760mm<br />全高 1,470mm"
+              <TextContent
+                label="モデル"
+                :content="carDetail.model | fmtHyphen"
               />
+              <TextContent
+                label="販売期間"
+                :content="carDetail.salesPeriod | fmtHyphen"
+              />
+              <TextContent
+                label="保証期間"
+                :content="carDetail.warrantyPeriod | fmtHyphen"
+              />
+              <TextContent
+                label="燃費"
+                sub-label="(JC08モード)"
+                is-small-sub-label
+                :content="carDetail.gasMileage | fmtHyphen"
+              />
+              <TextContent
+                label="車両重量"
+                :content="carDetail.weight | fmtCarWeight"
+              />
+              <TextContent label="車両寸法"
+                >全長 {{ carDetail.length | fmtCarSize }}<br />全幅
+                {{ carDetail.width | fmtCarSize }}<br />全高
+                {{ carDetail.height | fmtCarSize }}</TextContent
+              >
             </div>
           </v-col>
         </v-row>
@@ -248,12 +370,12 @@
         <div class="top-edit-button-wrapper">
           <RoundBorderButton />
         </div>
-        <CarInfoSide />
+        <CarInfoSide :car-summary="carSummary" />
       </v-col>
       <SelectCarDialog
         v-model="selectCarVisible"
         :data="carListData"
-        :current-car="currentCar"
+        :current-car="currentCarItem"
         @change="changeCar"
       />
       <EditReservationDialog v-model="reservationVisible" />
@@ -265,17 +387,35 @@ import SelectCarDialog from './select-car-dialog/index'
 import CarInfoSide from './CarInfoSide'
 import SubTitle from '~/components/customer/SubTitle.vue'
 import TextContent from '~/components/customer/TextContent.vue'
-import HtmlContent from '~/components/customer/HtmlContent.vue'
 import ColumnTitle from '~/components/customer/ColumnTitle'
 import PlusButton from '~/components/breadcrumbs/PlusButton'
 import RoundBorderButton from '~/components/customer/detail/button/RoundBorderButton'
-import EditReservationDialog from '~/components/customer/detail/edit-reservation-dialog'
+import EditReservationDialog from '~/components/customer/detail/car-info/edit-reservation-dialog'
+import {
+  fmtHyphen,
+  fmtCarNumber,
+  fmtAlternative,
+  fmtTransactionType,
+  fmtMoney,
+  sumCost,
+  fmtCarSize,
+  fmtCarWeight,
+} from '~/components/customer/helper'
+
 export default {
-  name: 'CarInfo',
+  filters: {
+    fmtHyphen,
+    fmtCarNumber,
+    fmtAlternative,
+    fmtTransactionType,
+    fmtMoney,
+    sumCost,
+    fmtCarSize,
+    fmtCarWeight,
+  },
   components: {
     SubTitle,
     TextContent,
-    HtmlContent,
     SelectCarDialog,
     ColumnTitle,
     PlusButton,
@@ -293,7 +433,13 @@ export default {
     selectCarVisible: false,
     reservationVisible: false,
     carListData: {},
-    currentCar: {},
+    currentCarItem: {},
+    carBase: {},
+    carSummary: {},
+    carTrade: {},
+    carExpense: {},
+    carCost: {},
+    carDetail: {},
   }),
   created() {
     this.getCarList()
@@ -301,7 +447,7 @@ export default {
   methods: {
     async getCarList() {
       const params = {
-        limit: 50,
+        limit: 500,
         offset: 0,
       }
       try {
@@ -309,10 +455,10 @@ export default {
           `/v1/customer/${this.customerId}/car`,
           params
         )
-        console.log('getCarList', res)
+        // console.log('getCarList', res)
         this.carListData = res || {}
         const carList = this.carListData.results || []
-        this.currentCar = carList[0] || {}
+        this.currentCarItem = carList[0] || {}
         await this.getCarInfo()
       } catch (e) {
         console.error(e)
@@ -321,15 +467,21 @@ export default {
     async getCarInfo() {
       try {
         const res = await this.$api.get(
-          `/v1/customer/${this.customerId}/car/${this.currentCar.carId}`
+          `/v1/customer/${this.customerId}/car/${this.currentCarItem.carId}`
         )
-        console.log('getCarInfo', res)
+        // console.log('getCarInfo', res)
+        this.carBase = res.customer.base || {}
+        this.carSummary = res.customer.summary || {}
+        this.carTrade = res.customer.trade || {}
+        this.carExpense = res.customer.expense || {}
+        this.carCost = res.customer.cost || {}
+        this.carDetail = res.customer.detail || {}
       } catch (e) {
         console.error(e)
       }
     },
     changeCar(item) {
-      this.currentCar = {
+      this.currentCarItem = {
         ...item,
       }
       this.getCarInfo()

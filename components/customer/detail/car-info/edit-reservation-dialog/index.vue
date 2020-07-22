@@ -3,20 +3,7 @@
     <v-card class="edit-reservation-dialog-card">
       <DialogHeader title="予約・入庫状況" @close="visible = false" />
 
-      <table cellspacing="0" cellpadding="0">
-        <tr>
-          <th></th>
-          <th>仮予約</th>
-          <th>予約</th>
-          <th>入庫</th>
-        </tr>
-        <tr v-for="(item, i) in list" :key="i">
-          <td>{{ item.type }}</td>
-          <td class="small">{{ fmtValue(item.tentativeReservation) }}</td>
-          <td class="small">{{ fmtValue(item.reservation) }}</td>
-          <td class="small">{{ fmtValue(item.warehousing) }}</td>
-        </tr>
-      </table>
+      <ReservationTable :list="list" />
 
       <div class="btn-wrapper">
         <v-btn depressed rounded color="#1295CE" height="40" dark
@@ -28,12 +15,14 @@
 </template>
 
 <script>
+import ReservationTable from './ReservationTable'
 import DialogHeader from '~/components/common/dialog-header/index'
 import Arrow from '~/components/customer/detail/memo-edit-dialog/Arrow'
 export default {
   components: {
     DialogHeader,
     Arrow,
+    ReservationTable,
   },
   props: {
     value: Boolean,
@@ -79,48 +68,12 @@ export default {
       this.$emit('input', val)
     },
   },
-  methods: {
-    fmtValue(val) {
-      return val ? '○' : 'ー'
-    },
-  },
 }
 </script>
 
 <style lang="scss">
 .edit-reservation-dialog-card {
   position: relative;
-  table {
-    width: 100%;
-    tr {
-      th {
-        background: #f2f6fa;
-        height: 40px;
-        border-left: 1px solid #dfe6f0;
-        font-size: 12px;
-        color: #446ba3;
-        border-bottom: 1px solid #dfe6f0;
-        font-weight: normal;
-        &:first-child {
-          border-left-width: 0;
-        }
-      }
-      td {
-        text-align: center;
-        color: $blue-200;
-        font-size: 12px;
-        border-left: 1px solid #dfe6f0;
-        border-bottom: 1px solid #dfe6f0;
-        height: 40px;
-        &:first-child {
-          border-left-width: 0;
-        }
-        &.small {
-          font-size: 8px;
-        }
-      }
-    }
-  }
   .btn-wrapper {
     margin: 30px auto 0;
     padding-bottom: 38px;

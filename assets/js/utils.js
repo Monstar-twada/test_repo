@@ -32,3 +32,34 @@ export function createUrlQuery(data, fields) {
   }, '?')
   return str.substr(0, str.length - 1)
 }
+
+/**
+ * to number
+ * @param value
+ * @returns {*}
+ */
+export function toNumber(value) {
+  return value >> 0
+}
+
+/**
+ * to comma number type
+ * @param value
+ * @param keepDecimalPlaces
+ * @returns {string|*}
+ */
+export function toCommaNumber(value, keepDecimalPlaces = false) {
+  if (!value) return value
+  const arr = value.toString().split('.')
+  const integerPartArray = arr[0].split('')
+  const result = []
+  let j = 0
+  for (let i = integerPartArray.length - 1; i >= 0; i--) {
+    result.push(integerPartArray[i])
+    if (j++ % 3 === 2) {
+      result.push(',')
+    }
+  }
+  arr[0] = result.reverse().join('').replace(/^,+/, '')
+  return keepDecimalPlaces ? arr.join('.') : arr[0]
+}

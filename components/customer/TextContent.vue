@@ -2,7 +2,9 @@
   <dl class="text-content pt5 pb5">
     <dt :style="TextStyle">
       {{ label }}
-      <div v-if="subLabel">{{ subLabel }}</div>
+      <div v-if="subLabel" :class="isSmallSubLabel ? 'is-small-sub-label' : ''">
+        {{ subLabel }}
+      </div>
     </dt>
     <dd :class="{ 'high-light': highLight, flex: flex }">
       {{ content }}
@@ -51,6 +53,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    isSmallSubLabel: Boolean,
   },
   computed: {
     TextStyle() {
@@ -62,7 +65,7 @@ export default {
   },
 }
 </script>
-<style lang="scss"></style>
+
 <style lang="scss" scoped>
 .text-content {
   width: 100%;
@@ -79,6 +82,10 @@ export default {
     /*height: var(--height);*/
     display: inline-block;
     font-weight: var(--weight);
+  }
+
+  .is-small-sub-label {
+    font-size: 0.8em;
   }
 
   dd {

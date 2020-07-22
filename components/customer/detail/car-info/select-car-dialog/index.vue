@@ -98,9 +98,6 @@ export default {
       if (this.visible !== val) {
         this.visible = val
       }
-      if (val) {
-        console.log(JSON.stringify(this.data, null, 2))
-      }
     },
     visible(val) {
       this.$emit('input', val)

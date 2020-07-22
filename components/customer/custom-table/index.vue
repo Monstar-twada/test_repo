@@ -147,7 +147,7 @@ export default {
   },
   watch: {
     list() {
-      console.log('watch list changed')
+      // console.log('watch list changed')
       this.initTableItemWidth()
     },
   },
@@ -207,7 +207,7 @@ export default {
     }
     .empty-content-wrapper {
       position: absolute;
-      z-index: 10;
+      z-index: 1;
       top: 0;
       left: 0;
       bottom: 0;
