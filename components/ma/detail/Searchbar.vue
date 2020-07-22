@@ -1,102 +1,173 @@
 <template>
   <div class="searchbar">
-    <v-row justify="left" align="center" class="mx-0">
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="顧客名"
-      />
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="住所"
-      />
-      <Select
-        v-model="manufacturers"
-        items="items"
-        class="mr20"
-        :list="manufacturers"
-        placeholder="メーカー"
-      />
-      <Select items="items" class="mr20" :list="list" placeholder="車種" />
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="電話番号"
-      />
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="メールアドレス"
-      />
+    <v-row justify="start" align="center" class="ma-0 pa-0">
+      <v-col cols="2">
+        <GlobalInput
+          v-model="search.name"
+          :customheight="28"
+          :customfontsize="10"
+          placeholder="顧客名"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalInput
+          v-model="search.city"
+          :customheight="28"
+          :customfontsize="10"
+          placeholder="住所"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.maker"
+          :options="manufacturers"
+          placeholder="メーカー"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.class"
+          placeholder="車種"
+          :options="carModels"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalInput
+          v-model="search.tel"
+          :customwidth="120"
+          :customheight="28"
+          :customfontsize="10"
+          placeholder="電話番号"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalInput
+          v-model="search.email"
+          :customheight="30"
+          :customfontsize="10"
+          placeholder="メールアドレス"
+        />
+      </v-col>
     </v-row>
-    <v-row justify="center" align="center" class="mt20 mx-0">
-      <Select
-        items="items"
-        class="mr20"
-        :list="list"
-        placeholder="コールステータス"
-      />
-      <Select
-        items="items"
-        class="mr20"
-        :list="list"
-        placeholder="DMステータス"
-      />
-      <Select
-        items="items"
-        class="mr20"
-        :list="list"
-        placeholder="SMSステータス"
-      />
-      <Select
-        items="items"
-        class="mr20"
-        :list="list"
-        placeholder="予約ステータス"
-      />
-      <Select
-        items="items"
-        class="mr20"
-        :list="list"
-        placeholder="入庫ステータス"
-      />
-      <ButtonSearch class="searchbar_button" />
+    <v-row justify="center" align="center" class="mx-0">
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.statusCall"
+          :options="statusList"
+          placeholder="コールステータス"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.statusDM"
+          :options="statusList"
+          placeholder="DMステータス"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.statusSMS"
+          :options="statusList"
+          placeholder="SMSステータス"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.reserve"
+          :options="statusList"
+          placeholder="予約ステータス"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <v-col cols="2">
+        <GlobalSelector
+          v-model="search.warehouse"
+          :options="statusList"
+          placeholder="入庫ステータス"
+          clearable
+          text-size="mini"
+        />
+      </v-col>
+      <ButtonSearch class="searchbar_button" @clickEvent="searchButtonClick" />
     </v-row>
   </div>
 </template>
 
 <script>
-import Input from '~/components/common/Input.vue'
-import Select from '~/components/common/Select.vue'
+import { getManufacturerList } from '~/components/customer/manufacturers.js'
+import GlobalInput from '~/components/common/global-input/index'
 import ButtonSearch from '~/components/common/ButtonSearch.vue'
-import { manufacturerList } from '~/components/customer/manufacturers'
+import GlobalSelector from '~/components/common/global-selector/index'
+
 export default {
   name: 'Searchbar',
   components: {
-    Input,
-    Select,
+    GlobalInput,
     ButtonSearch,
+    GlobalSelector,
   },
-  data: () => ({
-    list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    manufacturers: manufacturerList.map((item) => item.text),
-  }),
+  props: {
+    searchParams: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+  },
+  data() {
+    return {
+      statusList: [
+        {
+          text: 'ー',
+          value: 0,
+        },
+        {
+          text: '○',
+          value: 1,
+        },
+      ],
+      search: {
+        ...this.searchParams,
+      },
+      manufacturers: [...getManufacturerList()],
+    }
+  },
+  computed: {
+    carModels() {
+      const data =
+        this.manufacturers.find((item) => item.text === this.search.maker) || {}
+      return data.child || []
+    },
+  },
+  watch: {
+    'search.maker'() {
+      this.search.class = ''
+    },
+  },
+
+  methods: {
+    searchButtonClick() {
+      this.$emit('searchEvent', this.search)
+    },
+  },
 }
 </script>
 <style lang="scss"></style>
 <style lang="scss" scoped>
 .searchbar {
   width: 100%;
-  padding: 20px;
+  padding: 5px 20px;
   height: 120px;
   border-radius: 5px;
   background-color: $white-300;

@@ -7,8 +7,12 @@
         </div>
       </template>
     </Breadcrumbs>
-    <Searchbar />
-    <MaResult class="mt30" />
+    <Searchbar :search-params="searchParams" @searchEvent="updateSearch" />
+    <MaResult
+      v-model="searchParams.page"
+      class="mt30"
+      :item-list="maResultList"
+    />
   </div>
 </template>
 
@@ -16,9 +20,26 @@
 import Breadcrumbs from '~/components/breadcrumbs/index.vue'
 import Searchbar from '~/components/ma/detail/Searchbar.vue'
 import MaResult from '~/components/ma/detail/MaResult.vue'
+
+const SEARCH_PARAMS = {
+  offset: 0,
+  limit: 10,
+  name: '',
+  city: '',
+  maker: '',
+  class: '',
+  tel: '',
+  email: '',
+  statusCall: '',
+  statusDM: '',
+  statusSMS: '',
+  reserve: '',
+  warehouse: '',
+  page: 1,
+}
 export default {
   layout: 'manager',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     Searchbar,
@@ -32,7 +53,55 @@ export default {
         href: '',
       },
     ],
+    searchParams: {
+      ...SEARCH_PARAMS,
+    },
+    maResultList: {},
+    apiParams: {
+      categoryType: '0000',
+      targetDate: '202009',
+    },
   }),
+  watch: {
+    searchParams: {
+      deep: true,
+      handler() {
+        this.getMaResult()
+      },
+    },
+  },
+  created() {
+    this.apiParams = {
+      ...this.$route.params,
+    }
+    this.getMaResult()
+  },
+  methods: {
+    async getMaResult() {
+      const params = {
+        ...this.searchParams,
+      }
+      params.offset = (params.page - 1) * params.limit
+      await this.$api
+        .post(
+          `/v1/marketing/targeting/${this.$route.query.type}/${this.$route.query.date}`,
+          params
+        )
+        .then((data) => {
+          this.maResultList = data
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+    updateSearch(params) {
+      this.searchParams = {
+        ...this.searchParams,
+        ...params,
+        page: 1,
+      }
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>

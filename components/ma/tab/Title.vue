@@ -1,17 +1,17 @@
 <template>
   <v-row class="Title mx-0" justify="start" align="start">
-    <div class="Title__title ml20">
-      <div class="Title__title-left">
+    <div class="Title-left ml20">
+      <div class="Title-left__title">
         <h2>{{ title }}</h2>
         <h4 class="mt10">{{ subTitle1 }}</h4>
         <h4>{{ subTitle2 }}</h4>
       </div>
-      <div v-if="isSelectComp" class="Title__title-select">
-        <Select
+      <div v-if="isSelectComp" class="Title-left__select">
+        <GlobalSelector
+          v-model="selected"
           items="items"
-          :customwidth="160"
-          :list="selectItem"
-          :placeholder="selectItem[0]"
+          :options="selectItem"
+          :placeholder="selectItem[0].text"
         />
       </div>
     </div>
@@ -26,11 +26,11 @@
   </v-row>
 </template>
 <script>
-import Select from '~/components/common/Select.vue'
+import GlobalSelector from '~/components/common/global-selector/index'
 export default {
   name: 'Title',
   components: {
-    Select,
+    GlobalSelector,
   },
   props: {
     title: {
@@ -71,6 +71,23 @@ export default {
         return []
       },
     },
+    value: {
+      type: [Number, String],
+      default: '',
+    },
+  },
+  data() {
+    return {
+      selected: this.value,
+    }
+  },
+  watch: {
+    value(val) {
+      this.selected = val
+    },
+    selected(val) {
+      this.$emit('input', val)
+    },
   },
 }
 </script>
@@ -81,14 +98,19 @@ export default {
   color: $blue-200;
   flex-direction: column;
 
-  &__title {
+  &-left {
     color: $blue-200;
     padding-right: 20px;
     border-right: 1px $gray-100 solid;
     display: flex;
 
-    &-left {
+    &__title {
       margin-right: 30px;
+    }
+
+    &__select {
+      width: 140px;
+      display: flex;
     }
   }
   &__content {
