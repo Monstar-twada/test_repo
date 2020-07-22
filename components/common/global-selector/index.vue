@@ -1,7 +1,13 @@
 <template>
   <div
     class="global-selector-wrapper"
-    :class="['__' + size, '__' + theme, disabled ? '' : 'selectable']"
+    :class="[
+      '__' + size,
+      '__' + theme,
+      disabled ? '' : 'selectable',
+      'text-size-' + textSize,
+      clearable ? '__clearable' : '',
+    ]"
     :style="style"
   >
     <div
@@ -14,7 +20,8 @@
         <span v-if="selectText" class="text">{{ selectText }}</span>
         <span v-else class="placeholder">{{ placeholder }}</span>
       </keep-alive>
-      <i :class="optionsVisible ? 'is-show' : ''"
+      <i class="__clear" @click="clear($event)"></i>
+      <i :class="['__arrow', optionsVisible ? 'is-show' : '']"
         ><ArrowSvgIcon :color="iconColor"
       /></i>
     </div>
@@ -77,6 +84,10 @@ export default {
       type: String,
       default: 'small',
     },
+    textSize: {
+      type: String,
+      default: '',
+    },
     theme: {
       type: String,
       default: 'default',
@@ -90,6 +101,7 @@ export default {
       type: String,
       default: '',
     },
+    clearable: Boolean,
   },
   data() {
     const item = this.options.find((item) => item.value === this.value) || {}
@@ -97,6 +109,7 @@ export default {
       optionsVisible: false,
       selectText: item.text || this.placeholder,
       selectValue: this.value,
+      clearVisible: true,
     }
   },
   computed: {
@@ -183,6 +196,11 @@ export default {
     addPrefix(t) {
       return this.itemPrefix + t
     },
+    clear(e) {
+      e.stopPropagation()
+      this.selectText = null
+      this.selectValue = null
+    },
   },
 }
 </script>
@@ -228,6 +246,30 @@ $smallHeight: 28px;
         display: inline-block;
         margin-top: 3px;
         vertical-align: top;
+      }
+      &.__clear {
+        cursor: pointer;
+        transform: rotate(45deg);
+        display: none;
+        &:before,
+        &:after {
+          position: absolute;
+          display: inline-block;
+          content: '';
+          background: $blue-200;
+        }
+        &:before {
+          top: 5px;
+          left: 0;
+          width: 12px;
+          height: 2px;
+        }
+        &:after {
+          top: 0;
+          left: 5px;
+          width: 2px;
+          height: 12px;
+        }
       }
     }
   }
@@ -302,6 +344,12 @@ $smallHeight: 28px;
           color: $blue-100;
         }
       }
+      i.__clear {
+        &:before,
+        &:after {
+          background: $blue-100;
+        }
+      }
     }
     dl {
       dt {
@@ -363,6 +411,12 @@ $smallHeight: 28px;
           opacity: 0.5;
         }
       }
+      i.__clear {
+        &:before,
+        &:after {
+          background: $white-300;
+        }
+      }
     }
     dl {
       dt {
@@ -391,6 +445,34 @@ $smallHeight: 28px;
   &.__small {
     .result-wrapper {
       height: $smallHeight;
+    }
+  }
+
+  // text/font size
+  &.text-size-mini {
+    .result-wrapper {
+      span {
+        font-size: 10px;
+      }
+    }
+    dl {
+      dt,
+      dd {
+        font-size: 10px;
+      }
+    }
+  }
+
+  &.__clearable.selectable {
+    .result-wrapper {
+      &:hover {
+        .__arrow {
+          display: none;
+        }
+        .__clear {
+          display: block;
+        }
+      }
     }
   }
 }
