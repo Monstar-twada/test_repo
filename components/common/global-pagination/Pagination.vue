@@ -297,7 +297,7 @@ $normalHeight: 24px;
       }
     }
     .prev-next-group {
-      span {
+      button {
         box-sizing: border-box;
         &.__prev {
           border: 1px solid $gray-100;
