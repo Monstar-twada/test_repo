@@ -7,10 +7,15 @@
 export default {
   name: 'SwitchButton',
   props: {
-    switchFlg: {
+    value: {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      switchFlg: this.value,
+    }
   },
   computed: {
     stateSwitch: {
@@ -18,8 +23,16 @@ export default {
         return this.switchFlg
       },
       set() {
-        // do update
+        this.switchFlg = !this.switchFlg
       },
+    },
+  },
+  watch: {
+    value(val) {
+      this.switchFlg = val
+    },
+    switchFlg(val) {
+      this.$emit('input', val)
     },
   },
 }

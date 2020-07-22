@@ -19,11 +19,11 @@
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前年比</h4>
-          <Increase content="3.2%" />
+          <Decrease content="3.2%" />
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前々年比</h4>
-          <Decrease content="5.8%" />
+          <Increase content="5.8%" />
         </div>
       </div>
     </div>
@@ -39,11 +39,11 @@
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前年比</h4>
-          <Increase content="4.5%" />
+          <Decrease content="4.5%" />
         </div>
         <div class="stats__right__percent d-flex">
           <h4 class="stats__right__percent--label">前々年比</h4>
-          <Decrease content="3.5%" />
+          <Increase content="3.5%" />
         </div>
       </div>
     </div>
