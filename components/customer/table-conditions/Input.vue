@@ -1,7 +1,11 @@
 <template>
   <div
     class="table-conditions-input-wrapper"
-    :class="[clearable ? 'clearable' : '', 'text-size-' + textSize]"
+    :class="[
+      clearable ? 'clearable' : '',
+      'text-size-' + textSize,
+      disabled ? '' : 'cur',
+    ]"
     @click="handleClick"
     @mouseenter="clearVisible = clearable && value"
     @mouseleave="clearVisible = false"
@@ -33,6 +37,7 @@ export default {
       type: String,
       default: '',
     },
+    disabled: Boolean,
   },
   data() {
     return {
@@ -84,6 +89,9 @@ export default {
   border-radius: 4px;
   padding: 0 10px;
   overflow: hidden;
+  &.cur {
+    cursor: pointer;
+  }
   input {
     display: block;
     width: 100%;
