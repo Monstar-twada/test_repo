@@ -20,7 +20,7 @@
         v-model="manufacturer"
         items="items"
         class="mr20"
-        :list="manufacturers"
+        :list="list"
         placeholder="メーカー"
       />
       <Select
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { manufacturerList } from './manufacturers'
+// import { manufacturerList } from './manufacturers'
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
 import Calendar from '~/components/common/Calendar.vue'
@@ -68,16 +68,16 @@ export default {
   data() {
     return {
       list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-      manufacturers: manufacturerList.map((item) => item.text),
+      // list: manufacturerList.map((item) => item.text),
       manufacturer: '',
       carModel: '',
     }
   },
   computed: {
     carModels() {
-      const data =
-        manufacturerList.find((item) => item.text === this.manufacturer) || {}
-      return data.child || []
+      // const data =
+      //  manufacturerList.find((item) => item.text === this.manufacturer) || {}
+      return []
     },
   },
   watch: {

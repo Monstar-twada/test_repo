@@ -1,20 +1,23 @@
 <template>
   <div class="ma-list">
-    <PaginationComponent
-      :current-page.sync="currentPage"
-      :total="itemlist.length"
-      :per-page="itemsPerPage"
-      @updateEvent="updatePageNumber"
+    <GlobalPagination
+      v-model="currentPage"
+      class="mb15"
+      :total="itemList.total"
+      :page-size="itemList.limit"
     />
     <v-data-table
       :headers="headers"
-      :items="itemlist"
-      :items-per-page="itemsPerPage"
+      :items="itemList.results"
+      :items-per-page="itemList.limit"
       :page.sync="currentPage"
       hide-default-footer
       @click:row="
-        (itemlist) => {
-          $router.push(`/customer/detail/`)
+        (item) => {
+          $router.push({
+            path: '/customer/detail/',
+            query: { id: item.customerId },
+          })
         }
       "
     >
@@ -24,55 +27,70 @@
             <v-img :src="require('~/static/customer/profile-edit.svg')"></v-img>
           </v-avatar>
           <div class="user__name ml10">
-            <h3>{{ item.name }}</h3>
-            <span>({{ item.age }}歳)</span>
+            <h3>{{ item.lastName }}&nbsp;&nbsp;{{ item.firstName }}</h3>
+            <span>({{ item.age ? item.age : 'ー' }}歳)</span>
           </div>
+        </div>
+      </template>
+      <template v-slot:item.address="{ item }">
+        <div class="address">
+          <h4>{{ item.city }}{{ item.address1 }}{{ item.address2 }}</h4>
         </div>
       </template>
       <template v-slot:item.maker="{ item }">
         <div class="car">
-          <h4>{{ item.car_maker }}</h4>
-          <h4>{{ item.car_type }}</h4>
+          <h4>{{ item.maker }}</h4>
+          <h4>{{ item.class }}</h4>
         </div>
       </template>
       <template v-slot:item.tel="{ item }">
         <div class="tel">
-          <h4 class="fixed-tel">{{ item.fixed_tel }}</h4>
-          <h4 class="mobile-tel">{{ item.mobile_tel }}</h4>
+          <h4 class="fixed-tel">{{ item.phoneNumber }}</h4>
+          <h4 class="mobile-tel">{{ item.cellPhoneNumber }}</h4>
         </div>
       </template>
       <template v-slot:item.call="{ item }">
-        <BooleanFlg :flg="item.call" />
+        <BooleanFlg :flg="item.statusCall === '1'" />
       </template>
       <template v-slot:item.dm="{ item }">
-        <BooleanFlg :flg="item.dm" />
+        <BooleanFlg :flg="item.statusDM === '1'" />
       </template>
       <template v-slot:item.sms="{ item }">
-        <BooleanFlg :flg="item.sms" />
+        <BooleanFlg :flg="item.statusSMS === '1'" />
       </template>
-      <template v-slot:item.order="{ item }">
-        <BooleanFlg :flg="item.order" />
+      <template v-slot:item.reserve="{ item }">
+        <BooleanFlg :flg="item.reserve === '1'" />
       </template>
-      <template v-slot:item.storing="{ item }">
-        <BooleanFlg :flg="item.storing" />
+      <template v-slot:item.warehouse="{ item }">
+        <BooleanFlg :flg="item.warehouse === '1'" />
       </template>
     </v-data-table>
-    <PaginationComponent
-      :current-page.sync="currentPage"
-      :total="itemlist.length"
-      :per-page="itemsPerPage"
-      @updateEvent="updatePageNumber"
+    <GlobalPagination
+      v-model="currentPage"
+      class="mt10"
+      :total="itemList.total"
+      :page-size="itemList.limit"
     />
   </div>
 </template>
 <script>
-import PaginationComponent from '~/components/common/PaginationComponent.vue'
+import GlobalPagination from '~/components/common/global-pagination/index'
 import BooleanFlg from '~/components/ma/detail/BooleanFlg.vue'
 export default {
   name: 'CustomerResult',
   components: {
-    PaginationComponent,
+    GlobalPagination,
     BooleanFlg,
+  },
+  props: {
+    itemList: {
+      type: Object,
+      default: null,
+    },
+    value: {
+      type: Number,
+      default: 1,
+    },
   },
   data: () => ({
     headers: [
@@ -80,10 +98,10 @@ export default {
         text: 'ID',
         sortable: true,
         align: 'center',
-        value: 'id',
+        value: 'customerId',
         width: '50px',
       },
-      { text: '顧客名', value: 'name', align: 'center', width: '180px' },
+      { text: '顧客名', value: 'name', align: 'start', width: '180px' },
       {
         text: '住所',
         value: 'address',
@@ -101,7 +119,7 @@ export default {
       { text: '電話番号', value: 'tel', align: 'start', sortable: false },
       {
         text: 'メールアドレス',
-        value: 'mail',
+        value: 'email',
         align: 'center',
         sortable: false,
       },
@@ -128,231 +146,27 @@ export default {
       },
       {
         text: '予約',
-        value: 'order',
+        value: 'reserve',
         align: 'center',
         width: '60px',
         sortable: false,
       },
       {
         text: '入庫',
-        value: 'storing',
+        value: 'warehouse',
         align: 'center',
         width: '60px',
         sortable: false,
       },
     ],
-    itemlist: [
-      {
-        id: 12301,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: false,
-        storing: false,
-      },
-      {
-        id: 12302,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: false,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12303,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12304,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: false,
-        storing: false,
-      },
-      {
-        id: 12305,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: false,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12306,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12307,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: false,
-        storing: false,
-      },
-      {
-        id: 12308,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: false,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12309,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12310,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: false,
-        storing: false,
-      },
-      {
-        id: 12311,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: false,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-      {
-        id: 12312,
-        name: '米田 道春',
-        address: '東京都渋谷区渋谷2丁目',
-        image_path: 'person.png',
-        age: 31,
-        fixed_tel: '03-1234-1234',
-        mobile_tel: '080-1234-1234',
-        mail: 'yoneda@gmail.com',
-        car_maker: 'トヨタ',
-        car_type: 'プリンス',
-        call: true,
-        dm: false,
-        sms: true,
-        order: true,
-        storing: false,
-      },
-    ],
     currentPage: 1,
-    itemsPerPage: 10,
   }),
-  methods: {
-    updatePageNumber(newPage) {
-      this.currentPage = newPage
+  watch: {
+    value(val) {
+      this.currentPage = val
+    },
+    currentPage(val) {
+      this.$emit('input', val)
     },
   },
 }
@@ -475,8 +289,8 @@ export default {
 }
 .user {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   &__name {
     text-align: left;
