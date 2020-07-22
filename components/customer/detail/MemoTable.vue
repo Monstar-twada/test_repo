@@ -6,7 +6,7 @@
 
     <GlobalTable
       :headers="headers"
-      :is-empty="list.length === 0"
+      :list="list"
       head-font-weight-normal
       head-background
       td-bottom-border

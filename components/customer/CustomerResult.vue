@@ -8,7 +8,7 @@
     />
     <CustomTable
       :headers="headers"
-      :is-empty="tableData.total === 0"
+      :list="list"
       padding="lr10"
       rounded
       head-bottom-border

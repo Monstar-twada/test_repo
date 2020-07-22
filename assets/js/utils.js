@@ -51,15 +51,14 @@ export function toNumber(value) {
 export function toCommaNumber(value, keepDecimalPlaces = false) {
   if (!value) return value
   const arr = value.toString().split('.')
-  const integerPartArray = arr[0].split('')
+  const integerPartArray = arr[0].split('').reverse()
   const result = []
-  let j = 0
-  for (let i = integerPartArray.length - 1; i >= 0; i--) {
-    result.push(integerPartArray[i])
-    if (j++ % 3 === 2) {
+  for (let i = 0; i < integerPartArray.length; i++) {
+    if (i && i % 3 === 0) {
       result.push(',')
     }
+    result.push(integerPartArray[i])
   }
-  arr[0] = result.reverse().join('').replace(/^,+/, '')
+  arr[0] = result.reverse().join('')
   return keepDecimalPlaces ? arr.join('.') : arr[0]
 }

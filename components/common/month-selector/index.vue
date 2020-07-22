@@ -40,6 +40,9 @@ export default {
     disabled: Boolean,
   },
   data() {
+    console.error(
+      'This common/month-selector will be removed, please use "~/components/common/global-selector/index" component instead'
+    )
     const item = this.items.find((item) => item.value === this.value) || {}
     return {
       selectValue: this.value,

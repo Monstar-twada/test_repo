@@ -110,7 +110,7 @@
                 >（{{ data.age | fmtHyphen }}歳）</span
               >
             </dt>
-            <dd>{{ [data.firstNameKana, data.lastNameKana].join(' ') }}</dd>
+            <dd>{{ [data.lastNameKana, data.firstNameKana].join(' ') }}</dd>
             <dd class="pt10">ユーザー名:{{ data.userName | fmtHyphen }}</dd>
             <dd>ユーザーID:{{ data.userId | fmtHyphen }}</dd>
           </dl>
