@@ -119,7 +119,8 @@ export function fmtCarSize(value) {
  */
 export function fmtDate(value) {
   if (!value) return '-'
-  if (/^\d+/.test(value) && value.length > 4) {
+  // 202006
+  if (/^\d+$/.test(value) && value.length > 4) {
     value = value.substr(0, 4) + '/' + value.substr(4)
   }
   return value.replace(/-/g, '/')
