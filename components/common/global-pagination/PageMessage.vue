@@ -42,5 +42,12 @@ $normalHeight: 24px;
       color: $white-300;
     }
   }
+
+  &.__blue {
+    strong,
+    span {
+      color: $blue-200;
+    }
+  }
 }
 </style>

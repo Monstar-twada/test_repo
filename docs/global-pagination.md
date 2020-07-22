@@ -1,7 +1,7 @@
 # global-pagination
 
 ```javascript
-// 1025 件中 0〜10件を表示      |< 12345678910 >| <>
+// 1025 件中 1〜10件を表示      |< 12345678910 >| <>
 import GlobalPagination from '~/components/common/global-pagination/index'
 
 // |< 12345678910 >| <>

@@ -30,6 +30,7 @@ export default {
   padding: 0 12px;
   outline: none;
   border: 1px solid #ebf1f8;
+  white-space: nowrap;
   i {
     display: inline-block;
     margin-right: 4px;

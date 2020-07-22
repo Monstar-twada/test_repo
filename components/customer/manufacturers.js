@@ -1,3 +1,5 @@
+import { storage } from '~/assets/js/storage'
+
 const manufacturersString = `
   ＢＭＷ	１シリーズ
   ＢＭＷ	２シリーズ
@@ -869,23 +871,45 @@ const manufacturersString = `
   日野	リエッセⅡ
   日野	レンジャー`
 
+const arr = []
 const data = {}
-let temp
+let tempArr, tempName
 manufacturersString.split(/[\n\r]/).forEach((item) => {
-  temp = item.trim().split(/\t/)
-  if (temp[0]) {
-    if (!data[temp[0]]) {
-      data[temp[0]] = []
+  tempArr = item.trim().split(/\t/)
+  tempName = tempArr[0]
+  if (tempName) {
+    if (!data[tempName]) {
+      data[tempName] = []
+      arr.push(tempName)
     }
-    data[temp[0]].push(temp[1])
+    data[tempName].push({
+      text: tempArr[1],
+      value: tempArr[1],
+    })
   }
 })
 
-const manufacturerList = Object.keys(data).map((item) => {
+const manufacturerList = arr.map((item) => {
   return {
     text: item,
+    value: item,
     child: data[item],
   }
 })
 
-export { manufacturerList }
+const CACHE_KEY = 'MANUFACTURE_OPTIONS'
+
+/**
+ * get manufacturer list
+ * @returns {{text: *, value: *, child: *}[]|any}
+ */
+function getManufacturerList() {
+  if (storage.get(CACHE_KEY)) {
+    return storage.get(CACHE_KEY)
+  } else {
+    storage.set(CACHE_KEY, manufacturerList)
+    return manufacturerList
+  }
+}
+
+export { getManufacturerList }
