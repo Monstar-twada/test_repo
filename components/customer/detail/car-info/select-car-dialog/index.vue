@@ -12,7 +12,7 @@
       <GlobalTable
         :headers="tableHeaders"
         body-height="450px"
-        :is-empty="data.total === 0"
+        :list="list"
         head-font-weight-normal
         head-background
         td-space-vertical-line

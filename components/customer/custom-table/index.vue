@@ -79,7 +79,12 @@ export default {
         return []
       },
     },
-    isEmpty: Boolean,
+    list: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
     rounded: {
       type: Boolean,
       default: false,
@@ -144,10 +149,12 @@ export default {
       })
       return items
     },
+    isEmpty() {
+      return this.list.length === 0
+    },
   },
   watch: {
     list() {
-      // console.log('watch list changed')
       this.initTableItemWidth()
     },
   },
@@ -156,7 +163,7 @@ export default {
   },
   methods: {
     initTableItemWidth() {
-      this.$nextTick(() => {
+      let timer = setTimeout(() => {
         const head = this.$refs.head
         if (!head) return
         const headWidth = head.offsetWidth
@@ -175,7 +182,9 @@ export default {
             0
           ).map((el) => el.offsetWidth)
         }
-      })
+        clearTimeout(timer)
+        timer = null
+      }, 0)
     },
   },
 }
