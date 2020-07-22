@@ -9,11 +9,7 @@
           <SubTitle sub-title="基本情報" class="mt10 ml20" />
           <v-col cols="6" align-self="start" class="right-border p20 pb-0">
             <TextContent label="住所">
-              〒{{ data.zipCode }}<br />{{
-                [data.prefecture, data.city, data.address1, data.address2].join(
-                  ''
-                )
-              }}
+              〒{{ data.zipCode }}<br />{{ data | fmtAddress }}
             </TextContent>
             <TextContent label="性別" :content="data.sex | fmtHyphen" />
             <TextContent
@@ -25,10 +21,7 @@
               :content="data.phoneNumber | fmtHyphen"
             />
             <TextContent label="メール" :content="data.email | fmtHyphen" />
-            <TextContent
-              label="生年月日"
-              :content="data.birthday | fmtHyphen"
-            />
+            <TextContent label="生年月日" :content="data.birthday | fmtDate" />
             <TextContent label="家族構成">
               {{ data.family | fmtHyphen }}
             </TextContent>
@@ -105,12 +98,12 @@
           </v-avatar>
           <dl>
             <dt>
-              {{ fmtCustomerName(data) }}
+              {{ data | fmtCustomerName }}
               <span style="font-size: 10px;"
                 >（{{ data.age | fmtHyphen }}歳）</span
               >
             </dt>
-            <dd>{{ [data.lastNameKana, data.firstNameKana].join(' ') }}</dd>
+            <dd>{{ data | fmtNameKana }}</dd>
             <dd class="pt10">ユーザー名:{{ data.userName | fmtHyphen }}</dd>
             <dd>ユーザーID:{{ data.userId | fmtHyphen }}</dd>
           </dl>
@@ -134,7 +127,7 @@
               @click="handleClickRow(item)"
             >
               <td>{{ item.transactionType }}</td>
-              <td>{{ item.inputDate }}</td>
+              <td>{{ item.inputDate | fmtDate }}</td>
               <td>{{ item.storeName }}</td>
             </tr>
           </CustomerTable>
@@ -152,22 +145,24 @@ import TextContent from '~/components/customer/TextContent.vue'
 import RoundBorderButton from '~/components/customer/detail/button/RoundBorderButton'
 import ColumnTitle from '~/components/customer/ColumnTitle'
 import InvitationDialog from '~/components/customer/detail/invitation-dialog/index'
-import { fmtCustomerName, fmtHyphen } from '~/components/customer/helper'
+import {
+  fmtCustomerName,
+  fmtHyphen,
+  fmtDate,
+  fmtAddress,
+  fmtNameKana,
+  fmtWork,
+} from '~/components/customer/helper'
 import CustomerTable from '~/components/customer/custom-table/index'
 export default {
   name: 'CustomerInfo',
   filters: {
     fmtHyphen,
-    fmtWork(item) {
-      const arr = []
-      if (item.workName) {
-        arr.push(item.workName)
-      }
-      if (item.workPhoneNumber) {
-        arr.push(`(${item.workPhoneNumber})`)
-      }
-      return fmtHyphen(arr.join(''))
-    },
+    fmtWork,
+    fmtDate,
+    fmtAddress,
+    fmtNameKana,
+    fmtCustomerName,
   },
   components: {
     SubTitle,
@@ -239,7 +234,6 @@ export default {
       this.currentQrItem = item
       this.qrVisible = true
     },
-    fmtCustomerName,
   },
 }
 </script>
