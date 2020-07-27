@@ -1,10 +1,10 @@
 <template>
-  <v-dialog v-model="visible" max-width="480px">
+  <v-dialog v-model="visible" persistent max-width="480px">
     <v-card class="questionnaire-results-dialog-card">
       <DialogHeader title="アンケート結果" @close="visible = false" />
       <ul class="remark">
         <li>取引種別：{{ item.transactionType }}</li>
-        <li>回答日時：{{ item.inputDate }}</li>
+        <li>回答日時：{{ item.inputDate | fmtDate }}</li>
         <li>店舗：{{ item.storeName }}</li>
       </ul>
       <dl class="list-wrapper">
@@ -21,7 +21,12 @@
 
 <script>
 import DialogHeader from '~/components/common/dialog-header/index'
+import { fmtDate } from '~/components/customer/helper'
+
 export default {
+  filters: {
+    fmtDate,
+  },
   components: {
     DialogHeader,
   },

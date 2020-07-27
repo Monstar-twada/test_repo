@@ -118,7 +118,7 @@
             size="small"
             body-height="240px"
             bottom-rounded
-            :is-empty="enqueteList.length === 0"
+            :list="enqueteList"
           >
             <tr
               v-for="(item, i) in enqueteList"
@@ -213,6 +213,7 @@ export default {
       headers: [
         {
           text: '取引種別',
+          width: 100,
         },
         { text: '回答日時' },
         { text: '店舗' },

@@ -344,12 +344,13 @@ export default {
       td {
         &:before {
           position: absolute;
-          top: 15%;
+          top: 50%;
           left: 0;
+          margin-top: -25px;
           content: '';
           background: $gray-100;
           width: 1px;
-          height: 70%;
+          height: 50px;
         }
         &:first-child {
           &:before {

@@ -13,29 +13,29 @@
     <v-row no-gutters>
       <v-col cols="8" class="p20">
         <div class="mt10 ml20">
-          <SubTitle sub-title="プリウス" />
+          <SubTitle :sub-title="carSummary.name | fmtHyphen" />
         </div>
         <v-row no-gutters class="customer-car__owner p20">
           <v-col cols="3" class="">
             <h4>所有者</h4>
-            <v-avatar size="24" class="ml10">
+            <v-avatar v-if="carSummary.owner" size="24" class="ml10">
               <v-img :src="require('~/static/customer/profile-edit.svg')" />
             </v-avatar>
+            <template v-else>-</template>
           </v-col>
           <v-col cols="3" class="px-0">
             <h4>意思決定者</h4>
-            <v-avatar size="24" class="ml10">
+            <v-avatar v-if="carSummary.payer" size="24" class="ml10">
               <v-img :src="require('~/static/customer/profile-edit.svg')" />
             </v-avatar>
+            <template v-else>-</template>
           </v-col>
           <v-col cols="3" class="px-0">
             <h4>利用者</h4>
-            <v-avatar size="24" class="ml10">
+            <v-avatar v-if="carSummary.user" size="24" class="ml10">
               <v-img :src="require('~/static/customer/profile-edit.svg')" />
             </v-avatar>
-            <v-avatar size="24">
-              <v-img :src="require('~/static/customer/profile-edit.svg')" />
-            </v-avatar>
+            <template v-else>-</template>
           </v-col>
         </v-row>
 
@@ -44,18 +44,16 @@
             <h4>主な利用目的</h4>
           </v-col>
           <v-col cols="10" class="px-0">
-            <v-chip text-color="#436AA3" color="#DFE6F0" outlined label small
-              >車出勤</v-chip
+            <v-chip
+              v-if="carSummary.purpose"
+              text-color="#436AA3"
+              color="#DFE6F0"
+              outlined
+              label
+              small
+              >{{ carSummary.purpose }}</v-chip
             >
-            <v-chip text-color="#436AA3" color="#DFE6F0" outlined label small
-              >買い物</v-chip
-            >
-            <v-chip text-color="#436AA3" color="#DFE6F0" outlined label small
-              >部活送迎</v-chip
-            >
-            <v-chip text-color="#436AA3" color="#DFE6F0" outlined label small
-              >習い事送迎</v-chip
-            >
+            <template v-else>-</template>
           </v-col>
         </v-row>
 
@@ -123,8 +121,8 @@
               />
               <TextContent
                 label="保険情報有無"
-                :content="carBase.insuranceNumber"
-                copyable
+                :content="carBase.insuranceNumber | fmtHyphen"
+                :copyable="!!carBase.insuranceNumber"
                 high-light
               >
                 <v-chip
@@ -494,6 +492,7 @@ export default {
 
 <style lang="scss">
 .customer-detail-car-info-wrapper {
+  color: $blue-200;
   .change-car-icon {
     cursor: pointer;
   }
