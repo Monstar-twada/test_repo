@@ -102,21 +102,21 @@ export default {
         sortable: true,
         align: 'center',
         value: 'customerId',
-        width: '50px',
+        width: '6%',
       },
-      { text: '顧客名', value: 'name', align: 'start', width: '180px' },
+      { text: '顧客名', value: 'name', align: 'start', width: '18%' },
       {
         text: '住所',
         value: 'address',
         align: 'start',
-        width: '100px',
+        width: '12%',
         sortable: false,
       },
       {
         text: '対象車両',
         value: 'maker',
         align: 'start',
-        width: '80px',
+        width: '10%',
         sortable: false,
       },
       {
@@ -124,47 +124,48 @@ export default {
         value: 'tel',
         align: 'start',
         sortable: false,
-        width: '120px',
+        width: '12%',
       },
       {
         text: 'メールアドレス',
         value: 'email',
         align: 'center',
         sortable: false,
+        width: '12%',
       },
       {
         text: 'コール',
         value: 'call',
         align: 'center',
-        width: '60px',
+        width: '6%',
         sortable: false,
       },
       {
         text: 'DM',
         value: 'dm',
         align: 'center',
-        width: '60px',
+        width: '6%',
         sortable: false,
       },
       {
         text: 'SMS',
         value: 'sms',
         align: 'center',
-        width: '60px',
+        width: '6%',
         sortable: false,
       },
       {
         text: '予約',
         value: 'reserve',
         align: 'center',
-        width: '60px',
+        width: '6%',
         sortable: false,
       },
       {
         text: '入庫',
         value: 'warehouse',
         align: 'center',
-        width: '60px',
+        width: '6%',
         sortable: false,
       },
     ],
@@ -258,7 +259,7 @@ export default {
           color: $blue-200;
           cursor: pointer;
           td {
-            padding: 0 8px !important;
+            padding: 0 5px !important;
             font-size: 12px !important;
             position: relative;
             font-weight: 300;
