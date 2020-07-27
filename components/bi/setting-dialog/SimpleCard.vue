@@ -91,9 +91,9 @@
       </v-card-text>
       <v-card-text>
         <div class="setting-dialog-wrapper flex-column">
-          <h4 class="mb15">点検</h4>
+          <h4 class="mb15">整備</h4>
           <div class="setting-dialog-wrapper__left">
-            <h5>整備</h5>
+            <h5>台数</h5>
             <div class="mb10">
               <Input
                 :customheight="30"

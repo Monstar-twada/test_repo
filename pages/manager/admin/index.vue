@@ -7,7 +7,7 @@ import Admin from '~/components/admin/index'
 
 export default {
   layout: 'manager',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   components: {
     Admin,
   },
