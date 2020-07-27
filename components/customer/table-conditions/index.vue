@@ -45,27 +45,43 @@
         />
       </v-col>
       <v-col cols="2">
-        <Calendar
-          label="初度登録年月 自"
-          @change="(date) => (form.firstRegistrationDateFrom = date)"
+        <GlobalCalendar
+          v-model="form.firstRegistrationDateFrom"
+          placeholder="初度登録年月 自"
+          text-size="mini"
+          readonly
+          clearable
+          type="month"
+          show-dash
         />
       </v-col>
       <v-col cols="2">
-        <Calendar
-          label="初度登録年月 至"
-          @change="(date) => (form.firstRegistrationDateTo = date)"
+        <GlobalCalendar
+          v-model="form.firstRegistrationDateTo"
+          placeholder="初度登録年月 至"
+          text-size="mini"
+          readonly
+          clearable
+          type="month"
         />
       </v-col>
       <v-col cols="2">
-        <Calendar
-          label="車検満了年月 自"
-          @change="(date) => (form.inspectionExpirationDateFrom = date)"
+        <GlobalCalendar
+          v-model="form.inspectionExpirationDateFrom"
+          placeholder="車検満了年月 自"
+          text-size="mini"
+          readonly
+          clearable
+          show-dash
         />
       </v-col>
       <v-col cols="2">
-        <Calendar
-          label="車検満了年月 至"
-          @change="(date) => (form.inspectionExpirationDateTo = date)"
+        <GlobalCalendar
+          v-model="form.inspectionExpirationDateTo"
+          placeholder="車検満了年月 至"
+          text-size="mini"
+          readonly
+          clearable
         />
       </v-col>
     </v-row>
@@ -76,14 +92,13 @@
 <script>
 import { getManufacturerList } from '../manufacturers'
 import Input from './Input.vue'
-import Calendar from '~/components/common/Calendar.vue'
 import GlobalSelector from '~/components/common/global-selector/index'
+import GlobalCalendar from '~/components/common/global-calendar/index'
 export default {
-  name: 'Searchbar',
   components: {
     Input,
-    Calendar,
     GlobalSelector,
+    GlobalCalendar,
   },
   props: {
     query: {
