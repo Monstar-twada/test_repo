@@ -3,7 +3,7 @@
     <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page">
       <template v-slot:left>
         <div class="subTitle">
-          <h3>[ 6月満期車検 対象者リスト ]</h3>
+          <h3>[ 9月満期車検 対象者リスト ]</h3>
         </div>
       </template>
       <template v-slot:right>

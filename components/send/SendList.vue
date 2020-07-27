@@ -70,16 +70,16 @@ export default {
       items: [
         {
           id: '1234567890',
-          customerName: ['米田 道春', '（31歳）'],
-          tel: '080-1234-1234',
+          customerName: ['米田 道治', '（64歳）'],
+          tel: '0743-66-2840',
           carInfo: ['トヨタ', 'プリウス', ''],
           img: 'person_default.svg',
-          number: '足立 310 あ 1234',
+          number: '奈良 335 ら 318',
           kind: '購入',
           status: '送客中',
         },
         {
-          id: '1234567890',
+          id: '12345678901',
           customerName: ['山本篤', '（42歳）'],
           tel: '090-2323-4455',
           carInfo: ['マツダ', 'CX-5', ''],
@@ -89,7 +89,7 @@ export default {
           status: '対応中',
         },
         {
-          id: '1234567890',
+          id: '1234567892',
           customerName: ['北中真希子', '（36歳）'],
           tel: '080-8888-2040',
           carInfo: ['フォルクスワーゲン', 'ポロ', ''],
@@ -99,7 +99,7 @@ export default {
           status: '対応中',
         },
         {
-          id: '1234567890',
+          id: '1234567893',
           customerName: ['斎藤拓', '（58歳）'],
           tel: '080-7490-2041',
           carInfo: ['メルセデスベンツ', 'Aクラス', ''],
@@ -109,7 +109,7 @@ export default {
           status: '対応中',
         },
         {
-          id: '1234567890',
+          id: '1234567894',
           customerName: ['島田一郎', '（47歳）'],
           tel: '080-5454-9745',
           carInfo: ['スバル', 'レガシー', ''],
@@ -119,7 +119,7 @@ export default {
           status: '成約済',
         },
         {
-          id: '1234567890',
+          id: '1234567895',
           customerName: ['長谷川宏美', '（30歳）'],
           tel: '080-0090-3090',
           carInfo: ['ホンダ', 'N-BOX', ''],
@@ -129,7 +129,7 @@ export default {
           status: '成約済',
         },
         {
-          id: '1234567890',
+          id: '1234567896',
           customerName: ['森下千絵', '（29歳）'],
           tel: '090-2323-4455',
           carInfo: ['日産', 'ノート', ''],
@@ -139,7 +139,7 @@ export default {
           status: '成約済',
         },
         {
-          id: '1234567890',
+          id: '1234567897',
           customerName: ['加藤雅之', '（39歳）'],
           tel: '080-8888-2040',
           carInfo: ['トヨタ', 'ヴェルファイア', ''],
@@ -149,7 +149,7 @@ export default {
           status: '成約済',
         },
         {
-          id: '1234567890',
+          id: '1234567898',
           customerName: ['平岡和正', '（56歳）'],
           tel: '080-7490-2041',
           carInfo: ['BMW', 'Z4', ''],
@@ -159,7 +159,7 @@ export default {
           status: '成約済',
         },
         {
-          id: '1234567890',
+          id: '1234567899',
           customerName: ['鈴木翔子', '（46歳）'],
           tel: '080-5454-9745',
           carInfo: ['レクサス', 'NX', ''],

@@ -1,7 +1,7 @@
 <template>
   <div class="requestInfoPart" :style="InputStyle">
     <div class="requestInfoPart__title">
-      <p>依頼詳細</p>
+      <p>{{ title }}</p>
     </div>
     <div class="requestInfoPart__body">
       <textarea
