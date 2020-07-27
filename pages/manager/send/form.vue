@@ -16,7 +16,7 @@ import FormContainer from '~/components/send/FormContainer.vue'
 
 export default {
   layout: 'manager',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     FormContainer,

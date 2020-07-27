@@ -16,7 +16,7 @@ import DetailContainer from '~/components/send/DetailContainer.vue'
 
 export default {
   layout: 'manager',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     DetailContainer,
