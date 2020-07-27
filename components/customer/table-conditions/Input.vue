@@ -5,19 +5,21 @@
       clearable ? 'clearable' : '',
       'text-size-' + textSize,
       disabled ? '' : 'cur',
+      isCalendar ? 'is-calendar' : '',
+      isNonEmpty ? 'is-non-empty' : '',
     ]"
     @click="handleClick"
-    @mouseenter="clearVisible = clearable && value"
-    @mouseleave="clearVisible = false"
   >
     <input
       ref="input"
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       :value="text"
+      :readonly="readonly"
       @input="handleInput"
     />
-    <i v-show="clearVisible" class="__clear" @click="handleClear($event)"></i>
+    <i class="__clear" @click="handleClear($event)"></i>
+    <i class="__calendar"></i>
   </div>
 </template>
 
@@ -32,22 +34,30 @@ export default {
       type: String,
       default: '',
     },
+    type: {
+      type: String,
+      default: 'text',
+    },
     clearable: Boolean,
     textSize: {
       type: String,
       default: '',
     },
     disabled: Boolean,
+    readonly: Boolean,
+    isCalendar: Boolean,
   },
   data() {
     return {
-      clearVisible: false,
       text: this.value,
     }
   },
   computed: {
     input() {
       return this.$refs.input
+    },
+    isNonEmpty() {
+      return !!this.value
     },
   },
   watch: {
@@ -70,7 +80,10 @@ export default {
       })
     },
     handleClick() {
-      this.input.focus()
+      if (!this.readonly || !this.disabled) {
+        this.input.focus()
+      }
+      this.$emit('click')
     },
     handleInput() {
       this.text = this.input.value
@@ -89,7 +102,8 @@ export default {
   border-radius: 4px;
   padding: 0 10px;
   overflow: hidden;
-  &.cur {
+  &.cur,
+  &.cur input {
     cursor: pointer;
   }
   input {
@@ -116,7 +130,7 @@ export default {
       right: 13px;
       top: 50%;
       margin-top: -6px;
-      display: inline-block;
+      display: none;
       text-align: center;
       width: 12px;
       height: 12px;
@@ -142,6 +156,39 @@ export default {
         left: 5px;
         width: 2px;
         height: 12px;
+      }
+    }
+    .__calendar {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      right: 13px;
+      top: 50%;
+      margin-top: -6px;
+      text-align: center;
+      width: 12px;
+      height: 12px;
+      background: url('./img/calendar.svg') no-repeat center center;
+    }
+  }
+
+  // is-calendar
+  &.is-calendar {
+    .__calendar {
+      display: block;
+    }
+  }
+
+  // clearable
+  &.clearable.is-non-empty {
+    &:hover {
+      .__clear {
+        display: block;
+      }
+      &.is-calendar {
+        .__calendar {
+          display: none;
+        }
       }
     }
   }
