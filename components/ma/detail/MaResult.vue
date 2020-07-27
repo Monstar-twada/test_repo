@@ -64,6 +64,9 @@
       <template v-slot:item.warehouse="{ item }">
         <BooleanFlg :flg="item.warehouse === '1'" />
       </template>
+      <template v-slot:no-data>
+        <span>検索結果はありません。</span>
+      </template>
     </v-data-table>
     <GlobalPagination
       v-model="currentPage"
@@ -116,7 +119,13 @@ export default {
         width: '80px',
         sortable: false,
       },
-      { text: '電話番号', value: 'tel', align: 'start', sortable: false },
+      {
+        text: '電話番号',
+        value: 'tel',
+        align: 'start',
+        sortable: false,
+        width: '120px',
+      },
       {
         text: 'メールアドレス',
         value: 'email',
@@ -252,6 +261,7 @@ export default {
             padding: 0 8px !important;
             font-size: 12px !important;
             position: relative;
+            font-weight: 300;
             &:not(:last-child):after {
               content: '';
               position: absolute;
@@ -268,6 +278,10 @@ export default {
         }
       }
     }
+  }
+
+  .theme--light.v-data-table .v-data-table__empty-wrapper {
+    color: $blue-200 !important;
   }
 
   .theme--light.v-data-table
@@ -300,20 +314,12 @@ export default {
     }
   }
 }
-.car {
-  position: relative;
 
-  &__more {
-    position: absolute;
-    top: 20px;
-    right: 2px;
-    display: block;
-    text-align: center;
-    width: 30px;
-    height: 18px;
-    border-radius: 8px;
-    background-color: $blue-200;
-    color: $white-300;
+.address,
+.car,
+.tel {
+  h4 {
+    font-weight: 400;
   }
 }
 .tel {
