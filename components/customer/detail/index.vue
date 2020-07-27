@@ -24,7 +24,7 @@ import MemoTable from '~/components/customer/detail/MemoTable.vue'
 import SendingRequestButton from '~/components/customer/detail/button/SendingRequest'
 export default {
   layout: 'manager',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     CustomerInfo,
@@ -39,6 +39,7 @@ export default {
         {
           text: '顧客管理',
           href: '/customer',
+          nuxt: true,
         },
         {
           text: '顧客詳細',

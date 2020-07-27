@@ -12,8 +12,8 @@
       <div class="customerContainer__user__content">
         <div class="customerContainer__user__content--text">
           <p>
-            米田 道春
-            <span>（31歳）</span>
+            米田 道治
+            <span>（64歳）</span>
           </p>
           <p>ヨネダ ミチハル</p>
         </div>
