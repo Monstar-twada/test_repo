@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="visible" max-width="480px">
+  <v-dialog v-model="visible" persistent max-width="480px">
     <v-card class="questionnaire-results-dialog-card">
       <DialogHeader title="アンケート結果" @close="visible = false" />
       <ul class="remark">
