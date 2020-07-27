@@ -7,6 +7,7 @@
       disabled ? '' : 'selectable',
       'text-size-' + textSize,
       clearable ? '__clearable' : '',
+      isNonEmpty ? 'is-non-empty' : '',
     ]"
     :style="style"
   >
@@ -17,7 +18,7 @@
       @mouseleave="mouseLeave"
     >
       <keep-alive>
-        <span v-if="selectText" class="text">{{ selectText }}</span>
+        <span v-if="isNonEmpty" class="text">{{ selectText }}</span>
         <span v-else class="placeholder">{{ placeholder }}</span>
       </keep-alive>
       <i class="__clear" @click="clear($event)"></i>
@@ -107,7 +108,7 @@ export default {
     const item = this.options.find((item) => item.value === this.value) || {}
     return {
       optionsVisible: false,
-      selectText: item.text || this.placeholder,
+      selectText: item.text,
       selectValue: this.value,
       clearVisible: true,
     }
@@ -122,6 +123,9 @@ export default {
         str += `width:${this.width};`
       }
       return str
+    },
+    isNonEmpty() {
+      return !!this.selectText
     },
   },
   watch: {
@@ -463,7 +467,7 @@ $smallHeight: 28px;
     }
   }
 
-  &.__clearable.selectable {
+  &.__clearable.selectable.is-non-empty {
     .result-wrapper {
       &:hover {
         .__arrow {
