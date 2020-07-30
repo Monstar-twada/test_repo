@@ -59,13 +59,13 @@ export default {
           title: '購入',
           img: 'send_car_icon',
           count: '12',
-          cost: '10,000',
+          cost: '40,000',
         },
         {
           title: '売却',
           img: 'send_money_icon',
           count: '21',
-          cost: '40,000',
+          cost: '10,000',
         },
         {
           title: '整備',
