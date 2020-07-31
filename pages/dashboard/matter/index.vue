@@ -11,10 +11,9 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import Searchbar from '~/components/dashboard/matter/Searchbar.vue'
 import MatterResult from '~/components/dashboard/matter/MatterResult'
-
 export default {
   layout: 'dashboard',
   components: {

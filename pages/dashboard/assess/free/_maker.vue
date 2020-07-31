@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import BodyContainer from '~/components/assess/free/BodyContainer'
 
 export default {

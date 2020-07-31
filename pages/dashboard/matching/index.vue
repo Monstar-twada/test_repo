@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import Searchbar from '~/components/dashboard/matching/Searchbar.vue'
 import CustomerResult from '~/components/dashboard/matching/MatchingResult.vue'
 export default {

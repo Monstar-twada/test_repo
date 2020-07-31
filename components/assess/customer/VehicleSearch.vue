@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar mb30">
-    <v-row justify="left" align="center" class="mx-0">
+    <v-row justify="start" align="center" class="mx-0">
       <h3 class="searchbar_title">車両検索</h3>
       <Select class="mr20" placeholder="運輸支局" />
       <Input

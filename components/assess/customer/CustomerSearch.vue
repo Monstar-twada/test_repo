@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar mb30">
-    <v-row justify="left" align="center" class="mx-0">
+    <v-row justify="start" align="center" class="mx-0">
       <h3 class="searchbar_title">顧客検索</h3>
       <Input
         class="mr20"

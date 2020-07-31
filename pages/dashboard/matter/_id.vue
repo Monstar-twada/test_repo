@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import DetailSearchBar from '~/components/dashboard/matter/DetailSearchBar.vue'
 import MatterDetail from '~/components/dashboard/matter/MatterDetail.vue'
 export default {

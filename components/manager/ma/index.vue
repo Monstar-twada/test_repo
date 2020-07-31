@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index'
 import Chart from '~/components/manager/ma/index/chart/index'
 import MaTabs from '~/components/manager/ma/index/tabs/index'
 import DataCol from '~/components/manager/ma/index/common/data-col/DataCol.vue'

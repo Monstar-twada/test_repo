@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import CustomerPart from '~/components/send/common/CustomerPart.vue'
-import RequestKindPart from '~/components/send/common/RequestKindPart.vue'
-import TextAreaInfo from '~/components/send/common/TextAreaInfo.vue'
-import SubmitButton from '~/components/send/common/SubmitButton.vue'
+import CustomerPart from '~/components/manager/send/common/CustomerPart.vue'
+import RequestKindPart from '~/components/manager/send/common/RequestKindPart.vue'
+import TextAreaInfo from '~/components/manager/send/common/TextAreaInfo.vue'
+import SubmitButton from '~/components/manager/send/common/SubmitButton.vue'
 
 export default {
   name: 'FormContainer',

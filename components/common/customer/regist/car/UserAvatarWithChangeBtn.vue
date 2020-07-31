@@ -8,7 +8,7 @@
       <v-img
         :max-width="14"
         :max-height="10"
-        :src="require(`~/static/customer/change_icon.svg`)"
+        :src="require(`./img/change-icon.svg`)"
       ></v-img>
       変更
     </button>
@@ -16,7 +16,7 @@
       <v-img
         :max-width="24"
         :max-height="24"
-        :src="require(`~/static/customer/trash_round_icon.svg`)"
+        :src="require(`./img/trash-round-icon.svg`)"
         class="userAvatarContainer__editPart--remove"
       ></v-img>
       <v-img

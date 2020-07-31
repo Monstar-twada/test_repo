@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import CostItem from '~/components/send/CostItem.vue'
+import CostItem from '~/components/manager/send/CostItem.vue'
 import Select from '~/components/common/Select.vue'
 
 export default {

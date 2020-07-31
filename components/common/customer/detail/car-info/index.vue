@@ -4,7 +4,7 @@
       <v-img
         class="change-car-icon mr10"
         width="90"
-        :src="require('~/static/customer/car-more.svg')"
+        :src="require('./img/car-more.svg')"
         @click="selectCarVisible = true"
       />
       <PlusButton border />
@@ -386,7 +386,7 @@ import CarInfoSide from './CarInfoSide'
 import SubTitle from '~/components/common/customer/SubTitle.vue'
 import TextContent from '~/components/common/customer/TextContent.vue'
 import ColumnTitle from '~/components/common/customer/ColumnTitle'
-import PlusButton from '~/components/breadcrumbs/PlusButton'
+import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 import RoundBorderButton from '~/components/common/customer/detail/button/RoundBorderButton'
 import EditReservationDialog from '~/components/common/customer/detail/car-info/edit-reservation-dialog'
 import {

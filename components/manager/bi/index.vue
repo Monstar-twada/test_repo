@@ -33,7 +33,7 @@ import TopRightTab from './TopRightTab'
 import CarSales from './car-sales/index'
 import DateViewer from '~/components/common/date-viewer/index'
 import MonthSelector from '~/components/common/month-selector/index'
-import Breadcrumbs from '~/components/breadcrumbs/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index'
 export default {
   layout: 'manager',
   // middleware: 'authenticated',

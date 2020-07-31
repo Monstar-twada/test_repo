@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar">
-    <v-row justify="left" align="center" class="ma-0">
+    <v-row justify="start" align="center" class="ma-0">
       <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
       <Select items="items" class="mr20" :list="list" placeholder="グレード" />
@@ -14,7 +14,7 @@
       <Select items="items" class="mr20" :list="list" placeholder="車検残" />
       <Select items="items" class="mr20" :list="list" placeholder="価格帯" />
     </v-row>
-    <v-row justify="left" align="center" class="mt20 mx-0">
+    <v-row justify="start" align="center" class="mt20 mx-0">
       <Select
         items="items"
         class="mr20"

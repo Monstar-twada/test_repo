@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ResultInformation from '~/components/assess/ResultInformation.vue'
 import ResultPrice from '~/components/assess/ResultPrice.vue'

@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar">
-    <v-row justify="left" align="center" class="mx-0">
+    <v-row justify="start" align="center" class="mx-0">
       <Input
         class="mr20"
         :customwidth="120"
