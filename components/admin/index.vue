@@ -13,7 +13,7 @@
 <script>
 import Shop from './Shop'
 import Staff from './Staff'
-import Breadcrumbs from '~/components/breadcrumbs/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index'
 export default {
   components: {
     Breadcrumbs,

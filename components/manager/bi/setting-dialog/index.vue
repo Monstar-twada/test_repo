@@ -17,7 +17,7 @@
 <script>
 import DetailsCard from './DetailsCard'
 import SimpleCard from './SimpleCard'
-import SettingDialogHeader from '~/components/bi/setting-dialog/SettingDialogHeader.vue'
+import SettingDialogHeader from '~/components/manager/bi/setting-dialog/SettingDialogHeader.vue'
 export default {
   name: 'ImportDialog',
   components: {

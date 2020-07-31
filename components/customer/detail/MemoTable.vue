@@ -43,7 +43,7 @@
 <script>
 import MemoEditDialog from './memo-edit-dialog/index'
 import ColumnTitle from '~/components/customer/ColumnTitle'
-import PlusButton from '~/components/breadcrumbs/PlusButton'
+import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 import RoundBorderButton from '~/components/customer/detail/button/RoundBorderButton'
 import GlobalTable from '~/components/customer/custom-table/index'
 import { fmtDate } from '~/components/customer/helper'

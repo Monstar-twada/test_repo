@@ -17,7 +17,7 @@
 <script>
 import CloseButton from '~/components/common/dialog-header/CloseButton'
 import Select from '~/components/common/Select.vue'
-import SwitchButton from '~/components/bi/setting-dialog/SwitchButton'
+import SwitchButton from '~/components/manager/bi/setting-dialog/SwitchButton'
 export default {
   name: 'DialogHeader',
   components: {

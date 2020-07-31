@@ -11,7 +11,7 @@
 
 <script>
 import IndexBodyContainer from './IndexBodyContainer'
-import Breadcrumbs from '~/components/breadcrumbs/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index'
 export default {
   components: {
     Breadcrumbs,

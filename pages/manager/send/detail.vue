@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import DetailContainer from '~/components/send/DetailContainer.vue'
 
 export default {

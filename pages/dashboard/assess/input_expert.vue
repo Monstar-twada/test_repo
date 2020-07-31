@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import AssessExpertBar from '~/components/AssessExpertBar.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
 import BasicInformation from '~/components/assess/BasicInformation.vue'
