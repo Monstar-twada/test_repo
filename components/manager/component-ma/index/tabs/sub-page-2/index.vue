@@ -26,11 +26,7 @@
             </p>
           </v-col>
           <v-col cols="5">
-            <v-img
-              :src="require('~/static/ma/display.png')"
-              :max-width="240"
-              :max-height="240"
-            />
+            <img src="./img/google.png" width="240" height="240" />
           </v-col>
         </v-row>
       </v-col>
@@ -62,7 +58,7 @@
           </v-col>
           <v-col cols="5">
             <v-col cols="5">
-              <img src="/ma/google.png" width="240" height="182" />
+              <img src="./img/google.png" width="240" height="182" />
             </v-col>
           </v-col>
         </v-row>
@@ -95,7 +91,7 @@
           </v-col>
           <v-col cols="5">
             <v-img
-              :src="require('~/static/ma/facebook.png')"
+              :src="require('./img/facebook.png')"
               :max-width="240"
               :max-height="126"
             />
@@ -130,7 +126,7 @@
           </v-col>
           <v-col cols="5">
             <v-img
-              :src="require('~/static/ma/instagram.png')"
+              :src="require('./img/instagram.png')"
               :max-width="240"
               :max-height="182"
             />
@@ -141,9 +137,9 @@
   </div>
 </template>
 <script>
-import Title from '~/components/ma/tab/Title.vue'
-import DataColSmall from '~/components/ma/tab/DataColSmall.vue'
-import SwitchButton from '~/components/ma/tab/SwitchButton.vue'
+import Title from '~/components/manager/component-ma/index/common/Title.vue'
+import DataColSmall from '~/components/manager/component-ma/index/common/data-col/DataColSmall.vue'
+import SwitchButton from '~/components/manager/component-ma/index/common/SwitchButton.vue'
 export default {
   name: 'Advertisement',
   components: {

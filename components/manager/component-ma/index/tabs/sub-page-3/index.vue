@@ -32,7 +32,7 @@
               <TableCalendar />
               <nuxt-link
                 :to="{
-                  name: 'ma-list',
+                  name: 'ma-detail',
                   query: { type: '0000', date: '202009' },
                 }"
                 class="mt20"
@@ -80,7 +80,7 @@
               <TableCalendar />
               <nuxt-link
                 :to="{
-                  name: 'ma-list',
+                  name: 'ma-detail',
                   query: { type: '1006', date: '202009' },
                 }"
                 class="mt20"
@@ -128,7 +128,7 @@
               <TableCalendar />
               <nuxt-link
                 :to="{
-                  name: 'ma-list',
+                  name: 'ma-detail',
                   query: { type: '1012', date: '202009' },
                 }"
                 class="mt20"
@@ -176,7 +176,7 @@
               <TableCalendar />
               <nuxt-link
                 :to="{
-                  name: 'ma-list',
+                  name: 'ma-detail',
                   query: { type: '1018', date: '202009' },
                 }"
                 class="mt20"
@@ -195,10 +195,10 @@
   </div>
 </template>
 <script>
-import Title from '~/components/ma/tab/Title.vue'
-import DataColSmall from '~/components/ma/tab/DataColSmall.vue'
-import TableCalendar from '~/components/ma/tab/TableCalendar.vue'
-import SwitchButton from '~/components/ma/tab/SwitchButton.vue'
+import Title from '~/components/manager/component-ma/index/common/Title.vue'
+import DataColSmall from '~/components/manager/component-ma/index/common/data-col/DataColSmall.vue'
+import TableCalendar from '~/components/manager/component-ma/index/common/calendar/index'
+import SwitchButton from '~/components/manager/component-ma/index/common/SwitchButton.vue'
 export default {
   name: 'Inspection',
   components: {

@@ -9,14 +9,14 @@
         class="d-inline-block rate-img"
         :max-width="10"
         :max-height="10"
-        :src="require(`../img/arrow-up.svg`)"
+        :src="require(`./img/arrow-up.svg`)"
       ></v-img>
       <v-img
         v-else-if="rate !== 0"
         class="d-inline-block rate-img"
         :max-width="10"
         :max-height="10"
-        :src="require(`../img/arrow-down.svg`)"
+        :src="require(`./img/arrow-down.svg`)"
       ></v-img>
       <span class="d-inline">{{ rate !== 0 ? `${rate}%` : 'ー' }}</span>
     </p>
