@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Customer from '~/components/customer/index'
+import Customer from '~/components/common/customer/index'
 export default {
   layout: 'manager',
   components: {

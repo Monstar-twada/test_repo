@@ -8,12 +8,31 @@
         :customfontsize="10"
         placeholder="顧客名"
       />
+      <Input
+        class="mr20"
+        :customwidth="120"
+        :customheight="30"
+        :customfontsize="10"
+        placeholder="電話番号"
+      />
       <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
       <Select items="items" class="mr20" :list="list" placeholder="車種" />
-      <Select items="items" class="mr20" :list="list" placeholder="担当者" />
-      <Calendar label="作成日" />
-      <span class="searchbar_space">~</span>
-      <Calendar />
+      <Input
+        class="mr20"
+        :customwidth="120"
+        :customheight="30"
+        :customfontsize="10"
+        placeholder="登録ナンバー"
+      />
+    </v-row>
+    <v-row justify="center" align="center" class="mt20 mx-0">
+      <Select items="items" class="mr20" :list="list" placeholder="依頼種別" />
+      <Select
+        items="items"
+        class="mr20"
+        :list="status"
+        placeholder="ステータス"
+      />
       <ButtonSearch class="searchbar_button" />
     </v-row>
   </div>
@@ -22,7 +41,6 @@
 <script>
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
-import Calendar from '~/components/common/Calendar.vue'
 import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'Searchbar',
@@ -30,10 +48,10 @@ export default {
     Input,
     Select,
     ButtonSearch,
-    Calendar,
   },
   data: () => ({
     list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    status: ['送客中', '対応中', '成約済', '見送済'],
   }),
 }
 </script>
@@ -42,7 +60,7 @@ export default {
 .searchbar {
   width: 100%;
   padding: 20px;
-  height: 70px;
+  height: 120px;
   border-radius: 5px;
   background-color: $white-300;
   &_space {

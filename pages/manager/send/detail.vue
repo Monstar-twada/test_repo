@@ -12,7 +12,7 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import DetailContainer from '~/components/send/DetailContainer.vue'
+import DetailContainer from '~/components/manager/send/DetailContainer.vue'
 
 export default {
   layout: 'manager',

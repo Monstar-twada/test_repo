@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar mb30">
-    <v-row justify="left" align="center" class="mx-0">
+    <v-row justify="start" align="center" class="mx-0">
       <h3 class="searchbar_title">車両検索</h3>
       <Select class="mr20" placeholder="運輸支局" />
       <Input
@@ -32,7 +32,7 @@
 <script>
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
-import ButtonSearch from '~/components/common/ButtonSearch.vue'
+import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'VehicleSearch',
   components: {

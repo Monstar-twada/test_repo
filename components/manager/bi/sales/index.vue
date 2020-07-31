@@ -52,10 +52,10 @@
 import SalesGraph from './sales-graph.js'
 import SalesPercent from './SalesPercent.vue'
 import SalesStats from './SalesStats.vue'
-import ImportButton from '~/components/customer/ImportButton'
+import ImportButton from '~/components/common/customer/ImportButton'
 import SettingsButton from '~/components/manager/bi/SettingsButton'
 import SettingsDialog from '~/components/manager/bi/setting-dialog/index'
-import ImportDialog from '~/components/customer/import-dialog/index'
+import ImportDialog from '~/components/common/customer/import-dialog/index'
 export default {
   name: 'Sales',
   components: {

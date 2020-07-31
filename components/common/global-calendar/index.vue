@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Input from '~/components/customer/table-conditions/Input'
+import Input from '~/components/common/customer/table-conditions/Input'
 import { getMaxZIndex } from '~/assets/js/dom'
 
 export default {

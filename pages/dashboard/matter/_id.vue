@@ -12,8 +12,8 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import DetailSearchBar from '~/components/matter/DetailSearchBar.vue'
-import MatterDetail from '~/components/matter/MatterDetail.vue'
+import DetailSearchBar from '~/components/dashboard/matter/DetailSearchBar.vue'
+import MatterDetail from '~/components/dashboard/matter/MatterDetail.vue'
 export default {
   layout: 'dashboard',
   components: {

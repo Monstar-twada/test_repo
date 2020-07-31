@@ -18,9 +18,9 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import SearchBar from '~/components/send/SearchBar.vue'
-import CustomerInfo from '~/components/send/CustomerInfo'
-import SendList from '~/components/send/SendList'
+import SearchBar from '~/components/manager/send/SearchBar.vue'
+import CustomerInfo from '~/components/manager/send/CustomerInfo'
+import SendList from '~/components/manager/send/SendList'
 import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 
 export default {
