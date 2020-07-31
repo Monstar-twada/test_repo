@@ -1,15 +1,16 @@
 <template>
   <div>
-    <Ma />
+    <MaDetail />
   </div>
 </template>
 
 <script>
-import Ma from '~/components/component-ma/index/index'
+import MaDetail from '~/components/component-ma/detail/index'
+
 export default {
   layout: 'manager',
   components: {
-    Ma,
+    MaDetail,
   },
 }
 </script>

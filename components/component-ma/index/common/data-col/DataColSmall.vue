@@ -24,7 +24,7 @@
   </v-row>
 </template>
 <script>
-import Rate from '~/components/ma/tab/Rate.vue'
+import Rate from '~/components/component-ma/index/common/rate/index'
 export default {
   name: 'DataCol',
   components: {
@@ -68,7 +68,7 @@ export default {
 
     &:not(:last-child)::after {
       content: '';
-      background-image: url('../img/arrow-bg.svg');
+      background-image: url('./img/arrow-bg.svg');
       position: absolute;
       width: 18px;
       height: 80px;

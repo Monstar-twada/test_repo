@@ -78,7 +78,7 @@
 </template>
 <script>
 import GlobalPagination from '~/components/common/global-pagination/index'
-import BooleanFlg from '~/components/ma/detail/BooleanFlg.vue'
+import BooleanFlg from '~/components/component-ma/detail/BooleanFlg.vue'
 export default {
   name: 'CustomerResult',
   components: {
@@ -218,8 +218,8 @@ export default {
                 right: -10px;
                 width: 7px;
                 height: 4px;
-                background: url('../../customer/custom-table/img/table-sort-arrow-normal.svg')
-                  no-repeat 0 0;
+                background: url('./img/table-sort-arrow-normal.svg') no-repeat 0
+                  0;
                 transform: rotate(180deg);
               }
               &:after {
@@ -229,8 +229,8 @@ export default {
                 right: -10px;
                 width: 7px;
                 height: 4px;
-                background: url('../../customer/custom-table/img/table-sort-arrow-normal.svg')
-                  no-repeat 0 0;
+                background: url('./img/table-sort-arrow-normal.svg') no-repeat 0
+                  0;
               }
             }
           }
@@ -238,7 +238,7 @@ export default {
             span {
               font-weight: bold;
               &:before {
-                background: url('../../customer/custom-table/img/table-sort-arrow.svg');
+                background: url('./img/table-sort-arrow.svg');
               }
             }
           }
@@ -246,7 +246,7 @@ export default {
             span {
               font-weight: bold;
               &:after {
-                background: url('../../customer/custom-table/img/table-sort-arrow.svg');
+                background: url('./img/table-sort-arrow.svg');
               }
             }
           }
@@ -325,7 +325,7 @@ export default {
 }
 .tel {
   .fixed-tel:before {
-    content: url('../img/fixed_tel.svg');
+    content: url('./img/fixed_tel.svg');
     display: inline-block;
     width: 11px;
     height: 11px;
@@ -333,7 +333,7 @@ export default {
   }
 
   .mobile-tel:before {
-    content: url('../img/mobile_tel.svg');
+    content: url('./img/mobile_tel.svg');
     display: inline-block;
     width: 8px;
     height: 11px;

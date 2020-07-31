@@ -99,7 +99,7 @@
           text-size="mini"
         />
       </v-col>
-      <ButtonSearch class="searchbar_button" @clickEvent="searchButtonClick" />
+      <button class="searchbar_button" @click="search" />
     </v-row>
   </div>
 </template>
@@ -107,14 +107,12 @@
 <script>
 import { getManufacturerList } from '~/components/customer/manufacturers.js'
 import GlobalInput from '~/components/common/global-input/index'
-import ButtonSearch from '~/components/common/ButtonSearch.vue'
 import GlobalSelector from '~/components/common/global-selector/index'
 
 export default {
   name: 'Searchbar',
   components: {
     GlobalInput,
-    ButtonSearch,
     GlobalSelector,
   },
   props: {
@@ -180,6 +178,11 @@ export default {
   }
   &_button {
     margin-left: auto;
+    outline: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #0786bd url('./img/search-icon.svg') no-repeat center center;
   }
 }
 </style>

@@ -15,7 +15,7 @@
         <td class="td-title">SMS</td>
         <td>
           <v-img
-            :src="require('../img/sms.svg')"
+            :src="require('./img/sms.svg')"
             :max-width="20"
             :max-height="20"
           />
@@ -23,7 +23,7 @@
         <td>ー</td>
         <td>
           <v-img
-            :src="require('../img/sms.svg')"
+            :src="require('./img/sms.svg')"
             :max-width="20"
             :max-height="20"
           />
@@ -39,28 +39,28 @@
         <td class="td-title">DM</td>
         <td>
           <v-img
-            :src="require('../img/mail.svg')"
+            :src="require('./img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
         </td>
         <td>
           <v-img
-            :src="require('../img/mail.svg')"
+            :src="require('./img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
         </td>
         <td>
           <v-img
-            :src="require('../img/mail.svg')"
+            :src="require('./img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
         </td>
         <td>
           <v-img
-            :src="require('../img/mail.svg')"
+            :src="require('./img/mail.svg')"
             :max-width="20"
             :max-height="18"
           />
@@ -75,14 +75,14 @@
         <td class="td-title">TEL</td>
         <td>
           <v-img
-            :src="require('../img/tel.svg')"
+            :src="require('./img/tel.svg')"
             :max-width="20"
             :max-height="20"
           />
         </td>
         <td>
           <v-img
-            :src="require('../img/tel.svg')"
+            :src="require('./img/tel.svg')"
             :max-width="20"
             :max-height="20"
           />
