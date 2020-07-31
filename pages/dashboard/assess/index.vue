@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import Searchbar from '~/components/assess/Searchbar.vue'
 import AssessResult from '~/components/assess/AssessResult.vue'
 import FreeCarInputButton from '~/components/assess/free-car-input-button/index'

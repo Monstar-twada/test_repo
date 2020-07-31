@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import Searchbar from '~/components/manager/ma/detail/search-bar/index'
 import MaResult from '~/components/manager/ma/detail/ma-result/index'
 import ExportButton from '~/components/manager/ma/detail/ExportButton.vue'

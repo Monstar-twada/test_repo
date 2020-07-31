@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import SearchBar from '~/components/send/SearchBar.vue'
 import CustomerInfo from '~/components/send/CustomerInfo'
 import SendList from '~/components/send/SendList'
-import PlusButton from '~/components/breadcrumbs/PlusButton'
+import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 
 export default {
   layout: 'manager',

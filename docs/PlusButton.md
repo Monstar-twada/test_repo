@@ -3,31 +3,29 @@
 ### Import
 
 ```javascript
-import PlusButton from '~/components/breadcrumbs/PlusButton'
+import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 ```
 
 ### Property
 
-|property|type|remark|
-|:--|:--|:--|
-|click|Function|Event that fires when clicking.|
-
+| property | type     | remark                          |
+| :------- | :------- | :------------------------------ |
+| click    | Function | Event that fires when clicking. |
 
 ### Usage
 
 ```html
 <template>
-   <PlusButton @click="handleClick"/>
+  <PlusButton @click="handleClick" />
 </template>
 
 <script>
-export default {
-  methods: {
-    handleClick(e) {
+  export default {
+    methods: {
+      handleClick(e) {
         // do something
-    }
+      },
+    },
   }
-}
 </script>
 ```
-

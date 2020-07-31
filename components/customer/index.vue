@@ -23,8 +23,8 @@ import ImportButton from './ImportButton'
 import TableConditions from './table-conditions/index.vue'
 import CustomerResult from './CustomerResult.vue'
 import ImportDialog from './import-dialog/index'
-import Breadcrumbs from '~/components/breadcrumbs/index'
-import PlusButton from '~/components/breadcrumbs/PlusButton'
+import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 
 const DEFAULT_QUERY = {
   offset: 0,

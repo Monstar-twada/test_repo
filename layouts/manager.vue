@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import Sidebar from '~/components/sidebar/index'
-import NextAction from '~/components/next-action/index'
-import OnePointAdvice from '~/components/one-point-advice/index'
-import { managerMenuItems } from '~/components/sidebar/menu-manager'
+import Sidebar from '~/components/common/sidebar/index'
+import NextAction from '~/components/manager/next-action/index'
+import OnePointAdvice from '~/components/manager/one-point-advice/index'
+import { managerMenuItems } from '~/components/common/sidebar/menu-manager'
 const SIDE_WIDTH = 210
 const SPACE_WIDTH = 60
 export default {

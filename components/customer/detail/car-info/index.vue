@@ -386,7 +386,7 @@ import CarInfoSide from './CarInfoSide'
 import SubTitle from '~/components/customer/SubTitle.vue'
 import TextContent from '~/components/customer/TextContent.vue'
 import ColumnTitle from '~/components/customer/ColumnTitle'
-import PlusButton from '~/components/breadcrumbs/PlusButton'
+import PlusButton from '~/components/common/breadcrumbs/PlusButton'
 import RoundBorderButton from '~/components/customer/detail/button/RoundBorderButton'
 import EditReservationDialog from '~/components/customer/detail/car-info/edit-reservation-dialog'
 import {

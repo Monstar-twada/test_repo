@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import IconPlus from '~/components/breadcrumbs/IconPlus'
+import IconPlus from '~/components/common/breadcrumbs/IconPlus'
 export default {
   name: 'PlusButton',
   components: {
