@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import Sales from './Sales.vue'
-import SalesProductivity from './SalesProductivity.vue'
-import SalesBreakdown from './SalesBreakdown.vue'
+import Sales from './sales/index'
+import SalesProductivity from './sales-productivity/index'
+import SalesBreakdown from './sales-breakdown/index'
 import TopRightTab from './TopRightTab'
 import CarSales from './car-sales/index'
 import DateViewer from '~/components/common/date-viewer/index'

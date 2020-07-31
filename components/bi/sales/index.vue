@@ -49,9 +49,9 @@
   </div>
 </template>
 <script>
-import SalesGraph from '~/components/bi/SalesGraph.js'
-import SalesPercent from '~/components/bi/SalesPercent.vue'
-import SalesStats from '~/components/bi/SalesStats.vue'
+import SalesGraph from './SalesGraph.js'
+import SalesPercent from './SalesPercent.vue'
+import SalesStats from './SalesStats.vue'
 import ImportButton from '~/components/customer/ImportButton'
 import SettingsButton from '~/components/bi/SettingsButton'
 import SettingsDialog from '~/components/bi/setting-dialog/index'

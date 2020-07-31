@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import SalesProductivityGraph from '~/components/bi/SalesProductivityGraph.js'
+import SalesProductivityGraph from './SalesProductivityGraph.js'
 export default {
   name: 'Sales',
   components: {
