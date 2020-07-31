@@ -4,7 +4,7 @@
       :width="15"
       :height="15"
       contain
-      :src="require('~/static/common/arrowup.svg')"
+      :src="require('~/static/common/arrow-up.svg')"
     ></v-img>
     <h3 class="percentage">{{ content }}</h3>
   </div>
