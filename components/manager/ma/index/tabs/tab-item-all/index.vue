@@ -5,8 +5,8 @@
   </div>
 </template>
 <script>
-import Inspection from '~/components/manager/component-ma/index/tabs/sub-page-3/index.vue'
-import Advertisement from '~/components/manager/component-ma/index/tabs/sub-page-2/index.vue'
+import Inspection from '~/components/manager/ma/index/tabs/tab-item-repeat/index.vue'
+import Advertisement from '~/components/manager/ma/index/tabs/tab-item-new/index.vue'
 export default {
   components: {
     Advertisement,

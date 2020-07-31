@@ -24,7 +24,7 @@
       <template v-slot:item.name="{ item }">
         <div class="user">
           <v-avatar size="38" class="user__image">
-            <v-img :src="require('~/static/customer/profile-edit.svg')"></v-img>
+            <v-img :src="require('./img/profile-edit.svg')"></v-img>
           </v-avatar>
           <div class="user__name ml10">
             <h3>{{ item.lastName }}&nbsp;&nbsp;{{ item.firstName }}</h3>
@@ -78,7 +78,7 @@
 </template>
 <script>
 import GlobalPagination from '~/components/common/global-pagination/index'
-import BooleanFlg from '~/components/manager/component-ma/detail/BooleanFlg.vue'
+import BooleanFlg from '~/components/manager/ma/detail/BooleanFlg.vue'
 export default {
   name: 'CustomerResult',
   components: {
@@ -325,7 +325,7 @@ export default {
 }
 .tel {
   .fixed-tel:before {
-    content: url('./img/fixed_tel.svg');
+    content: url('./img/fixed-tel.svg');
     display: inline-block;
     width: 11px;
     height: 11px;
@@ -333,7 +333,7 @@ export default {
   }
 
   .mobile-tel:before {
-    content: url('./img/mobile_tel.svg');
+    content: url('./img/mobile-tel.svg');
     display: inline-block;
     width: 8px;
     height: 11px;
