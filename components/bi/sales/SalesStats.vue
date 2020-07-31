@@ -1,5 +1,5 @@
 <template>
-  <div class="container pa-0">
+  <div class="content pa-0">
     <div class="stats d-flex pa-0">
       <div class="stats__left">
         <h3 class="mb10">総売上</h3>
@@ -7,7 +7,7 @@
           :height="70"
           :width="60"
           contain
-          :src="require('~/static/bi/meter.svg')"
+          :src="require('./img/meter.svg')"
         ></v-img>
         <p class="stats__left--percentage">88<span>%</span></p>
       </div>
@@ -67,9 +67,9 @@
   </div>
 </template>
 <script>
-import Increase from '../common/Increase.vue'
-import Decrease from '../common/Decrease.vue'
-import SalesCount from '~/components/bi/SalesCount.vue'
+import SalesCount from './SalesCount.vue'
+import Increase from '~/components/common/Increase.vue'
+import Decrease from '~/components/common/Decrease.vue'
 
 export default {
   name: 'SalesStats',
@@ -81,7 +81,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.container {
+.content {
   padding: 0px;
   .stats {
     padding: 20px 0px;

@@ -4,10 +4,7 @@
       <div class="setting-dialog-wrapper">
         <div class="check-info mt10">
           <h4 class="mr30">年間利益目標</h4>
-          <v-img
-            class="mr5"
-            :src="require('~/static/customer/warning.svg')"
-          ></v-img>
+          <v-img class="mr5" :src="require('./img/warning.svg')"></v-img>
           年間利益目標に到達していません。目標設定を再入力願います。
         </div>
         <table class="details-table">
