@@ -1,8 +1,8 @@
 <template>
   <div class="tab mb30">
     <div class="tab__header">
-      <h3 class="tab__header--left">生産性</h3>
-      <div class="tab__header__right d-flex align-baseline">
+      <h3 class="tab__header__title">生産性</h3>
+      <div class="tab__header__aside d-flex align-baseline">
         <h4>平均粗利</h4>
         <h3><span>¥</span>5,340<span>/時</span></h3>
       </div>
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import SalesProductivityGraph from './SalesProductivityGraph.js'
+import SalesProductivityGraph from './sales-productivity-graph.js'
 export default {
   name: 'Sales',
   components: {
@@ -117,11 +117,11 @@ export default {
     align-items: center;
     justify-content: space-between;
     display: flex;
-    &--left {
+    &__title {
       font-size: 18px;
       color: $blue-200;
     }
-    &__right {
+    &__aside {
       h4 {
         margin-right: 10px;
         font-size: 14px;

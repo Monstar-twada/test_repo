@@ -2,7 +2,7 @@
   <div class="tab mb30">
     <div class="tab__header">
       <div class="d-flex">
-        <h3 class="tab__header--title">売上</h3>
+        <h3 class="tab__header__title">売上</h3>
         <ul class="tab__header__legend pa-0 ml10">
           <li>
             <span />
@@ -49,7 +49,7 @@
   </div>
 </template>
 <script>
-import SalesGraph from './SalesGraph.js'
+import SalesGraph from './sales-graph.js'
 import SalesPercent from './SalesPercent.vue'
 import SalesStats from './SalesStats.vue'
 import ImportButton from '~/components/customer/ImportButton'
@@ -228,7 +228,7 @@ export default {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    &--title {
+    &__title {
       font-size: 18px;
       color: $blue-200;
     }
