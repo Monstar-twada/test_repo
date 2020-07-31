@@ -30,7 +30,7 @@
 
 <script>
 import Input from '~/components/common/Input.vue'
-import ButtonSearch from '~/components/common/ButtonSearch.vue'
+import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'CustomerSearch',
   components: {

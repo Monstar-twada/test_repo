@@ -23,7 +23,7 @@
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
 import Calendar from '~/components/common/Calendar.vue'
-import ButtonSearch from '~/components/common/ButtonSearch.vue'
+import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'Searchbar',
   components: {

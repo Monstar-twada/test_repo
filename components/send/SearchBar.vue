@@ -41,7 +41,7 @@
 <script>
 import Input from '~/components/common/Input.vue'
 import Select from '~/components/common/Select.vue'
-import ButtonSearch from '~/components/common/ButtonSearch.vue'
+import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'Searchbar',
   components: {

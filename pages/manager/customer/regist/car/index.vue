@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import RegistCar from '~/components/customer/regist/car/index'
+import RegistCar from '~/components/common/customer/regist/car/index'
 export default {
   layout: 'manager',
   components: {

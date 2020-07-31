@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Detail from '~/components/customer/detail/index'
+import Detail from '~/components/common/customer/detail/index'
 export default {
   layout: 'dashboard',
   components: {

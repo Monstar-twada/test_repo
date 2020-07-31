@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { getManufacturerList } from '~/components/customer/manufacturers.js'
+import { getManufacturerList } from '~/components/common/customer/manufacturers.js'
 import GlobalInput from '~/components/common/global-input/index'
 import GlobalSelector from '~/components/common/global-selector/index'
 

@@ -11,7 +11,7 @@
 
 <script>
 import Breadcrumbs from '~/components/breadcrumbs/index'
-import IndexBodyContainer from '~/components/customer/regist/car/IndexBodyContainer'
+import IndexBodyContainer from '~/components/common/customer/regist/car/IndexBodyContainer'
 export default {
   layout: 'dashboard',
   components: {
