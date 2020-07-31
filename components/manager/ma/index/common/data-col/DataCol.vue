@@ -27,7 +27,7 @@
   </v-row>
 </template>
 <script>
-import Rate from '~/components/manager/component-ma/index/common/rate/index'
+import Rate from '~/components/manager/ma/index/common/rate/index'
 export default {
   name: 'DataCol',
   components: {

@@ -195,10 +195,10 @@
   </div>
 </template>
 <script>
-import Title from '~/components/manager/component-ma/index/common/Title.vue'
-import DataColSmall from '~/components/manager/component-ma/index/common/data-col/DataColSmall.vue'
-import TableCalendar from '~/components/manager/component-ma/index/common/calendar/index'
-import SwitchButton from '~/components/manager/component-ma/index/common/SwitchButton.vue'
+import Title from '~/components/manager/ma/index/common/Title.vue'
+import DataColSmall from '~/components/manager/ma/index/common/data-col/DataColSmall.vue'
+import TableCalendar from '~/components/manager/ma/index/common/calendar/index'
+import SwitchButton from '~/components/manager/ma/index/common/SwitchButton.vue'
 export default {
   name: 'Inspection',
   components: {

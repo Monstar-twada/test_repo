@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MaDetail from '~/components/manager/component-ma/detail/index'
+import MaDetail from '~/components/manager/ma/detail/index'
 
 export default {
   layout: 'manager',
