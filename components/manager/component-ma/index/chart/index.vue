@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import Doughnut from '~/components/component-ma/index/chart/Doughnut'
-import StackedBar from '~/components/component-ma/index/chart/StackedBar'
+import Doughnut from '~/components/manager/component-ma/index/chart/Doughnut'
+import StackedBar from '~/components/manager/component-ma/index/chart/StackedBar'
 
 export default {
   components: {

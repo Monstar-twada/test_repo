@@ -23,9 +23,9 @@
   </div>
 </template>
 <script>
-import TabItemAll from '~/components/component-ma/index/tabs/sub-page-1/index.vue'
-import TabItemNew from '~/components/component-ma/index/tabs/sub-page-2/index.vue'
-import TabItemRepeat from '~/components/component-ma/index/tabs/sub-page-3/index.vue'
+import TabItemAll from '~/components/manager/component-ma/index/tabs/sub-page-1/index.vue'
+import TabItemNew from '~/components/manager/component-ma/index/tabs/sub-page-2/index.vue'
+import TabItemRepeat from '~/components/manager/component-ma/index/tabs/sub-page-3/index.vue'
 export default {
   components: {
     TabItemAll,

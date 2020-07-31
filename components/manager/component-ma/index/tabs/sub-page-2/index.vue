@@ -137,9 +137,9 @@
   </div>
 </template>
 <script>
-import Title from '~/components/component-ma/index/common/Title.vue'
-import DataColSmall from '~/components/component-ma/index/common/data-col/DataColSmall.vue'
-import SwitchButton from '~/components/component-ma/index/common/SwitchButton.vue'
+import Title from '~/components/manager/component-ma/index/common/Title.vue'
+import DataColSmall from '~/components/manager/component-ma/index/common/data-col/DataColSmall.vue'
+import SwitchButton from '~/components/manager/component-ma/index/common/SwitchButton.vue'
 export default {
   name: 'Advertisement',
   components: {

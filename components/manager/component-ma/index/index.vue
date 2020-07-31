@@ -19,9 +19,9 @@
 
 <script>
 import Breadcrumbs from '~/components/breadcrumbs/index'
-import Chart from '~/components/component-ma/index/chart/index'
-import MaTabs from '~/components/component-ma/index/tabs/index'
-import DataCol from '~/components/component-ma/index/common/data-col/DataCol.vue'
+import Chart from '~/components/manager/component-ma/index/chart/index'
+import MaTabs from '~/components/manager/component-ma/index/tabs/index'
+import DataCol from '~/components/manager/component-ma/index/common/data-col/DataCol.vue'
 export default {
   layout: 'manager',
   // middleware: 'authenticated',

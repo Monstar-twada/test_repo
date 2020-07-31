@@ -78,7 +78,7 @@
 </template>
 <script>
 import GlobalPagination from '~/components/common/global-pagination/index'
-import BooleanFlg from '~/components/component-ma/detail/BooleanFlg.vue'
+import BooleanFlg from '~/components/manager/component-ma/detail/BooleanFlg.vue'
 export default {
   name: 'CustomerResult',
   components: {

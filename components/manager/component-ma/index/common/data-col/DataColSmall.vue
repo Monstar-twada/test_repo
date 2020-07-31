@@ -1,37 +1,48 @@
 <template>
   <v-row class="data-col mx-0">
     <div class="data-col__item">
-      <h4>総広告予算</h4>
-      <p class="data">¥755,800</p>
-    </div>
-    <div class="data-col__item">
       <h4>リーチ数</h4>
-      <p class="data">3,779</p>
-      <Rate is-up :rate="Number(4.8)" />
+      <p class="data">
+        {{ reach.value ? reach.value.toLocaleString() : 'ー' }}
+      </p>
+      <Rate :is-up="reach.isUp" :rate="Number(reach.rate)" />
     </div>
     <div class="data-col__item">
       <h4>コンタクト数</h4>
-      <p class="data">2,447</p>
-      <Rate :rate="Number(1.2)" />
+      <p class="data">
+        {{ contacts.value ? contacts.value.toLocaleString() : 'ー' }}
+      </p>
+      <Rate :is-up="contacts.isUp" :rate="Number(contacts.rate)" />
     </div>
     <div class="data-col__item">
       <h4>予約件数</h4>
-      <p class="data">595</p>
-      <Rate is-up :rate="Number(2.0)" />
-    </div>
-    <div class="data-col__item">
-      <h4>予約獲得単価</h4>
-      <p class="data">¥1,270</p>
-      <Rate :rate="Number(3.5)" />
+      <p class="data">
+        {{ order.value ? order.value.toLocaleString() : 'ー' }}
+      </p>
+      <Rate :is-up="order.isUp" :rate="Number(order.rate)" />
     </div>
   </v-row>
 </template>
 <script>
-import Rate from '~/components/component-ma/index/common/rate/index'
+import Rate from '~/components/manager/component-ma/index/common/rate/index'
 export default {
   name: 'DataCol',
   components: {
     Rate,
+  },
+  props: {
+    reach: {
+      type: Object,
+      default: null,
+    },
+    contacts: {
+      type: Object,
+      default: null,
+    },
+    order: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
@@ -43,16 +54,15 @@ export default {
 <style lang="scss"></style>
 <style lang="scss" scoped>
 .data-col {
-  height: 100px;
+  height: 80px;
   border: 1px solid $gray-100;
   border-radius: 6px;
   color: $blue-200;
   font-weight: bold;
 
   &__item {
-    width: 20%;
-    height: 80px;
-    padding: 10px 0;
+    width: 33%;
+    //padding: 10px 0;
     text-align: center;
     position: relative;
 
@@ -60,25 +70,24 @@ export default {
       content: '';
       background-image: url('./img/arrow-bg.svg');
       position: absolute;
-      width: 20px;
-      height: 100px;
+      width: 18px;
+      height: 80px;
       right: 0;
       top: 0;
       background-size: contain;
       background-repeat: no-repeat;
       vertical-align: middle;
     }
-
-    .data {
-      font-size: 25px;
+    h4 {
       margin-top: 5px;
-      margin-bottom: 5px;
-      font-weight: 900;
-      font-family: 'Yantramanav';
     }
 
-    .rate {
-      font-size: 10px;
+    .data {
+      font-size: 24px;
+      font-weight: 900;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      font-family: 'Yantramanav';
     }
   }
 }
