@@ -67,7 +67,7 @@ export default {
   data() {
     const isManager = this.$isManager
     return {
-      selectedResult: 7,
+      selectedResult: 8,
       // item's index in menu
       index: -1,
       logoName: isManager ? 'manager' : 'dashboard',
@@ -101,6 +101,10 @@ export default {
         {
           text: 'cars足立',
           value: 7,
+        },
+        {
+          text: 'cars天理',
+          value: 8,
         },
       ],
     }
