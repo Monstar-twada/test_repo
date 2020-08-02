@@ -6,7 +6,7 @@
     <div class="customerContainer__user">
       <div class="customerContainer__user__img">
         <v-avatar :size="60">
-          <img :src="require(`~/static/send/person_default.svg`)" alt="John" />
+          <img :src="require(`./img/person_default.svg`)" alt="John" />
         </v-avatar>
       </div>
       <div class="customerContainer__user__content">
@@ -21,7 +21,7 @@
           <v-img
             :max-width="70"
             :max-height="30"
-            :src="require(`~/static/send/change_btn.svg`)"
+            :src="require(`./img/change_btn.svg`)"
           ></v-img>
         </div>
       </div>
@@ -31,7 +31,7 @@
         <v-img
           :max-width="120"
           :max-height="66"
-          :src="require(`~/static/send/car.png`)"
+          :src="require(`./img/car.png`)"
           class="arrow-right"
         ></v-img>
       </div>
@@ -44,7 +44,7 @@
           <v-img
             :max-width="90"
             :max-height="30"
-            :src="require(`~/static/send/car_change_btn.svg`)"
+            :src="require(`./img/car_change_btn.svg`)"
           ></v-img>
         </div>
       </div>

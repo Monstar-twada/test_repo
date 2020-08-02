@@ -8,14 +8,14 @@
             <v-img
               :max-width="7"
               :max-height="11"
-              :src="require(`~/static/send/send_arrow_left.svg`)"
+              :src="require(`./img/send_arrow_left.svg`)"
               class="arrow-left"
             ></v-img>
             <p>2020年1月-2020年6月</p>
             <v-img
               :max-width="7"
               :max-height="11"
-              :src="require(`~/static/send/send_arrow_right.svg`)"
+              :src="require(`./img/send_arrow_right.svg`)"
               class="arrow-right"
             ></v-img>
           </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import CostItem from '~/components/manager/send/CostItem.vue'
+import CostItem from './CostItem.vue'
 import Select from '~/components/common/Select.vue'
 
 export default {

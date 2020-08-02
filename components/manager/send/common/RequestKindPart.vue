@@ -18,7 +18,7 @@
           <v-img
             :max-width="30"
             :max-height="30"
-            :src="require(`~/static/send/${isSelectedIcon(i)}.svg`)"
+            :src="require(`./img/${isSelectedIcon(i)}.svg`)"
           ></v-img>
         </div>
         <p>{{ item.title }}</p>
