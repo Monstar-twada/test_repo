@@ -1,7 +1,7 @@
 <template>
   <button class="free-car-input-button" @click="$emit('click')">
     <h3>フリー車種入力から作成</h3>
-    <img width="30" :src="require('~/static/common/btn-plus.svg')" />
+    <img width="30" :src="require('./img/btn-plus.svg')" />
   </button>
 </template>
 

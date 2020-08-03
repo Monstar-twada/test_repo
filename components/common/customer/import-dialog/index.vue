@@ -24,10 +24,7 @@
           <button @click="selectFile">ファイルを選択</button>
           <input ref="fileInput" type="file" style="display: none;" />
           <div class="check-info ml20">
-            <v-img
-              class="mr5"
-              :src="require('~/static/customer/warning.svg')"
-            ></v-img>
+            <v-img class="mr5" :src="require('./img/warning.svg')"></v-img>
             フォーマットが不一致です。（1000行目）
           </div>
         </div>

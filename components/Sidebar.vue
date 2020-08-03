@@ -2,11 +2,11 @@
   <v-navigation-drawer class="sidebar">
     <div class="sidebar_container">
       <div class="sidebar_container_top p20">
-        <v-img
+        <!-- <v-img
           class="sidebar_container_top_logo"
           :src="require('~/static/common/logo.svg')"
         >
-        </v-img>
+        </v-img> -->
         <h5>株式会社ファーストグループ</h5>
         <v-select
           background-color="#F2F6FA"

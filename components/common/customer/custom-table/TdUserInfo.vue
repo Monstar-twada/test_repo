@@ -1,9 +1,7 @@
 <template>
   <div class="table-td-user-info-wrapper">
     <v-avatar size="37">
-      <v-img
-        :src="item.photoKey || require('~/static/customer/profile-edit.svg')"
-      ></v-img>
+      <v-img :src="item.photoKey || require('./img/profile-edit.svg')"></v-img>
     </v-avatar>
     <div class="text">
       <h3>{{ fmtCustomerName(item) }}</h3>

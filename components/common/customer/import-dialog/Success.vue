@@ -2,7 +2,7 @@
   <div class="customer-import-dialog-success">
     <v-img
       :class="[isBi ? 'is-bi' : '']"
-      :src="require('~/static/customer/import-success.svg')"
+      :src="require('./img/import-success.svg')"
     ></v-img>
     <h2 class="mt25">インポートが完了しました。</h2>
     <v-btn class="mt30" rounded outlined depressed @click="$emit('close')"

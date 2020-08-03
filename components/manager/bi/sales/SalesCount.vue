@@ -18,8 +18,8 @@
   </div>
 </template>
 <script>
-import Increase from '~/components/common/Increase.vue'
-import Decrease from '~/components/common/Decrease.vue'
+import Increase from '~/components/common/increase/index'
+import Decrease from '~/components/common/decrease/index'
 
 export default {
   name: 'SalesStats',
