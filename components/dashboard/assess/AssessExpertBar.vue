@@ -6,7 +6,7 @@
     </div>
     <div class="d-flex border-right assess">
       <v-avatar size="31" class="mr10">
-        <v-img :src="require('~/static/breadcrumbs/person.png')" />
+        <v-img :src="require('~/static/common/person.png')" />
       </v-avatar>
       <h3 class="assess-text">米田 道春</h3>
       <h4 class="assess-text">（31歳）</h4>

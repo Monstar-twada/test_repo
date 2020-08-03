@@ -16,9 +16,7 @@
       <template v-slot:item.owner="{ item }">
         <div class="user ml30">
           <v-avatar size="38" class="user__image">
-            <v-img
-              :src="require('~/static/breadcrumbs/' + item.image_path)"
-            ></v-img>
+            <v-img :src="require('~/static/common/' + item.image_path)"></v-img>
           </v-avatar>
           <h3 class="pl5">{{ item.name }}</h3>
           <span>（{{ item.age }}歳）</span>

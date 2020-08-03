@@ -1,5 +1,5 @@
 <template>
-  <v-img :src="require('~/static/breadcrumbs/home.svg')" />
+  <v-img :src="require('~/static/common/person_default.svg/home.svg')" />
 </template>
 <script>
 export default {

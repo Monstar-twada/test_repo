@@ -16,7 +16,7 @@
           <div class="table-avatar-wrapper">
             <v-avatar size="30">
               <v-img
-                :src="require('~/static/breadcrumbs/' + item.image_path)"
+                :src="require('~/static/common/' + item.image_path)"
               ></v-img>
             </v-avatar>
             {{ item.name }}

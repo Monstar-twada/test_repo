@@ -11,9 +11,9 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import AssessExpertBar from '~/components/AssessExpertBar.vue'
-import ResultInformation from '~/components/assess/ResultInformation.vue'
-import ResultPrice from '~/components/assess/ResultPrice.vue'
+import AssessExpertBar from '~/components/dashboard/assess/AssessExpertBar.vue'
+import ResultInformation from '~/components/dashboard/assess/ResultInformation.vue'
+import ResultPrice from '~/components/dashboard/assess/ResultPrice.vue'
 export default {
   layout: 'dashboard',
   components: {

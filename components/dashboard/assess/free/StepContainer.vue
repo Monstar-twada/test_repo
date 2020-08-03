@@ -4,7 +4,11 @@
       <v-img
         :max-width="30"
         :max-height="30"
-        :src="require(`~/static/assess/step${stepInfo.step + 1}_icon.svg`)"
+        :src="
+          require(`~/components/dashboard/assess/img/step${
+            stepInfo.step + 1
+          }_icon.svg`)
+        "
       ></v-img>
       {{ stepInfo.title }}
     </div>
@@ -22,7 +26,7 @@
           <v-img
             :max-width="12"
             :max-height="12"
-            :src="require(`~/static/assess/pancel_icon.svg`)"
+            :src="require(`~/components/dashboard/assess/img/pancel_icon.svg`)"
           ></v-img>
           編集
         </div>

@@ -26,7 +26,7 @@
 export default {
   data() {
     return {
-      userAvatar: '/breadcrumbs/person_default.svg',
+      userAvatar: '/common/person_default.svg',
       userDropdownVisible: false,
     }
   },
