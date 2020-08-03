@@ -22,7 +22,7 @@
       <v-img
         :max-width="30"
         :max-height="30"
-        :src="require(`~/static/common/btn-plus.svg`)"
+        :src="require(`./img/btn-plus.svg`)"
         class="userAvatarContainer__editPart--add"
       ></v-img>
     </div>

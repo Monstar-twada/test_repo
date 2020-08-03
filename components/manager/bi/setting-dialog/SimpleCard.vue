@@ -10,10 +10,7 @@
           </div>
         </div>
         <div class="check-info mt10">
-          <v-img
-            class="mr5"
-            :src="require('~/static/customer/warning.svg')"
-          ></v-img>
+          <v-img class="mr5" :src="require('./img/warning.svg')"></v-img>
           年間利益目標に到達していません。目標設定を再入力願います。
         </div>
       </div>

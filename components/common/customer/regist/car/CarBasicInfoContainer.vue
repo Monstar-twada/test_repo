@@ -10,14 +10,14 @@
               <v-img
                 :max-width="89"
                 :max-height="24"
-                :src="require(`~/static/customer/set_image_icon.png`)"
+                :src="require(`./img/set-image-icon.png`)"
               ></v-img>
             </div>
             <div class="pic--right">
               <v-img
                 :max-width="116"
                 :max-height="77"
-                :src="require(`~/static/customer/user_card_img.png`)"
+                :src="require(`./img/user-card-img.png`)"
               ></v-img>
             </div>
           </div>

@@ -182,7 +182,7 @@ export default {
         display: block;
         position: absolute;
         left: 15px;
-        background: url('../../../static/common/download.svg') no-repeat;
+        background: url('./img/download.svg') no-repeat;
         width: 20px;
         height: 20px;
         float: left;

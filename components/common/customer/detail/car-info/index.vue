@@ -19,21 +19,21 @@
           <v-col cols="3" class="">
             <h4>所有者</h4>
             <v-avatar v-if="carSummary.owner" size="24" class="ml10">
-              <v-img :src="require('~/static/customer/profile-edit.svg')" />
+              <v-img :src="require('./img/profile-edit.svg')" />
             </v-avatar>
             <template v-else>-</template>
           </v-col>
           <v-col cols="3" class="px-0">
             <h4>意思決定者</h4>
             <v-avatar v-if="carSummary.payer" size="24" class="ml10">
-              <v-img :src="require('~/static/customer/profile-edit.svg')" />
+              <v-img :src="require('./img/profile-edit.svg')" />
             </v-avatar>
             <template v-else>-</template>
           </v-col>
           <v-col cols="3" class="px-0">
             <h4>利用者</h4>
             <v-avatar v-if="carSummary.user" size="24" class="ml10">
-              <v-img :src="require('~/static/customer/profile-edit.svg')" />
+              <v-img :src="require('./img/profile-edit.svg')" />
             </v-avatar>
             <template v-else>-</template>
           </v-col>

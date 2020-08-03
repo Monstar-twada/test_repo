@@ -4,7 +4,7 @@
       :width="15"
       :height="15"
       contain
-      :src="require('~/static/common/arrow-down.svg')"
+      :src="require('./img/arrow-down.svg')"
     ></v-img>
     <h3 class="text">{{ content }}</h3>
   </div>
