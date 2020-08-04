@@ -23,16 +23,14 @@
               <v-img
                 :max-width="30"
                 :max-height="30"
-                :src="
-                  require(`~/components/dashboard/assess/img/pancel-icon.svg`)
-                "
+                :src="require(`./img/pancel-icon.svg`)"
                 class="message__context__edit__btns--remake"
                 @click="editMessage(i)"
               ></v-img>
               <v-img
                 :max-width="30"
                 :max-height="30"
-                :src="require(`./img/trash_icon.svg`)"
+                :src="require(`./img/trash-icon.svg`)"
                 class="message__context__edit__btns--trash"
                 @click="removeMessage(i)"
               ></v-img>
@@ -58,13 +56,13 @@
         <v-img
           :max-width="13"
           :max-height="13"
-          :src="require(`./img/upload_icon.svg`)"
+          :src="require(`./img/upload-icon.svg`)"
           class="chatContainer__input__btns--upload"
         ></v-img>
         <v-img
           :max-width="16"
           :max-height="14"
-          :src="require(`./img/sendMessage_icon.svg`)"
+          :src="require(`./img/send-message-icon.svg`)"
           class="chatContainer__input__btns--send"
           @click="sendMessage"
         ></v-img>
@@ -75,7 +73,7 @@
         <v-img
           :max-width="13"
           :max-height="13"
-          :src="require(`./img/upload_icon.svg`)"
+          :src="require(`./img/upload-icon.svg`)"
           class="chatContainer__input__btns--upload"
         ></v-img>
         プリウス 車両カタログ.pdf

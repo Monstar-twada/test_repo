@@ -15,7 +15,7 @@
         <p>カテゴリー</p>
         <v-breadcrumbs :items="items" class="pa-0">
           <template v-slot:divider>
-            <img src="./img/right_arrow_blue.svg" />
+            <img src="./img/right-arrow-blue.svg" />
           </template>
         </v-breadcrumbs>
       </div>
