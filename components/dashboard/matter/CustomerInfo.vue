@@ -22,7 +22,7 @@
         <v-img
           :max-width="'100%'"
           :min-height="166"
-          :src="require(`./img/car_img.png`)"
+          :src="require(`./img/car-img.png`)"
         ></v-img>
         <div>プリウス</div>
       </div>

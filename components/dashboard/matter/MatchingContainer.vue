@@ -43,7 +43,7 @@
                 <v-img
                   :max-width="12"
                   :max-height="12"
-                  :src="require(`./img/trash_icon_nobg.svg`)"
+                  :src="require(`./img/trash-icon-nobg.svg`)"
                 ></v-img>
                 削除
               </div>
