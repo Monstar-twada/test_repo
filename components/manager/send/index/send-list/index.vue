@@ -21,7 +21,7 @@
       <template v-slot:item.customerName="{ item }">
         <div class="customerName">
           <v-avatar :size="36">
-            <img :src="require(`~/static/send/${item.img}`)" alt="John" />
+            <img :src="require(`./img/${item.img}`)" alt="" />
           </v-avatar>
           <div class="customerName--content">
             <span>{{ item.customerName[0] }}</span>

@@ -5,7 +5,7 @@
       <v-img
         :max-width="48"
         :max-height="48"
-        :src="require(`~/static/send/${item.img}.svg`)"
+        :src="require(`./img/${item.img}.svg`)"
         class="costItem__top--img"
       ></v-img>
       <p class="costItem__top--num">
