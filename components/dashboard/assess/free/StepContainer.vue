@@ -26,7 +26,7 @@
           <v-img
             :max-width="12"
             :max-height="12"
-            :src="require(`~/components/dashboard/assess/img/pancel_icon.svg`)"
+            :src="require(`~/components/dashboard/assess/img/pancel-icon.svg`)"
           ></v-img>
           編集
         </div>

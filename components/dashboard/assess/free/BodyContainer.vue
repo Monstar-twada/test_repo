@@ -25,7 +25,7 @@
                     :max-width="16"
                     :max-height="16"
                     :src="
-                      require(`~/components/dashboard/assess/img/no_radio_icon.svg`)
+                      require(`~/components/dashboard/assess/img/no-radio-icon.svg`)
                     "
                     class="item__radio__no"
                   ></v-img>
@@ -34,7 +34,7 @@
                     :max-width="10"
                     :max-height="10"
                     :src="
-                      require(`~/components/dashboard/assess/img/radio_active_icon.svg`)
+                      require(`~/components/dashboard/assess/img/radio-active-icon.svg`)
                     "
                     class="item__radio__active"
                   ></v-img>
@@ -71,7 +71,7 @@
                     :max-width="16"
                     :max-height="16"
                     :src="
-                      require(`~/components/dashboard/assess/img/no_radio_icon.svg`)
+                      require(`~/components/dashboard/assess/img/no-radio-icon.svg`)
                     "
                     class="item__radio__no"
                   ></v-img>
@@ -80,7 +80,7 @@
                     :max-width="10"
                     :max-height="10"
                     :src="
-                      require(`~/components/dashboard/assess/img/radio_active_icon.svg`)
+                      require(`~/components/dashboard/assess/img/radio-active-icon.svg`)
                     "
                     class="item__radio__active"
                   ></v-img>
@@ -175,7 +175,7 @@
           :max-width="7"
           :max-height="12"
           :src="
-            require(`~/components/dashboard/assess/img/arrow_right_icon.svg`)
+            require(`~/components/dashboard/assess/img/arrow-right-icon.svg`)
           "
           class="item__radio__no"
         ></v-img>
