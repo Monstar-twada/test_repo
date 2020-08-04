@@ -8,14 +8,14 @@
             <v-img
               :max-width="7"
               :max-height="11"
-              :src="require(`./img/send_arrow_left.svg`)"
+              :src="require(`./img/send-arrow-left.svg`)"
               class="arrow-left"
             ></v-img>
             <p>2020年1月-2020年6月</p>
             <v-img
               :max-width="7"
               :max-height="11"
-              :src="require(`./img/send_arrow_right.svg`)"
+              :src="require(`./img/send-arrow-right.svg`)"
               class="arrow-right"
             ></v-img>
           </div>
@@ -57,37 +57,37 @@ export default {
       costItems: [
         {
           title: '購入',
-          img: 'send_car_icon',
+          img: 'send-car-icon',
           count: '12',
           cost: '40,000',
         },
         {
           title: '売却',
-          img: 'send_money_icon',
+          img: 'send-money-icon',
           count: '21',
           cost: '10,000',
         },
         {
           title: '整備',
-          img: 'send_wrench_icon',
+          img: 'send-wrench-icon',
           count: '55',
           cost: '3,000',
         },
         {
           title: '鈑金',
-          img: 'send_hammer_icon',
+          img: 'send-hammer-icon',
           count: '14',
           cost: '3,000',
         },
         {
           title: '保険',
-          img: 'send_heart_icon',
+          img: 'send-heart-icon',
           count: '4',
           cost: '10,000~',
         },
         {
           title: 'アクセサリー',
-          img: 'send_tire_icon',
+          img: 'send-tire-icon',
           count: '34',
           cost: '1,000~',
         },

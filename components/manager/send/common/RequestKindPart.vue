@@ -37,32 +37,32 @@ export default {
         {
           target: 'car',
           title: '購入',
-          svg: 'send_car_icon',
+          svg: 'send-car-icon',
         },
         {
           target: 'money',
           title: '売却',
-          svg: 'send_money_icon',
+          svg: 'send-money-icon',
         },
         {
           target: 'wrench',
           title: '整備',
-          svg: 'send_wrench_icon',
+          svg: 'send-wrench-icon',
         },
         {
           target: 'hammer',
           title: '鈑金',
-          svg: 'send_hammer_icon',
+          svg: 'send-hammer-icon',
         },
         {
           target: 'heart',
           title: '保険',
-          svg: 'send_heart_icon',
+          svg: 'send-heart-icon',
         },
         {
           target: 'tire',
           title: 'アクセサリー',
-          svg: 'send_tire_icon',
+          svg: 'send-tire-icon',
         },
       ],
     }
@@ -76,7 +76,7 @@ export default {
     },
     isSelectedIcon(index) {
       return this.isSelected(index)
-        ? `${this.icons[index].svg}_white`
+        ? `${this.icons[index].svg}-white`
         : `${this.icons[index].svg}`
     },
   },
