@@ -1,19 +1,19 @@
 <template>
-  <div class="formContainer">
-    <div class="formContainer__top">
+  <div class="send-detail-detail-conatiner">
+    <div class="send-detail-detail-conatiner__top">
       <h3>送客依頼詳細</h3>
-      <div class="formContainer__top__right">
-        <div class="formContainer__top__right--date">
+      <div class="send-detail-detail-conatiner__top__right">
+        <div class="send-detail-detail-conatiner__top__right--date">
           <p>依頼日時：</p>
           <p>R02/06/01 16:30</p>
         </div>
-        <div class="formContainer__top__right--date">
+        <div class="send-detail-detail-conatiner__top__right--date">
           <p>完了日時：</p>
           <p>R02/07/01 16:30</p>
         </div>
       </div>
     </div>
-    <div class="formContainer__bottom">
+    <div class="send-detail-detail-conatiner__bottom">
       <CustomerPart />
       <RequestKindPart />
       <TextAreaInfo
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.formContainer {
+.send-detail-detail-conatiner {
   width: 100%;
   background-color: $white-300;
   border-radius: 6px;

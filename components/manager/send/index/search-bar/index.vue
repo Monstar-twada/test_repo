@@ -1,5 +1,5 @@
 <template>
-  <div class="searchbar">
+  <div class="send-search-bar-container">
     <v-row justify="start" align="center" class="mx-0">
       <Input
         class="mr20"
@@ -33,7 +33,7 @@
         :list="status"
         placeholder="ステータス"
       />
-      <ButtonSearch class="searchbar_button" />
+      <ButtonSearch class="send-search-bar-container_button" />
     </v-row>
   </div>
 </template>
@@ -57,7 +57,7 @@ export default {
 </script>
 <style lang="scss"></style>
 <style lang="scss" scoped>
-.searchbar {
+.send-search-bar-container {
   width: 100%;
   padding: 20px;
   height: 120px;

@@ -1,19 +1,21 @@
 <template>
-  <div class="costItem">
-    <div class="costItem__top">
-      <p class="costItem__top--title">{{ item.title }}</p>
+  <div class="customer-info-cost-item-container">
+    <div class="customer-info-cost-item-container__top">
+      <p class="customer-info-cost-item-container__top--title">
+        {{ item.title }}
+      </p>
       <v-img
         :max-width="48"
         :max-height="48"
         :src="require(`./img/${item.img}.svg`)"
-        class="costItem__top--img"
+        class="customer-info-cost-item-container__top--img"
       ></v-img>
-      <p class="costItem__top--num">
+      <p class="customer-info-cost-item-container__top--num">
         {{ item.count }}
         <span>件</span>
       </p>
     </div>
-    <div class="costItem__bottom">
+    <div class="customer-info-cost-item-container__bottom">
       <p>
         <span>¥</span>
         <span>{{ item.cost }}</span>
@@ -36,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.costItem {
+.customer-info-cost-item-container {
   border: 1px solid $gray-100;
   margin: 0;
   width: 123px;
