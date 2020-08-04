@@ -23,7 +23,9 @@
               <v-img
                 :max-width="30"
                 :max-height="30"
-                :src="require(`./img/pancel_icon.svg`)"
+                :src="
+                  require(`~/components/dashboard/assess/img/pancel-icon.svg`)
+                "
                 class="message__context__edit__btns--remake"
                 @click="editMessage(i)"
               ></v-img>

@@ -5,7 +5,7 @@
       <v-img
         :min-height="800"
         :min-width="420"
-        :src="require('~/static/assess/car-interior.svg')"
+        :src="require('~/components/dashboard/assess/img/car-interior.svg')"
         class="mb40"
       />
       <h3 class="title">特記事項</h3>

@@ -24,14 +24,18 @@
                   <v-img
                     :max-width="16"
                     :max-height="16"
-                    :src="require(`~/static/assess/no_radio_icon.svg`)"
+                    :src="
+                      require(`~/components/dashboard/assess/img/no-radio-icon.svg`)
+                    "
                     class="item__radio__no"
                   ></v-img>
                   <v-img
                     v-if="selected[stepList[0].stepName] === item"
                     :max-width="10"
                     :max-height="10"
-                    :src="require(`~/static/assess/radio_active_icon.svg`)"
+                    :src="
+                      require(`~/components/dashboard/assess/img/radio-active-icon.svg`)
+                    "
                     class="item__radio__active"
                   ></v-img>
                 </div>
@@ -66,14 +70,18 @@
                   <v-img
                     :max-width="16"
                     :max-height="16"
-                    :src="require(`~/static/assess/no_radio_icon.svg`)"
+                    :src="
+                      require(`~/components/dashboard/assess/img/no-radio-icon.svg`)
+                    "
                     class="item__radio__no"
                   ></v-img>
                   <v-img
                     v-if="selected[stepList[1].stepName] === item"
                     :max-width="10"
                     :max-height="10"
-                    :src="require(`~/static/assess/radio_active_icon.svg`)"
+                    :src="
+                      require(`~/components/dashboard/assess/img/radio-active-icon.svg`)
+                    "
                     class="item__radio__active"
                   ></v-img>
                 </div>
@@ -166,7 +174,9 @@
         <v-img
           :max-width="7"
           :max-height="12"
-          :src="require(`~/static/assess/arrow_right_icon.svg`)"
+          :src="
+            require(`~/components/dashboard/assess/img/arrow-right-icon.svg`)
+          "
           class="item__radio__no"
         ></v-img>
       </button>
@@ -175,7 +185,7 @@
 </template>
 
 <script>
-import StepContainer from '~/components/assess/free/StepContainer'
+import StepContainer from '~/components/dashboard/assess/free/StepContainer'
 
 export default {
   name: 'BodyContainer',

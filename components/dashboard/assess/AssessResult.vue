@@ -18,7 +18,7 @@
           <v-avatar size="38" class="user__image">
             <v-img
               class="d-inline"
-              :src="require('~/static/breadcrumbs/' + item.image_path)"
+              :src="require('~/static/common/' + item.image_path)"
             ></v-img>
           </v-avatar>
           <h3 class="pl5 d-inline">{{ item.name }}</h3>

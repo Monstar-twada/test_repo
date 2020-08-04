@@ -7,7 +7,7 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import BodyContainer from '~/components/assess/free/BodyContainer'
+import BodyContainer from '~/components/dashboard/assess/free/BodyContainer'
 
 export default {
   layout: 'dashboard',
