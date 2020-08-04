@@ -91,8 +91,7 @@
           <v-avatar size="80">
             <v-img
               :src="
-                data.photoKey ||
-                require('~/static/breadcrumbs/person_default.svg')
+                data.photoKey || require('~/static/common/person_default.svg')
               "
             ></v-img>
           </v-avatar>

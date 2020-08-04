@@ -95,13 +95,13 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import AssessExpertBar from '~/components/AssessExpertBar.vue'
+import AssessExpertBar from '~/components/dashboard/assess/AssessExpertBar.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
-import BasicInformation from '~/components/assess/BasicInformation.vue'
-import ExpertInformation from '~/components/assess/ExpertInformation.vue'
-import CarInterior from '~/components/assess/CarInterior.vue'
-import CarImage from '~/components/assess/CarImage.vue'
-import Pricing from '~/components/assess/Pricing.vue'
+import BasicInformation from '~/components/dashboard/assess/BasicInformation.vue'
+import ExpertInformation from '~/components/dashboard/assess/ExpertInformation.vue'
+import CarInterior from '~/components/dashboard/assess/CarInterior.vue'
+import CarImage from '~/components/dashboard/assess/CarImage.vue'
+import Pricing from '~/components/dashboard/assess/Pricing.vue'
 export default {
   layout: 'dashboard',
   components: {
