@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Sidebar from '~/components/sidebar/index'
-import { dashboardMenuItems } from '~/components/sidebar/menu-dashboard'
+import Sidebar from '~/components/common/sidebar/index'
+import { dashboardMenuItems } from '~/components/common/sidebar/menu-dashboard'
 export default {
   components: {
     Sidebar,

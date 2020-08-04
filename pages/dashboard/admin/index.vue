@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Admin from '~/components/admin/index'
+import Admin from '~/components/common/admin/index'
 export default {
   layout: 'dashboard',
   components: {

@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index.vue'
-import CustomerSearch from '~/components/assess/customer/CustomerSearch.vue'
-import VehicleSearch from '~/components/assess/customer/VehicleSearch.vue'
-import AssessResult from '~/components/assess/AssessResult.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
+import CustomerSearch from '~/components/dashboard/assess/customer/CustomerSearch.vue'
+import VehicleSearch from '~/components/dashboard/assess/customer/VehicleSearch.vue'
+import AssessResult from '~/components/dashboard/assess/AssessResult.vue'
 export default {
   layout: 'dashboard',
   components: {
