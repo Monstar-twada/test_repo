@@ -1,6 +1,6 @@
 <template>
   <div class="detailsearch">
-    <v-row justify="left" align="center" class="ma-0">
+    <v-row justify="start" align="center" class="ma-0">
       <h3 class="mr10">案件ID</h3>
       <h4 class="mr20">AT-123</h4>
       <span class="line"></span>

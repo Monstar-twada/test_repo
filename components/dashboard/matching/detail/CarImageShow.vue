@@ -8,7 +8,11 @@
           :key="i.imageKey"
           class="tab_box mr20 mb20"
         >
-          <v-img class="tab_box--image" :src="`${i.src}`" />
+          <v-img
+            class="tab_box--image"
+            :src="require(`./img/${i.src}`)"
+            width="180"
+          />
         </div>
       </div>
     </div>
@@ -20,14 +24,14 @@ export default {
   data() {
     return {
       loadedImage: [
-        { imagekey: 1, src: '1.png' },
-        { imagekey: 1, src: '2.png' },
-        { imagekey: 1, src: '1.png' },
-        { imagekey: 1, src: '2.png' },
-        { imagekey: 1, src: '1.png' },
-        { imagekey: 1, src: '2.png' },
-        { imagekey: 1, src: '1.png' },
-        { imagekey: 1, src: '2.png' },
+        { imagekey: 1, src: 'car-detail-1.png' },
+        { imagekey: 2, src: 'car-detail-2.png' },
+        { imagekey: 3, src: 'car-detail-1.png' },
+        { imagekey: 4, src: 'car-detail-2.png' },
+        { imagekey: 5, src: 'car-detail-1.png' },
+        { imagekey: 6, src: 'car-detail-2.png' },
+        { imagekey: 7, src: 'car-detail-1.png' },
+        { imagekey: 8, src: 'car-detail-2.png' },
       ],
     }
   },
