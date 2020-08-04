@@ -29,6 +29,9 @@ export const baseConfig = {
           'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Yantramanav:wght@100;300;400;500;700;900&display=swap',
       },
     ],
+    script: [
+      { src: '/plugins/first-group-ui/first-group-ui.min.js', async: true, defer: true }
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -47,7 +50,9 @@ export const baseConfig = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/first-group-ui.js', ssr: false }
+  ],
   /*
    ** Nuxt.js modules
    */
