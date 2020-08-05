@@ -1,5 +1,5 @@
 <template>
-  <div class="container pa-0">
+  <div class="content pa-0">
     <ul class="d-flex">
       <h3>新規</h3>
       <li v-for="value in newData" :key="value.id">
@@ -33,7 +33,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.container {
+.content {
   ul {
     list-style: none;
     border-bottom: 1px solid $gray-100;

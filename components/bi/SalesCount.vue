@@ -1,5 +1,5 @@
 <template>
-  <div class="container d-flex justify-space-between mt10">
+  <div class="d-flex justify-space-between mt10">
     <div class="count ml20">
       <h3 class="count--label">新規</h3>
       <h4 class="count--number">609<span>件</span></h4>

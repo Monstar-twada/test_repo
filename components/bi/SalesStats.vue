@@ -1,5 +1,5 @@
 <template>
-  <div class="container pa-0">
+  <div class="content pa-0">
     <div class="stats d-flex pa-0">
       <div class="stats__left">
         <h3 class="mb10">総売上</h3>
@@ -81,7 +81,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.container {
+.content {
   padding: 0px;
   .stats {
     padding: 20px 0px;
