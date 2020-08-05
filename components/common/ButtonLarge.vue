@@ -58,7 +58,7 @@ export default {
 
 .blue_style {
   background: $blue-100;
-  border: 1px solid $blue-100;
+  border: 1px solid $white-100;
   color: $white-100;
   &::after {
     border-top: 2px solid $white-100;
