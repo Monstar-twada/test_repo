@@ -1,5 +1,5 @@
 <template>
-  <div class="page mt10 mb10">
+  <div class="page mt15 mb15">
     <div class="page__text">
       <h1>{{ total }}</h1>
       <h3>
@@ -50,6 +50,31 @@ export default {
 </script>
 <style lang="scss">
 .page {
+  ul {
+    position: relative;
+    li {
+      margin-right: 10px;
+    }
+    li:first-child {
+      position: absolute;
+      right: 28px;
+      margin-right: 0px;
+      button {
+        border-radius: 15px 0px 0px 15px;
+        border-right: 2px solid $gray-100;
+      }
+    }
+    li:last-child {
+      position: absolute;
+      margin-right: 0px;
+      button {
+        border-radius: 0px 15px 15px 0px;
+      }
+    }
+    li:nth-last-child(2) {
+      margin-right: 80px;
+    }
+  }
   .theme--light.v-pagination {
     justify-content: flex-end !important;
     display: inline-flex;
@@ -79,6 +104,9 @@ export default {
     .v-pagination__item--active .primary {
       border-color: none !important;
     }
+    button {
+      outline: none;
+    }
   }
 }
 </style>
@@ -91,6 +119,14 @@ export default {
     h3 {
       display: inline;
       color: $white-300;
+    }
+    h1 {
+      font-weight: 800;
+    }
+    h3 {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.6px;
     }
   }
 }

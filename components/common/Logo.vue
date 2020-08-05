@@ -1,18 +1,22 @@
 <template>
   <v-img
     class="logo"
-    :src="require('~/static/common/logo.svg')"
+    :src="require(`~/components/common/sidebar/img/logo-${logoName}.svg`)"
     :width="logoWidth"
   />
 </template>
 <script>
 export default {
-  name: 'Logo',
   props: {
     logoWidth: {
       type: Number,
       default: 160,
     },
+  },
+  data() {
+    return {
+      logoName: this.$isManager ? 'manager' : 'dashboard',
+    }
   },
 }
 </script>
