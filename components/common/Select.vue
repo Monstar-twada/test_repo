@@ -11,7 +11,7 @@
 
 <script>
 import VSelect from 'vue-select'
-import Dropdown from '~/components/common/Dropdown.vue'
+import Dropdown from '~/components/common/drop-down/index'
 import 'vue-select/dist/vue-select.css'
 export default {
   name: 'Select',

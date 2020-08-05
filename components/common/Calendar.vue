@@ -23,7 +23,7 @@
       <v-date-picker v-model="date" locale="ja-jp" no-title scrollable>
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="menu = false">キャンセル</v-btn>
-        <v-btn text color="primary" @click="$refs.menu.save(date)">選択</v-btn>
+        <v-btn text color="primary" @click="handleSelect">選択</v-btn>
       </v-date-picker>
       <v-icon />
     </v-menu>
@@ -53,13 +53,17 @@ export default {
     updateDateValue() {
       this.date = new Date().toISOString().substr(0, 10)
     },
+    handleSelect() {
+      this.$refs.menu.save(this.date)
+      this.$emit('change', this.date)
+    },
   },
 }
 </script>
 <style lang="scss">
 .calendar {
   .v-text-field--outlined {
-    width: 122px !important;
+    /*width: 122px !important;*/
     height: 30px !important;
     margin-top: 0px;
     .v-input__control {

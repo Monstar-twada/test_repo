@@ -2,7 +2,7 @@
 
 > The cars Dashboard and Manager's front-end system.
 
-![](./docs/system.png)
+![](./docs/img/system.png)
 
 ## Build Setup
 
