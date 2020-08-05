@@ -43,7 +43,6 @@ const DEFAULT_QUERY = {
 }
 
 export default {
-  // middleware: 'authenticated',
   layout: 'manager',
   components: {
     Breadcrumbs,
