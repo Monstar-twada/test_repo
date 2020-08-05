@@ -1,7 +1,7 @@
 <template>
-  <div class="customerInfo">
-    <div class="customerInfo__top">
-      <div class="customerInfo__top__left">
+  <div class="send-customer-info-container">
+    <div class="send-customer-info-container__top">
+      <div class="send-customer-info-container__top__left">
         <h2>今月の送客数</h2>
         <div>
           <div>
@@ -29,13 +29,13 @@
           </div>
         </div>
       </div>
-      <div class="customerInfo__top__right">
+      <div class="send-customer-info-container__top__right">
         <p>送客額合計</p>
         <p>¥</p>
         <p>1,241,000</p>
       </div>
     </div>
-    <div class="customerInfo__bottom">
+    <div class="send-customer-info-container__bottom">
       <CostItem
         v-for="(item, i) in costItems"
         :key="`item-${i}`"
@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.customerInfo {
+.send-customer-info-container {
   background-color: $white-300;
   color: $blue-200;
   border-radius: 6px;
