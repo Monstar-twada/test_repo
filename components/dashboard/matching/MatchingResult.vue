@@ -13,6 +13,11 @@
       :page.sync="currentPage"
       hide-default-footer
     >
+      <template v-slot:item.id="{ item }">
+        <div class="id">
+          <nuxt-link to="/matching/detail">{{ item.id }}</nuxt-link>
+        </div>
+      </template>
       <template v-slot:item.owner="{ item }">
         <div class="user ml30">
           <v-avatar size="38" class="user__image">

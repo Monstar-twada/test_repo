@@ -6,7 +6,7 @@
         <v-img
           :max-width="16"
           :max-height="16"
-          :src="require(`./img/note_svg.svg`)"
+          :src="require(`./img/note-svg.svg`)"
         ></v-img>
         <p>オーダーシート</p>
       </div>
@@ -30,7 +30,7 @@
         <v-img
           :max-width="16"
           :max-height="16"
-          :src="require(`./img/note_svg.svg`)"
+          :src="require(`./img/note-svg.svg`)"
         ></v-img>
         <p>査定書</p>
       </div>
