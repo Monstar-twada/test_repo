@@ -1,23 +1,23 @@
 <template>
-  <div class="customerContainer">
-    <div class="customerContainer__title">
+  <div class="send-common-customer">
+    <div class="send-common-customer__title">
       <p>対象顧客</p>
     </div>
-    <div class="customerContainer__user">
-      <div class="customerContainer__user__img">
+    <div class="send-common-customer__user">
+      <div class="send-common-customer__user__img">
         <v-avatar :size="60">
           <img :src="require(`./img/person-default.svg`)" alt="John" />
         </v-avatar>
       </div>
-      <div class="customerContainer__user__content">
-        <div class="customerContainer__user__content--text">
+      <div class="send-common-customer__user__content">
+        <div class="send-common-customer__user__content--text">
           <p>
             米田 道治
             <span>（64歳）</span>
           </p>
           <p>ヨネダ ミチハル</p>
         </div>
-        <div class="customerContainer__user__content--btn">
+        <div class="send-common-customer__user__content--btn">
           <v-img
             :max-width="70"
             :max-height="30"
@@ -26,8 +26,8 @@
         </div>
       </div>
     </div>
-    <div class="customerContainer__car">
-      <div class="customerContainer__car__img">
+    <div class="send-common-customer__car">
+      <div class="send-common-customer__car__img">
         <v-img
           :max-width="120"
           :max-height="66"
@@ -35,12 +35,12 @@
           class="arrow-right"
         ></v-img>
       </div>
-      <div class="customerContainer__car__content">
-        <div class="customerContainer__car__content--text">
+      <div class="send-common-customer__car__content">
+        <div class="send-common-customer__car__content--text">
           <p>トヨタ</p>
           <p>プリウス</p>
         </div>
-        <div class="customerContainer__car__content--btn">
+        <div class="send-common-customer__car__content--btn">
           <v-img
             :max-width="90"
             :max-height="30"
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.customerContainer {
+.send-common-customer {
   display: grid;
   grid-template-columns: 140px 1fr 1fr;
   padding: 30px 0;

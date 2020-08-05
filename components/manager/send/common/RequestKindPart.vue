@@ -1,17 +1,17 @@
 <template>
-  <div class="requestKindPart">
-    <div class="requestKindPart__title">
+  <div class="send-common-request-kind">
+    <div class="send-common-request-kind__title">
       <p>依頼種別</p>
     </div>
-    <div class="requestKindPart__select">
+    <div class="send-common-request-kind__select">
       <div
         v-for="(item, i) in icons"
         :key="`item-${i}`"
-        class="requestKindPart__select--list"
+        class="send-common-request-kind__select--list"
         @click="handleClick(i)"
       >
         <div
-          :class="`requestKindPart__select--list--item${
+          :class="`send-common-request-kind__select--list--item${
             isSelected(i) ? '' : '-active'
           }`"
         >
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.requestKindPart {
+.send-common-request-kind {
   display: grid;
   grid-template-columns: 140px 1fr;
   padding: 30px 0;

@@ -1,9 +1,9 @@
 <template>
-  <div class="formContainer">
-    <div class="formContainer__top">
+  <div class="send-form-form-container">
+    <div class="send-form-form-container__top">
       <h3>送客依頼フォーム</h3>
     </div>
-    <div class="formContainer__bottom">
+    <div class="send-form-form-container__bottom">
       <CustomerPart />
       <RequestKindPart />
       <TextAreaInfo
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.formContainer {
+.send-form-form-container {
   width: 100%;
   background-color: $white-300;
   border-radius: 6px;

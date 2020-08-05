@@ -1,13 +1,13 @@
 <template>
-  <div class="requestInfoPart" :style="InputStyle">
-    <div class="requestInfoPart__title">
+  <div class="send-common-text-area-info" :style="InputStyle">
+    <div class="send-common-text-area-info__title">
       <p>{{ title }}</p>
     </div>
-    <div class="requestInfoPart__body">
+    <div class="send-common-text-area-info__body">
       <textarea
         v-model="value"
         :placeholder="placeholder"
-        class="requestInfoPart__body--textarea"
+        class="send-common-text-area-info__body--textarea"
       />
     </div>
   </div>
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.requestInfoPart {
+.send-common-text-area-info {
   display: grid;
   grid-template-columns: 140px 1fr;
   padding: 30px 0;

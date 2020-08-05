@@ -1,6 +1,8 @@
 <template>
-  <div class="submitButton">
-    <button class="submitButton__btn">{{ title }}</button>
+  <div class="send-common-submit">
+    <button class="send-common-submit__btn">
+      {{ title }}
+    </button>
   </div>
 </template>
 
@@ -17,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.submitButton {
+.send-common-submit {
   display: flex;
   justify-content: center;
   padding-bottom: 30px;

@@ -1,10 +1,10 @@
 <template>
-  <div class="statusPart">
-    <div class="statusPart__title">
+  <div class="send-common-status">
+    <div class="send-common-status__title">
       <p>ステータス</p>
     </div>
-    <div class="statusPart__body">
-      <div class="statusPart__body--selectContent">
+    <div class="send-common-status__body">
+      <div class="send-common-status__body--selectContent">
         <Select
           :list="list"
           :placeholder="placeholder"
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.statusPart {
+.send-common-status {
   display: grid;
   grid-template-columns: 140px 1fr 1fr;
   padding: 30px 0;
