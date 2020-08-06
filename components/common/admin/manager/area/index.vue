@@ -10,8 +10,9 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/breadcrumbs/index'
-import IndexForm from '~/components/admin/manager/area/IndexForm'
+import IndexForm from './IndexForm'
+import Breadcrumbs from '~/components/common/breadcrumbs/index'
+
 export default {
   components: {
     Breadcrumbs,

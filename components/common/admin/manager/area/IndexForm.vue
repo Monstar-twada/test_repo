@@ -14,7 +14,7 @@
           <v-img
             :max-width="24"
             :max-height="24"
-            :src="require(`~/static/admin/trash_icon.svg`)"
+            :src="require(`./img/trash-icon.svg`)"
           ></v-img>
         </div>
       </div>
