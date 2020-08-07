@@ -1,12 +1,12 @@
 <template>
-  <Login />
+  <Pin />
 </template>
 
 <script>
-import Login from '~/components/common/login/index'
+import Pin from '~/components/common/login/pin/index'
 export default {
   components: {
-    Login,
+    Pin,
   },
 }
 </script>
