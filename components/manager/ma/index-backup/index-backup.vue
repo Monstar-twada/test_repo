@@ -9,19 +9,27 @@
         </div>
       </template>
     </Breadcrumbs>
-    <ActiveList />
+    <div class="chart">
+      <Chart />
+      <DataCol class="mt20" />
+    </div>
+    <MaTabs class="mt20" />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import ActiveList from '~/components/manager/ma/index/ActiveList'
+import Chart from '~/components/manager/ma/index/chart/index'
+import MaTabs from '~/components/manager/ma/index/tabs/index'
+import DataCol from '~/components/manager/ma/index/common/data-col/DataCol.vue'
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
   components: {
     Breadcrumbs,
-    ActiveList,
+    Chart,
+    MaTabs,
+    DataCol,
   },
   data: () => ({
     page: '集客',
