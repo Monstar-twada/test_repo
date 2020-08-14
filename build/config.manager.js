@@ -14,6 +14,8 @@ export default {
   generate: {
     dir: 'dist/manager'
   },
+  // https://nuxtjs.org/guides/directory-structure/nuxt
+  buildDir: 'dist/.manager',
   plugins: [
     ...baseConfig.plugins,
     { src: '~/plugins/global-manager-properties.js', ssr: false }
