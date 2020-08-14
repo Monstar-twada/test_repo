@@ -14,6 +14,8 @@ export default {
   generate: {
     dir: 'dist/dashboard'
   },
+  // https://nuxtjs.org/guides/directory-structure/nuxt
+  buildDir: 'dist/.dashboard',
   plugins: [
     ...baseConfig.plugins,
     { src: '~/plugins/global-dashboard-properties.js', ssr: false }
