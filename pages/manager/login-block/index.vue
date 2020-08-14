@@ -2,11 +2,11 @@
   <v-app>
     <v-container class="fill-height login_container" fluid>
       <v-col cols="6">
-        <LoginBg />
+        <!-- <LoginBg /> -->
       </v-col>
       <v-col cols="6">
         <div class="login_form">
-          <Logo />
+          <!-- <Logo /> -->
           <v-row justify="center" align="center" class="mt50">
             <Input name="ID" placeholder="ID" :customwidth="270" />
             <Input
@@ -38,16 +38,16 @@
 
 <script>
 // import Logo from '~/components/Logo.vue'
-import LoginBg from '~/components/common/LoginBg.vue'
-import Logo from '~/components/common/Logo.vue'
+// import LoginBg from '~/components/common/LoginBg.vue'
+// import Logo from '~/components/common/Logo.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
 import Input from '~/components/common/Input.vue'
 
 export default {
   layout: 'login',
   components: {
-    LoginBg,
-    Logo,
+    // LoginBg,
+    // Logo,
     ButtonLarge,
     Input,
   },

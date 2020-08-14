@@ -2,7 +2,7 @@
   <v-app>
     <v-container class="fill-height login_container" fluid>
       <v-col cols="6">
-        <LoginBg />
+        <!-- <LoginBg /> -->
       </v-col>
       <v-col cols="6">
         <div class="login_form">
@@ -34,8 +34,8 @@
 
 <script>
 // import Logo from '~/components/Logo.vue'
-import LoginBg from '~/components/common/LoginBg.vue'
-import Logo from '~/components/common/Logo.vue'
+// import LoginBg from '~/components/common/LoginBg.vue'
+// import Logo from '~/components/common/Logo.vue'
 import ButtonLarge from '~/components/common/ButtonLarge.vue'
 import Input from '~/components/common/Input.vue'
 
@@ -43,7 +43,7 @@ export default {
   layout: 'login',
   components: {
     LoginBg,
-    Logo,
+    // Logo,
     ButtonLarge,
     Input,
   },
