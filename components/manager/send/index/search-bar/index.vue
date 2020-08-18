@@ -15,8 +15,10 @@
         :customfontsize="10"
         placeholder="電話番号"
       />
-      <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
-      <Select items="items" class="mr20" :list="list" placeholder="車種" />
+      <!-- <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
+      <Select items="items" class="mr20" :list="list" placeholder="車種" /> -->
+      <fg-select v-model="selectValue1" :items="list" size="small" />
+      <fg-select v-model="selectValue1" :items="list" size="small" />
       <Input
         class="mr20"
         :customwidth="120"
@@ -26,13 +28,15 @@
       />
     </v-row>
     <v-row justify="center" align="center" class="mt20 mx-0">
-      <Select items="items" class="mr20" :list="list" placeholder="依頼種別" />
-      <Select
+      <!-- <Select items="items" class="mr20" :list="list" placeholder="依頼種別" /> -->
+      <fg-select v-model="selectValue1" :items="list" size="small" />
+      <!-- <Select
         items="items"
         class="mr20"
         :list="status"
         placeholder="ステータス"
-      />
+      /> -->
+      <fg-select v-model="selectedStatus" :items="status" size="small" />
       <ButtonSearch class="send-search-bar-container_button" />
     </v-row>
   </div>
@@ -40,18 +44,53 @@
 
 <script>
 import Input from '~/components/common/Input.vue'
-import Select from '~/components/common/Select.vue'
+// import Select from '~/components/common/Select.vue'
 import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'Searchbar',
   components: {
     Input,
-    Select,
     ButtonSearch,
   },
   data: () => ({
-    list: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    status: ['送客中', '対応中', '成約済', '見送済'],
+    selectValue1: '',
+    list: [
+      {
+        text: 'Foo',
+        value: 1,
+      },
+      {
+        text: 'Bar',
+        value: 2,
+      },
+      {
+        text: 'Fizz',
+        value: 3,
+      },
+      {
+        text: 'Buzz',
+        value: 4,
+      },
+    ],
+    selectedStatus: '',
+    status: [
+      {
+        text: '送客中',
+        value: 1,
+      },
+      {
+        text: '対応中',
+        value: 1,
+      },
+      {
+        text: '成約済',
+        value: 1,
+      },
+      {
+        text: '見送済',
+        value: 1,
+      },
+    ],
   }),
 }
 </script>
