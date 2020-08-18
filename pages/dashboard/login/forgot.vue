@@ -42,7 +42,7 @@ import Input from '~/components/common/Input.vue'
 export default {
   layout: 'login',
   components: {
-    LoginBg,
+    // LoginBg,
     // Logo,
     ButtonLarge,
     Input,

@@ -2,18 +2,14 @@
   <div class="login-page-wrapper">
     <div class="slogan-wrapper" />
     <div class="body-wrapper">
-      <Logo />
       <nuxt />
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '../components/common/login/Logo.vue'
 export default {
-  components: {
-    Logo,
-  },
+  components: {},
 }
 </script>
 <style lang="scss">
