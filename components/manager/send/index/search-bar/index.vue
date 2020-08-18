@@ -15,10 +15,22 @@
         :customfontsize="10"
         placeholder="電話番号"
       />
-      <!-- <Select items="items" class="mr20" :list="list" placeholder="メーカー" />
-      <Select items="items" class="mr20" :list="list" placeholder="車種" /> -->
-      <fg-select v-model="selectValue1" :items="list" size="small" />
-      <fg-select v-model="selectValue1" :items="list" size="small" />
+      <fg-select
+        v-model="selectValue1"
+        :items="list"
+        size="small"
+        class="mr20"
+        :width="'120px'"
+        placeholder="メーカー"
+      />
+      <fg-select
+        v-model="selectValue1"
+        :items="list"
+        size="small"
+        class="mr20"
+        :width="'120px'"
+        placeholder="車種"
+      />
       <Input
         class="mr20"
         :customwidth="120"
@@ -28,15 +40,22 @@
       />
     </v-row>
     <v-row justify="center" align="center" class="mt20 mx-0">
-      <!-- <Select items="items" class="mr20" :list="list" placeholder="依頼種別" /> -->
-      <fg-select v-model="selectValue1" :items="list" size="small" />
-      <!-- <Select
-        items="items"
+      <fg-select
+        v-model="selectValue1"
+        :items="list"
+        size="small"
         class="mr20"
-        :list="status"
+        :width="'120px'"
+        placeholder="依頼種別"
+      />
+      <fg-select
+        v-model="selectedStatus"
+        class="mr20"
+        :items="status"
+        size="small"
+        :width="'120px'"
         placeholder="ステータス"
-      /> -->
-      <fg-select v-model="selectedStatus" :items="status" size="small" />
+      />
       <ButtonSearch class="send-search-bar-container_button" />
     </v-row>
   </div>
@@ -44,7 +63,6 @@
 
 <script>
 import Input from '~/components/common/Input.vue'
-// import Select from '~/components/common/Select.vue'
 import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'Searchbar',

@@ -24,6 +24,7 @@
               v-model="selectedDate"
               :items="selectDateOptions"
               size="small"
+              :width="'120px'"
             />
           </div>
         </div>
@@ -52,7 +53,7 @@ export default {
   components: { CostItem },
   data() {
     return {
-      selectedDate: '',
+      selectedDate: 1,
       selectDateOptions: [{ text: '過去6ヶ月', value: 1 }],
       costItems: [
         {
