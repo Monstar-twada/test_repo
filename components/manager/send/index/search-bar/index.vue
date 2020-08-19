@@ -1,20 +1,22 @@
 <template>
   <div class="send-search-bar-container">
     <v-row justify="start" align="center" class="mx-0">
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="顧客名"
-      />
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="電話番号"
-      />
+      <div class="send-search-bar-container__input__box mr20">
+        <fg-input
+          v-model="inputValue1"
+          placeholder="顧客名"
+          clearable
+          size="small"
+        />
+      </div>
+      <div class="send-search-bar-container__input__box mr20">
+        <fg-input
+          v-model="inputValue2"
+          placeholder="電話番号"
+          clearable
+          size="small"
+        />
+      </div>
       <fg-select
         v-model="selectValue1"
         :items="list"
@@ -31,13 +33,14 @@
         :width="'120px'"
         placeholder="車種"
       />
-      <Input
-        class="mr20"
-        :customwidth="120"
-        :customheight="30"
-        :customfontsize="10"
-        placeholder="登録ナンバー"
-      />
+      <div class="send-search-bar-container__input__box mr20">
+        <fg-input
+          v-model="inputValue3"
+          placeholder="登録ナンバー"
+          clearable
+          size="small"
+        />
+      </div>
     </v-row>
     <v-row justify="center" align="center" class="mt20 mx-0">
       <fg-select
@@ -62,15 +65,16 @@
 </template>
 
 <script>
-import Input from '~/components/common/Input.vue'
 import ButtonSearch from '~/components/common/button-search/index'
 export default {
   name: 'Searchbar',
   components: {
-    Input,
     ButtonSearch,
   },
   data: () => ({
+    inputValue1: '',
+    inputValue2: '',
+    inputValue3: '',
     selectValue1: '',
     list: [
       {
@@ -120,6 +124,9 @@ export default {
   height: 120px;
   border-radius: 5px;
   background-color: $white-300;
+  &__input__box {
+    width: 120px;
+  }
   &_space {
     display: block;
     width: 20px;
