@@ -30,7 +30,8 @@ export const baseConfig = {
       },
     ],
     script: [
-      { src: '/plugins/first-group-ui/first-group-ui.min.js', async: true, defer: true }
+      // { src: 'https://cdn.jsdelivr.net/npm/vue', async: true },
+      // { src: '/plugins/first-group-ui/first-group-ui.min.js', async: true, defer: true }
     ],
   },
   /*
@@ -114,6 +115,9 @@ export const baseConfig = {
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
         })
+      }
+      config.externals = {
+        // vue: 'Vue',
       }
     },
   },
