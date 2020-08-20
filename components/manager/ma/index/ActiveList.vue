@@ -1,46 +1,76 @@
 <template>
-  <div class="ma-list">
+  <div class="ma-index">
+    <div class="ma-index-title">
+      <h2>今月のアクションリスト</h2>
+      <fg-month-picker v-model="currentMonth" />
+    </div>
     <v-data-table
       :headers="headers"
       :items="itemList.results"
       :items-per-page="itemList.limit"
       :page.sync="currentPage"
+      hide-default-footer
     >
+      <template v-slot:item.vehicle_inspection="{ item }">
+        <h3>{{ item.vehicle_inspection }}</h3>
+        <h3>({{ item.year }})</h3>
+      </template>
       <template v-slot:item.list_count="{ item }">
-        <p>{{ item.list_count.toLocaleString() }}</p>
+        <div class="count">{{ item.list_count.toLocaleString() }}</div>
       </template>
       <template v-slot:item.progress="{ item }">
-        <div>- {{ item.goal_count }}コール済 ({{ item.goal_percent }})</div>
+        <span class="progress">
+          -&nbsp;{{ item.goal_count }}&nbsp;コール済&nbsp;&nbsp;({{
+            item.goal_percent
+          }})
+        </span>
       </template>
       <template v-slot:item.detail="{ item }">
         <ul class="detail">
-          <li>車検入庫: {{ item.warehouse }}</li>
-          <li>本予約: {{ item.reserve }}</li>
-          <li>仮予約: {{ item.tentative_reserve }}</li>
-          <li>買換意向: {{ item.intention_to_replace }}</li>
-          <li>納車済: {{ item.delivered }}</li>
+          <li>
+            車検入庫
+            <span>{{ item.warehouse }}</span
+            >件
+          </li>
+          <li>
+            本予約
+            <span>{{ item.reserve }}</span
+            >件
+          </li>
+          <li>
+            仮予約
+            <span>{{ item.tentative_reserve }}</span
+            >件
+          </li>
+          <li>
+            買換意向
+            <span>{{ item.intention_to_replace }}</span
+            >件
+          </li>
+          <li>
+            納車済
+            <span>{{ item.delivered }}</span
+            >件
+          </li>
         </ul>
       </template>
-      <!-- <template v-slot:item.operation="{ item }">
-        <fg-button
-          v-if="item.list_count != 0"
-          type="primary"
-          suffix-icon="arrow-right"
-          round
-          bold
-          >対象者一覧</fg-button
-        >
-      </template>-->
+      <template v-slot:item.operation="{ item }">
+        <nuxt-link to="/ma/detail?type=0000&date=202009">
+          <fg-button
+            v-if="item.list_count != 0"
+            class="button"
+            type="primary"
+            suffix-icon="arrow-right"
+            round
+            bold
+            >対象者一覧</fg-button
+          >
+        </nuxt-link>
+      </template>
     </v-data-table>
-    <fg-button type="primary" suffix-icon="arrow-right" round bold
-      >対象者一覧</fg-button
-    >
-    <!-- <fg-input
-      v-model="inputValue2"
-      placeholder="入力ください"
-      clearable
-      size="medium"
-    /> -->
+    <h5 class="ma-index-command">
+      ※連絡先が入力されていない顧客は表示しておりません
+    </h5>
   </div>
 </template>
 <script>
@@ -60,28 +90,28 @@ export default {
         text: '車検',
         align: 'center',
         value: 'vehicle_inspection',
-        width: '15%',
+        width: '10%',
         sortable: false,
       },
       {
         text: '対象者',
         value: 'list_count',
-        align: 'center',
-        width: '15%',
+        align: 'right',
+        width: '10%',
         sortable: false,
       },
       {
         text: '進捗',
         value: 'progress',
-        align: 'center',
-        width: '15%',
+        align: 'left',
+        width: '14%',
         sortable: false,
       },
       {
         text: '内訳',
         value: 'detail',
         align: 'center',
-        width: '40%',
+        width: '50%',
         sortable: false,
       },
       {
@@ -89,13 +119,14 @@ export default {
         value: 'operation',
         align: 'center',
         sortable: false,
-        width: '15%',
+        width: '16%',
       },
     ],
     itemList: {
       results: [
         {
-          vehicle_inspection: '1月満期(2021)',
+          vehicle_inspection: '1月満期',
+          year: 2021,
           list_count: 1415,
           goal_count: '34',
           goal_percent: '40%',
@@ -106,21 +137,83 @@ export default {
           delivered: '3',
         },
         {
-          vehicle_inspection: '1月満期(2021)',
+          vehicle_inspection: '12月満期',
+          year: 2020,
           list_count: 0,
-          goal_count: '34',
+          goal_count: 0,
+          goal_percent: 0,
+          warehouse: 0,
+          reserve: 0,
+          tentative_reserve: 0,
+          intention_to_replace: 0,
+          delivered: '0',
+        },
+        {
+          vehicle_inspection: '11月満期',
+          year: 2020,
+          list_count: 938,
+          goal_count: 34,
           goal_percent: '40%',
-          warehouse: '83',
-          reserve: '32',
-          tentative_reserve: '33',
-          intention_to_replace: '11',
-          delivered: '3',
+          warehouse: 120,
+          reserve: 83,
+          tentative_reserve: 44,
+          intention_to_replace: 23,
+          delivered: 11,
+        },
+        {
+          vehicle_inspection: '10月満期',
+          year: 2020,
+          list_count: 917,
+          goal_count: 34,
+          goal_percent: '40%',
+          warehouse: 92,
+          reserve: 28,
+          tentative_reserve: 12,
+          intention_to_replace: 19,
+          delivered: 11,
+        },
+        {
+          vehicle_inspection: '9月満期',
+          year: 2020,
+          list_count: 839,
+          goal_count: 34,
+          goal_percent: '40%',
+          warehouse: 52,
+          reserve: 43,
+          tentative_reserve: 82,
+          intention_to_replace: 9,
+          delivered: 2,
+        },
+        {
+          vehicle_inspection: '8月満期',
+          year: 2020,
+          list_count: 938,
+          goal_count: 34,
+          goal_percent: '40%',
+          warehouse: 120,
+          reserve: 83,
+          tentative_reserve: 44,
+          intention_to_replace: 23,
+          delivered: 11,
+        },
+        {
+          vehicle_inspection: '7月満期',
+          year: 2020,
+          list_count: 917,
+          goal_count: 34,
+          goal_percent: '40%',
+          warehouse: 92,
+          reserve: 28,
+          tentative_reserve: 12,
+          intention_to_replace: 19,
+          delivered: 11,
         },
       ],
       total: 7,
       limit: 7,
     },
     currentPage: 1,
+    currentMonth: {},
   }),
   watch: {
     value(val) {
@@ -130,12 +223,23 @@ export default {
       this.$emit('input', val)
     },
   },
+  created() {
+    this.getCurrentMonth()
+  },
+  methods: {
+    getCurrentMonth() {
+      const date = new Date()
+      const year = date.getFullYear()
+      const month = date.getMonth()
+      this.currentMonth = { year, month }
+    },
+  },
 }
 </script>
 
 <style lang="scss">
 .v-application--is-ltr
-  .ma-list
+  .ma-index
   .v-data-table
   .v-data-table__wrapper
   table
@@ -144,7 +248,7 @@ export default {
   th {
   text-align: center;
 }
-.ma-list {
+.ma-index {
   .v-data-table {
     table {
       thead {
@@ -152,51 +256,13 @@ export default {
           th {
             font-size: 12px;
             font-weight: normal;
-            height: 40px !important;
+            height: 30px !important;
             color: $blue-200 !important;
             padding: 0 2px !important;
+            background: $white-100;
+            border-bottom: none !important;
             i {
               display: none;
-            }
-          }
-          th.sortable {
-            span {
-              position: relative;
-              &:before {
-                content: '';
-                position: absolute;
-                top: calc(50% - 4px);
-                right: -10px;
-                width: 7px;
-                height: 4px;
-                //background: url('./img/table-sort-arrow-normal.svg') no-repeat 0 0;
-                transform: rotate(180deg);
-              }
-              &:after {
-                content: '';
-                position: absolute;
-                top: calc(50% + 2px);
-                right: -10px;
-                width: 7px;
-                height: 4px;
-                //background: url('./img/table-sort-arrow-normal.svg') no-repeat 0 0;
-              }
-            }
-          }
-          th.asc {
-            span {
-              font-weight: bold;
-              &:before {
-                //background: url('./img/table-sort-arrow.svg');
-              }
-            }
-          }
-          th.desc {
-            span {
-              font-weight: bold;
-              &:after {
-                //background: url('./img/table-sort-arrow.svg');
-              }
             }
           }
         }
@@ -204,11 +270,10 @@ export default {
       tbody {
         tr {
           font-size: 12px;
-          height: 70px !important;
           color: $blue-200;
           cursor: pointer;
           td {
-            padding: 0 5px !important;
+            padding: 10px 5px !important;
             font-size: 12px !important;
             position: relative;
             font-weight: 300;
@@ -222,9 +287,10 @@ export default {
               background: $gray-100;
             }
           }
-        }
-        tr:nth-child(even) {
-          background-color: $white-100;
+          td:nth-child(2):after,
+          td:nth-child(4):after {
+            display: none;
+          }
         }
       }
     }
@@ -234,13 +300,8 @@ export default {
     color: $blue-200 !important;
   }
 
-  .theme--light.v-data-table
-    .v-data-table__wrapper
-    table
-    tbody
-    tr:not(:last-child)
-    td:not(.v-data-table__mobile-row) {
-    border-bottom: none !important;
+  .theme--light.v-data-table .v-data-table__wrapper table tbody tr td {
+    border-bottom: 1px $gray-100 solid !important;
   }
   .theme--light.v-icon {
     color: $blue-300 !important;
@@ -248,21 +309,64 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-.id a {
-  text-decoration: none;
-}
-.user {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+.ma-index {
+  background: $white-300;
+  color: $blue-200;
 
-  &__name {
-    text-align: left;
-    span {
-      font-size: 10px;
-      font-weight: bold;
+  &-title {
+    padding: 15px;
+
+    h2 {
+      display: inline;
+    }
+    .fg-month-picker {
+      margin-left: 20px;
+      display: inline-flex;
     }
   }
+  &-command {
+    display: block;
+    padding: 20px 0 20px 40px;
+  }
+}
+
+.detail {
+  list-style: none;
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 5%;
+  li {
+    margin: 5px 10px;
+    display: inline-block;
+    font-family: 'Avenir Next';
+    font-size: 14px;
+  }
+
+  span {
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 0 5px;
+  }
+}
+
+.count {
+  display: inline-block;
+  font-family: 'Avenir Next';
+  font-size: 21px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.progress {
+  font-family: 'Avenir Next';
+  font-size: 14px;
+}
+
+.button {
+  width: 130px;
 }
 
 .address,

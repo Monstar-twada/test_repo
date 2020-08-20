@@ -1,14 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page">
-      <template v-slot:left>
-        <div class="subTitle">
-          <span>&lt;</span>
-          2020年6月
-          <span>&gt;</span>
-        </div>
-      </template>
-    </Breadcrumbs>
+    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page" />
     <ActiveList />
   </div>
 </template>

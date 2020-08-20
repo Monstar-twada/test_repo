@@ -1,31 +1,32 @@
 <template>
   <div>
-    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page">
-      <template v-slot:left>
-        <div class="subTitle">
-          <h3>[ 9月満期車検 対象者リスト ]</h3>
+    <Breadcrumbs
+      :breadcrumbs="breadcrumbs"
+      title-image="ma-tel.svg"
+      :page="page"
+    >
+      <template v-slot:right>
+        <div class="export-area">
+          <ExportButton @click="handleImportClick" />
+          <ExportDialog v-model="importVisible" />
         </div>
       </template>
-      <template v-slot:right>
-        <ExportButton @click="handleImportClick" />
-      </template>
     </Breadcrumbs>
-    <Searchbar :search-params="searchParams" @searchEvent="updateSearch" />
+    <StatusBar />
     <MaResult
       v-model="searchParams.page"
       class="mt30"
       :item-list="maResultList"
     />
-    <ExportDialog v-model="importVisible" />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import Searchbar from '~/components/manager/ma/detail/search-bar/index'
 import MaResult from '~/components/manager/ma/detail/ma-result/index'
+import StatusBar from '~/components/manager/ma/detail/status-bar/index'
 import ExportButton from '~/components/manager/ma/detail/ExportButton.vue'
-import ExportDialog from '~/components/manager/ma/detail/export-dialog/index'
+import ExportDialog from '~/components/manager/ma/detail/ExportDialog.vue'
 
 const SEARCH_PARAMS = {
   offset: 0,
@@ -48,13 +49,13 @@ export default {
   // middleware: 'authenticated',
   components: {
     Breadcrumbs,
-    Searchbar,
     MaResult,
     ExportButton,
     ExportDialog,
+    StatusBar,
   },
   data: () => ({
-    page: '集客',
+    page: '対象者リスト:2020年9月車検満期',
     breadcrumbs: [
       {
         text: '集客',
@@ -80,6 +81,20 @@ export default {
       ...this.$route.params,
     }
     this.getMaResult()
+    this.bindWindowPopState()
+  },
+  mounted() {
+    // if (window.history && window.history.pushState) {
+    // history.pushState(null, null, window.location.href)
+    // window.addEventListener('popstate', this.goBack, false)
+    // }
+    // window.onpopstate = (event) => {
+    //   alert('location: ' + document.location)
+    // }
+  },
+
+  destroyed() {
+    window.removeEventListener('popstate', this.goBack)
   },
   methods: {
     async getMaResult() {
@@ -109,6 +124,17 @@ export default {
     handleImportClick() {
       this.importVisible = true
     },
+
+    bindWindowPopState() {
+      history.pushState(null, null, window.location.href)
+      window.addEventListener(
+        'popstate',
+        (event) => {
+          alert('location: ' + window.location.href)
+        },
+        false
+      )
+    },
   },
 }
 </script>
@@ -119,5 +145,8 @@ export default {
   h3 {
     font-size: 20px;
   }
+}
+.export-area {
+  position: relative;
 }
 </style>
