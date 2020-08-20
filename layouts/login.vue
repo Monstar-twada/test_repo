@@ -15,7 +15,7 @@ export default {
 <style lang="scss">
 .login-page-wrapper {
   .slogan-wrapper {
-    background: url('../components/common/login/img/bg-login.png');
+    background: url('../static/common/bg-login.png');
     position: fixed;
     background-size: cover;
     background-repeat: no-repeat;

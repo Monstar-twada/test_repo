@@ -154,39 +154,14 @@
 
 <script>
 import Logo from '~/components/common/logo/index'
-function toDouble(n) {
-  return n.toString()[1] ? n : '0' + n
-}
 export default {
   name: 'SignIndex',
   components: {
     Logo,
   },
   data() {
-    const months = []
-    for (let i = 1; i <= 12; i++) {
-      months.push({
-        text: toDouble(i),
-        value: i,
-      })
-    }
-    const days = []
-    for (let i = 1; i <= 31; i++) {
-      days.push({
-        text: toDouble(i),
-        value: i,
-      })
-    }
     return {
       showPassword: false,
-      years: [
-        {
-          text: '1990',
-          value: 1990,
-        },
-      ],
-      months,
-      days,
       form: {
         firstName: '',
         lastName: '',
@@ -207,7 +182,7 @@ export default {
 .signin-page-wrapper {
   margin: 30px 65px 0px;
   &__header {
-    width: 60%;
+    max-width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;

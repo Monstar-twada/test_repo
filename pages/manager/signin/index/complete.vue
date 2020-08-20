@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import SignInComplete from '~/components/manager/signin/index/complete'
+import SignInComplete from '~/components/manager/signin/complete'
 export default {
   components: {
     SignInComplete,

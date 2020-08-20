@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import SigninIndex from '~/components/manager/signin/index/SignIndex.vue'
+import SigninIndex from '~/components/manager/signin/index/index'
 export default {
   components: {
     SigninIndex,
