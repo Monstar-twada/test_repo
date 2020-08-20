@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Logo from '../Logo.vue'
+import Logo from '~/components/common/logo/index'
 export default {
   components: {
     Logo,
