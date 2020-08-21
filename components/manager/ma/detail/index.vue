@@ -81,20 +81,7 @@ export default {
       ...this.$route.params,
     }
     this.getMaResult()
-    this.bindWindowPopState()
-  },
-  mounted() {
-    // if (window.history && window.history.pushState) {
-    // history.pushState(null, null, window.location.href)
-    // window.addEventListener('popstate', this.goBack, false)
-    // }
-    // window.onpopstate = (event) => {
-    //   alert('location: ' + document.location)
-    // }
-  },
-
-  destroyed() {
-    window.removeEventListener('popstate', this.goBack)
+    // this.bindWindowPopStateEvent()
   },
   methods: {
     async getMaResult() {
@@ -123,17 +110,6 @@ export default {
     },
     handleImportClick() {
       this.importVisible = true
-    },
-
-    bindWindowPopState() {
-      history.pushState(null, null, window.location.href)
-      window.addEventListener(
-        'popstate',
-        (event) => {
-          alert('location: ' + window.location.href)
-        },
-        false
-      )
     },
   },
 }

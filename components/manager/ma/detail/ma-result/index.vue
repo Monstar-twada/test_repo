@@ -6,7 +6,7 @@
         class="pagination-link"
         :total="itemList.total"
         :page-size="itemList.limit"
-        @change="changePage($event)"
+        :before-change="handleBeforeChange"
       />
       <fg-button
         class="pagination-button"
@@ -100,6 +100,7 @@
         class="pagination-link"
         :total="itemList.total"
         :page-size="itemList.limit"
+        :before-change="handleBeforeChange"
       />
       <fg-button
         class="pagination-button"
@@ -243,6 +244,19 @@ export default {
       this.$emit('input', val)
     },
   },
+  mounted() {
+    history.pushState(null, null, window.location.href)
+    window.addEventListener(
+      'popstate',
+      () => {
+        this.clickBrowserSystemButton()
+      },
+      false
+    )
+  },
+  destroyed() {
+    window.removeEventListener('popstate', this.clickBrowserSystemButton)
+  },
   methods: {
     handleChange(property, id, val) {
       const value = Number(val).toString()
@@ -262,21 +276,10 @@ export default {
 
     saveChange() {
       if (this.saveFlg) {
-        this.$confirm('入力中のデータがを保存しますか？')
+        this.$confirm('入力したデータを保存しますか？')
           .then(() => {
-            console.log('ok')
-          })
-          .catch(() => {
-            console.log('cancel')
-          })
-      }
-    },
-
-    changePage(val) {
-      if (this.saveFlg) {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
-          .then(() => {
-            console.log('ok')
+            this.saveFlg = false
+            this.status = []
           })
           .catch(() => {
             console.log('cancel')
@@ -289,6 +292,35 @@ export default {
         path: `/customer/detail/`,
         query: { id: item.customerId },
       })
+    },
+
+    clickBrowserSystemButton() {
+      if (!this.saveFlg) return
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+        .then(() => {
+          this.saveFlg = false
+          this.status = []
+          this.$router.back()
+        })
+        .catch(() => {
+          console.log('cancel')
+        })
+    },
+
+    handleBeforeChange(next) {
+      if (this.saveFlg) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+          .then(() => {
+            this.saveFlg = false
+            this.status = []
+            next()
+          })
+          .catch(() => {
+            console.log('cancel')
+          })
+      } else {
+        next()
+      }
     },
   },
 }
@@ -373,6 +405,7 @@ export default {
           td {
             padding: 0 5px !important;
             font-size: 12px !important;
+            height: 70px !important;
             position: relative;
             font-weight: 300;
             &:not(:last-child):after {
@@ -440,13 +473,17 @@ export default {
     margin: 0 5px 0 1px;
   }
 }
+.fg-checkbox,
+.fg-switch {
+  height: 70px;
+}
 
 .pagination {
   display: flex;
   justify-content: space-between;
 
   &-link {
-    flex-basis: max-content;
+    flex-basis: 87%;
   }
 
   &-button {

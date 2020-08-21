@@ -1,7 +1,14 @@
 <template>
   <div class="ma-export-dialog" :class="[visible ? '' : '__close']">
     <DialogHeader title="エクスポートしますか？" @close="visible = false" />
-    <v-btn color="blue" depressed rounded @click="handleImport">はい</v-btn>
+    <fg-button
+      class="ma-export-dialog-button"
+      type="primary"
+      bold
+      width="240"
+      @click="handleImport"
+      >はい</fg-button
+    >
   </div>
 </template>
 <script>
@@ -30,8 +37,10 @@ export default {
       this.$emit('input', val)
     },
   },
-  mounted() {
-    console.log('visible', this.visible)
+  methods: {
+    handleImport() {
+      // do something
+    },
   },
 }
 </script>
@@ -50,12 +59,9 @@ export default {
     border-bottom: none;
   }
 
-  .v-btn {
+  &-button {
     width: 240px;
     margin-left: 50px;
-  }
-  .v-btn__content {
-    color: $white-300;
   }
 }
 

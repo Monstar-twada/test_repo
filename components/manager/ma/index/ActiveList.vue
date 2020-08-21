@@ -246,6 +246,9 @@ export default {
   thead
   tr
   th {
+  text-align: center !important;
+}
+.v-application .ma-index tr th.text-right:nth-child(2) {
   text-align: center;
 }
 .ma-index {
@@ -277,6 +280,7 @@ export default {
             font-size: 12px !important;
             position: relative;
             font-weight: 300;
+            height: 80px;
             &:not(:last-child):after {
               content: '';
               position: absolute;
@@ -361,8 +365,11 @@ export default {
 }
 
 .progress {
+  display: block;
   font-family: 'Avenir Next';
   font-size: 14px;
+  height: 70px;
+  line-height: 70px;
 }
 
 .button {

@@ -106,11 +106,11 @@ export default {
   display: flex;
   flex: 1 1 auto;
   .left {
-    width: 22%;
+    width: 20%;
     font-size: 14px;
     vertical-align: center;
     table {
-      padding: 10px 15px;
+      padding: 10px 0px 10px 10px;
       td {
         height: 36px;
       }
@@ -124,23 +124,30 @@ export default {
     }
   }
   .right {
+    width: 80%;
     display: block;
     table {
       border-spacing: 0;
-    }
-    tr {
-      height: 45px;
+      width: 100%;
+      tr {
+        height: 45px;
 
-      td {
-        border-left: 1px solid $gray-100;
-        border-bottom: 1px solid $gray-100;
-        label {
-          display: inline-block;
-          margin-right: 5px;
+        td {
+          border-left: 1px solid $gray-100;
+          border-bottom: 1px solid $gray-100;
+
+          label {
+            display: inline-block;
+            margin-right: 5px;
+          }
+          strong {
+            font-size: 16px;
+          }
         }
-        strong {
-          font-size: 16px;
-        }
+      }
+
+      tr:last-child td {
+        border-bottom: none;
       }
     }
 
