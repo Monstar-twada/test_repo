@@ -6,13 +6,28 @@
       title-image="customer.svg"
     >
       <template v-slot:right>
-        <SendingRequestButton @click="sendingRequestClick" />
+        <fg-button
+          prefix-icon="plus"
+          justify="center"
+          size="small"
+          class="mr10"
+          width="106"
+          >車両追加</fg-button
+        >
+        <fg-button
+          prefix-icon="car-line"
+          justify="center"
+          size="small"
+          width="106"
+          @click="sendingRequestClick"
+          >送客依頼</fg-button
+        >
       </template>
     </Breadcrumbs>
 
     <CustomerInfo class="customer-info" :data="customerData" />
-    <CarInfo class="customer-info mt30" :customer-id="query.id" />
-    <MemoTable class="customer-info mt30" :customer-id="query.id" />
+    <CarInfo :customer-id="query.id" />
+    <EventTable class="customer-info mt30" :customer-id="query.id" />
   </div>
 </template>
 
@@ -20,8 +35,8 @@
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
 import CustomerInfo from '~/components/common/customer/detail/CustomerInfo.vue'
 import CarInfo from '~/components/common/customer/detail/car-info/index.vue'
-import MemoTable from '~/components/common/customer/detail/MemoTable.vue'
-import SendingRequestButton from '~/components/common/customer/detail/button/SendingRequest'
+import EventTable from '~/components/common/customer/detail/event-table/index.vue'
+
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
@@ -29,8 +44,7 @@ export default {
     Breadcrumbs,
     CustomerInfo,
     CarInfo,
-    MemoTable,
-    SendingRequestButton,
+    EventTable,
   },
   data() {
     return {
@@ -52,6 +66,7 @@ export default {
       },
     }
   },
+  watch: {},
   created() {
     this.getDetail()
   },
@@ -74,6 +89,7 @@ export default {
 </script>
 <style lang="scss">
 .customer-detail-page-wrapper {
+  color: $blue-200;
   .high-light {
     color: $blue-100;
   }

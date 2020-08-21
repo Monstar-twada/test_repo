@@ -6,9 +6,7 @@
       <ReservationTable :list="list" />
 
       <div class="btn-wrapper">
-        <v-btn depressed rounded color="#1295CE" height="40" dark
-          >更新 <Arrow
-        /></v-btn>
+        <fg-button suffix-icon="arrow-right">更新</fg-button>
       </div>
     </v-card>
   </v-dialog>
@@ -17,11 +15,9 @@
 <script>
 import ReservationTable from './ReservationTable'
 import DialogHeader from '~/components/common/dialog-header/index'
-import Arrow from '~/components/common/customer/detail/memo-edit-dialog/Arrow'
 export default {
   components: {
     DialogHeader,
-    Arrow,
     ReservationTable,
   },
   props: {

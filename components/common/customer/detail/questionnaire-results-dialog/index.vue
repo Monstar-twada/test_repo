@@ -21,7 +21,7 @@
 
 <script>
 import DialogHeader from '~/components/common/dialog-header/index'
-import { fmtDate } from '~/components/common/customer/helper'
+import { fmtDate } from '~/components/common/customer/common/helper'
 
 export default {
   filters: {
