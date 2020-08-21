@@ -7,6 +7,7 @@
 </template>
 <script>
 export default {
+  name: 'Logo',
   props: {
     logoWidth: {
       type: Number,
