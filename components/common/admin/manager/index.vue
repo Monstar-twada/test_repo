@@ -4,7 +4,6 @@
       :breadcrumbs="breadcrumbs"
       :page="page"
       title-image="setting.svg"
-      :right-wrapper-width="'90%'"
     >
       <template v-slot:right>
         <div class="tap-nav">
@@ -15,13 +14,13 @@
               </v-tab>
             </v-tabs>
           </div>
-          <div>
+          <!-- <div>
             <v-img
               :max-width="105"
               :max-height="30"
               :src="require(`./img/import-btn.svg`)"
             ></v-img>
-          </div>
+          </div> -->
         </div>
       </template>
     </Breadcrumbs>
@@ -72,22 +71,22 @@ export default {
           tab: 'スタッフ管理',
           content: 'bbbb',
         },
-        {
-          tab: '請求管理',
-          content: 'bbbb',
-        },
-        {
-          tab: 'アンケート管理',
-          content: 'bbbb',
-        },
-        {
-          tab: '活動報告管理',
-          content: 'bbbb',
-        },
-        {
-          tab: '操作ログ',
-          content: 'bbbb',
-        },
+        // {
+        //   tab: '請求管理',
+        //   content: 'bbbb',
+        // },
+        // {
+        //   tab: 'アンケート管理',
+        //   content: 'bbbb',
+        // },
+        // {
+        //   tab: '活動報告管理',
+        //   content: 'bbbb',
+        // },
+        // {
+        //   tab: '操作ログ',
+        //   content: 'bbbb',
+        // },
       ],
     }
   },
@@ -98,10 +97,13 @@ export default {
 .admin-container {
   max-width: 1120px;
   width: 100%;
+  .right-wrapper {
+    width: 85% !important;
+  }
   .tap-nav {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 0;
     .v-tabs {

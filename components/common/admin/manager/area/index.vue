@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      page: '管理  [ エリア設定 ]',
+      page: '管理 [エリア設定]',
       breadcrumbs: [
         {
           text: '管理',
