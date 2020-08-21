@@ -1,71 +1,46 @@
 <template>
-  <div>
+  <div class="customer-page-wrapper">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       title-image="customer.svg"
       :page="pageTitle"
     >
-      <template v-slot:right>
-        <ImportButton class="mr15" @click="handleImportClick" />
-        <PlusButton />
-      </template>
+      <template v-slot:right> </template>
     </Breadcrumbs>
 
-    <TableConditions :query="query" @change="searchChange" />
-    <CustomerResult class="mt30" :query="query" :table-data="tableData" />
+    <SearchConditions :query="query" @change="conditionChange" />
 
-    <ImportDialog v-model="importVisible" />
+    <Table class="mt30" :query="query" :table-data="tableData" />
   </div>
 </template>
 
 <script>
-import ImportButton from './ImportButton'
-import TableConditions from './table-conditions/index.vue'
-import CustomerResult from './CustomerResult.vue'
-import ImportDialog from './import-dialog/index'
+import SearchConditions from './index/SearchConditions'
+import { DEFAULT_QUERY } from './common/base'
+import Table from './index/table'
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import PlusButton from '~/components/common/breadcrumbs/PlusButton'
-
-const DEFAULT_QUERY = {
-  offset: 0,
-  limit: 10,
-  name: '',
-  maker: '',
-  class: '',
-  vin: '',
-  // 202006
-  firstRegistrationDateFrom: '',
-  firstRegistrationDateTo: '',
-  // 2020-06-01"
-  inspectionExpirationDateFrom: '',
-  inspectionExpirationDateTo: '',
-  page: 1,
-}
 
 export default {
-  layout: 'manager',
   components: {
     Breadcrumbs,
-    TableConditions,
-    CustomerResult,
-    PlusButton,
-    ImportButton,
-    ImportDialog,
+    SearchConditions,
+    Table,
   },
-  data: () => ({
-    pageTitle: '顧客管理',
-    breadcrumbs: [
-      {
-        text: '顧客管理',
-        href: '',
+  data() {
+    return {
+      pageTitle: '顧客管理',
+      breadcrumbs: [
+        {
+          text: '顧客管理',
+          href: '',
+        },
+      ],
+      query: {
+        ...DEFAULT_QUERY,
       },
-    ],
-    importVisible: false,
-    query: {
-      ...DEFAULT_QUERY,
-    },
-    tableData: {},
-  }),
+      tableData: {},
+    }
+  },
   watch: {
     query: {
       deep: true,
@@ -78,13 +53,10 @@ export default {
     this.getData()
   },
   methods: {
-    handleImportClick() {
-      this.importVisible = true
-    },
-    searchChange(params) {
+    conditionChange(data) {
       this.query = {
         ...this.query,
-        ...params,
+        ...data,
         page: 1,
       }
     },
@@ -111,4 +83,9 @@ export default {
   },
 }
 </script>
-<style lang="scss"></style>
+
+<style lang="scss">
+.customer-page-wrapper {
+  color: $blue-200;
+}
+</style>
