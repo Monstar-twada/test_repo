@@ -1,40 +1,45 @@
 <template>
   <div class="ma-list">
-    <GlobalPagination
-      v-model="currentPage"
-      class="mb15"
-      :total="itemList.total"
-      :page-size="itemList.limit"
-    />
+    <div class="pagination mb15">
+      <fg-pagination
+        v-model="currentPage"
+        class="pagination-link"
+        :total="itemList.total"
+        :page-size="itemList.limit"
+        :before-change="handleBeforeChange"
+      />
+      <fg-button
+        class="pagination-button"
+        type="white"
+        size="small"
+        border
+        bold
+        width="110"
+        :disabled="saveFlg === false"
+        @click="saveChange"
+        >保存</fg-button
+      >
+    </div>
     <v-data-table
       :headers="headers"
       :items="itemList.results"
       :items-per-page="itemList.limit"
       :page.sync="currentPage"
       hide-default-footer
-      @click:row="
-        (item) => {
-          $router.push({
-            path: '/customer/detail/',
-            query: { id: item.customerId },
-          })
-        }
-      "
     >
       <template v-slot:item.name="{ item }">
-        <div class="user">
-          <v-avatar size="38" class="user__image">
-            <v-img :src="require('./img/profile-edit.svg')"></v-img>
-          </v-avatar>
-          <div class="user__name ml10">
-            <h3>{{ item.lastName }}&nbsp;&nbsp;{{ item.firstName }}</h3>
-            <span>({{ item.age ? item.age : 'ー' }}歳)</span>
-          </div>
-        </div>
-      </template>
-      <template v-slot:item.address="{ item }">
-        <div class="address">
-          <h4>{{ item.city }}{{ item.address1 }}{{ item.address2 }}</h4>
+        <div @click="handleClickName(item)">
+          <fg-avatar
+            class="user"
+            :data="{
+              url: '/common/person_default.svg',
+              name: `${item.lastName} ${item.firstName}`,
+              summary: `（${item.age || '-'}歳）`,
+            }"
+            text-width="120px"
+            circle
+            text-flex-direction-column
+          ></fg-avatar>
         </div>
       </template>
       <template v-slot:item.maker="{ item }">
@@ -49,42 +54,71 @@
           <h4 class="mobile-tel">{{ item.cellPhoneNumber }}</h4>
         </div>
       </template>
+      <template v-slot:item.intention_to_replace="{ item }">
+        <fg-checkbox
+          theme="red"
+          :value="item.statusSMS === '1'"
+          @change="handleChange('intentionToReplace', item.customerId, $event)"
+        />
+      </template>
+      <template v-slot:item.delivered="{ item }">
+        <fg-checkbox
+          theme="red"
+          :value="item.statusCall === '1'"
+          @change="handleChange('delivered', item.customerId, $event)"
+        />
+      </template>
       <template v-slot:item.call="{ item }">
-        <BooleanFlg :flg="item.statusCall === '1'" />
+        <fg-checkbox :value="item.statusCall === '1'" />
       </template>
       <template v-slot:item.dm="{ item }">
-        <BooleanFlg :flg="item.statusDM === '1'" />
+        <fg-checkbox :value="item.statusDM === '1'" />
       </template>
       <template v-slot:item.sms="{ item }">
-        <BooleanFlg :flg="item.statusSMS === '1'" />
+        <fg-checkbox :value="item.statusSMS === '1'" />
       </template>
       <template v-slot:item.reserve="{ item }">
-        <BooleanFlg :flg="item.reserve === '1'" />
+        <fg-checkbox :value="item.reserve === '1'" />
       </template>
       <template v-slot:item.warehouse="{ item }">
-        <BooleanFlg :flg="item.warehouse === '1'" />
+        <fg-switch :value="item.warehouse === '1'" />
+      </template>
+      <template v-slot:item.other="{ item }">
+        <fg-select
+          :value="item.warehouse"
+          :items="options"
+          placeholder="選択"
+        />
       </template>
       <template v-slot:no-data>
         <span>検索結果はありません。</span>
       </template>
     </v-data-table>
-    <GlobalPagination
-      v-model="currentPage"
-      class="mt10"
-      :total="itemList.total"
-      :page-size="itemList.limit"
-    />
+    <div class="pagination mt15">
+      <fg-pagination
+        v-model="currentPage"
+        class="pagination-link"
+        :total="itemList.total"
+        :page-size="itemList.limit"
+        :before-change="handleBeforeChange"
+      />
+      <fg-button
+        class="pagination-button"
+        type="white"
+        size="small"
+        border
+        bold
+        width="110"
+        :disabled="saveFlg === false"
+        @click="saveChange"
+        >保存</fg-button
+      >
+    </div>
   </div>
 </template>
 <script>
-import GlobalPagination from '~/components/common/global-pagination/index'
-import BooleanFlg from '~/components/manager/ma/detail/BooleanFlg.vue'
 export default {
-  name: 'CustomerResult',
-  components: {
-    GlobalPagination,
-    BooleanFlg,
-  },
+  name: 'MaResult',
   props: {
     itemList: {
       type: Object,
@@ -97,27 +131,20 @@ export default {
   },
   data: () => ({
     headers: [
-      {
-        text: 'ID',
-        sortable: true,
-        align: 'center',
-        value: 'customerId',
-        width: '6%',
-      },
-      { text: '顧客名', value: 'name', align: 'start', width: '18%' },
-      {
-        text: '住所',
-        value: 'address',
-        align: 'start',
-        width: '12%',
-        sortable: false,
-      },
+      { text: '顧客名', value: 'name', align: 'start', width: '14%' },
       {
         text: '対象車両',
         value: 'maker',
         align: 'start',
-        width: '10%',
+        width: '14%',
         sortable: false,
+      },
+      {
+        text: '車検満了日',
+        value: 'email',
+        align: 'center',
+        sortable: false,
+        width: '10%',
       },
       {
         text: '電話番号',
@@ -127,49 +154,87 @@ export default {
         width: '12%',
       },
       {
-        text: 'メールアドレス',
-        value: 'email',
+        text: '買換意向',
+        value: 'intention_to_replace',
         align: 'center',
-        sortable: false,
-        width: '12%',
-      },
-      {
-        text: 'コール',
-        value: 'call',
-        align: 'center',
-        width: '6%',
+        width: '7%',
         sortable: false,
       },
       {
-        text: 'DM',
-        value: 'dm',
+        text: '納車済',
+        value: 'delivered',
         align: 'center',
-        width: '6%',
+        width: '5%',
         sortable: false,
       },
       {
-        text: 'SMS',
-        value: 'sms',
-        align: 'center',
-        width: '6%',
-        sortable: false,
-      },
-      {
-        text: '予約',
-        value: 'reserve',
-        align: 'center',
-        width: '6%',
-        sortable: false,
-      },
-      {
-        text: '入庫',
+        text: '車検入庫',
         value: 'warehouse',
         align: 'center',
-        width: '6%',
+        width: '10%',
+        sortable: false,
+      },
+      {
+        text: '本予約',
+        value: 'reserve',
+        align: 'center',
+        width: '5%',
+        sortable: false,
+      },
+      {
+        text: '仮予約',
+        value: 'dm',
+        align: 'center',
+        width: '5%',
+        sortable: false,
+      },
+      {
+        text: '検討中',
+        value: 'sms',
+        align: 'center',
+        width: '5%',
+        sortable: false,
+      },
+      {
+        text: '不通',
+        value: 'call',
+        align: 'center',
+        width: '5%',
+        sortable: false,
+      },
+      {
+        text: '他社流出',
+        value: 'other',
+        align: 'center',
+        width: '10%',
         sortable: false,
       },
     ],
     currentPage: 1,
+    options: [
+      {
+        text: '選択',
+        value: 0,
+      },
+      {
+        text: '車検',
+        value: 1,
+      },
+      {
+        text: '買替',
+        value: 2,
+      },
+      {
+        text: '廃車',
+        value: 3,
+      },
+      {
+        text: '不明',
+        value: 4,
+      },
+    ],
+    status: {},
+    saveFlg: false,
   }),
   watch: {
     value(val) {
@@ -177,6 +242,85 @@ export default {
     },
     currentPage(val) {
       this.$emit('input', val)
+    },
+  },
+  mounted() {
+    history.pushState(null, null, window.location.href)
+    window.addEventListener(
+      'popstate',
+      () => {
+        this.clickBrowserSystemButton()
+      },
+      false
+    )
+  },
+  destroyed() {
+    window.removeEventListener('popstate', this.clickBrowserSystemButton)
+  },
+  methods: {
+    handleChange(property, id, val) {
+      const value = Number(val).toString()
+      if (!this.status[id]) {
+        this.status[id] = {}
+        this.status[id][property] = value
+      } else if (!this.status[id][property]) {
+        this.status[id][property] = value
+      } else {
+        delete this.status[id][property]
+        if (Object.keys(this.status[id]).length === 0) {
+          delete this.status[id]
+        }
+      }
+      this.saveFlg = !!Object.keys(this.status).length > 0
+    },
+
+    saveChange() {
+      if (this.saveFlg) {
+        this.$confirm('入力したデータを保存しますか？')
+          .then(() => {
+            this.saveFlg = false
+            this.status = []
+          })
+          .catch(() => {
+            console.log('cancel')
+          })
+      }
+    },
+    handleClickName(item) {
+      // console.log(JSON.stringify(item, null, 2))
+      this.$router.push({
+        path: `/customer/detail/`,
+        query: { id: item.customerId },
+      })
+    },
+
+    clickBrowserSystemButton() {
+      if (!this.saveFlg) return
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+        .then(() => {
+          this.saveFlg = false
+          this.status = []
+          this.$router.back()
+        })
+        .catch(() => {
+          console.log('cancel')
+        })
+    },
+
+    handleBeforeChange(next) {
+      if (this.saveFlg) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+          .then(() => {
+            this.saveFlg = false
+            this.status = []
+            next()
+          })
+          .catch(() => {
+            console.log('cancel')
+          })
+      } else {
+        next()
+      }
     },
   },
 }
@@ -261,6 +405,7 @@ export default {
           td {
             padding: 0 5px !important;
             font-size: 12px !important;
+            height: 70px !important;
             position: relative;
             font-weight: 300;
             &:not(:last-child):after {
@@ -272,6 +417,9 @@ export default {
               right: 0;
               background: $gray-100;
             }
+          }
+          td:nth-child(5):after {
+            display: none;
           }
         }
         tr:nth-child(even) {
@@ -297,26 +445,15 @@ export default {
     color: $blue-300 !important;
   }
 }
+/*TODO delete*/
+.ma-list .fg-avatar .text-wrapper .__name {
+  line-height: 1.4;
+}
 </style>
 <style lang="scss" scoped>
-.id a {
-  text-decoration: none;
-}
 .user {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  &__name {
-    text-align: left;
-    span {
-      font-size: 10px;
-      font-weight: bold;
-    }
-  }
+  margin-left: 20px;
 }
-
-.address,
 .car,
 .tel {
   h4 {
@@ -338,6 +475,25 @@ export default {
     width: 8px;
     height: 11px;
     margin: 0 5px 0 1px;
+  }
+}
+.fg-checkbox,
+.fg-switch {
+  height: 70px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+
+  &-link {
+    flex-basis: 87%;
+  }
+
+  &-button {
+    flex-basis: 110px;
+    text-align: center;
+    justify-content: center;
   }
 }
 </style>
