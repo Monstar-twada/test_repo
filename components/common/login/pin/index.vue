@@ -4,7 +4,10 @@
     <div class="pin-form">
       <h2>認証コード入力</h2>
       <h3>ご登録のメールアドレス</h3>
-      <h3>aaaa@cars-enjoy.com</h3>
+      <h3 class="mb20">{{ email }}</h3>
+    </div>
+    <div class="pin-form__pin-input">
+      <fg-code-input v-model="code" width="300" />
     </div>
     <div class="pin-form__requirements mt25">
       <p>ご登録のメールアドレス宛に送信した</p>
@@ -18,6 +21,8 @@
         suffix-icon="arrow-right"
         round
         bold
+        :disabled="isValid()"
+        @click="nextUrl('/login/passwordreset')"
         >送信する</fg-button
       >
       <fg-button
@@ -26,6 +31,7 @@
         border
         bold
         width="30%"
+        @click="nextUrl('/login/forgot')"
         >戻る</fg-button
       >
     </div>
@@ -40,32 +46,16 @@ export default {
   },
   data() {
     return {
-      email: '',
-      password: '',
-      // eslint-disable-next-line no-useless-escape
-      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
-      showPassword: false,
-      matchPassword: true,
+      code: '',
+      email: 'aaaa@cars-enjoy.com',
     }
   },
-  watch: {
-    email(val) {
-      this.isValid()
-    },
-    psasword(val) {
-      this.isValid()
-    },
-  },
   methods: {
-    isEmailValid() {
-      return this.email === ''
-        ? ''
-        : this.reg.test(this.email)
-        ? false
-        : ['login-form__error', true]
+    nextUrl(url) {
+      this.$router.push({ path: url })
     },
     isValid() {
-      if (this.isEmailValid() === false && this.password !== '') {
+      if (this.code.length === 6) {
         return false
       } else {
         return true
@@ -101,6 +91,10 @@ export default {
       input[type='text'] {
         border: 1px solid red;
       }
+    }
+    &__pin-input {
+      display: flex;
+      justify-content: center;
     }
     &__requirements {
       text-align: center;

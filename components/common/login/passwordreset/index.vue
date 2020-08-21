@@ -36,6 +36,7 @@
         suffix-icon="arrow-right"
         round
         bold
+        @click="nextUrl('/login/complete')"
         >パスワード設定</fg-button
       >
     </div>
@@ -65,6 +66,9 @@ export default {
     },
   },
   methods: {
+    nextUrl(url) {
+      this.$router.push({ path: url })
+    },
     passwordValidation() {
       if (this.password1 === this.password2) {
         this.matchPassword = false
