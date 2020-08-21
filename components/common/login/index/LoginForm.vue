@@ -29,10 +29,10 @@
         @click="nextUrl('/bi')"
         >ログイン</fg-button
       >
-      <nuxt-link to="/login/pin" class="login-form__link mt25">
+      <nuxt-link to="/login/forgot" class="login-form__link mt25">
         メールアドレスを忘れた方
       </nuxt-link>
-      <nuxt-link to="/login/pin" class="login-form__link mt10">
+      <nuxt-link to="/login/forgot" class="login-form__link mt10">
         パスワードを忘れた方
       </nuxt-link>
       <div class="login-form__separator mt20 mb25">
