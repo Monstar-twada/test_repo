@@ -445,6 +445,10 @@ export default {
     color: $blue-300 !important;
   }
 }
+/*TODO delete*/
+.ma-list .fg-avatar .text-wrapper .__name {
+  line-height: 1.4;
+}
 </style>
 <style lang="scss" scoped>
 .user {

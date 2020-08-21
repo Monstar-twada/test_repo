@@ -316,9 +316,10 @@ export default {
 .ma-index {
   background: $white-300;
   color: $blue-200;
+  border-radius: 6px;
 
   &-title {
-    padding: 15px;
+    padding: 15px 0 15px 30px;
 
     h2 {
       display: inline;
