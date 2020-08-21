@@ -35,6 +35,7 @@
           suffix-icon="arrow-right"
           round
           bold
+          @click="nextUrl('/login/pin')"
           >送信する</fg-button
         >
         <fg-button
@@ -43,6 +44,7 @@
           border
           bold
           width="100%"
+          @click="nextUrl('/login')"
           >ログインへ戻る</fg-button
         >
       </div>
@@ -76,6 +78,9 @@ export default {
     },
   },
   methods: {
+    nextUrl(url) {
+      this.$router.push({ path: url })
+    },
     isEmailValid() {
       return this.email === ''
         ? ''

@@ -15,6 +15,7 @@
         suffix-icon="arrow-right"
         round
         bold
+        @click="nextUrl('/login')"
         >ログイン</fg-button
       >
     </div>
@@ -26,6 +27,11 @@ import Logo from '~/components/common/logo/index'
 export default {
   components: {
     Logo,
+  },
+  methods: {
+    nextUrl(url) {
+      this.$router.push({ path: url })
+    },
   },
 }
 </script>

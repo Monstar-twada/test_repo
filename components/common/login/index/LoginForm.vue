@@ -9,7 +9,6 @@
         size="medium"
         :class="['mb20', isEmailValid()]"
       />
-      <!-- <fg-input placeholder="パスワード" clearable size="medium" class="mb30" /> -->
       <fg-input
         v-model="password"
         placeholder="パスワード"
@@ -27,12 +26,13 @@
         round
         bold
         :disabled="isValid()"
+        @click="nextUrl('/bi')"
         >ログイン</fg-button
       >
       <nuxt-link to="/login/forgot" class="login-form__link mt25">
         メールアドレスを忘れた方
       </nuxt-link>
-      <nuxt-link to="/login/mailreset" class="login-form__link mt10">
+      <nuxt-link to="/login/forgot" class="login-form__link mt10">
         パスワードを忘れた方
       </nuxt-link>
       <div class="login-form__separator mt20 mb25">
@@ -96,6 +96,10 @@ export default {
       } else {
         return true
       }
+    },
+    nextUrl(url) {
+      this.$store.commit('user/signIn', true)
+      this.$router.push({ path: url })
     },
   },
 }
