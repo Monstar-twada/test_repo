@@ -14,13 +14,6 @@
               </v-tab>
             </v-tabs>
           </div>
-          <!-- <div>
-            <v-img
-              :max-width="105"
-              :max-height="30"
-              :src="require(`./img/import-btn.svg`)"
-            ></v-img>
-          </div> -->
         </div>
       </template>
     </Breadcrumbs>
@@ -71,22 +64,6 @@ export default {
           tab: 'スタッフ管理',
           content: 'bbbb',
         },
-        // {
-        //   tab: '請求管理',
-        //   content: 'bbbb',
-        // },
-        // {
-        //   tab: 'アンケート管理',
-        //   content: 'bbbb',
-        // },
-        // {
-        //   tab: '活動報告管理',
-        //   content: 'bbbb',
-        // },
-        // {
-        //   tab: '操作ログ',
-        //   content: 'bbbb',
-        // },
       ],
     }
   },

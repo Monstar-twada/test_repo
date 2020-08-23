@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-container">
+  <div class="admin-container-index-form">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       :page="page"

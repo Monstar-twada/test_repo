@@ -34,13 +34,16 @@
       </div>
     </div>
     <div class="admin-area-container_button">
+      <fg-button suffix-icon="arrow-right" border bold width="220"
+        >保存</fg-button
+      >
       <fg-button
         suffix-icon="arrow-right"
         type="primary"
         border
         bold
         width="220"
-        >Cancel</fg-button
+        >戻る</fg-button
       >
     </div>
   </div>
@@ -65,6 +68,9 @@ export default {
 
 <style lang="scss">
 .admin-area-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   &_top {
     max-width: 712px;
     width: 100%;
@@ -78,11 +84,10 @@ export default {
         &_area {
           width: 100%;
           height: 80px;
-          background-color: $white-300;
           display: grid;
           grid-template-columns: 100px 1fr;
           align-items: center;
-          border: 1px solid $gray-100;
+          border-bottom: 1px solid $gray-100;
           padding: 24px 20px;
           &_left {
             p {
@@ -122,6 +127,7 @@ export default {
       display: flex;
       align-items: center;
       padding: 10px 23px;
+      border-radius: 0 0 6px 6px;
       &_add {
         width: max-content;
         display: flex;
@@ -132,6 +138,14 @@ export default {
         }
       }
     }
+  }
+  &_button {
+    margin-top: 40px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
   }
 }
 </style>
