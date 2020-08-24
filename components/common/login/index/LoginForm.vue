@@ -26,15 +26,15 @@
         round
         bold
         :disabled="isValid()"
-        @click="nextUrl('/bi')"
+        @click="nextUrl('/customer')"
         >ログイン</fg-button
       >
-      <nuxt-link to="/login/forgot" class="login-form__link mt25">
-        メールアドレスを忘れた方
-      </nuxt-link>
-      <nuxt-link to="/login/forgot" class="login-form__link mt10">
-        パスワードを忘れた方
-      </nuxt-link>
+      <nuxt-link to="/login/forgot" class="login-form__link mt25"
+        >メールアドレスを忘れた方</nuxt-link
+      >
+      <nuxt-link to="/login/forgot" class="login-form__link mt10"
+        >パスワードを忘れた方</nuxt-link
+      >
       <div class="login-form__separator mt20 mb25">
         <span />
         <span>or</span>

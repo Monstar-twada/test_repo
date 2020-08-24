@@ -5,11 +5,11 @@
  */
 export const managerMenuItems = [
   {
-    icon: 'bi',
-    iconHover: 'bi-hover',
-    link: '/bi',
-    text: '経営状況',
-    width: 21,
+    icon: 'customer',
+    iconHover: 'customer-hover',
+    link: '/customer',
+    text: '顧客管理',
+    width: 16,
   },
   {
     icon: 'ma',
@@ -18,12 +18,12 @@ export const managerMenuItems = [
     text: '集客',
     width: 16,
   },
-  {
-    icon: 'customer',
-    iconHover: 'customer-hover',
-    link: '/customer',
-    text: '顧客管理',
-    width: 16,
+  /* {
+    icon: 'bi',
+    iconHover: 'bi-hover',
+    link: '/bi',
+    text: '経営状況',
+    width: 21,
   },
   {
     icon: 'send',
@@ -38,5 +38,5 @@ export const managerMenuItems = [
     link: '/admin',
     text: '管理',
     width: 16,
-  },
+  }, */
 ]
