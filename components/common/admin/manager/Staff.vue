@@ -3,7 +3,10 @@
     <div class="left-wrapper">
       <div class="header-wrapper">
         <h2>スタッフ一覧</h2>
-        <Pagination />
+        <div class="add-staff">
+          <p>スタッフ追加</p>
+          <fg-button circle type="primary" icon="plus" width="30px" />
+        </div>
       </div>
       <v-data-table
         :headers="headers"
@@ -20,25 +23,42 @@
             {{ item.name }}
           </div>
         </template>
+        <template v-slot:item.edit="{ item }">
+          <fg-button
+            width="63"
+            border
+            size="mini"
+            prefix-icon="edit"
+            @click="goToEdit(item.id)"
+          >
+            編集
+          </fg-button>
+        </template>
       </v-data-table>
     </div>
-    <div class="right-wrapper"></div>
+    <!-- <div class="right-wrapper"></div> -->
   </div>
 </template>
 
 <script>
-import Pagination from './Pagination'
+// import Pagination from './Pagination'
 export default {
   name: 'Staff',
-  components: {
-    Pagination,
-  },
+  // components: {
+  //   Pagination,
+  // },
   data() {
     return {
       currentItem: {},
       headers: [
         {
-          text: '名前',
+          text: 'cars Manager ID',
+          value: 'id',
+          align: 'center',
+          sortable: false,
+        },
+        {
+          text: '氏名',
           align: 'center',
           value: 'name',
           sortable: false,
@@ -47,20 +67,29 @@ export default {
           text: '権限',
           value: 'job',
           align: 'center',
-          width: '200px',
-          sortable: false,
-        },
-        { text: '勤続年数', value: 'year', align: 'center', sortable: false },
-        {
-          text: '電話番号',
-          value: 'tel',
-          align: 'center',
-          width: '180px',
           sortable: false,
         },
         {
           text: '所属店舗',
           value: 'shop_name',
+          align: 'center',
+          sortable: false,
+        },
+        {
+          text: '電話番号',
+          value: 'tel',
+          align: 'center',
+          sortable: false,
+        },
+        {
+          text: 'メールアドレス',
+          value: 'email',
+          align: 'center',
+          sortable: false,
+        },
+        {
+          text: '',
+          value: 'edit',
           align: 'center',
           sortable: false,
         },
@@ -72,8 +101,8 @@ export default {
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
-          year: '3年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000002,
@@ -81,8 +110,8 @@ export default {
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
-          year: '10年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000003,
@@ -90,8 +119,8 @@ export default {
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
-          year: '3年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000004,
@@ -99,8 +128,8 @@ export default {
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
-          year: '10年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000005,
@@ -108,8 +137,8 @@ export default {
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
-          year: '3年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000006,
@@ -117,8 +146,8 @@ export default {
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
-          year: '10年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000007,
@@ -126,8 +155,8 @@ export default {
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
-          year: '3年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
         {
           id: 10000008,
@@ -135,8 +164,8 @@ export default {
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
-          year: '10年',
           image_path: 'person.png',
+          email: 'aaaa@cars-enjoy.com',
         },
       ],
       currentPage: 1,
@@ -146,12 +175,19 @@ export default {
   created() {
     this.currentItem = this.itemList[0] || {}
   },
+  methods: {
+    goToEdit(id) {
+      console.log(id)
+    },
+  },
 }
 </script>
 
 <style lang="scss">
 .admin-body-container-wrapper {
-  &.staff-column-wrapper {
+  color: $blue-200;
+  .left-wrapper {
+    width: 100%;
     .table-avatar-wrapper {
       text-align: left;
       .v-avatar {
@@ -160,9 +196,19 @@ export default {
         overflow: hidden;
       }
     }
-    .right-wrapper {
-      background: none;
+    .header-wrapper {
+      .add-staff {
+        display: flex;
+        align-items: center;
+        & > p {
+          font-size: 12px;
+          margin: 0 10px 0 0;
+        }
+      }
     }
+  }
+  .right-wrapper {
+    background: none;
   }
 }
 </style>
