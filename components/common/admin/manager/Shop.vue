@@ -52,8 +52,12 @@
             </p>
           </div>
         </template>
-        <template v-slot:item.editBtn>
-          <v-img class="admin-btn" :src="require('./img/btn-edit.svg')">
+        <template v-slot:item.editBtn="{ item }">
+          <v-img
+            class="admin-btn"
+            :src="require('./img/btn-edit.svg')"
+            @click="moveToEdit(item.id)"
+          >
           </v-img>
         </template>
       </v-data-table>
@@ -178,13 +182,12 @@ export default {
   methods: {
     moveToForm() {
       this.$router.push({
-        path: `/admin/area/`,
+        path: `/admin/area/new`,
       })
     },
     moveToEdit(id) {
       this.$router.push({
-        path: `/admin/area/edit`,
-        query: { id },
+        path: `/admin/area/edit/${id}`,
       })
     },
   },
