@@ -1,29 +1,20 @@
 <template>
   <div class="header-user-info-wrapper">
-    <div
-      class="avatar-wrapper"
-      @mouseenter="mouseEnter"
-      @mouseleave="mouseLeave"
-      @click="avatarClick"
-    >
-      <img :src="userAvatar" alt="" @load="imgOnLoad" />
+    <div class="avatar-wrapper" @click="avatarClick">
+      <img :src="userAvatar" alt @load="imgOnLoad" />
     </div>
-    <dl
-      v-show="userDropdownVisible"
-      class="user-dropdown-wrapper"
-      @mouseleave="mouseLeave"
-      @mouseenter="mouseEnter"
-    >
-      <dd class="login-out-button" @click="handleLogout">
-        <i class="icon-logout"></i>
-        <span>ログアウト</span>
-      </dd>
-    </dl>
+    <div v-show="userDropdownVisible" class="user-dropdown-wrapper">
+      <UserDropDown />
+    </div>
   </div>
 </template>
 
 <script>
+import UserDropDown from '~/components/common/breadcrumbs/user-info/user-drop-down/index'
 export default {
+  components: {
+    UserDropDown,
+  },
   data() {
     return {
       userAvatar: '/common/person_default.svg',
@@ -64,6 +55,7 @@ export default {
     },
     avatarClick(e) {
       e.stopPropagation()
+      this.userDropdownVisible = !this.userDropdownVisible
     },
     docClick() {
       if (!this.userDropdownVisible) return
@@ -100,8 +92,8 @@ export default {
     position: absolute;
     z-index: 10;
     top: 35px;
-    right: 50%;
-    width: 100px;
+    right: 220px;
+    width: 490px;
     background: $white-300;
     border-radius: 4px;
     transform: translateX(50%);
@@ -110,34 +102,13 @@ export default {
       position: absolute;
       z-index: 0;
       top: -3px;
-      left: 50%;
+      right: 40px;
       margin-left: -3px;
       content: '';
       width: 6px;
       height: 6px;
       background: $white-300;
       transform: rotate(45deg);
-    }
-    dd {
-      height: 36px;
-      display: flex;
-      align-items: center;
-      padding: 0 11px;
-      .icon-logout {
-        display: inline-block;
-        width: 11px;
-        height: 11px;
-        background: url('./img/logout.svg') no-repeat 0 0;
-        background-size: cover;
-        margin-right: 4px;
-      }
-      span {
-        font-size: 12px;
-        color: $blue-100;
-      }
-    }
-    .login-out-button {
-      cursor: pointer;
     }
   }
 }

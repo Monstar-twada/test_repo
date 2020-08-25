@@ -1,7 +1,14 @@
 <template>
   <div class="customer-detail-customer-info-wrapper">
     <ColumnTitle title="顧客情報" border>
-      <RoundBorderButton />
+      <fg-button
+        prefix-icon="edit"
+        size="mini"
+        border
+        width="63"
+        justify="center"
+        >編集</fg-button
+      >
     </ColumnTitle>
     <v-row class="customer-profile">
       <v-col cols="8">
@@ -39,39 +46,21 @@
             <TextContent label="住宅" :content="data.house | fmtHyphen" />
             <TextContent
               label="免許証"
-              :content="data.licence | fmtHyphen"
+              :content="(data.licence || 'ゴールド 839294813493') | fmtHyphen"
               high-light
-              :copyable="!!data.licence"
-            />
-            <TextContent
-              label="銀行口座"
-              :content="data.bank | fmtHyphen"
-              high-light
-              :copyable="!!data.bank"
+              :copyable="!!data.licence || true"
+              @click="clickLicence"
             />
             <TextContent
               label="cars ID "
               :content="data.carsId | fmtHyphen"
               high-light
               flex
-            >
-              <RoundBorderButton
-                v-if="data.carsId"
-                text="招待"
-                icon="invitation"
-                class="ml5"
-                @click="invitationVisible = true"
-              />
-            </TextContent>
+            />
             <TextContent
               label="個人/法人 "
               :content="data.customerType | fmtHyphen"
             />
-            <TextContent label="その他" sub-label="システムID">
-              <div v-if="data.otherSystemId">
-                車両管理番号: {{ data.otherSystemId }}
-              </div>
-            </TextContent>
           </v-col>
         </v-row>
         <v-row class="ma-0 pb20">
@@ -88,13 +77,12 @@
       </v-col>
       <v-col cols="4" class="pt20">
         <div class="side-customer-profile-wrapper">
-          <v-avatar size="80">
-            <v-img
-              :src="
-                data.photoKey || require('~/static/common/person_default.svg')
-              "
-            ></v-img>
-          </v-avatar>
+          <fg-avatar
+            size="80"
+            :src="
+              data.photoKey || require('~/static/common/person_default.svg')
+            "
+          />
           <dl>
             <dt>
               {{ data | fmtCustomerName }}
@@ -103,47 +91,42 @@
               >
             </dt>
             <dd>{{ data | fmtNameKana }}</dd>
-            <dd class="pt10">ユーザー名:{{ data.userName | fmtHyphen }}</dd>
-            <dd>ユーザーID:{{ data.userId | fmtHyphen }}</dd>
+            <dd>
+              <h5>担当店舗：cars足立</h5>
+            </dd>
           </dl>
         </div>
-        <div class="questionnaire-wrapper mr20">
-          <h3 class="mt30 mb10">アンケート情報</h3>
-          <CustomerTable
-            :headers="headers"
-            head-background
-            head-font-weight-normal
-            border
-            size="small"
-            body-height="240px"
-            bottom-rounded
-            :list="enqueteList"
+        <h4 class="mt25 mb5">カーライフ</h4>
+        <div class="tag-items">
+          <fg-tag
+            v-for="(item, i) in carLife"
+            :key="i"
+            fillet
+            :border="!item.active"
+            >{{ item.text }}</fg-tag
           >
-            <tr
-              v-for="(item, i) in enqueteList"
-              :key="i"
-              class="high-light cur"
-              @click="handleClickRow(item)"
-            >
-              <td>{{ item.transactionType }}</td>
-              <td>{{ item.inputDate | fmtDate }}</td>
-              <td>{{ item.storeName }}</td>
-            </tr>
-          </CustomerTable>
+        </div>
+        <h4 class="mt25 mb5">選定ポイント</h4>
+        <div class="tag-items">
+          <fg-tag
+            v-for="(item, i) in selectionPoints"
+            :key="i"
+            fillet
+            :border="!item.active"
+            >{{ item.text }}</fg-tag
+          >
         </div>
       </v-col>
-      <QuestionnaireResultDialog v-model="qrVisible" :item="currentQrItem" />
-      <InvitationDialog v-model="invitationVisible" />
+      <LicenceDialog v-model="licenceVisible" :data="licenceInfo" />
     </v-row>
   </div>
 </template>
 <script>
-import QuestionnaireResultDialog from './questionnaire-results-dialog/index'
-import SubTitle from '~/components/common/customer/SubTitle.vue'
-import TextContent from '~/components/common/customer/TextContent.vue'
-import RoundBorderButton from '~/components/common/customer/detail/button/RoundBorderButton'
-import ColumnTitle from '~/components/common/customer/ColumnTitle'
-import InvitationDialog from '~/components/common/customer/detail/invitation-dialog/index'
+import LicenceDialog from './licence-dialog/index'
+import { carLife, selectionPoints } from './base'
+import SubTitle from '~/components/common/customer/common/SubTitle.vue'
+import TextContent from '~/components/common/customer/common/TextContent.vue'
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import {
   fmtCustomerName,
   fmtHyphen,
@@ -151,8 +134,8 @@ import {
   fmtAddress,
   fmtNameKana,
   fmtWork,
-} from '~/components/common/customer/helper'
-import CustomerTable from '~/components/common/customer/custom-table/index'
+} from '~/components/common/customer/common/helper'
+
 export default {
   name: 'CustomerInfo',
   filters: {
@@ -166,11 +149,8 @@ export default {
   components: {
     SubTitle,
     TextContent,
-    QuestionnaireResultDialog,
-    RoundBorderButton,
     ColumnTitle,
-    InvitationDialog,
-    CustomerTable,
+    LicenceDialog,
   },
   props: {
     data: {
@@ -217,22 +197,24 @@ export default {
         { text: '回答日時' },
         { text: '店舗' },
       ],
-      qrVisible: false,
-      invitationVisible: false,
+      licenceVisible: false,
       currentQrItem: {},
+      carLife,
+      selectionPoints,
     }
   },
   computed: {
-    // アンケート情報
-    enqueteList() {
-      const data = this.data.enquete || {}
-      return data.results || []
+    licenceInfo() {
+      return {}
     },
   },
   methods: {
-    handleClickRow(item) {
-      this.currentQrItem = item
-      this.qrVisible = true
+    /**
+     * show licence
+     * 免許証
+     */
+    clickLicence() {
+      this.licenceVisible = true
     },
   },
 }
@@ -244,13 +226,14 @@ export default {
     position: relative;
     color: $blue-200;
     font-weight: normal;
-    .v-avatar {
+    height: 80px;
+    .fg-avatar {
       position: absolute;
       top: 0;
       left: 0;
     }
     dl {
-      margin: 0 20px 0 98px;
+      margin: 0 20px 0 106px;
       dt {
         font-weight: bold;
         font-size: 14px;
@@ -260,8 +243,16 @@ export default {
       }
     }
   }
-  .questionnaire-wrapper {
-    color: $blue-200;
+  .tag-items {
+    margin-top: 8px;
+    .fg-tag {
+      margin: 0 4px 8px 0;
+      box-sizing: content-box;
+      border: 1px solid $gray-100;
+      &.__border {
+        color: #748eb7;
+      }
+    }
   }
 }
 </style>

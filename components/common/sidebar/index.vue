@@ -2,7 +2,7 @@
   <div class="global-sidebar-wrapper">
     <div :class="['top-wrapper', isFirstIndex ? 'radius-br' : '']">
       <div class="logo">
-        <img :src="require(`./img/logo-${logoName}.svg`)" alt="" />
+        <img :src="require(`./img/logo-${logoName}.svg`)" alt />
       </div>
       <h5>株式会社ファーストグループ</h5>
 
