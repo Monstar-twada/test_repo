@@ -6,6 +6,7 @@
         size="small"
         placeholder="メーカー"
         clearable
+        filterable
         :items="makerItems"
       ></fg-select>
     </fg-col>
