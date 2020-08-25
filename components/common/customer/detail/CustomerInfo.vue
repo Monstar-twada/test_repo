@@ -7,6 +7,7 @@
         border
         width="63"
         justify="center"
+        @click="handleEdit"
         >編集</fg-button
       >
     </ColumnTitle>
@@ -215,6 +216,9 @@ export default {
      */
     clickLicence() {
       this.licenceVisible = true
+    },
+    handleEdit() {
+      this.$router.push('/customer/regist/edit?id=' + this.data.customerId)
     },
   },
 }
