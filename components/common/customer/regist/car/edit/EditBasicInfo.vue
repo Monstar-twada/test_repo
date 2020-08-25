@@ -21,7 +21,6 @@
                 >変更</fg-button
               >
               <fg-button icon="trash" border circle size="mini"></fg-button>
-              <fg-button icon="plus" border circle size="small"></fg-button>
             </fg-col>
             <fg-col span="20">
               <fg-avatar :data="avatarData" />
