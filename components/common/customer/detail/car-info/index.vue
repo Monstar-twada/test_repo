@@ -369,7 +369,7 @@
           v-model="selectCarVisible"
           :data="carListData"
           :query="carQuery"
-          :current-car="currentCarItem"
+          :current-car-id="currentCarId"
           @change="changeCar"
         />
         <EditReservationDialog v-model="reservationVisible" />
@@ -445,7 +445,7 @@ export default {
       ...CAR_TABLE_QUERY,
     },
     carListData: {},
-    currentCarItem: {},
+    currentCarId: '',
     carBase: {},
     carSummary: {},
     carTrade: {},
@@ -470,9 +470,10 @@ export default {
   },
   methods: {
     async getCarInfo() {
+      if (!this.currentCarId) return
       try {
         const res = await this.$api.get(
-          `/v1/customer/${this.customerId}/car/${this.currentCarItem.carId}`
+          `/v1/customer/${this.customerId}/car/${this.currentCarId}`
         )
         // console.log('getCarInfo', res)
         this.carBase = res.customer.base || {}
@@ -499,17 +500,17 @@ export default {
         console.log('getCarList', res)
         this.carListData = res || {}
         const carList = this.carListData.results || []
-        this.currentCarItem = carList[0] || {}
-        await this.getCarInfo()
+        if (!this.currentCarId && carList.length > 0) {
+          this.currentCarId = carList[0].carId
+          await this.getCarInfo()
+        }
       } catch (e) {
         console.error(e)
       }
     },
     changeCar(item) {
       // console.log(JSON.stringify(item, null, 2))
-      this.currentCarItem = {
-        ...item,
-      }
+      this.currentCarId = item.carId
       this.getCarInfo()
     },
   },
