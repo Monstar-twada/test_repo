@@ -5,17 +5,17 @@
       :page="page"
       title-image="result.svg"
     />
-    <BodyContainer />
+    <ConfirmBodyContainer />
   </div>
 </template>
 
 <script>
-import BodyContainer from './BodyContainer'
+import ConfirmBodyContainer from './ConfirmBodyContainer'
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
 export default {
   components: {
     Breadcrumbs,
-    BodyContainer,
+    ConfirmBodyContainer,
   },
   data() {
     return {
