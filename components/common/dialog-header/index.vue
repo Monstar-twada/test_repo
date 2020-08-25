@@ -1,6 +1,7 @@
 <template>
   <div class="dialog-header-wrapper" :class="noBorder ? '' : 'border'">
     <h2>{{ title }}</h2>
+    <slot></slot>
     <CloseButton @click="$emit('close')" />
   </div>
 </template>
@@ -30,14 +31,16 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   &.border {
     border-bottom: 1px solid $gray-100;
   }
   height: 58px;
+  overflow: hidden;
   h2 {
     margin-left: 24px;
     color: $blue-200;
-    width: calc(100% - 78px);
+    max-width: calc(100% - 78px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

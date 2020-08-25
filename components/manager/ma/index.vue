@@ -1,35 +1,19 @@
 <template>
   <div>
-    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page">
-      <template v-slot:left>
-        <div class="subTitle">
-          <span> &lt; </span>
-          2020年6月
-          <span> &gt; </span>
-        </div>
-      </template>
-    </Breadcrumbs>
-    <div class="chart">
-      <Chart />
-      <DataCol class="mt20" />
-    </div>
-    <MaTabs class="mt20" />
+    <Breadcrumbs :breadcrumbs="breadcrumbs" title-image="ma.svg" :page="page" />
+    <ActiveList />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import Chart from '~/components/manager/ma/index/chart/index'
-import MaTabs from '~/components/manager/ma/index/tabs/index'
-import DataCol from '~/components/manager/ma/index/common/data-col/DataCol.vue'
+import ActiveList from '~/components/manager/ma/index/ActiveList'
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
   components: {
     Breadcrumbs,
-    Chart,
-    MaTabs,
-    DataCol,
+    ActiveList,
   },
   data: () => ({
     page: '集客',

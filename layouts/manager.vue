@@ -9,23 +9,24 @@
     <div class="global-main-wrapper" :style="{ width }">
       <nuxt />
     </div>
-    <NextAction v-model="isCollapsed" />
-    <OnePointAdvice />
+    <!-- ProtoType版表示しない--->
+    <!-- <NextAction v-model="isCollapsed" /> -->
+    <!-- <OnePointAdvice /> -->
   </v-app>
 </template>
 
 <script>
 import Sidebar from '~/components/common/sidebar/index'
-import NextAction from '~/components/manager/next-action/index'
-import OnePointAdvice from '~/components/manager/one-point-advice/index'
+// import NextAction from '~/components/manager/next-action/index'
+// import OnePointAdvice from '~/components/manager/one-point-advice/index'
 import { managerMenuItems } from '~/components/common/sidebar/menu-manager'
 const SIDE_WIDTH = 210
 const SPACE_WIDTH = 60
 export default {
   components: {
     Sidebar,
-    NextAction,
-    OnePointAdvice,
+    // NextAction,
+    // OnePointAdvice,
   },
   data() {
     return {
@@ -43,7 +44,7 @@ export default {
   },
   methods: {
     initWidth() {
-      this.width = window.innerWidth - (SIDE_WIDTH + SPACE_WIDTH) * 2 + 'px'
+      this.width = window.innerWidth - SIDE_WIDTH - SPACE_WIDTH * 2 + 'px'
     },
     onWinResize() {
       this.initWidth()
@@ -62,7 +63,7 @@ $sideWidth: 210px;
   background-attachment: fixed !important;
 
   .global-main-wrapper {
-    margin: 0 $sideWidth + $space;
+    margin: 0 $space 0 $sideWidth + $space;
     padding-bottom: $space;
     /*width: 100%;*/
     transition: margin-right 0.3s ease-in-out;
