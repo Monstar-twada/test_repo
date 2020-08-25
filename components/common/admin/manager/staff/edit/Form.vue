@@ -1,11 +1,11 @@
 <template>
-  <div class="admin-area-edit-form-container">
-    <div class="admin-area-edit-form-container_body">
+  <div class="admin-staff-edit-form-container">
+    <div class="admin-staff-edit-form-container_body">
       <div class="page-title-wrapper">
         <h2>基本情報</h2>
       </div>
       <fg-form label-width="120px">
-        <fg-form-item label="店舗名">
+        <!-- <fg-form-item label="店舗名">
           <fg-input placeholder="cars足立"></fg-input>
         </fg-form-item>
         <fg-form-item label="エリア名">
@@ -48,11 +48,18 @@
         </fg-form-item>
         <fg-form-item label="導入サービス">
           <div class="service-items"></div>
+        </fg-form-item> -->
+        <fg-form-item label="権限">
+          <fg-radio-group>
+            <fg-radio label="スタッフ" value="1"></fg-radio>
+            <fg-radio label="マネージャー" value="2"></fg-radio>
+            <fg-radio label="オーナー" value="2"></fg-radio>
+          </fg-radio-group>
         </fg-form-item>
       </fg-form>
     </div>
 
-    <div class="admin-area-edit-form-container_bottom">
+    <div class="admin-staff-edit-form-container_bottom">
       <fg-button suffix-icon="arrow-right" border bold width="220"
         >保存</fg-button
       >
@@ -83,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss">
-.admin-area-edit-form-container {
+.admin-staff-edit-form-container {
   max-width: 712px;
   width: 100%;
   margin: 0 auto;

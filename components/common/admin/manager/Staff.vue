@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-body-container-wrapper mt30 staff-column-wrapper">
+  <div class="admin-body-container-wrapper">
     <div class="left-wrapper">
       <div class="header-wrapper">
         <h2>スタッフ一覧</h2>
@@ -29,24 +29,29 @@
             border
             size="mini"
             prefix-icon="edit"
-            @click="goToEdit(item.id)"
+            @click="moveToEdit(item.id)"
           >
             編集
           </fg-button>
         </template>
       </v-data-table>
     </div>
-    <!-- <div class="right-wrapper"></div> -->
+    <dl class="bottom-pagenation">
+      <dd>
+        <fg-pagination
+          v-model="currentPage"
+          :total="itemList.length"
+          :page-size="itemsPerPage"
+          hide-page-info
+        ></fg-pagination>
+      </dd>
+    </dl>
   </div>
 </template>
 
 <script>
-// import Pagination from './Pagination'
 export default {
   name: 'Staff',
-  // components: {
-  //   Pagination,
-  // },
   data() {
     return {
       currentItem: {},
@@ -176,8 +181,10 @@ export default {
     this.currentItem = this.itemList[0] || {}
   },
   methods: {
-    goToEdit(id) {
-      console.log(id)
+    moveToEdit(id) {
+      this.$router.push({
+        path: `/admin/staff/edit/${id}`,
+      })
     },
   },
 }
@@ -186,7 +193,11 @@ export default {
 <style lang="scss">
 .admin-body-container-wrapper {
   color: $blue-200;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
   .left-wrapper {
+    background-color: $white-300;
     width: 100%;
     .table-avatar-wrapper {
       text-align: left;
@@ -207,8 +218,9 @@ export default {
       }
     }
   }
-  .right-wrapper {
-    background: none;
+  .bottom-pagenation {
+    margin-top: 20px;
+    background-color: transparent;
   }
 }
 </style>

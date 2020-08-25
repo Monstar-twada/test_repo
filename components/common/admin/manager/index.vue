@@ -74,6 +74,7 @@ export default {
 .admin-container {
   max-width: 1120px;
   width: 100%;
+  background-color: transparent;
   .right-wrapper {
     width: 85% !important;
   }
@@ -96,6 +97,7 @@ export default {
   .v-tabs-items {
     width: 100%;
     border-radius: 6px;
+    background-color: transparent !important;
   }
 }
 </style>
