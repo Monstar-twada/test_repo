@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fg-col span="8">
+    <fg-col :span="span">
       <fg-select
         v-model="form.maker"
         size="small"
@@ -9,7 +9,7 @@
         :items="makerItems"
       ></fg-select>
     </fg-col>
-    <fg-col span="8">
+    <fg-col :span="span">
       <fg-select
         v-model="form.class"
         size="small"
@@ -25,6 +25,10 @@
 import { getManufacturerList } from './maker'
 export default {
   props: {
+    span: {
+      type: [String, Number],
+      default: 8,
+    },
     form: {
       type: Object,
       default() {
