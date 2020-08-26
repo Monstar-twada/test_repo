@@ -37,10 +37,10 @@
           <fg-tag size="medium" bg-color="#0786BD">YES</fg-tag>
         </td>
         <td>
-          <fg-checkbox :value="true" />
+          <fg-checkbox :value="true" disabled />
         </td>
         <td>
-          <fg-checkbox :value="true" />
+          <fg-checkbox :value="true" disabled />
         </td>
         <td>10</td>
       </tr>

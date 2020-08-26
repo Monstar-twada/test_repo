@@ -52,11 +52,9 @@ export default {
         }
       },
     },
-    currentCar: {
-      type: Object,
-      default() {
-        return {}
-      },
+    currentCarId: {
+      type: [String, Number],
+      default: '',
     },
     query: Object,
   },
@@ -89,7 +87,7 @@ export default {
   methods: {
     fmtCarNumber,
     handleSelect(item) {
-      if (item.carId !== this.currentCar.carId) {
+      if (item.carId !== this.currentCarId) {
         this.$emit('change', item)
         this.visible = false
       }
