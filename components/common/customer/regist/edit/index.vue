@@ -3,27 +3,26 @@
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       title-image="customer.svg"
-      :sub-title="subTitle"
+      sub-title="[ 顧客編集 ]"
       :page="pageTitle"
     >
     </Breadcrumbs>
-    <ConfirmWrapper />
+    <FormWrapper />
   </div>
 </template>
 
 <script>
-import ConfirmWrapper from './ConfirmWrapper'
+import FormWrapper from './FormWrapper'
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
 export default {
   components: {
     Breadcrumbs,
-    ConfirmWrapper,
+    FormWrapper,
   },
   data() {
     const query = this.$route.query
     console.log(query)
     return {
-      query,
       pageTitle: '顧客管理',
       breadcrumbs: [
         {
@@ -36,12 +35,6 @@ export default {
         },
       ],
     }
-  },
-  computed: {
-    subTitle() {
-      const isEdit = this.query.id > 0
-      return `[ 顧客${isEdit ? '編集' : '登録'} ]確認`
-    },
   },
 }
 </script>

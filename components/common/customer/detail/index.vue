@@ -60,7 +60,7 @@ export default {
           href: '',
         },
       ],
-      query: $nuxt.$route.query || {},
+      query: this.$route.query || {},
       customerData: {
         enquete: {},
       },

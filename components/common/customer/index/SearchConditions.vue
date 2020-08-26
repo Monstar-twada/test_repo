@@ -10,6 +10,7 @@
               size="small"
               placeholder="顧客名（姓）"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -18,6 +19,7 @@
               size="small"
               placeholder="顧客名（名）"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -26,6 +28,7 @@
               size="small"
               placeholder="電話番号"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
         </fg-row>
@@ -51,6 +54,7 @@
               size="small"
               placeholder="登録ナンバー"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
         </fg-row>
@@ -99,8 +103,8 @@
 </template>
 
 <script>
+import Maker from '../common/maker-select-cols/index'
 import SearchBar from './search-bar/index'
-import Maker from './search-bar/maker/index'
 export default {
   components: {
     SearchBar,
