@@ -29,6 +29,12 @@
         @click="nextUrl('/customer')"
         >ログイン</fg-button
       >
+      <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
+        メールアドレスを忘れた方
+      </nuxt-link>
+      <nuxt-link to="/login/forgot" class="login-form__link mt10">
+        パスワードを忘れた方
+      </nuxt-link>
       <nuxt-link to="/login/forgot" class="login-form__link mt25"
         >メールアドレスを忘れた方</nuxt-link
       >
@@ -48,7 +54,7 @@
         width="220"
         justify="center"
         >Googleでログイン</fg-button
-      >
+      > -->
     </div>
     <div class="login-form__requirements mt25">
       <p>[ 推奨環境 ]</p>
