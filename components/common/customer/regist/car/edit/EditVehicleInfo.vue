@@ -4,49 +4,33 @@
     <fg-form ref="form" :model="form" label-width="150px" class="ml20">
       <fg-form-item label="車検証">
         <div class="edit-vehicle-wrapper__item">
-          <v-img
-            :max-width="150"
-            :max-height="100"
-            :src="require(`./img/user-card-img.png`)"
-          ></v-img>
-          <fg-button
-            class="mr5 ml5"
-            size="mini"
-            icon="edit"
-            border
-            circle
-          ></fg-button>
-          <fg-button size="mini" icon="trash" border circle></fg-button>
+          <fg-image-processor
+            :options="{ width: 2000, height: 'auto' }"
+            icon="license-front"
+            url=""
+          ></fg-image-processor>
         </div>
       </fg-form-item>
       <fg-form-item label="車検証番号">
         <fg-input v-model="form.licenseNumber" width="440px"></fg-input>
       </fg-form-item>
       <fg-form-item label="メーカー">
-        <fg-select
-          v-model="form.maker"
-          :placeholder="form.maker"
-          :items="years"
-          width="440px"
-        ></fg-select>
+        <fg-input v-model="form.maker" width="440px"></fg-input>
       </fg-form-item>
       <fg-form-item label="車種">
-        <fg-select
-          v-model="form.model"
-          :placeholder="form.model"
-          :items="years"
-          width="440px"
-        ></fg-select>
+        <fg-input v-model="form.model" width="440px"></fg-input>
       </fg-form-item>
       <fg-form-item label="グレード">
-        <fg-select
-          v-model="form.grade"
-          :placeholder="form.grade"
-          :items="years"
-          width="440px"
-        ></fg-select>
+        <fg-input v-model="form.grade" width="440px"></fg-input>
       </fg-form-item>
-      <fg-form-item label="登録ナンバー">
+      <fg-form-item label="車両画像">
+        <fg-image-processor
+          :options="{ width: 2000, height: 'auto' }"
+          icon="car"
+          url=""
+        ></fg-image-processor>
+      </fg-form-item>
+      <fg-form-item label="ナンバー">
         <div class="edit-vehicle-wrapper__car-box">
           <fg-input v-model="form.plateCity" width="110px"></fg-input>
           <fg-input v-model="form.plateNumber" width="110px"></fg-input>
@@ -158,10 +142,10 @@ export default {
         firstRegistrationDate: '2017/2',
         registerDate: '2018/12/1',
         carInspectionExpiration: '2020/3/24',
-        carSizeType: '中古車',
-        intentionToPurchase: true,
-        mileage: '90,000',
-        mileageCheckDate: '2020/9/7',
+        carSizeType: ' ',
+        intentionToPurchase: false,
+        mileage: ' ',
+        mileageCheckDate: ' ',
       },
     }
   },

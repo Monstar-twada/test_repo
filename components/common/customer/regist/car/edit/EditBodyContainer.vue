@@ -1,7 +1,8 @@
 <template>
   <div class="bodyContainer">
-    <EditBasicInfo />
+    <!-- <EditBasicInfo /> -->
     <EditVehicleInfo />
+    <EditTradeInfo />
     <EditTaxInfo />
     <EditRunningCost />
     <EditVehicleDetail />
@@ -10,7 +11,6 @@
       suffix-icon="arrow-right"
       border
       bold
-      disabled
       width="240px"
       >更新</fg-button
     >
@@ -23,7 +23,7 @@
       width="240px"
       >戻る</fg-button
     >
-    <fg-button
+    <!-- <fg-button
       class="bodyContainer__buttons mt20"
       type="primary"
       line
@@ -31,21 +31,23 @@
       bold
       width="240px"
       >削除</fg-button
-    >
+    > -->
   </div>
 </template>
 
 <script>
-import EditBasicInfo from './EditBasicInfo'
+// import EditBasicInfo from './EditBasicInfo'
 import EditVehicleInfo from './EditVehicleInfo'
+import EditTradeInfo from './EditTradeInfo'
 import EditTaxInfo from './EditTaxInfo'
 import EditRunningCost from './EditRunningCost'
 import EditVehicleDetail from './EditVehicleDetail'
 export default {
   name: 'EditBodyContainer',
   components: {
-    EditBasicInfo,
+    // EditBasicInfo,
     EditVehicleInfo,
+    EditTradeInfo,
     EditTaxInfo,
     EditRunningCost,
     EditVehicleDetail,

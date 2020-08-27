@@ -85,5 +85,8 @@ export default {
   background-color: $white-300;
   padding: 24px 23.5px;
   margin-bottom: 30px;
+  .fg-form-item {
+    margin-bottom: 0px;
+  }
 }
 </style>

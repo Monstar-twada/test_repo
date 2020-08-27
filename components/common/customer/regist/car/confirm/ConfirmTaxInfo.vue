@@ -9,16 +9,16 @@
       split-vertical-line
     >
       <fg-form-item label="自動車税">
-        <h4>{{ form.gasoline }}</h4>
+        <h4>{{ '￥' + form.gasoline }}</h4>
       </fg-form-item>
       <fg-form-item label="自賠責保険">
-        <h4>{{ form.liabilityInsurance }}</h4>
+        <h4>{{ '￥' + form.liabilityInsurance }}</h4>
       </fg-form-item>
       <fg-form-item label="重量税">
-        <h4>{{ form.weightTax }}</h4>
+        <h4>{{ '￥' + form.weightTax }}</h4>
       </fg-form-item>
       <fg-form-item label="リサイクル">
-        <h4>{{ form.recycle }}</h4>
+        <h4>{{ '￥' + form.recycle }}</h4>
       </fg-form-item>
     </fg-form>
   </div>
@@ -47,5 +47,11 @@ export default {
   background-color: $white-300;
   padding: 24px 23.5px 10px;
   margin-bottom: 30px;
+  .fg-form-item {
+    margin-bottom: 0px;
+  }
+  h4 {
+    font-weight: 400;
+  }
 }
 </style>

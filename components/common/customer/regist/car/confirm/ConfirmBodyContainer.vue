@@ -1,7 +1,8 @@
 <template>
   <div class="bodyContainer">
-    <ConfirmBasicInfo />
+    <!-- <ConfirmBasicInfo /> -->
     <ConfirmVehicleInfo />
+    <ConfirmTradeInfo />
     <ConfirmTaxInfo />
     <ConfirmRunningCost />
     <ConfirmVehicleDetail />
@@ -10,9 +11,8 @@
       suffix-icon="arrow-right"
       border
       bold
-      disabled
       width="240px"
-      >更新</fg-button
+      >登録</fg-button
     >
     <fg-button
       class="bodyContainer__buttons mt20"
@@ -23,7 +23,7 @@
       width="240px"
       >戻る</fg-button
     >
-    <fg-button
+    <!-- <fg-button
       class="bodyContainer__buttons mt20"
       type="primary"
       line
@@ -31,21 +31,23 @@
       bold
       width="240px"
       >削除</fg-button
-    >
+    > -->
   </div>
 </template>
 
 <script>
-import ConfirmBasicInfo from './ConfirmBasicInfo'
+// import ConfirmBasicInfo from './ConfirmBasicInfo'
 import ConfirmVehicleInfo from './ConfirmVehicleInfo'
+import ConfirmTradeInfo from './ConfirmTradeInfo'
 import ConfirmTaxInfo from './ConfirmTaxInfo'
 import ConfirmRunningCost from './ConfirmRunningCost'
 import ConfirmVehicleDetail from './ConfirmVehicleDetail'
 export default {
   name: 'ConfirmBodyContainer',
   components: {
-    ConfirmBasicInfo,
+    // ConfirmBasicInfo,
     ConfirmVehicleInfo,
+    ConfirmTradeInfo,
     ConfirmTaxInfo,
     ConfirmRunningCost,
     ConfirmVehicleDetail,

@@ -9,13 +9,13 @@
       split-vertical-line
     >
       <fg-form-item label="ガソリン代">
-        <h4>{{ form.gasoline }}</h4>
+        <h4>{{ '￥' + form.gasoline }}</h4>
       </fg-form-item>
       <fg-form-item label="保険料">
-        <h4>{{ form.insuranceFee }}</h4>
+        <h4>{{ '￥' + form.insuranceFee }}</h4>
       </fg-form-item>
       <fg-form-item label="駐車場代">
-        <h4>{{ form.parkingFee }}</h4>
+        <h4>{{ '￥' + form.parkingFee }}</h4>
       </fg-form-item>
     </fg-form>
   </div>
@@ -43,5 +43,11 @@ export default {
   background-color: $white-300;
   padding: 24px 23.5px 10px;
   margin-bottom: 30px;
+  .fg-form-item {
+    margin-bottom: 0px;
+  }
+  h4 {
+    font-weight: 400;
+  }
 }
 </style>

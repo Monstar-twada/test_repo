@@ -24,10 +24,10 @@ export default {
   data() {
     return {
       form: {
-        gasoline: '36,000',
-        liabilityInsurance: '27,840',
-        weightTax: '24,600',
-        recycle: '11,350',
+        gasoline: ' ',
+        liabilityInsurance: ' ',
+        weightTax: ' ',
+        recycle: ' ',
       },
     }
   },

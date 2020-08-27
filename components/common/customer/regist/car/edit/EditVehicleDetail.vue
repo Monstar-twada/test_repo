@@ -18,7 +18,34 @@
         <fg-input v-model="form.maxTorque" width="440px"></fg-input>
       </fg-form-item>
       <fg-form-item label="タイヤサイズ">
-        <fg-input v-model="form.tireSize" width="440px"></fg-input>
+        <fg-row gutter="20">
+          <fg-col span="9" class="edit-vehicle-detail-wrapper__tire-box">
+            <h4>フロント</h4>
+            <fg-input v-model="form.tireSizeFront" width="110px"></fg-input>
+          </fg-col>
+          <fg-col span="9" class="edit-vehicle-detail-wrapper__tire-box">
+            <h4>リア</h4>
+            <fg-input v-model="form.tireSizeBack" width="110px"></fg-input>
+          </fg-col>
+        </fg-row>
+      </fg-form-item>
+      <fg-form-item label="タイヤ製造">
+        <fg-row gutter="20">
+          <fg-col span="8" class="edit-vehicle-detail-wrapper__tire-box">
+            <fg-input
+              v-model="form.tireYear"
+              width="110px"
+              suffix-text-outside="年"
+            ></fg-input>
+          </fg-col>
+          <fg-col span="8" class="edit-vehicle-detail-wrapper__tire-box">
+            <fg-input
+              v-model="form.tireWeek"
+              width="110px"
+              suffix-text-outside="週目"
+            ></fg-input>
+          </fg-col>
+        </fg-row>
       </fg-form-item>
       <fg-form-item label="バッテリーサイズ">
         <fg-input v-model="form.batterySize" width="440px"></fg-input>
@@ -97,24 +124,27 @@ export default {
   data() {
     return {
       form: {
-        chassisNumber: 'ZVW51-0123456',
-        nameModel: 'ZVW51-AHXGB(T)',
-        engineType: '2ZR-1NM',
-        maxOutput: '72kW(98PS)',
-        maxTorque: '142N･m',
-        tireSize: '215/45R17',
-        batterySize: 'バッテリーサイズ',
-        gasTank: '燃料タンク',
-        colorCode: '3T7(エモーショナルレッド)',
-        trimCode: 'トリムコード',
-        model: '後期型',
-        launched: '2018/12',
-        warrantyPeriod: '~2022/2/24',
-        fuelConsumption: '37.2',
-        vehicleWeight: '1,360',
-        vehicleDimentionLength: '4,575',
-        vehicleDimentionWidth: '1,760',
-        vehicleDimentionHeight: '1,470',
+        chassisNumber: ' ',
+        nameModel: ' ',
+        engineType: ' ',
+        maxOutput: ' ',
+        maxTorque: ' ',
+        tireSizeFront: ' ',
+        tireSizeBack: ' ',
+        tireYear: ' ',
+        tireWeek: ' ',
+        batterySize: ' ',
+        gasTank: ' ',
+        colorCode: ' ',
+        trimCode: ' ',
+        model: ' ',
+        launched: ' ',
+        warrantyPeriod: ' ',
+        fuelConsumption: ' ',
+        vehicleWeight: ' ',
+        vehicleDimentionLength: ' ',
+        vehicleDimentionWidth: ' ',
+        vehicleDimentionHeight: ' ',
       },
     }
   },
@@ -128,6 +158,12 @@ export default {
   background-color: $white-300;
   padding: 24px 23.5px 10px;
   margin-bottom: 30px;
+  &__tire-box {
+    display: flex;
+    h4 {
+      margin-right: 15px;
+    }
+  }
   &__car-info {
     display: flex;
     margin-bottom: 0px;

@@ -100,5 +100,11 @@ export default {
   background-color: $white-300;
   padding: 24px 23.5px 10px;
   margin-bottom: 30px;
+  .fg-form-item {
+    margin-bottom: 0px;
+  }
+  h4 {
+    font-weight: 400;
+  }
 }
 </style>

@@ -24,7 +24,16 @@
         <h4>{{ form.maxTorque }}</h4>
       </fg-form-item>
       <fg-form-item label="タイヤサイズ">
-        <h4>{{ form.tireSize }}</h4>
+        <h4>
+          {{
+            'フロント :' + form.tireSizeFront + '/ リア :' + form.tireSizeBack
+          }}
+        </h4>
+      </fg-form-item>
+      <fg-form-item label="タイヤ製造">
+        <h4>
+          {{ form.tireYear + '年' + form.tireSizeBack + '週目' }}
+        </h4>
       </fg-form-item>
       <fg-form-item label="バッテリーサイズ">
         <h4>{{ form.batterySize }}</h4>
@@ -82,11 +91,14 @@ export default {
         engineType: '2ZR-1NM',
         maxOutput: '72kW(98PS)',
         maxTorque: '142N･m',
-        tireSize: '215/45R17',
-        batterySize: 'LN1',
+        tireSizeFront: '215',
+        tireSizeBack: '215',
+        tireYear: '2015',
+        tireWeek: '27',
+        batterySize: 'LN1　製造：2019/03/12',
         gasTank: '43',
         colorCode: '3T7(エモーショナルレッド)',
-        trimCode: 'トリムコード',
+        trimCode: 'FA22(ブラック)',
         model: '後期型',
         launched: '2018/12',
         warrantyPeriod: '~2022/2/24',
@@ -108,6 +120,12 @@ export default {
   background-color: $white-300;
   padding: 24px 23.5px 10px;
   margin-bottom: 30px;
+  .fg-form-item {
+    margin-bottom: 0px;
+  }
+  h4 {
+    font-weight: 400;
+  }
   &__car-info {
     display: flex;
     margin-bottom: 0px;

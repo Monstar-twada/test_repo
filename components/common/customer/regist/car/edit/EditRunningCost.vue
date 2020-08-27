@@ -21,9 +21,9 @@ export default {
   data() {
     return {
       form: {
-        gasoline: '10,000',
-        insuranceFee: '8,540',
-        parkingFee: '12,000',
+        gasoline: ' ',
+        insuranceFee: ' ',
+        parkingFee: ' ',
       },
     }
   },
