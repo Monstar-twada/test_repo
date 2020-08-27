@@ -31,16 +31,16 @@
           />
         </td>
         <td class="is-left">
-          <dl class="table-item-tel">
-            <dd>
+          <div class="table-item-tel">
+            <fg-text>
               <fg-icon v-if="item.tel" name="mobile" color="$color.primary" />{{
                 item.tel
               }}
-            </dd>
-            <dd>
+            </fg-text>
+            <fg-text>
               <fg-icon name="email" color="$color.primary" />yoneda@gmail.com
-            </dd>
-          </dl>
+            </fg-text>
+          </div>
         </td>
         <td>
           <dl style="display: inline-block; text-align: left;">
@@ -53,11 +53,19 @@
         <td>{{ item.firstRegistrationDate | fmtDate }}</td>
         <td>{{ item.inspectionExpirationDate | fmtDate }}</td>
         <td>
-          <div style="max-width: 100px; text-align: left;">
-            <fg-tag bg-color="#2993D9" width="42px">買換</fg-tag>
-            <fg-tag bg-color="#12AACE" width="42px">乗換</fg-tag>
-            <fg-tag bg-color="#0DBEA9" width="42px">車検</fg-tag>
-            <fg-tag v-if="i % 3 === 0" bg-color="#1DDB99" width="42px"
+          <div
+            style="display: inline-block; max-width: 100px; text-align: left;"
+          >
+            <fg-tag v-if="i % 5 === 0" bg-color="#2993D9" width="42px"
+              >買換</fg-tag
+            >
+            <fg-tag v-if="i % 6 === 0" bg-color="#12AACE" width="42px"
+              >乗換</fg-tag
+            >
+            <fg-tag v-if="i % 2 === 0" bg-color="#0DBEA9" width="42px"
+              >車検</fg-tag
+            >
+            <fg-tag v-if="i % 9 !== 0" bg-color="#1DDB99" width="42px"
               >6ヶ月</fg-tag
             >
           </div>
@@ -115,7 +123,7 @@ export default {
           align: 'center',
           width: '200px',
         },
-        { text: '連絡先情報', align: 'center' },
+        { text: '連絡先情報', align: 'center', width: 180 },
         { text: '所有車', align: 'start', width: '120px' },
         { text: '登録ナンバー', align: 'center' },
         {
@@ -127,7 +135,7 @@ export default {
           align: 'center',
         },
         { text: '最終取引日', align: 'center' },
-        { text: 'フラグ', align: 'center' },
+        { text: 'フラグ', align: 'center', width: 150 },
       ],
     }
   },
