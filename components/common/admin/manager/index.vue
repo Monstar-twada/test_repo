@@ -15,6 +15,9 @@
             </v-tabs>
           </div>
         </div>
+        <div v-if="tab === 0" class="import-icon">
+          <img :src="require('./img/import-btn.svg')" />
+        </div>
       </template>
     </Breadcrumbs>
     <v-tabs-items v-model="tab">
