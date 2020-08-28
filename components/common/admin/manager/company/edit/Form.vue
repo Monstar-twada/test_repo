@@ -5,14 +5,11 @@
         <h2>企業情報</h2>
       </div>
       <fg-form label-width="120px">
-        <fg-form-item label="会社名">
+        <fg-form-item label="会社名" show-suffix-required-icon>
           <fg-input placeholder="株式会社XXXXXX"></fg-input>
         </fg-form-item>
-        <fg-form-item label="代表者">
+        <fg-form-item label="代表者" show-suffix-required-icon>
           <fg-input placeholder="田中 太郎"></fg-input>
-        </fg-form-item>
-        <fg-form-item label="設立">
-          <fg-input placeholder="1960年"></fg-input>
         </fg-form-item>
         <fg-form-item label="郵便番号">
           <div class="input-small-width">
@@ -37,10 +34,10 @@
         <fg-form-item label="建物名・部屋番号など">
           <fg-input placeholder=""></fg-input>
         </fg-form-item>
-        <fg-form-item label="電話番号">
+        <fg-form-item label="電話番号" show-suffix-required-icon>
           <fg-input placeholder="000-0000-0000"></fg-input>
         </fg-form-item>
-        <fg-form-item label="メールアドレス">
+        <fg-form-item label="メールアドレス" show-suffix-required-icon>
           <fg-input placeholder="aaaa@cars-enjoy.com"></fg-input>
         </fg-form-item>
         <fg-form-item label="店舗数">
@@ -49,20 +46,53 @@
         <fg-form-item label="社員数">
           <fg-input placeholder="210名"></fg-input>
         </fg-form-item>
-        <fg-form-item label="事業内容">
-          <fg-input placeholder="グローバルカーライフテックサービス"></fg-input>
-        </fg-form-item>
-        <fg-form-item label="URL">
-          <fg-input placeholder="https://XXXXXX.jp/"></fg-input>
-        </fg-form-item>
         <fg-form-item label="年度">
           <p>4月〜3月</p>
+        </fg-form-item>
+        <fg-form-item label="銀行口座" class="form-bankaccount">
+          <fg-row gutter="20">
+            <fg-col span="18">
+              <fg-input v-model="form.a" placeholder="銀行名"></fg-input>
+            </fg-col>
+            <fg-col span="6">
+              <fg-input v-model="form.b" placeholder="銀行コード"></fg-input>
+            </fg-col>
+          </fg-row>
+          <fg-row gutter="20">
+            <fg-col span="18">
+              <fg-input v-model="form.a" placeholder="支店名"></fg-input>
+            </fg-col>
+            <fg-col span="6">
+              <fg-input v-model="form.b" placeholder="支店コード"></fg-input>
+            </fg-col>
+          </fg-row>
+          <fg-row gutter="20">
+            <fg-col span="6">
+              <fg-select
+                v-model="form.areaName"
+                :options="areaItems"
+                placeholder="口座種別"
+                item-prefix="- "
+              />
+            </fg-col>
+          </fg-row>
+          <fg-row gutter="20">
+            <fg-col span="18">
+              <fg-input
+                v-model="form.a"
+                placeholder="口座名義人（全角カナ）"
+              ></fg-input>
+            </fg-col>
+            <fg-col span="6">
+              <fg-input v-model="form.b" placeholder="口座番号"></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
       </fg-form>
     </div>
 
     <div class="admin-company-edit-form-container_bottom">
-      <fg-button suffix-icon="arrow-right" border bold width="220"
+      <fg-button suffix-icon="arrow-right" border bold width="220px"
         >保存</fg-button
       >
       <fg-button
@@ -70,7 +100,8 @@
         type="primary"
         border
         bold
-        width="220"
+        width="220px"
+        white-transparent
         >戻る</fg-button
       >
     </div>
@@ -121,6 +152,16 @@ export default {
       p {
         font-size: 12px;
         margin-bottom: 0;
+      }
+
+      &.form-bankaccount {
+        align-items: flex-start;
+        .fg-row {
+          margin-bottom: 15px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
       }
     }
   }

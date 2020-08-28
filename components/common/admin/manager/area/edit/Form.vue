@@ -47,13 +47,30 @@
           <fg-input placeholder="aaaa@cars-enjoy.com"></fg-input>
         </fg-form-item>
         <fg-form-item label="導入サービス">
-          <div class="service-items"></div>
+          <div class="service-items">
+            <div
+              v-for="(item, i) in serviceItems"
+              :key="`${item}-${i}`"
+              class="service-items_item"
+            >
+              <div class="service-items_item_img">
+                <v-img
+                  :max-width="24"
+                  :max-height="24"
+                  :src="require(`./img/${item.icon}-icon-white.svg`)"
+                ></v-img>
+              </div>
+              <div class="service-items_item_text">
+                {{ item.text }}
+              </div>
+            </div>
+          </div>
         </fg-form-item>
       </fg-form>
     </div>
 
     <div class="admin-area-edit-form-container_bottom">
-      <fg-button suffix-icon="arrow-right" border bold width="220"
+      <fg-button suffix-icon="arrow-right" border bold width="220px"
         >保存</fg-button
       >
       <fg-button
@@ -61,7 +78,8 @@
         type="primary"
         border
         bold
-        width="220"
+        width="220px"
+        white-transparent
         >戻る</fg-button
       >
     </div>
@@ -73,6 +91,36 @@ export default {
   data() {
     return {
       areaOptions: {},
+      serviceItems: [
+        {
+          icon: 'car',
+          text: '購入',
+        },
+        {
+          icon: 'money',
+          text: '整備',
+        },
+        {
+          icon: 'wrench',
+          text: '整備',
+        },
+        {
+          icon: 'hammer',
+          text: '鈑金',
+        },
+        {
+          icon: 'heart',
+          text: '保険',
+        },
+        {
+          icon: 'tire',
+          text: 'アクセサリー',
+        },
+        {
+          icon: 'paper',
+          text: '車検',
+        },
+      ],
       form: {
         name: '',
         areaName: '',
@@ -107,6 +155,31 @@ export default {
       .service-items {
         display: flex;
         align-items: center;
+        &_item {
+          cursor: pointer;
+          margin-right: 25px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          &_img {
+            width: 40px;
+            height: 40px;
+            background-color: $blue-200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            .v-image {
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          &_text {
+            font-size: 12px;
+          }
+        }
       }
     }
   }

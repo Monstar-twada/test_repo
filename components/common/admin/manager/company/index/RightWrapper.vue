@@ -2,25 +2,9 @@
   <div class="company-right-wrapper">
     <div class="company-right-wrapper-top-wrapper">
       <div class="header-wrapper">
-        <h2>ユーザーガイド</h2>
-      </div>
-      <div class="company-right-wrapper-top-wrapper_body">
-        <div class="company-right-wrapper-top-wrapper_body_guide">
-          <p>使い方ガイド</p>
-          <v-img
-            :max-width="10"
-            :max-height="10"
-            :src="require(`./img/copy-icon.svg`)"
-            @click="moveToForm"
-          ></v-img>
-        </div>
-      </div>
-    </div>
-    <div class="company-right-wrapper-bottom-wrapper">
-      <div class="header-wrapper">
         <h2>契約情報</h2>
       </div>
-      <div class="company-right-wrapper-bottom-wrapper_body">
+      <div class="company-right-wrapper-top-wrapper_body">
         <div class="main-row">
           <div class="main-row_left">
             プラン
@@ -36,6 +20,30 @@
           <div class="main-row_right">
             10店
           </div>
+        </div>
+        <div class="main-row">
+          <div class="main-row_left">
+            ユーザー数
+          </div>
+          <div class="main-row_right">
+            25名/30名
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-right-wrapper-bottom-wrapper">
+      <div class="header-wrapper">
+        <h2>ユーザーガイド</h2>
+      </div>
+      <div class="company-right-wrapper-bottom-wrapper_body">
+        <div class="company-right-wrapper-bottom-wrapper_body_guide">
+          <p>使い方ガイド</p>
+          <v-img
+            :max-width="10"
+            :max-height="10"
+            :src="require(`./img/copy-icon.svg`)"
+            @click="moveToForm"
+          ></v-img>
         </div>
       </div>
     </div>
@@ -76,8 +84,8 @@ export default {
   margin: 10px;
   display: flex;
   flex-direction: column;
-  &-top-wrapper {
-    margin-bottom: 20px;
+  &-bottom-wrapper {
+    margin-top: 20px;
     max-height: 180px;
     height: 100%;
     background-color: $white-300;
@@ -99,8 +107,8 @@ export default {
       }
     }
   }
-  &-bottom-wrapper {
-    max-height: 180px;
+  &-top-wrapper {
+    max-height: 250px;
     background-color: $white-300;
     border-radius: 6px;
     &_body {

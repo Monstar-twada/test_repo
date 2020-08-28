@@ -82,26 +82,18 @@
       </div>
       <div class="main-row">
         <div class="main-row_left">
-          事業内容
-        </div>
-        <div class="main-row_right">
-          グローバルカーライフテックサービス
-        </div>
-      </div>
-      <div class="main-row">
-        <div class="main-row_left">
-          URL
-        </div>
-        <div class="main-row_right">
-          https://XXXXXX.jp/
-        </div>
-      </div>
-      <div class="main-row">
-        <div class="main-row_left">
           年度
         </div>
         <div class="main-row_right">
           4月〜3月
+        </div>
+      </div>
+      <div class="main-row">
+        <div class="main-row_left">
+          口座情報
+        </div>
+        <div class="main-row_right">
+          〇〇銀行 〇〇支店
         </div>
       </div>
     </div>

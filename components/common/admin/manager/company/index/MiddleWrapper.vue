@@ -53,18 +53,18 @@ export default {
   border-radius: 6px;
   max-width: 420px;
   width: 100%;
-  max-height: 440px;
+  max-height: 530px;
   height: auto;
   color: $blue-200;
   margin: 10px;
   &_body {
     padding: 20px 30px;
-    border-bottom: 1px solid $gray-600;
     &_row {
       margin-bottom: 24px;
       & > .fg-input {
         padding: 0;
         & > textarea {
+          height: 240px;
           padding: 10px;
         }
       }
