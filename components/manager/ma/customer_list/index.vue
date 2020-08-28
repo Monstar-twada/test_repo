@@ -23,10 +23,10 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import MaResult from '~/components/manager/ma/detail/ma-result/index'
-import StatusBar from '~/components/manager/ma/detail/status-bar/index'
-import ExportButton from '~/components/manager/ma/detail/ExportButton.vue'
-import ExportDialog from '~/components/manager/ma/detail/ExportDialog.vue'
+import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
+import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
+import ExportButton from '~/components/manager/ma/customer_list/ExportButton.vue'
+import ExportDialog from '~/components/manager/ma/customer_list/ExportDialog.vue'
 
 const SEARCH_PARAMS = {
   offset: 0,
