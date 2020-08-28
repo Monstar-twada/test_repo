@@ -360,6 +360,7 @@
               border
               width="63px"
               justify="center"
+              @click="handleEdit"
               >編集</fg-button
             >
           </div>
@@ -512,6 +513,9 @@ export default {
       // console.log(JSON.stringify(item, null, 2))
       this.currentCarId = item.carId
       this.getCarInfo()
+    },
+    handleEdit() {
+      this.$router.push('/customer/regist/car/edit?id=' + this.customerId)
     },
   },
 }
