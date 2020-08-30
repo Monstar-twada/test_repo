@@ -74,22 +74,10 @@
       <fg-button suffix-icon="arrow-right" border bold width="220px"
         >保存</fg-button
       >
-      <fg-button
-        suffix-icon="arrow-right"
-        type="primary"
-        border
-        bold
-        width="220px"
-        white-transparent
+      <fg-button width="220px" suffix-icon="arrow-right" bold white-transparent
         >削除</fg-button
       >
-      <fg-button
-        suffix-icon="arrow-right"
-        type="primary"
-        border
-        bold
-        width="220px"
-        white-transparent
+      <fg-button width="220px" suffix-icon="arrow-right" bold white-transparent
         >戻る</fg-button
       >
     </div>
@@ -168,8 +156,6 @@ export default {
       }
     }
     .fg-form-item {
-      display: grid;
-      grid-template-columns: 147px 1fr;
       align-items: center;
       .just-text {
         margin-bottom: 0;
@@ -193,6 +179,7 @@ export default {
         overflow-y: scroll;
         border: 1px solid $gray-600;
         border-radius: 4px;
+        padding: 20px;
         &_item {
           display: flex;
           align-items: center;

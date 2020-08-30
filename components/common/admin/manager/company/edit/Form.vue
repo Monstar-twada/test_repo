@@ -4,7 +4,7 @@
       <div class="page-title-wrapper">
         <h2>企業情報</h2>
       </div>
-      <fg-form label-width="120px">
+      <fg-form label-width="150px">
         <fg-form-item label="会社名" show-suffix-required-icon>
           <fg-input placeholder="株式会社XXXXXX"></fg-input>
         </fg-form-item>
@@ -12,9 +12,7 @@
           <fg-input placeholder="田中 太郎"></fg-input>
         </fg-form-item>
         <fg-form-item label="郵便番号">
-          <div class="input-small-width">
-            <fg-input placeholder="1200011"></fg-input>
-          </div>
+          <fg-input placeholder="1200011" width="160px"></fg-input>
         </fg-form-item>
         <fg-form-item label="都道府県">
           <fg-select
@@ -95,13 +93,7 @@
       <fg-button suffix-icon="arrow-right" border bold width="220px"
         >保存</fg-button
       >
-      <fg-button
-        suffix-icon="arrow-right"
-        type="primary"
-        border
-        bold
-        width="220px"
-        white-transparent
+      <fg-button width="220px" suffix-icon="arrow-right" bold white-transparent
         >戻る</fg-button
       >
     </div>
@@ -133,17 +125,12 @@ export default {
     padding: 24px;
     background-color: $white-300;
     .page-title-wrapper {
+      margin-bottom: 20px;
       h2 {
         font-size: 14px;
       }
     }
     .fg-form-item {
-      display: grid;
-      grid-template-columns: 147px 1fr;
-      align-items: center;
-      .input-small-width {
-        width: 160px;
-      }
       .service-items {
         display: flex;
         align-items: center;

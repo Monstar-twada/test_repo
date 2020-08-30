@@ -58,20 +58,20 @@ export default {
   color: $blue-200;
   margin: 10px;
   &_body {
-    padding: 20px 30px;
+    padding: 20px;
     &_row {
       margin-bottom: 24px;
       & > .fg-input {
         padding: 0;
         & > textarea {
-          height: 240px;
+          height: 260px;
           padding: 10px;
         }
       }
     }
   }
   &_bottom {
-    height: 88px;
+    height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;

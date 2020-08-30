@@ -37,12 +37,7 @@
       <fg-button suffix-icon="arrow-right" border bold width="220"
         >保存</fg-button
       >
-      <fg-button
-        suffix-icon="arrow-right"
-        type="primary"
-        border
-        bold
-        width="220"
+      <fg-button width="220px" suffix-icon="arrow-right" bold white-transparent
         >戻る</fg-button
       >
     </div>

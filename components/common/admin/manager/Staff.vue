@@ -5,7 +5,14 @@
         <h2>スタッフ一覧</h2>
         <div class="add-staff">
           <p>スタッフ追加</p>
-          <fg-button circle type="primary" icon="plus" width="30px" />
+          <fg-button
+            circle
+            type="primary"
+            icon="plus"
+            width="30px"
+            @click="visibleDialog = true"
+          />
+          <IndexDialog v-model="visibleDialog" />
         </div>
       </div>
       <v-data-table
@@ -21,6 +28,17 @@
               <v-img :src="`/common/${item.image_path}`"></v-img>
             </v-avatar>
             {{ item.name }}
+          </div>
+        </template>
+        <template v-slot:item.shop_name="{ item }">
+          <div class="table-shop-wrapper">
+            <p
+              v-for="(shop, i) in item.shop_name"
+              :key="`${i}`"
+              class="table-shop-wrapper_item"
+            >
+              {{ shop }}
+            </p>
           </div>
         </template>
         <template v-slot:item.edit="{ item }">
@@ -42,6 +60,7 @@
           v-model="currentPage"
           :total="itemList.length"
           :page-size="itemsPerPage"
+          theme="blue"
           hide-page-info
         ></fg-pagination>
       </dd>
@@ -50,10 +69,16 @@
 </template>
 
 <script>
+import IndexDialog from '~/components/common/admin/manager/staff/IndexDialog'
+
 export default {
   name: 'Staff',
+  components: {
+    IndexDialog,
+  },
   data() {
     return {
+      visibleDialog: false,
       currentItem: {},
       headers: [
         {
@@ -102,7 +127,7 @@ export default {
       itemList: [
         {
           id: 10000001,
-          shop_name: '足立店',
+          shop_name: ['cars足立'],
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
@@ -111,7 +136,7 @@ export default {
         },
         {
           id: 10000002,
-          shop_name: '足立店＋その他複数店舗',
+          shop_name: ['cars足立', 'cars板橋'],
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
@@ -120,7 +145,7 @@ export default {
         },
         {
           id: 10000003,
-          shop_name: '足立店',
+          shop_name: ['cars足立', 'cars杉並'],
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
@@ -129,7 +154,7 @@ export default {
         },
         {
           id: 10000004,
-          shop_name: '足立店＋その他複数店舗',
+          shop_name: ['cars大宮'],
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
@@ -138,7 +163,7 @@ export default {
         },
         {
           id: 10000005,
-          shop_name: '足立店',
+          shop_name: ['cars足立'],
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
@@ -147,7 +172,7 @@ export default {
         },
         {
           id: 10000006,
-          shop_name: '足立店＋その他複数店舗',
+          shop_name: ['cars板橋'],
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
@@ -156,7 +181,7 @@ export default {
         },
         {
           id: 10000007,
-          shop_name: '足立店',
+          shop_name: ['cars杉並'],
           name: '谷口 広大',
           job: 'スタッフ',
           tel: '03-1234-1234',
@@ -165,7 +190,7 @@ export default {
         },
         {
           id: 10000008,
-          shop_name: '足立店＋その他複数店舗',
+          shop_name: ['cars大宮'],
           name: '大倉 秀樹',
           job: 'マネージャー',
           tel: '03-1234-1234',
@@ -205,6 +230,11 @@ export default {
         margin-right: 8px;
         border-radius: 50%;
         overflow: hidden;
+      }
+    }
+    .table-shop-wrapper {
+      &_item {
+        margin-bottom: 0;
       }
     }
     .header-wrapper {

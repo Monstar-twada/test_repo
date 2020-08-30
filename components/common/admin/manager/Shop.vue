@@ -30,35 +30,16 @@
         <template v-slot:item.service="{ item }">
           <ServiceIcons :item="item" />
         </template>
-        <template v-slot:item.manager="{ item }">
-          <div class="manager-column">
-            <v-avatar :size="24">
-              <img :src="require(`./img/${item.manager.image}.svg`)" alt="" />
-            </v-avatar>
-            <p>
-              {{ item.manager.name }}
-              <span>{{ item.manager.other }}</span>
-            </p>
-          </div>
-        </template>
-        <template v-slot:item.manager="{ item }">
-          <div class="manager-column">
-            <v-avatar :size="24">
-              <img :src="require(`./img/${item.manager.image}.svg`)" alt="" />
-            </v-avatar>
-            <p>
-              {{ item.manager.name }}
-              <span>{{ item.manager.other }}</span>
-            </p>
-          </div>
-        </template>
         <template v-slot:item.editBtn="{ item }">
-          <v-img
-            class="admin-btn"
-            :src="require('./img/btn-edit.svg')"
+          <fg-button
+            width="63"
+            border
+            size="mini"
+            prefix-icon="edit"
             @click="moveToEdit(item.id)"
           >
-          </v-img>
+            編集
+          </fg-button>
         </template>
       </v-data-table>
     </div>
@@ -83,12 +64,6 @@ export default {
       mail: 'aaaa@cars-enjoy.com',
       company_name: '株式会社ファーストグループ',
       company_katakana: 'カブシキガイシャファーストグループ',
-      manager: {
-        image: 'person-default',
-        name: '谷口広大',
-        other: '(他1名)',
-      },
-      staffAmount: 4,
     }
     const item2 = {
       id: 10000001,
@@ -100,12 +75,6 @@ export default {
       mail: 'aaaa@cars-enjoy.com',
       company_name: '株式会社ファーストグループ',
       company_katakana: 'カブシキガイシャファーストグループ',
-      manager: {
-        image: 'person-default',
-        name: '谷口広大',
-        other: '(他1名)',
-      },
-      staffAmount: 4,
     }
 
     const itemList = []
@@ -149,18 +118,6 @@ export default {
         {
           text: '導入サービス',
           value: 'service',
-          align: 'center',
-          sortable: false,
-        },
-        {
-          text: 'マネージャー',
-          value: 'manager',
-          align: 'center',
-          sortable: false,
-        },
-        {
-          text: 'スタッフ数',
-          value: 'staffAmount',
           align: 'center',
           sortable: false,
         },
