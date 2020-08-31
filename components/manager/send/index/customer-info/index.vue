@@ -20,11 +20,11 @@
             ></v-img>
           </div>
           <div>
-            <Select
-              :customwidth="118"
-              :customheight="18"
-              :list="['過去6ヶ月']"
-              :placeholder="'過去6ヶ月'"
+            <fg-select
+              v-model="selectedDate"
+              :items="selectDateOptions"
+              size="small"
+              :width="'120px'"
             />
           </div>
         </div>
@@ -47,13 +47,14 @@
 
 <script>
 import CostItem from './CostItem.vue'
-import Select from '~/components/common/Select.vue'
 
 export default {
   name: 'CustomerInfo',
-  components: { CostItem, Select },
+  components: { CostItem },
   data() {
     return {
+      selectedDate: 1,
+      selectDateOptions: [{ text: '過去6ヶ月', value: 1 }],
       costItems: [
         {
           title: '購入',
