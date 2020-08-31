@@ -1,7 +1,6 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="480px">
+  <fg-dialog v-model="visible" persistent max-width="480px" title="アンケート結果">
     <v-card class="questionnaire-results-dialog-card">
-      <DialogHeader title="アンケート結果" @close="visible = false" />
       <ul class="remark">
         <li>取引種別：{{ item.transactionType }}</li>
         <li>回答日時：{{ item.inputDate | fmtDate }}</li>
@@ -16,19 +15,15 @@
         </template>
       </dl>
     </v-card>
-  </v-dialog>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
 import { fmtDate } from '~/components/common/customer/common/helper'
 
 export default {
   filters: {
     fmtDate,
-  },
-  components: {
-    DialogHeader,
   },
   props: {
     value: Boolean,
