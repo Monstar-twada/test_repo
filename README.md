@@ -17,6 +17,18 @@ $ npm i
 
 #### Development
 
+update and build first-group-ui
+
+```bash
+# /first-group-ui
+# https://github.com/monstar-lab-consulting/first-group-ui/tree/develop
+# Pull the latest code of the first-group-ui/develop branch
+# build
+npm run build
+```
+
+run first_group(manager or dashboard)
+
 ```bash
 # serve with hot reload at localhost:3000
 # dashboard

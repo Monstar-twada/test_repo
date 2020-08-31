@@ -53,19 +53,47 @@
         <td>{{ item.firstRegistrationDate | fmtDate }}</td>
         <td>{{ item.inspectionExpirationDate | fmtDate }}</td>
         <td>
-          <div
-            style="display: inline-block; max-width: 100px; text-align: left;"
-          >
-            <fg-tag v-if="i % 5 === 0" bg-color="#2993D9" width="42px"
+          <div style="text-align: center;">
+            <fg-tag
+              :class="{ hide: i % 5 === 0 }"
+              color="#fff"
+              size="small"
+              round
+              bg-color="#2993D9"
+              border-color="#2993D9"
+              width="42px"
               >買換</fg-tag
             >
-            <fg-tag v-if="i % 6 === 0" bg-color="#12AACE" width="42px"
+            <fg-tag
+              :class="{ hide: i % 6 === 0 }"
+              color="#fff"
+              size="small"
+              round
+              bg-color="#12AACE"
+              border-color="#12AACE"
+              width="42px"
               >乗換</fg-tag
             >
-            <fg-tag v-if="i % 2 === 0" bg-color="#0DBEA9" width="42px"
+          </div>
+          <div style="text-align: center;">
+            <fg-tag
+              :class="{ hide: i % 2 === 0 }"
+              color="#fff"
+              size="small"
+              round
+              bg-color="#0DBEA9"
+              border-color="#0DBEA9"
+              width="42px"
               >車検</fg-tag
             >
-            <fg-tag v-if="i % 9 !== 0" bg-color="#1DDB99" width="42px"
+            <fg-tag
+              :class="{ hide: i % 3 === 0 }"
+              color="#fff"
+              size="small"
+              round
+              bg-color="#1DDB99"
+              border-color="#1DDB99"
+              width="42px"
               >6ヶ月</fg-tag
             >
           </div>
@@ -116,12 +144,14 @@ export default {
           text: '顧客ID',
           align: 'center',
           value: 'id',
+          sortable: true,
         },
         {
           text: '顧客名',
           value: 'name',
           align: 'center',
           width: '200px',
+          sortable: true,
         },
         { text: '連絡先情報', align: 'center', width: 180 },
         { text: '所有車', align: 'start', width: '120px' },
@@ -171,6 +201,9 @@ export default {
     }
     .fg-tag {
       margin: 2px;
+      &.hide {
+        opacity: 0;
+      }
     }
   }
 }

@@ -5,18 +5,19 @@
 @import "icons";
 @import "media";
 
-@media (min-width: 1904px) {
-  .container {
-    max-width: 1440px;
-  }
-}
-
-@media (max-width: 1904px) {
-  .container {
-    max-width: 1440px;
-  }
-}
-
-.v-application--wrap {
-  flex-direction: row !important;
-}
+// グルーバルメニューの折り機能影響ありため、コメントアウトする
+//@media (min-width: 1904px) {
+//  .container {
+//    max-width: 1440px;
+//  }
+//}
+//
+//@media (max-width: 1904px) {
+//  .container {
+//    max-width: 1440px;
+//  }
+//}
+//
+//.v-application--wrap {
+//  flex-direction: row !important;
+//}

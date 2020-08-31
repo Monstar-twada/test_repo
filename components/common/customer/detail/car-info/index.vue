@@ -51,8 +51,8 @@
                 <fg-tag
                   v-for="(item, i) in selectionPoints"
                   :key="i"
-                  fillet
-                  :border="!item.active"
+                  size="small"
+                  :selected="item.active"
                   >{{ item.text }}</fg-tag
                 >
               </v-col>
@@ -63,24 +63,32 @@
                 <h4>取引種別</h4>
               </v-col>
               <v-col cols="10" class="px-0">
-                <fg-tag :bg-color="carSummary.tradeSales | fmtTransactionType"
+                <fg-tag
+                  round
+                  size="small"
+                  :bg-color="carSummary.tradeSales | fmtTransactionType"
                   >車販</fg-tag
                 >
                 <fg-tag
+                  round
+                  size="small"
                   :bg-color="carSummary.tradeMaintenance | fmtTransactionType"
                   >整備</fg-tag
                 >
                 <fg-tag
+                  round
                   size="small"
                   :bg-color="carSummary.tradeInspection | fmtTransactionType"
                   >車検</fg-tag
                 >
                 <fg-tag
+                  round
                   size="small"
                   :bg-color="carSummary.tradeSheetMetal | fmtTransactionType"
                   >鈑金</fg-tag
                 >
                 <fg-tag
+                  round
                   size="small"
                   :bg-color="carSummary.tradeInsurance | fmtTransactionType"
                   >保険</fg-tag
@@ -360,6 +368,7 @@
               border
               width="63px"
               justify="center"
+              @click="goEditCar"
               >編集</fg-button
             >
           </div>
@@ -512,6 +521,11 @@ export default {
       // console.log(JSON.stringify(item, null, 2))
       this.currentCarId = item.carId
       this.getCarInfo()
+    },
+    goEditCar() {
+      this.$router.push(
+        `/customer/regist/car/edit?id=${this.currentCarId}&customerId=${this.customerId}`
+      )
     },
   },
 }

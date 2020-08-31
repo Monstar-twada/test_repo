@@ -34,13 +34,25 @@
         <td>2020/09/20</td>
         <td>2020/09/02</td>
         <td>
-          <fg-tag size="medium" bg-color="#0786BD">YES</fg-tag>
+          <fg-tag
+            size="medium"
+            width="60px"
+            round
+            bold
+            :color="i % 4 === 1 ? '#fff' : '#0786BD'"
+            :bg-color="i % 4 === 1 ? '#0786BD' : '#DFE6F0'"
+            >{{ i % 4 === 1 ? 'YES' : 'No' }}</fg-tag
+          >
         </td>
         <td>
-          <fg-checkbox :value="true" disabled />
+          <span v-if="i % 4 === 1" class="temp-checkbox">
+            <fg-icon name="hook" color="#fff"></fg-icon>
+          </span>
         </td>
         <td>
-          <fg-checkbox :value="true" disabled />
+          <span v-if="i % 3 === 0" class="temp-checkbox">
+            <fg-icon name="hook" color="#fff"></fg-icon>
+          </span>
         </td>
         <td>10</td>
       </tr>
@@ -82,26 +94,34 @@ export default {
         {
           text: '初度登録年月',
           align: 'center',
+          sortable: true,
         },
         {
           text: '車検満了日',
           align: 'center',
+          sortable: true,
         },
         {
           text: '最終取引日',
           align: 'center',
+          sortable: true,
         },
         {
           text: '車検入庫',
           align: 'center',
+          sortable: true,
         },
         {
           text: '本予約',
           align: 'center',
+          sortable: true,
+          width: 100,
         },
         {
           text: '仮予約',
           align: 'center',
+          sortable: true,
+          width: 100,
         },
         {
           text: '活動報告',
@@ -159,14 +179,14 @@ export default {
 
 <style lang="scss">
 .car-select-table-wrapper {
-  .fg-checkbox.__blue .fg-checkbox-input.__checked .fg-checkbox-inner {
+  .temp-checkbox {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     width: 19px;
     height: 19px;
-    &:after {
-      top: 4px;
-      left: 6px;
-    }
+    background: $blue-200;
   }
 }
 </style>
