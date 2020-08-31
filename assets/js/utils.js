@@ -62,3 +62,7 @@ export function toCommaNumber(value, keepDecimalPlaces = false) {
   arr[0] = result.reverse().join('')
   return keepDecimalPlaces ? arr.join('.') : arr[0]
 }
+
+export function isString(s) {
+  return typeof s === 'string'
+}

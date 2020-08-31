@@ -292,7 +292,8 @@ export default {
     },
     handleConfirm() {
       this.saveCache()
-      this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
+      // this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
+      this.$router.push(`/customer/detail/?id=${this.query.id}`)
     },
     handleBack() {
       this.$router.push(`/customer/detail?id=${this.query.id}`)
