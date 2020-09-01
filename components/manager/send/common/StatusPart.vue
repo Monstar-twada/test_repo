@@ -5,11 +5,12 @@
     </div>
     <div class="send-common-status__body">
       <div class="send-common-status__body--selectContent">
-        <Select
-          :list="list"
+        <fg-select
+          v-model="selected"
+          :items="list"
+          size="small"
+          :width="'120px'"
           :placeholder="placeholder"
-          :customwidth="120"
-          :customheight="20"
         />
       </div>
     </div>
@@ -17,20 +18,20 @@
 </template>
 
 <script>
-import Select from '~/components/common/Select'
 export default {
   name: 'StatusPart',
-  components: {
-    Select,
-  },
   props: {
+    selected: {
+      type: [String, Number],
+      default: '',
+    },
     placeholder: {
       type: String,
       default: 'Label',
     },
     list: {
       type: Array,
-      default: () => ['1', '2'],
+      require: true,
     },
   },
 }
