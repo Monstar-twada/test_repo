@@ -294,6 +294,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .customer-regist-confirm-form-wrapper {
+  margin: 0 auto;
+  padding: 20px 0;
+  width: 712px;
   &__car-info {
     display: flex;
     margin-bottom: 0px;
