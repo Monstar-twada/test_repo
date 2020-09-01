@@ -109,7 +109,7 @@
         </fg-form-item>
 
         <fg-form-item label="勤続年数（入社日）">
-          <fg-input v-model="form.workYear" width="160px"></fg-input>
+          <fg-calendar v-model="form.workYear" width="160px"></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="年収">
@@ -124,7 +124,7 @@
         <fg-form-item label="住宅（入居日）">
           <fg-row gutter="20">
             <fg-col span="5">
-              <fg-select v-model="form.homeX"></fg-select>
+              <fg-select v-model="form.homeX" placeholder="選択"></fg-select>
             </fg-col>
             <fg-col span="10">
               <fg-calendar v-model="form.homeInDate" writable></fg-calendar>
@@ -146,7 +146,11 @@
         </fg-form-item>
 
         <fg-form-item label="免許証の色">
-          <fg-select v-model="form.licenceColor" width="110px"></fg-select>
+          <fg-select
+            v-model="form.licenceColor"
+            width="110px"
+            placeholder="選択"
+          ></fg-select>
         </fg-form-item>
 
         <fg-form-item label="免許証番号">
@@ -156,7 +160,7 @@
         <fg-form-item label="家族構成" class="plus-row-wrapper">
           <fg-row gutter="15">
             <fg-col span="5">
-              <fg-select></fg-select>
+              <fg-select placeholder="選択"></fg-select>
             </fg-col>
             <fg-col span="5">
               <fg-input></fg-input>
