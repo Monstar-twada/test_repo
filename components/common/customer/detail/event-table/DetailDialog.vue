@@ -91,7 +91,7 @@ export default {
     .info-body {
       padding-bottom: 20px;
       > div {
-        line-height: 18px;
+        line-height: 1.6em;
       }
     }
   }

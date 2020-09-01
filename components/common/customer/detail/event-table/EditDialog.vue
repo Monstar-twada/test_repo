@@ -32,7 +32,11 @@
       <div class="info-body mt25">
         <h3>コメント</h3>
         <div class="mt15">
-          <fg-input v-model="form.content" type="textarea"></fg-input>
+          <fg-input
+            v-model="form.content"
+            class="event-textarea"
+            type="textarea"
+          ></fg-input>
         </div>
       </div>
     </div>
@@ -96,6 +100,9 @@ export default {
     }
     .info-body {
       padding-bottom: 20px;
+    }
+    .event-textarea textarea {
+      line-height: 1.6em;
     }
   }
   .footer-wrapper {
