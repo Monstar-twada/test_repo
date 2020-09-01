@@ -133,6 +133,7 @@ header.breadcrumbs-container {
       h1 {
         color: $white-300;
         display: flex;
+        width: max-content;
       }
 
       h2 {
