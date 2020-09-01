@@ -102,8 +102,8 @@
           <fg-tag
             v-for="(item, i) in carLife"
             :key="i"
-            fillet
-            :border="!item.active"
+            :selected="item.active"
+            :border-color="$colors.border"
             >{{ item.text }}</fg-tag
           >
         </div>
@@ -113,7 +113,8 @@
             v-for="(item, i) in selectionPoints"
             :key="i"
             fillet
-            :border="!item.active"
+            :selected="item.active"
+            :border-color="$colors.border"
             >{{ item.text }}</fg-tag
           >
         </div>
@@ -251,11 +252,6 @@ export default {
     margin-top: 8px;
     .fg-tag {
       margin: 0 4px 8px 0;
-      box-sizing: content-box;
-      border: 1px solid $gray-100;
-      &.__border {
-        color: #748eb7;
-      }
     }
   }
 }

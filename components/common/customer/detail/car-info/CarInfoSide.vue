@@ -6,7 +6,7 @@
 
     <h3>
       マッチング情報
-      <fg-tag class="ml5" size="mini">出品中</fg-tag>
+      <fg-tag class="ml5" size="mini" selected round>出品中</fg-tag>
     </h3>
     <v-card outlined>
       <TextContent

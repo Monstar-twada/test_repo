@@ -25,7 +25,10 @@
           14:34
         </td>
         <td>
-          <fg-icon name="flag" color="#DB3394"></fg-icon>
+          <fg-icon
+            name="flag"
+            :color="i % 3 === 1 ? $colors.border : '#DB3394'"
+          ></fg-icon>
         </td>
         <td>
           トヨタ<br />
@@ -58,8 +61,9 @@
     <EditDialog v-model="editVisible" />
 
     <DetailDialog v-model="detailVisible" @edit="handleEdit" />
-
-    <AddButton @click="addVisible = true" />
+    <transition name="fg-zoom-in-right-bottom">
+      <AddButton v-show="!addVisible" @click="addVisible = true" />
+    </transition>
     <AddDialog v-model="addVisible" />
   </div>
 </template>
