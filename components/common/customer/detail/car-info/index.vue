@@ -297,6 +297,11 @@
                   label="トリムコード"
                   :content="carDetail.trimCode | fmtHyphen"
                 />
+                <TextContent label="車両寸法"
+                  >全長 {{ carDetail.length | fmtCarSize }}<br />全幅
+                  {{ carDetail.width | fmtCarSize }}<br />全高
+                  {{ carDetail.height | fmtCarSize }}</TextContent
+                >
               </div>
             </v-col>
             <v-col cols="6">
@@ -305,6 +310,7 @@
                   label="タイヤサイズ"
                   :content="carDetail.tireSize | fmtHyphen"
                 />
+                <TextContent label="タイヤ製造" content="2015年27週目" />
                 <TextContent
                   label="バッテリーサイズ"
                   :content="carDetail.batterySize | fmtHyphen"
@@ -331,11 +337,6 @@
                   label="車両重量"
                   :content="carDetail.weight | fmtCarWeight"
                 />
-                <TextContent label="車両寸法"
-                  >全長 {{ carDetail.length | fmtCarSize }}<br />全幅
-                  {{ carDetail.width | fmtCarSize }}<br />全高
-                  {{ carDetail.height | fmtCarSize }}</TextContent
-                >
               </div>
             </v-col>
           </v-row>

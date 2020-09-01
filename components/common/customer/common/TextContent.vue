@@ -92,7 +92,7 @@ export default {
   }
 
   dt {
-    flex: 0 0 80px;
+    flex: 0 0 114px;
     /*height: var(--height);*/
     display: inline-block;
     font-weight: var(--weight);
