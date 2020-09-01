@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="105" height="30" viewBox="0 0 105 30">
+  <g id="그룹_4077" data-name="그룹 4077" transform="translate(-546)">
+    <g id="사각형_9" data-name="사각형 9" transform="translate(546)" fill="#fff" stroke="#dfe6f0" stroke-width="1">
+      <rect width="105" height="30" rx="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="104" height="29" rx="14.5" fill="none"/>
+    </g>
+    <g id="그룹_3527" data-name="그룹 3527" transform="translate(560.154 6.883)">
+      <path id="패스_2177" data-name="패스 2177" d="M11.393,16.464H10.069v1.379h1.324c.691,0,1.228.353,1.228.657v6.116c0,.3-.536.657-1.228.657H2.607c-.691,0-1.228-.353-1.228-.657V18.5c0-.3.536-.657,1.228-.657H3.931V16.464H2.607C1.145,16.464,0,17.359,0,18.5v6.116c0,1.142,1.145,2.036,2.607,2.036h8.786c1.461,0,2.607-.894,2.607-2.036V18.5C14,17.358,12.855,16.464,11.393,16.464Z" transform="translate(0 -12.589)" fill="#0786bd"/>
+      <path id="패스_2178" data-name="패스 2178" d="M23.389,6.757a.687.687,0,0,0-.488.2l-.863.863V1.807a.69.69,0,0,0-1.379,0V7.869l-.91-.91a.689.689,0,0,0-.975.975l2.059,2.059a.687.687,0,0,0,.487.2h.01a.686.686,0,0,0,.487-.2l2.059-2.059a.69.69,0,0,0-.488-1.177Z" transform="translate(-14.303 1)" fill="#0786bd"/>
+    </g>
+    <text id="インポート" transform="translate(581 19)" fill="#0786bd" font-size="10" font-family="AppleSDGothicNeo-Regular, Apple SD Gothic Neo"><tspan x="0" y="0">インポート</tspan></text>
+  </g>
+</svg>

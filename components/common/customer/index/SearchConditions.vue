@@ -163,7 +163,26 @@ export default {
       height: 30px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      // justify-content: space-between;
+      .fg-checkbox {
+        margin-right: 40px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1370px) {
+  .search-bar-form-wrapper {
+    .right-item-wrapper {
+      .checkbox-wrapper {
+        justify-content: space-between;
+        .fg-checkbox {
+          flex: 1;
+          margin-right: 0;
+        }
+      }
     }
   }
 }
