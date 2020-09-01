@@ -1,6 +1,6 @@
 <template>
   <dl class="text-content pt5 pb5">
-    <dt :style="TextStyle">
+    <dt :style="dtStyle">
       {{ label }}
       <div v-if="subLabel" :class="isSmallSubLabel ? 'is-small-sub-label' : ''">
         {{ subLabel }}
@@ -32,13 +32,13 @@ export default {
       type: String,
       default: '',
     },
-    customHeight: {
-      type: [Number, String],
-      default: 20,
-    },
-    customFontWeight: {
+    height: {
       type: String,
-      default: 'bold',
+      default: '',
+    },
+    labelFontWeight: {
+      type: String,
+      default: '',
     },
     highLight: {
       type: Boolean,
@@ -52,18 +52,25 @@ export default {
       type: Boolean,
       default: false,
     },
-    light: {
-      type: Boolean,
-      default: false,
-    },
     isSmallSubLabel: Boolean,
+    labelWidth: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
-    TextStyle() {
-      return {
-        '--height': this.customHeight + 'px',
-        '--weight': this.customFontWeight,
+    dtStyle() {
+      const ret = {}
+      if (this.height) {
+        ret.height = this.height
       }
+      if (this.labelFontWeight) {
+        ret.fontWeight = this.labelFontWeight
+      }
+      if (this.labelWidth) {
+        ret.flex = `0 0 ${this.labelWidth}`
+      }
+      return ret
     },
   },
   methods: {
@@ -93,9 +100,8 @@ export default {
 
   dt {
     flex: 0 0 114px;
-    /*height: var(--height);*/
     display: inline-block;
-    font-weight: var(--weight);
+    font-weight: bold;
   }
 
   .is-small-sub-label {
