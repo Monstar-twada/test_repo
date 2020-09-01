@@ -180,13 +180,12 @@ import { fmtCustomerName, fmtNameKana } from '../../../common/helper'
 import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import {
-  carLife,
-  selectionPoints,
-} from '~/components/common/customer/detail/base'
-import {
-  customerTypes,
-  genders,
+  CAR_LIVES,
+  SELECTION_POINTS,
+  CUSTOMER_TYPES,
+  GENDERS,
 } from '~/components/common/customer/common/base'
+
 import { storage } from '~/assets/js/storage'
 export default {
   filters: {
@@ -203,28 +202,26 @@ export default {
       query: {
         ...this.$route.query,
       },
-      customerTypes,
-      genders,
+      customerTypes: CUSTOMER_TYPES,
+      genders: GENDERS,
       avatarData: {
         url: '/common/person_default.svg',
         name: '米田 道春',
         summary: '（31歳）',
       },
-      carLife,
-      selectionPoints,
+      carLives: CAR_LIVES,
+      selectionPoints: SELECTION_POINTS,
       form: storage.get('registCustomEdit'),
     }
   },
   computed: {
     carLifeContent() {
-      return carLife
-        .filter((item) => item.active)
+      return CAR_LIVES.filter((item) => item.active)
         .map((item) => item.text)
         .join('、')
     },
     selectionPointsContent() {
-      return selectionPoints
-        .filter((item) => item.active)
+      return SELECTION_POINTS.filter((item) => item.active)
         .map((item) => item.text)
         .join('、')
     },

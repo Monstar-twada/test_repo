@@ -100,7 +100,7 @@
         <h4 class="mt25 mb5">カーライフ</h4>
         <div class="tag-items">
           <fg-tag
-            v-for="(item, i) in carLife"
+            v-for="(item, i) in carLives"
             :key="i"
             :selected="item.active"
             :border-color="$colors.border"
@@ -124,8 +124,8 @@
   </div>
 </template>
 <script>
+import { CAR_LIVES, SELECTION_POINTS } from '../common/base'
 import LicenceDialog from './licence-dialog/index'
-import { carLife, selectionPoints } from './base'
 import SubTitle from '~/components/common/customer/common/SubTitle.vue'
 import TextContent from '~/components/common/customer/common/TextContent.vue'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
@@ -201,8 +201,8 @@ export default {
       ],
       licenceVisible: false,
       currentQrItem: {},
-      carLife,
-      selectionPoints,
+      carLives: CAR_LIVES,
+      selectionPoints: SELECTION_POINTS,
     }
   },
   computed: {

@@ -193,7 +193,7 @@
       <fg-form label-width="140px">
         <fg-form-item label="カーライフ">
           <fg-checkbox
-            v-for="(item, index) in carLife"
+            v-for="(item, index) in carLives"
             :key="index"
             :label="item.text"
             :value="item.active"
@@ -257,13 +257,12 @@ import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import { storage } from '~/assets/js/storage'
 import {
-  carLife,
-  selectionPoints,
-} from '~/components/common/customer/detail/base'
-import {
-  customerTypes,
-  genders,
+  CAR_LIVES,
+  SELECTION_POINTS,
+  CUSTOMER_TYPES,
+  GENDERS,
 } from '~/components/common/customer/common/base'
+
 export default {
   components: {
     ColumnTitle,
@@ -273,15 +272,15 @@ export default {
     const query = this.$route.query
     return {
       query,
-      customerTypes,
-      genders,
+      customerTypes: CUSTOMER_TYPES,
+      genders: GENDERS,
       avatarData: {
         url: '/common/person_default.svg',
         name: '米田 道春',
         summary: '（31歳）',
       },
-      carLife,
-      selectionPoints,
+      carLives: CAR_LIVES,
+      selectionPoints: SELECTION_POINTS,
       form: query.edit ? storage.get('registCustomEdit') : {},
     }
   },

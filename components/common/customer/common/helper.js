@@ -77,7 +77,12 @@ export function fmtAlternative(alternativeTarget) {
  * @returns {string}
  */
 export function fmtTransactionType(value) {
-  return value >> 0 ? '#1E5199' : '#aaa'
+  // 20200901
+  // 取引種別のエリアですが、
+  // ここはProto・V1ではデータが存在しないため空欄になりますが、
+  // 左のようなデザインで、すべてグレー固定で表示可能でしょうか？
+  // return value >> 0 ? '#1E5199' : '#aaa'
+  return '#aaa'
 }
 
 /**
