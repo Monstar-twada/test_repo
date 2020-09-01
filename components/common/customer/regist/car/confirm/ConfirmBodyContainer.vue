@@ -27,13 +27,13 @@
           <h4>{{ form.carBase.carId | fmtHyphen }}</h4>
         </fg-form-item>
         <fg-form-item label="メーカー">
-          <h4>{{ form.carBase.maker }}</h4>
+          <h4>{{ form.carBase.maker | fmtHyphen }}</h4>
         </fg-form-item>
         <fg-form-item label="車種">
-          <h4>{{ form.carBase.class }}</h4>
+          <h4>{{ form.carBase.class | fmtHyphen }}</h4>
         </fg-form-item>
         <fg-form-item label="グレード">
-          <h4>{{ form.carBase.grade }}</h4>
+          <h4>{{ form.carBase.grade | fmtHyphen }}</h4>
         </fg-form-item>
         <fg-form-item label="登録ナンバー">
           <h4>
