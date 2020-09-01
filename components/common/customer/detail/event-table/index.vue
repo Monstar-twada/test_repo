@@ -37,7 +37,7 @@
         <td>整備</td>
         <td>電話</td>
         <td>
-          <fg-text :rows="2">
+          <fg-text :rows="2" :line-height="1.6" unit="em">
             入電 SMSからの返信 5/15の9:30に無料12ヶ月点検の予約いただきました。
           </fg-text>
         </td>
