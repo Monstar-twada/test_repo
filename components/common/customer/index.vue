@@ -17,7 +17,7 @@
 <script>
 import SearchConditions from './index/SearchConditions'
 import { DEFAULT_QUERY } from './common/base'
-import Table from './index/table'
+import Table from './index/Table'
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
 
 export default {

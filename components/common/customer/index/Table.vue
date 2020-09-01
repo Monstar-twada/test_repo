@@ -38,9 +38,7 @@
         <td class="is-left">
           <div class="table-item-tel">
             <fg-text>
-              <fg-icon v-if="item.tel" name="mobile" color="$color.primary" />{{
-                item.tel
-              }}
+              <fg-icon name="mobile" color="$color.primary" />{{ item.tel }}
             </fg-text>
             <fg-text>
               <fg-icon name="email" color="$color.primary" />yoneda@gmail.com
