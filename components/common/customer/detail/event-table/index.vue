@@ -96,12 +96,12 @@ export default {
     return {
       headers: [
         { text: '日時', width: 120 },
-        { text: 'チェック', width: 80 },
-        { text: '対象車両', width: 100 },
-        { text: '取引種別', width: 80 },
-        { text: 'チャネル', width: 80 },
+        { text: 'チェック', width: 80, sortable: true },
+        { text: '対象車両', width: 100, sortable: true },
+        { text: '取引種別', width: 80, sortable: true },
+        { text: 'チャネル', width: 80, sortable: true },
         { text: 'コメント' },
-        { text: '担当者', width: 80 },
+        { text: '担当者', width: 80, sortable: true },
         { text: '', width: 60 },
       ],
       query: {
