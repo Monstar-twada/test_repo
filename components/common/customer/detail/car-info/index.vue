@@ -526,7 +526,6 @@ export default {
       this.$router.push(
         `/customer/regist/car/edit?id=${this.currentCarId}&customerId=${this.customerId}`
       )
-      // this.$router.push('/customer/regist/car/edit?id=' + this.customerId)
     },
   },
 }
