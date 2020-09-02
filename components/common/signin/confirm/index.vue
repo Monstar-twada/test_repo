@@ -2,40 +2,29 @@
   <div class="signin-index-page-wrapper">
     <Header title="新規アカウント登録" />
     <div class="signin-index-form-wrapper">
-      <fg-form label-width="140px">
+      <fg-form label-width="250px" split-vertical-line>
         <fg-form-item label="会社名">
           <p>株式会社ファーストグループ</p>
         </fg-form-item>
         <fg-form-item label="氏名">
-          <fg-row gutter="20">
-            <fg-col span="12">
-              <fg-input placeholder="姓"></fg-input>
-            </fg-col>
-            <fg-col span="12">
-              <fg-input placeholder="名"></fg-input>
-            </fg-col>
-          </fg-row>
+          <p>大倉 秀樹</p>
         </fg-form-item>
         <fg-form-item label="フリガナ">
-          <fg-row gutter="20">
-            <fg-col span="12">
-              <fg-input placeholder="セイ"></fg-input>
-            </fg-col>
-            <fg-col span="12">
-              <fg-input placeholder="メイ"></fg-input>
-            </fg-col>
-          </fg-row>
+          <p>オオクラ ヒデキ</p>
         </fg-form-item>
         <fg-form-item label="電話番号">
-          <fg-input placeholder="000-0000-0000"></fg-input>
+          <p>03-3960-7776</p>
         </fg-form-item>
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
             <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
-              <div class="signin-index-form-item">
+              <div
+                v-if="selectedJob.includes(i)"
+                class="signin-index-form-item"
+              >
                 <div class="signin-index-form-item_img">
                   <fg-avatar
-                    :src="require(`./img/${item.icon}-icon-white.svg`)"
+                    :src="require(`../img/${item.icon}-icon-white.svg`)"
                     :size="25"
                     fillet
                   ></fg-avatar>
@@ -48,52 +37,29 @@
           </div>
         </fg-form-item>
         <fg-form-item label="資格">
-          <fg-row gutter="20">
-            <fg-col span="21">
-              <fg-input placeholder="例）1級小型自動車整備士"></fg-input>
-            </fg-col>
-            <fg-col span="3">
-              <fg-button circle border icon="less" width="30px" />
-            </fg-col>
-          </fg-row>
-          <fg-row gutter="20">
-            <fg-col span="3">
-              <fg-button circle border icon="plus" width="30px" />
-            </fg-col>
-          </fg-row>
+          <fg-tag selected>1級小型自動車整備士</fg-tag>
         </fg-form-item>
         <fg-form-item label="生年月日">
-          <fg-calendar width="160px" placeholder="1989/1/1"></fg-calendar>
+          <p>1989/1/1</p>
         </fg-form-item>
         <fg-form-item label="メールアドレス">
-          <fg-input placeholder="aaaa@cars-enjoy.com"></fg-input>
+          <p>aaaa@cars-enjoy.com</p>
         </fg-form-item>
-        <fg-form-item label="初期パスワード">
-          <fg-input
-            v-model="password"
-            placeholder="password"
-            suffix-icon="eye"
-            :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
-            :type="showPassword1 ? 'text' : 'password'"
-            :offset-right="30"
-            @click:suffix-icon="showPassword = !showPassword"
-          />
-        </fg-form-item>
-        <fg-form-item label="初期パスワード(確認)">
-          <fg-input
-            v-model="password"
-            placeholder="password"
-            suffix-icon="eye"
-            :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
-            :type="showPassword2 ? 'text' : 'password'"
-            :offset-right="30"
-            @click:suffix-icon="showPassword = !showPassword"
-          />
+        <fg-form-item label="パスワード">
+          <p>････････</p>
         </fg-form-item>
       </fg-form>
       <div class="signin-index-submit-button">
         <fg-button type="primary" suffix-icon="arrow-right" bold width="220px"
-          >確認</fg-button
+          >登録</fg-button
+        >
+        <fg-button
+          suffix-icon="arrow-right"
+          type="primary"
+          border
+          bold
+          width="220px"
+          >戻る</fg-button
         >
       </div>
     </div>
@@ -140,6 +106,7 @@ export default {
           icon: 'paper',
         },
       ],
+      selectedJob: [0, 1, 2],
     }
   },
   methods: {},
