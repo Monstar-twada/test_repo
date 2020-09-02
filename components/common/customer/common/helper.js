@@ -130,6 +130,16 @@ export function fmtCarSize(value) {
 }
 
 /**
+ * 車体寸法（長さ）+ "mm"
+ * データがない場合は”cm"ごとブランク表示
+ * @param value
+ */
+export function fmtCarSizeMm(value) {
+  const result = toCommaNumber(value)
+  return result ? result + 'mm' : '-'
+}
+
+/**
  * APIからの戻り値「YYYY-MM-DD」形式を「YYYY/MM/DD」形式に編集して表示
  * データがない場合はブランク表示
  * @param value
