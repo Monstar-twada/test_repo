@@ -151,7 +151,7 @@ export default {
         value: 'tel',
         align: 'start',
         sortable: false,
-        width: '12%',
+        width: '10%',
       },
       {
         text: '買換意向',
@@ -461,6 +461,7 @@ export default {
   }
 }
 .tel {
+  margin-left: 10%;
   .fixed-tel:before {
     content: url('./img/fixed-tel.svg');
     display: inline-block;
