@@ -52,7 +52,7 @@
         <fg-form-item label="新中区分">
           <h4>{{ form.carBase.newOldType }}</h4>
         </fg-form-item>
-        <fg-form-item label="新中区分">
+        <fg-form-item label="買換意向">
           <h4>{{ form.intentionToPurchase ? 'あり' : 'なし' }}</h4>
         </fg-form-item>
         <fg-form-item label="走行距離">
@@ -219,15 +219,15 @@
         <fg-form-item label="車両寸法">
           <div class="customer-regist-confirm-form-wrapper__car-info">
             <h4>全長</h4>
-            <h4>{{ form.carDetail.length | fmtCarSize }}</h4>
+            <h4>{{ form.carDetail.length | fmtCarSizeMm }}</h4>
           </div>
           <div class="customer-regist-confirm-form-wrapper__car-info">
             <h4>全幅</h4>
-            <h4>{{ form.carDetail.width | fmtCarSize }}</h4>
+            <h4>{{ form.carDetail.width | fmtCarSizeMm }}</h4>
           </div>
           <div class="customer-regist-confirm-form-wrapper__car-info">
             <h4>全高</h4>
-            <h4>{{ form.carDetail.height | fmtCarSize }}</h4>
+            <h4>{{ form.carDetail.height | fmtCarSizeMm }}</h4>
           </div>
         </fg-form-item>
       </fg-form>
@@ -256,7 +256,7 @@ import {
   fmtTransactionType,
   fmtMoney,
   sumCost,
-  fmtCarSize,
+  fmtCarSizeMm,
   fmtCarWeight,
   fmtDate,
 } from '~/components/common/customer/common/helper'
@@ -269,7 +269,7 @@ export default {
     fmtTransactionType,
     fmtMoney,
     sumCost,
-    fmtCarSize,
+    fmtCarSizeMm,
     fmtCarWeight,
     fmtDate,
   },
@@ -287,7 +287,9 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push(`/customer/regist/car/edit?id=${this.query.id}&edit=1`)
+      this.$router.push(
+        `/customer/regist/car/edit?id=${this.currentCarId}&customerId=${this.customerId}&edit=1`
+      )
     },
   },
 }

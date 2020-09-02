@@ -121,7 +121,7 @@
             width="160px"
           ></fg-select>
         </fg-form-item>
-        <fg-form-item label="新中区分">
+        <fg-form-item label="買換意向">
           <fg-checkbox
             v-model="form.intentionToPurchase"
             theme="blue"
@@ -502,7 +502,9 @@ export default {
     },
     handleConfirm() {
       this.saveCache()
-      this.$router.push(`/customer/regist/car/confirm?id=${this.query.id}`)
+      this.$router.push(
+        `/customer/regist/car/confirm?id=${this.query.id}&customerId=${this.query.customerId}`
+      )
     },
     handleBack() {
       this.$router.push(`/customer/detail?id=${this.query.id}`)
@@ -512,19 +514,16 @@ export default {
       this.form.photoKey = data.url
     },
     async getCarInfo() {
-      if (!this.currentCarId) return
       try {
         const res = await this.$api.get(
-          `/v1/customer/${this.query.id}/car/${this.currentCarId}`
+          `/v1/customer/${this.query.customerId}/car/${this.query.id}`
         )
-
         this.form.carBase = res.customer.base || {}
         this.form.carSummary = res.customer.summary || {}
         this.form.carTrade = res.customer.trade || {}
         this.form.carExpense = res.customer.expense || {}
         this.form.carCost = res.customer.cost || {}
         this.form.carDetail = res.customer.detail || {}
-        // console.log('getCarInfo', res)
       } catch (e) {
         console.error(e)
       }
@@ -540,9 +539,10 @@ export default {
           `/v1/customer/${this.query.id}/car`,
           params
         )
-        // console.log('getCarList', res)
+        console.log('getCarList', res)
         this.carListData = res || {}
         const carList = this.carListData.results || []
+        await this.getCarInfo()
         if (!this.currentCarId && carList.length > 0) {
           this.currentCarId = carList[0].carId
           await this.getCarInfo()
