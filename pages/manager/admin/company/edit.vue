@@ -1,16 +1,15 @@
 <template>
-  <Admin />
+  <Edit />
 </template>
 
 <script>
-// import Admin from '~/components/common/admin/index'
-import Admin from '~/components/common/admin/manager/index'
+import Edit from '~/components/common/admin/manager/company/edit/index'
 
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
   components: {
-    Admin,
+    Edit,
   },
 }
 </script>

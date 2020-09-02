@@ -1,16 +1,15 @@
 <template>
-  <Admin />
+  <Area />
 </template>
 
 <script>
-// import Admin from '~/components/common/admin/index'
-import Admin from '~/components/common/admin/manager/index'
+import Area from '~/components/common/admin/manager/area/new/index'
 
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
   components: {
-    Admin,
+    Area,
   },
 }
 </script>
