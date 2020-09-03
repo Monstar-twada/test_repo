@@ -3,6 +3,22 @@ html {
   color: $--color-primary;
   font-family: 'Avenir Next', 'Yantramanav', 'Noto Sans JP', 'Helvetica', Arial,
     'Microsoft Yahei';
+  // delete this after vuetify deleted
+  overflow-x: inherit !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+body {
+  overflow: hidden;
+}
+#__nuxt {
+  height: 100%;
+  overflow-y: auto;
 }
 
 // text formats
