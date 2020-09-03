@@ -4,7 +4,12 @@
  * Date: 2020-07-12 12:25
  */
 import Vue from 'vue'
+import FirstGroupUI from 'first-group-ui'
 import { RequestApi } from './api'
+// css
+import 'first-group-ui/dist/index.blue.css'
+
+Vue.use(FirstGroupUI, { theme: 'blue' })
 
 const extendsProps = {
   install(Vue) {
