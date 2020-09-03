@@ -53,7 +53,7 @@ export const baseConfig = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/first-group-ui.js', ssr: false }
+    //   { src: '~/plugins/first-group-ui.js', ssr: false }
   ],
   /*
    ** Nuxt.js modules
@@ -89,7 +89,9 @@ export const baseConfig = {
     proxy: true,
   },
   proxy: {
-    '/api/': isDevelopment ? 'https://manager.cars-enjoy.com' : 'https://manager.cars-enjoy.com',
+    '/api/': isDevelopment
+      ? 'https://manager.cars-enjoy.com'
+      : 'https://manager.cars-enjoy.com',
   },
   /*
    ** vuetify module configuration

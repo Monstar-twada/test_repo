@@ -16,7 +16,11 @@ export default {
   },
   data() {
     return {
-      logoName: this.$isManager ? 'manager' : 'dashboard',
+      logoName: this.$isManager
+        ? 'manager'
+        : this.$isConsole
+        ? 'console'
+        : 'dashboard',
     }
   },
 }
