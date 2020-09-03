@@ -1,23 +1,21 @@
 /**
- * Created by Capricorncd.
- * https://github.com/capricorncd
- * Date: 2020-07-12 10:47
+ * Date: 2020-09-02 15:00
  */
 import { baseConfig } from './base'
 
 export default {
   ...baseConfig,
   dir: {
-    pages: 'pages/dashboard',
+    pages: 'pages/console',
   },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
-    dir: 'dist/dashboard',
+    dir: 'dist/console',
   },
   // https://nuxtjs.org/guides/directory-structure/nuxt
-  buildDir: 'dist/.dashboard',
+  buildDir: 'dist/.console',
   plugins: [
     ...baseConfig.plugins,
-    { src: '~/plugins/global-dashboard-properties.js', ssr: false },
+    { src: '~/plugins/global-console-properties.js', ssr: false },
   ],
 }

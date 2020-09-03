@@ -71,12 +71,13 @@ export default {
   },
   data() {
     const isManager = this.$isManager
+    const isConsole = this.$isConsole
     return {
       collapsed: this.value,
       selectedResult: 8,
       // item's index in menu
       index: -1,
-      logoName: isManager ? 'manager' : 'dashboard',
+      logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
       selectList: [
         {
           title: '営業管理',

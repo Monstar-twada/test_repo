@@ -12,12 +12,12 @@ export default {
   },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
-    dir: 'dist/manager'
+    dir: 'dist/manager',
   },
   // https://nuxtjs.org/guides/directory-structure/nuxt
   buildDir: 'dist/.manager',
   plugins: [
     ...baseConfig.plugins,
-    { src: '~/plugins/global-manager-properties.js', ssr: false }
+    { src: '~/plugins/global-manager-properties.js', ssr: false },
   ],
 }
