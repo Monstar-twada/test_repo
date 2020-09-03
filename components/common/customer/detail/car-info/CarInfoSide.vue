@@ -1,34 +1,52 @@
 <template>
-  <div class="customer-car-info-right-side-wrapper ml20 mr20">
+  <div class="customer-car-info-right-side-wrapper mr20">
     <div class="car-photos-wrapper">
-      <v-img v-if="carSummary.photoKey" :src="carSummary.photoKey" />
+      <fg-image v-if="carSummary.photoKey" :src="carSummary.photoKey" />
     </div>
 
-    <h3>
+    <h3 class="mt30">
       マッチング情報
       <fg-tag class="ml5" size="mini" selected round>出品中</fg-tag>
     </h3>
-    <v-card outlined>
+
+    <div class="card-wrapper">
       <TextContent
         label="価格"
+        :label-width="labelWidth"
         content="¥1,600,000"
-        custom-font-weight="normal"
+        label-font-weight="normal"
       />
       <TextContent
         label="掲載期間"
+        :label-width="labelWidth"
         content="R2/4/1 - R2/4/15"
-        custom-font-weight="normal"
+        label-font-weight="normal"
       />
-    </v-card>
+    </div>
 
-    <h3>車両評価</h3>
-    <v-card outlined>
-      <TextContent label="外装評価" content="A" custom-font-weight="normal" />
-      <TextContent label="内装評価" content="B" custom-font-weight="normal" />
-      <TextContent label="修復歴" custom-font-weight="normal">
-        <span>有:</span><span>トランクフロア修復歴有</span>
+    <h3 class="mt30">車両評価</h3>
+
+    <div class="card-wrapper">
+      <TextContent
+        label="外装評価"
+        :label-width="labelWidth"
+        content="A"
+        label-font-weight="normal"
+      />
+      <TextContent
+        label="内装評価"
+        :label-width="labelWidth"
+        content="B"
+        label-font-weight="normal"
+      />
+      <TextContent
+        label="修復歴"
+        :label-width="labelWidth"
+        label-font-weight="normal"
+      >
+        トランクフロア
       </TextContent>
-    </v-card>
+    </div>
   </div>
 </template>
 
@@ -48,32 +66,7 @@ export default {
   },
   data() {
     return {
-      reservationList: [
-        {
-          type: '6ヶ月',
-          tentativeReservation: true,
-          reservation: true,
-          warehousing: true,
-        },
-        {
-          type: '12ヶ月',
-          tentativeReservation: false,
-          reservation: false,
-          warehousing: true,
-        },
-        {
-          type: '18ヶ月',
-          tentativeReservation: true,
-          reservation: true,
-          warehousing: true,
-        },
-        {
-          type: '車検',
-          tentativeReservation: true,
-          reservation: true,
-          warehousing: true,
-        },
-      ],
+      labelWidth: '80px',
     }
   },
 }
@@ -85,6 +78,23 @@ export default {
     width: 100%;
     height: 210px;
     background: $white-100 url('./img/car-photo.svg') no-repeat center center;
+  }
+  .card-wrapper {
+    position: relative;
+    background: $white-100;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 12px;
+    overflow: hidden;
+    &:before {
+      position: absolute;
+      top: 12px;
+      left: 75px;
+      bottom: 12px;
+      content: '';
+      width: 1px;
+      background: $gray-100;
+    }
   }
 }
 </style>

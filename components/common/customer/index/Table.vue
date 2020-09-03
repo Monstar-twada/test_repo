@@ -18,8 +18,13 @@
       body-min-height="300px"
       placeholder="検索結果はありません"
     >
-      <tr v-for="(item, i) in list" :key="i">
-        <td class="high-light cur" @click="clickRow(item)">
+      <tr
+        v-for="(item, i) in list"
+        :key="i"
+        class="cur"
+        @click="clickRow(item)"
+      >
+        <td class="high-light">
           {{ item.customerId }}
         </td>
         <td class="is-left">
@@ -33,9 +38,7 @@
         <td class="is-left">
           <div class="table-item-tel">
             <fg-text>
-              <fg-icon v-if="item.tel" name="mobile" color="$color.primary" />{{
-                item.tel
-              }}
+              <fg-icon name="mobile" color="$color.primary" />{{ item.tel }}
             </fg-text>
             <fg-text>
               <fg-icon name="email" color="$color.primary" />yoneda@gmail.com

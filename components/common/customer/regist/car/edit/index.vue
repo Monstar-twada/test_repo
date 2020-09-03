@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      page: '顧客管理 [ 車両登録 ]',
+      page: '顧客管理 [車両編集]',
       breadcrumbs: [
         {
           text: '顧客管理',

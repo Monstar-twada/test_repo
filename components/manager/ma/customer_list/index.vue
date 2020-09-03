@@ -55,10 +55,14 @@ export default {
     StatusBar,
   },
   data: () => ({
-    page: '対象者リスト:2020年9月車検満期',
+    page: '対象者リスト：2020年9月車検満期',
     breadcrumbs: [
       {
         text: '集客',
+        href: '',
+      },
+      {
+        text: '対象者リスト：2020年9月車検満期',
         href: '',
       },
     ],

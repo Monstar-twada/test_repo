@@ -13,96 +13,69 @@
         >
       </ColumnTitle>
 
-      <v-row no-gutters>
-        <v-col cols="8" class="p20">
+      <fg-row gutter="60">
+        <fg-col span="16">
           <div class="mt10 ml20">
             <SubTitle :sub-title="carSummary.name | fmtHyphen" />
           </div>
-          <div class="temporarily-hide-wrapper">
-            <v-row no-gutters class="customer-car__owner p20">
-              <v-col cols="3" class="">
-                <h4>所有者</h4>
+
+          <fg-row class="mt15">
+            <fg-col span="8">
+              <TextContent label="所有者" class="ml20" label-width="90px">
                 <v-avatar v-if="carSummary.owner" size="24" class="ml10">
                   <v-img :src="require('./img/profile-edit.svg')" />
                 </v-avatar>
                 <template v-else>-</template>
-              </v-col>
-              <v-col cols="3" class="px-0">
-                <h4>意思決定者</h4>
+              </TextContent>
+            </fg-col>
+            <fg-col span="8">
+              <TextContent label="意思決定者" class="ml20" label-width="80px">
                 <v-avatar v-if="carSummary.payer" size="24" class="ml10">
                   <v-img :src="require('./img/profile-edit.svg')" />
                 </v-avatar>
                 <template v-else>-</template>
-              </v-col>
-              <v-col cols="3" class="px-0">
-                <h4>利用者</h4>
+              </TextContent>
+            </fg-col>
+            <fg-col span="8">
+              <TextContent label="利用者" class="ml20" label-width="60px">
                 <v-avatar v-if="carSummary.user" size="24" class="ml10">
                   <v-img :src="require('./img/profile-edit.svg')" />
                 </v-avatar>
                 <template v-else>-</template>
-              </v-col>
-            </v-row>
+              </TextContent>
+            </fg-col>
+          </fg-row>
 
-            <v-row no-gutters class="customer-car__owner pl20 pr20">
-              <v-col cols="2" class="px-0">
-                <h4>カーライフ</h4>
-              </v-col>
-              <v-col cols="10" class="px-0 selection-points-wrapper">
-                <fg-tag
-                  v-for="(item, i) in selectionPoints"
-                  :key="i"
-                  size="small"
-                  :selected="item.active"
-                  >{{ item.text }}</fg-tag
-                >
-              </v-col>
-            </v-row>
+          <TextContent label="カーライフ" class="ml20 mt10" label-width="90px">
+            <fg-tag
+              v-for="(item, i) in carLives"
+              :key="i"
+              size="small"
+              :selected="item.active"
+              >{{ item.text }}</fg-tag
+            >
+          </TextContent>
 
-            <v-row no-gutters class="customer-car__owner p20">
-              <v-col cols="2" class="px-0">
-                <h4>取引種別</h4>
-              </v-col>
-              <v-col cols="10" class="px-0">
-                <fg-tag
-                  round
-                  size="small"
-                  :bg-color="carSummary.tradeSales | fmtTransactionType"
-                  >車販</fg-tag
-                >
-                <fg-tag
-                  round
-                  size="small"
-                  :bg-color="carSummary.tradeMaintenance | fmtTransactionType"
-                  >整備</fg-tag
-                >
-                <fg-tag
-                  round
-                  size="small"
-                  :bg-color="carSummary.tradeInspection | fmtTransactionType"
-                  >車検</fg-tag
-                >
-                <fg-tag
-                  round
-                  size="small"
-                  :bg-color="carSummary.tradeSheetMetal | fmtTransactionType"
-                  >鈑金</fg-tag
-                >
-                <fg-tag
-                  round
-                  size="small"
-                  :bg-color="carSummary.tradeInsurance | fmtTransactionType"
-                  >保険</fg-tag
-                >
-              </v-col>
-            </v-row>
-          </div>
+          <TextContent label="取引種別" class="ml20 mt10" label-width="90px">
+            <fg-tag
+              v-for="(item, i) in transactionTypes"
+              :key="i"
+              round
+              size="small"
+              no-border
+              color="#fff"
+              :bold="false"
+              :bg-color="carSummary[item.key] | fmtTransactionType"
+              >{{ item.text }}</fg-tag
+            >
+          </TextContent>
 
           <div class="mt20 ml20">
             <SubTitle sub-title="車両基本情報" />
           </div>
 
-          <v-row no-gutters>
-            <v-col cols="6">
+          <fg-row>
+            <fg-col span="12">
               <div class="right-border pt10 pl20 pr20">
                 <TextContent
                   label="メーカー"
@@ -141,8 +114,8 @@
                   >
                 </TextContent>
               </div>
-            </v-col>
-            <v-col cols="6">
+            </fg-col>
+            <fg-col span="12">
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="グレード"
@@ -179,15 +152,15 @@
                   :content="carBase.alternativeReaction"
                 />
               </div>
-            </v-col>
-          </v-row>
+            </fg-col>
+          </fg-row>
 
           <div class="mt20 ml20">
             <SubTitle sub-title="売買情報" />
           </div>
 
-          <v-row no-gutters>
-            <v-col cols="6">
+          <fg-row>
+            <fg-col span="12">
               <div class="right-border pt10 pl20 pr20">
                 <TextContent
                   label="販売価格"
@@ -206,8 +179,8 @@
                   :content="carTrade.repaymentMonthly | fmtHyphen"
                 />
               </div>
-            </v-col>
-            <v-col cols="6">
+            </fg-col>
+            <fg-col span="12">
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="AI査定額"
@@ -224,11 +197,11 @@
                   :content="carTrade.remainingAmount | fmtHyphen"
                 />
               </div>
-            </v-col>
-          </v-row>
+            </fg-col>
+          </fg-row>
 
-          <v-row no-gutters>
-            <v-col cols="6">
+          <fg-row>
+            <fg-col span="12">
               <div class="mt20 ml20">
                 <SubTitle sub-title="税金/諸費用" />
               </div>
@@ -250,8 +223,8 @@
                   :content="carExpense.recycleFee | fmtMoney"
                 />
               </div>
-            </v-col>
-            <v-col cols="6">
+            </fg-col>
+            <fg-col span="12">
               <div class="mt20 ml20">
                 <SubTitle sub-title="ランニングコスト/月" />
               </div>
@@ -271,8 +244,8 @@
                 <div class="double-line mt10 mb5"></div>
                 <TextContent label="月間コスト" :content="carCost | sumCost" />
               </div>
-            </v-col>
-          </v-row>
+            </fg-col>
+          </fg-row>
 
           <div class="mt20 ml20">
             <SubTitle sub-title="車両詳細情報">
@@ -282,8 +255,8 @@
             </SubTitle>
           </div>
 
-          <v-row no-gutters>
-            <v-col cols="6">
+          <fg-row>
+            <fg-col span="12">
               <div class="right-border pt10 pl20 pr20 pb20">
                 <TextContent
                   label="車台番号"
@@ -317,14 +290,20 @@
                   label="トリムコード"
                   :content="carDetail.trimCode | fmtHyphen"
                 />
+                <TextContent label="車両寸法"
+                  >全長 {{ carDetail.length | fmtCarSize }}<br />全幅
+                  {{ carDetail.width | fmtCarSize }}<br />全高
+                  {{ carDetail.height | fmtCarSize }}</TextContent
+                >
               </div>
-            </v-col>
-            <v-col cols="6">
+            </fg-col>
+            <fg-col span="12">
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="タイヤサイズ"
                   :content="carDetail.tireSize | fmtHyphen"
                 />
+                <TextContent label="タイヤ製造" content="2015年27週目" />
                 <TextContent
                   label="バッテリーサイズ"
                   :content="carDetail.batterySize | fmtHyphen"
@@ -351,17 +330,12 @@
                   label="車両重量"
                   :content="carDetail.weight | fmtCarWeight"
                 />
-                <TextContent label="車両寸法"
-                  >全長 {{ carDetail.length | fmtCarSize }}<br />全幅
-                  {{ carDetail.width | fmtCarSize }}<br />全高
-                  {{ carDetail.height | fmtCarSize }}</TextContent
-                >
               </div>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="4" class="customer-car__matching">
-          <div class="top-edit-button-wrapper">
+            </fg-col>
+          </fg-row>
+        </fg-col>
+        <fg-col span="8">
+          <div class="mt15 pb15 pr20" style="text-align: right;">
             <fg-button
               prefix-icon="edit"
               size="mini"
@@ -373,25 +347,26 @@
             >
           </div>
           <CarInfoSide :car-summary="carSummary" />
-        </v-col>
-        <SelectCarDialog
-          v-model="selectCarVisible"
-          :data="carListData"
-          :query="carQuery"
-          :current-car-id="currentCarId"
-          @change="changeCar"
-        />
-        <EditReservationDialog v-model="reservationVisible" />
-        <VICDialog v-model="vicVisible" />
-        <InsuranceDialog v-model="insuranceVisible" />
-      </v-row>
+        </fg-col>
+      </fg-row>
     </div>
+
+    <SelectCarDialog
+      v-model="selectCarVisible"
+      :data="carListData"
+      :query="carQuery"
+      :current-car-id="currentCarId"
+      @change="changeCar"
+    />
+    <EditReservationDialog v-model="reservationVisible" />
+    <VICDialog v-model="vicVisible" />
+    <InsuranceDialog v-model="insuranceVisible" />
 
     <CarTable class="customer-info mt30" :customer-id="customerId" />
   </div>
 </template>
 <script>
-import { selectionPoints } from '../base'
+import { TRANSACTION_TYPES } from '../../common/base'
 import SelectCarDialog from './select-car-dialog/index'
 import CarInfoSide from './CarInfoSide'
 import VICDialog from './vehicle-inspection-cert-dialog/index'
@@ -463,7 +438,8 @@ export default {
     carDetail: {},
     vicVisible: false,
     insuranceVisible: false,
-    selectionPoints,
+    carLives: [],
+    transactionTypes: TRANSACTION_TYPES,
   }),
   watch: {
     carQuery: {
@@ -534,79 +510,7 @@ export default {
 <style lang="scss">
 .customer-detail-car-info-wrapper {
   color: $blue-200;
-  .temporarily-hide-wrapper {
-    position: relative;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 90px;
-      right: 0;
-      z-index: 10;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.99);
-    }
-  }
-  .change-car-icon {
-    cursor: pointer;
-  }
-  .customer-car {
-    &__owner {
-      h4 {
-        display: inline-block;
-        color: $blue-200;
-      }
-    }
-    &__matching {
-      .top-edit-button-wrapper {
-        margin-right: 20px;
-        height: 50px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-      }
-      h3 {
-        margin: 30px 0 10px;
-        color: $blue-200;
-      }
-      h4 {
-        color: $blue-200;
-        margin: 10px 0;
-        font-weight: normal;
-      }
-      .v-card {
-        padding: 10px;
-        background: $white-100;
-        border: none !important;
-        font-weight: normal;
-        dl {
-          position: relative;
-          padding-bottom: 1px;
-          padding-top: 1px;
-          &:after {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            content: '';
-            width: 1px;
-            background: #dfe6f0;
-            left: 80px;
-          }
-          dd {
-            padding-left: 15px;
-          }
-        }
-      }
-    }
-  }
-  .profile {
-    color: $blue-200;
-  }
-  .line {
-    width: 100%;
-    height: 1px;
-    background: $gray-100;
-  }
+
   .double-line {
     width: 100%;
     height: 3px;
@@ -617,17 +521,6 @@ export default {
     height: 40px;
     padding: 0 5px;
     outline: none;
-  }
-
-  .selection-points-wrapper {
-    .fg-tag {
-      margin: 0 4px 0 0;
-      border: 1px solid $gray-100;
-      box-sizing: content-box;
-      &.__border {
-        color: #748eb7;
-      }
-    }
   }
 }
 </style>

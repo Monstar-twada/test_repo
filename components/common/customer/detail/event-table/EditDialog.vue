@@ -1,50 +1,53 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="840px">
-    <v-card class="customer-event-table-edit-dialog">
-      <DialogHeader title="活動報告編集" @close="visible = false" />
-      <div class="body-wrapper">
-        <fg-row gutter="30" class="info-header">
-          <fg-col span="7">
-            <b>日時</b>
-            <fg-date-setter value="2020/09/02 (水) 14:34"></fg-date-setter>
-          </fg-col>
-          <fg-col span="7">
-            <b>対象車両</b>
-            <fg-select />
-          </fg-col>
-          <fg-col span="4">
-            <b>取引種別</b>
-            <fg-select placeholder="選択" />
-          </fg-col>
-          <fg-col span="6">
-            <b>チャネル</b>
-            <fg-select />
-          </fg-col>
-        </fg-row>
-        <div class="check-wrapper mt25">
-          <h3>要チェック</h3>
-          <fg-checkbox label="チェック"></fg-checkbox>
-        </div>
-        <div class="info-body mt25">
-          <h3>コメント</h3>
-          <div class="mt15">
-            <fg-input v-model="form.content" type="textarea"></fg-input>
-          </div>
+  <fg-dialog
+    v-model="visible"
+    class="customer-event-table-edit-dialog"
+    title="活動報告編集"
+    persistent
+    max-width="840px"
+  >
+    <div class="body-wrapper">
+      <fg-row gutter="30" class="info-header">
+        <fg-col span="7">
+          <b>日時</b>
+          <fg-date-setter value="2020/09/02 (水) 14:34"></fg-date-setter>
+        </fg-col>
+        <fg-col span="7">
+          <b>対象車両</b>
+          <fg-select />
+        </fg-col>
+        <fg-col span="4">
+          <b>取引種別</b>
+          <fg-select placeholder="選択" />
+        </fg-col>
+        <fg-col span="6">
+          <b>チャネル</b>
+          <fg-select />
+        </fg-col>
+      </fg-row>
+      <div class="check-wrapper mt25">
+        <h3>要チェック</h3>
+        <fg-checkbox label="チェック"></fg-checkbox>
+      </div>
+      <div class="info-body mt25">
+        <h3>コメント</h3>
+        <div class="mt15">
+          <fg-input
+            v-model="form.content"
+            class="event-textarea"
+            type="textarea"
+          ></fg-input>
         </div>
       </div>
-      <div class="footer-wrapper">
-        <fg-button type="primary" width="240px" @click="save">保存</fg-button>
-      </div>
-    </v-card>
-  </v-dialog>
+    </div>
+    <div class="footer-wrapper">
+      <fg-button type="primary" width="240px" @click="save">保存</fg-button>
+    </div>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
 export default {
-  components: {
-    DialogHeader,
-  },
   props: {
     value: Boolean,
   },
@@ -76,7 +79,6 @@ export default {
 
 <style lang="scss">
 .customer-event-table-edit-dialog {
-  position: relative;
   .body-wrapper {
     margin: 0 34px;
     color: $blue-200;
@@ -98,6 +100,9 @@ export default {
     }
     .info-body {
       padding-bottom: 20px;
+    }
+    .event-textarea textarea {
+      line-height: 1.6em;
     }
   }
   .footer-wrapper {

@@ -27,13 +27,13 @@
       <table>
         <tr>
           <td class="main">
-            <div class="ml10">
+            <div class="ml20">
               <label>継続顧客：</label>
               <span> <strong>34</strong> /162（40%） </span>
             </div>
           </td>
           <td>
-            <div class="ml10">
+            <div class="ml20">
               <label>納車済</label>
               <span> <strong>83</strong>（40%） </span>
               <label>車検入庫</label>
@@ -45,13 +45,13 @@
         </tr>
         <tr>
           <td class="main">
-            <div class="ml10">
+            <div class="ml20">
               <label>未確定：</label>
               <span> <strong>34</strong> /162（40%） </span>
             </div>
           </td>
           <td>
-            <div class="ml10">
+            <div class="ml20">
               <label>検討中</label>
               <span> <strong>47</strong>（40%） </span>
               <label>買換意向</label>
@@ -67,13 +67,13 @@
         </tr>
         <tr>
           <td class="main">
-            <div class="ml10">
+            <div class="ml20">
               <label>他社流出：</label>
               <span> <strong>34</strong> /162（40%） </span>
             </div>
           </td>
           <td>
-            <div class="ml10">
+            <div class="ml20">
               <label>買換</label>
               <span> <strong>47</strong>（40%） </span>
               <label>車検</label>
@@ -98,9 +98,9 @@ export default {
 <style lang="scss" scoped>
 .status-bar {
   font-size: 12px;
-  background: $white-100;
+  background: $white-300;
   color: $blue-200;
-  border-radius: 10px;
+  border-radius: 6px;
   width: 100%;
   border-spacing: 0;
   display: flex;
@@ -110,9 +110,9 @@ export default {
     font-size: 14px;
     vertical-align: center;
     table {
-      padding: 10px 0px 10px 10px;
+      padding: 20px 0px 15px 25px;
       td {
-        height: 36px;
+        height: 32px;
       }
       h4 {
         font-size: 18px;
@@ -153,9 +153,11 @@ export default {
 
     .main {
       font-size: 14px;
+      width: 230px;
       label {
         width: 70px;
         font-weight: bold;
+        margin-right: 10px;
       }
       strong {
         font-size: 21px;
