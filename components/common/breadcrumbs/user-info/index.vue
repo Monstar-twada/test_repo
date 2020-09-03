@@ -76,7 +76,7 @@ export default {
   .avatar-wrapper {
     width: 27px;
     height: 27px;
-    border: 2px solid $white-300;
+    border: 2px solid $--color-white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,7 +94,7 @@ export default {
     top: 35px;
     right: 220px;
     width: 490px;
-    background: $white-300;
+    background: $--color-white;
     border-radius: 4px;
     transform: translateX(50%);
     box-shadow: 0 5px 10px rgba(7, 134, 189, 0.3);
@@ -107,7 +107,7 @@ export default {
       content: '';
       width: 6px;
       height: 6px;
-      background: $white-300;
+      background: $--color-white;
       transform: rotate(45deg);
     }
   }

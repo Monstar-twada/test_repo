@@ -81,7 +81,7 @@ export default {
 .customer-event-table-edit-dialog {
   .body-wrapper {
     margin: 0 34px;
-    color: $blue-200;
+    color: $--color-primary;
     overflow: hidden;
     font-size: 14px;
     .info-header {
@@ -112,7 +112,7 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 20px 0 27px;
-    border-top: 1px solid $gray-100;
+    border-top: 1px solid $--color-border;
   }
 }
 </style>

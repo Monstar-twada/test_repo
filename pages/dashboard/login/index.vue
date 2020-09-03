@@ -64,7 +64,7 @@ export default {
   text-align: center;
 
   .note {
-    color: $blue-500;
+    color: $--color-primary-placeholder;
     h3 {
       width: 100%;
       text-align: center;

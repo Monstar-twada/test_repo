@@ -346,7 +346,7 @@ export default {
             font-size: 12px;
             font-weight: normal;
             height: 40px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             padding: 0 2px !important;
             i {
               display: none;
@@ -400,7 +400,7 @@ export default {
         tr {
           font-size: 12px;
           height: 70px !important;
-          color: $blue-200;
+          color: $--color-primary;
           cursor: pointer;
           td {
             padding: 0 5px !important;
@@ -415,7 +415,7 @@ export default {
               height: 70%;
               top: 15%;
               right: 0;
-              background: $gray-100;
+              background: $--color-border;
             }
           }
           td:nth-child(5):after {
@@ -423,14 +423,14 @@ export default {
           }
         }
         tr:nth-child(even) {
-          background-color: $white-100;
+          background-color: $--color-background;
         }
       }
     }
   }
 
   .theme--light.v-data-table .v-data-table__empty-wrapper {
-    color: $blue-200 !important;
+    color: $--color-primary !important;
   }
 
   .theme--light.v-data-table

@@ -35,15 +35,15 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  background: $white-300;
+  background: $--color-white;
   padding: 0 24px;
   text-align: center;
   h3 {
     margin-top: 58px;
-    color: $blue-200;
+    color: $--color-primary;
   }
   .progress-value {
-    color: $blue-200;
+    color: $--color-primary;
     span {
       font-weight: bold;
       &:first-child {

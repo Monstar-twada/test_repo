@@ -109,7 +109,7 @@ export default {
     h2,
     p {
       text-align: center;
-      color: $blue-200;
+      color: $--color-primary;
     }
     &__title {
       font-weight: 700;
@@ -135,7 +135,7 @@ export default {
         width: 270px;
       }
       h4 {
-        color: $blue-200;
+        color: $--color-primary;
       }
     }
     &__button {

@@ -40,7 +40,7 @@ export default {
 <style lang="scss" scoped>
 .title {
   font-size: 20px;
-  color: $blue-200;
+  color: $--color-primary;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -54,7 +54,7 @@ export default {
 }
 .tab {
   padding: 30px;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 5px;
   margin-bottom: 30px;
   &_box {
@@ -80,7 +80,7 @@ export default {
   p {
     font-size: 12px;
     font-family: 'Noto Sans JP';
-    color: $blue-200;
+    color: $--color-primary;
     margin-bottom: 10px;
   }
 }

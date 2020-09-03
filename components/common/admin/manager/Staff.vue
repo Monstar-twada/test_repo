@@ -217,12 +217,12 @@ export default {
 
 <style lang="scss">
 .admin-body-container-wrapper {
-  color: $blue-200;
+  color: $--color-primary;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   .left-wrapper {
-    background-color: $white-300;
+    background-color: $--color-white;
     width: 100%;
     .table-avatar-wrapper {
       text-align: left;

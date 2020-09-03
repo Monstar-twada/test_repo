@@ -119,17 +119,17 @@ export default {
     display: flex;
     &__title {
       font-size: 18px;
-      color: $blue-200;
+      color: $--color-primary;
     }
     &__aside {
       h4 {
         margin-right: 10px;
         font-size: 14px;
-        color: $blue-200;
+        color: $--color-primary;
       }
       h3 {
         font-size: 34px;
-        color: $blue-200;
+        color: $--color-primary;
         font-weight: 800;
         font-family: 'Yantramanav';
       }
@@ -145,7 +145,7 @@ export default {
     margin: 0 36px;
     li {
       font-size: 14px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 800;
       font-family: 'Yantramanav';
     }

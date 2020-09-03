@@ -33,13 +33,13 @@ export default {
   align-items: center;
   justify-content: flex-start;
   &.border {
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
   }
   height: 58px;
   overflow: hidden;
   h2 {
     margin-left: 24px;
-    color: $blue-200;
+    color: $--color-primary;
     max-width: calc(100% - 78px);
     white-space: nowrap;
     overflow: hidden;

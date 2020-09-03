@@ -121,7 +121,7 @@ export default {
     td {
       font-size: 12px;
       font-weight: 600;
-      color: $blue-200;
+      color: $--color-primary;
       text-align: center;
     }
   }

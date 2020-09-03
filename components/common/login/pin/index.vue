@@ -77,11 +77,11 @@ export default {
     text-align: center;
     margin: 0 auto;
     h2 {
-      color: $blue-200;
+      color: $--color-primary;
       margin-bottom: 35px;
     }
     h3 {
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 400;
     }
     &__button {
@@ -98,7 +98,7 @@ export default {
     }
     &__requirements {
       text-align: center;
-      color: $blue-200;
+      color: $--color-primary;
     }
     &__buttons {
       display: flex;

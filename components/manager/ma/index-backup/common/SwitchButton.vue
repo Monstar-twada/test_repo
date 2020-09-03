@@ -76,11 +76,11 @@ export default {
       right: -25px;
       width: 20px;
       height: 16px;
-      color: $blue-200;
+      color: $--color-primary;
     }
   }
   .v-input--switch__thumb.primary--text {
-    color: $white-300 !important;
+    color: $--color-white !important;
     &:before {
       content: 'ON';
       font-size: 12px;
@@ -91,7 +91,7 @@ export default {
       left: -25px;
       width: 20px;
       height: 16px;
-      color: $white-300;
+      color: $--color-white;
     }
   }
   .v-input--switch__thumb {

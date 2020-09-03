@@ -8,6 +8,10 @@ export default {
   dir: {
     pages: 'pages/console',
   },
+  // import color css
+  styleResources: {
+    scss: [...baseConfig.styleResources.scss, 'first-group-ui/dist/red.scss'],
+  },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
     dir: 'dist/console',

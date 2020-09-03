@@ -39,8 +39,8 @@
             width="60px"
             round
             bold
-            :color="i % 4 === 1 ? '#fff' : '#0786BD'"
-            :bg-color="i % 4 === 1 ? '#0786BD' : '#DFE6F0'"
+            :color="i % 4 === 1 ? '#fff' : '$--color-primary-active'"
+            :bg-color="i % 4 === 1 ? '$--color-primary-active' : '#DFE6F0'"
             >{{ i % 4 === 1 ? 'YES' : 'No' }}</fg-tag
           >
         </td>
@@ -186,7 +186,7 @@ export default {
     border-radius: 50%;
     width: 19px;
     height: 19px;
-    background: $blue-200;
+    background: $--color-primary;
   }
 }
 </style>

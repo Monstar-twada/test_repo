@@ -36,10 +36,10 @@ export default {
   margin: 10px 8px 0 12px;
   padding: 10px;
   border-radius: 6px;
-  background: $white-100;
+  background: $--color-background;
   dt {
     font-size: 14px;
-    color: $blue-200;
+    color: $--color-primary;
     font-weight: 600;
     &.small {
       font-size: 12px;
@@ -57,7 +57,7 @@ export default {
       margin-top: 5px;
       .left {
         display: flex;
-        color: $pink-100;
+        color: $--color-warning;
         .text {
           display: inline-block;
           font-size: 11px;
@@ -75,7 +75,7 @@ export default {
         height: 24px;
         line-height: 24px;
         border-radius: 12px;
-        background: $blue-100;
+        background: $--color-primary-active;
         min-width: 42px;
         padding: 0 12px;
         font-size: 12px;

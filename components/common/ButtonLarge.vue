@@ -57,22 +57,22 @@ export default {
 }
 
 .blue_style {
-  background: $blue-100;
-  border: 1px solid $white-100;
-  color: $white-100;
+  background: $--color-primary-active;
+  border: 1px solid $--color-background;
+  color: $--color-background;
   &::after {
-    border-top: 2px solid $white-100;
-    border-right: 2px solid $white-100;
+    border-top: 2px solid $--color-background;
+    border-right: 2px solid $--color-background;
   }
 }
 
 .white_style {
-  border: 1px solid $blue-100;
-  background: $white-300;
-  color: $blue-100;
+  border: 1px solid $--color-primary-active;
+  background: $--color-white;
+  color: $--color-primary-active;
   &::after {
-    border-top: 2px solid $blue-100;
-    border-right: 2px solid $blue-100;
+    border-top: 2px solid $--color-primary-active;
+    border-right: 2px solid $--color-primary-active;
   }
 }
 </style>

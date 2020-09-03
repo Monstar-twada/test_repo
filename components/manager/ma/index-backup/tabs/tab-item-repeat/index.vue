@@ -276,12 +276,12 @@ export default {
 <style lang="scss" scoped>
 .tab-all__item {
   padding: 30px;
-  border-bottom: 1px solid $gray-100;
+  border-bottom: 1px solid $--color-border;
 
   &-data {
     p {
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
       margin: 15px 0;
     }
   }

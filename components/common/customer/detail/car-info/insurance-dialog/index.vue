@@ -152,7 +152,7 @@ export default {
         left: 50%;
         height: 100%;
         width: 1px;
-        background: $gray-100;
+        background: $--color-border;
         transform: translateX(-1px);
       }
     }

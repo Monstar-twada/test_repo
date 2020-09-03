@@ -37,7 +37,7 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$white-100' },
+  loading: { color: '$--color-background' },
   /*
    ** Global CSS
    */

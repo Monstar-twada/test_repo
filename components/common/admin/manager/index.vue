@@ -95,7 +95,7 @@ export default {
       font-weight: bold;
       .v-tab {
         font-size: 14px;
-        color: $white-300 !important;
+        color: $--color-white !important;
       }
     }
   }

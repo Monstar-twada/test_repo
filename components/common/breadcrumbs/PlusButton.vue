@@ -34,11 +34,11 @@ button.plus-button {
   height: 30px;
   border-radius: 50%;
   overflow: hidden;
-  background: $white-300;
+  background: $--color-white;
   border: 1px solid #fff;
   outline: none;
   &.border {
-    border-color: $gray-100;
+    border-color: $--color-border;
   }
 }
 </style>

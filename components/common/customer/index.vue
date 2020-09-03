@@ -86,6 +86,6 @@ export default {
 
 <style lang="scss">
 .customer-page-wrapper {
-  color: $blue-200;
+  color: $--color-primary;
 }
 </style>

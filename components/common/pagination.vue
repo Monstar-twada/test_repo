@@ -38,7 +38,7 @@ export default {
     h1,
     h3 {
       display: inline;
-      color: $white-300;
+      color: $--color-white;
     }
   }
 }

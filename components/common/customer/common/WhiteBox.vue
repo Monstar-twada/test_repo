@@ -12,10 +12,10 @@ export default {
 
 <style lang="scss" scoped>
 .white-box {
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   overflow: hidden;
-  color: $blue-200;
+  color: $--color-primary;
   padding: 10px 0;
 }
 </style>

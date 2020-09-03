@@ -59,7 +59,7 @@ import ArrowSvgIcon from './ArrowSvgIcon'
 import { getMaxZIndex } from '~/assets/js/dom'
 const ICON_COLORS = {
   transparent: '#fff',
-  'light-blue': '#0786BD',
+  'light-blue': '$--color-primary-active',
   default: '#1e5199',
 }
 export default {
@@ -260,7 +260,7 @@ $smallHeight: 28px;
           position: absolute;
           display: inline-block;
           content: '';
-          background: $blue-200;
+          background: $--color-primary;
         }
         &:before {
           top: 5px;
@@ -283,7 +283,7 @@ $smallHeight: 28px;
     top: 37px;
     left: 0;
     min-width: 100%;
-    background: $white-300;
+    background: $--color-white;
     box-shadow: 0 5px 10px rgba(7, 134, 189, 0.3);
     min-height: 35px;
     max-height: 300px;
@@ -300,7 +300,7 @@ $smallHeight: 28px;
       background-color: $gray-400;
       cursor: pointer;
       border-radius: 2px;
-      border: 1px solid $white-300;
+      border: 1px solid $--color-white;
     }
     dt,
     dd {
@@ -339,28 +339,28 @@ $smallHeight: 28px;
   // theme
   &.__light-blue {
     .result-wrapper {
-      background: $white-100;
+      background: $--color-background;
       span {
         &.text {
-          color: $blue-100;
+          color: $--color-primary-active;
         }
         &.placeholder {
-          color: $blue-100;
+          color: $--color-primary-active;
         }
       }
       i.__clear {
         &:before,
         &:after {
-          background: $blue-100;
+          background: $--color-primary-active;
         }
       }
     }
     dl {
       dt {
-        color: $blue-100;
+        color: $--color-primary-active;
       }
       dd {
-        color: $blue-100;
+        color: $--color-primary-active;
         &:hover {
           background: #eff6fa;
         }
@@ -374,28 +374,28 @@ $smallHeight: 28px;
 
   &.__default {
     .result-wrapper {
-      border: 1px solid $gray-100;
+      border: 1px solid $--color-border;
       border-radius: 4px;
       span {
         &.text {
-          color: $blue-500;
+          color: $--color-primary-placeholder;
         }
         &.placeholder {
-          color: $blue-500;
+          color: $--color-primary-placeholder;
         }
       }
     }
     dl {
       dt {
-        color: $blue-500;
+        color: $--color-primary-placeholder;
       }
       dd {
-        color: $blue-500;
+        color: $--color-primary-placeholder;
         &:hover {
           background: #eff6fa;
         }
         &.selected {
-          background: $gray-100;
+          background: $--color-border;
           font-weight: bold;
         }
       }
@@ -404,30 +404,30 @@ $smallHeight: 28px;
 
   &.__transparent {
     .result-wrapper {
-      border: 1px solid $gray-100;
+      border: 1px solid $--color-border;
       border-radius: 4px;
       span {
         &.text {
-          color: $white-300;
+          color: $--color-white;
         }
         &.placeholder {
-          color: $white-300;
+          color: $--color-white;
           opacity: 0.5;
         }
       }
       i.__clear {
         &:before,
         &:after {
-          background: $white-300;
+          background: $--color-white;
         }
       }
     }
     dl {
       dt {
-        color: $blue-100;
+        color: $--color-primary-active;
       }
       dd {
-        color: $blue-100;
+        color: $--color-primary-active;
         &:hover {
           background: #eff6fa;
         }

@@ -55,7 +55,7 @@ export default {
   width: 100%;
   max-height: 530px;
   height: auto;
-  color: $blue-200;
+  color: $--color-primary;
   margin: 10px;
   &_body {
     padding: 20px;

@@ -87,7 +87,7 @@ export default {
 .text-content {
   width: 100%;
   position: relative;
-  color: $blue-200;
+  color: $--color-primary;
   vertical-align: top;
   font-size: 12px;
   display: flex;

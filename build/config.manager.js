@@ -10,6 +10,10 @@ export default {
   dir: {
     pages: 'pages/manager',
   },
+  // import color css
+  styleResources: {
+    scss: [...baseConfig.styleResources.scss, 'first-group-ui/dist/blue.scss'],
+  },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
     dir: 'dist/manager',

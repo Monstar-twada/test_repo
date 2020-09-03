@@ -100,8 +100,8 @@ export default {
 
 <style lang="scss" scoped>
 .send-customer-info-container {
-  background-color: $white-300;
-  color: $blue-200;
+  background-color: $--color-white;
+  color: $--color-primary;
   border-radius: 6px;
   padding: 25px 20px;
   &__top {

@@ -177,19 +177,19 @@ export default {
       font-weight: 600;
       font-size: 18px;
       line-height: 24px;
-      color: $blue-200;
+      color: $--color-primary;
     }
   }
   .v-data-table {
     margin-top: 16px;
     th {
       height: 30px !important;
-      background: $white-100;
+      background: $--color-background;
       white-space: nowrap;
-      border-bottom: 1px solid $gray-100 !important;
+      border-bottom: 1px solid $--color-border !important;
       span {
         line-height: 30px;
-        color: $blue-500;
+        color: $--color-primary-placeholder;
         font-weight: 400;
       }
     }
@@ -200,7 +200,7 @@ export default {
         & > td {
           border-bottom: none !important;
           height: 34px !important;
-          background-color: $white-100;
+          background-color: $--color-background;
           font-size: 12px;
           padding: 0 18px !important;
           font-weight: bold;
@@ -211,11 +211,11 @@ export default {
       }
     }
     td {
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 0.75rem !important;
       height: auto !important;
       padding: 15px !important;
-      border-bottom-color: $gray-100 !important;
+      border-bottom-color: $--color-border !important;
       .align-left {
         text-align: left;
       }

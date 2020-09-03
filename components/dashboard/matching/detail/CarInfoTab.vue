@@ -82,10 +82,10 @@ export default {
 .tab-container {
   position: relative;
   h4 {
-    color: $white-300;
+    color: $--color-white;
   }
   .button-qr {
-    background-color: $white-300;
+    background-color: $--color-white;
     width: 150px;
     font-size: 12px;
     font-weight: 500;
@@ -106,10 +106,10 @@ export default {
     }
   }
   .custombutton {
-    border: 1px solid $white-300;
+    border: 1px solid $--color-white;
   }
 }
 .tab-text {
-  color: $white-300 !important;
+  color: $--color-white !important;
 }
 </style>

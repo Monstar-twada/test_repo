@@ -48,10 +48,10 @@ export default {
   padding: 20px;
   height: 70px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   &_title {
     font-size: 18px;
-    color: $blue-200;
+    color: $--color-primary;
     font-weight: 600;
     margin-right: 30px;
   }

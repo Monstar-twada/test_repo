@@ -634,7 +634,7 @@ export default {
             font-size: 12px;
             font-weight: normal;
             height: 40px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
           }
         }
       }
@@ -642,10 +642,10 @@ export default {
         tr {
           font-size: 12px;
           height: 70px !important;
-          color: $blue-500;
+          color: $--color-primary-placeholder;
         }
         tr:nth-child(even) {
-          background-color: $white-100;
+          background-color: $--color-background;
         }
       }
     }
@@ -678,12 +678,12 @@ export default {
       line-height: 20px !important;
       background: none !important;
       box-shadow: none !important;
-      color: $white-300 !important;
+      color: $--color-white !important;
       border-radius: 0px !important;
       transition: none !important;
     }
     .v-pagination__item--active {
-      border-bottom: 1px $white-300 solid !important;
+      border-bottom: 1px $--color-white solid !important;
     }
 
     .v-pagination__item--active .primary {
@@ -719,7 +719,7 @@ export default {
     width: 84px;
     height: 24px;
     border-radius: 12px;
-    border: 1px solid $gray-100;
+    border: 1px solid $--color-border;
   }
 }
 </style>

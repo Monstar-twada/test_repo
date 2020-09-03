@@ -131,7 +131,7 @@ export default {
     }
     &__link {
       text-align: center;
-      color: $blue-100;
+      color: $--color-primary-active;
       font-size: 14px;
     }
     &__googlebtn {
@@ -141,16 +141,16 @@ export default {
       display: flex;
       span {
         text-align: center;
-        color: $blue-200;
+        color: $--color-primary;
         position: relative;
         &:first-child {
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           display: block;
           width: 48%;
           margin-bottom: 10px;
         }
         &:last-child {
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           display: block;
           width: 48%;
           margin-bottom: 10px;
@@ -162,7 +162,7 @@ export default {
     }
     &__requirements {
       text-align: center;
-      color: $blue-500;
+      color: $--color-primary-placeholder;
     }
   }
 }

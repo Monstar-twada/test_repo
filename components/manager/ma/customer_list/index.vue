@@ -120,7 +120,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .subTitle {
-  color: $white-300;
+  color: $--color-white;
   margin: 5px 0 0 20px;
   h3 {
     font-size: 20px;
