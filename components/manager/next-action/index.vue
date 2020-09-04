@@ -47,7 +47,7 @@ $sideWidth: 210px;
   right: 0;
   bottom: 0;
   width: $sideWidth;
-  background: $white-300;
+  background: $--color-white;
   transition: all 0.3s ease-in-out;
   .toggle-button {
     position: absolute;
@@ -58,7 +58,8 @@ $sideWidth: 210px;
     height: 24px;
     border-radius: 50%;
     box-shadow: 0 0 6px rgba(7, 134, 189, 0.2);
-    background: $white-300 url('./img/arrow-right.svg') no-repeat center center;
+    background: $--color-white url('./img/arrow-right.svg') no-repeat center
+      center;
     transition: all 0.3s ease-in-out;
   }
 
@@ -70,17 +71,17 @@ $sideWidth: 210px;
     h2 {
       margin: 7px 0 0 18px;
       font-size: 16px;
-      color: $blue-200;
+      color: $--color-primary;
     }
     .badge {
       margin: 7px 0 0 4px;
       padding: 0 5px;
       min-width: 30px;
       display: inline-block;
-      background: $pink-100;
+      background: $--color-warning;
       font-size: 10px;
       font-weight: bold;
-      color: $white-300;
+      color: $--color-white;
       text-align: center;
       border-radius: 9px;
       height: 18px;

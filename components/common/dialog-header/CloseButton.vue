@@ -19,9 +19,9 @@ button.dialog-close-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 50%;
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   width: 30px;
   height: 30px;
   outline: none;

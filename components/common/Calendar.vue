@@ -70,7 +70,7 @@ export default {
       .v-input__slot {
         min-height: 30px !important;
         margin-bottom: 0 !important;
-        border: 1px $gray-100 solid !important;
+        border: 1px $--color-border solid !important;
         padding: 0 4px 0 8px !important;
       }
     }
@@ -87,7 +87,7 @@ export default {
   .v-input input {
     max-height: 28px !important;
     font-size: 12px !important;
-    color: $blue-200 !important;
+    color: $--color-primary !important;
   }
   .v-input__icon {
     width: 16px !important;
@@ -95,7 +95,7 @@ export default {
   }
   .v-icon.v-icon {
     font-size: 16px;
-    color: $blue-200;
+    color: $--color-primary;
   }
 }
 </style>

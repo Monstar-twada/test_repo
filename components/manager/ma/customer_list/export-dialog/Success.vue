@@ -20,7 +20,7 @@ export default {}
   left: 0;
   bottom: 0;
   width: 100%;
-  background: $white-300;
+  background: $--color-white;
   padding: 0 24px;
   text-align: center;
   .v-image {
@@ -31,12 +31,12 @@ export default {}
     margin: 30px auto 0;
   }
   h2 {
-    color: $blue-200;
+    color: $--color-primary;
   }
   .v-btn {
     width: 160px;
-    border-color: $blue-100;
-    color: $blue-100;
+    border-color: $--color-primary-active;
+    color: $--color-primary-active;
   }
 }
 </style>

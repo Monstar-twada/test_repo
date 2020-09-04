@@ -39,7 +39,7 @@ export default {
       padding: 10px 10px 10px 10px;
       font-size: 12px;
       display: flex;
-      border-right: 1px solid $gray-600;
+      border-right: 1px solid $--color-background-hover;
       p {
         margin-bottom: 0;
         padding-bottom: 10px;

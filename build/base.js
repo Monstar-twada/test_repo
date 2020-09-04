@@ -37,14 +37,14 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$white-100' },
+  loading: { color: '$--color-background' },
   /*
    ** Global CSS
    */
   css: ['~/assets/scss/_main.scss'],
   styleResources: {
     scss: [
-      '~/assets/scss/_colors.scss',
+      // '~/assets/scss/_colors.scss',
       // '~/assets/scss/*.scss',
       // '~/assets/scss/_main.scss', // use underscore "_" & also file extension ".scss"
     ],

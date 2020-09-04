@@ -46,9 +46,9 @@ export default {
     margin: 20px;
     dl {
       padding: 12px 0;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 0.75rem;
-      border-top: 1px solid $gray-100;
+      border-top: 1px solid $--color-border;
       dt {
         font-weight: 600;
         margin-bottom: 4px;

@@ -63,7 +63,7 @@ export default {
     bottom: 98px;
     right: 5px;
     width: 210px;
-    background: $white-300;
+    background: $--color-white;
     border-radius: 4px;
     box-shadow: 0 5px 10px rgba(7, 134, 189, 0.3);
     &:before {
@@ -72,7 +72,7 @@ export default {
       bottom: -5px;
       right: 50px;
       width: 8px;
-      border-right: 8px solid $white-300;
+      border-right: 8px solid $--color-white;
       border-top: 8px solid transparent;
       border-bottom: 5px solid transparent;
     }
@@ -81,7 +81,7 @@ export default {
       align-items: center;
       padding: 14px 15px 10px;
       h4 {
-        color: $pink-100;
+        color: $--color-warning;
       }
       i {
         display: inline-block;

@@ -36,9 +36,9 @@ export default {
   &_body {
     max-width: 712px;
     width: 100%;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
-    color: $blue-200;
+    color: $--color-primary;
   }
 }
 </style>

@@ -44,7 +44,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .subTitle {
-  color: $white-300;
+  color: $--color-white;
   font-size: 12px;
   margin: 10px 0 0 20px;
   span {
@@ -54,7 +54,7 @@ export default {
 .chart {
   width: 100%;
   padding: 20px;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   overflow: hidden;
 }

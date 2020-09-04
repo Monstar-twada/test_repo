@@ -95,13 +95,13 @@ export default {
 .Title {
   width: 100%;
   height: 80px;
-  color: $blue-200;
+  color: $--color-primary;
   flex-direction: column;
 
   &-left {
-    color: $blue-200;
+    color: $--color-primary;
     padding-right: 20px;
-    border-right: 1px $gray-100 solid;
+    border-right: 1px $--color-border solid;
     display: flex;
 
     &__title {

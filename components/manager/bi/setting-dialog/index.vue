@@ -72,16 +72,16 @@ export default {
   position: relative;
   .v-card__text {
     padding: 20px 30px 20px 15px !important;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     .remark {
       margin-top: 28px;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 14px;
       font-weight: 400;
     }
     .v-input__control {
       .theme--light.v-icon {
-        color: $gray-100;
+        color: $--color-border;
       }
       .v-input--radio-group__input {
         display: flex;
@@ -91,14 +91,14 @@ export default {
           flex: 0 0 50%;
           margin-top: 10px;
           label {
-            color: $blue-200;
+            color: $--color-primary;
             font-size: 12px;
           }
         }
       }
     }
     .setting-dialog-border {
-      border-right: 1px solid $gray-100;
+      border-right: 1px solid $--color-border;
     }
     .setting-dialog-wrapper {
       display: flex;
@@ -133,7 +133,7 @@ export default {
         display: flex;
         align-items: center;
         font-size: 12px;
-        color: $pink-100;
+        color: $--color-warning;
       }
     }
   }
@@ -144,7 +144,7 @@ export default {
     .v-btn {
       width: 240px;
       .v-btn__content {
-        color: $white-300;
+        color: $--color-white;
       }
     }
   }
@@ -152,6 +152,6 @@ export default {
 </style>
 <style lang="scss" scoped>
 .setting-dialog-border {
-  border-right: 1px solid $gray-100 !important;
+  border-right: 1px solid $--color-border !important;
 }
 </style>

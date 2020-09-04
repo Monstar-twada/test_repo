@@ -168,7 +168,7 @@ export default {
   padding: 5px 20px;
   height: 120px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   &_space {
     display: block;
     width: 20px;
@@ -182,7 +182,8 @@ export default {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: #0786bd url('./img/search-icon.svg') no-repeat center center;
+    background: $--color-primary-active url('./img/search-icon.svg') no-repeat
+      center center;
   }
 }
 </style>

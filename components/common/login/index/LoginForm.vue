@@ -15,7 +15,7 @@
         size="medium"
         class="mb30"
         suffix-icon="eye"
-        :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
+        :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
         :type="showPassword ? 'text' : 'password'"
         @click:suffix-icon="showPassword = !showPassword"
       />
@@ -26,7 +26,7 @@
         round
         bold
         :disabled="isValid()"
-        @click="nextUrl('/customer')"
+        @click="confirm"
         >ログイン</fg-button
       >
       <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
@@ -84,7 +84,7 @@ export default {
     email(val) {
       this.isValid()
     },
-    psasword(val) {
+    password(val) {
       this.isValid()
     },
   },
@@ -103,9 +103,12 @@ export default {
         return true
       }
     },
-    nextUrl(url) {
-      this.$store.commit('user/signIn', true)
-      this.$router.push({ path: url })
+    // nextUrl(url) {
+    //   this.$store.commit('user/signIn', true)
+    //   this.$router.push({ path: url })
+    // },
+    confirm() {
+      this.$login.success.call(this)
     },
   },
 }
@@ -126,12 +129,12 @@ export default {
     }
     &__error {
       input[type='text'] {
-        border: 1px solid red;
+        border: 1px solid $--color-warning;
       }
     }
     &__link {
       text-align: center;
-      color: $blue-100;
+      color: $--color-primary-active;
       font-size: 14px;
     }
     &__googlebtn {
@@ -141,16 +144,16 @@ export default {
       display: flex;
       span {
         text-align: center;
-        color: $blue-200;
+        color: $--color-primary;
         position: relative;
         &:first-child {
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           display: block;
           width: 48%;
           margin-bottom: 10px;
         }
         &:last-child {
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           display: block;
           width: 48%;
           margin-bottom: 10px;
@@ -162,7 +165,7 @@ export default {
     }
     &__requirements {
       text-align: center;
-      color: $blue-500;
+      color: $--color-primary-placeholder;
     }
   }
 }

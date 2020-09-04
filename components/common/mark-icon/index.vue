@@ -48,7 +48,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $blue-200;
+    background: $--color-primary;
     border-radius: 5px;
 
     img {
@@ -59,7 +59,7 @@ export default {
     width: 40px;
     font-size: 12px;
     font-weight: normal;
-    color: $blue-200;
+    color: $--color-primary;
   }
 }
 </style>

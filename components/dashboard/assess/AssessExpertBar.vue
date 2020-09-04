@@ -30,22 +30,22 @@ export default {
   padding: 15px 0px;
   height: 70px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   display: flex;
   margin-bottom: 40px;
   .assess {
     align-items: center;
     padding: 0px 20px;
     &-text {
-      color: $blue-200;
+      color: $--color-primary;
     }
     &-subtext {
-      color: $blue-100;
+      color: $--color-primary-active;
       font-weight: 400;
     }
   }
   .border-right {
-    border-right: 1px solid $gray-100;
+    border-right: 1px solid $--color-border;
   }
 }
 </style>

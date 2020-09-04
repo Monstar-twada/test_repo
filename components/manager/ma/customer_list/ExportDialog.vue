@@ -52,9 +52,9 @@ export default {
   top: 30px;
   width: 340px;
   height: 120px;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 2px;
-  box-shadow: 2px 2px $gray-100;
+  box-shadow: 2px 2px $--color-border;
   .dialog-header-wrapper.border {
     border-bottom: none;
   }

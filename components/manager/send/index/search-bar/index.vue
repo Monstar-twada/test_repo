@@ -123,7 +123,7 @@ export default {
   padding: 20px;
   height: 120px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   &__input__box {
     width: 120px;
   }

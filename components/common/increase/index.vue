@@ -24,6 +24,6 @@ export default {
 .percentage {
   font-size: 12px;
   font-weight: 400;
-  color: $pink-100 !important;
+  color: $--color-warning !important;
 }
 </style>

@@ -18,10 +18,10 @@ export default {}
   width: 230px;
   height: 40px;
   border-radius: 20px;
-  background: $white-300;
+  background: $--color-white;
   outline: none;
   h3 {
-    color: $blue-100;
+    color: $--color-primary-active;
   }
   .img {
     width: 30px;

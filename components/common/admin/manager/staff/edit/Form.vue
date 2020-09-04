@@ -145,11 +145,11 @@ export default {
   max-width: 712px;
   width: 100%;
   margin: 0 auto;
-  color: $blue-200;
+  color: $--color-primary;
   &_body {
     border-radius: 6px;
     padding: 24px;
-    background-color: $white-300;
+    background-color: $--color-white;
     .page-title-wrapper {
       h2 {
         font-size: 14px;
@@ -177,7 +177,7 @@ export default {
         width: 435px;
         height: 160px;
         overflow-y: scroll;
-        border: 1px solid $gray-600;
+        border: 1px solid $--color-background-hover;
         border-radius: 4px;
         padding: 20px;
         &_item {
@@ -207,7 +207,7 @@ export default {
           &_img {
             width: 40px;
             height: 40px;
-            background-color: $blue-200;
+            background-color: $--color-primary;
             display: flex;
             justify-content: center;
             align-items: center;

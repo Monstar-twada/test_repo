@@ -94,7 +94,7 @@ export default {
   right: 10px;
   width: 740px;
   max-width: 100%;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   box-shadow: 0 5px 10px rgba(7, 134, 189, 0.3);
   .header-wrapper {
@@ -107,7 +107,7 @@ export default {
   }
   .body-wrapper {
     margin: 0 34px;
-    color: $blue-200;
+    color: $--color-primary;
     overflow: hidden;
     font-size: 14px;
     .info-header {

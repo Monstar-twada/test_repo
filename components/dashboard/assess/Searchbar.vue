@@ -44,7 +44,7 @@ export default {
   padding: 20px;
   height: 70px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   &_space {
     display: block;
     width: 20px;

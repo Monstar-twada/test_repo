@@ -106,8 +106,8 @@ export default {
       tr {
         th {
           border-bottom: none !important;
-          background-color: $white-100 !important;
-          color: $blue-200 !important;
+          background-color: $--color-background !important;
+          color: $--color-primary !important;
           font-weight: normal;
         }
       }
@@ -117,9 +117,9 @@ export default {
       tr {
         margin: 13px 0 !important;
         td {
-          color: $blue-200 !important;
+          color: $--color-primary !important;
           font-size: 12px !important;
-          border-right: 1px solid $gray-100;
+          border-right: 1px solid $--color-border;
           padding: 10px 15px !important;
           border-bottom: none !important;
           &.table--id {
@@ -159,7 +159,7 @@ export default {
     padding: 25px 20px;
     font-size: 18px;
     font-weight: bold;
-    color: $blue-200;
+    color: $--color-primary;
   }
 }
 </style>

@@ -62,7 +62,7 @@ export default {
     display: inline-block;
     margin: 0 7px;
     font-size: 12px;
-    color: $white-300;
+    color: $--color-white;
   }
 }
 </style>

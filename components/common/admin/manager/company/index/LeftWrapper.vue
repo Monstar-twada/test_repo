@@ -127,7 +127,7 @@ export default {
   max-width: 420px;
   width: 100%;
   max-height: 591px;
-  color: $blue-200;
+  color: $--color-primary;
   margin: 10px;
   &_body {
     padding: 20px 30px;
@@ -142,7 +142,7 @@ export default {
       }
       &_right {
         padding-left: 30px;
-        color: $blue-500;
+        color: $--color-primary-placeholder;
         font-size: 12px;
         & > p {
           font-size: 12px;

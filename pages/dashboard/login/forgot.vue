@@ -66,7 +66,7 @@ export default {
 
   h2,
   h3 {
-    color: $blue-300;
+    color: $--color-primary;
   }
 }
 </style>

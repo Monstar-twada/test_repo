@@ -26,11 +26,11 @@ export default {
   &__btn {
     font-size: 14px;
     font-weight: bold;
-    color: $white-300;
+    color: $--color-white;
     width: 240px;
     height: 40px;
     border-radius: 50px;
-    background-image: linear-gradient(99deg, #1295ce, #0786bd);
+    background-image: linear-gradient(99deg, #1295ce, $--color-primary-active);
   }
 }
 </style>

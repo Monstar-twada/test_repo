@@ -93,12 +93,12 @@ export default {
 <style lang="scss" scoped>
 .send-detail-detail-conatiner {
   width: 100%;
-  background-color: $white-300;
+  background-color: $--color-white;
   border-radius: 6px;
-  color: $blue-200;
+  color: $--color-primary;
   &__top {
     padding: 25px 20px;
-    border-bottom: 1px solid $gray-600;
+    border-bottom: 1px solid $--color-background-hover;
     display: flex;
     justify-content: space-between;
     h3 {

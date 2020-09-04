@@ -206,7 +206,7 @@ export default {
   padding: 20px;
 }
 .importbutton {
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
 }
 .left {
   width: auto;
@@ -223,14 +223,14 @@ export default {
   width: 900px;
   &__header {
     height: 65px;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     padding: 0px 20px;
     align-items: center;
     display: flex;
     justify-content: space-between;
     &__title {
       font-size: 18px;
-      color: $blue-200;
+      color: $--color-primary;
     }
     &__legend {
       list-style: none;
@@ -240,19 +240,19 @@ export default {
         display: flex;
         align-items: center;
         &:first-child span {
-          background: $blue-700;
+          background: $--color-primary-active;
         }
         &:nth-child(2) span {
-          background: $blue-800;
+          background: $--color-primary-active;
         }
         &:nth-child(3) span {
-          background: $green-100;
+          background: $--color-success;
         }
         &:nth-child(4) span {
-          background: $violet-100;
+          background: #696dd9;
         }
         &:nth-child(5) span {
-          background: $pink-100;
+          background: $--color-warning;
         }
         span {
           width: 10px;
@@ -262,7 +262,7 @@ export default {
         }
         h5 {
           font-weight: 400;
-          color: $blue-600;
+          color: $--color-primary;
         }
       }
     }

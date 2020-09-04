@@ -69,9 +69,9 @@ export default {
   &_top {
     max-width: 712px;
     width: 100%;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
-    color: $blue-200;
+    color: $--color-primary;
     padding: 0;
     &_list {
       &_item {
@@ -82,7 +82,7 @@ export default {
           display: grid;
           grid-template-columns: 100px 1fr;
           align-items: center;
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           padding: 24px 20px;
           &_left {
             p {
@@ -118,7 +118,7 @@ export default {
     }
     &_bottom {
       height: 50px;
-      background-color: $white-100;
+      background-color: $--color-background;
       display: flex;
       align-items: center;
       padding: 10px 23px;

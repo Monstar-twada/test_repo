@@ -113,16 +113,16 @@ export default {
 .customer-import-dialog-card {
   position: relative;
   .v-card__text {
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     .remark {
       margin-top: 28px;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 14px;
       font-weight: 400;
     }
     .v-input__control {
       .theme--light.v-icon {
-        color: $gray-100;
+        color: $--color-border;
       }
       .v-input--radio-group__input {
         display: flex;
@@ -132,7 +132,7 @@ export default {
           flex: 0 0 50%;
           margin-top: 10px;
           label {
-            color: $blue-200;
+            color: $--color-primary;
             font-size: 12px;
           }
         }
@@ -142,22 +142,22 @@ export default {
       display: flex;
       align-items: center;
       button {
-        color: $blue-200;
+        color: $--color-primary;
         font-size: 12px;
-        border: 1px solid $gray-100;
+        border: 1px solid $--color-border;
         height: 38px;
         width: 160px;
         border-radius: 4px;
         outline: none;
         &:hover {
-          border-color: $blue-500;
+          border-color: $--color-primary-placeholder;
         }
       }
       .check-info {
         display: flex;
         align-items: center;
         font-size: 12px;
-        color: $pink-100;
+        color: $--color-warning;
       }
     }
   }
@@ -168,7 +168,7 @@ export default {
     .v-btn {
       width: 240px;
       .v-btn__content {
-        color: $white-300;
+        color: $--color-white;
       }
     }
   }

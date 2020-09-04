@@ -38,7 +38,7 @@ export default {
     height: 26px;
     border-radius: 13px;
     opacity: 1 !important;
-    background: $blue-100 !important;
+    background: $--color-primary-active !important;
   }
   .v-input--selection-controls__ripple {
     height: 26px !important;
@@ -64,11 +64,11 @@ export default {
       right: -35px;
       width: 30px;
       height: 16px;
-      color: $white-300;
+      color: $--color-white;
     }
   }
   .v-input--switch__thumb.primary--text {
-    color: $white-300 !important;
+    color: $--color-white !important;
     &:before {
       content: '簡単';
       font-size: 12px;
@@ -79,7 +79,7 @@ export default {
       left: -25px;
       width: 30px;
       height: 16px;
-      color: $white-300;
+      color: $--color-white;
     }
   }
 }

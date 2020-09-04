@@ -45,7 +45,7 @@ export default {
   font-weight: 400;
   text-transform: uppercase;
   font-size: 50px;
-  color: $blue-100;
+  color: $--color-primary-active;
 }
 
 .subtitle {

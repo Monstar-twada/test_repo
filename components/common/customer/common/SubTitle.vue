@@ -23,9 +23,9 @@ export default {
   width: 100%;
   height: 40px;
   position: relative;
-  border-bottom: 1px $gray-100 solid;
+  border-bottom: 1px $--color-border solid;
   h3 {
-    color: $blue-200;
+    color: $--color-primary;
     font-weight: bold;
     line-height: 40px;
   }
@@ -35,7 +35,7 @@ export default {
     height: 1px;
     display: block;
     position: absolute;
-    background-color: $blue-200;
+    background-color: $--color-primary;
     left: 0;
     bottom: -1px;
   }

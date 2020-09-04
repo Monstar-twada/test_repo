@@ -270,9 +270,9 @@ export default {
             font-size: 12px;
             font-weight: normal;
             height: 30px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             padding: 0 2px !important;
-            background: $white-100;
+            background: $--color-background;
             border-bottom: none !important;
             i {
               display: none;
@@ -283,7 +283,7 @@ export default {
       tbody {
         tr {
           font-size: 12px;
-          color: $blue-200;
+          color: $--color-primary;
           cursor: pointer;
           td {
             padding: 10px 5px !important;
@@ -298,7 +298,7 @@ export default {
               height: 70%;
               top: 15%;
               right: 0;
-              background: $gray-100;
+              background: $--color-border;
             }
           }
           td:nth-child(2):after,
@@ -311,21 +311,21 @@ export default {
   }
 
   .theme--light.v-data-table .v-data-table__empty-wrapper {
-    color: $blue-200 !important;
+    color: $--color-primary !important;
   }
 
   .theme--light.v-data-table .v-data-table__wrapper table tbody tr td {
-    border-bottom: 1px $gray-100 solid !important;
+    border-bottom: 1px $--color-border solid !important;
   }
   .theme--light.v-icon {
-    color: $blue-300 !important;
+    color: $--color-primary !important;
   }
 }
 </style>
 <style lang="scss" scoped>
 .ma-index {
-  background: $white-300;
-  color: $blue-200;
+  background: $--color-white;
+  color: $--color-primary;
   border-radius: 6px;
 
   &-title {
