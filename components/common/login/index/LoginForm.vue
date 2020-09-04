@@ -15,7 +15,7 @@
         size="medium"
         class="mb30"
         suffix-icon="eye"
-        :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
+        :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
         :type="showPassword ? 'text' : 'password'"
         @click:suffix-icon="showPassword = !showPassword"
       />
@@ -26,7 +26,7 @@
         round
         bold
         :disabled="isValid()"
-        @click="nextUrl('/customer')"
+        @click="confirm"
         >ログイン</fg-button
       >
       <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
@@ -84,7 +84,7 @@ export default {
     email(val) {
       this.isValid()
     },
-    psasword(val) {
+    password(val) {
       this.isValid()
     },
   },
@@ -103,9 +103,12 @@ export default {
         return true
       }
     },
-    nextUrl(url) {
-      this.$store.commit('user/signIn', true)
-      this.$router.push({ path: url })
+    // nextUrl(url) {
+    //   this.$store.commit('user/signIn', true)
+    //   this.$router.push({ path: url })
+    // },
+    confirm() {
+      this.$login.success.call(this)
     },
   },
 }
@@ -126,7 +129,7 @@ export default {
     }
     &__error {
       input[type='text'] {
-        border: 1px solid red;
+        border: 1px solid $--color-warning;
       }
     }
     &__link {

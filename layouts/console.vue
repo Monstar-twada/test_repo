@@ -1,10 +1,10 @@
 <template>
-  <v-app class="default-console-layout-container">
+  <div class="default-console-layout-container">
     <Sidebar />
     <div class="console-main-wrapper">
       <nuxt />
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -27,11 +27,9 @@ export default {
 @import '../assets/scss/contants';
 
 .default-console-layout-container {
-  background: url('~static/console/full.png') no-repeat top center !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
+  background: linear-gradient(135deg, #eee, #f9f9f9);
   overflow: auto;
-  height: 100%;
+  min-height: 100vh;
 
   .console-main-wrapper {
     margin: 0 $sideSpaceWidth 0 $sideWidthNormal + $sideSpaceWidth;

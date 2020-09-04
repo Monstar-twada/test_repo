@@ -6,6 +6,7 @@
 import Vue from 'vue'
 import FirstGroupUI from 'first-group-ui'
 import { RequestApi } from './api'
+import { login } from '~/components/dashboard/plugins/login'
 // css
 import 'first-group-ui/dist/index.blue.css'
 
@@ -17,6 +18,8 @@ const extendsProps = {
     Vue.prototype.$isManager = false
     // $api
     Vue.prototype.$api = new RequestApi(['X-CARS-DASHBOARD'])
+    // $login
+    Vue.prototype.$login = login
   },
 }
 
