@@ -47,7 +47,7 @@ export default {
   margin-bottom: 30px;
   background: $--color-white;
   &__info {
-    border-bottom: 1px solid $gray-300;
+    border-bottom: 1px solid $--color-border;
     &__title {
       font-size: 18px;
       color: $--color-primary;
@@ -84,6 +84,6 @@ export default {
   height: 190px !important;
 }
 .border-bottom {
-  border-bottom: 1px solid $gray-300;
+  border-bottom: 1px solid $--color-border;
 }
 </style>

@@ -145,7 +145,7 @@ export default {
         padding: 0px 10px;
         border-radius: 5px;
         h4 {
-          color: $gray-400;
+          color: $--color-background;
           font-size: 10px;
           font-weight: 300;
         }
@@ -163,7 +163,7 @@ export default {
         padding-left: 42%;
         &--label {
           font-size: 10px;
-          color: $gray-500;
+          color: $--color-border;
           font-weight: 400;
         }
       }

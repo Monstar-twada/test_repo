@@ -297,7 +297,7 @@ $smallHeight: 28px;
       width: 4px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: $gray-400;
+      background-color: $--color-background;
       cursor: pointer;
       border-radius: 2px;
       border: 1px solid $--color-white;

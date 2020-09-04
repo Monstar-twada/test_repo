@@ -46,7 +46,7 @@ export default {
     }
   }
   dd {
-    color: $blue-300;
+    color: $--color-primary;
     font-size: 12px;
     line-height: 18px;
     text-align: justify;

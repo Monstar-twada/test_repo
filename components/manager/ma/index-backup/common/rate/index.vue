@@ -55,6 +55,6 @@ export default {
 }
 
 .rate-gray {
-  color: $gray-500;
+  color: $--color-border;
 }
 </style>

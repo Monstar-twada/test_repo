@@ -318,7 +318,7 @@ export default {
     border-bottom: 1px $--color-border solid !important;
   }
   .theme--light.v-icon {
-    color: $blue-300 !important;
+    color: $--color-primary !important;
   }
 }
 </style>

@@ -200,7 +200,7 @@ export default {
             background-color: $--color-primary;
           }
           &__gray {
-            background-color: $gray-200;
+            background-color: $--color-background;
           }
         }
       }

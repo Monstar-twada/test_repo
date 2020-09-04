@@ -167,10 +167,10 @@ export default {
         margin-left: 0px;
       }
       &:first-child span {
-        background: $blue-700;
+        background: $--color-primary-active;
       }
       &:nth-child(2) span {
-        background: $blue-800;
+        background: $--color-primary-active;
       }
       span {
         width: 10px;
@@ -180,7 +180,7 @@ export default {
       }
       h5 {
         font-weight: 400;
-        color: $blue-600;
+        color: $--color-primary;
       }
     }
   }

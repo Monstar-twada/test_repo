@@ -113,7 +113,7 @@ export default {
         i {
           &:before,
           &:after {
-            background: $gray-200;
+            background: $--color-background;
           }
         }
       }

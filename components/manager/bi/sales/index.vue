@@ -240,16 +240,16 @@ export default {
         display: flex;
         align-items: center;
         &:first-child span {
-          background: $blue-700;
+          background: $--color-primary-active;
         }
         &:nth-child(2) span {
-          background: $blue-800;
+          background: $--color-primary-active;
         }
         &:nth-child(3) span {
           background: $--color-success;
         }
         &:nth-child(4) span {
-          background: $violet-100;
+          background: #696dd9;
         }
         &:nth-child(5) span {
           background: $--color-warning;
@@ -262,7 +262,7 @@ export default {
         }
         h5 {
           font-weight: 400;
-          color: $blue-600;
+          color: $--color-primary;
         }
       }
     }

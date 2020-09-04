@@ -692,7 +692,7 @@ export default {
   }
 
   .theme--light.v-icon {
-    color: $blue-300 !important;
+    color: $--color-primary !important;
   }
 }
 </style>
