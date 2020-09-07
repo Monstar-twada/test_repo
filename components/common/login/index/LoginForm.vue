@@ -25,7 +25,7 @@
         suffix-icon="arrow-right"
         round
         bold
-        :disabled="isValid()"
+        :disabled="!isValid"
         @click="confirm"
         >ログイン</fg-button
       >
@@ -80,12 +80,9 @@ export default {
       matchPassword: true,
     }
   },
-  watch: {
-    email(val) {
-      this.isValid()
-    },
-    password(val) {
-      this.isValid()
+  computed: {
+    isValid() {
+      return this.isEmailValid() === false && this.password !== ''
     },
   },
   methods: {
@@ -96,17 +93,6 @@ export default {
         ? false
         : ['login-form__error', true]
     },
-    isValid() {
-      if (this.isEmailValid() === false && this.password !== '') {
-        return false
-      } else {
-        return true
-      }
-    },
-    // nextUrl(url) {
-    //   this.$store.commit('user/signIn', true)
-    //   this.$router.push({ path: url })
-    // },
     confirm() {
       this.$login.success.call(this)
     },
