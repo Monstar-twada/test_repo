@@ -8,3 +8,9 @@ export const login = {
     this.$router.push('/customer')
   },
 }
+
+export const forgot = {
+  success() {
+    this.$router.push('/pin')
+  },
+}

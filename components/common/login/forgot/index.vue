@@ -28,7 +28,7 @@
       </div>
       <div class="forgot-form__button">
         <fg-button
-          :disabled="isValid()"
+          :disabled="!isValid"
           class="mb20"
           width="100%"
           type="primary"
@@ -39,6 +39,7 @@
           >送信する</fg-button
         >
         <fg-button
+          class="forgot-form__button__login"
           suffix-icon="arrow-right"
           type="primary"
           border
@@ -69,12 +70,9 @@ export default {
       matchPassword: true,
     }
   },
-  watch: {
-    email(val) {
-      this.isValid()
-    },
-    birthday(val) {
-      this.isValid()
+  computed: {
+    isValid() {
+      return this.isEmailValid() === false && this.birthday !== ''
     },
   },
   methods: {
@@ -87,13 +85,6 @@ export default {
         : this.reg.test(this.email)
         ? false
         : ['forgot-form__input-box__error', true]
-    },
-    isValid() {
-      if (this.isEmailValid() === false && this.birthday !== '') {
-        return false
-      } else {
-        return true
-      }
     },
   },
 }
@@ -140,6 +131,9 @@ export default {
     }
     &__button {
       margin: 0 100px;
+      &__login {
+        margin-top: 20px;
+      }
     }
   }
 }
