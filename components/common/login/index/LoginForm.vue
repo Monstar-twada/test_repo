@@ -2,30 +2,39 @@
   <div class="login-index-page-wrapper">
     <Logo />
     <div class="login-form">
-      <fg-input
-        v-model="email"
-        placeholder="メールアドレス"
-        clearable
-        size="medium"
-        :class="['mb20', isEmailValid()]"
-      />
-      <fg-input
-        v-model="password"
-        placeholder="パスワード"
-        size="medium"
-        class="mb30"
-        suffix-icon="eye"
-        :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
-        :type="showPassword ? 'text' : 'password'"
-        @click:suffix-icon="showPassword = !showPassword"
-      />
+      <div class="mb20">
+        <fg-input
+          v-model="email"
+          placeholder="メールアドレス"
+          clearable
+          size="medium"
+          :class="this.inputValidation.email ? '' : 'login-form__error'"
+        />
+        <fg-text v-if="!this.inputValidation.email" class="login-form__error"
+          >メールアドレスが空欄です</fg-text
+        >
+      </div>
+      <div class="mb30">
+        <fg-input
+          v-model="password"
+          placeholder="パスワード"
+          size="medium"
+          suffix-icon="eye"
+          :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
+          :type="showPassword ? 'text' : 'password'"
+          :class="this.inputValidation.password ? '' : 'login-form__error'"
+          @click:suffix-icon="showPassword = !showPassword"
+        />
+        <fg-text v-if="!this.inputValidation.password" class="login-form__error"
+          >パスワードが空欄です</fg-text
+        >
+      </div>
       <fg-button
         class="login-form__button"
         type="primary"
         suffix-icon="arrow-right"
         round
         bold
-        :disabled="isValid()"
         @click="confirm"
         >ログイン</fg-button
       >
@@ -78,14 +87,18 @@ export default {
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
       matchPassword: true,
+      inputValidation: {
+        email: true,
+        password: true,
+      },
     }
   },
   watch: {
     email(val) {
-      this.isValid()
+      this.validation()
     },
     password(val) {
-      this.isValid()
+      this.validation()
     },
   },
   methods: {
@@ -103,12 +116,25 @@ export default {
         return true
       }
     },
+    validation() {
+      let count = 0
+      if (this.email === '') {
+        this.inputValidation.email = false
+        count += 1
+      } else this.inputValidation.email = true
+      if (this.password === '') {
+        this.inputValidation.password = false
+        count += 1
+      } else this.inputValidation.password = true
+      return count
+    },
     // nextUrl(url) {
     //   this.$store.commit('user/signIn', true)
     //   this.$router.push({ path: url })
     // },
     confirm() {
-      this.$login.success.call(this)
+      const count = this.validation()
+      if (count === 0) this.$login.success.call(this)
     },
   },
 }
@@ -128,8 +154,11 @@ export default {
       margin: 0 20px;
     }
     &__error {
-      input[type='text'] {
+      input {
         border: 1px solid $--color-warning;
+      }
+      div {
+        color: $--color-warning;
       }
     }
     &__link {
