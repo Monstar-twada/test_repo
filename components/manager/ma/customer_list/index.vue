@@ -7,8 +7,8 @@
     >
       <template v-slot:right>
         <div class="export-area">
-          <ExportButton @click="handleImportClick" />
-          <ExportDialog v-model="importVisible" />
+          <ExportButton @click="handleExportClick" />
+          <ExportDialog v-model="exportVisible" />
         </div>
       </template>
     </Breadcrumbs>
@@ -26,7 +26,7 @@ import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
 import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
 import ExportButton from '~/components/manager/ma/customer_list/ExportButton.vue'
-import ExportDialog from '~/components/manager/ma/customer_list/ExportDialog.vue'
+import ExportDialog from '~/components/manager/ma/customer_list/export-dialog/index'
 
 const SEARCH_PARAMS = {
   offset: 0,
@@ -70,7 +70,7 @@ export default {
       ...SEARCH_PARAMS,
     },
     maResultList: {},
-    importVisible: false,
+    exportVisible: false,
   }),
   watch: {
     searchParams: {
@@ -112,8 +112,8 @@ export default {
         page: 1,
       }
     },
-    handleImportClick() {
-      this.importVisible = true
+    handleExportClick() {
+      this.exportVisible = true
     },
   },
 }
