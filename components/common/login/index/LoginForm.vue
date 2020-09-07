@@ -8,11 +8,11 @@
           placeholder="メールアドレス"
           clearable
           size="medium"
-          :class="this.inputValidation.email ? '' : 'login-form__error'"
+          :class="validationMessage.email ? 'login-form__error' : ''"
         />
-        <fg-text v-if="!this.inputValidation.email" class="login-form__error"
-          >メールアドレスが空欄です</fg-text
-        >
+        <fg-text v-if="validationMessage.email" class="login-form__error">{{
+          validationMessage.email
+        }}</fg-text>
       </div>
       <div class="mb30">
         <fg-input
@@ -22,12 +22,12 @@
           suffix-icon="eye"
           :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
           :type="showPassword ? 'text' : 'password'"
-          :class="this.inputValidation.password ? '' : 'login-form__error'"
+          :class="validationMessage.password ? 'login-form__error' : ''"
           @click:suffix-icon="showPassword = !showPassword"
         />
-        <fg-text v-if="!this.inputValidation.password" class="login-form__error"
-          >パスワードが空欄です</fg-text
-        >
+        <fg-text v-if="validationMessage.password" class="login-form__error">{{
+          validationMessage.password
+        }}</fg-text>
       </div>
       <fg-button
         class="login-form__button"
@@ -87,9 +87,9 @@ export default {
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
       matchPassword: true,
-      inputValidation: {
-        email: true,
-        password: true,
+      validationMessage: {
+        email: '',
+        password: '',
       },
     }
   },
@@ -119,13 +119,13 @@ export default {
     validation() {
       let count = 0
       if (this.email === '') {
-        this.inputValidation.email = false
+        this.validationMessage.email = 'メールアドレスが空欄です'
         count += 1
-      } else this.inputValidation.email = true
+      } else this.validationMessage.email = ''
       if (this.password === '') {
-        this.inputValidation.password = false
+        this.validationMessage.password = 'パスワードが空欄です'
         count += 1
-      } else this.inputValidation.password = true
+      } else this.validationMessage.password = ''
       return count
     },
     // nextUrl(url) {

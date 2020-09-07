@@ -10,12 +10,22 @@
       </p>
       <div class="forgot-form__input-box mb20">
         <h4>メールアドレス</h4>
-        <fg-input
-          v-model="email"
-          :class="['forgot-form__input-box__email', isEmailValid()]"
-          placeholder="入力ください"
-          clearable
-        />
+        <div>
+          <fg-input
+            v-model="email"
+            :class="[
+              'forgot-form__input-box__email',
+              validationMessage.email ? 'forgot-form__input-box__error' : '',
+            ]"
+            placeholder="入力ください"
+            clearable
+          />
+          <fg-text
+            v-if="validationMessage.email"
+            class="forgot-form__input-box__error"
+            >{{ validationMessage.email }}</fg-text
+          >
+        </div>
       </div>
       <div class="forgot-form__input-box mb30">
         <h4>生年月日</h4>
@@ -28,14 +38,13 @@
       </div>
       <div class="forgot-form__button">
         <fg-button
-          :disabled="isValid()"
           class="mb20"
           width="100%"
           type="primary"
           suffix-icon="arrow-right"
           round
           bold
-          @click="nextUrl('/login/pin')"
+          @click="handleSend"
           >送信する</fg-button
         >
         <fg-button
@@ -67,14 +76,18 @@ export default {
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
       matchPassword: true,
+      validationMessage: {
+        email: '',
+        birthday: '',
+      },
     }
   },
   watch: {
     email(val) {
-      this.isValid()
+      this.validation()
     },
     birthday(val) {
-      this.isValid()
+      this.validation()
     },
   },
   methods: {
@@ -94,6 +107,21 @@ export default {
       } else {
         return true
       }
+    },
+    validation() {
+      let count = 0
+      if (this.email === '') {
+        this.validationMessage.email = 'メールアドレスが空欄です'
+        count += 1
+      } else if (!this.reg.test(this.email)) {
+        this.validationMessage.email = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.email = ''
+      return count
+    },
+    handleSend() {
+      const count = this.validation()
+      if (count === 0) this.nextUrl('/login/pin')
     },
   },
 }
@@ -127,8 +155,11 @@ export default {
         width: 270px;
       }
       &__error {
-        input[type='text'] {
-          border: 1px solid red;
+        input {
+          border: 1px solid $--color-warning;
+        }
+        div {
+          color: $--color-warning;
         }
       }
       &__calendar {
