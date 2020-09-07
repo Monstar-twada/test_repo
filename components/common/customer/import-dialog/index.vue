@@ -1,30 +1,26 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="670px">
+  <fg-dialog v-model="visible" persistent max-width="670px">
     <v-card class="customer-import-dialog-card">
       <DialogHeader title="インポート" @close="visible = false" />
       <v-card-text>
         <div class="remark">
           インポートするデータの種類とファイルを選択してください。
         </div>
-        <v-radio-group v-if="isBi" v-model="dataType" column>
-          <v-radio
-            label="売上データ（ブロードリーフ NSオンプレ）"
-            value="売上データ（ブロードリーフ NSオンプレ）"
-          ></v-radio>
-        </v-radio-group>
-        <v-radio-group v-else v-model="dataType" column>
-          <v-radio
+        <fg-radio-group v-if="isBi" v-model="dataType" column>
+          <fg-radio label="売上データ（ブロードリーフ NSオンプレ）"></fg-radio>
+        </fg-radio-group>
+        <fg-radio-group v-else v-model="dataType" column>
+          <fg-radio
             v-for="(item, i) in dataTypeList"
             :key="i"
             :label="item"
-            :value="item"
-          ></v-radio>
-        </v-radio-group>
+          ></fg-radio>
+        </fg-radio-group>
         <div class="select-file-wrapper">
           <button @click="selectFile">ファイルを選択</button>
           <input ref="fileInput" type="file" style="display: none;" />
           <div class="check-info ml20">
-            <v-img class="mr5" :src="require('./img/warning.svg')"></v-img>
+            <fg-icon class="mr5" name="exclamation-circle-line"></fg-icon>
             フォーマットが不一致です。（1000行目）
           </div>
         </div>
@@ -37,7 +33,7 @@
       <Progress v-show="isUploading" :value="progress" />
       <Success v-if="isSuccess" is-bi @close="visible = false" />
     </v-card>
-  </v-dialog>
+  </fg-dialog>
 </template>
 
 <script>
@@ -117,16 +113,16 @@ export default {
 .customer-import-dialog-card {
   position: relative;
   .v-card__text {
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     .remark {
       margin-top: 28px;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 14px;
       font-weight: 400;
     }
     .v-input__control {
       .theme--light.v-icon {
-        color: $gray-100;
+        color: $--color-border;
       }
       .v-input--radio-group__input {
         display: flex;
@@ -136,7 +132,7 @@ export default {
           flex: 0 0 50%;
           margin-top: 10px;
           label {
-            color: $blue-200;
+            color: $--color-primary;
             font-size: 12px;
           }
         }
@@ -146,22 +142,22 @@ export default {
       display: flex;
       align-items: center;
       button {
-        color: $blue-200;
+        color: $--color-primary;
         font-size: 12px;
-        border: 1px solid $gray-100;
+        border: 1px solid $--color-border;
         height: 38px;
         width: 160px;
         border-radius: 4px;
         outline: none;
         &:hover {
-          border-color: $blue-500;
+          border-color: $--color-primary-placeholder;
         }
       }
       .check-info {
         display: flex;
         align-items: center;
         font-size: 12px;
-        color: $pink-100;
+        color: $--color-warning;
       }
     }
   }
@@ -172,7 +168,7 @@ export default {
     .v-btn {
       width: 240px;
       .v-btn__content {
-        color: $white-300;
+        color: $--color-white;
       }
     }
   }

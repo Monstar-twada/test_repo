@@ -561,7 +561,7 @@ export default {
     &--title {
       font-size: 14px;
       font-weight: bold;
-      color: $blue-200;
+      color: $--color-primary;
       margin-bottom: 23px;
     }
     &__items {
@@ -579,7 +579,7 @@ export default {
         align-items: center;
         font-size: 12px;
         font-weight: 500;
-        color: $blue-200;
+        color: $--color-primary;
         margin-bottom: 21px;
         cursor: pointer;
         .item__radio {
@@ -610,7 +610,7 @@ export default {
 .typeContainer {
   &__typeItem {
     border-radius: 4px;
-    background-color: $white-100;
+    background-color: $--color-background;
     display: grid;
     grid-template-columns: 200px 1fr;
     align-items: center;
@@ -625,15 +625,15 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
-      border-right: 1px solid $gray-100;
+      border-right: 1px solid $--color-border;
       & > div:first-child {
         width: 70px;
         height: 70px;
         border-radius: 4px;
-        background-color: $blue-100;
+        background-color: $--color-primary-active;
         font-size: 14px;
         font-weight: bold;
-        color: $white-300;
+        color: $--color-white;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -644,14 +644,14 @@ export default {
       }
       & > div:last-child {
         font-size: 12px;
-        color: $blue-200;
+        color: $--color-primary;
         margin: 0 20px;
       }
     }
     &__series {
       margin: 0 22px;
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
       span {
         margin-right: 10px;
       }
@@ -677,11 +677,11 @@ export default {
     width: 240px;
     height: 40px;
     border-radius: 50px;
-    background-color: $white-300;
+    background-color: $--color-white;
     position: relative;
     font-size: 14px;
     font-weight: bold;
-    color: $blue-100;
+    color: $--color-primary-active;
     .v-image {
       position: absolute;
       top: 50%;

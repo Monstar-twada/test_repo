@@ -64,14 +64,14 @@ export default {
       width: 100%;
       height: 137px;
       border-radius: 4px;
-      border: solid 1px $gray-100;
+      border: solid 1px $--color-border;
       resize: none;
       padding: 17px;
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
       &::placeholder {
         font-size: 12px;
-        color: $blue-500;
+        color: $--color-primary-placeholder;
       }
     }
   }

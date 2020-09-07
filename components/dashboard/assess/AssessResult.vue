@@ -517,7 +517,7 @@ export default {
             font-size: 12px;
             font-weight: normal;
             height: 40px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
           }
         }
       }
@@ -526,11 +526,11 @@ export default {
           td {
             font-size: 12px;
             height: 70px !important;
-            color: $blue-400 !important;
+            color: $--color-success !important;
           }
         }
         tr:nth-child(even) {
-          background-color: $white-100;
+          background-color: $--color-background;
         }
       }
     }
@@ -544,7 +544,7 @@ export default {
     border-bottom: none !important;
   }
   .theme--light.v-icon {
-    color: $blue-300 !important;
+    color: $--color-primary !important;
   }
 }
 </style>
@@ -556,7 +556,7 @@ export default {
     h1,
     h3 {
       display: inline;
-      color: $white-300;
+      color: $--color-white;
     }
   }
 }

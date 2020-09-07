@@ -1,7 +1,11 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="480px">
+  <fg-dialog
+    v-model="visible"
+    persistent
+    max-width="480px"
+    title="アンケート結果"
+  >
     <v-card class="questionnaire-results-dialog-card">
-      <DialogHeader title="アンケート結果" @close="visible = false" />
       <ul class="remark">
         <li>取引種別：{{ item.transactionType }}</li>
         <li>回答日時：{{ item.inputDate | fmtDate }}</li>
@@ -16,19 +20,15 @@
         </template>
       </dl>
     </v-card>
-  </v-dialog>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
 import { fmtDate } from '~/components/common/customer/common/helper'
 
 export default {
   filters: {
     fmtDate,
-  },
-  components: {
-    DialogHeader,
   },
   props: {
     value: Boolean,
@@ -80,7 +80,7 @@ export default {
   position: relative;
   ul.remark {
     display: flex;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     list-style: none;
     justify-content: flex-start;
     height: 50px;
@@ -88,7 +88,7 @@ export default {
     padding: 0;
     li {
       margin: 0 10px 0 20px;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 12px;
       font-weight: 400;
     }
@@ -99,10 +99,10 @@ export default {
       margin: 20px 23px 0;
       font-size: 14px;
       font-weight: bold;
-      color: $blue-200;
+      color: $--color-primary;
       &:before {
         content: 'Q. ';
-        color: $blue-200;
+        color: $--color-primary;
         font-size: 20px;
       }
     }
@@ -110,13 +110,13 @@ export default {
       margin: 14px 23px 10px 47px;
       div {
         padding: 10px 13px;
-        background: $white-100;
+        background: $--color-background;
         border-radius: 4px;
         display: flex;
         align-items: center;
-        border: 1px solid $gray-100;
+        border: 1px solid $--color-border;
         font-size: 12px;
-        color: $blue-200;
+        color: $--color-primary;
         text-align: justify;
       }
     }

@@ -11,11 +11,11 @@
         >編集</fg-button
       >
     </ColumnTitle>
-    <v-row class="customer-profile">
-      <v-col cols="8">
-        <v-row class="ma-0">
+    <fg-row class="customer-profile" gutter="60">
+      <fg-col span="16">
+        <fg-row class="ma-0">
           <SubTitle sub-title="基本情報" class="mt10 ml20" />
-          <v-col cols="6" align-self="start" class="right-border p20 pb-0">
+          <fg-col span="12" align-self="start" class="right-border p20 pb-0">
             <TextContent label="住所">
               〒{{ data.zipCode }}<br />{{ data | fmtAddress }}
             </TextContent>
@@ -33,8 +33,8 @@
             <TextContent label="家族構成">
               {{ data.family | fmtHyphen }}
             </TextContent>
-          </v-col>
-          <v-col cols="6" align-self="start" class="p20 pb-0">
+          </fg-col>
+          <fg-col span="12" align-self="start" class="p20 pb-0">
             <TextContent label="勤務先" :content="data | fmtWork" />
             <TextContent
               label="勤続年数"
@@ -62,21 +62,21 @@
               label="個人/法人 "
               :content="data.customerType | fmtHyphen"
             />
-          </v-col>
-        </v-row>
-        <v-row class="ma-0 pb20">
+          </fg-col>
+        </fg-row>
+        <fg-row class="ma-0 pb20">
           <SubTitle sub-title="その他の情報" class="mt10 ml20" />
-          <v-col cols="6" class="right-border p20 pb-0">
+          <fg-col span="12" class="right-border p20 pb-0">
             <TextContent label="ペット" :content="data.pet | fmtHyphen" />
             <TextContent label="実家" :content="data.home | fmtHyphen" />
-          </v-col>
-          <v-col cols="6" class="p20 pb-0">
+          </fg-col>
+          <fg-col span="12" class="p20 pb-0">
             <TextContent label="ドリンク" :content="data.drink | fmtHyphen" />
             <TextContent label="趣味" :content="data.hobby | fmtHyphen" />
-          </v-col>
-        </v-row>
-      </v-col>
-      <v-col cols="4" class="pt20">
+          </fg-col>
+        </fg-row>
+      </fg-col>
+      <fg-col span="8" class="pt20">
         <div class="side-customer-profile-wrapper">
           <fg-avatar
             size="80"
@@ -100,10 +100,10 @@
         <h4 class="mt25 mb5">カーライフ</h4>
         <div class="tag-items">
           <fg-tag
-            v-for="(item, i) in carLife"
+            v-for="(item, i) in carLives"
             :key="i"
-            fillet
-            :border="!item.active"
+            :selected="item.active"
+            :border-color="$colors.border"
             >{{ item.text }}</fg-tag
           >
         </div>
@@ -113,18 +113,19 @@
             v-for="(item, i) in selectionPoints"
             :key="i"
             fillet
-            :border="!item.active"
+            :selected="item.active"
+            :border-color="$colors.border"
             >{{ item.text }}</fg-tag
           >
         </div>
-      </v-col>
+      </fg-col>
       <LicenceDialog v-model="licenceVisible" :data="licenceInfo" />
-    </v-row>
+    </fg-row>
   </div>
 </template>
 <script>
+import { CAR_LIVES, SELECTION_POINTS } from '../common/base'
 import LicenceDialog from './licence-dialog/index'
-import { carLife, selectionPoints } from './base'
 import SubTitle from '~/components/common/customer/common/SubTitle.vue'
 import TextContent from '~/components/common/customer/common/TextContent.vue'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
@@ -200,8 +201,8 @@ export default {
       ],
       licenceVisible: false,
       currentQrItem: {},
-      carLife,
-      selectionPoints,
+      carLives: CAR_LIVES,
+      selectionPoints: SELECTION_POINTS,
     }
   },
   computed: {
@@ -228,7 +229,7 @@ export default {
 .customer-detail-customer-info-wrapper {
   .side-customer-profile-wrapper {
     position: relative;
-    color: $blue-200;
+    color: $--color-primary;
     font-weight: normal;
     height: 80px;
     .fg-avatar {
@@ -251,11 +252,6 @@ export default {
     margin-top: 8px;
     .fg-tag {
       margin: 0 4px 8px 0;
-      box-sizing: content-box;
-      border: 1px solid $gray-100;
-      &.__border {
-        color: #748eb7;
-      }
     }
   }
 }

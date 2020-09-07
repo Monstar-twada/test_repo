@@ -1,4 +1,5 @@
 import { storage } from '~/assets/js/storage'
+import { fmtJpCharacter } from '~/assets/js/full-half-width'
 
 const manufacturersString = `
   ＢＭＷ	１シリーズ
@@ -891,7 +892,7 @@ manufacturersString.split(/[\n\r]/).forEach((item) => {
 
 const manufacturerList = arr.map((item) => {
   return {
-    text: item,
+    text: fmtJpCharacter(item),
     value: item,
     child: data[item],
   }

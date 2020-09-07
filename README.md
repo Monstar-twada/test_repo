@@ -17,6 +17,18 @@ $ npm i
 
 #### Development
 
+update and build first-group-ui
+
+```bash
+# /first-group-ui
+# https://github.com/monstar-lab-consulting/first-group-ui/tree/develop
+# Pull the latest code of the first-group-ui/develop branch
+# build
+npm run build
+```
+
+run first_group(manager or dashboard)
+
 ```bash
 # serve with hot reload at localhost:3000
 # dashboard
@@ -55,13 +67,17 @@ scripts
   "scripts": {
     "dashboard": "nuxt -c ./build/config.dashboard.js",
     "manager": "nuxt -c ./build/config.manager.js",
+    "console": "nuxt -c ./build/config.console.js",
     "dev:d": "npm run dashboard",
     "dev:m": "npm run manager",
+    "dev:c": "npm run console",
     "build:d": "nuxt build -c ./build/config.dashboard.js",
     "build:m": "nuxt build -c ./build/config.manager.js",
-    "build": "npm run build:d && npm run build:m",
+    "build:c": "nuxt build -c ./build/config.console.js",
+    "build": "npm run build:d && npm run build:m && npm run build:c",
     "start:d": "nuxt start -c ./build/config.dashboard.js -p 3000",
-    "start:m": "nuxt start -c ./build/config.manager.js -p 3001"
+    "start:m": "nuxt start -c ./build/config.manager.js -p 3001",
+    "start:c": "nuxt start -c ./build/config.console.js -p 3002"
   }
 }
 ```
@@ -80,11 +96,11 @@ export default {
   },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
-    dir: 'dist/dashboard'
+    dir: 'dist/dashboard',
   },
   plugins: [
     ...baseConfig.plugins,
-    { src: '~/plugins/global-dashboard-properties.js', ssr: false }
+    { src: '~/plugins/global-dashboard-properties.js', ssr: false },
   ],
 }
 ```
@@ -101,11 +117,11 @@ export default {
   },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
-    dir: 'dist/manager'
+    dir: 'dist/manager',
   },
   plugins: [
     ...baseConfig.plugins,
-    { src: '~/plugins/global-manager-properties.js', ssr: false }
+    { src: '~/plugins/global-manager-properties.js', ssr: false },
   ],
 }
 ```
@@ -129,9 +145,9 @@ It's a custom global property of Vue
 
 #### Properties
 
-|peoperty|type|remark|
-|:--|:--|:--|
-|$isManager|Boolean|front system environment differentiation, `true` or `false`|
+| peoperty    | type    | remark                                                      |
+| :---------- | :------ | :---------------------------------------------------------- |
+| \$isManager | Boolean | front system environment differentiation, `true` or `false` |
 
 #### Source
 
@@ -153,11 +169,11 @@ Vue.use(extendsProps)
 
 ```javascript
 export default {
-  data () {
+  data() {
     return {
-      isManager: this.$isManager
+      isManager: this.$isManager,
     }
-  }
+  },
 }
 ```
 

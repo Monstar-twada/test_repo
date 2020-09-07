@@ -47,7 +47,24 @@
       <fg-col span="11" class="left-item-wrapper">
         <h3 class="label">車で探す</h3>
         <fg-row gutter="20">
-          <Maker :form="form" />
+          <fg-col span="8">
+            <fg-input
+              v-model="form.maker"
+              size="small"
+              placeholder="メーカー"
+              clearable
+              @keyup.native.enter="search"
+            ></fg-input>
+          </fg-col>
+          <fg-col span="8">
+            <fg-input
+              v-model="form.class"
+              size="small"
+              placeholder="車種"
+              clearable
+              @keyup.native.enter="search"
+            ></fg-input>
+          </fg-col>
           <fg-col span="8">
             <fg-input
               v-model="form.vin"
@@ -103,12 +120,10 @@
 </template>
 
 <script>
-import Maker from '../common/maker-select-cols/index'
 import SearchBar from './search-bar/index'
 export default {
   components: {
     SearchBar,
-    Maker,
   },
   props: {
     query: {
@@ -163,7 +178,26 @@ export default {
       height: 30px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      // justify-content: space-between;
+      .fg-checkbox {
+        margin-right: 40px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1370px) {
+  .search-bar-form-wrapper {
+    .right-item-wrapper {
+      .checkbox-wrapper {
+        justify-content: space-between;
+        .fg-checkbox {
+          flex: 1;
+          margin-right: 0;
+        }
+      }
     }
   }
 }

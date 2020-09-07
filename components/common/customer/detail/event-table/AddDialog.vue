@@ -1,50 +1,56 @@
 <template>
-  <div v-show="visible" class="customer-detail-event-add-dialog">
-    <div class="header-wrapper">
-      <fg-button
-        icon="plus"
-        size="small"
-        border
-        circle
-        @click="visible = false"
-      ></fg-button>
-    </div>
-    <div class="body-wrapper">
-      <fg-row gutter="30" class="info-header">
-        <fg-col span="7">
-          <b>日時</b>
-          <fg-date-setter :value="form.date"></fg-date-setter>
-        </fg-col>
-        <fg-col span="7">
-          <b>対象車両</b>
-          <fg-select />
-        </fg-col>
-        <fg-col span="4">
-          <b>取引種別</b>
-          <fg-select placeholder="選択" />
-        </fg-col>
-        <fg-col span="6">
-          <b>チャネル</b>
-          <fg-select />
-        </fg-col>
-      </fg-row>
-      <div class="check-wrapper mt25">
-        <h3>要チェック</h3>
-        <fg-checkbox label="チェック"></fg-checkbox>
+  <transition name="fg-zoom-in-right-bottom">
+    <div v-show="visible" class="customer-detail-event-add-dialog">
+      <div class="header-wrapper">
+        <fg-button
+          icon="plus"
+          size="small"
+          border
+          circle
+          @click="visible = false"
+        ></fg-button>
       </div>
-      <div class="info-body mt25">
-        <h3>コメント</h3>
-        <div class="mt15">
-          <fg-input v-model="form.content" type="textarea"></fg-input>
+      <div class="body-wrapper">
+        <fg-row gutter="30" class="info-header">
+          <fg-col span="7">
+            <b>日時</b>
+            <fg-date-setter :value="form.date"></fg-date-setter>
+          </fg-col>
+          <fg-col span="7">
+            <b>対象車両</b>
+            <fg-select />
+          </fg-col>
+          <fg-col span="4">
+            <b>取引種別</b>
+            <fg-select placeholder="選択" />
+          </fg-col>
+          <fg-col span="6">
+            <b>チャネル</b>
+            <fg-select />
+          </fg-col>
+        </fg-row>
+        <div class="check-wrapper mt25">
+          <h3>要チェック</h3>
+          <fg-checkbox label="チェック"></fg-checkbox>
+        </div>
+        <div class="info-body mt25">
+          <h3>コメント</h3>
+          <div class="mt15">
+            <fg-input
+              v-model="form.content"
+              class="event-textarea"
+              type="textarea"
+            ></fg-input>
+          </div>
         </div>
       </div>
+      <div class="footer-wrapper">
+        <fg-button type="primary" width="240px" bold @click="save"
+          >活動報告を追加する</fg-button
+        >
+      </div>
     </div>
-    <div class="footer-wrapper">
-      <fg-button type="primary" width="240px" bold @click="save"
-        >活動報告を追加する</fg-button
-      >
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -88,7 +94,7 @@ export default {
   right: 10px;
   width: 740px;
   max-width: 100%;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   box-shadow: 0 5px 10px rgba(7, 134, 189, 0.3);
   .header-wrapper {
@@ -101,7 +107,7 @@ export default {
   }
   .body-wrapper {
     margin: 0 34px;
-    color: $blue-200;
+    color: $--color-primary;
     overflow: hidden;
     font-size: 14px;
     .info-header {
@@ -120,6 +126,9 @@ export default {
     .info-body {
       padding-bottom: 20px;
     }
+    .event-textarea textarea {
+      line-height: 1.6em;
+    }
   }
   .footer-wrapper {
     overflow: hidden;
@@ -129,5 +138,19 @@ export default {
     justify-content: center;
     padding: 0 0 27px;
   }
+}
+
+.transition-right-bottom-in-enter-active,
+.transition-right-bottom-in-leave-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: right bottom;
+}
+.transition-right-bottom-in-enter,
+.transition-right-bottom-in-leave-active {
+  opacity: 0;
+  transform: scale(0);
 }
 </style>

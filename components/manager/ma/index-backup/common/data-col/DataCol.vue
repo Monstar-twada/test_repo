@@ -44,9 +44,9 @@ export default {
 <style lang="scss" scoped>
 .data-col {
   height: 100px;
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   border-radius: 6px;
-  color: $blue-200;
+  color: $--color-primary;
   font-weight: bold;
 
   &__item {

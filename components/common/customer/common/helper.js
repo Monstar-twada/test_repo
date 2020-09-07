@@ -77,7 +77,12 @@ export function fmtAlternative(alternativeTarget) {
  * @returns {string}
  */
 export function fmtTransactionType(value) {
-  return value >> 0 ? '#1E5199' : '#aaa'
+  // 20200901
+  // 取引種別のエリアですが、
+  // ここはProto・V1ではデータが存在しないため空欄になりますが、
+  // 左のようなデザインで、すべてグレー固定で表示可能でしょうか？
+  // return value >> 0 ? '#1E5199' : '#aaa'
+  return '#aaa'
 }
 
 /**
@@ -122,6 +127,16 @@ export function fmtCarWeight(value) {
 export function fmtCarSize(value) {
   const result = toCommaNumber(value)
   return result ? result + 'cm' : '-'
+}
+
+/**
+ * 車体寸法（長さ）+ "mm"
+ * データがない場合は”cm"ごとブランク表示
+ * @param value
+ */
+export function fmtCarSizeMm(value) {
+  const result = toCommaNumber(value)
+  return result ? result + 'mm' : '-'
 }
 
 /**

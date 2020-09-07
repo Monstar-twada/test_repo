@@ -12,6 +12,7 @@
           size="small"
           class="mr10"
           width="106"
+          style="display: none;"
           >車両追加</fg-button
         >
         <fg-button
@@ -19,6 +20,7 @@
           justify="center"
           size="small"
           width="106"
+          style="display: none;"
           @click="sendingRequestClick"
           >送客依頼</fg-button
         >
@@ -89,9 +91,9 @@ export default {
 </script>
 <style lang="scss">
 .customer-detail-page-wrapper {
-  color: $blue-200;
+  color: $--color-primary;
   .high-light {
-    color: $blue-100;
+    color: $--color-primary-active;
   }
   .right-border {
     position: relative;
@@ -107,7 +109,7 @@ export default {
   }
   .customer-info {
     width: 100%;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 5px;
     overflow: hidden;
   }

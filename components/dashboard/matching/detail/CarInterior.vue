@@ -146,17 +146,17 @@ export default {
 <style lang="scss">
 .textarea.theme--light.v-input textarea {
   font-size: 12px;
-  color: $blue-200;
+  color: $--color-primary;
 }
 .textarea.v-text-field--outlined fieldset {
-  border-color: $gray-100;
+  border-color: $--color-border;
 }
 </style>
 <style lang="scss" scoped>
 .title,
 .subtitle {
   font-size: 20px;
-  color: $blue-200;
+  color: $--color-primary;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -173,21 +173,21 @@ export default {
   padding: 30px;
   border-radius: 5px;
   margin-bottom: 30px;
-  background: $white-300;
+  background: $--color-white;
 }
 table.tableStyle {
   width: 100%;
-  background-color: $white-300;
+  background-color: $--color-white;
   border-collapse: collapse;
-  border: 1px solid $gray-100;
-  color: $blue-200;
+  border: 1px solid $--color-border;
+  color: $--color-primary;
 
   td {
     height: 50px;
     &:nth-child(odd) {
       width: 77px;
       font-size: 14px;
-      background-color: $white-100;
+      background-color: $--color-background;
     }
     &:nth-child(even) {
       width: 117px;
@@ -198,7 +198,7 @@ table.tableStyle {
 }
 table.tableStyle td,
 table.tableStyle th {
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   padding: 5px;
 }
 
@@ -206,7 +206,7 @@ table.tableBold td {
   &:nth-child(odd) {
     width: 77px;
     font-size: 14px;
-    background-color: $white-100;
+    background-color: $--color-background;
   }
   &:nth-child(even) {
     width: 117px;

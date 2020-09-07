@@ -57,16 +57,16 @@ export default {
 <style lang="scss">
 .MaTabs {
   .v-slide-group__wrapper {
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
 
     .v-tabs-bar__content {
       margin: 0 20px -1px;
-      color: $blue-200;
+      color: $--color-primary;
     }
   }
   .v-tabs-bar {
     .v-tab {
-      color: $blue-200 !important;
+      color: $--color-primary !important;
     }
   }
 }
@@ -75,7 +75,7 @@ export default {
 .MaTabs {
   width: 100%;
   padding: 10px 0;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
 }
 </style>

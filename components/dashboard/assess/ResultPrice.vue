@@ -45,12 +45,12 @@ export default {
   padding: 20px 0px;
   border-radius: 5px;
   margin-bottom: 30px;
-  background: $white-300;
+  background: $--color-white;
   &__info {
-    border-bottom: 1px solid $gray-300;
+    border-bottom: 1px solid $--color-border;
     &__title {
       font-size: 18px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 600;
     }
   }
@@ -58,12 +58,12 @@ export default {
     margin: 20px;
     &--subtitle {
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 400;
     }
     &--amount {
       font-size: 26px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 600;
       text-align: right;
       padding-bottom: 10px;
@@ -72,7 +72,7 @@ export default {
   &__textarea {
     &--title {
       font-size: 18px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 600;
     }
     &__box {
@@ -84,6 +84,6 @@ export default {
   height: 190px !important;
 }
 .border-bottom {
-  border-bottom: 1px solid $gray-300;
+  border-bottom: 1px solid $--color-border;
 }
 </style>

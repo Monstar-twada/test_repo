@@ -55,7 +55,7 @@ export default {
 <style lang="scss">
 .detailSearch__info__category {
   .v-breadcrumbs__item {
-    color: $blue-200 !important;
+    color: $--color-primary !important;
   }
 }
 </style>
@@ -65,7 +65,7 @@ export default {
   padding: 20px;
   height: 70px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,12 +83,12 @@ export default {
       p:nth-child(1) {
         font-size: 14px;
         font-weight: bold;
-        color: $blue-200;
+        color: $--color-primary;
         margin-right: 1em;
       }
       p:nth-child(2) {
         font-size: 12px;
-        color: $blue-100;
+        color: $--color-primary-active;
       }
     }
     &__charge {
@@ -98,7 +98,7 @@ export default {
       p {
         font-size: 14px;
         font-weight: bold;
-        color: $blue-200;
+        color: $--color-primary;
         margin-right: 1em;
       }
     }
@@ -106,11 +106,11 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      color: $blue-200 !important;
+      color: $--color-primary !important;
       & > p {
         font-size: 14px;
         font-weight: bold;
-        color: $blue-200;
+        color: $--color-primary;
         margin-right: 1em;
       }
     }
@@ -128,9 +128,9 @@ export default {
     &--btn {
       padding: 5px 25px;
       font-size: 14px;
-      color: $white-300;
+      color: $--color-white;
       border-radius: 15px;
-      background-color: $blue-100;
+      background-color: $--color-primary-active;
     }
   }
 }

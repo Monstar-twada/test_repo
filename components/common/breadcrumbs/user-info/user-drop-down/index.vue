@@ -82,7 +82,7 @@ export default {
 </script>
 <style lang="scss">
 .user-drop-down {
-  color: $blue-200;
+  color: $--color-primary;
   &-title {
     padding: 13px 15px;
     display: flex;
@@ -97,7 +97,7 @@ export default {
       display: flex;
       align-items: center;
       padding: 0 11px;
-      border: 1px $white-100 solid;
+      border: 1px $--color-background solid;
       border-radius: 15px;
       cursor: pointer;
       .icon-logout {
@@ -110,7 +110,7 @@ export default {
       }
       span {
         font-size: 12px;
-        color: $blue-100;
+        color: $--color-primary-active;
       }
     }
   }
@@ -121,7 +121,7 @@ export default {
   }
   .fg-form-item.__long {
     font-size: 14px;
-    border-top: 1px $white-100 solid;
+    border-top: 1px $--color-background solid;
     padding: 14px 20px;
   }
   .fg-form-item.__long:nth-child(1) {

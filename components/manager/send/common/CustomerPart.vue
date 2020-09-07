@@ -74,7 +74,7 @@ export default {
   }
   &__user {
     display: flex;
-    border-right: solid 1px $gray-600;
+    border-right: solid 1px $--color-background-hover;
     padding: 0 30px 0 0;
     &__img {
       margin-right: 10px;

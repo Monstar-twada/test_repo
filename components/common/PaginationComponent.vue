@@ -61,7 +61,7 @@ export default {
       margin-right: 0px;
       button {
         border-radius: 15px 0px 0px 15px;
-        border-right: 2px solid $gray-100;
+        border-right: 2px solid $--color-border;
       }
     }
     li:last-child {
@@ -93,12 +93,12 @@ export default {
       line-height: 20px !important;
       background: none !important;
       box-shadow: none !important;
-      color: $white-300 !important;
+      color: $--color-white !important;
       border-radius: 0px !important;
       transition: none !important;
     }
     .v-pagination__item--active {
-      border-bottom: 1px $white-300 solid !important;
+      border-bottom: 1px $--color-white solid !important;
     }
 
     .v-pagination__item--active .primary {
@@ -118,7 +118,7 @@ export default {
     h1,
     h3 {
       display: inline;
-      color: $white-300;
+      color: $--color-white;
     }
     h1 {
       font-weight: 800;

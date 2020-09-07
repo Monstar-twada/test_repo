@@ -8,6 +8,7 @@
         clearable
         filterable
         :items="makerItems"
+        :custom-filter="customFilter"
       ></fg-select>
     </fg-col>
     <fg-col :span="span">
@@ -24,6 +25,7 @@
 
 <script>
 import { getManufacturerList } from './maker'
+import { fmtJpCharacter } from '~/assets/js/full-half-width'
 export default {
   props: {
     span: {
@@ -52,6 +54,13 @@ export default {
   watch: {
     'form.maker'() {
       this.form.class = ''
+    },
+  },
+  methods: {
+    customFilter(value, item) {
+      const str = fmtJpCharacter(value)
+      const reg = new RegExp(`(${str})`, 'i')
+      return value ? reg.test(item.text) : true
     },
   },
 }

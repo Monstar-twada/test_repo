@@ -66,7 +66,7 @@ export default {
 </script>
 <style lang="scss">
 .selectStyle {
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   border-radius: 5px;
 }
 .vs__dropdown-menu {
@@ -80,7 +80,7 @@ export default {
 .selectStyle .vs__dropdown-menu {
   background: var(--background);
   border: none;
-  color: $blue-400;
+  color: $--color-success;
   text-transform: lowercase;
   font-variant: small-caps;
   font-family: 'Noto Sans JP';
@@ -93,7 +93,7 @@ export default {
   padding: 0px;
 }
 .vs__selected {
-  color: $blue-500;
+  color: $--color-primary-placeholder;
 }
 .selectStyle .vs__clear,
 .selectStyle .vs__open-indicator {

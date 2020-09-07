@@ -165,25 +165,25 @@ export default {
   &__title {
     font-size: 18px;
     font-weight: bold;
-    color: $blue-200;
+    color: $--color-primary;
     margin-bottom: 20px;
   }
   &__body {
     width: 100%;
     height: 260px;
     border-radius: 4px;
-    border: solid 1px $gray-100;
-    background-color: $white-100;
+    border: solid 1px $--color-border;
+    background-color: $--color-background;
     margin-bottom: 20px;
     padding: 21px;
     overflow: scroll;
     overflow-x: hidden;
-    scrollbar-color: $blue-100;
+    scrollbar-color: $--color-primary-active;
     &::-webkit-scrollbar {
       width: 3px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: $blue-100;
+      background-color: $--color-primary-active;
     }
     &__messages {
       width: 100%;
@@ -201,20 +201,20 @@ export default {
         }
         & > p {
           font-size: 11px;
-          color: $blue-500;
+          color: $--color-primary-placeholder;
         }
       }
       &--left {
         .message__context {
-          background-color: $white-300;
-          color: $blue-200;
+          background-color: $--color-white;
+          color: $--color-primary;
           border-radius: 20px 20px 20px 0;
           position: relative;
           &__input {
             width: max-content;
             height: 100%;
             font-size: 13px;
-            color: $blue-500;
+            color: $--color-primary-placeholder;
           }
           &__edit {
             position: absolute;
@@ -232,8 +232,8 @@ export default {
         grid-column: 2/3;
         justify-self: flex-end;
         .message__context {
-          background-color: $blue-400;
-          color: $white-300;
+          background-color: $--color-success;
+          color: $--color-white;
           border-radius: 20px 20px 0 20px;
         }
       }
@@ -253,7 +253,7 @@ export default {
       padding: 10px 10px;
       font-size: 11px;
       &::placeholder {
-        color: $blue-500;
+        color: $--color-primary-placeholder;
       }
     }
     &__btns {
@@ -277,11 +277,11 @@ export default {
       justify-content: center;
       align-items: center;
       border-radius: 15px;
-      border: solid 1px $gray-100;
-      background-color: $white-300;
+      border: solid 1px $--color-border;
+      background-color: $--color-white;
       padding: 9px 30px;
       font-size: 11px;
-      color: $blue-100;
+      color: $--color-primary-active;
       position: relative;
       cursor: pointer;
       .v-image {

@@ -49,7 +49,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .upload-image {
-  border: 1px $gray-100 solid;
+  border: 1px $--color-border solid;
   border-radius: 5px;
   flex: 0 0 auto !important;
   width: 300px;

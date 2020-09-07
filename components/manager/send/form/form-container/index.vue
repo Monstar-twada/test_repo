@@ -45,12 +45,12 @@ export default {
 <style lang="scss" scoped>
 .send-form-form-container {
   width: 100%;
-  background-color: $white-300;
+  background-color: $--color-white;
   border-radius: 6px;
-  color: $blue-200;
+  color: $--color-primary;
   &__top {
     padding: 25px 20px;
-    border-bottom: 1px solid $gray-600;
+    border-bottom: 1px solid $--color-background-hover;
     h3 {
       font-size: 18px;
       font-weight: bold;

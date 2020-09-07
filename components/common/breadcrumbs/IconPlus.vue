@@ -25,7 +25,7 @@ i.icon-plus {
     position: absolute;
     display: inline-block;
     content: '';
-    background: $blue-100;
+    background: $--color-primary-active;
   }
   &:before {
     top: 5px;
@@ -42,7 +42,7 @@ i.icon-plus {
   &.__white {
     &:before,
     &:after {
-      background: $white-300;
+      background: $--color-white;
     }
   }
 }

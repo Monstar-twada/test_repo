@@ -20,42 +20,52 @@
       </template>
       <template v-slot:item.progress="{ item }">
         <span class="progress">
-          -&nbsp;{{ item.goal_count }}&nbsp;コール済&nbsp;&nbsp;({{
-            item.goal_percent
-          }})
+          -&nbsp;{{
+            item.goal_count.toLocaleString()
+          }}&nbsp;コール済&nbsp;&nbsp;({{ item.goal_percent }})
         </span>
       </template>
       <template v-slot:item.detail="{ item }">
-        <ul class="detail">
-          <li>
-            車検入庫
-            <span>{{ item.warehouse }}</span
-            >件
-          </li>
-          <li>
-            本予約
-            <span>{{ item.reserve }}</span
-            >件
-          </li>
-          <li>
-            仮予約
-            <span>{{ item.tentative_reserve }}</span
-            >件
-          </li>
-          <li>
-            買換意向
-            <span>{{ item.intention_to_replace }}</span
-            >件
-          </li>
-          <li>
-            納車済
-            <span>{{ item.delivered }}</span
-            >件
-          </li>
-        </ul>
+        <div class="detail">
+          <dl>
+            <dt>車検入庫</dt>
+            <dd>
+              <span>{{ item.warehouse.toLocaleString() }}</span
+              >件
+            </dd>
+          </dl>
+          <dl>
+            <dt>本予約</dt>
+            <dd>
+              <span>{{ item.reserve.toLocaleString() }}</span
+              >件
+            </dd>
+          </dl>
+          <dl>
+            <dt>仮予約</dt>
+            <dd>
+              <span>{{ item.tentative_reserve.toLocaleString() }}</span
+              >件
+            </dd>
+          </dl>
+          <dl>
+            <dt>買換意向</dt>
+            <dd>
+              <span>{{ item.intention_to_replace.toLocaleString() }}</span
+              >件
+            </dd>
+          </dl>
+          <dl>
+            <dt>納車済</dt>
+            <dd>
+              <span>{{ item.delivered.toLocaleString() }}</span
+              >件
+            </dd>
+          </dl>
+        </div>
       </template>
       <template v-slot:item.operation="{ item }">
-        <nuxt-link to="/ma/detail?type=0000&date=202009">
+        <nuxt-link to="/ma/customer_list?type=0000&date=202009">
           <fg-button
             v-if="item.list_count != 0"
             class="button"
@@ -97,14 +107,14 @@ export default {
         text: '対象者',
         value: 'list_count',
         align: 'right',
-        width: '10%',
+        width: '8%',
         sortable: false,
       },
       {
         text: '進捗',
         value: 'progress',
         align: 'left',
-        width: '14%',
+        width: '13%',
         sortable: false,
       },
       {
@@ -127,14 +137,14 @@ export default {
         {
           vehicle_inspection: '1月満期',
           year: 2021,
-          list_count: 1415,
-          goal_count: '34',
+          list_count: 51415,
+          goal_count: 34,
           goal_percent: '40%',
-          warehouse: '83',
-          reserve: '32',
-          tentative_reserve: '33',
-          intention_to_replace: '11',
-          delivered: '3',
+          warehouse: 83,
+          reserve: 1032,
+          tentative_reserve: 233,
+          intention_to_replace: 11,
+          delivered: 3,
         },
         {
           vehicle_inspection: '12月満期',
@@ -260,9 +270,9 @@ export default {
             font-size: 12px;
             font-weight: normal;
             height: 30px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             padding: 0 2px !important;
-            background: $white-100;
+            background: $--color-background;
             border-bottom: none !important;
             i {
               display: none;
@@ -273,7 +283,7 @@ export default {
       tbody {
         tr {
           font-size: 12px;
-          color: $blue-200;
+          color: $--color-primary;
           cursor: pointer;
           td {
             padding: 10px 5px !important;
@@ -288,7 +298,7 @@ export default {
               height: 70%;
               top: 15%;
               right: 0;
-              background: $gray-100;
+              background: $--color-border;
             }
           }
           td:nth-child(2):after,
@@ -301,21 +311,21 @@ export default {
   }
 
   .theme--light.v-data-table .v-data-table__empty-wrapper {
-    color: $blue-200 !important;
+    color: $--color-primary !important;
   }
 
   .theme--light.v-data-table .v-data-table__wrapper table tbody tr td {
-    border-bottom: 1px $gray-100 solid !important;
+    border-bottom: 1px $--color-border solid !important;
   }
   .theme--light.v-icon {
-    color: $blue-300 !important;
+    color: $--color-primary !important;
   }
 }
 </style>
 <style lang="scss" scoped>
 .ma-index {
-  background: $white-300;
-  color: $blue-200;
+  background: $--color-white;
+  color: $--color-primary;
   border-radius: 6px;
 
   &-title {
@@ -340,20 +350,28 @@ export default {
   text-align: left;
   padding-left: 5%;
   padding-right: 5%;
-  li {
+  dl {
     margin: 5px 10px;
-    display: inline-block;
     font-family: 'Avenir Next';
     font-size: 14px;
-  }
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
 
-  span {
-    display: inline-block;
-    width: 50px;
-    text-align: right;
-    font-size: 21px;
-    font-weight: bold;
-    padding: 0 5px;
+    dt {
+      width: 60px;
+    }
+    dd {
+      width: 90px;
+      span {
+        display: inline-block;
+        width: 70px;
+        text-align: right;
+        font-size: 21px;
+        font-weight: bold;
+        padding: 0 5px;
+      }
+    }
   }
 }
 

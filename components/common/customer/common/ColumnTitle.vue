@@ -35,7 +35,7 @@ export default {
     border-bottom: 1px solid #e5edf6;
   }
   h2 {
-    color: $blue-200;
+    color: $--color-primary;
   }
   .right-wrapper {
     display: flex;

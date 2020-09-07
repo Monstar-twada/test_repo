@@ -109,7 +109,7 @@
         </fg-form-item>
 
         <fg-form-item label="勤続年数（入社日）">
-          <fg-input v-model="form.workYear" width="160px"></fg-input>
+          <fg-calendar v-model="form.workYear" width="160px"></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="年収">
@@ -124,7 +124,7 @@
         <fg-form-item label="住宅（入居日）">
           <fg-row gutter="20">
             <fg-col span="5">
-              <fg-select v-model="form.homeX"></fg-select>
+              <fg-select v-model="form.homeX" placeholder="選択"></fg-select>
             </fg-col>
             <fg-col span="10">
               <fg-calendar v-model="form.homeInDate" writable></fg-calendar>
@@ -146,7 +146,11 @@
         </fg-form-item>
 
         <fg-form-item label="免許証の色">
-          <fg-select v-model="form.licenceColor" width="110px"></fg-select>
+          <fg-select
+            v-model="form.licenceColor"
+            width="110px"
+            placeholder="選択"
+          ></fg-select>
         </fg-form-item>
 
         <fg-form-item label="免許証番号">
@@ -156,7 +160,7 @@
         <fg-form-item label="家族構成" class="plus-row-wrapper">
           <fg-row gutter="15">
             <fg-col span="5">
-              <fg-select></fg-select>
+              <fg-select placeholder="選択"></fg-select>
             </fg-col>
             <fg-col span="5">
               <fg-input></fg-input>
@@ -189,7 +193,7 @@
       <fg-form label-width="140px">
         <fg-form-item label="カーライフ">
           <fg-checkbox
-            v-for="(item, index) in carLife"
+            v-for="(item, index) in carLives"
             :key="index"
             :label="item.text"
             :value="item.active"
@@ -253,13 +257,12 @@ import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import { storage } from '~/assets/js/storage'
 import {
-  carLife,
-  selectionPoints,
-} from '~/components/common/customer/detail/base'
-import {
-  customerTypes,
-  genders,
+  CAR_LIVES,
+  SELECTION_POINTS,
+  CUSTOMER_TYPES,
+  GENDERS,
 } from '~/components/common/customer/common/base'
+
 export default {
   components: {
     ColumnTitle,
@@ -269,15 +272,15 @@ export default {
     const query = this.$route.query
     return {
       query,
-      customerTypes,
-      genders,
+      customerTypes: CUSTOMER_TYPES,
+      genders: GENDERS,
       avatarData: {
         url: '/common/person_default.svg',
         name: '米田 道春',
         summary: '（31歳）',
       },
-      carLife,
-      selectionPoints,
+      carLives: CAR_LIVES,
+      selectionPoints: SELECTION_POINTS,
       form: query.edit ? storage.get('registCustomEdit') : {},
     }
   },

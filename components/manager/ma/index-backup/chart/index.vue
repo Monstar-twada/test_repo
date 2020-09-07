@@ -162,10 +162,10 @@ export default {
 
 <style lang="scss" scoped>
 .ma-chart {
-  background: $white-300;
+  background: $--color-white;
 
   &__title {
-    color: $blue-200;
+    color: $--color-primary;
     font-size: 18px;
   }
 
@@ -198,7 +198,7 @@ export default {
       h5 {
         font-weight: 400;
         font-size: 10px;
-        color: $blue-200;
+        color: $--color-primary;
       }
     }
   }
@@ -209,7 +209,7 @@ export default {
   height: 250px;
 }
 .doughnut-chart {
-  background: $white-300;
+  background: $--color-white;
   width: 200px;
   height: 200px;
 }

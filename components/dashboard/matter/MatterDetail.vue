@@ -32,7 +32,7 @@ export default {
   grid-gap: 30px;
   margin: 30px 0;
   & > div {
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
   }
 }

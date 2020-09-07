@@ -1,7 +1,12 @@
 <template>
-  <v-dialog v-model="visible" persistent scrollable max-width="670px">
-    <v-card class="change-car-dialog-card">
-      <DialogHeader title="車両選択" @close="visible = false" />
+  <fg-dialog
+    v-model="visible"
+    class="customer-change-car-dialog"
+    persistent
+    max-width="670px"
+    title="車両選択"
+  >
+    <div>
       <fg-pagination
         v-model="query.page"
         class="mt15 mb15 ml25 mr25"
@@ -30,18 +35,14 @@
           <td>{{ fmtCarNumber(item) }}</td>
         </tr>
       </fg-table-experiment>
-    </v-card>
-  </v-dialog>
+    </div>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
 import { fmtCarNumber } from '~/components/common/customer/common/helper'
 
 export default {
-  components: {
-    DialogHeader,
-  },
   props: {
     value: Boolean,
     data: {
@@ -97,8 +98,6 @@ export default {
 </script>
 
 <style lang="scss">
-.change-car-dialog-card {
-  position: relative;
-  color: $blue-200 !important;
+.customer-change-car-dialog {
 }
 </style>

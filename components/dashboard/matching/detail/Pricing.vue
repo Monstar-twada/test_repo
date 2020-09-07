@@ -111,7 +111,7 @@ export default {
 .title,
 .subtitle {
   font-size: 20px;
-  color: $blue-200;
+  color: $--color-primary;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -127,32 +127,32 @@ export default {
   padding: 25px 30px;
   border-radius: 5px;
   margin-bottom: 30px;
-  background: $white-300;
+  background: $--color-white;
   p {
     font-size: 12px;
     font-family: 'Noto Sans JP';
-    color: $blue-200;
+    color: $--color-primary;
     margin-bottom: 10px;
   }
 }
 .table {
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   tr:hover {
     background-color: transparent !important;
   }
   td {
     width: 50%;
-    color: $blue-200;
+    color: $--color-primary;
   }
   &_left {
-    background-color: $white-100;
-    border-right: 1px solid $gray-100;
+    background-color: $--color-background;
+    border-right: 1px solid $--color-border;
   }
   &_right {
     text-align: right;
   }
   &_input {
-    background-color: $white-300;
+    background-color: $--color-white;
     height: 70px;
   }
 }

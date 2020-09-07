@@ -24,6 +24,6 @@ export default {
 .text {
   font-size: 12px;
   font-weight: 400;
-  color: $blue-900;
+  color: $--color-primary-active;
 }
 </style>

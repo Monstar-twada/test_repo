@@ -85,7 +85,7 @@ header.breadcrumbs-container {
     margin-bottom: 30px;
 
     .v-breadcrumbs__item {
-      color: $white-100 !important;
+      color: $--color-background !important;
     }
 
     .icon-home {
@@ -131,13 +131,14 @@ header.breadcrumbs-container {
       }
 
       h1 {
-        color: $white-300;
+        color: $--color-white;
         display: flex;
+        width: max-content;
       }
 
       h2 {
         margin: 5px 0 0 10px;
-        color: $white-300;
+        color: $--color-white;
         font-size: 20px;
       }
     }

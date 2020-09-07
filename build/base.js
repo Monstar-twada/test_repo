@@ -37,22 +37,23 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$white-100' },
+  loading: { color: '$--color-background' },
   /*
    ** Global CSS
    */
   css: ['~/assets/scss/_main.scss'],
   styleResources: {
     scss: [
-      '~/assets/scss/*.scss',
-      '~/assets/scss/_main.scss', // use underscore "_" & also file extension ".scss"
+      // '~/assets/scss/_colors.scss',
+      // '~/assets/scss/*.scss',
+      // '~/assets/scss/_main.scss', // use underscore "_" & also file extension ".scss"
     ],
   },
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/first-group-ui.js', ssr: false }
+    //   { src: '~/plugins/first-group-ui.js', ssr: false }
   ],
   /*
    ** Nuxt.js modules
@@ -88,7 +89,9 @@ export const baseConfig = {
     proxy: true,
   },
   proxy: {
-    '/api/': isDevelopment ? 'https://manager.cars-enjoy.com' : 'https://manager.cars-enjoy.com',
+    '/api/': isDevelopment
+      ? 'https://manager.cars-enjoy.com'
+      : 'https://manager.cars-enjoy.com',
   },
   /*
    ** vuetify module configuration

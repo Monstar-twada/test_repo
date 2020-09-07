@@ -55,7 +55,7 @@ export default {
     }
     td {
       text-align: center;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 12px;
       border-left: 1px solid #dfe6f0;
       border-bottom: 1px solid #dfe6f0;

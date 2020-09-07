@@ -152,7 +152,7 @@ export default {
     top: calc(50% - 1px);
   }
   .v-input--switch__thumb.primary--text {
-    color: $white-300 !important;
+    color: $--color-white !important;
   }
   .theme--light.v-input--switch .v-input--switch__track {
     color: #e5edf6;
@@ -173,13 +173,13 @@ export default {
 .table-calendar {
   width: 100%;
   max-width: 290px;
-  color: $blue-200;
-  border: 1px $gray-100 solid;
+  color: $--color-primary;
+  border: 1px $--color-border solid;
   border-collapse: collapse;
 
   thead {
     tr {
-      border-bottom: 1px $gray-100 solid;
+      border-bottom: 1px $--color-border solid;
       th {
         font-size: 12px;
         width: 45px;
@@ -189,17 +189,17 @@ export default {
   }
   tbody {
     tr:not(:last-child) {
-      border-bottom: 1px $gray-100 solid;
+      border-bottom: 1px $--color-border solid;
     }
     td {
       font-size: 12px;
       height: 35px;
-      border-right: 1px $gray-100 solid;
+      border-right: 1px $--color-border solid;
       text-align: center;
 
       .td-title {
         font-size: 12px;
-        background: $gray-100;
+        background: $--color-border;
       }
 
       .v-image {

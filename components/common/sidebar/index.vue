@@ -1,19 +1,28 @@
 <template>
   <div class="global-sidebar-wrapper">
+    <button class="sidebar-control-button" @click="collapsed = !collapsed">
+      <fg-icon name="d-arrow-left"></fg-icon>
+    </button>
     <div :class="['top-wrapper', isFirstIndex ? 'radius-br' : '']">
       <div class="logo">
         <img :src="require(`./img/logo-${logoName}.svg`)" alt />
       </div>
-      <h5>株式会社ファーストグループ</h5>
+      <div class="company">株式会社ファーストグループ</div>
 
       <div class="select-wrapper">
-        <GlobalSelector
+        <fg-select
           v-model="selectedResult"
-          :options="selectList"
+          :items="selectList"
           theme="light-blue"
           size="medium"
           item-prefix="- "
-        />
+          :offset-left="24"
+          :popup-position="popupPosition"
+        >
+          <template v-slot:prefix>
+            <img :src="require('./img/icon-shop-select.svg')" alt="" />
+          </template>
+        </fg-select>
       </div>
     </div>
     <v-list>
@@ -50,13 +59,9 @@
 </template>
 
 <script>
-import GlobalSelector from '~/components/common/global-selector/index'
-
 export default {
-  components: {
-    GlobalSelector,
-  },
   props: {
+    value: Boolean,
     menuItems: {
       type: Array,
       default() {
@@ -66,11 +71,13 @@ export default {
   },
   data() {
     const isManager = this.$isManager
+    const isConsole = this.$isConsole
     return {
+      collapsed: this.value,
       selectedResult: 8,
       // item's index in menu
       index: -1,
-      logoName: isManager ? 'manager' : 'dashboard',
+      logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
       selectList: [
         {
           title: '営業管理',
@@ -116,23 +123,32 @@ export default {
     isLastIndex() {
       return this.index === this.menuItems.length - 1
     },
+    popupPosition() {
+      return this.collapsed ? 'right' : ''
+    },
   },
   watch: {
     selectedResult(val) {
       console.log('selectedResult change', val)
     },
-    '$nuxt._route'() {
+    $route() {
       this.resetRouteIndex()
     },
+    value(val) {
+      if (this.collapsed !== val) {
+        this.collapsed = val
+      }
+    },
+    collapsed(val) {
+      this.$emit('input', val)
+    },
   },
-
   created() {
     this.resetRouteIndex()
   },
-
   methods: {
     resetRouteIndex() {
-      const route = $nuxt._route
+      const route = this.$route
       const path = '/' + route.path.split('/')[1]
       this.index = this.menuItems.findIndex((item) => item.link === path)
     },
@@ -146,15 +162,39 @@ export default {
   },
 }
 </script>
+
 <style lang="scss">
+@import '../../../assets/scss/contants';
+
+@mixin transitionMixin($name) {
+  transition: $name 0.3s ease-in-out;
+}
+
 .global-sidebar-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 210px;
+  width: $sideWidthNormal;
   display: flex;
   flex-direction: column;
+  @include transitionMixin(width);
+  white-space: nowrap;
+  .sidebar-control-button {
+    position: absolute;
+    z-index: 1;
+    top: 6px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ebf1f8;
+    border: 0;
+    width: 24px;
+    height: 16px;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+  }
   // border-bottom-right-radius
   .radius-br {
     border-bottom-right-radius: 6px;
@@ -165,29 +205,50 @@ export default {
   }
 
   .top-wrapper {
-    padding: 24px 0 20px;
+    padding-bottom: 15px;
     background: #fff;
+    overflow: hidden;
+    .company {
+      margin: 26px 15px 0 15px;
+      color: $--color-primary-active;
+      font-weight: 400;
+      font-size: 10px;
+      @include transitionMixin(all);
+      height: 12px;
+      line-height: 12px;
+      overflow: hidden;
+    }
     .logo {
-      margin: 0 auto;
+      margin: 24px auto 0;
       width: 110px;
+      @include transitionMixin(all);
       img {
         max-width: 100%;
       }
     }
-    h5 {
-      margin: 25px 15px 7px 15px;
-      color: $blue-100;
-      font-weight: 400;
-    }
-
     .select-wrapper {
-      margin: 0 15px;
+      margin: 7px 15px 0;
+      height: 35px;
+      @include transitionMixin(all);
+      .fg-input {
+        @include transitionMixin(all);
+        .__l {
+          @include transitionMixin(all);
+        }
+        .__r {
+          overflow: hidden;
+        }
+      }
     }
   }
 
   .bottom-space {
     flex-grow: 1;
     background: #fff;
+  }
+
+  .v-list-item__content {
+    @include transitionMixin(all);
   }
 
   .v-list {
@@ -197,17 +258,20 @@ export default {
 
     .v-list-item__title {
       font-size: 14px !important;
-      color: $blue-200 !important;
+      color: $--color-primary !important;
     }
 
     .v-list-item {
-      background: $white-300;
+      background: $--color-white;
+      padding: 0;
       a {
         display: flex;
         align-items: center;
         height: 50px;
         width: 100%;
         text-decoration: none;
+        box-sizing: border-box;
+        padding: 0 16px;
         .v-list-item__icon {
           display: flex;
           align-items: center;
@@ -231,10 +295,45 @@ export default {
     .v-list-item--active {
       background: transparent !important;
       .v-list-item__title {
-        color: $white-100 !important;
+        color: $--color-background !important;
       }
       &::before {
         opacity: 0 !important;
+      }
+    }
+  }
+}
+
+.is-menu-collapsed {
+  .global-sidebar-wrapper {
+    width: $sideWidthCollapsed;
+    .sidebar-control-button {
+      .fg-icon {
+        transform: rotate(180deg);
+      }
+    }
+    .top-wrapper {
+      .logo {
+        margin-top: 36px;
+        width: 40px;
+      }
+      .company {
+        height: 0;
+        opacity: 0;
+      }
+      .select-wrapper {
+        margin: 7px -2px 0;
+        .fg-input {
+          input {
+            color: transparent;
+          }
+          .__l {
+            left: 21px;
+          }
+          .__r {
+            width: 0;
+          }
+        }
       }
     }
   }

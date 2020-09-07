@@ -98,8 +98,8 @@ export default {
 <style lang="scss" scoped>
 .status-bar {
   font-size: 12px;
-  background: $white-100;
-  color: $blue-200;
+  background: $--color-background;
+  color: $--color-primary;
   border-radius: 10px;
   width: 100%;
   border-spacing: 0;
@@ -133,8 +133,8 @@ export default {
         height: 45px;
 
         td {
-          border-left: 1px solid $gray-100;
-          border-bottom: 1px solid $gray-100;
+          border-left: 1px solid $--color-border;
+          border-bottom: 1px solid $--color-border;
 
           label {
             display: inline-block;

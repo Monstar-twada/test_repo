@@ -1,20 +1,19 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="940px">
-    <div class="customer-licence-dialog">
-      <DialogHeader title="車検証" @close="visible = false" />
-      <div class="body-wrapper">
-        <img src="/common/vehicle-inspection-certificate.jpg" alt="" />
-      </div>
+  <fg-dialog
+    v-model="visible"
+    class="customer-vic-dialog"
+    persistent
+    max-width="940px"
+    title="車検証"
+  >
+    <div class="body-wrapper">
+      <img src="/common/vehicle-inspection-certificate.jpg" alt="" />
     </div>
-  </v-dialog>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
 export default {
-  components: {
-    DialogHeader,
-  },
   props: {
     value: Boolean,
   },
@@ -39,10 +38,7 @@ export default {
 </script>
 
 <style lang="scss">
-.customer-licence-dialog-card {
-  background: $white-300;
-  border-radius: 4px;
-  position: relative;
+.customer-vic-dialog {
   .body-wrapper {
     padding: 40px;
     img {

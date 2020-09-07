@@ -59,15 +59,15 @@ export default {
   padding: 20px;
   height: 120px;
   border-radius: 5px;
-  background-color: $white-300;
+  background-color: $--color-white;
   &_input {
     height: 30px;
     width: 120px;
     line-height: 20px;
     padding-bottom: 5px;
-    border: 1px solid $gray-100;
+    border: 1px solid $--color-border;
     &::-webkit-input-placeholder {
-      color: $blue-500;
+      color: $--color-primary-placeholder;
       font-size: 10px;
     }
   }

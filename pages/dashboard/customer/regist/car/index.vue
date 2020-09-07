@@ -5,18 +5,18 @@
       :page="page"
       title-image="result.svg"
     />
-    <IndexBodyContainer />
+    <ConfirmBodyContainer />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import IndexBodyContainer from '~/components/common/customer/regist/car/IndexBodyContainer'
+import ConfirmBodyContainer from '~/components/common/customer/regist/car/confirm/ConfirmBodyContainer'
 export default {
   layout: 'dashboard',
   components: {
     Breadcrumbs,
-    IndexBodyContainer,
+    ConfirmBodyContainer,
   },
   data() {
     return {

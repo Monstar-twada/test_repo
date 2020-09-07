@@ -26,7 +26,11 @@
         :value="row4.value"
         :placeholder="row4.placeholder"
       />
-      <StatusPart :list="row5.list" :placeholder="row5.placeholder" />
+      <StatusPart
+        :selected="row5.selectedValue"
+        :list="row5.list"
+        :placeholder="row5.placeholder"
+      />
       <SubmitButton :title="'更新'" />
     </div>
   </div>
@@ -61,8 +65,26 @@ export default {
       placeholder: '',
     },
     row5: {
+      selectedValue: 0,
       placeholder: '送客中',
-      list: ['送客中', '対応中', '成約済', '見送済'],
+      list: [
+        {
+          value: 0,
+          text: '送客中',
+        },
+        {
+          value: 1,
+          text: '対応中',
+        },
+        {
+          value: 2,
+          text: '成約済',
+        },
+        {
+          value: 3,
+          text: '見送済',
+        },
+      ],
     },
   }),
 }
@@ -71,12 +93,12 @@ export default {
 <style lang="scss" scoped>
 .send-detail-detail-conatiner {
   width: 100%;
-  background-color: $white-300;
+  background-color: $--color-white;
   border-radius: 6px;
-  color: $blue-200;
+  color: $--color-primary;
   &__top {
     padding: 25px 20px;
-    border-bottom: 1px solid $gray-600;
+    border-bottom: 1px solid $--color-background-hover;
     display: flex;
     justify-content: space-between;
     h3 {

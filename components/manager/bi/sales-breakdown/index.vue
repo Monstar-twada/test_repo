@@ -84,12 +84,12 @@ export default {
     display: flex;
     h5 {
       font-size: 10x;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 400;
     }
     h3 {
       font-size: 18px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 600;
     }
     span {
@@ -101,21 +101,21 @@ export default {
     border-collapse: collapse;
     thead {
       height: 30px;
-      background: $white-100;
+      background: $--color-background;
       th {
         align-items: center;
         font-size: 12px;
-        color: $blue-500;
+        color: $--color-primary-placeholder;
         font-weight: 400;
       }
     }
     tr {
-      border-bottom: 1px solid $gray-100;
+      border-bottom: 1px solid $--color-border;
       td {
         height: 60px;
         font-size: 15px;
         font-weight: 800;
-        color: $blue-200;
+        color: $--color-primary;
         text-align: center;
         font-family: 'Yantramanav';
         span {

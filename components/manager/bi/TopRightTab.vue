@@ -77,7 +77,7 @@ export default {
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    color: $white-300;
+    color: $--color-white;
     margin-left: 30px;
     &:first-child {
       margin-left: 0;
@@ -88,7 +88,7 @@ export default {
     bottom: -10px;
     left: 0;
     height: 1px;
-    background: $white-300;
+    background: $--color-white;
     transition: all 0.3s ease-in-out;
   }
 }

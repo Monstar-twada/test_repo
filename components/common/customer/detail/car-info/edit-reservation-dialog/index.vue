@@ -1,23 +1,22 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="350px">
-    <v-card class="edit-reservation-dialog-card">
-      <DialogHeader title="予約・入庫状況" @close="visible = false" />
-
-      <ReservationTable :list="list" />
-
-      <div class="btn-wrapper">
-        <fg-button suffix-icon="arrow-right">更新</fg-button>
-      </div>
-    </v-card>
-  </v-dialog>
+  <fg-dialog
+    v-model="visible"
+    class="edit-reservation-dialog"
+    persistent
+    max-width="350px"
+    title="予約・入庫状況"
+  >
+    <ReservationTable :list="list" />
+    <div class="btn-wrapper">
+      <fg-button suffix-icon="arrow-right">更新</fg-button>
+    </div>
+  </fg-dialog>
 </template>
 
 <script>
 import ReservationTable from './ReservationTable'
-import DialogHeader from '~/components/common/dialog-header/index'
 export default {
   components: {
-    DialogHeader,
     ReservationTable,
   },
   props: {
@@ -68,8 +67,7 @@ export default {
 </script>
 
 <style lang="scss">
-.edit-reservation-dialog-card {
-  position: relative;
+.edit-reservation-dialog {
   .btn-wrapper {
     margin: 30px auto 0;
     padding-bottom: 38px;
