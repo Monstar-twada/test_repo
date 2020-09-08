@@ -14,7 +14,10 @@
         <fg-row gutter="30" class="info-header">
           <fg-col span="7">
             <b>日時</b>
-            <fg-date-setter :value="form.date"></fg-date-setter>
+            <fg-date-picker
+              v-model="form.date"
+              format="yyyy/MM/dd (W) hh:mm"
+            ></fg-date-picker>
           </fg-col>
           <fg-col span="7">
             <b>対象車両</b>
