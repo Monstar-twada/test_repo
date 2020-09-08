@@ -10,7 +10,10 @@
       <fg-row gutter="30" class="info-header">
         <fg-col span="7">
           <b>日時</b>
-          <fg-date-setter value="2020/09/02 (水) 14:34"></fg-date-setter>
+          <fg-date-picker
+            v-model="form.date"
+            format="yyyy/MM/dd (W) hh:mm"
+          ></fg-date-picker>
         </fg-col>
         <fg-col span="7">
           <b>対象車両</b>
@@ -56,6 +59,7 @@ export default {
       carModel: '',
       visible: this.value,
       form: {
+        date: '',
         content: `ギアアップの不具合を感じるとのことで入庫されたが、テスターを当てても、特に該当するような症状は見受けられず、何度か走行テストも実施した結果、万が一あり得るとしたら触媒の劣化であることが考察されたが、テストで取り替えるにはあまりに高いので、50万相当の工賃がかかる旨と若干の違和感を感じるかもしれないが、走行に問題が生じているわけではない旨を説明し車は戻していたが、再度やはりおかしいとの問い合わせ。`,
       },
     }

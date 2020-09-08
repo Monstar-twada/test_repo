@@ -20,80 +20,162 @@
         >保存</fg-button
       >
     </div>
-    <v-data-table
-      :headers="headers"
-      :items="itemList.results"
-      :items-per-page="itemList.limit"
-      :page.sync="currentPage"
-      hide-default-footer
-    >
-      <template v-slot:item.name="{ item }">
-        <div @click="handleClickName(item)">
-          <fg-avatar
-            class="user"
-            :data="{
-              url: '/common/person_default.svg',
-              name: `${item.lastName} ${item.firstName}`,
-              summary: `（${item.age || '-'}歳）`,
-            }"
-            text-width="120px"
-            circle
-            text-flex-direction-column
-          ></fg-avatar>
-        </div>
-      </template>
-      <template v-slot:item.maker="{ item }">
-        <div class="car">
-          <h4>{{ item.maker }}</h4>
-          <h4>{{ item.class }}</h4>
-        </div>
-      </template>
-      <template v-slot:item.tel="{ item }">
-        <div class="tel">
-          <h4 class="fixed-tel">{{ item.phoneNumber }}</h4>
-          <h4 class="mobile-tel">{{ item.cellPhoneNumber }}</h4>
-        </div>
-      </template>
-      <template v-slot:item.intention_to_replace="{ item }">
-        <fg-checkbox
-          theme="red"
-          :value="item.statusSMS === '1'"
-          @change="handleChange('intentionToReplace', item.customerId, $event)"
-        />
-      </template>
-      <template v-slot:item.delivered="{ item }">
-        <fg-checkbox
-          theme="red"
-          :value="item.statusCall === '1'"
-          @change="handleChange('delivered', item.customerId, $event)"
-        />
-      </template>
-      <template v-slot:item.call="{ item }">
-        <fg-checkbox :value="item.statusCall === '1'" />
-      </template>
-      <template v-slot:item.dm="{ item }">
-        <fg-checkbox :value="item.statusDM === '1'" />
-      </template>
-      <template v-slot:item.sms="{ item }">
-        <fg-checkbox :value="item.statusSMS === '1'" />
-      </template>
-      <template v-slot:item.reserve="{ item }">
-        <fg-checkbox :value="item.reserve === '1'" />
-      </template>
-      <template v-slot:item.warehouse="{ item }">
-        <fg-switch :value="item.warehouse === '1'" />
-      </template>
-      <template v-slot:item.other="{ item }">
-        <fg-select
-          :value="item.warehouse"
-          :items="options"
-          placeholder="選択"
-        />
-      </template>
-      <template v-slot:no-data>
-        <span>検索結果はありません。</span>
-      </template>
-    </v-data-table>
+    <fg-table :data="itemList.results">
+      <fg-table-column
+        show="customerName"
+        label="顧客名"
+        cell-class="left"
+        :sortable="true"
+        width="16%"
+      >
+        <template v-slot="item">
+          <div @click="handleClickName(item)">
+            <fg-avatar
+              class="user"
+              :data="{
+                url: '/common/person_default.svg',
+                name: `${item.lastName} ${item.firstName}`,
+                summary: `（${item.age || '-'}歳）`,
+              }"
+              text-width="120px"
+              circle
+              text-flex-direction-column
+            ></fg-avatar>
+          </div>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="maker"
+        label="対象車両"
+        cell-class="left"
+        :sortable="false"
+        width="12%"
+      >
+        <template v-slot="item">
+          <div class="car">
+            <h4>{{ item.maker }}</h4>
+            <h4>{{ item.class }}</h4>
+          </div>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="email"
+        label="車検満了日"
+        cell-class="left"
+        :sortable="false"
+        width="10%"
+      ></fg-table-column>
+      <fg-table-column
+        show="tel"
+        label="電話番号"
+        cell-class="left"
+        :sortable="false"
+        width="11%"
+      >
+        <template v-slot="item">
+          <div class="tel">
+            <h4 class="fixed-tel">{{ item.phoneNumber }}</h4>
+            <h4 class="mobile-tel">{{ item.cellPhoneNumber }}</h4>
+          </div>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="intention_to_replace"
+        label="買換意向"
+        :sortable="true"
+        width="7%"
+      >
+        <template v-slot="item">
+          <fg-checkbox
+            theme="red"
+            :value="item.statusSMS === '1'"
+            @change="
+              handleChange('intentionToReplace', item.customerId, $event)
+            "
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="delivered"
+        label="納車済"
+        :sortable="true"
+        width="5%"
+      >
+        <template v-slot="item">
+          <fg-checkbox
+            theme="red"
+            :value="item.statusSMS === '1'"
+            @change="handleChange('delivered', item.customerId, $event)"
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="warehouse"
+        label="車検入庫"
+        :sortable="true"
+        width="10%"
+      >
+        <template v-slot="item">
+          <fg-switch
+            :value="item.warehouse === '1'"
+            @change="handleChange('warehouse', item.customerId, $event)"
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="reserve"
+        label="本予約"
+        :sortable="true"
+        width="5%"
+      >
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.reserve === '1'"
+            @change="handleChange('reserve', item.customerId, $event)"
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column show="dm" label="仮予約" :sortable="true" width="5%">
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.statusDM === '1'"
+            @change="handleChange('dm', item.customerId, $event)"
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column show="sms" label="検討中" :sortable="true" width="5%">
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.statusSMS === '1'"
+            @change="
+              handleChange('intentionToReplace', item.customerId, $event)
+            "
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column show="call" label="不通" :sortable="true" width="5%">
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.statusCall === '1'"
+            @change="handleChange('call', item.customerId, $event)"
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="call"
+        label="他社流出"
+        :sortable="true"
+        width="10%"
+      >
+        <template v-slot="item">
+          <fg-select
+            :value="item.warehouse"
+            :items="options"
+            placeholder="選択"
+          />
+        </template>
+      </fg-table-column>
+    </fg-table>
     <div class="pagination mt15">
       <fg-pagination
         v-model="currentPage"
@@ -130,86 +212,6 @@ export default {
     },
   },
   data: () => ({
-    headers: [
-      { text: '顧客名', value: 'name', align: 'start', width: '16%' },
-      {
-        text: '対象車両',
-        value: 'maker',
-        align: 'start',
-        width: '12%',
-        sortable: false,
-      },
-      {
-        text: '車検満了日',
-        value: 'email',
-        align: 'center',
-        sortable: false,
-        width: '10%',
-      },
-      {
-        text: '電話番号',
-        value: 'tel',
-        align: 'start',
-        sortable: false,
-        width: '10%',
-      },
-      {
-        text: '買換意向',
-        value: 'intention_to_replace',
-        align: 'center',
-        width: '7%',
-        sortable: true,
-      },
-      {
-        text: '納車済',
-        value: 'delivered',
-        align: 'center',
-        width: '5%',
-        sortable: true,
-      },
-      {
-        text: '車検入庫',
-        value: 'warehouse',
-        align: 'center',
-        width: '10%',
-        sortable: true,
-      },
-      {
-        text: '本予約',
-        value: 'reserve',
-        align: 'center',
-        width: '5%',
-        sortable: true,
-      },
-      {
-        text: '仮予約',
-        value: 'dm',
-        align: 'center',
-        width: '5%',
-        sortable: true,
-      },
-      {
-        text: '検討中',
-        value: 'sms',
-        align: 'center',
-        width: '5%',
-        sortable: true,
-      },
-      {
-        text: '不通',
-        value: 'call',
-        align: 'center',
-        width: '5%',
-        sortable: true,
-      },
-      {
-        text: '他社流出',
-        value: 'other',
-        align: 'center',
-        width: '10%',
-        sortable: false,
-      },
-    ],
     currentPage: 1,
     options: [
       {
@@ -325,131 +327,6 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.v-application--is-ltr
-  .ma-list
-  .v-data-table
-  .v-data-table__wrapper
-  table
-  thead
-  tr
-  th {
-  text-align: center;
-}
-.ma-list {
-  .v-data-table {
-    table {
-      thead {
-        tr {
-          th {
-            font-size: 12px;
-            font-weight: normal;
-            height: 40px !important;
-            color: $--color-primary !important;
-            padding: 0 2px !important;
-            i {
-              display: none;
-            }
-          }
-          th.sortable {
-            span {
-              position: relative;
-              &:before {
-                content: '';
-                position: absolute;
-                top: calc(50% - 4px);
-                right: -10px;
-                width: 7px;
-                height: 4px;
-                background: url('./img/table-sort-arrow-normal.svg') no-repeat 0
-                  0;
-                transform: rotate(180deg);
-              }
-              &:after {
-                content: '';
-                position: absolute;
-                top: calc(50% + 2px);
-                right: -10px;
-                width: 7px;
-                height: 4px;
-                background: url('./img/table-sort-arrow-normal.svg') no-repeat 0
-                  0;
-              }
-            }
-          }
-          th.asc {
-            span {
-              font-weight: bold;
-              &:before {
-                background: url('./img/table-sort-arrow.svg');
-              }
-            }
-          }
-          th.desc {
-            span {
-              font-weight: bold;
-              &:after {
-                background: url('./img/table-sort-arrow.svg');
-              }
-            }
-          }
-        }
-      }
-      tbody {
-        tr {
-          font-size: 12px;
-          height: 70px !important;
-          color: $--color-primary;
-          cursor: pointer;
-          td {
-            padding: 0 5px !important;
-            font-size: 12px !important;
-            height: 70px !important;
-            position: relative;
-            font-weight: 300;
-            &:not(:last-child):after {
-              content: '';
-              position: absolute;
-              width: 1px;
-              height: 70%;
-              top: 15%;
-              right: 0;
-              background: $--color-border;
-            }
-          }
-          td:nth-child(5):after {
-            display: none;
-          }
-        }
-        tr:nth-child(even) {
-          background-color: $--color-background;
-        }
-      }
-    }
-  }
-
-  .theme--light.v-data-table .v-data-table__empty-wrapper {
-    color: $--color-primary !important;
-  }
-
-  .theme--light.v-data-table
-    .v-data-table__wrapper
-    table
-    tbody
-    tr:not(:last-child)
-    td:not(.v-data-table__mobile-row) {
-    border-bottom: none !important;
-  }
-  .theme--light.v-icon {
-    color: $--color-primary !important;
-  }
-}
-/*TODO delete*/
-.ma-list .fg-avatar .text-wrapper .__name {
-  line-height: 1.4;
-}
-</style>
 <style lang="scss" scoped>
 .user {
   margin-left: 20px;
