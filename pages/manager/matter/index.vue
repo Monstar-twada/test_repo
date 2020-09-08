@@ -1,13 +1,13 @@
 <template>
-  <Customer />
+  <Matter />
 </template>
 
 <script>
-import Customer from '~/components/manager/matter/index'
+import Matter from '~/components/manager/matter/index'
 export default {
   layout: 'manager',
   components: {
-    Customer,
+    Matter,
   },
 }
 </script>
