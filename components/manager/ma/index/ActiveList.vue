@@ -4,80 +4,101 @@
       <h2>今月のアクションリスト</h2>
       <fg-month-picker v-model="currentMonth" />
     </div>
-    <v-data-table
-      :headers="headers"
-      :items="itemList.results"
-      :items-per-page="itemList.limit"
-      :page.sync="currentPage"
-      hide-default-footer
-    >
-      <template v-slot:item.vehicle_inspection="{ item }">
-        <h3>{{ item.vehicle_inspection }}</h3>
-        <h3>({{ item.year }})</h3>
-      </template>
-      <template v-slot:item.list_count="{ item }">
-        <div class="count">{{ item.list_count.toLocaleString() }}</div>
-      </template>
-      <template v-slot:item.progress="{ item }">
-        <span class="progress">
-          -&nbsp;{{
-            item.goal_count.toLocaleString()
-          }}&nbsp;コール済&nbsp;&nbsp;({{ item.goal_percent }})
-        </span>
-      </template>
-      <template v-slot:item.detail="{ item }">
-        <div class="detail">
-          <dl>
-            <dt>車検入庫</dt>
-            <dd>
-              <span>{{ item.warehouse.toLocaleString() }}</span
-              >件
-            </dd>
-          </dl>
-          <dl>
-            <dt>本予約</dt>
-            <dd>
-              <span>{{ item.reserve.toLocaleString() }}</span
-              >件
-            </dd>
-          </dl>
-          <dl>
-            <dt>仮予約</dt>
-            <dd>
-              <span>{{ item.tentative_reserve.toLocaleString() }}</span
-              >件
-            </dd>
-          </dl>
-          <dl>
-            <dt>買換意向</dt>
-            <dd>
-              <span>{{ item.intention_to_replace.toLocaleString() }}</span
-              >件
-            </dd>
-          </dl>
-          <dl>
-            <dt>納車済</dt>
-            <dd>
-              <span>{{ item.delivered.toLocaleString() }}</span
-              >件
-            </dd>
-          </dl>
-        </div>
-      </template>
-      <template v-slot:item.operation="{ item }">
-        <nuxt-link to="/ma/customer_list?type=0000&date=202009">
-          <fg-button
-            v-if="item.list_count != 0"
-            class="button"
-            type="primary"
-            suffix-icon="arrow-right"
-            round
-            bold
-            >対象者一覧</fg-button
-          >
-        </nuxt-link>
-      </template>
-    </v-data-table>
+    <fg-table :data="itemList.results">
+      <fg-table-column
+        show="車検"
+        lable="vehicleInspection"
+        width="10%"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <h3>{{ item.vehicleInspection }}</h3>
+          <h3>({{ item.year }})</h3>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="対象者"
+        lable="listCount"
+        width="8%"
+        cell-class="right"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <div class="count">{{ item.listCount.toLocaleString() }}</div>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="進捗"
+        lable="progress"
+        width="14%"
+        cell-class="left"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <span class="progress">
+            -&nbsp;{{
+              item.goal_count.toLocaleString()
+            }}&nbsp;コール済&nbsp;&nbsp;({{ item.goal_percent }})
+          </span>
+        </template>
+      </fg-table-column>
+      <fg-table-column show="内訳" lable="detail" width="52%" :sortable="false">
+        <template v-slot="item">
+          <div class="detail">
+            <dl>
+              <dt>車検入庫</dt>
+              <dd>
+                <span>{{ item.warehouse.toLocaleString() }}</span
+                >件
+              </dd>
+            </dl>
+            <dl>
+              <dt>本予約</dt>
+              <dd>
+                <span>{{ item.reserve.toLocaleString() }}</span
+                >件
+              </dd>
+            </dl>
+            <dl>
+              <dt>仮予約</dt>
+              <dd>
+                <span>{{ item.tentative_reserve.toLocaleString() }}</span
+                >件
+              </dd>
+            </dl>
+            <dl>
+              <dt>買換意向</dt>
+              <dd>
+                <span>{{ item.intention_to_replace.toLocaleString() }}</span
+                >件
+              </dd>
+            </dl>
+            <dl>
+              <dt>納車済</dt>
+              <dd>
+                <span>{{ item.delivered.toLocaleString() }}</span
+                >件
+              </dd>
+            </dl>
+          </div>
+        </template>
+      </fg-table-column>
+      <fg-table-column label width="16%" :sortable="false">
+        <template v-slot="item">
+          <nuxt-link to="/ma/customer_list?type=0000&date=202009">
+            <fg-button
+              v-if="item.listCount != 0"
+              class="button"
+              type="primary"
+              suffix-icon="arrow-right"
+              round
+              bold
+              >対象者一覧</fg-button
+            >
+          </nuxt-link>
+        </template>
+      </fg-table-column>
+    </fg-table>
     <h5 class="ma-index-command">
       ※連絡先が入力されていない顧客は表示しておりません
     </h5>
@@ -94,50 +115,12 @@ export default {
     },
   },
   data: () => ({
-    inputValue2: '',
-    headers: [
-      {
-        text: '車検',
-        align: 'center',
-        value: 'vehicle_inspection',
-        width: '10%',
-        sortable: false,
-      },
-      {
-        text: '対象者',
-        value: 'list_count',
-        align: 'right',
-        width: '8%',
-        sortable: false,
-      },
-      {
-        text: '進捗',
-        value: 'progress',
-        align: 'left',
-        width: '13%',
-        sortable: false,
-      },
-      {
-        text: '内訳',
-        value: 'detail',
-        align: 'center',
-        width: '50%',
-        sortable: false,
-      },
-      {
-        text: '',
-        value: 'operation',
-        align: 'center',
-        sortable: false,
-        width: '16%',
-      },
-    ],
     itemList: {
       results: [
         {
-          vehicle_inspection: '1月満期',
+          vehicleInspection: '1月満期',
           year: 2021,
-          list_count: 51415,
+          listCount: 1415,
           goal_count: 34,
           goal_percent: '40%',
           warehouse: 83,
@@ -147,9 +130,9 @@ export default {
           delivered: 3,
         },
         {
-          vehicle_inspection: '12月満期',
+          vehicleInspection: '12月満期',
           year: 2020,
-          list_count: 0,
+          listCount: 0,
           goal_count: 0,
           goal_percent: 0,
           warehouse: 0,
@@ -159,9 +142,9 @@ export default {
           delivered: '0',
         },
         {
-          vehicle_inspection: '11月満期',
+          vehicleInspection: '11月満期',
           year: 2020,
-          list_count: 938,
+          listCount: 938,
           goal_count: 34,
           goal_percent: '40%',
           warehouse: 120,
@@ -171,9 +154,9 @@ export default {
           delivered: 11,
         },
         {
-          vehicle_inspection: '10月満期',
+          vehicleInspection: '10月満期',
           year: 2020,
-          list_count: 917,
+          listCount: 917,
           goal_count: 34,
           goal_percent: '40%',
           warehouse: 92,
@@ -183,9 +166,9 @@ export default {
           delivered: 11,
         },
         {
-          vehicle_inspection: '9月満期',
+          vehicleInspection: '9月満期',
           year: 2020,
-          list_count: 839,
+          listCount: 839,
           goal_count: 34,
           goal_percent: '40%',
           warehouse: 52,
@@ -195,9 +178,9 @@ export default {
           delivered: 2,
         },
         {
-          vehicle_inspection: '8月満期',
+          vehicleInspection: '8月満期',
           year: 2020,
-          list_count: 938,
+          listCount: 938,
           goal_count: 34,
           goal_percent: '40%',
           warehouse: 120,
@@ -207,9 +190,9 @@ export default {
           delivered: 11,
         },
         {
-          vehicle_inspection: '7月満期',
+          vehicleInspection: '7月満期',
           year: 2020,
-          list_count: 917,
+          listCount: 917,
           goal_count: 34,
           goal_percent: '40%',
           warehouse: 92,
@@ -248,63 +231,48 @@ export default {
 </script>
 
 <style lang="scss">
-.v-application--is-ltr
-  .ma-index
-  .v-data-table
-  .v-data-table__wrapper
-  table
-  thead
-  tr
-  th {
-  text-align: center !important;
-}
-.v-application .ma-index tr th.text-right:nth-child(2) {
-  text-align: center;
-}
 .ma-index {
-  .v-data-table {
-    table {
-      thead {
-        tr {
-          th {
-            font-size: 12px;
-            font-weight: normal;
-            height: 30px !important;
-            color: $--color-primary !important;
-            padding: 0 2px !important;
-            background: $--color-background;
-            border-bottom: none !important;
-            i {
-              display: none;
-            }
+  .fg-table {
+    thead {
+      tr {
+        th {
+          font-size: 12px;
+          font-weight: normal;
+          height: 30px !important;
+          color: $--color-primary !important;
+          padding: 0 2px !important;
+          background: $--color-background;
+          border-bottom: none !important;
+          i {
+            display: none;
           }
         }
       }
-      tbody {
-        tr {
-          font-size: 12px;
-          color: $--color-primary;
-          cursor: pointer;
-          td {
-            padding: 10px 5px !important;
-            font-size: 12px !important;
-            position: relative;
-            font-weight: 300;
-            height: 80px;
-            &:not(:last-child):after {
-              content: '';
-              position: absolute;
-              width: 1px;
-              height: 70%;
-              top: 15%;
-              right: 0;
-              background: $--color-border;
-            }
+    }
+    tbody {
+      tr {
+        font-size: 12px;
+        color: $--color-primary;
+        cursor: pointer;
+        td {
+          padding: 10px 5px !important;
+          font-size: 12px !important;
+          position: relative;
+          font-weight: 300;
+          height: 80px;
+          &:not(:last-child):after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 70%;
+            top: 15%;
+            right: 0;
+            background: $--color-border;
           }
-          td:nth-child(2):after,
-          td:nth-child(4):after {
-            display: none;
-          }
+        }
+        td:nth-child(2):after,
+        td:nth-child(4):after {
+          display: none;
         }
       }
     }
