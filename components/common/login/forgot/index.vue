@@ -48,6 +48,7 @@
           >送信する</fg-button
         >
         <fg-button
+          class="forgot-form__button__login"
           suffix-icon="arrow-right"
           type="primary"
           border
@@ -171,6 +172,9 @@ export default {
     }
     &__button {
       margin: 0 100px;
+      &__login {
+        margin-top: 20px;
+      }
     }
   }
 }
