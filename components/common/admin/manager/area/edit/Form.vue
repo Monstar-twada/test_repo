@@ -10,7 +10,7 @@
         </fg-form-item>
         <fg-form-item label="エリア名">
           <fg-select
-            v-model="form.areaName"
+            v-model="areaName"
             :options="areaItems"
             width="160px"
             placeholder="東京エリア"
@@ -18,11 +18,20 @@
           />
         </fg-form-item>
         <fg-form-item label="郵便番号">
-          <fg-input placeholder="1200011" width="160px"></fg-input>
+          <fg-input
+            v-model="zipcode"
+            placeholder="1200011"
+            width="160px"
+          ></fg-input>
+          <fg-text
+            v-if="validationMessage.zipcode"
+            class="admin-area-edit-form-container__error"
+            >{{ validationMessage.zipcode }}</fg-text
+          >
         </fg-form-item>
         <fg-form-item label="都道府県">
           <fg-select
-            v-model="form.areaName"
+            v-model="areaName"
             :options="areaItems"
             width="160px"
             placeholder="東京都"
@@ -39,10 +48,23 @@
           <fg-input placeholder=""></fg-input>
         </fg-form-item>
         <fg-form-item label="電話番号">
-          <fg-input placeholder="0120-161-135"></fg-input>
+          <fg-input v-model="phone" placeholder="0120-161-135"></fg-input>
+          <fg-text
+            v-if="validationMessage.phone"
+            class="admin-area-edit-form-container__error"
+            >{{ validationMessage.phone }}</fg-text
+          >
         </fg-form-item>
         <fg-form-item label="メールアドレス">
-          <fg-input placeholder="aaaa@cars-enjoy.com"></fg-input>
+          <fg-input
+            v-model="email"
+            placeholder="aaaa@cars-enjoy.com"
+          ></fg-input>
+          <fg-text
+            v-if="validationMessage.email"
+            class="admin-area-edit-form-container__error"
+            >{{ validationMessage.email }}</fg-text
+          >
         </fg-form-item>
         <fg-form-item label="導入サービス">
           <div class="service-items">
@@ -68,7 +90,12 @@
     </div>
 
     <div class="admin-area-edit-form-container_bottom">
-      <fg-button suffix-icon="arrow-right" border bold width="220px"
+      <fg-button
+        suffix-icon="arrow-right"
+        border
+        bold
+        width="220px"
+        @click="handleSubmit"
         >保存</fg-button
       >
       <fg-button width="220px" suffix-icon="arrow-right" bold white-transparent
@@ -82,7 +109,7 @@
 export default {
   data() {
     return {
-      areaOptions: {},
+      areaItems: {},
       serviceItems: [
         {
           icon: 'car',
@@ -113,11 +140,57 @@ export default {
           text: '車検',
         },
       ],
-      form: {
-        name: '',
-        areaName: '',
+      name: '',
+      areaName: '',
+      zipcode: '',
+      phone: '',
+      email: '',
+      reg: {
+        zipcode: /\d{3}-\d{4}/,
+        phone: /\d{2,4}-\d{2,4}-\d{3,4}/,
+        // eslint-disable-next-line no-useless-escape
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      },
+      validationMessage: {
+        zipcode: '',
+        phone: '',
+        email: '',
       },
     }
+  },
+  watch: {
+    zipcode(val) {
+      this.validation()
+    },
+    phone(val) {
+      this.validation()
+    },
+    email(val) {
+      this.validation()
+    },
+  },
+  methods: {
+    validation() {
+      let count = 0
+      if (!this.reg.zipcode.test(this.zipcode)) {
+        this.validationMessage.zipcode = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.zipcode = ''
+      if (!this.reg.phone.test(this.phone)) {
+        this.validationMessage.phone = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.phone = ''
+      if (!this.reg.email.test(this.email)) {
+        this.validationMessage.email = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.email = ''
+      return count
+    },
+    handleSubmit() {
+      const count = this.validation()
+      if (count === 0) console.log('submitted')
+      // if (count === 0) this.nextUrl('/login/passwordreset')
+    },
   },
 }
 </script>
@@ -128,6 +201,14 @@ export default {
   width: 100%;
   margin: 0 auto;
   color: $--color-primary;
+  &__error {
+    input {
+      border: 1px solid $--color-warning;
+    }
+    div {
+      color: $--color-warning;
+    }
+  }
   &_body {
     border-radius: 6px;
     padding: 24px;
