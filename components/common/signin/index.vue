@@ -34,11 +34,7 @@
             <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
               <div class="signin-index-form-item">
                 <div class="signin-index-form-item_img">
-                  <fg-avatar
-                    :src="require(`./img/${item.icon}-icon-white.svg`)"
-                    :size="25"
-                    fillet
-                  ></fg-avatar>
+                  <fg-avatar :src="require(`./img/${item.icon}-icon-white.svg`)" :size="25" fillet></fg-avatar>
                 </div>
                 <div class="signin-index-form-item_title">
                   <p>{{ item.title }}</p>
@@ -92,9 +88,7 @@
         </fg-form-item>
       </fg-form>
       <div class="signin-index-submit-button">
-        <fg-button type="primary" suffix-icon="arrow-right" bold width="220px"
-          >確認</fg-button
-        >
+        <fg-button type="primary" suffix-icon="arrow-right" bold width="220px">確認</fg-button>
       </div>
     </div>
   </div>
@@ -166,7 +160,7 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: $blue-200;
+          background-color: $--color-primary;
           border-radius: 6px;
           .fg-avatar {
             width: 25px;

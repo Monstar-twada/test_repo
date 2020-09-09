@@ -11,7 +11,7 @@
             width="80px"
             height="80px"
             :options="{ width: 720, height: 720 }"
-            url=""
+            url
             @change="avatarChange"
           ></fg-image-processor>
         </fg-form-item>
@@ -164,7 +164,7 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: $blue-200;
+          // background-color: $blue-200;
           border-radius: 6px;
           .fg-avatar {
             width: 25px;
