@@ -43,8 +43,8 @@ export default {
   height: 70px;
   line-height: 40px;
   border-radius: 5px;
-  background-color: $white-300;
-  color: $blue-200;
+  background-color: $--color-white;
+  color: $--color-primary;
 
   h3 {
     font-weight: bold;
@@ -53,14 +53,14 @@ export default {
     display: block;
     width: 1px;
     height: 40px;
-    background: $gray-100;
+    background: $--color-border;
   }
   .keep {
     font-size: 12px;
     width: 84px;
     height: 24px;
     border-radius: 12px;
-    border: 1px $gray-100 solid;
+    border: 1px $--color-border solid;
     line-height: 24px;
     text-align: center;
   }
@@ -68,8 +68,8 @@ export default {
     width: 80px;
     height: 30px;
     font-size: 12px;
-    border: 1px $gray-100 solid;
-    color: $blue-200;
+    border: 1px $--color-border solid;
+    color: $--color-primary;
     border-radius: 15px;
     margin-left: auto;
   }
@@ -77,9 +77,9 @@ export default {
     width: 80px;
     height: 30px;
     font-size: 12px;
-    background: $blue-200;
-    border: 1px $blue-200 solid;
-    color: $white-100;
+    background: $--color-primary;
+    border: 1px $--color-primary solid;
+    color: $--color-background;
     border-radius: 15px;
     margin-left: 10px;
   }

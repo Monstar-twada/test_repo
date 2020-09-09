@@ -194,7 +194,7 @@ export default {
 <style lang="scss">
 .customer-index-table-wrapper {
   .high-light {
-    color: $blue-100;
+    color: $--color-primary-active;
   }
   td {
     .table-item-tel {

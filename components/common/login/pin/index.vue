@@ -11,7 +11,10 @@
     </div>
     <div class="pin-form__requirements mt25">
       <p>ご登録のメールアドレス宛に送信した</p>
-      <p>6桁の「認証コード」を入力して送信してください。</p>
+      <p class="mb20">6桁の「認証コード」を入力して送信してください。</p>
+      <fg-text v-if="validationMessage.code" class="pin-form__error">{{
+        validationMessage.code
+      }}</fg-text>
     </div>
     <div class="pin-form__buttons mt25">
       <fg-button
@@ -21,8 +24,7 @@
         suffix-icon="arrow-right"
         round
         bold
-        :disabled="isValid()"
-        @click="nextUrl('/login/passwordreset')"
+        @click="handleSubmit"
         >送信する</fg-button
       >
       <fg-button
@@ -48,6 +50,9 @@ export default {
     return {
       code: '',
       email: 'aaaa@cars-enjoy.com',
+      validationMessage: {
+        code: '',
+      },
     }
   },
   methods: {
@@ -60,6 +65,18 @@ export default {
       } else {
         return true
       }
+    },
+    validation() {
+      let count = 0
+      if (this.code.length !== 6) {
+        this.validationMessage.code = 'すべての確認コードを入力してください'
+        count += 1
+      } else this.validationMessage.code = ''
+      return count
+    },
+    handleSubmit() {
+      const count = this.validation()
+      if (count === 0) this.nextUrl('/login/passwordreset')
     },
   },
 }
@@ -77,11 +94,11 @@ export default {
     text-align: center;
     margin: 0 auto;
     h2 {
-      color: $blue-200;
+      color: $--color-primary;
       margin-bottom: 35px;
     }
     h3 {
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 400;
     }
     &__button {
@@ -91,6 +108,9 @@ export default {
       input[type='text'] {
         border: 1px solid red;
       }
+      div {
+        color: $--color-warning;
+      }
     }
     &__pin-input {
       display: flex;
@@ -98,7 +118,7 @@ export default {
     }
     &__requirements {
       text-align: center;
-      color: $blue-200;
+      color: $--color-primary;
     }
     &__buttons {
       display: flex;

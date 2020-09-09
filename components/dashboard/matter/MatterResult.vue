@@ -312,12 +312,12 @@ export default {
       line-height: 20px !important;
       background: none !important;
       box-shadow: none !important;
-      color: $white-300 !important;
+      color: $--color-white !important;
       border-radius: 0px !important;
       transition: none !important;
     }
     .v-pagination__item--active {
-      border-bottom: 1px $white-300 solid !important;
+      border-bottom: 1px $--color-white solid !important;
     }
 
     .v-pagination__item--active .primary {
@@ -332,7 +332,7 @@ export default {
       thead {
         tr {
           th {
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             text-align: center !important;
             &:first-child {
               border-radius: 6px 0 0 0 !important;
@@ -347,11 +347,11 @@ export default {
         tr {
           height: 60px !important;
           &:nth-child(even) {
-            background-color: $white-100;
+            background-color: $--color-background;
           }
           td {
             text-align: center;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             border-bottom: none !important;
           }
         }
@@ -377,7 +377,7 @@ export default {
       align-items: baseline;
       p {
         margin-bottom: 0;
-        color: $white-300;
+        color: $--color-white;
         font-size: 14px;
         &.total {
           margin-right: 4.3px;

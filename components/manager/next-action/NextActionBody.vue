@@ -70,14 +70,14 @@ export default {
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $blue-100;
+    background-color: $--color-primary-active;
     cursor: pointer;
     border-radius: 2px;
   }
   h4.title {
     margin: 15px 8px 0 12px;
     font-size: 14px !important;
-    color: $blue-200;
+    color: $--color-primary;
     &:first-child {
       margin-top: 0;
     }

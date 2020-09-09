@@ -71,7 +71,7 @@ export default {
   width: 100%;
   height: max-content;
   border-radius: 6px;
-  background-color: $white-300;
+  background-color: $--color-white;
   padding: 18px 23px;
   display: grid;
   grid-template-columns: 230px 1fr;
@@ -81,8 +81,8 @@ export default {
     display: flex;
     font-size: 18px;
     font-weight: bold;
-    color: $blue-200;
-    border-right: 1px solid $gray-100;
+    color: $--color-primary;
+    border-right: 1px solid $--color-border;
     .v-image {
       margin-right: 12px;
     }
@@ -96,7 +96,7 @@ export default {
       p {
         font-size: 14px;
         font-weight: bold;
-        color: $blue-200;
+        color: $--color-primary;
         margin-bottom: 0;
       }
       &--btn {
@@ -107,7 +107,7 @@ export default {
         border: solid 1px #dfe6f0;
         padding: 3px 10px;
         font-size: 12px;
-        color: $blue-100;
+        color: $--color-primary-active;
         cursor: pointer;
         .v-image {
           margin-right: 8px;

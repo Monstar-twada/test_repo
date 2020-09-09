@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 .customer-info-cost-item-container {
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   margin: 0;
   width: 123px;
   height: 190px;
@@ -55,7 +55,7 @@ export default {
       width: 100%;
       text-align: center;
       border-radius: 4px;
-      background-color: $white-100;
+      background-color: $--color-background;
       font-size: 14px;
       font-weight: bold;
       padding: 5px 0;
@@ -75,7 +75,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: solid 1px $gray-100;
+    border-top: solid 1px $--color-border;
     height: 40px;
     p {
       font-size: 14px;

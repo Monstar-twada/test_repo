@@ -19,7 +19,7 @@ export default {}
 .search-bar-wrapper {
   position: relative;
   padding: 0 70px 20px 20px;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   .fg-button {
     position: absolute;

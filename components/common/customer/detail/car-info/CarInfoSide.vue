@@ -77,11 +77,12 @@ export default {
   .car-photos-wrapper {
     width: 100%;
     height: 210px;
-    background: $white-100 url('./img/car-photo.svg') no-repeat center center;
+    background: $--color-background url('./img/car-photo.svg') no-repeat center
+      center;
   }
   .card-wrapper {
     position: relative;
-    background: $white-100;
+    background: $--color-background;
     border-radius: 4px;
     margin-top: 10px;
     padding: 12px;
@@ -93,7 +94,7 @@ export default {
       bottom: 12px;
       content: '';
       width: 1px;
-      background: $gray-100;
+      background: $--color-border;
     }
   }
 }

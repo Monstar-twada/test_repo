@@ -56,12 +56,12 @@ export default {
     padding: 25px 20px 16px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $gray-600;
+    border-bottom: 1px solid $--color-background-hover;
     h2 {
       font-weight: 600;
       font-size: 18px;
       line-height: 24px;
-      color: $blue-200;
+      color: $--color-primary;
     }
   }
 }

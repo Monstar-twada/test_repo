@@ -127,11 +127,11 @@ export default {
   max-width: 712px;
   width: 100%;
   margin: 0 auto;
-  color: $blue-200;
+  color: $--color-primary;
   &_body {
     border-radius: 6px;
     padding: 24px;
-    background-color: $white-300;
+    background-color: $--color-white;
     .page-title-wrapper {
       margin-bottom: 20px;
       h2 {
@@ -155,7 +155,7 @@ export default {
           &_img {
             width: 40px;
             height: 40px;
-            background-color: $blue-200;
+            background-color: $--color-primary;
             display: flex;
             justify-content: center;
             align-items: center;

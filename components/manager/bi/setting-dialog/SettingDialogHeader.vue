@@ -57,7 +57,7 @@ export default {
   justify-content: space-between;
   padding: 24px;
   &.border {
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
   }
   height: 58px;
   &__toggle {
@@ -66,7 +66,7 @@ export default {
     top: 18px;
   }
   h2 {
-    color: $blue-200;
+    color: $--color-primary;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

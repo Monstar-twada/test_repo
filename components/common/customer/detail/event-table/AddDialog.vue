@@ -14,7 +14,10 @@
         <fg-row gutter="30" class="info-header">
           <fg-col span="7">
             <b>日時</b>
-            <fg-date-setter :value="form.date"></fg-date-setter>
+            <fg-date-picker
+              v-model="form.date"
+              format="yyyy/MM/dd (W) hh:mm"
+            ></fg-date-picker>
           </fg-col>
           <fg-col span="7">
             <b>対象車両</b>
@@ -94,7 +97,7 @@ export default {
   right: 10px;
   width: 740px;
   max-width: 100%;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   box-shadow: 0 5px 10px rgba(7, 134, 189, 0.3);
   .header-wrapper {
@@ -107,7 +110,7 @@ export default {
   }
   .body-wrapper {
     margin: 0 34px;
-    color: $blue-200;
+    color: $--color-primary;
     overflow: hidden;
     font-size: 14px;
     .info-header {

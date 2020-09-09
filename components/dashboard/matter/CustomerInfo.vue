@@ -91,7 +91,7 @@ export default {
     &--context {
       p {
         margin-bottom: 2px;
-        color: $blue-200;
+        color: $--color-primary;
       }
       p:nth-child(1) {
         font-size: 19px;
@@ -107,7 +107,7 @@ export default {
       }
       & > span {
         font-size: 12px;
-        color: $blue-500;
+        color: $--color-primary-placeholder;
         display: flex;
         align-items: center;
         .v-image {
@@ -123,10 +123,14 @@ export default {
         width: 100%;
         height: 33px;
         opacity: 0.8;
-        background-image: linear-gradient(96deg, $blue-400, $blue-100);
+        background-image: linear-gradient(
+          96deg,
+          $--color-success,
+          $--color-primary-active
+        );
         font-size: 14px;
         font-weight: bold;
-        color: $white-300;
+        color: $--color-white;
         display: flex;
         align-items: center;
         padding-left: 1em;
@@ -143,7 +147,7 @@ export default {
           align-items: center;
           font-size: 12px;
           font-weight: bold;
-          color: $blue-200;
+          color: $--color-primary;
           & > span {
             margin-right: 0.5em;
           }
@@ -159,17 +163,17 @@ export default {
         margin-top: 10px;
         & > p {
           font-size: 12px;
-          color: $blue-200;
+          color: $--color-primary;
           font-weight: bold;
           margin-bottom: 0;
         }
         .items {
           & > span {
             font-size: 10px;
-            color: $blue-200;
-            background-color: $white-300;
+            color: $--color-primary;
+            background-color: $--color-white;
             border-radius: 4px;
-            border: solid 1px $gray-100;
+            border: solid 1px $--color-border;
             padding: 5px;
           }
         }
@@ -181,22 +185,22 @@ export default {
         margin-top: 10px;
         & > p {
           font-size: 12px;
-          color: $blue-200;
+          color: $--color-primary;
           font-weight: bold;
           margin-bottom: 0;
         }
         .items {
           & > span {
             font-size: 10px;
-            color: $white-300;
+            color: $--color-white;
             border-radius: 10px;
             padding: 5px 10px;
           }
           &__blue {
-            background-color: $blue-200;
+            background-color: $--color-primary;
           }
           &__gray {
-            background-color: $gray-200;
+            background-color: $--color-background;
           }
         }
       }

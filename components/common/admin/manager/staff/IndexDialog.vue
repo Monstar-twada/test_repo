@@ -59,14 +59,14 @@ export default {
   position: relative;
   .body-wrapper {
     margin: 0 0;
-    color: $blue-200;
+    color: $--color-primary;
     overflow: hidden;
     font-size: 14px;
     .fg-form {
       .fg-form-item {
         padding: 20px 40px;
         margin-bottom: 0;
-        border-bottom: 1px solid $gray-600;
+        border-bottom: 1px solid $--color-background-hover;
         .fg-form-item__label {
           font-weight: normal;
         }

@@ -57,7 +57,7 @@ export default {}
   &__title {
     font-size: 14px;
     font-weight: bold;
-    color: $blue-200;
+    color: $--color-primary;
     margin-bottom: 1.2em;
   }
   &__card {
@@ -65,8 +65,8 @@ export default {}
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-radius: 4px;
-    border: solid 1px $gray-100;
-    background-color: $white-100;
+    border: solid 1px $--color-border;
+    background-color: $--color-background;
     margin-bottom: 1.2em;
     &--title {
       display: flex;
@@ -88,7 +88,7 @@ export default {}
         align-items: center;
         p {
           margin-bottom: 0;
-          color: $blue-200;
+          color: $--color-primary;
         }
         p:first-child {
           font-size: 10px;

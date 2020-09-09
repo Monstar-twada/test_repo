@@ -27,12 +27,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $white-300;
+    color: $--color-white;
     font-size: 50px;
   }
   .body-wrapper {
     margin-left: 50%;
-    background: $white-300;
+    background: $--color-white;
   }
 }
 </style>

@@ -71,12 +71,13 @@ export default {
   },
   data() {
     const isManager = this.$isManager
+    const isConsole = this.$isConsole
     return {
       collapsed: this.value,
       selectedResult: 8,
       // item's index in menu
       index: -1,
-      logoName: isManager ? 'manager' : 'dashboard',
+      logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
       selectList: [
         {
           title: '営業管理',
@@ -209,7 +210,7 @@ export default {
     overflow: hidden;
     .company {
       margin: 26px 15px 0 15px;
-      color: $blue-100;
+      color: $--color-primary-active;
       font-weight: 400;
       font-size: 10px;
       @include transitionMixin(all);
@@ -257,11 +258,11 @@ export default {
 
     .v-list-item__title {
       font-size: 14px !important;
-      color: $blue-200 !important;
+      color: $--color-primary !important;
     }
 
     .v-list-item {
-      background: $white-300;
+      background: $--color-white;
       padding: 0;
       a {
         display: flex;
@@ -294,7 +295,7 @@ export default {
     .v-list-item--active {
       background: transparent !important;
       .v-list-item__title {
-        color: $white-100 !important;
+        color: $--color-background !important;
       }
       &::before {
         opacity: 0 !important;

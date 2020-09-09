@@ -7,13 +7,17 @@
   "scripts": {
     "dashboard": "nuxt -c ./build/config.dashboard.js",
     "manager": "nuxt -c ./build/config.manager.js",
+    "console": "nuxt -c ./build/config.console.js",
     "dev:d": "node build/index.js && npm run dashboard",
     "dev:m": "node build/index.js && npm run manager",
+    "dev:c": "node build/index.js && npm run console",
     "build:d": "nuxt build -c ./build/config.dashboard.js",
     "build:m": "nuxt build -c ./build/config.manager.js",
-    "build": "npm run build:d && npm run build:m",
+    "build:c": "nuxt build -c ./build/config.console.js",
+    "build": "npm run build:d && npm run build:m && npm run build:c",
     "start:d": "nuxt start -c ./build/config.dashboard.js -p 3000",
-    "start:m": "nuxt start -c ./build/config.manager.js -p 3001"
+    "start:m": "nuxt start -c ./build/config.manager.js -p 3001",
+    "start:c": "nuxt start -c ./build/config.console.js -p 3002"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -42,6 +46,7 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "sass-loader": "^8.0.2",
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-merge": "^5.1.3"
   }
 }

@@ -233,7 +233,7 @@ export default {
 <style lang="scss" scoped>
 .title {
   font-size: 20px;
-  color: $blue-200;
+  color: $--color-primary;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -243,14 +243,14 @@ export default {
   padding: 30px;
   border-radius: 5px;
   margin-bottom: 30px;
-  background: $white-300;
+  background: $--color-white;
 }
 table.tableStyle {
   width: 100%;
   background-color: #ffffff;
   border-collapse: collapse;
-  border: 1px solid $gray-100;
-  color: $blue-200;
+  border: 1px solid $--color-border;
+  color: $--color-primary;
 }
 .table-w50 {
   width: 50% !important;
@@ -268,7 +268,7 @@ table.tableStyle td {
   &:nth-child(odd) {
     width: 77px;
     font-size: 11px;
-    background-color: $white-100;
+    background-color: $--color-background;
   }
   &:nth-child(even) {
     width: 117px;
@@ -278,10 +278,10 @@ table.tableStyle td {
 }
 table.tableStyle td,
 table.tableStyle th {
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   padding: 5px;
 }
 .custombutton {
-  border: 1px solid $white-300;
+  border: 1px solid $--color-white;
 }
 </style>

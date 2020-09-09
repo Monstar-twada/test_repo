@@ -174,14 +174,14 @@ export default {
 <style lang="scss"></style>
 <style lang="scss" scoped>
 .car-info {
-  color: $blue-200;
+  color: $--color-primary;
   &__base {
-    background: $white-300;
+    background: $--color-white;
     border-radius: 5px;
     overflow: hidden;
     &-title {
       line-height: 40px;
-      border-bottom: 1px $gray-100 solid;
+      border-bottom: 1px $--color-border solid;
       font-weight: 400;
     }
     dl {
@@ -191,7 +191,7 @@ export default {
       dt {
         display: inline-block;
         width: 30%;
-        border-right: 1px $gray-100 solid;
+        border-right: 1px $--color-border solid;
       }
       dd {
         display: inline-block;
@@ -202,7 +202,7 @@ export default {
   }
 
   &__customer {
-    background: $white-300;
+    background: $--color-white;
     border-radius: 5px;
     overflow: hidden;
     padding: 20px;
@@ -220,7 +220,7 @@ export default {
   }
 
   &__price {
-    background: $white-300;
+    background: $--color-white;
     border-radius: 5px;
     overflow: hidden;
     padding: 20px;
@@ -242,8 +242,8 @@ export default {
       .input {
         width: 170px;
         height: 44px;
-        border: 1px $gray-100 solid;
-        color: $blue-200;
+        border: 1px $--color-border solid;
+        color: $--color-primary;
         font-weight: bold;
         text-align: right;
         padding: 0 10px;
@@ -251,17 +251,17 @@ export default {
     }
   }
   &__table {
-    background: $white-100;
+    background: $--color-background;
     border-radius: 5px;
     overflow: hidden;
     padding: 20px;
     .theme--light.v-data-table .v-data-table__wrapper table thead th {
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
     }
     .theme--light.v-data-table .v-data-table__wrapper table tbody td {
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
     }
   }
 }

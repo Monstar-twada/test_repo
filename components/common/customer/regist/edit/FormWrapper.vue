@@ -13,6 +13,7 @@
             height="80px"
             :options="{ width: 720, height: 720 }"
             :url="form.photoKey"
+            :validate="customValidate"
             @change="avatarChange"
           ></fg-image-processor>
         </fg-form-item>
@@ -137,11 +138,13 @@
             :options="{ width: 2000 }"
             url=""
             icon="license-front"
+            :validate="customValidate"
           ></fg-image-processor>
           <fg-image-processor
             :options="{ width: 2000 }"
             url=""
             icon="license-back"
+            :validate="customValidate"
           ></fg-image-processor>
         </fg-form-item>
 
@@ -295,11 +298,22 @@ export default {
     },
     handleConfirm() {
       this.saveCache()
-      // this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
-      this.$router.push(`/customer/detail/?id=${this.query.id}`)
+      this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
     },
     handleBack() {
       this.$router.push(`/customer/detail?id=${this.query.id}`)
+    },
+    customValidate(file, next) {
+      if (!/^image\/(jpeg|png|pdf|heif)/.test(file.type)) {
+        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        return
+      }
+
+      if (file.size / 1024 > 5120) {
+        this.$alert('5MBまでのファイルが使用できます')
+        return
+      }
+      next()
     },
     async getDetail() {
       try {

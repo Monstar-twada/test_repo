@@ -89,8 +89,8 @@ export default {
   grid-template-columns: 140px 1fr;
   padding: 30px 0;
   margin: 0 120px;
-  border-top: solid 1px $gray-600;
-  border-bottom: solid 1px $gray-600;
+  border-top: solid 1px $--color-background-hover;
+  border-bottom: solid 1px $--color-background-hover;
   &__title {
     display: flex;
     align-items: center;
@@ -113,7 +113,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $blue-200;
+        background-color: $--color-primary;
         cursor: pointer;
         &-active {
           width: 60px;
@@ -122,8 +122,8 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          border: solid 1px $gray-100;
-          background-color: $white-300;
+          border: solid 1px $--color-border;
+          background-color: $--color-white;
         }
       }
       p {

@@ -59,6 +59,7 @@
               :options="{ width: 2000, height: 'auto' }"
               icon="license-front"
               :url="form.photoKey"
+              :validate="customValidate"
               @change="avatarChange"
             ></fg-image-processor>
           </div>
@@ -79,6 +80,7 @@
           <fg-image-processor
             :options="{ width: 2000, height: 'auto' }"
             icon="car"
+            :validate="customValidate"
             url=""
           ></fg-image-processor>
         </fg-form-item>
@@ -512,6 +514,18 @@ export default {
     avatarChange(data) {
       console.log('avatarChange', data)
       this.form.photoKey = data.url
+    },
+    customValidate(file, next) {
+      if (!/^image\/(jpeg|png|pdf|heif)/.test(file.type)) {
+        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        return
+      }
+
+      if (file.size / 1024 > 5120) {
+        this.$alert('5MBまでのファイルが使用できます')
+        return
+      }
+      next()
     },
     async getCarInfo() {
       try {

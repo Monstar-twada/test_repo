@@ -353,7 +353,7 @@ export default {
     font-size: 16px;
   }
   .theme--light.v-label {
-    color: $blue-200;
+    color: $--color-primary;
   }
 }
 </style>
@@ -362,11 +362,11 @@ export default {
   width: 712px;
   margin: 0 auto;
   &-form {
-    background: $white-300;
+    background: $--color-white;
     border-radius: 5px;
     padding: 20px;
     h3 {
-      color: $blue-200;
+      color: $--color-primary;
     }
     dl {
       width: 100%;
@@ -375,7 +375,7 @@ export default {
       align-items: flex-start;
       justify-content: flex-start;
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
       dt {
         width: 20%;
         line-height: 40px;
@@ -403,7 +403,7 @@ export default {
       }
     }
     &__apologize {
-      border: 1px $gray-100 solid;
+      border: 1px $--color-border solid;
       border-radius: 5px;
       flex: 0 0 auto !important;
       width: 300px;

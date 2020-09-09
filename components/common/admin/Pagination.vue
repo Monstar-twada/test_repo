@@ -26,7 +26,7 @@ export default {
   span {
     display: inline-block;
     cursor: pointer;
-    color: $blue-100;
+    color: $--color-primary-active;
     font-size: 10px;
     &:hover {
       opacity: 0.8;
@@ -65,7 +65,7 @@ export default {
       align-items: center;
       width: 26px;
       height: 22px;
-      border: 1px solid $gray-100;
+      border: 1px solid $--color-border;
       i {
         position: relative;
         display: inline-block;
@@ -77,7 +77,7 @@ export default {
           position: absolute;
           display: inline-block;
           content: '';
-          background: $blue-100;
+          background: $--color-primary-active;
         }
         &:before {
           left: 0;
@@ -113,7 +113,7 @@ export default {
         i {
           &:before,
           &:after {
-            background: $gray-200;
+            background: $--color-background;
           }
         }
       }

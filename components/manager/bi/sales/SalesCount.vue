@@ -34,13 +34,13 @@ export default {
   text-align: right;
   &--label {
     font-size: 10px;
-    color: $blue-500;
+    color: $--color-primary-placeholder;
     font-weight: 400;
   }
   &--number {
     font-family: 'Yantramanav';
     font-size: 24px;
-    color: $blue-200;
+    color: $--color-primary;
     font-weight: 900;
     span {
       font-size: 12px;

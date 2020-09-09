@@ -8,9 +8,10 @@
           </td>
         </tr>
         <tr>
-          <td>
-            コール済
-            <strong>34</strong> /162（40%）
+          <td class="pt10 pb10">
+            <p>コール済</p>
+            <h4><strong>34</strong> /162</h4>
+            <p>（40%）</p>
           </td>
         </tr>
         <tr>
@@ -29,17 +30,22 @@
           <td class="main">
             <div class="ml20">
               <label>継続顧客：</label>
-              <span> <strong>34</strong> /162（40%） </span>
+              <span> <strong>9999</strong> /9999（40%） </span>
             </div>
           </td>
-          <td>
-            <div class="ml20">
-              <label>納車済</label>
-              <span> <strong>83</strong>（40%） </span>
-              <label>車検入庫</label>
-              <span> <strong>83</strong>（40%） </span>
-              <label>本予約</label>
-              <span> <strong>12</strong>（40%） </span>
+          <td class="detail">
+            <div class="detail-wrapper">
+              <div
+                v-for="(item, i) in continueCustomer"
+                :key="i"
+                class="detail-item"
+              >
+                <label>{{ item.title }}</label>
+                <span>
+                  <strong>{{ item.data }}</strong>
+                  （{{ item.percent }}）
+                </span>
+              </div>
             </div>
           </td>
         </tr>
@@ -47,21 +53,18 @@
           <td class="main">
             <div class="ml20">
               <label>未確定：</label>
-              <span> <strong>34</strong> /162（40%） </span>
+              <span> <strong>9999</strong> /9999（40%） </span>
             </div>
           </td>
-          <td>
-            <div class="ml20">
-              <label>検討中</label>
-              <span> <strong>47</strong>（40%） </span>
-              <label>買換意向</label>
-              <span> <strong>11</strong>（40%） </span>
-              <label>仮予約</label>
-              <span> <strong>33</strong>（40%） </span>
-              <label>不通</label>
-              <span> <strong>12</strong>（40%） </span>
-              <label>流出先不明</label>
-              <span> <strong>4</strong>（40%） </span>
+          <td class="detail">
+            <div class="detail-wrapper">
+              <div v-for="(item, i) in unsettled" :key="i" class="detail-item">
+                <label>{{ item.title }}</label>
+                <span>
+                  <strong>{{ item.data }}</strong>
+                  （{{ item.percent }}）
+                </span>
+              </div>
             </div>
           </td>
         </tr>
@@ -69,17 +72,22 @@
           <td class="main">
             <div class="ml20">
               <label>他社流出：</label>
-              <span> <strong>34</strong> /162（40%） </span>
+              <span> <strong>9999</strong> /9999（40%） </span>
             </div>
           </td>
-          <td>
-            <div class="ml20">
-              <label>買換</label>
-              <span> <strong>47</strong>（40%） </span>
-              <label>車検</label>
-              <span> <strong>83</strong>（40%） </span>
-              <label>廃車</label>
-              <span> <strong>32</strong>（40%） </span>
+          <td class="detail">
+            <div class="detail-wrapper">
+              <div
+                v-for="(item, i) in otherCompany"
+                :key="`continue${i}}`"
+                class="detail-item"
+              >
+                <label>{{ item.title }}</label>
+                <span>
+                  <strong>{{ item.data }}</strong>
+                  （{{ item.percent }}）
+                </span>
+              </div>
             </div>
           </td>
         </tr>
@@ -91,15 +99,77 @@
 export default {
   name: 'StatusBar',
   data() {
-    return {}
+    return {
+      continueCustomer: [
+        {
+          title: '納車済',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '車検入庫',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '本予約',
+          data: 9999,
+          percent: '40%',
+        },
+      ],
+      unsettled: [
+        {
+          title: '検討中',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '買換意向',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '仮予約',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '不通',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '流出先不明',
+          data: 9999,
+          percent: '40%',
+        },
+      ],
+      otherCompany: [
+        {
+          title: '買換',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '車検',
+          data: 9999,
+          percent: '40%',
+        },
+        {
+          title: '廃車',
+          data: 9999,
+          percent: '40%',
+        },
+      ],
+    }
   },
 }
 </script>
 <style lang="scss" scoped>
 .status-bar {
   font-size: 12px;
-  background: $white-300;
-  color: $blue-200;
+  background: $--color-white;
+  color: $--color-primary;
   border-radius: 6px;
   width: 100%;
   border-spacing: 0;
@@ -112,10 +182,15 @@ export default {
     table {
       padding: 20px 0px 15px 25px;
       td {
-        height: 32px;
+        text-align: center;
+        vertical-align: center;
+      }
+      p {
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
       h4 {
-        font-size: 18px;
+        font-size: 14px;
       }
       strong {
         margin-left: 5px;
@@ -133,16 +208,8 @@ export default {
         height: 45px;
 
         td {
-          border-left: 1px solid $gray-100;
-          border-bottom: 1px solid $gray-100;
-
-          label {
-            display: inline-block;
-            margin-right: 5px;
-          }
-          strong {
-            font-size: 16px;
-          }
+          border-left: 1px solid $--color-border;
+          border-bottom: 1px solid $--color-border;
         }
       }
 
@@ -153,14 +220,45 @@ export default {
 
     .main {
       font-size: 14px;
-      width: 230px;
+      width: 280px;
       label {
+        display: inline-block;
         width: 70px;
         font-weight: bold;
         margin-right: 10px;
       }
       strong {
         font-size: 21px;
+      }
+    }
+    .detail {
+      &-wrapper {
+        padding: 8px 20px;
+      }
+      &-item {
+        display: inline-block;
+        margin: 8px 20px 8px 0;
+
+        label {
+          margin-right: 10px;
+        }
+
+        strong {
+          font-size: 16px;
+        }
+      }
+    }
+    td.detail {
+      border-left: none;
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 70%;
+        top: 15%;
+        left: 0;
+        background: $--color-border;
       }
     }
   }

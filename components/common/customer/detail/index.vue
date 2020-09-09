@@ -91,9 +91,9 @@ export default {
 </script>
 <style lang="scss">
 .customer-detail-page-wrapper {
-  color: $blue-200;
+  color: $--color-primary;
   .high-light {
-    color: $blue-100;
+    color: $--color-primary-active;
   }
   .right-border {
     position: relative;
@@ -109,7 +109,7 @@ export default {
   }
   .customer-info {
     width: 100%;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 5px;
     overflow: hidden;
   }

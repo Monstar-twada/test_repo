@@ -5,18 +5,18 @@
       :page="page"
       title-image="customer.svg"
     />
-    <ConfirmBodyContainer />
+    <ConfirmWrapper />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import ConfirmBodyContainer from '~/components/common/customer/regist/user/confirm/ConfirmBodyContainer.vue'
+import ConfirmWrapper from '~/components/common/customer/regist/user/confirm/ConfirmWrapper'
 export default {
   layout: 'dashboard',
   components: {
     Breadcrumbs,
-    ConfirmBodyContainer,
+    ConfirmWrapper,
   },
   data() {
     return {

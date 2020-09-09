@@ -229,7 +229,7 @@ export default {
 .customer-detail-customer-info-wrapper {
   .side-customer-profile-wrapper {
     position: relative;
-    color: $blue-200;
+    color: $--color-primary;
     font-weight: normal;
     height: 80px;
     .fg-avatar {

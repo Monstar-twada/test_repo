@@ -36,7 +36,7 @@ export default {
 .content {
   ul {
     list-style: none;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     padding: 10px 0px;
     justify-content: space-between;
     &:last-child {
@@ -44,14 +44,14 @@ export default {
     }
     h3 {
       position: absolute;
-      color: $blue-200;
+      color: $--color-primary;
       font-size: 10px;
       font-weight: 400;
     }
     li {
       margin-left: 68px;
       font-size: 12px;
-      color: $blue-200;
+      color: $--color-primary;
       font-weight: 800;
     }
   }

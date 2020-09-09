@@ -509,13 +509,13 @@ export default {
 
 <style lang="scss">
 .customer-detail-car-info-wrapper {
-  color: $blue-200;
+  color: $--color-primary;
 
   .double-line {
     width: 100%;
     height: 3px;
-    border-top: 1px solid $gray-100;
-    border-bottom: 1px solid $gray-100;
+    border-top: 1px solid $--color-border;
+    border-bottom: 1px solid $--color-border;
   }
   .car-info-arrow-down-button {
     height: 40px;

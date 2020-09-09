@@ -86,7 +86,7 @@ export default {
   .stats {
     padding: 20px 0px;
     height: 145px;
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid $--color-border;
     &:nth-child(3) {
       border-bottom: none;
       padding-bottom: 0px;
@@ -97,7 +97,7 @@ export default {
       position: relative;
       h3 {
         margin-left: 15px;
-        color: $blue-200;
+        color: $--color-primary;
         font-size: 14px;
         font-weight: 600;
       }
@@ -109,7 +109,7 @@ export default {
         left: 20px;
         top: 65px;
         font-size: 16px;
-        color: #0786bd;
+        color: $--color-primary-active;
         font-weight: 900;
         position: absolute;
         span {
@@ -126,7 +126,7 @@ export default {
       h1 {
         font-size: 36px;
         font-family: 'Yantramanav';
-        color: $blue-200;
+        color: $--color-primary;
         font-weight: 900;
         line-height: 28px;
         text-align: right;
@@ -141,17 +141,17 @@ export default {
         justify-content: space-between;
         height: 30px;
         margin-top: 5px;
-        background: $white-100;
+        background: $--color-background;
         padding: 0px 10px;
         border-radius: 5px;
         h4 {
-          color: $gray-400;
+          color: $--color-background;
           font-size: 10px;
           font-weight: 300;
         }
         h3 {
           font-family: 'Yantramanav';
-          color: $blue-500;
+          color: $--color-primary-placeholder;
           font-size: 17px;
           font-weight: 400;
         }
@@ -163,7 +163,7 @@ export default {
         padding-left: 42%;
         &--label {
           font-size: 10px;
-          color: $gray-500;
+          color: $--color-border;
           font-weight: 400;
         }
       }

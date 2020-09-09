@@ -2,31 +2,40 @@
   <div class="login-index-page-wrapper">
     <Logo />
     <div class="login-form">
-      <fg-input
-        v-model="email"
-        placeholder="メールアドレス"
-        clearable
-        size="medium"
-        :class="['mb20', isEmailValid()]"
-      />
-      <fg-input
-        v-model="password"
-        placeholder="パスワード"
-        size="medium"
-        class="mb30"
-        suffix-icon="eye"
-        :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
-        :type="showPassword ? 'text' : 'password'"
-        @click:suffix-icon="showPassword = !showPassword"
-      />
+      <div class="mb20">
+        <fg-input
+          v-model="email"
+          placeholder="メールアドレス"
+          clearable
+          size="medium"
+          :class="validationMessage.email ? 'login-form__error' : ''"
+        />
+        <fg-text v-if="validationMessage.email" class="login-form__error">{{
+          validationMessage.email
+        }}</fg-text>
+      </div>
+      <div class="mb30">
+        <fg-input
+          v-model="password"
+          placeholder="パスワード"
+          size="medium"
+          suffix-icon="eye"
+          :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
+          :type="showPassword ? 'text' : 'password'"
+          :class="validationMessage.password ? 'login-form__error' : ''"
+          @click:suffix-icon="showPassword = !showPassword"
+        />
+        <fg-text v-if="validationMessage.password" class="login-form__error">{{
+          validationMessage.password
+        }}</fg-text>
+      </div>
       <fg-button
         class="login-form__button"
         type="primary"
         suffix-icon="arrow-right"
         round
         bold
-        :disabled="isValid()"
-        @click="nextUrl('/customer')"
+        @click="confirm"
         >ログイン</fg-button
       >
       <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
@@ -78,14 +87,18 @@ export default {
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
       matchPassword: true,
+      validationMessage: {
+        email: '',
+        password: '',
+      },
     }
   },
   watch: {
     email(val) {
-      this.isValid()
+      this.validation()
     },
-    psasword(val) {
-      this.isValid()
+    password(val) {
+      this.validation()
     },
   },
   methods: {
@@ -103,9 +116,25 @@ export default {
         return true
       }
     },
-    nextUrl(url) {
-      this.$store.commit('user/signIn', true)
-      this.$router.push({ path: url })
+    validation() {
+      let count = 0
+      if (this.email === '') {
+        this.validationMessage.email = 'メールアドレスが空欄です'
+        count += 1
+      } else this.validationMessage.email = ''
+      if (this.password === '') {
+        this.validationMessage.password = 'パスワードが空欄です'
+        count += 1
+      } else this.validationMessage.password = ''
+      return count
+    },
+    // nextUrl(url) {
+    //   this.$store.commit('user/signIn', true)
+    //   this.$router.push({ path: url })
+    // },
+    confirm() {
+      const count = this.validation()
+      if (count === 0) this.$login.success.call(this)
     },
   },
 }
@@ -125,13 +154,16 @@ export default {
       margin: 0 20px;
     }
     &__error {
-      input[type='text'] {
-        border: 1px solid red;
+      input {
+        border: 1px solid $--color-warning;
+      }
+      div {
+        color: $--color-warning;
       }
     }
     &__link {
       text-align: center;
-      color: $blue-100;
+      color: $--color-primary-active;
       font-size: 14px;
     }
     &__googlebtn {
@@ -141,16 +173,16 @@ export default {
       display: flex;
       span {
         text-align: center;
-        color: $blue-200;
+        color: $--color-primary;
         position: relative;
         &:first-child {
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           display: block;
           width: 48%;
           margin-bottom: 10px;
         }
         &:last-child {
-          border-bottom: 1px solid $gray-100;
+          border-bottom: 1px solid $--color-border;
           display: block;
           width: 48%;
           margin-bottom: 10px;
@@ -162,7 +194,7 @@ export default {
     }
     &__requirements {
       text-align: center;
-      color: $blue-500;
+      color: $--color-primary-placeholder;
     }
   }
 }

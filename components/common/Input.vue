@@ -60,15 +60,15 @@ export default {
   padding: 0 10px;
   height: var(--height);
   width: var(--width);
-  border: 1px solid $gray-100;
+  border: 1px solid $--color-border;
   border-radius: 5px;
   line-height: 40px;
   clear: both;
   font-size: var(--fontsize);
-  color: $blue-200;
+  color: $--color-primary;
   &::placeholder {
     font-size: var(--fontsize);
-    color: $blue-500;
+    color: $--color-primary-placeholder;
     text-align: var(--textalign);
   }
 }

@@ -80,7 +80,7 @@ export default {
   background: transparent;
   max-width: 240px;
   width: 100%;
-  color: $blue-200;
+  color: $--color-primary;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -88,7 +88,7 @@ export default {
     margin-top: 20px;
     max-height: 180px;
     height: 100%;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
     &_body {
       padding: 20px 30px;
@@ -97,7 +97,7 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        border: 1px solid $gray-600;
+        border: 1px solid $--color-background-hover;
         padding: 29px 20px;
         border-radius: 4px;
         & > p {
@@ -109,7 +109,7 @@ export default {
   }
   &-top-wrapper {
     max-height: 250px;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
     &_body {
       /* padding: 20px 30px; */
@@ -118,14 +118,14 @@ export default {
         grid-template-columns: 60px 1fr;
         align-items: center;
         padding: 20px 30px;
-        border-bottom: 1px solid $gray-600;
+        border-bottom: 1px solid $--color-background-hover;
         &_left {
           font-weight: bold;
           font-size: 12px;
         }
         &_right {
           padding-left: 30px;
-          color: $blue-500;
+          color: $--color-primary-placeholder;
           font-size: 12px;
           & > p {
             font-size: 12px;

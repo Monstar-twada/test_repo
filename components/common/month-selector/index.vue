@@ -91,7 +91,7 @@ export default {
       max-width: calc(100% - 30);
       text-overflow: ellipsis;
       white-space: nowrap;
-      color: $white-300;
+      color: $--color-white;
       line-height: 1;
       &.placeholder {
         opacity: 0.5;
