@@ -12,11 +12,20 @@
           <fg-input placeholder="田中 太郎"></fg-input>
         </fg-form-item>
         <fg-form-item label="郵便番号">
-          <fg-input placeholder="1200011" width="160px"></fg-input>
+          <fg-input
+            v-model="zipcode"
+            placeholder="1200011"
+            width="160px"
+          ></fg-input>
+          <fg-text
+            v-if="validationMessage.zipcode"
+            class="admin-company-edit-form-container__error"
+            >{{ validationMessage.zipcode }}</fg-text
+          >
         </fg-form-item>
         <fg-form-item label="都道府県">
           <fg-select
-            v-model="form.areaName"
+            v-model="areaName"
             :options="areaItems"
             width="160px"
             placeholder="東京都"
@@ -33,10 +42,23 @@
           <fg-input placeholder=""></fg-input>
         </fg-form-item>
         <fg-form-item label="電話番号" show-suffix-required-icon>
-          <fg-input placeholder="000-0000-0000"></fg-input>
+          <fg-input v-model="phone" placeholder="000-0000-0000"></fg-input>
+          <fg-text
+            v-if="validationMessage.phone"
+            class="admin-company-edit-form-container__error"
+            >{{ validationMessage.phone }}</fg-text
+          >
         </fg-form-item>
         <fg-form-item label="メールアドレス" show-suffix-required-icon>
-          <fg-input placeholder="aaaa@cars-enjoy.com"></fg-input>
+          <fg-input
+            v-model="email"
+            placeholder="aaaa@cars-enjoy.com"
+          ></fg-input>
+          <fg-text
+            v-if="validationMessage.email"
+            class="admin-company-edit-form-container__error"
+            >{{ validationMessage.email }}</fg-text
+          >
         </fg-form-item>
         <fg-form-item label="店舗数">
           <fg-input placeholder="30店"></fg-input>
@@ -50,24 +72,24 @@
         <fg-form-item label="銀行口座" class="form-bankaccount">
           <fg-row gutter="20">
             <fg-col span="18">
-              <fg-input v-model="form.a" placeholder="銀行名"></fg-input>
+              <fg-input v-model="a" placeholder="銀行名"></fg-input>
             </fg-col>
             <fg-col span="6">
-              <fg-input v-model="form.b" placeholder="銀行コード"></fg-input>
+              <fg-input v-model="b" placeholder="銀行コード"></fg-input>
             </fg-col>
           </fg-row>
           <fg-row gutter="20">
             <fg-col span="18">
-              <fg-input v-model="form.a" placeholder="支店名"></fg-input>
+              <fg-input v-model="a" placeholder="支店名"></fg-input>
             </fg-col>
             <fg-col span="6">
-              <fg-input v-model="form.b" placeholder="支店コード"></fg-input>
+              <fg-input v-model="b" placeholder="支店コード"></fg-input>
             </fg-col>
           </fg-row>
           <fg-row gutter="20">
             <fg-col span="6">
               <fg-select
-                v-model="form.areaName"
+                v-model="areaName"
                 :options="areaItems"
                 placeholder="口座種別"
                 item-prefix="- "
@@ -77,20 +99,24 @@
           <fg-row gutter="20">
             <fg-col span="18">
               <fg-input
-                v-model="form.a"
+                v-model="a"
                 placeholder="口座名義人（全角カナ）"
               ></fg-input>
             </fg-col>
             <fg-col span="6">
-              <fg-input v-model="form.b" placeholder="口座番号"></fg-input>
+              <fg-input v-model="b" placeholder="口座番号"></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
       </fg-form>
     </div>
-
     <div class="admin-company-edit-form-container_bottom">
-      <fg-button suffix-icon="arrow-right" border bold width="220px"
+      <fg-button
+        suffix-icon="arrow-right"
+        border
+        bold
+        width="220px"
+        @click="handleSubmit"
         >保存</fg-button
       >
       <fg-button width="220px" suffix-icon="arrow-right" bold white-transparent
@@ -104,12 +130,58 @@
 export default {
   data() {
     return {
-      areaOptions: {},
-      form: {
-        name: '',
-        areaName: '',
+      areaItems: {},
+      name: '',
+      areaName: '',
+      zipcode: '',
+      phone: '',
+      email: '',
+      reg: {
+        zipcode: /\d{3}-\d{4}/,
+        phone: /\d{2,4}-\d{2,4}-\d{3,4}/,
+        // eslint-disable-next-line no-useless-escape
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      },
+      validationMessage: {
+        zipcode: '',
+        phone: '',
+        email: '',
       },
     }
+  },
+  watch: {
+    zipcode(val) {
+      this.validation()
+    },
+    phone(val) {
+      this.validation()
+    },
+    email(val) {
+      this.validation()
+    },
+  },
+  methods: {
+    validation() {
+      let count = 0
+      if (!this.reg.zipcode.test(this.zipcode)) {
+        this.validationMessage.zipcode = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.zipcode = ''
+      if (!this.reg.phone.test(this.phone)) {
+        this.validationMessage.phone = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.phone = ''
+      if (!this.reg.email.test(this.email)) {
+        this.validationMessage.email = '正しい形式で入力してください'
+        count += 1
+      } else this.validationMessage.email = ''
+      return count
+    },
+    handleSubmit() {
+      const count = this.validation()
+      if (count === 0) console.log('submitted')
+      // if (count === 0) this.nextUrl('/login/passwordreset')
+    },
   },
 }
 </script>
@@ -120,6 +192,14 @@ export default {
   width: 100%;
   margin: 0 auto;
   color: $--color-primary;
+  &__error {
+    input {
+      border: 1px solid $--color-warning;
+    }
+    div {
+      color: $--color-warning;
+    }
+  }
   &_body {
     border-radius: 6px;
     padding: 24px;
