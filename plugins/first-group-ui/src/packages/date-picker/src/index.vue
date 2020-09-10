@@ -1,0 +1,182 @@
+<template>
+  <fg-calendar
+    :value="inputValue"
+    :placeholder="placeholder"
+    :size="size"
+    :popup-class="popupClass"
+    :popup-position="popupPosition"
+    :show-before-dash="showBeforeDash"
+    :show-after-dash="showAfterDash"
+    :disabled="disabled"
+    :inline="inline"
+    :writable="writable"
+    :width="width"
+    class="fg-date-picker"
+    is-time-picker
+    :value-formatter="calendarValueFormat"
+    @calendar="(that) => (calendar = that)"
+  >
+    <template v-slot:time-picker>
+      <div class="fg-calendar__time-wrapper" @click="clickTimeWrapper">
+        <TimePicker :value="time" @change="timePickerChange" />
+        <div class="btn-group">
+          <fg-button size="mini" border width="80px" @click="cancel"
+            >キャンセル</fg-button
+          >
+          <fg-button
+            size="mini"
+            type="primary"
+            width="52px"
+            :disabled="!ymd || !time"
+            @click="confirm"
+            >選択</fg-button
+          >
+        </div>
+      </div>
+    </template>
+  </fg-calendar>
+</template>
+
+<script>
+import TimePicker from './time-picker'
+export default {
+  name: 'FgDatePicker',
+  components: {
+    TimePicker,
+  },
+  props: {
+    value: {
+      type: [String, Number, Date],
+      default: '',
+    },
+    placeholder: {
+      type: String,
+      default: '選択してください',
+    },
+    size: {
+      type: String,
+      default: 'regular',
+    },
+    clearable: Boolean,
+    writable: Boolean,
+    disabled: Boolean,
+    inline: Boolean,
+    showBeforeDash: Boolean,
+    showAfterDash: Boolean,
+    popupClass: {
+      type: String,
+      default: '',
+    },
+    popupPosition: {
+      type: String,
+      default: '',
+    },
+    format: {
+      type: String,
+      default: 'yyyy/MM/dd hh:mm:ss',
+    },
+    width: {
+      type: [String, Number],
+      default: '',
+    },
+  },
+  data() {
+    return {
+      popVisible: false,
+      calendar: null,
+      date: null,
+      ymd: '',
+      time: '',
+    }
+  },
+  computed: {
+    inputValue() {
+      return this.date ? this.calendar.formatDate(this.date, this.format) : ''
+    },
+  },
+  watch: {
+    inputValue(val) {
+      this.$emit('input', val)
+    },
+    value(val) {
+      this.resetDateTime(val)
+    },
+    calendar() {
+      this.resetDateTime(this.value)
+    },
+  },
+  created() {
+    this.resetDateTime(this.value)
+  },
+  methods: {
+    resetDateTime(val) {
+      if (!this.calendar) return
+      const { toDate, formatDate } = this.calendar
+      let date = toDate(val)
+      this.date = date
+      if (!date) {
+        date = new Date()
+      }
+      this.ymd = formatDate(date, 'yyyy/MM/dd')
+      this.time = formatDate(date, 'hh:mm:ss')
+      this.calendar.setDate(this.ymd)
+    },
+    clickTimeWrapper(e) {
+      e.stopPropagation()
+    },
+    timePickerChange(val) {
+      this.time = val.join(':')
+    },
+    cancel() {
+      this.calendar.hidePop()
+    },
+    confirm() {
+      this.date = this.calendar.formatDate(
+        [this.ymd, this.time].join(' '),
+        this.format
+      )
+      this.calendar.hidePop()
+    },
+    calendarValueFormat(val) {
+      this.ymd = val ? this.calendar.formatDate(val, 'yyyy/MM/dd') : ''
+      return this.value
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+.fg-date-picker {
+}
+
+.is-time-picker.fg-calendar-pop-wrapper {
+  display: flex;
+  .fg-calendar__date-wrapper {
+    flex: 0 0 320px;
+  }
+  .fg-calendar__time-wrapper {
+    padding: 20px;
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 5%;
+      left: 0;
+      height: 90%;
+      width: 1px;
+      background: $--color-border;
+      content: '';
+    }
+  }
+  .btn-group {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    .fg-button {
+      margin-left: 10px;
+    }
+  }
+}
+</style>
