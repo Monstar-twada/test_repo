@@ -4,7 +4,7 @@
       :breadcrumbs="breadcrumbs"
       title-image="result.svg"
       :page="page"
-      task-counter
+      task
     />
     <SearchConditions />
     <TaskBoard />
