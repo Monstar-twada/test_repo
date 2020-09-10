@@ -264,7 +264,7 @@ import {
   SELECTION_POINTS,
   CUSTOMER_TYPES,
   GENDERS,
-} from '~/components/common/customer/common/base'
+} from '~/assets/constants/index'
 
 export default {
   components: {

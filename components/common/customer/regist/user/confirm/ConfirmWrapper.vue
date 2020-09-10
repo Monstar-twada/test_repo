@@ -184,7 +184,7 @@ import {
   SELECTION_POINTS,
   CUSTOMER_TYPES,
   GENDERS,
-} from '~/components/common/customer/common/base'
+} from '~/assets/constants/index'
 
 import { storage } from '~/assets/js/storage'
 export default {
