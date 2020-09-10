@@ -1,0 +1,92 @@
+@import "../common/mixins";
+
+.status-item {
+  margin-left: 20px;
+  .bottom-dashed-line {
+    border-bottom: 1px dashed $--color-border;
+  }
+  .fg-checkbox {
+    font-size: 0;
+  }
+  .checkbox-wrapper {
+    .fg-checkbox {
+      margin: 15px 0 0 0;
+      min-width: calc(100% / 6);
+      justify-content: flex-start;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .fg-radio-group {
+    .fg-radio {
+      margin-right: 10px;
+      .fg-radio__label {
+        padding-left: 3px;
+      }
+    }
+  }
+  .color-checkbox-wrapper {
+    .fg-checkbox {
+      margin-right: 14px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .color-checkbox {
+      margin-left: 6px;
+    }
+  }
+
+  // 商談情報
+  .add-opportunity-information-item {
+    position: relative;
+    .fg-button {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-top: -12px;
+    }
+  }
+
+  // 決済情報
+  .payment-information-wrapper {
+    background: $--color-background;
+    border-radius: 4px;
+    margin-left: -10px;
+    .payment-information__item {
+      position: relative;
+      padding: 15px 10px;
+      display: flex;
+      @include borderBottom();
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+      .fg-radio {
+        .fg-radio__inner {
+          background: $--color-white;
+        }
+      }
+      .fg-input {
+        input {
+          background: $--color-white;
+        }
+      }
+    }
+  }
+
+  .status-item__footer {
+    margin-top: 20px;
+    font-size: 0;
+    text-align: right;
+    .fg-button {
+      margin-left: 17px;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+

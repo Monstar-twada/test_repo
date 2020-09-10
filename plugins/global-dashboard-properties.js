@@ -4,11 +4,9 @@
  * Date: 2020-07-12 12:25
  */
 import Vue from 'vue'
-import FirstGroupUI from 'first-group-ui'
+import FirstGroupUI from './first-group-ui/src/index'
 import { RequestApi } from './api'
 import { login } from '~/components/dashboard/plugins/login'
-// css
-import 'first-group-ui/dist/index.blue.css'
 
 Vue.use(FirstGroupUI, { theme: 'blue' })
 
