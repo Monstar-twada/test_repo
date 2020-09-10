@@ -1,0 +1,19 @@
+
+@mixin border($pos) {
+  &:after {
+    content: '';
+    position: absolute;
+    #{$pos}: 0;
+    left: 0;
+    width: 100%;
+    border-#{$pos}: 1px solid $--color-border;
+  }
+}
+
+@mixin borderTop() {
+  @include border(top);
+}
+
+@mixin borderBottom() {
+  @include border(bottom);
+}
