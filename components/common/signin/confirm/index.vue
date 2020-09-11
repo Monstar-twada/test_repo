@@ -18,9 +18,16 @@
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
             <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
-              <div v-if="selectedJob.includes(i)" class="signin-index-form-item">
+              <div
+                v-if="selectedJob.includes(i)"
+                class="signin-index-form-item"
+              >
                 <div class="signin-index-form-item_img">
-                  <fg-avatar :src="require(`../img/${item.icon}-icon-white.svg`)" :size="25" fillet></fg-avatar>
+                  <fg-avatar
+                    :src="require(`../img/${item.icon}-icon-white.svg`)"
+                    :size="25"
+                    fillet
+                  ></fg-avatar>
                 </div>
                 <div class="signin-index-form-item_title">
                   <p>{{ item.title }}</p>
@@ -43,8 +50,17 @@
         </fg-form-item>
       </fg-form>
       <div class="signin-index-submit-button">
-        <fg-button type="primary" suffix-icon="arrow-right" bold width="220px">登録</fg-button>
-        <fg-button suffix-icon="arrow-right" type="primary" border bold width="220px">戻る</fg-button>
+        <fg-button type="primary" suffix-icon="arrow-right" bold width="220px"
+          >登録</fg-button
+        >
+        <fg-button
+          suffix-icon="arrow-right"
+          type="primary"
+          border
+          bold
+          width="220px"
+          >戻る</fg-button
+        >
       </div>
     </div>
   </div>

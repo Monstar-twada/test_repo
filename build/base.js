@@ -61,6 +61,7 @@ export const baseConfig = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     // Doc: https://github.com/nuxt-community/style-resources-module
+    '@nuxtjs/gtm',
     '@nuxtjs/axios',
     '@nuxtjs/svg',
     '@nuxtjs/style-resources',
@@ -96,6 +97,19 @@ export const baseConfig = {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+  // vuetify: {
+  //   customVariables: ["~/assets/scss/variables.scss"],
+  //   treeShake: true
+  // },
+  gtm: {
+    enabled: true,
+    id: 'GTM-N8RJT4T',
+    autoInit: true,
+    respectDoNotTrack: true,
+    noscript: true,
+    noscriptId: 'gtm-noscript',
+    noscriptURL: 'https://www.googletagmanager.com/ns.html'
+  },
   /*
    ** Build configuration
    */

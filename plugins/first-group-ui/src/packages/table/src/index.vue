@@ -25,7 +25,7 @@
       </table>
     </div>
 
-    <div style="display: none;">
+    <div style="display: none">
       <slot></slot>
     </div>
   </div>

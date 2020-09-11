@@ -51,7 +51,7 @@
               icon="trash"
               border
               size="mini"
-              style="width: 24px;"
+              style="width: 24px"
             ></fg-button>
           </div>
         </td>
