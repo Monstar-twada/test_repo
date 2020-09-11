@@ -37,7 +37,6 @@
         ]"
         @click="handleMenuClick"
       >
-        <!-- <template v-slot:default="{ active }"> -->
         <nuxt-link :to="item.link">
           <div class="sidebar-list-item__icon">
             <img

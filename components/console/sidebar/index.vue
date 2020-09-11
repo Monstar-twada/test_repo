@@ -1,34 +1,29 @@
 <template>
   <div class="console-sidebar-wrapper">
-    <!-- <button class="sidebar-control-button" @click="collapsed = !collapsed">
-      <fg-icon name="d-arrow-left"></fg-icon>
-    </button> -->
     <div :class="['top-wrapper', isFirstIndex ? 'radius-br' : '']">
       <div class="logo">
         <img :src="require(`./img/logo-console.svg`)" alt />
       </div>
     </div>
-    <v-list>
-      <v-list-item-group ref="menu" v-model="index">
-        <v-list-item
-          v-for="(item, i) in menuItems"
-          :key="i"
-          :class="[
-            i === index - 1 ? 'radius-br' : '',
-            i === index + 1 ? 'radius-tr' : '',
-          ]"
-          @click="handleMenuClick"
-        >
-          <template v-slot>
-            <nuxt-link :to="item.link">
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
-              </v-list-item-content>
-            </nuxt-link>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
+    <ul class="sidebar-list">
+      <li
+        v-for="(item, i) in menuItems"
+        :key="i"
+        class="sidebar-list-item"
+        :class="[
+          i === index - 1 ? 'radius-br' : '',
+          i === index ? 'sidebar-list-item--active' : '',
+          i === index + 1 ? 'radius-tr' : '',
+        ]"
+        @click="handleMenuClick"
+      >
+        <nuxt-link :to="item.link">
+          <div class="sidebar-list-item__content">
+            <h4 class="sidebar-list-item__title">{{ item.text }}</h4>
+          </div>
+        </nuxt-link>
+      </li>
+    </ul>
     <div :class="['bottom-space', isLastIndex ? 'radius-tr' : '']"></div>
   </div>
 </template>
@@ -152,21 +147,21 @@ export default {
     background: $--color-white;
   }
 
-  .v-list-item__content {
+  .sidebar-list-item__content {
     @include transitionMixin(all);
   }
 
-  .v-list {
+  .sidebar-list {
     padding: 0 !important;
     margin: 0 !important;
     background: none !important;
 
-    .v-list-item__title {
+    .sidebar-list-item__title {
       font-size: 14px !important;
       color: $--color-primary !important;
     }
 
-    .v-list-item {
+    .sidebar-list-item {
       padding: 0;
       background: $--color-white;
       a {
@@ -184,7 +179,7 @@ export default {
       }
     }
 
-    .v-list-item--active {
+    .sidebar-list-item--active {
       background: transparent !important;
       &::before {
         opacity: 0 !important;
