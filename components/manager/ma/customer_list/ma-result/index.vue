@@ -164,7 +164,7 @@
       <fg-table-column
         show="call"
         label="他社流出"
-        :sortable="true"
+        :sortable="false"
         width="10%"
       >
         <template v-slot="item">
