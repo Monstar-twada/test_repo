@@ -375,7 +375,7 @@ export default {
     max-height: 300px;
     overflow-y: auto;
     color: $--color-primary;
-    margin: 0;
+    margin: 2px 2px 2px 0;
     padding: 5px 0;
     @include scrollbar();
   }

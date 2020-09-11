@@ -1,6 +1,6 @@
 <template>
-  <div class="status-item">
-    <div class="see-off__item">
+  <div class="mdd-tasks-item">
+    <div class="lose__item">
       <fg-checkbox label="敗退扱い"></fg-checkbox>
       <Item label="敗退理由" class="ml30">
         <fg-select size="small" placeholder="選択" width="440"></fg-select>
@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import Item from '../common/Item'
-import ButtonComplete from '../common/ButtonComplete'
-import ButtonSave from '../common/ButtonSave'
+import Item from '../../common/Item'
+import ButtonComplete from '../../common/ButtonComplete'
+import ButtonSave from '../../common/ButtonSave'
 export default {
   components: {
     Item,
@@ -33,8 +33,8 @@ export default {
 </script>
 
 <style lang="scss">
-.status-item {
-  .see-off__item {
+.mdd-tasks-item {
+  .lose__item {
     display: flex;
   }
 }

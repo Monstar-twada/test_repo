@@ -1,5 +1,5 @@
 <template>
-  <div class="status-item">
+  <div class="mdd-tasks-item">
     <div class="mt10">
       <fg-checkbox label="車庫証明"></fg-checkbox>
       <fg-select
@@ -217,4 +217,4 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss"></style>

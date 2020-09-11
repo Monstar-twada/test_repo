@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div v-show="popVisible" ref="pop" class="fg-popup" :style="popStyle">
+    <div v-show="popVisible" ref="pop" :class="classes" :style="popStyle">
       <slot></slot>
       <i v-if="!hideArrow" class="fg-popup__arrow" :style="arrowStyle"></i>
     </div>
@@ -71,6 +71,9 @@ export default {
     },
     marginOffset() {
       return isUndefined(this.offset) ? 10 : toNumber(this.offset)
+    },
+    classes() {
+      return ['fg-popup', `is-${this.transitionName}`]
     },
   },
   watch: {

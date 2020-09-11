@@ -7,72 +7,64 @@
     header-height="117"
   >
     <template v-slot:header>
-      <DetailHeader />
+      <DetailHeader :type="type" @close="visible = false" />
     </template>
-    <!--担当者-->
-    <Principal />
-    <!--依頼元-->
-    <Request />
-    <!--対象顧客, コメント-->
-    <Target />
 
-    <FgCollapse v-model="status1" title="未着手中タスク">
-      <UnfinishedTask />
-    </FgCollapse>
-
-    <FgCollapse title="提案中タスク">
-      <ProposedTask />
-    </FgCollapse>
-
-    <FgCollapse title="作業中タスク">
-      <WorkingTask />
-    </FgCollapse>
-
-    <FgCollapse title="見送">
-      <SeeOff />
-    </FgCollapse>
-
-    <FgCollapse title="支払処理">
-      <PaymentProcessing />
-    </FgCollapse>
+    <Buy v-if="type === 'buy'" />
+    <Sale v-if="type === 'sale'" />
+    <Inspection v-if="type === 'inspection'" />
   </fg-dialog>
 </template>
 
 <script>
-import DetailHeader from './Header'
-import Principal from './Principal'
-import Request from './Request'
-import Target from './Target'
-import FgCollapse from './common/collapse'
-import UnfinishedTask from './status-item/UnfinishedTask'
-import ProposedTask from './status-item/proposed-task/index'
-import WorkingTask from './status-item/WorkingTask'
-import SeeOff from './status-item/SeeOff'
-import PaymentProcessing from './status-item/PaymentProcessing'
-import './status-item/index.scss'
+import DetailHeader from './common/Header'
+import Buy from './Buy'
+import Sale from './Sale'
+import Inspection from './Inspection'
+import './common/tasks/index.scss'
+
 export default {
   components: {
+    Buy,
+    Sale,
+    Inspection,
     DetailHeader,
-    Principal,
-    Request,
-    Target,
-    FgCollapse,
-    UnfinishedTask,
-    ProposedTask,
-    WorkingTask,
-    SeeOff,
-    PaymentProcessing,
+  },
+  props: {
+    value: Boolean,
+    // 購入 buy, 売却 sale, 車検 inspection
+    type: {
+      type: String,
+      default: 'buy',
+    },
+    // 未着手中タスク not-start, 提案中タスク proposal, 作業中タスク started, 見送 lose, 支払処理 done
+    status: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
-      visible: true,
-      status1: true,
+      visible: this.value,
     }
+  },
+  watch: {
+    value(val) {
+      if (this.visible !== val) {
+        this.visible = val
+      }
+    },
+    visible(val) {
+      this.$emit('input', val)
+    },
   },
 }
 </script>
 
 <style lang="scss">
 .matter-detail-dialog {
+  .fg-dialog__body {
+    margin: 2px 2px 2px 0;
+  }
 }
 </style>
