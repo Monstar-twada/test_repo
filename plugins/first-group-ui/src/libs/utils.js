@@ -13,36 +13,6 @@ export function toNumber(a) {
   return isNaN(n) ? 0 : n
 }
 
-/**
- * is number
- * @param str
- * @returns {boolean}
- */
-export function isNumber(str) {
-  return typeof str === 'number'
-}
-
-/**
- * is number like
- * @param str
- * @returns {boolean}
- */
-export function isNumberLike(str) {
-  return /^-?\d+\.?\d*$/.test(str)
-}
-
-export function isUndefined(o) {
-  return typeof o === 'undefined'
-}
-
-export function isString(s) {
-  return typeof s === 'string'
-}
-
-export function isFunction(fn) {
-  return typeof fn === 'function'
-}
-
 export function merge(target) {
   for (let i = 1, j = arguments.length; i < j; i++) {
     const source = arguments[i] || {}

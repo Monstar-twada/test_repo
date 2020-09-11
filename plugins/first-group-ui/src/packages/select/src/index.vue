@@ -11,6 +11,7 @@
     :style="elStyle"
     @mouseenter="isLeaved = false"
     @mouseleave="isLeaved = true"
+    @click="toggleList($event)"
   >
     <fg-input
       :value="selectText"
@@ -21,9 +22,9 @@
       :icon-color="iconColor"
       :disabled="disabled"
       :unit="unit"
+      :width="width"
       :offset-left="offsetLeft"
       :offset-right="offsetRight + clearOffset"
-      @click="toggleList($event)"
       @clear="inputClear"
       @input.native="handleInput"
     >
@@ -36,7 +37,7 @@
         </i>
       </template>
     </fg-input>
-
+    <slot></slot>
     <Popup
       ref="popup"
       v-model="popVisible"
@@ -47,11 +48,13 @@
         popupClass,
       ]"
       :position="popupPosition"
+      :offset="popupOffset"
       @mouseenter.native="isLeaved = false"
       @mouseleave.native="isLeaved = true"
       @click.native="$emit('click', $event)"
     >
-      <dl>
+      <slot name="options"></slot>
+      <dl v-if="!$slots.options">
         <template v-for="(item, i) in list">
           <dt v-if="item.title" :key="i" class="__title">
             <div>{{ item.title }}</div>
@@ -149,6 +152,10 @@ export default {
       type: Number,
       default: 0,
     },
+    popupOffset: {
+      type: [Number, String],
+      default: undefined,
+    },
   },
   data() {
     const item = this.items.find((item) => item.value === this.value) || {}
@@ -203,6 +210,9 @@ export default {
     selectValue(val) {
       this.$emit('input', val)
     },
+    popVisible(val) {
+      this.$emit('pop-visible', val)
+    },
   },
   methods: {
     toggleList() {
@@ -251,6 +261,9 @@ export default {
               ? this.customFilter(value, item, i)
               : reg.test(item.text)
           })
+    },
+    resetPopPosition() {
+      this.$refs.popup.resetPopPosition()
     },
   },
 }
