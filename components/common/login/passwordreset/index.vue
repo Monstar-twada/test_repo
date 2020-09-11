@@ -2,9 +2,7 @@
   <div class="login-reset-page-wrapper">
     <Logo />
     <div class="reset-form">
-      <h2 class="reset-form__title mb5">
-        パスワード再設定
-      </h2>
+      <h2 class="reset-form__title mb5">パスワード再設定</h2>
       <p class="reset-form__subtitle mb20">
         新しいパスワードを入力してください。
       </p>

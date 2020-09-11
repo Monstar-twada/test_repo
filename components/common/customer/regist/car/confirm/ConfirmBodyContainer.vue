@@ -184,9 +184,7 @@
           </h4>
         </fg-form-item>
         <fg-form-item label="タイヤ製造">
-          <h4>
-            -
-          </h4>
+          <h4>-</h4>
         </fg-form-item>
         <fg-form-item label="バッテリーサイズ">
           <h4>-</h4>

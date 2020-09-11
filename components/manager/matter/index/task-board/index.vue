@@ -1,0 +1,271 @@
+<template>
+  <div>
+    <taskBoard :board-list="boardList" />
+  </div>
+</template>
+<script>
+import taskBoard from './taskBoard'
+export default {
+  components: {
+    taskBoard,
+  },
+  data() {
+    return {
+      boardList: [
+        {
+          title: '未着手',
+          subTitle: '担当・初回面談日確定前のタスク',
+          users: [1, 2, 3],
+          tasks: [
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 2,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 3,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1],
+              status: 2,
+            },
+          ],
+        },
+        {
+          title: '提案中',
+          subTitle: '条件提示期間中のタスク',
+          users: [1, 2, 3, 4, 5],
+          tasks: [
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 2,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 3,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1],
+              status: 1,
+            },
+          ],
+        },
+        {
+          title: '作業中',
+          subTitle: '成約後のタスク',
+          users: [1, 2, 3, 4, 5, 6, 7],
+          tasks: [
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 2,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 3,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1],
+              status: 1,
+            },
+          ],
+        },
+        {
+          title: '支払処理中',
+          subTitle: '紹介料支払中のタスク',
+          users: [1, 2, 3],
+          tasks: [
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 2,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 3,
+            },
+          ],
+        },
+        {
+          title: '完了済',
+          subTitle: '決済が完了し経理処理前のタスク',
+          users: [1, 2, 3, 4],
+          tasks: [
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 2,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 3,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1],
+              status: 1,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1],
+              status: 2,
+            },
+            {
+              number: 'xxxxxx',
+              owner: '米田智彦',
+              car: 'トヨタ プリウス',
+              date: '2020/09/20 21:32',
+              assignee: [1, 2, 3],
+              status: 1,
+            },
+          ],
+        },
+      ],
+    }
+  },
+}
+</script>
+<style lang="scss"></style>

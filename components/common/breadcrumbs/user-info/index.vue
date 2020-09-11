@@ -1,5 +1,12 @@
 <template>
   <div class="header-user-info-wrapper">
+    <div v-if="task" class="task-wrapper">
+      <h4 class="mr25">Your Task</h4>
+      <div class="task-wrapper-counter">
+        <span>{{ taskNumber }}</span>
+        <h5>Open</h5>
+      </div>
+    </div>
     <div class="avatar-wrapper" @click="avatarClick">
       <img :src="userAvatar" alt @load="imgOnLoad" />
     </div>
@@ -15,10 +22,17 @@ export default {
   components: {
     UserDropDown,
   },
+  props: {
+    task: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       userAvatar: '/common/person_default.svg',
       userDropdownVisible: false,
+      taskNumber: 14,
     }
   },
   beforeDestroy() {
@@ -70,9 +84,11 @@ export default {
 
 <style lang="scss">
 .header-user-info-wrapper {
+  display: flex;
   position: relative;
-  width: 31px;
-  height: 31px;
+  align-items: center;
+  /* width: 31px; */
+  /* height: 31px; */
   .avatar-wrapper {
     width: 27px;
     height: 27px;
@@ -109,6 +125,21 @@ export default {
       height: 6px;
       background: $--color-white;
       transform: rotate(45deg);
+    }
+  }
+  .task-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    span,
+    h4,
+    h5 {
+      color: $--color-white;
+    }
+    &-counter {
+      span {
+        font-size: 24px;
+      }
     }
   }
 }

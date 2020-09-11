@@ -12,7 +12,7 @@
           <i class="icon-divider"></i>
         </template>
       </v-breadcrumbs>
-      <UserInfo />
+      <UserInfo :task="task" />
     </div>
     <div class="page-title-wrapper">
       <div class="left-wrapper">
@@ -58,6 +58,10 @@ export default {
     iconWidth: {
       type: [String, Number],
       default: 22,
+    },
+    task: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
