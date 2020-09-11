@@ -183,9 +183,6 @@ export default {
 
 https://nuxtjs.org/
 
-#### Vuetifyjs
-
-https://vuetifyjs.com/en/components/api-explorer/
 
 #### Chart.js
 

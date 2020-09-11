@@ -1,5 +1,5 @@
 <template>
-  <v-app
+  <div
     :class="[
       'default-manager-layout-container',
       { 'next-action-is-collapsed': isCollapsed },
@@ -13,7 +13,7 @@
     <!-- ProtoType版表示しない--->
     <!-- <NextAction v-model="isCollapsed" /> -->
     <!-- <OnePointAdvice /> -->
-  </v-app>
+  </div>
 </template>
 
 <script>
