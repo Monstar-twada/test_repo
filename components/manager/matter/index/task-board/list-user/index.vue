@@ -10,7 +10,7 @@ export default {
     users: {
       type: [Object, Array],
       default() {
-        return { tes1t: [1], test2: [2] }
+        return { test1: [1], test2: [2] }
       },
     },
   },
