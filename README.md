@@ -41,6 +41,12 @@ $ npm run manager
 $ npm run dev:m
 ```
 
+run ui doc
+
+```bash
+$ npm run ui
+```
+
 #### Build and Launch server
 
 ```bash
@@ -56,30 +62,6 @@ $ npm run build:m
 $ npm run start:d
 # launch server manager, at localhost:3001
 $ npm run start:m
-```
-
-## package.json
-
-scripts
-
-```json
-{
-  "scripts": {
-    "dashboard": "nuxt -c ./build/config.dashboard.js",
-    "manager": "nuxt -c ./build/config.manager.js",
-    "console": "nuxt -c ./build/config.console.js",
-    "dev:d": "npm run dashboard",
-    "dev:m": "npm run manager",
-    "dev:c": "npm run console",
-    "build:d": "nuxt build -c ./build/config.dashboard.js",
-    "build:m": "nuxt build -c ./build/config.manager.js",
-    "build:c": "nuxt build -c ./build/config.console.js",
-    "build": "npm run build:d && npm run build:m && npm run build:c",
-    "start:d": "nuxt start -c ./build/config.dashboard.js -p 3000",
-    "start:m": "nuxt start -c ./build/config.manager.js -p 3001",
-    "start:c": "nuxt start -c ./build/config.console.js -p 3002"
-  }
-}
 ```
 
 ## nuxt.config
@@ -145,7 +127,7 @@ It's a custom global property of Vue
 
 #### Properties
 
-| peoperty    | type    | remark                                                      |
+| property    | type    | remark                                                      |
 | :---------- | :------ | :---------------------------------------------------------- |
 | \$isManager | Boolean | front system environment differentiation, `true` or `false` |
 
