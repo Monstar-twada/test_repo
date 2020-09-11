@@ -31,6 +31,11 @@ export default {
     font-size: 50px;
   }
   .body-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -5%;
     margin-left: 50%;
     background: $--color-white;
   }
