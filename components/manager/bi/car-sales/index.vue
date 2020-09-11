@@ -1,7 +1,5 @@
 <template>
-  <div class="bi-car-sales-wrapper">
-    車販
-  </div>
+  <div class="bi-car-sales-wrapper">車販</div>
 </template>
 
 <script>

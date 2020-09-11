@@ -2,9 +2,7 @@
   <div class="login-forgot-page-wrapper">
     <Logo />
     <div class="forgot-form">
-      <h2 class="forgot-form__title mb5">
-        パスワードをお忘れの方
-      </h2>
+      <h2 class="forgot-form__title mb5">パスワードをお忘れの方</h2>
       <p class="forgot-form__subtitle mb20">
         パスワードのリセット方法をメールにお送りします。
       </p>

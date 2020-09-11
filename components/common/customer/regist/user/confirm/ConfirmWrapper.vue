@@ -48,9 +48,7 @@
           {{ form.zipCode }}
         </fg-form-item>
 
-        <fg-form-item label="都道府県">
-          -
-        </fg-form-item>
+        <fg-form-item label="都道府県"> - </fg-form-item>
 
         <fg-form-item label="市区町村">
           {{ form.city }}

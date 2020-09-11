@@ -2,9 +2,7 @@
   <div class="login-mailreset-page-wrapper">
     <Logo />
     <div class="mailreset-form">
-      <h2 class="mailreset-form__title mb5">
-        メールアドレス再設定
-      </h2>
+      <h2 class="mailreset-form__title mb5">メールアドレス再設定</h2>
       <p class="mailreset-form__subtitle mb20">
         新しいメールアドレスを入力してください。
       </p>
