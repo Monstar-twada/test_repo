@@ -1,7 +1,5 @@
 <template>
-  <div class="fg-progress">
-    fg-table-component
-  </div>
+  <div class="fg-progress">fg-table-component</div>
 </template>
 
 <script>

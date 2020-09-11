@@ -1,7 +1,5 @@
 <template>
-  <div class="fg-message">
-    fg-table-component
-  </div>
+  <div class="fg-message">fg-table-component</div>
 </template>
 
 <script>

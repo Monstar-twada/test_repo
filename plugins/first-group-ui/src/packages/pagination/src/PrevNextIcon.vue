@@ -12,8 +12,9 @@
         transform="translate(0 9) rotate(-90)"
         fill-rule="evenodd"
       />
-    </g></svg
-></template>
+    </g>
+  </svg>
+</template>
 <script>
 export default {
   props: {
