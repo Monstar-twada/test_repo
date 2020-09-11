@@ -52,7 +52,7 @@ export default {
     }
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto 100%;
   }
   .text {
     margin-top: -2px;
