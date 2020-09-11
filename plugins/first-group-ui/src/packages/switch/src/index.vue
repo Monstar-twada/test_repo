@@ -129,6 +129,7 @@ export default {
         color: $--color-primary-active;
         position: absolute;
         left: 22px;
+        top: 2px;
       }
     }
   }
@@ -148,6 +149,7 @@ export default {
           color: $--color-white;
           position: absolute;
           left: -28px;
+          top: 2px;
         }
       }
     }

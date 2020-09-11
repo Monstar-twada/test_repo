@@ -244,7 +244,6 @@ export default {
       }
       th.fg-table__th--sort span {
         display: inline-block;
-        margin-left: 4px;
       }
 
       th.fg-table__th--sort span:before {
