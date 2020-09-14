@@ -5,7 +5,7 @@
         <UserSelector
           class="mr5"
           inline
-          :items="principalList"
+          :items="principalListSingle"
           width="150"
           clearable
         />
@@ -22,7 +22,12 @@
       </Item>
     </Border>
     <Item label="副担当者" class="mt25" align="baseline">
-      <UserSelector multiple inline :items="principalList" width="350" />
+      <UserSelector
+        multiple
+        inline
+        :items="principalListMultiple"
+        width="350"
+      />
     </Item>
     <div class="status-item__footer">
       <ButtonSave />
@@ -37,6 +42,7 @@ import Item from '../Item'
 import ButtonComplete from '../ButtonComplete'
 import ButtonSave from '../ButtonSave'
 import UserSelector from '../user-selector/index'
+import { mockPrincipalList } from '../mock-data'
 export default {
   components: {
     ButtonComplete,
@@ -48,128 +54,8 @@ export default {
   data() {
     return {
       time: '',
-      principalList: [
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '岡田俊平',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '浅井健太',
-          isSelected: false,
-        },
-        {
-          url: '/common/person_default.svg',
-          name: '谷口広大',
-          isSelected: false,
-        },
-      ],
+      principalListSingle: JSON.parse(JSON.stringify(mockPrincipalList)),
+      principalListMultiple: JSON.parse(JSON.stringify(mockPrincipalList)),
     }
   },
 }

@@ -32,6 +32,10 @@ export default {
   },
   props: {
     value: Boolean,
+    id: {
+      type: [String, Number],
+      default: '',
+    },
     // 購入 buy, 売却 sale, 車検 inspection
     type: {
       type: String,
