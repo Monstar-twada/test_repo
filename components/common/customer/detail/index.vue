@@ -12,7 +12,7 @@
           size="small"
           class="mr10"
           width="106"
-          style="display: none"
+          style="display: none;"
           >車両追加</fg-button
         >
         <fg-button
@@ -20,7 +20,7 @@
           justify="center"
           size="small"
           width="106"
-          style="display: none"
+          style="display: none;"
           @click="sendingRequestClick"
           >送客依頼</fg-button
         >
