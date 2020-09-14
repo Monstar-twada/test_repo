@@ -202,12 +202,15 @@
 
         <fg-form-item label="免許証番号">
           <fg-input
-            v-model="form.licence"
+            v-model="form.license"
             width="395px"
-            :length="strLength.licence"
+            :length="strLength.license"
+            :custom-formatter="
+              (val) => changeToHankakuAndGetNumber('license', val)
+            "
           ></fg-input>
         </fg-form-item>
-
+        {{ form }}
         <fg-form-item label="家族構成" class="plus-row-wrapper">
           <fg-row gutter="15">
             <fg-col span="5">
@@ -287,7 +290,6 @@
         </fg-form-item>
       </fg-form>
     </WhiteBox>
-    {{ form }}
     <div class="footer-button-wrapper">
       <fg-button width="240px" suffix-icon="arrow-right" @click="handleConfirm"
         >確認</fg-button
@@ -348,23 +350,13 @@ export default {
         workName: 255,
         workPhoneNumber: 30,
         annualIncome: 30,
-        licence: 12,
+        license: 12,
         pet: 255,
         home: 255,
         drink: 255,
         hobby: 255,
       },
     }
-  },
-  computed: {
-    getLicence() {
-      return this.form.licence
-    },
-  },
-  watch: {
-    getLicence(val) {
-      this.changeToHankaku('licence', val)
-    },
   },
   created() {
     if (!this.query.edit) {
@@ -384,14 +376,20 @@ export default {
     handleBack() {
       this.$router.push(`/customer/detail?id=${this.query.id}`)
     },
-    changeToHankaku(target, str) {
-      this.form[target] = str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    changeToHankakuAndGetNumber(target, str) {
+      const hankaku = str.replace(/[０-９]/g, function (s) {
         // eslint-disable-next-line
         return String.fromCharCode(s.charCodeAt(0) - 0xfee0)
       })
+      const justNumber = hankaku.replace(/\D/g, '')
+      this.form[target] = justNumber
+      return justNumber
     },
     validation() {
       let count = 0
+      if (!this.form.lastName) {
+        count += 1
+      }
       Object.keys(this.strLength).forEach((key) => {
         if (this.form[key]) {
           if (this.form[key].length > this.strLength[key]) {
