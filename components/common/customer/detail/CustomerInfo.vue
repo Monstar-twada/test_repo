@@ -87,7 +87,7 @@
           <dl>
             <dt>
               {{ data | fmtCustomerName }}
-              <span style="font-size: 10px"
+              <span style="font-size: 10px;"
                 >（{{ data.age | fmtHyphen }}歳）</span
               >
             </dt>

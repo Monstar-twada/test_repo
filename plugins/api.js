@@ -40,6 +40,14 @@ export class RequestApi {
     return this._handleRequest(api, params, headers, 'GET')
   }
 
+  put(api, params, headers) {
+    return this._handleRequest(api, params, headers, 'PUT')
+  }
+
+  delete(api, params, headers) {
+    return this._handleRequest(api, params, headers, 'DELETE')
+  }
+
   /**
    * handle request
    * @param api

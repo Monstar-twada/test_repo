@@ -46,7 +46,7 @@
           </div>
         </td>
         <td>
-          <dl style="display: inline-block; text-align: left">
+          <dl style="display: inline-block; text-align: left;">
             <dd>{{ item.maker }}</dd>
             <dd>{{ item.class || '-' }}</dd>
           </dl>
@@ -56,7 +56,7 @@
         <td>{{ item.firstRegistrationDate | fmtDate }}</td>
         <td>{{ item.inspectionExpirationDate | fmtDate }}</td>
         <td>
-          <div style="text-align: center">
+          <div style="text-align: center;">
             <fg-tag
               :class="{ hide: i % 5 === 0 }"
               color="#fff"
@@ -78,7 +78,7 @@
               >乗換</fg-tag
             >
           </div>
-          <div style="text-align: center">
+          <div style="text-align: center;">
             <fg-tag
               :class="{ hide: i % 2 === 0 }"
               color="#fff"
