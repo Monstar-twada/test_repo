@@ -31,10 +31,18 @@
         <fg-form-item label="氏名" show-suffix-required-icon>
           <fg-row gutter="20">
             <fg-col span="10">
-              <fg-input v-model="form.lastName"></fg-input>
+              <fg-input
+                v-model="form.lastName"
+                placeholder="姓"
+                :length="strLength.lastName"
+              ></fg-input>
             </fg-col>
             <fg-col span="10">
-              <fg-input v-model="form.firstName"></fg-input>
+              <fg-input
+                v-model="form.firstName"
+                placeholder="名"
+                :length="strLength.firstName"
+              ></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
@@ -42,10 +50,18 @@
         <fg-form-item label="フリガナ">
           <fg-row gutter="20">
             <fg-col span="10">
-              <fg-input v-model="form.lastNameKana"></fg-input>
+              <fg-input
+                v-model="form.lastNameKana"
+                placeholder="セイ"
+                :length="strLength.lastNameKana"
+              ></fg-input>
             </fg-col>
             <fg-col span="10">
-              <fg-input v-model="form.firstNameKana"></fg-input>
+              <fg-input
+                v-model="form.firstNameKana"
+                placeholder="メイ"
+                :length="strLength.firstNameKana"
+              ></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
@@ -62,19 +78,36 @@
         </fg-form-item>
 
         <fg-form-item label="携帯電話">
-          <fg-input v-model="form.cellphoneNumber"></fg-input>
+          <fg-input
+            v-model="form.cellphoneNumber"
+            placeholder="00-0000-0000"
+            :length="strLength.cellphoneNumber"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="電話番号">
-          <fg-input v-model="form.phoneNumber"></fg-input>
+          <fg-input
+            v-model="form.phoneNumber"
+            placeholder="000-0000-0000"
+            :length="strLength.phoneNumber"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="メールアドレス">
-          <fg-input v-model="form.email"></fg-input>
+          <fg-input
+            v-model="form.email"
+            placeholder="user@cars-enjoy.com"
+            :length="strLength.email"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="郵便番号">
-          <fg-input v-model="form.zipCode" width="160px"></fg-input>
+          <fg-input
+            v-model="form.zipCode"
+            width="160px"
+            placeholder="000-0000"
+            :length="strLength.zipCode"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="都道府県">
@@ -82,15 +115,21 @@
         </fg-form-item>
 
         <fg-form-item label="市区町村">
-          <fg-input v-model="form.city"></fg-input>
+          <fg-input v-model="form.city" :length="strLength.city"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="番地など">
-          <fg-input v-model="form.address1"></fg-input>
+          <fg-input
+            v-model="form.address1"
+            :length="strLength.address1"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="建物名・部屋番号など">
-          <fg-input v-model="form.address2"></fg-input>
+          <fg-input
+            v-model="form.address2"
+            :length="strLength.address2"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="生年月日">
@@ -102,11 +141,17 @@
         </fg-form-item>
 
         <fg-form-item label="勤務先">
-          <fg-input v-model="form.workName"></fg-input>
+          <fg-input
+            v-model="form.workName"
+            :length="strLength.workName"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="勤務先電話番号">
-          <fg-input v-model="form.workPhoneNumber"></fg-input>
+          <fg-input
+            v-model="form.workPhoneNumber"
+            :length="strLength.workPhoneNumber"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="勤続年数（入社日）">
@@ -118,6 +163,7 @@
             v-model="form.annualIncome"
             type="number"
             width="160px"
+            :length="strLength.annualIncome"
             unit="万円"
           ></fg-input>
         </fg-form-item>
@@ -155,7 +201,11 @@
         </fg-form-item>
 
         <fg-form-item label="免許証番号">
-          <fg-input v-model="form.licence" width="395px"></fg-input>
+          <fg-input
+            v-model="form.licence"
+            width="395px"
+            :length="strLength.licence"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="家族構成" class="plus-row-wrapper">
@@ -221,23 +271,23 @@
       </ColumnTitle>
       <fg-form label-width="140px">
         <fg-form-item label="ペット">
-          <fg-input v-model="form.pet"></fg-input>
+          <fg-input v-model="form.pet" :length="strLength.pet"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="実家">
-          <fg-input v-model="form.home"></fg-input>
+          <fg-input v-model="form.home" :length="strLength.home"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="ドリンク">
-          <fg-input v-model="form.drink"></fg-input>
+          <fg-input v-model="form.drink" :length="strLength.drink"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="趣味">
-          <fg-input v-model="form.hobby"></fg-input>
+          <fg-input v-model="form.hobby" :length="strLength.hobby"></fg-input>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
-
+    {{ form }}
     <div class="footer-button-wrapper">
       <fg-button width="240px" suffix-icon="arrow-right" @click="handleConfirm"
         >確認</fg-button
@@ -283,7 +333,38 @@ export default {
       carLives: CAR_LIVES,
       selectionPoints: SELECTION_POINTS,
       form: query.edit ? storage.get('registCustomEdit') : {},
+      strLength: {
+        lastName: 255,
+        firstName: 255,
+        lastNameKana: 255,
+        firstNameKana: 255,
+        cellphoneNumber: 100,
+        phoneNumber: 100,
+        email: 254,
+        zipCode: 20,
+        city: 255,
+        address1: 255,
+        address2: 255,
+        workName: 255,
+        workPhoneNumber: 30,
+        annualIncome: 30,
+        licence: 12,
+        pet: 255,
+        home: 255,
+        drink: 255,
+        hobby: 255,
+      },
     }
+  },
+  computed: {
+    getLicence() {
+      return this.form.licence
+    },
+  },
+  watch: {
+    getLicence(val) {
+      this.changeToHankaku('licence', val)
+    },
   },
   created() {
     if (!this.query.edit) {
@@ -295,11 +376,30 @@ export default {
       storage.set('registCustomEdit', this.form)
     },
     handleConfirm() {
-      this.saveCache()
-      this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
+      if (this.validation()) {
+        this.saveCache()
+        this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
+      }
     },
     handleBack() {
       this.$router.push(`/customer/detail?id=${this.query.id}`)
+    },
+    changeToHankaku(target, str) {
+      this.form[target] = str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+        // eslint-disable-next-line
+        return String.fromCharCode(s.charCodeAt(0) - 0xfee0)
+      })
+    },
+    validation() {
+      let count = 0
+      Object.keys(this.strLength).forEach((key) => {
+        if (this.form[key]) {
+          if (this.form[key].length > this.strLength[key]) {
+            count += 1
+          }
+        }
+      })
+      return count === 0
     },
     customValidate(file, next) {
       if (!/^image\/(jpeg|png|pdf|heif)/.test(file.type)) {
