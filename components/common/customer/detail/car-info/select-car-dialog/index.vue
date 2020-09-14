@@ -57,7 +57,10 @@ export default {
       type: [String, Number],
       default: '',
     },
-    query: Object,
+    query: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
