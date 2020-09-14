@@ -12,7 +12,10 @@ export default merge(baseConfig, {
   },
   // import color css
   styleResources: {
-    scss: [ 'first-group-ui/dist/blue.scss' ],
+    scss: [
+      '~/plugins/first-group-ui/src/assets/scss/theme-blue.scss',
+      '~/plugins/first-group-ui/src/assets/scss/index.scss',
+    ],
   },
   // https://nuxtjs.org/api/configuration-generate
   generate: {

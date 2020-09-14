@@ -1,0 +1,160 @@
+@import "../../src/assets/scss/mixin";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 16px;
+  // color: $--color-primary;
+  color: #333;
+  font-family: 'Avenir Next', 'Yantramanav', 'Noto Sans JP', 'Helvetica', Arial,
+  'Microsoft Yahei';
+}
+body {
+  overflow: hidden;
+}
+
+h2, h3, pre {
+  margin-top: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+h3, p {
+  margin-bottom: 10px;
+}
+
+$sideWidth: 210px;
+$headerHeight: 60px;
+
+.example-page-wrapper {
+  overflow-y: auto;
+  height: 100%;
+  header {
+    position: fixed;
+    z-index: 100;
+    background: $--color-primary-active;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $headerHeight;
+    display: flex;
+    align-items: center;
+    h1, h2 {
+      padding: 0;
+      margin: 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: $headerHeight;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      text-indent: 20px;
+    }
+    h1 {
+      width: $sideWidth;
+    }
+    a {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      margin-top: -12px;
+      font-size: 0;
+      svg {
+        color: $--color-white;
+        opacity: 0.6;
+      }
+      &:hover {
+        svg {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .aside-wrapper {
+    position: fixed;
+    top: $headerHeight;
+    left: 0;
+    bottom: 0;
+    width: 210px;
+    background: $--color-background;
+    overflow: hidden;
+    .menu-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow-y: auto;
+      bottom: 20px;
+      @include scrollbar();
+      a {
+        display: block;
+        padding: 8px 20px;
+        color: $--color-primary-active;
+        text-decoration: none;
+
+        &:hover {
+          color: $--color-primary-hover;
+          background: $--color-background-hover;
+        }
+
+        &.__current {
+          color: $--color-white !important;
+          background: $--color-primary-active;
+        }
+      }
+    }
+  }
+
+  .main-page-wrapper {
+    margin: 20px 20px 20px 230px;
+    max-width: 1200px;
+  }
+}
+
+table {
+  width: 100%;
+  border: 0;
+  color: #555;
+  border-collapse: collapse;
+  tr {
+    th,
+    td {
+      padding: 10px;
+      font-size: 14px;
+    }
+    th {
+      background: $--color-background-hover;
+    }
+    td {
+      border-bottom: 1px solid $--color-border;
+    }
+    &:hover {
+      td {
+        background: $--color-background;
+      }
+    }
+  }
+}
+
+code {
+  padding: 2px 5px;
+  //background: #2b2b2b;
+  background: #777;
+  border-radius: 4px;
+  color: #fff;
+}
+
+pre {
+  code {
+    padding: 20px !important;
+    border-radius: 4px;
+  }
+  code.hljs {
+    padding-top: 0 !important;
+  }
+}

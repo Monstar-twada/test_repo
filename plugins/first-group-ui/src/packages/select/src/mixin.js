@@ -1,0 +1,31 @@
+/**
+ * Created by Capricorncd.
+ * https://github.com/capricorncd
+ * Date: 2020-09-03 13:06
+ */
+export default {
+  methods: {
+    clearTimer() {
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = null
+      }
+    },
+  },
+  watch: {
+    isLeaved(val) {
+      if (this.popVisible) {
+        if (val) {
+          this.timer = setTimeout(() => {
+            this.popVisible = false
+          }, 1000)
+        } else {
+          this.clearTimer()
+        }
+      }
+    },
+  },
+  beforeDestroy() {
+    this.clearTimer()
+  },
+}

@@ -124,8 +124,8 @@
   </div>
 </template>
 <script>
-import { CAR_LIVES, SELECTION_POINTS } from '../common/base'
 import LicenceDialog from './licence-dialog/index'
+import { CAR_LIVES, SELECTION_POINTS } from '~/assets/constants/index'
 import SubTitle from '~/components/common/customer/common/SubTitle.vue'
 import TextContent from '~/components/common/customer/common/TextContent.vue'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'

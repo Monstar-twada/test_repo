@@ -114,6 +114,24 @@
             ></fg-calendar>
           </fg-col>
         </fg-row>
+        <fg-row
+          v-if="
+            validationMessage.firstRegistration ||
+            validationMessage.inspectionExpiration
+          "
+          gutter="20"
+        >
+          <fg-col span="12">
+            <fg-text class="search-bar-form-wrapper__error mt10">{{
+              validationMessage.firstRegistration
+            }}</fg-text>
+          </fg-col>
+          <fg-col span="12">
+            <fg-text class="search-bar-form-wrapper__error mt10">{{
+              validationMessage.inspectionExpiration
+            }}</fg-text>
+          </fg-col>
+        </fg-row>
       </fg-col>
     </fg-row>
   </SearchBar>
@@ -140,11 +158,35 @@ export default {
       },
       makerItems: [],
       carModels: [],
+      validationMessage: {
+        firstRegistration: '',
+        inspectionExpiration: '',
+      },
     }
   },
   methods: {
+    validation() {
+      let count = 0
+      const frFrom = new Date(this.form.firstRegistrationDateFrom)
+      const frTo = new Date(this.form.firstRegistrationDateTo)
+      if (frFrom > frTo) {
+        this.validationMessage.firstRegistration =
+          '日付を正しく設定してください'
+        count += 1
+      } else this.validationMessage.firstRegistration = ''
+
+      const inspectionFrom = new Date(this.form.inspectionExpirationDateFrom)
+      const inspectionTo = new Date(this.form.inspectionExpirationDateTo)
+      if (inspectionFrom > inspectionTo) {
+        this.validationMessage.inspectionExpiration =
+          '日付を正しく設定してください'
+        count += 1
+      } else this.validationMessage.inspectionExpiration = ''
+      return count
+    },
     search() {
-      this.$emit('change', this.form)
+      const count = this.validation()
+      if (count === 0) this.$emit('change', this.form)
     },
   },
 }
@@ -152,6 +194,11 @@ export default {
 
 <style lang="scss">
 .search-bar-form-wrapper {
+  &__error {
+    div {
+      color: $--color-warning;
+    }
+  }
   > .fg-row {
     padding-top: 20px;
   }
