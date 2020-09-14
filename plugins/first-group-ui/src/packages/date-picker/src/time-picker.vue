@@ -1,7 +1,7 @@
 <template>
   <div class="fg-time-picker">
     <fg-row gutter="10">
-      <fg-col span="8">
+      <fg-col span="12">
         <fg-select
           v-model="hour"
           size="small"
@@ -13,29 +13,28 @@
           @click="clickSelect"
         ></fg-select>
       </fg-col>
-      <fg-col span="8">
+      <fg-col span="12">
         <fg-select
           v-model="minute"
           size="small"
           placeholder="分"
           :items="minutes"
-          unit=":"
           filterable
           clearable
           @click="clickSelect"
         ></fg-select>
       </fg-col>
-      <fg-col span="8">
-        <fg-select
-          v-model="second"
-          size="small"
-          placeholder="秒"
-          :items="seconds"
-          filterable
-          clearable
-          @click="clickSelect"
-        ></fg-select>
-      </fg-col>
+      <!--      <fg-col span="8">-->
+      <!--        <fg-select-->
+      <!--          v-model="second"-->
+      <!--          size="small"-->
+      <!--          placeholder="秒"-->
+      <!--          :items="seconds"-->
+      <!--          filterable-->
+      <!--          clearable-->
+      <!--          @click="clickSelect"-->
+      <!--        ></fg-select>-->
+      <!--      </fg-col>-->
     </fg-row>
   </div>
 </template>
@@ -105,10 +104,10 @@ function createArr(len) {
 
 <style lang="scss">
 .fg-time-picker {
-  width: 200px;
+  width: 145px;
   .fg-input {
     .suffix-outside-wrapper {
-      right: -3px;
+      right: -4px;
     }
   }
 }

@@ -6,11 +6,6 @@
 import {
   getPropByPath,
   getRandomStr,
-  isString,
-  isFunction,
-  isNumber,
-  isNumberLike,
-  isUndefined,
   merge,
   noop,
   slice,
@@ -18,6 +13,13 @@ import {
   toNumber,
   toTwoDigits,
 } from './utils'
+import {
+  isString,
+  isFunction,
+  isNumber,
+  isNumberLike,
+  isUndefined,
+} from './check'
 import {
   getScrollParents,
   getMaxZIndex,

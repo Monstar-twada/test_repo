@@ -165,11 +165,11 @@ export default {
     margin-left: 10px;
     line-height: 1;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
     .__name,
     .__summary {
       white-space: nowrap;
-      overflow: hidden;
+      overflow-x: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
     }

@@ -16,7 +16,6 @@
         <fg-form-item label="車検証">
           <div>
             <fg-image-processor
-              :options="{ width: 2000, height: 'auto' }"
               icon="license-front"
               url=""
               readonly

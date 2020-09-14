@@ -26,7 +26,10 @@ export default {
   },
   mixins: [Broadcaster],
   props: {
-    value: {},
+    value: {
+      type: [String, Number],
+      default: '',
+    },
     size: {
       type: String,
       default: '',

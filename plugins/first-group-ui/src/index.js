@@ -40,6 +40,8 @@ import themeBlue from './plugins/theme-blue'
 import themeRed from './plugins/theme-red'
 import * as libs from './libs/index'
 
+import './assets/scss/common.scss'
+
 const components = [
   FgAvatar,
   FgBreadcrumbs,

@@ -12,22 +12,22 @@
 </template>
 
 <script>
-import Item from './common/Item'
+import Item from '../common/Item'
 export default {
   components: { Item },
   data() {
     return {
       list: [
         {
-          url: '',
+          url: '/common/person_default.svg',
           name: '岡田俊平',
         },
         {
-          url: '',
+          url: '/common/person_default.svg',
           name: '浅井健太',
         },
         {
-          url: '',
+          url: '/common/person_default.svg',
           name: '谷口広大',
         },
       ],
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './common/mixins';
+@import '../common/mixins';
 .matter-detail-dialog__principal {
   position: relative;
   height: 60px;

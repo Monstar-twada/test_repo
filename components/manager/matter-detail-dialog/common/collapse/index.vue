@@ -9,11 +9,10 @@
         <b>{{ title }}</b>
       </div>
     </div>
-    <transition name="fg-zoom-in-top">
-      <div v-show="visible" class="fg-collapse__body">
-        <slot></slot>
-      </div>
-    </transition>
+
+    <div v-show="visible" class="fg-collapse__body">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -25,6 +24,10 @@ export default {
     title: {
       type: String,
       default: '',
+    },
+    index: {
+      type: Number,
+      default: 0,
     },
   },
   data() {
@@ -46,6 +49,7 @@ export default {
     handleCollapse() {
       if (this.disabled) return
       this.visible = !this.visible
+      this.$emit('collapse', this.index, this.visible)
     },
   },
 }

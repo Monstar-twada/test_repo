@@ -1,21 +1,10 @@
 <template>
-  <div class="status-item">
+  <div class="mdd-tasks-item">
     <Border>
       <fg-checkbox label="売却車両あり" class="mr40"></fg-checkbox>
     </Border>
 
-    <h4 class="mt25">顧客情報</h4>
-    <div class="mt10">
-      <Item label="生年月日" inline class="mr30">
-        <fg-calendar size="small"></fg-calendar>
-      </Item>
-      <Item label="家族構成" inline class="mr30">
-        <fg-select size="small"></fg-select>
-      </Item>
-      <Item label="住まい" inline>
-        <fg-select size="small"></fg-select>
-      </Item>
-    </div>
+    <CustomerInfo class="mt25" />
 
     <h4 class="mt25">カーライフ</h4>
     <div class="checkbox-wrapper">
@@ -45,7 +34,7 @@
 
     <h4 class="mt40 pb10 bottom-dashed-line">希望する車両</h4>
     <div class="pb20 bottom-dashed-line">
-      <div v-for="(item, i) in dvList" :key="i">
+      <div v-for="(item, i) in dvList" :key="i" class="add-and-del-group-item">
         <AddDesiredVehicle />
         <ButtonAdd
           v-if="(i === 0 && dvList.length === 1) || i === dvList.length - 1"
@@ -110,16 +99,7 @@
       </div>
     </Item>
 
-    <div class="mt20 color-checkbox-wrapper">
-      <fg-checkbox
-        v-for="(item, i) in CAR_COLORS"
-        :key="i"
-        :value="item.active"
-      >
-        <Color :color="item.color" />
-      </fg-checkbox>
-      <fg-checkbox label="他"></fg-checkbox>
-    </div>
+    <ColorCheckboxGroup class="mt20" />
 
     <div class="mt20">
       <Item label="ハンドル" inline>
@@ -137,17 +117,13 @@
     </h4>
 
     <div class="pb20 bottom-dashed-line">
-      <div
-        v-for="(item, i) in dvList"
-        :key="i"
-        class="add-opportunity-information-item"
-      >
+      <div v-for="(item, i) in oiList" :key="i" class="add-and-del-group-item">
         <AddOpportunityInfo />
         <ButtonAdd
-          v-if="(i === 0 && dvList.length === 1) || i === dvList.length - 1"
-          @click="addDvItem"
+          v-if="(i === 0 && oiList.length === 1) || i === oiList.length - 1"
+          @click="addOiItem"
         />
-        <ButtonDel v-else @click="delDvItem(i)" />
+        <ButtonDel v-else @click="delOiItem(i)" />
       </div>
     </div>
 
@@ -157,46 +133,7 @@
       </Item>
     </div>
 
-    <h4 class="mt30">確定車両</h4>
-
-    <dl class="mt20">
-      <dd>
-        <Item label="メーカー" inline label-width="73">
-          <fg-select placeholder="選択" size="small" width="120"></fg-select>
-        </Item>
-        <Item label="車種" inline class="ml30" label-width="60">
-          <fg-select placeholder="選択" size="small" width="120"></fg-select>
-        </Item>
-        <Item label="グレード" inline class="ml30" label-width="60">
-          <fg-input placeholder="記入" size="small" width="120"></fg-input>
-        </Item>
-      </dd>
-      <dd class="mt10">
-        <Item label="初年度登録" inline label-width="73">
-          <fg-select
-            placeholder="初年度登録"
-            size="small"
-            width="120"
-          ></fg-select>
-        </Item>
-
-        <Item label="登録年月日" inline class="ml30" label-width="60">
-          <fg-select
-            placeholder="登録年月日"
-            size="small"
-            width="120"
-          ></fg-select>
-        </Item>
-
-        <Item label="車検満了日" inline class="ml30" label-width="60">
-          <fg-select
-            placeholder="車検満了日"
-            size="small"
-            width="120"
-          ></fg-select>
-        </Item>
-      </dd>
-
+    <CarMakerAndDateInfo class="mt30" title="確定車両">
       <dd class="mt10">
         <Item label="走行距離" inline right="30" label-width="73">
           <fg-input
@@ -244,7 +181,7 @@
           <fg-select placeholder="選択" size="small" width="120"></fg-select>
         </Item>
       </dd>
-    </dl>
+    </CarMakerAndDateInfo>
 
     <div class="status-item__footer">
       <ButtonSave />
@@ -254,24 +191,26 @@
 </template>
 
 <script>
-import Border from '../../common/Border'
-import Item from '../../common/Item'
-import ButtonComplete from '../../common/ButtonComplete'
-import ButtonSave from '../../common/ButtonSave'
-import ButtonDel from '../../common/ButtonDel'
-import ButtonAdd from '../../common/ButtonAdd'
-import AddDesiredVehicle from './AddDesiredVehicle'
-import AddOpportunityInfo from './AddOpportunityInfo'
-import Color from './Color'
+import Border from '../common/Border'
+import Item from '../common/Item'
+import ButtonComplete from '../common/ButtonComplete'
+import ButtonSave from '../common/ButtonSave'
+import ButtonDel from '../common/ButtonDel'
+import ButtonAdd from '../common/ButtonAdd'
+import ColorCheckboxGroup from '../common/color-checkbox-group/index'
+import AddDesiredVehicle from '../common/tasks/AddDesiredVehicle'
+import AddOpportunityInfo from '../common/tasks/AddOpportunityInfo'
+import CustomerInfo from '../common/tasks/CustomerInfo'
+import CarMakerAndDateInfo from '../common/tasks/CarMakerAndDateInfo'
 import {
   CAR_BODY_TYPES,
-  CAR_COLORS,
   CAR_LIVES,
   SELECTION_POINTS,
 } from '~/assets/constants/index'
 
 export default {
   components: {
+    ColorCheckboxGroup,
     ButtonComplete,
     ButtonSave,
     Border,
@@ -280,15 +219,16 @@ export default {
     ButtonDel,
     AddDesiredVehicle,
     AddOpportunityInfo,
-    Color,
+    CustomerInfo,
+    CarMakerAndDateInfo,
   },
   data() {
     return {
       CAR_LIVES,
       SELECTION_POINTS,
       CAR_BODY_TYPES,
-      CAR_COLORS,
       dvList: [1],
+      oiList: [1],
     }
   },
   methods: {
@@ -297,6 +237,12 @@ export default {
     },
     delDvItem(index) {
       this.dvList.splice(index, 1)
+    },
+    addOiItem() {
+      this.oiList.push(1)
+    },
+    delOiItem(index) {
+      this.oiList.splice(index, 1)
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div v-show="popVisible" ref="pop" class="fg-popup" :style="popStyle">
+    <div v-show="popVisible" ref="pop" :class="classes" :style="popStyle">
       <slot></slot>
       <i v-if="!hideArrow" class="fg-popup__arrow" :style="arrowStyle"></i>
     </div>
@@ -8,8 +8,13 @@
 </template>
 
 <script>
-import { getScrollParents, resetZIndex } from '../../../libs'
-const MARGIN_OFFSET = 10
+import {
+  getScrollParents,
+  resetZIndex,
+  toNumber,
+  isUndefined,
+} from '../../../libs'
+
 export default {
   name: 'FgPopup',
   props: {
@@ -20,6 +25,10 @@ export default {
     },
     autoWidth: Boolean,
     hideArrow: Boolean,
+    offset: {
+      type: [String, Number],
+      default: undefined,
+    },
   },
   data() {
     return {
@@ -59,6 +68,12 @@ export default {
     },
     popHeight() {
       return this.pop ? this.pop.offsetHeight || 300 : 300
+    },
+    marginOffset() {
+      return isUndefined(this.offset) ? 10 : toNumber(this.offset)
+    },
+    classes() {
+      return ['fg-popup', `is-${this.transitionName}`]
     },
   },
   watch: {
@@ -107,6 +122,7 @@ export default {
       this.isTopIn = window.innerHeight - bottom > this.popHeight
     },
     resetPopPosition() {
+      const marginOffset = this.marginOffset
       const popStyle = {}
       const arrowStyle = {}
       this.$nextTick(() => {
@@ -137,7 +153,7 @@ export default {
           popStyle.bottom =
             (isSidePosition
               ? winHeight - top - height
-              : winHeight - top + MARGIN_OFFSET) + 'px'
+              : winHeight - top + marginOffset) + 'px'
         } else {
           // arrow
           if (isSidePosition) {
@@ -148,7 +164,7 @@ export default {
           }
           // pop body
           popStyle.top =
-            (isSidePosition ? bottom - height : bottom + MARGIN_OFFSET) + 'px'
+            (isSidePosition ? bottom - height : bottom + marginOffset) + 'px'
         }
         /** check right offset */
         const winWidth = window.innerWidth
@@ -156,12 +172,12 @@ export default {
         let l
         if (isSidePosition) {
           if (this.isLeftSide) {
-            l = left - popWidth - MARGIN_OFFSET
+            l = left - popWidth - marginOffset
             if (l < 0) {
               this.printError('left')
             }
           } else {
-            l = right + MARGIN_OFFSET
+            l = right + marginOffset
             if (l + popWidth > winWidth) {
               this.printError('right')
             }

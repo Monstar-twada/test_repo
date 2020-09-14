@@ -1,5 +1,5 @@
 <template>
-  <div class="status-item">
+  <div class="mdd-tasks-item">
     <div>
       <Item label="案件番号" inline bold>3028920</Item>
       <Item label="金額" inline bold class="ml30 mr30">¥40,000</Item>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import Border from '../common/Border'
-import Item from '../common/Item'
-import ButtonComplete from '../common/ButtonComplete'
+import Border from '../../common/Border'
+import Item from '../../common/Item'
+import ButtonComplete from '../../common/ButtonComplete'
 export default {
   components: {
     ButtonComplete,

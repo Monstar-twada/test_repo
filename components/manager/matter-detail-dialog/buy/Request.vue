@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Item from './common/Item'
+import Item from '../common/Item'
 export default {
   components: { Item },
   data() {
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './common/mixins';
+@import '../common/mixins';
 .matter-detail-dialog__request {
   position: relative;
   padding-bottom: 20px;

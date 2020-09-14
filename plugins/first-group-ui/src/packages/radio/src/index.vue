@@ -59,8 +59,14 @@ export default {
     },
   },
   props: {
-    value: {},
-    label: {},
+    value: {
+      type: [String, Number],
+      default: '',
+    },
+    label: {
+      type: [String, Number],
+      default: '',
+    },
     disabled: Boolean,
     name: {
       type: String,

@@ -2,8 +2,8 @@
   <div class="matter-detail-dialog__header">
     <div class="l">
       <div class="status-group">
-        <div class="icon"></div>
-        <h2>No.xxxxxx 米田智彦 様</h2>
+        <HeaderTypeIcon :type="type" />
+        <h2>{{ title }}</h2>
         <div class="desc">トヨタプリウス</div>
       </div>
     </div>
@@ -15,17 +15,36 @@
         circle
         size="small"
         style="transform: rotate(45deg);"
+        @click="$emit('close')"
       ></fg-button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import HeaderTypeIcon from './HeaderTypeIcon'
+import { SEND_TYPES } from './constants'
+export default {
+  components: {
+    HeaderTypeIcon,
+  },
+  props: {
+    type: {
+      type: String,
+      default: 'buy',
+    },
+  },
+  computed: {
+    title() {
+      const item = SEND_TYPES[this.type] || {}
+      return `【${item.text}】No.xxxxxx 米田智彦 様`
+    },
+  },
+}
 </script>
 
 <style lang="scss">
-@import './common/mixins';
+@import './mixins';
 .matter-detail-dialog__header {
   position: relative;
   height: 117px;
@@ -36,14 +55,10 @@ export default {}
     .status-group {
       position: relative;
       padding: 0 0 0 62px;
-      .icon {
+      .type-item {
         position: absolute;
         top: 0;
         left: 0;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        border: 1px solid $--color-border;
       }
       .desc {
         color: $--color-primary-placeholder;
