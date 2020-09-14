@@ -94,17 +94,17 @@ export default {
 .send-sales-wrapper {
   display: flex;
   justify-content: space-between;
-  color: $blue-200;
+  color: $--color-primary;
   margin-bottom: 40px;
   &-left {
     width: 25%;
     text-align: center;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
     &-top {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px $gray-100 solid;
+      border-bottom: 1px $--color-border solid;
       height: 64px;
       align-items: center;
       padding: 0 20px;
@@ -112,7 +112,7 @@ export default {
 
     &-center {
       overflow: hidden;
-      border-bottom: 1px $gray-100 solid;
+      border-bottom: 1px $--color-border solid;
       align-items: center;
       padding: 20px;
 
@@ -156,7 +156,7 @@ export default {
   &-right {
     flex: 1;
     margin-left: 20px;
-    background-color: $white-300;
+    background-color: $--color-white;
     border-radius: 6px;
 
     h2 {
@@ -167,11 +167,11 @@ export default {
 
     table {
       width: 100%;
-      border-bottom: 1px $gray-100 solid;
+      border-bottom: 1px $--color-border solid;
       border-spacing: 0;
       thead {
         tr {
-          background: $white-100;
+          background: $--color-background;
           height: 40px;
           th:first-child {
             width: 10%;

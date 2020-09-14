@@ -18,19 +18,19 @@ export const managerMenuItems = [
     text: '集客',
     width: 16,
   },
+  // {
+  //   icon: 'send',
+  //   iconHover: 'send-hover',
+  //   link: '/send',
+  //   text: '送客',
+  //   width: 24,
+  // },
   /* {
     icon: 'bi',
     iconHover: 'bi-hover',
     link: '/bi',
     text: '経営状況',
     width: 21,
-  },
-  {
-    icon: 'send',
-    iconHover: 'send-hover',
-    link: '/send',
-    text: '送客',
-    width: 24,
   },
   {
     icon: 'setting',

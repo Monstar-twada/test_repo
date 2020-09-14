@@ -87,9 +87,9 @@ export default {
   width: 1000px;
   height: 365px;
   margin: 0 auto;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
-  color: $blue-200;
+  color: $--color-primary;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,7 +99,7 @@ export default {
     width: 100%;
     height: 54px;
     line-height: 54px;
-    border-bottom: 1px $gray-100 solid;
+    border-bottom: 1px $--color-border solid;
     padding-left: 20px;
   }
 
@@ -114,14 +114,14 @@ export default {
     &-icon {
       width: 270px;
       height: 144px;
-      border: 1px $gray-100 solid;
+      border: 1px $--color-border solid;
       border-radius: 6px;
       display: flex;
       justify-content: center;
       align-items: center;
 
       &:hover {
-        border: 1px $blue-100 solid;
+        border: 1px $--color-primary-active solid;
       }
     }
   }

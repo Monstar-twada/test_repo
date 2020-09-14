@@ -41,11 +41,11 @@ export default {
 .send-card {
   width: 340px;
   height: 395px;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
   padding: 40px;
   text-align: center;
-  color: $blue-200;
+  color: $--color-primary;
 
   &-icon {
     display: flex;

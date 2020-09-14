@@ -88,15 +88,15 @@ export default {
   width: 1000px;
   height: 900px;
   margin: 0 auto;
-  background: $white-300;
+  background: $--color-white;
   border-radius: 6px;
-  color: $blue-200;
+  color: $--color-primary;
 
   .title {
     width: 100%;
     height: 54px;
     line-height: 54px;
-    border-bottom: 1px $gray-100 solid;
+    border-bottom: 1px $--color-border solid;
     padding-left: 20px;
     display: flex;
     justify-content: space-between;

@@ -222,7 +222,7 @@ export default {
             font-size: 12px;
             font-weight: normal;
             height: 40px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             padding: 0 2px !important;
             i {
               display: none;
@@ -260,11 +260,11 @@ export default {
         tr {
           height: 70px !important;
           &:nth-child(even) {
-            background-color: $white-100;
+            background-color: $--color-background;
           }
           td {
             padding: 0 10px !important;
-            color: $blue-200 !important;
+            color: $--color-primary !important;
             border-bottom: none !important;
             font-size: 12px !important;
             height: 70px !important;
@@ -276,7 +276,7 @@ export default {
               height: 70%;
               top: 15%;
               right: 0;
-              background: $gray-100;
+              background: $--color-border;
             }
           }
         }

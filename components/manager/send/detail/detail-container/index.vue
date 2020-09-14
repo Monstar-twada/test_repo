@@ -1,92 +1,92 @@
 <template>
-  <div class="send-detail-detail-conatiner">
-    <div class="send-detail-detail-conatiner__top">
-      <h3>送客依頼詳細</h3>
-      <div class="send-detail-detail-conatiner__top__right">
-        <div class="send-detail-detail-conatiner__top__right--date">
-          <p>依頼日時：</p>
-          <p>R02/06/01 16:30</p>
-        </div>
-        <div class="send-detail-detail-conatiner__top__right--date">
-          <p>完了日時：</p>
-          <p>R02/07/01 16:30</p>
-        </div>
-      </div>
-    </div>
-    <div class="send-detail-detail-conatiner__bottom">
-      <CustomerPart />
-      <RequestKindPart />
-      <TextAreaInfo
-        :title="row3.title"
-        :value="row3.value"
-        :placeholder="row3.placeholder"
-      />
-      <TextAreaInfo
-        :title="row4.title"
-        :value="row4.value"
-        :placeholder="row4.placeholder"
-      />
-      <StatusPart
-        :selected="row5.selectedValue"
-        :list="row5.list"
-        :placeholder="row5.placeholder"
-      />
-      <SubmitButton :title="'更新'" />
-    </div>
+  <div class="send-detail">
+    <CustomerInfo />
+    <SendStatusItem
+      :status-category-icon="progressItem1.categoryIcon"
+      :title="progressItem1.title"
+      :bar="progressItem1.bar"
+      :progress="progressItem1.progress"
+    />
+    <SendStatusItem
+      :status-category-icon="progressItem2.categoryIcon"
+      :title="progressItem2.title"
+      :bar="progressItem2.bar"
+      :progress="progressItem2.progress"
+    />
   </div>
 </template>
 
 <script>
-import CustomerPart from '~/components/manager/send/common/CustomerPart.vue'
-import RequestKindPart from '~/components/manager/send/common/RequestKindPart.vue'
-import TextAreaInfo from '~/components/manager/send/common/TextAreaInfo.vue'
-import SubmitButton from '~/components/manager/send/common/SubmitButton.vue'
-import StatusPart from '~/components/manager/send/common/StatusPart.vue'
-
+import CustomerInfo from '~/components/manager/send/detail/customer-info/index'
+import SendStatusItem from '~/components/manager/send/detail/send-status/index'
 export default {
   name: 'DetailContainer',
   components: {
-    CustomerPart,
-    RequestKindPart,
-    TextAreaInfo,
-    SubmitButton,
-    StatusPart,
+    CustomerInfo,
+    SendStatusItem,
   },
-  data: () => ({
-    row3: {
-      title: '依頼詳細',
-      value:
-        '乗り換えを希望していて、コンパクトカーまたはSUVを考えています。\n最寄りのcars杉並には来店出来るそうです。（土日）',
-      placeholder: '',
-    },
-    row4: {
-      title: '対応状況',
-      value: '6月2日14時に電話しましたが、出られませんでした。留守電に伝言。',
-      placeholder: '',
-    },
-    row5: {
-      selectedValue: 0,
-      placeholder: '送客中',
-      list: [
-        {
-          value: 0,
-          text: '送客中',
+  data() {
+    return {
+      progressItem1: {
+        categoryIcon: 'main',
+        title: {
+          statusIcon: 'buy',
+          id: 'No.xxxxxx',
+          name: '米田智彦',
+          maker: 'トヨタ',
+          type: 'プリウス',
+          sendPrice: 40000,
+          sendDestination: '〇〇〇〇株式会社　車検の速太郎 武蔵小杉店',
+          sendDate: '2020/09/29　12:32',
         },
-        {
-          value: 1,
-          text: '対応中',
+        bar: {
+          carInfo: {
+            img: 'car',
+            maker: 'ランボルギーニウラカン',
+          },
+          statusIcon: {
+            statusIconIndex: 1,
+            statusIconDate: [
+              '2020/09/17',
+              '2020/09/19',
+              '2020/09/20',
+              '2020/09/21',
+            ],
+          },
         },
-        {
-          value: 2,
-          text: '成約済',
+        progress: [],
+      },
+      progressItem2: {
+        categoryIcon: 'plus',
+        title: {
+          statusIcon: 'buy',
+          id: 'No.xxxxxx',
+          name: '米田智彦',
+          maker: 'トヨタ',
+          type: 'プリウス',
+          sendPrice: 40000,
+          sendDestination: '〇〇〇〇株式会社　車検の速太郎 武蔵小杉店',
+          sendDate: '2020/09/29　12:32',
         },
-        {
-          value: 3,
-          text: '見送済',
+        bar: {
+          carInfo: {
+            img: 'car',
+            maker: 'ランボルギーニウラカン',
+          },
+          statusIcon: {
+            statusIconIndex: 1,
+            statusIconDate: [
+              '2020/09/17',
+              '2020/09/19',
+              '2020/09/20',
+              '2020/09/21',
+            ],
+          },
         },
-      ],
-    },
-  }),
+        progress: [],
+      },
+    }
+  },
 }
 </script>
 
