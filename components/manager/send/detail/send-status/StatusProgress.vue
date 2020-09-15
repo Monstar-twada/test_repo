@@ -8,7 +8,7 @@
       >
         <div class="send-status-progress-item-info">
           <img :src="require(`./img/${item.iconSrc}.svg`)" />
-          <h4>{{ item.name }}</h4>
+          <h3>{{ item.name }}</h3>
           <span>{{ item.date }}</span>
         </div>
         <div class="send-status-progress-item-content">
@@ -94,11 +94,11 @@ export default {
   color: $--color-primary;
 
   &-info {
-    width: 20%;
+    width: 25%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    h4 {
+    h3 {
       margin: 0 30px 0 10px;
     }
     span {
@@ -111,6 +111,7 @@ export default {
     display: flex;
     align-items: center;
     font-size: 14px;
+    font-weight: bold;
     p {
       margin-bottom: 0;
     }

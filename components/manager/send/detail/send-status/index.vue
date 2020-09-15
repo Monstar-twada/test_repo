@@ -1,7 +1,7 @@
 <template>
   <div class="send-status">
     <div class="send-status-icon">
-      <img :src="require(`./img/${statusCategoryIcon}.svg`)" />
+      <img :src="require(`./img/${statusCategoryIcon}.svg`)" width="40" />
     </div>
     <div class="send-status-content">
       <StatusTitle :info="title">
@@ -71,9 +71,9 @@ export default {
 
 <style lang="scss" scoped>
 .send-status {
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
-  align-items: top;
+  align-items: flex-start;
   justify-content: flex-start;
   &-icon {
     margin: 30px 10px 0;

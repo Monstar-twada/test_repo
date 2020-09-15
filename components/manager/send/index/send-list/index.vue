@@ -14,11 +14,6 @@
         :sortable="true"
         width="8%"
       >
-        <!-- <template v-slot="item">
-          <div class="id">
-            <nuxt-link to="/send/detail">{{ item.date }}</nuxt-link>
-          </div>
-        </template> -->
       </fg-table-column>
       <fg-table-column
         show="customerName"
@@ -104,7 +99,7 @@
     </fg-table>
     <fg-pagination
       v-model="currentPage"
-      class="pagination-link"
+      class="mt15"
       :total="table.total"
       :page-size="table.limit"
     />
@@ -122,47 +117,6 @@ export default {
     currentPage: 1,
     itemsPerPage: 10,
     table: {
-      headers: [
-        {
-          text: '送客日時',
-          value: 'date',
-          align: 'center',
-          sortable: true,
-          width: '8%',
-        },
-        {
-          text: '顧客名',
-          value: 'customerName',
-          align: 'start',
-          sortable: true,
-        },
-        {
-          text: '依頼対象車',
-          value: 'carInfo',
-          align: 'center',
-          sortable: false,
-        },
-        {
-          text: '送客先',
-          value: 'sendInfo',
-          align: 'center',
-          sortable: false,
-          width: '15%',
-        },
-        { text: '進捗', value: 'progress', align: 'center', sortable: false },
-        {
-          text: '進行中案件',
-          value: 'projectProgress',
-          align: 'start',
-          sortable: false,
-        },
-        {
-          text: '獲得予定金額',
-          value: 'expectedAmount',
-          align: 'center',
-          sortable: false,
-        },
-      ],
       items: [
         {
           id: '1234567890',
@@ -295,6 +249,7 @@ export default {
           project: ['sale', 'inspection', 'buy'],
         },
       ],
+      total: 10,
       limit: 10,
     },
     progressList: [
@@ -422,17 +377,17 @@ export default {
   }
 
   .not-started {
-    // color: $green-100;
+    color: $--color-success;
   }
 
   .proposing {
     color: $--color-primary;
   }
   .working {
-    // color: $pink-100;
+    color: $--color-warning;
   }
   .finish {
-    color: #cccccc;
+    color: #ccc;
   }
 }
 </style>

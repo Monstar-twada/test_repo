@@ -42,12 +42,26 @@
         </thead>
         <tbody>
           <tr v-for="(item, i) in costItems" :key="i">
-            <td>{{ item.title }}件</td>
-            <td>{{ item.notStarted.toLocaleString() }}件</td>
-            <td>{{ item.proposing.toLocaleString() }}件</td>
-            <td>{{ item.working.toLocaleString() }}件</td>
-            <td>{{ item.payment.toLocaleString() }}件</td>
-            <td>¥{{ item.expectedAmount.toLocaleString() }}</td>
+            <td>{{ item.title }}</td>
+            <td>
+              <strong>{{ item.notStarted.toLocaleString() }}</strong
+              >件
+            </td>
+            <td>
+              <strong>{{ item.proposing.toLocaleString() }}</strong
+              >件
+            </td>
+            <td>
+              <strong>{{ item.working.toLocaleString() }}</strong
+              >件
+            </td>
+            <td>
+              <strong>{{ item.payment.toLocaleString() }}</strong
+              >件
+            </td>
+            <td>
+              ¥<strong>{{ item.expectedAmount.toLocaleString() }}</strong>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -101,6 +115,8 @@ export default {
     text-align: center;
     background-color: $--color-white;
     border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
     &-top {
       display: flex;
       justify-content: space-between;
@@ -169,6 +185,8 @@ export default {
       width: 100%;
       border-bottom: 1px $--color-border solid;
       border-spacing: 0;
+      font-size: 14px;
+      font-weight: bold;
       thead {
         tr {
           background: $--color-background;
@@ -186,6 +204,10 @@ export default {
           td {
             text-align: center;
             height: 50px;
+
+            strong {
+              font-size: 20px;
+            }
           }
         }
       }
