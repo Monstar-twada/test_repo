@@ -31,7 +31,7 @@
 <script>
 import ZxCalendar from 'zx-calendar'
 import Popup from '../../popup/index'
-import { toNumber } from '../../../libs'
+import { toNumber } from '../../../libs/index'
 const DEF_TITLE_FORMATTERS = {
   date: 'yyyy年MM月',
   month: 'yyyy年',

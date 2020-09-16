@@ -21,6 +21,7 @@ import Sidebar from '~/components/common/sidebar/index'
 // import NextAction from '~/components/manager/next-action/index'
 // import OnePointAdvice from '~/components/manager/one-point-advice/index'
 import { managerMenuItems } from '~/components/common/sidebar/menu-manager'
+import { basicDataMixin } from '~/mixins/basic-data/index'
 
 export default {
   components: {
@@ -28,6 +29,7 @@ export default {
     // NextAction,
     // OnePointAdvice,
   },
+  mixins: [basicDataMixin],
   data() {
     return {
       isCollapsed: false,

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { isNumberLike } from '../../../libs'
+import { isNumberLike } from '../../../libs/index'
 
 export default {
   name: 'FgImage',

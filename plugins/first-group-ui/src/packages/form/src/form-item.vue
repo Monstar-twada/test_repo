@@ -57,8 +57,9 @@
 </template>
 <script>
 import AsyncValidator from 'async-validator'
-import { merge, noop, getPropByPath, isNumberLike } from '../../../libs/index'
+import { noop, getPropByPath } from '../../../assets/js/utils'
 import Broadcaster from '../../../assets/js/broadcaster'
+import { merge, isNumberLike } from '../../../libs/index'
 import LabelWrap from './label-wrap'
 
 export default {

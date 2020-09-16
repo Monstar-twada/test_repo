@@ -85,15 +85,16 @@ $headerHeight: 60px;
     overflow: hidden;
     .menu-wrapper {
       position: absolute;
-      top: 0;
+      top: 2px;
       left: 0;
-      width: 100%;
+      right: 2px;
       overflow-y: auto;
-      bottom: 20px;
+      bottom: 2px;
       @include scrollbar();
       a {
         display: block;
         padding: 8px 20px;
+        margin-right: 2px;
         color: $--color-primary-active;
         text-decoration: none;
 

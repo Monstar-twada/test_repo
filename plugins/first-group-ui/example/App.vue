@@ -2,7 +2,7 @@
   <div class="example-page-wrapper">
     <header>
       <h1>FG-UI</h1>
-      <h2>fg-{{ pageTitle }}</h2>
+      <h2>{{ pageTitle }}</h2>
       <a
         href="https://github.com/monstar-lab-consulting/first-group-ui"
         target="_blank"
@@ -25,14 +25,14 @@
         <a
           v-for="(item, i) in routes"
           :key="i"
-          :class="[item.name === pageTitle ? '__current' : '']"
+          :class="[item.fullName === pageTitle ? '__current' : '']"
           :href="item.url"
           >{{ item.name }}</a
         >
       </div>
     </div>
     <div class="main-page-wrapper">
-      <h1 class="page-title">fg-{{ pageTitle }}</h1>
+      <h1 class="page-title">{{ pageTitle }}</h1>
       <router-view />
     </div>
   </div>
@@ -44,12 +44,15 @@ export default {
   data() {
     // route config
     const routes = this.$router.options.routes
+    const pathName = this.$route.path.substr(1)
     return {
-      pageTitle: this.$route.path.substr(1) || 'FG_UI',
+      pageTitle: pathName ? 'fg-' + pathName : 'home',
       routes: routes.map((item) => {
+        const name = item.path.substr(1)
         return {
           ...item,
-          name: item.path.substr(1),
+          name: name || 'home',
+          fullName: name ? 'fg-' + name : 'home',
           url: '#' + item.path,
         }
       }),
@@ -62,7 +65,8 @@ export default {
   },
   methods: {
     resetPageTitle() {
-      this.pageTitle = this.$route.path.substr(1)
+      const pathName = this.$route.path.substr(1)
+      this.pageTitle = pathName ? 'fg-' + pathName : 'home'
     },
   },
 }

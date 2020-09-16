@@ -1,17 +1,11 @@
 /**
  * Created by Capricorncd.
  * https://github.com/capricorncd
- * Date: 2020-08-31 12:53
+ * Date: 2020-09-14 16:18
  */
-import { toHumpStr, toNumber } from './utils'
+import { isElement } from './check'
+import { toHumpStr, toNumber } from './format'
 
-export function isElement(obj) {
-  return !!(obj && obj.nodeType === 1)
-}
-/**
- * get max zIndex
- * @returns {number}
- */
 export function getMaxZIndex() {
   const $els = document.getElementsByTagName('*')
   let $el, css, zIndex

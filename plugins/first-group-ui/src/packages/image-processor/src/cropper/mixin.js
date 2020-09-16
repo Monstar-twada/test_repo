@@ -4,7 +4,7 @@
  * Date: 2020-09-07 10:28
  */
 import { TOUCH_EVENTS } from 'image-process'
-import { getStyleValue } from '../../../../libs'
+import { getStyleValue } from '../../../../libs/index'
 import { getTouches, handleTouches } from './touch'
 import {
   handleMove,

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { toNumber } from '../../../libs'
+import { toNumber } from '../../../libs/index'
 import icons from './icons/index'
 import { createPathHtml } from './helper'
 

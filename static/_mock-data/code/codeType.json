@@ -1,0 +1,744 @@
+[
+  {
+    "codeId": "個人/法人区分",
+    "codeType": "private_business",
+    "codeValue": "1",
+    "codeName": "個人",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "個人/法人区分",
+    "codeType": "private_business",
+    "codeValue": "2",
+    "codeName": "法人",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "性別",
+    "codeType": "sex",
+    "codeValue": "1",
+    "codeName": "男性",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "性別",
+    "codeType": "sex",
+    "codeValue": "2",
+    "codeName": "女性",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "性別",
+    "codeType": "sex",
+    "codeValue": "3",
+    "codeName": "その他",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "住宅（種類）",
+    "codeType": "residence_type",
+    "codeValue": "1",
+    "codeName": "持家（自己所有）",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "住宅（種類）",
+    "codeType": "residence_type",
+    "codeValue": "2",
+    "codeName": "持家（家族所有）",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "住宅（種類）",
+    "codeType": "residence_type",
+    "codeValue": "3",
+    "codeName": "賃貸",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "免許証の色",
+    "codeType": "license_color",
+    "codeValue": "1",
+    "codeName": "グリーン",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "免許証の色",
+    "codeType": "license_color",
+    "codeValue": "2",
+    "codeName": "ブルー",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "免許証の色",
+    "codeType": "license_color",
+    "codeValue": "3",
+    "codeName": "ゴールド",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "外部システム区分",
+    "codeType": "external_system_type",
+    "codeValue": "1",
+    "codeName": "Vertice",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "外部システム区分",
+    "codeType": "external_system_type",
+    "codeValue": "2",
+    "codeName": "Broad Leaf",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "外部システム区分",
+    "codeType": "external_system_type",
+    "codeValue": "3",
+    "codeName": "DIC",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "続柄",
+    "codeType": "family_relationship",
+    "codeValue": "1",
+    "codeName": "配偶者",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "続柄",
+    "codeType": "family_relationship",
+    "codeValue": "2",
+    "codeName": "子供",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "続柄",
+    "codeType": "family_relationship",
+    "codeValue": "3",
+    "codeName": "親",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "続柄",
+    "codeType": "family_relationship",
+    "codeValue": "4",
+    "codeName": "兄弟・姉妹",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "続柄",
+    "codeType": "family_relationship",
+    "codeValue": "5",
+    "codeName": "その他",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "1",
+    "codeName": "通勤",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "2",
+    "codeName": "通学",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "3",
+    "codeName": "通院",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "4",
+    "codeName": "送迎",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "5",
+    "codeName": "買い物",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "6",
+    "codeName": "子育て",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "7",
+    "codeName": "ドライブ",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "8",
+    "codeName": "アウトドア",
+    "sortNumber": "8"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "9",
+    "codeName": "レジャー",
+    "sortNumber": "9"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "10",
+    "codeName": "趣味",
+    "sortNumber": "10"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "11",
+    "codeName": "商用/業務",
+    "sortNumber": "11"
+  },
+  {
+    "codeId": "カーライフ",
+    "codeType": "car_life",
+    "codeValue": "12",
+    "codeName": "運搬",
+    "sortNumber": "12"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "1",
+    "codeName": "価格",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "2",
+    "codeName": "燃費",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "3",
+    "codeName": "乗り心地",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "4",
+    "codeName": "安全性能",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "5",
+    "codeName": "デザイン性",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "6",
+    "codeName": "ブランド",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "7",
+    "codeName": "走行性能",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "8",
+    "codeName": "走行距離",
+    "sortNumber": "8"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "9",
+    "codeName": "修理歴",
+    "sortNumber": "9"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "10",
+    "codeName": "年式",
+    "sortNumber": "10"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "11",
+    "codeName": "禁煙",
+    "sortNumber": "11"
+  },
+  {
+    "codeId": "選定ポイント",
+    "codeType": "selection_points",
+    "codeValue": "12",
+    "codeName": "車検年数",
+    "sortNumber": "12"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "1",
+    "codeName": "車検",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "2",
+    "codeName": "整備",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "3",
+    "codeName": "購入",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "4",
+    "codeName": "売却",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "5",
+    "codeName": "保険",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "6",
+    "codeName": "鈑金",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "取引種別",
+    "codeType": "transaction_type",
+    "codeValue": "7",
+    "codeName": "その他",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "活動報告_チャネル",
+    "codeType": "channel",
+    "codeValue": "1",
+    "codeName": "来店",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "活動報告_チャネル",
+    "codeType": "channel",
+    "codeValue": "2",
+    "codeName": "電話",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "活動報告_チャネル",
+    "codeType": "channel",
+    "codeValue": "3",
+    "codeName": "訪問",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "活動報告_チャネル",
+    "codeType": "channel",
+    "codeValue": "4",
+    "codeName": "SMS",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "活動報告_チャネル",
+    "codeType": "channel",
+    "codeValue": "5",
+    "codeName": "メール",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "活動報告_チャネル",
+    "codeType": "channel",
+    "codeValue": "6",
+    "codeName": "その他",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "新中区分",
+    "codeType": "sale_new_old_car_type",
+    "codeValue": "1",
+    "codeName": "新車",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "新中区分",
+    "codeType": "sale_new_old_car_type",
+    "codeValue": "2",
+    "codeName": "中古車",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "新中区分",
+    "codeType": "sale_new_old_car_type",
+    "codeValue": "3",
+    "codeName": "新古車",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "自動車保険_自社/他社区分",
+    "codeType": "company_classification",
+    "codeValue": "0",
+    "codeName": "自社保険",
+    "sortNumber": "0"
+  },
+  {
+    "codeId": "自動車保険_自社/他社区分",
+    "codeType": "company_classification",
+    "codeValue": "1",
+    "codeName": "他社保険",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "買換意向",
+    "codeType": "purchase_intention",
+    "codeValue": "0",
+    "codeName": "なし",
+    "sortNumber": "0"
+  },
+  {
+    "codeId": "買換意向",
+    "codeType": "purchase_intention",
+    "codeValue": "1",
+    "codeName": "あり",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "支払区分",
+    "codeType": "payment_category",
+    "codeValue": "1",
+    "codeName": "現金",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "支払区分",
+    "codeType": "payment_category",
+    "codeValue": "2",
+    "codeName": "ローン",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "支払区分",
+    "codeType": "payment_category",
+    "codeValue": "3",
+    "codeName": "リース",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "支払区分",
+    "codeType": "payment_category",
+    "codeValue": "4",
+    "codeName": "その他",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "集客_他社流出",
+    "codeType": "outflow",
+    "codeValue": "1",
+    "codeName": "買換",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "集客_他社流出",
+    "codeType": "outflow",
+    "codeValue": "2",
+    "codeName": "車検",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "集客_他社流出",
+    "codeType": "outflow",
+    "codeValue": "3",
+    "codeName": "廃車",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "集客_他社流出",
+    "codeType": "outflow",
+    "codeValue": "4",
+    "codeName": "不明",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "契約プラン",
+    "codeType": "contract_plan",
+    "codeValue": "1",
+    "codeName": "フリー",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "契約プラン",
+    "codeType": "contract_plan",
+    "codeValue": "2",
+    "codeName": "ベーシック",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "契約プラン",
+    "codeType": "contract_plan",
+    "codeValue": "3",
+    "codeName": "マスター",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "1",
+    "codeName": "購入",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "2",
+    "codeName": "売却",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "3",
+    "codeName": "整備",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "4",
+    "codeName": "鈑金",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "5",
+    "codeName": "保険",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "6",
+    "codeName": "アクセサリー",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "導入サービス",
+    "codeType": "service_code",
+    "codeValue": "7",
+    "codeName": "車検",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "1",
+    "codeName": "購入",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "2",
+    "codeName": "売却",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "3",
+    "codeName": "整備",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "4",
+    "codeName": "鈑金",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "5",
+    "codeName": "保険",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "6",
+    "codeName": "アクセサリー",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "職種",
+    "codeType": "occupation",
+    "codeValue": "7",
+    "codeName": "車検",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "21",
+    "codeName": "オーナー",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "22",
+    "codeName": "マネージャー",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "23",
+    "codeName": "スタッフ",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "32",
+    "codeName": "FG管理者",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "31",
+    "codeName": "FGスタッフ",
+    "sortNumber": "5"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "10",
+    "codeName": "lambda(認証)",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "11",
+    "codeName": "lambda(mail)",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "20",
+    "codeName": "carsMANAGER",
+    "sortNumber": "8"
+  },
+  {
+    "codeId": "権限",
+    "codeType": "cars_role",
+    "codeValue": "30",
+    "codeName": "carsMANAGEMENT",
+    "sortNumber": "9"
+  },
+  {
+    "codeId": "画像種別",
+    "codeType": "image_type",
+    "codeValue": "1",
+    "codeName": "スタッフ写真",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "画像種別",
+    "codeType": "image_type",
+    "codeValue": "2",
+    "codeName": "車検証画像",
+    "sortNumber": "2"
+  },
+  {
+    "codeId": "画像種別",
+    "codeType": "image_type",
+    "codeValue": "3",
+    "codeName": "車両画像",
+    "sortNumber": "3"
+  },
+  {
+    "codeId": "画像種別",
+    "codeType": "image_type",
+    "codeValue": "4",
+    "codeName": "顧客 顔写真",
+    "sortNumber": "4"
+  },
+  {
+    "codeId": "画像種別",
+    "codeType": "image_type",
+    "codeValue": "6",
+    "codeName": "顧客免許証画像(表)",
+    "sortNumber": "6"
+  },
+  {
+    "codeId": "画像種別",
+    "codeType": "image_type",
+    "codeValue": "7",
+    "codeName": "顧客免許証画像(裏)",
+    "sortNumber": "7"
+  },
+  {
+    "codeId": "画像サイズタイプ",
+    "codeType": "image_size_type",
+    "codeValue": "1",
+    "codeName": "オリジナル画像",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "cognitoステータス",
+    "codeType": "cognito_status",
+    "codeValue": "0",
+    "codeName": "仮登録",
+    "sortNumber": "1"
+  },
+  {
+    "codeId": "cognitoステータス",
+    "codeType": "cognito_status",
+    "codeValue": "1",
+    "codeName": "登録済み",
+    "sortNumber": "2"
+  }
+]

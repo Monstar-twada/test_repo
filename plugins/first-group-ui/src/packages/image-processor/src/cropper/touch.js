@@ -3,7 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-09-07 11:13
  */
-import { slice } from '../../../../libs'
+import { slice } from '../../../../libs/index'
 
 export function handleTouches(e, startTouches) {
   return calculateScale(startTouches, targetTouches(e.touches))

@@ -18,6 +18,7 @@ import Form from '../form/index'
 import Icon from '../icon/index'
 import Image from '../image/index'
 import ImageProcessor from '../image-processor/index'
+import Index from '../index/index.vue'
 import Input from '../input/index'
 import Message from '../message/index'
 import MessageBox from '../message-box/index'
@@ -32,8 +33,6 @@ import Table from '../table/index'
 import TableExperiment from '../table-experiment/index'
 import Tag from '../tag/index'
 import Text from '../text/index'
-
-import Index from './Index.vue'
 
 Vue.use(VueRouter)
 

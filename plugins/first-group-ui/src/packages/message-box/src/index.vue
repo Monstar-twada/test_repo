@@ -29,7 +29,7 @@
 <script>
 import FgButton from '../../button/index'
 import FgIcon from '../../icon/index'
-import { resetZIndex } from '../../../libs'
+import { resetZIndex } from '../../../libs/index'
 export default {
   name: 'FgMessageBox',
   components: {

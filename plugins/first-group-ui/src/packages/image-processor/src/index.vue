@@ -48,7 +48,7 @@
 
 <script>
 import { handleMediaFile, utils } from 'image-process'
-import { isFunction, isNumberLike } from '../../../libs'
+import { isFunction, isNumberLike } from '../../../libs/index'
 import Cropper from './cropper/index'
 
 export default {
