@@ -46,16 +46,20 @@
       </nuxt-link>
       <nuxt-link to="/login/forgot" class="login-form__link mt25"
         >メールアドレスを忘れた方</nuxt-link
-      >
-      <nuxt-link to="/login/forgot" class="login-form__link mt10"
+      > -->
+      <nuxt-link
+        v-if="getEnv === 'console'"
+        to="/login/forgot"
+        class="login-form__link mt10"
         >パスワードを忘れた方</nuxt-link
       >
-      <div class="login-form__separator mt20 mb25">
+      <div v-if="getEnv === 'console'" class="login-form__separator mt20 mb25">
         <span />
         <span>or</span>
         <span />
       </div>
       <fg-button
+        v-if="getEnv === 'console'"
         class="login-form__googlebtn"
         prefix-icon="google"
         border
@@ -63,7 +67,7 @@
         width="220"
         justify="center"
         >Googleでログイン</fg-button
-      > -->
+      >
     </div>
     <div class="login-form__requirements mt25">
       <p>[ 推奨環境 ]</p>
@@ -92,6 +96,15 @@ export default {
         password: '',
       },
     }
+  },
+  computed: {
+    getEnv() {
+      return this.$isManager
+        ? 'manager'
+        : this.$isConsole
+        ? 'console'
+        : 'dashboard'
+    },
   },
   watch: {
     email(val) {
@@ -167,6 +180,7 @@ export default {
     }
     &__googlebtn {
       margin: 0 auto;
+      color: $--color-primary;
     }
     &__separator {
       display: flex;

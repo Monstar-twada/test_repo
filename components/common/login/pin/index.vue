@@ -19,7 +19,7 @@
     <div class="pin-form__buttons mt25">
       <fg-button
         class="mb20"
-        width="30%"
+        width="60%"
         type="primary"
         suffix-icon="arrow-right"
         round
@@ -32,7 +32,7 @@
         type="primary"
         border
         bold
-        width="30%"
+        width="60%"
         @click="nextUrl('/login/forgot')"
         >戻る</fg-button
       >
@@ -125,6 +125,9 @@ export default {
       justify-content: center;
       flex-direction: column;
       align-items: center;
+      button {
+        margin-bottom: 20px;
+      }
     }
   }
 }

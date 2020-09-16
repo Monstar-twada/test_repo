@@ -1,7 +1,5 @@
 <template>
-  <div class="company-page-wrapper">
-    company
-  </div>
+  <div class="company-page-wrapper">company</div>
 </template>
 
 <script>
