@@ -1,3 +1,8 @@
+## Properties
+
+|Name|Description|
+|:--|:--|
+|project| project name: manager/dashboard/console|
 
 ## Methods
 
@@ -5,21 +10,33 @@
 
 |Name|Parameters|Description|
 |:--|:--|:--|
-|getScrollParents|(el: HTMLElement)|return `HTMLElement[]`|
-|getMaxZIndex|()|get max z-index value, return `number`|
-|getScrollBarWidth|()|get scrollbar width|
-|getStyleValue|(el: HTMLElement, attr: string[, isInt: boolean])|get style value of el attr|
-|isElement|(el)|Determine whether el is an HTMLElement|
-|isFunction|(fn)|Determine whether fn is a Function|
-|isNumber|(n)|Determine whether n is a Number|
-|isNumberLike|(n)|Determine whether n is like a Number|
-|isString|(s)|Determine whether s is a String|
-|isUndefined|(o)|Determine whether o is undefined|
-|resetZIndex|(el: HTMLElement)|Determine and reset the z-index value of EL, when is less than the maximum z-index|
-|slice|(arrayLike: ArrayLike[, index: Number])|ArrayLike to Array|
-|toHumpStr|(str: String[, spacer = '-'])|str to Hump string, Example: `font-size` -> `fontSize`|
-|toNumber|(a)|`a` to number|
-|toTwoDigits|(n)|Example: `2` -> `02`|
+|clearCache|(key: string): void|clear all cache data the domain localStorage.<br>該当ドメインのlocalStorage全部データを削除する|
+|createUrlQuery|(params: object[, fields: string[]]): string||
+|createRandomStr|(prefix: string): string| create a random string|
+|getCache|(key: string): any||
+|getMaxZIndex|(): number||
+|getParentComponent|(fgParentName: string): Component||
+|getStyleValue|(el: HTMLElement, attr: string[, isInt: boolean]): string/number||
+|getScrollBarWidth|(): number||
+|getScrollParents|(el: HTMLElement): HTMLElement[]||
+|hasOwn|(o: object, attr: string): boolean|Object.hasOwnProperty|
+|init|(projectName: string): void|initial|
+|merge|(target: object, ...args: object): object||
+|isElement|(el: any): boolean||
+|isFunction|(fn: any): boolean||
+|isNumber|(n: any): boolean||
+|isNumberLike|(n: any): boolean||
+|isString|(s: any): boolean||
+|isUndefined|(a: any): boolean||
+|removeCache|(key: string): void||
+|resetZIndex|(el: HTMLElement): void||
+|setCache|(key: string, value: any): void||
+|slice|(o: ArrayLike, index: number): any[]||
+|toCommaNumber|(value: string[, keepDecimalPlaces: boolean]): string|Example: `123456` -> `123,456`|
+|toNumber|(a: any): number||
+|toTwoDigits|(a: any): string|Example: `3` -> `03`|
+|toHumpStr|(attr: string[, spacer: string])|Example: `font-size` -> `fontSize`|
+|windowDispatcher|(eventName: string)||
 
 ## colors
 
