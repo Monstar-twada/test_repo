@@ -1,8 +1,12 @@
 /**
  * Created by Capricorncd.
  * https://github.com/capricorncd
- * Date: 2020-09-10 16:25
+ * Date: 2020-09-14 16:18
  */
+export function hasOwn(o, attr) {
+  return Object.prototype.hasOwnProperty.call(o, attr)
+}
+
 /**
  * is number
  * @param str
@@ -18,7 +22,7 @@ export function isNumber(str) {
  * @returns {boolean}
  */
 export function isNumberLike(str) {
-  return /^-?\d+\.?\d*$/.test(str)
+  return /^[-+]?\d+\.?\d*$/.test(str)
 }
 
 export function isUndefined(o) {
@@ -31,4 +35,12 @@ export function isString(s) {
 
 export function isFunction(fn) {
   return typeof fn === 'function'
+}
+
+export function isElement(obj) {
+  return !!(obj && obj.nodeType === 1)
+}
+
+export function isArray(arr) {
+  return Array.isArray(arr)
 }

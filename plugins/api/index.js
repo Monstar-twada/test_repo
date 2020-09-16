@@ -4,8 +4,7 @@
  * Date: 2020-07-20 12:19
  */
 import Axios from 'axios'
-import { storage } from '~/assets/js/storage'
-import { createUrlQuery } from '~/assets/js/utils'
+import { getMockData } from './mock-data'
 
 // https://github.com/axios/axios#request-config
 // Axios.defaults.withCredentials = true
@@ -24,7 +23,8 @@ export class RequestApi {
   getHeaders() {
     let temp
     return this.headers.reduce((prev, key) => {
-      temp = storage.get(key)
+      /* eslint-disable */
+      temp = $nuxt.$ui.getCache(key)
       if (temp) {
         prev[key] = temp
       }
@@ -58,17 +58,23 @@ export class RequestApi {
    * @private
    */
   _handleRequest(api, params, headers, method) {
+    /* eslint-disable */
+    const { hasOwn, createUrlQuery } = $nuxt.$ui
     // handle parameter
     const _params = {
       ...params,
     }
     /* eslint-disable no-prototype-builtins */
-    if (_params.hasOwnProperty('offset') || _params.hasOwnProperty('limit')) {
+    if (hasOwn(_params, 'offset') || hasOwn(_params, 'limit')) {
       api += createUrlQuery(_params, ['offset', 'limit'])
       delete _params.offset
       delete _params.limit
     }
     return new Promise((resolve, reject) => {
+      if (process.env.useMockData) {
+        getMockData(api, params, Axios.get, method).then(resolve).catch(reject)
+        return
+      }
       Axios.request({
         url: '/api' + api,
         method,
@@ -84,11 +90,19 @@ export class RequestApi {
           if (res.status === 200) {
             resolve(res.data)
           } else {
-            reject(res)
+            throw res
           }
         })
         .catch((err) => {
-          reject(err)
+          if (err.response) {
+            reject(err.response.data)
+            return
+          }
+          /* eslint-disable prefer-promise-reject-errors */
+          reject({
+            message: err.message,
+            errors: [err],
+          })
         })
     })
   }

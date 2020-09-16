@@ -1,5 +1,10 @@
 <template>
-  <div ref="wrapper" class="fg-calendar" :style="elStyle">
+  <div
+    ref="wrapper"
+    class="fg-calendar"
+    :class="{ 'is-error': isError }"
+    :style="elStyle"
+  >
     <Input
       :value="inputValue"
       :placeholder="placeholder"
@@ -56,6 +61,9 @@
       </div>
       <slot name="time-picker"></slot>
     </Popup>
+    <transition name="fg-slide-in-top">
+      <div v-show="isError" class="error-message">{{ errorMessage }}</div>
+    </transition>
   </div>
 </template>
 
@@ -63,7 +71,7 @@
 import { ZxVueCalendar } from 'zx-calendar/lib/vue-calendar'
 import Input from '../../input/index'
 import Popup from '../../popup/index'
-import { isFunction, isNumberLike } from '../../../libs'
+import { isFunction, isNumberLike } from '../../../libs/index'
 import {
   DEF_ITEM_SUFFIXES,
   DEF_TITLE_FORMATTERS,
@@ -131,6 +139,16 @@ export default {
       type: Function,
       default: undefined,
     },
+    validators: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    valueFormat: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -138,6 +156,8 @@ export default {
       currentDate: this.value,
       calendar: null,
       dashColor: this.$colors.primary,
+      isError: false,
+      errorMessage: '',
     }
   },
   computed: {
@@ -176,7 +196,10 @@ export default {
   },
   watch: {
     currentDate(val) {
-      this.$emit('input', val)
+      this.handleValidate()
+      const format = this.valueFormat || this.formatter
+      const date = this.toDate(val)
+      this.$emit('input', date ? this.formatDate(date, format) : '')
     },
     value(val) {
       if (this.currentDate !== val) {
@@ -261,6 +284,22 @@ export default {
       if (!this.isTimePicker) {
         // hide popup
         this.popVisible = false
+      }
+    },
+    handleValidate() {
+      try {
+        this.validators.forEach((item) => {
+          console.log(item)
+          if (isFunction(item.validator)) {
+            item.validator(this.currentDate, () => {
+              this.isError = false
+              this.errorMessage = null
+            })
+          }
+        })
+      } catch (e) {
+        this.isError = true
+        this.errorMessage = e.message
       }
     },
   },

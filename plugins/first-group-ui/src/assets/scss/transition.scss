@@ -46,3 +46,21 @@
 @include zoomIn(left, bottom);
 @include zoomIn(right, bottom);
 @include zoomIn(center, center);
+
+
+@mixin slideIn($p1) {
+  .fg-slide-in-#{$p1}-enter-active,
+  .fg-slide-in-#{$p1}-leave-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: $fadeTransition;
+    transform-origin: center $p1;
+  }
+  .fg-slide-in-#{$p1}-enter,
+  .fg-slide-in-#{$p1}-leave-active {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@include slideIn(top);

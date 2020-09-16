@@ -1,5 +1,8 @@
 <template>
   <div class="example-calendar-wrapper">
+    <Doc />
+    <ValidateDemo />
+    <h2>Example</h2>
     <fg-row gutter="20">
       <fg-col span="12">
         <h2>show-before-dash</h2>
@@ -125,7 +128,15 @@
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
+import Doc from './doc.md'
+import ValidateDemo from './ValidateDemo.md'
 export default {
+  components: {
+    Doc,
+    ValidateDemo,
+  },
+  mixins: [customMixin],
   data() {
     return {
       date1: '2020/08/12',

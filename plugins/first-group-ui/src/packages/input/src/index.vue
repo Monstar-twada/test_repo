@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import { isFunction, isNumberLike } from '../../../libs'
 import Broadcaster from '../../../assets/js/broadcaster'
+import { isFunction, isNumberLike } from '../../../libs/index'
 import {
   DEF_PADDING,
   DEF_SIDE_PADDING,

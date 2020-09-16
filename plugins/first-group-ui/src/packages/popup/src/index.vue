@@ -13,7 +13,7 @@ import {
   resetZIndex,
   toNumber,
   isUndefined,
-} from '../../../libs'
+} from '../../../libs/index'
 
 export default {
   name: 'FgPopup',

@@ -13,6 +13,7 @@
     :width="width"
     class="fg-date-picker"
     is-time-picker
+    :value-format="valueFormat"
     :value-formatter="calendarValueFormat"
     @calendar="(that) => (calendar = that)"
   >
@@ -75,6 +76,10 @@ export default {
       type: String,
       default: 'yyyy/MM/dd hh:mm:ss',
     },
+    valueFormat: {
+      type: String,
+      default: '',
+    },
     width: {
       type: [String, Number],
       default: '',
@@ -91,12 +96,18 @@ export default {
   },
   computed: {
     inputValue() {
+      console.warn(
+        this.date ? this.calendar.formatDate(this.date, this.format) : ''
+      )
       return this.date ? this.calendar.formatDate(this.date, this.format) : ''
     },
   },
   watch: {
-    inputValue(val) {
-      this.$emit('input', val)
+    date(val) {
+      const format = this.valueFormat || this.format
+      const res = val ? this.calendar.formatDate(val, format) : ''
+      this.$emit('input', res)
+      this.$emit('change', res, val)
     },
     value(val) {
       this.resetDateTime(val)
@@ -113,10 +124,10 @@ export default {
       if (!this.calendar) return
       const { toDate, formatDate } = this.calendar
       let date = toDate(val)
-      this.date = date
       if (!date) {
         date = new Date()
       }
+      this.date = date
       this.ymd = formatDate(date, 'yyyy/MM/dd')
       this.time = formatDate(date, 'hh:mm:ss')
       this.calendar.setDate(this.ymd)
@@ -139,7 +150,7 @@ export default {
     },
     calendarValueFormat(val) {
       this.ymd = val ? this.calendar.formatDate(val, 'yyyy/MM/dd') : ''
-      return this.value
+      return this.inputValue
     },
   },
 }

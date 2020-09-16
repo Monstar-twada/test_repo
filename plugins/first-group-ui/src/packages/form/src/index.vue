@@ -15,8 +15,8 @@
   </form>
 </template>
 <script>
-import { isFunction, isString, merge } from '../../../libs/index'
 import Broadcaster from '../../../assets/js/broadcaster'
+import { isFunction, isString, merge } from '../../../libs/index'
 
 export default {
   name: 'FgForm',

@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { isFunction, toNumber } from '../../../libs'
+import { isFunction, toNumber } from '../../../libs/index'
 import FirstIconSvg from './FirstIconSvg'
 import PrevNextIcon from './PrevNextIcon'
 
