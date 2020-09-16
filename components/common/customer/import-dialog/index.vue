@@ -18,7 +18,7 @@
         </fg-radio-group>
         <div class="select-file-wrapper">
           <button @click="selectFile">ファイルを選択</button>
-          <input ref="fileInput" type="file" style="display: none;" />
+          <input ref="fileInput" type="file" style="display: none" />
           <div class="check-info ml20">
             <fg-icon class="mr5" name="exclamation-circle-line"></fg-icon>
             フォーマットが不一致です。（1000行目）
