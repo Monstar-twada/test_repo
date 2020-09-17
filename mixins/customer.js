@@ -1,7 +1,7 @@
 /**
  * Created by Capricorncd.
  * https://github.com/capricorncd
- * Date: 2020-07-21 11:23
+ * Date: 2020-09-16 12:04
  */
 /**
  * 陸運事務局名称
@@ -12,8 +12,13 @@
  * @param item
  * @returns {string}
  */
-export function fmtCarNumber(item) {
-  return [item.vinLTO, item.vinNumber, item.vinKana, item.vin].join(' ')
+function fmtCarNumber(item) {
+  return [
+    item.landTransportOffice,
+    item.carRegistrationNumberType,
+    item.carRegistrationNumberKana,
+    item.carRegistrationNumber,
+  ].join(' ')
 }
 
 /**
@@ -23,7 +28,7 @@ export function fmtCarNumber(item) {
  * @param item
  * @returns {string}
  */
-export function fmtCustomerName(data) {
+function fmtCustomerName(data) {
   return [data.lastName, data.firstName].join(' ')
 }
 
@@ -32,11 +37,11 @@ export function fmtCustomerName(data) {
  * @param data
  * @returns {{summary: string, name: string}}
  */
-export function fmtAvatar(data) {
+function fmtAvatar(data) {
   return {
     name: fmtCustomerName(data),
     summary: `（${data.age || '-'}歳）`,
-    url: '/common/person_default.svg',
+    url: data.facePhoto || '/common/person_default.svg',
   }
 }
 
@@ -44,10 +49,10 @@ export function fmtAvatar(data) {
  * 氏名カナ（姓） ＋ 半角スペース ＋ 氏名カナ（名）
  * 氏名カナ（姓）がブランクの場合は、氏名カナ（名）のみを表示（半角スペースは付加しない）
  * どちらもデータがない場合はブランク表示
- * @param item
+ * @param data
  * @returns {string}
  */
-export function fmtNameKana(data) {
+function fmtNameKana(data) {
   return [data.lastNameKana, data.firstNameKana].join(' ')
 }
 
@@ -56,7 +61,7 @@ export function fmtNameKana(data) {
  * @param text
  * @returns {*|string}
  */
-export function fmtHyphen(text) {
+function fmtHyphen(text) {
   return text || '-'
 }
 
@@ -65,7 +70,7 @@ export function fmtHyphen(text) {
  * @param alternativeTarget
  * @returns {string}
  */
-export function fmtAlternative(alternativeTarget) {
+function fmtAlternative(alternativeTarget) {
   return alternativeTarget >> 0 ? '対象' : 'なし'
 }
 
@@ -74,7 +79,7 @@ export function fmtAlternative(alternativeTarget) {
  * @param value
  * @returns {string}
  */
-export function fmtTransactionType(value) {
+function fmtTransactionType(value) {
   // 20200901
   // 取引種別のエリアですが、
   // ここはProto・V1ではデータが存在しないため空欄になりますが、
@@ -88,9 +93,8 @@ export function fmtTransactionType(value) {
  * データがない場合は"円マーク \" ごとブランク表示
  * @param value
  */
-export function fmtMoney(value, noMark = false) {
+function fmtMoney(value, noMark = false) {
   const mark = noMark ? '' : '¥'
-  /* eslint-disable */
   const result = $nuxt.$ui.toCommaNumber(value)
   return result ? mark + result : '-'
 }
@@ -103,7 +107,7 @@ export function fmtMoney(value, noMark = false) {
  * 合計対象のデータがすべてブランクの場合は、ブランク表示
  * @param cost
  */
-export function sumCost(cost) {
+function sumCost(cost) {
   const result =
     ((cost.gasFee >> (0 + cost.insuranceFee)) >> (0 + cost.parkingFee)) >> 0
   return fmtMoney(result ? result.toString() : '')
@@ -114,8 +118,8 @@ export function sumCost(cost) {
  * データがない場合は”Kg"ごとブランク表示
  * @param value
  */
-export function fmtCarWeight(value) {
-  return value >> 0 ? toCommaNumber(value) + 'Kg' : '-'
+function fmtCarWeight(value) {
+  return value >> 0 ? $nuxt.$ui.toCommaNumber(value) + 'Kg' : '-'
 }
 
 /**
@@ -123,8 +127,8 @@ export function fmtCarWeight(value) {
  * データがない場合は”cm"ごとブランク表示
  * @param value
  */
-export function fmtCarSize(value) {
-  const result = toCommaNumber(value)
+function fmtCarSize(value) {
+  const result = $nuxt.$ui.toCommaNumber(value)
   return result ? result + 'cm' : '-'
 }
 
@@ -133,8 +137,8 @@ export function fmtCarSize(value) {
  * データがない場合は”cm"ごとブランク表示
  * @param value
  */
-export function fmtCarSizeMm(value) {
-  const result = toCommaNumber(value)
+function fmtCarSizeMm(value) {
+  const result = $nuxt.$ui.toCommaNumber(value)
   return result ? result + 'mm' : '-'
 }
 
@@ -144,7 +148,7 @@ export function fmtCarSizeMm(value) {
  * @param value
  * @returns {*}
  */
-export function fmtDate(value) {
+function fmtDate(value) {
   if (!value) return '-'
   // 202006
   if (/^\d+$/.test(value) && value.length > 4) {
@@ -155,12 +159,18 @@ export function fmtDate(value) {
 
 /**
  * 住所（都道府県） + 住所（市区町村） + 住所（番地） + 住所（その他）
- * @param value
+ * @param data
  * @returns {*}
  */
-export function fmtAddress(data) {
+function fmtAddress(data) {
+  const prefectures = $nuxt.$ui.getBasicData('prefectures', true)
   return data
-    ? [data.prefecture, data.city, data.address1, data.address2].join('')
+    ? [
+        prefectures[data.prefecturesCode] || data.prefecturesCode,
+        data.address1,
+        data.address2,
+        data.address3,
+      ].join('')
     : data
 }
 
@@ -170,13 +180,39 @@ export function fmtAddress(data) {
  * @param data
  * @returns {string}
  */
-export function fmtWork(data) {
+function fmtWork(data) {
   const arr = []
-  if (data.workName) {
-    arr.push(data.workName)
+  if (data.organizationName) {
+    arr.push(data.organizationName)
   }
-  if (data.workPhoneNumber) {
-    arr.push(`(${data.workPhoneNumber})`)
+  if (data.organizationPhoneNumber) {
+    arr.push(`(${data.organizationPhoneNumber})`)
   }
   return fmtHyphen(arr.join(''))
+}
+
+function fmtSex(code) {
+  const genders = $nuxt.$ui.getBasicData('sex', true)
+  return genders[code] || '-'
+}
+
+export const customerMixin = {
+  filters: {
+    fmtAddress,
+    fmtAlternative,
+    fmtAvatar,
+    fmtCarNumber,
+    fmtCarSize,
+    fmtCarSizeMm,
+    fmtCustomerName,
+    fmtCarWeight,
+    fmtDate,
+    fmtHyphen,
+    fmtMoney,
+    fmtNameKana,
+    fmtSex,
+    fmtTransactionType,
+    fmtWork,
+    sumCost,
+  },
 }

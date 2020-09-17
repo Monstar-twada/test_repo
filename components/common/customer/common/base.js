@@ -6,39 +6,37 @@
 export const DEFAULT_QUERY = {
   offset: 0,
   limit: 10,
-  name: '',
-  maker: '',
-  class: '',
-  vin: '',
-  // 202006
-  firstRegistrationDateFrom: '',
-  firstRegistrationDateTo: '',
-  // 2020-06-01"
-  inspectionExpirationDateFrom: '',
-  inspectionExpirationDateTo: '',
   page: 1,
+  sort: {
+    customerCode: '',
+    lastName: '',
+  },
+  // 顧客名（姓）
+  lastName: '',
+  // 顧客名（名）
+  firstName: '',
+  // 電話番号
+  phoneNumber: '',
+  // メーカー
+  maker: '',
+  // 車種
+  carType: '',
+  // 登録ナンバー
+  carRegistrationNumber: '',
+  // 初度登録年月開始
+  registrationFirstDateFrom: '',
+  // 初度登録年月終了
+  registrationFirstDateTo: '',
+  // 車検満了年月開始
+  registrationEndDateFrom: '',
+  // 車検満了年月終了
+  registrationEndDateTo: '',
+  // 買替意向
+  purchaseIntention: 0,
+  // 乗換対象
+  transferTarget: 0,
+  // 車検間近
+  nearInspection: 0,
+  // 6カ月内接点
+  sixManthContact: 0,
 }
-
-// 取引種別
-export const TRANSACTION_TYPES = [
-  {
-    key: 'tradeSales',
-    text: '車販',
-  },
-  {
-    key: 'tradeMaintenance',
-    text: '整備',
-  },
-  {
-    key: 'tradeInspection',
-    text: '車検',
-  },
-  {
-    key: 'tradeSheetMetal',
-    text: '鈑金',
-  },
-  {
-    key: 'tradeInsurance',
-    text: '保険',
-  },
-]

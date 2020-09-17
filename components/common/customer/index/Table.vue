@@ -17,91 +17,15 @@
       td-space-vertical-line
       body-min-height="300px"
       placeholder="検索結果はありません"
+      @sort-change="sortChange"
     >
-      <tr
+      <TableItem
         v-for="(item, i) in list"
         :key="i"
         class="cur"
-        @click="clickRow(item)"
-      >
-        <td class="high-light">
-          {{ item.customerId }}
-        </td>
-        <td class="is-left">
-          <fg-avatar
-            text-flex-direction-column
-            circle
-            text-width="120px"
-            :data="fmtAvatar(item)"
-          />
-        </td>
-        <td class="is-left">
-          <div class="table-item-tel">
-            <fg-text>
-              <fg-icon name="mobile" color="$color.primary" />{{ item.tel }}
-            </fg-text>
-            <fg-text>
-              <fg-icon name="email" color="$color.primary" />yoneda@gmail.com
-            </fg-text>
-          </div>
-        </td>
-        <td>
-          <dl style="display: inline-block; text-align: left;">
-            <dd>{{ item.maker }}</dd>
-            <dd>{{ item.class || '-' }}</dd>
-          </dl>
-        </td>
-        <td>{{ fmtCarNumber(item) }}</td>
-        <td>{{ item.inspectionExpirationDate | fmtDate }}</td>
-        <td>{{ item.firstRegistrationDate | fmtDate }}</td>
-        <td>{{ item.inspectionExpirationDate | fmtDate }}</td>
-        <td>
-          <div style="text-align: center;">
-            <fg-tag
-              :class="{ hide: i % 5 === 0 }"
-              color="#fff"
-              size="small"
-              round
-              bg-color="#2993D9"
-              border-color="#2993D9"
-              width="42px"
-              >買換</fg-tag
-            >
-            <fg-tag
-              :class="{ hide: i % 6 === 0 }"
-              color="#fff"
-              size="small"
-              round
-              bg-color="#12AACE"
-              border-color="#12AACE"
-              width="42px"
-              >乗換</fg-tag
-            >
-          </div>
-          <div style="text-align: center;">
-            <fg-tag
-              :class="{ hide: i % 2 === 0 }"
-              color="#fff"
-              size="small"
-              round
-              bg-color="#0DBEA9"
-              border-color="#0DBEA9"
-              width="42px"
-              >車検</fg-tag
-            >
-            <fg-tag
-              :class="{ hide: i % 3 === 0 }"
-              color="#fff"
-              size="small"
-              round
-              bg-color="#1DDB99"
-              border-color="#1DDB99"
-              width="42px"
-              >6ヶ月</fg-tag
-            >
-          </div>
-        </td>
-      </tr>
+        :item="item"
+        @click.native="clickRow(item)"
+      />
     </fg-table-experiment>
 
     <fg-pagination
@@ -114,16 +38,12 @@
 </template>
 
 <script>
-import {
-  fmtAvatar,
-  fmtCarNumber,
-  fmtDate,
-} from '~/components/common/customer/common/helper'
+import TableItem from './TableItem'
+
 export default {
-  filters: {
-    fmtDate,
+  components: {
+    TableItem,
   },
-  components: {},
   props: {
     query: {
       type: Object,
@@ -146,12 +66,12 @@ export default {
         {
           text: '顧客ID',
           align: 'center',
-          value: 'id',
+          field: 'customerCode',
           sortable: true,
         },
         {
           text: '顧客名',
-          value: 'name',
+          field: 'lastName',
           align: 'center',
           width: '200px',
           sortable: true,
@@ -179,14 +99,14 @@ export default {
   },
   methods: {
     clickRow(item) {
-      // console.log(JSON.stringify(item, null, 2))
       this.$router.push({
         path: `/customer/detail/`,
-        query: { id: item.customerId },
+        query: { id: item.customerCode },
       })
     },
-    fmtCarNumber,
-    fmtAvatar,
+    sortChange(field, sort) {
+      this.query.sort[field] = sort
+    },
   },
 }
 </script>

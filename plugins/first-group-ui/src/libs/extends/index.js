@@ -20,7 +20,7 @@ import {
  */
 export function fmtSort(sortData) {
   const arr = []
-  Object.keys(sortData).keys((key) => {
+  Object.keys(sortData).forEach((key) => {
     const sort = sortData[key]
     if (sort) {
       arr.push((sort === 'desc' ? '-' : '') + key)

@@ -24,7 +24,7 @@
           </fg-col>
           <fg-col span="8">
             <fg-input
-              v-model="form.tel"
+              v-model="form.phoneNumber"
               size="small"
               placeholder="電話番号"
               clearable
@@ -36,10 +36,26 @@
       <fg-col span="13" class="right-item-wrapper">
         <h3>属性で探す</h3>
         <div class="checkbox-wrapper">
-          <fg-checkbox size="small" label="買換意向"></fg-checkbox>
-          <fg-checkbox size="small" label="乗換対象"></fg-checkbox>
-          <fg-checkbox size="small" label="車検間近"></fg-checkbox>
-          <fg-checkbox size="small" label="6ヶ月内接点"></fg-checkbox>
+          <fg-checkbox
+            v-model="form.purchaseIntention"
+            size="small"
+            label="買換意向"
+          ></fg-checkbox>
+          <fg-checkbox
+            v-model="form.transferTarget"
+            size="small"
+            label="乗換対象"
+          ></fg-checkbox>
+          <fg-checkbox
+            v-model="form.nearInspection"
+            size="small"
+            label="車検間近"
+          ></fg-checkbox>
+          <fg-checkbox
+            v-model="form.sixManthContact"
+            size="small"
+            label="6ヶ月内接点"
+          ></fg-checkbox>
         </div>
       </fg-col>
     </fg-row>
@@ -58,7 +74,7 @@
           </fg-col>
           <fg-col span="8">
             <fg-input
-              v-model="form.class"
+              v-model="form.carType"
               size="small"
               placeholder="車種"
               clearable
@@ -67,7 +83,7 @@
           </fg-col>
           <fg-col span="8">
             <fg-input
-              v-model="form.vin"
+              v-model="form.carRegistrationNumber"
               size="small"
               placeholder="登録ナンバー"
               clearable
@@ -80,7 +96,7 @@
         <fg-row gutter="20">
           <fg-col span="6">
             <fg-calendar
-              v-model="form.firstRegistrationDateFrom"
+              v-model="form.registrationFirstDateFrom"
               size="small"
               placeholder="初度登録年月"
               show-after-dash
@@ -90,7 +106,7 @@
           </fg-col>
           <fg-col span="6">
             <fg-calendar
-              v-model="form.firstRegistrationDateTo"
+              v-model="form.registrationFirstDateTo"
               size="small"
               type="month"
               clearable
@@ -98,7 +114,7 @@
           </fg-col>
           <fg-col span="6">
             <fg-calendar
-              v-model="form.inspectionExpirationDateFrom"
+              v-model="form.registrationEndDateFrom"
               size="small"
               placeholder="車検満了年月"
               show-after-dash
@@ -107,7 +123,7 @@
           </fg-col>
           <fg-col span="6">
             <fg-calendar
-              v-model="form.inspectionExpirationDateTo"
+              v-model="form.registrationEndDateTo"
               size="small"
               placeholder=""
               clearable
@@ -156,8 +172,6 @@ export default {
       form: {
         ...this.query,
       },
-      makerItems: [],
-      carModels: [],
       validationMessage: {
         firstRegistration: '',
         inspectionExpiration: '',
@@ -167,16 +181,16 @@ export default {
   methods: {
     validation() {
       let count = 0
-      const frFrom = new Date(this.form.firstRegistrationDateFrom)
-      const frTo = new Date(this.form.firstRegistrationDateTo)
+      const frFrom = new Date(this.form.registrationFirstDateFrom)
+      const frTo = new Date(this.form.registrationFirstDateTo)
       if (frFrom > frTo) {
         this.validationMessage.firstRegistration =
           '日付を正しく設定してください'
         count += 1
       } else this.validationMessage.firstRegistration = ''
 
-      const inspectionFrom = new Date(this.form.inspectionExpirationDateFrom)
-      const inspectionTo = new Date(this.form.inspectionExpirationDateTo)
+      const inspectionFrom = new Date(this.form.registrationEndDateFrom)
+      const inspectionTo = new Date(this.form.registrationEndDateTo)
       if (inspectionFrom > inspectionTo) {
         this.validationMessage.inspectionExpiration =
           '日付を正しく設定してください'
@@ -186,7 +200,18 @@ export default {
     },
     search() {
       const count = this.validation()
-      if (count === 0) this.$emit('change', this.form)
+      if (count === 0) {
+        const form = {
+          ...this.form,
+        }
+        this.$ui.booleanToNumber(form, [
+          'purchaseIntention',
+          'transferTarget',
+          'nearInspection',
+          'sixManthContact',
+        ])
+        this.$emit('change', form)
+      }
     },
   },
 }
