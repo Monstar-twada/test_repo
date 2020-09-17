@@ -3,7 +3,10 @@
  * https://github.com/capricorncd
  * Date: 2020-09-17 10:58
  */
-import { BASIC_MASTER_CACHE_KEY, BASIC_PREFECTURE_CACHE_KEY } from '~/assets/constants'
+import {
+  BASIC_MASTER_CACHE_KEY,
+  BASIC_PREFECTURE_CACHE_KEY,
+} from '~/assets/constants'
 
 /**
  * init basic data

@@ -3,7 +3,11 @@
  * https://github.com/capricorncd
  * Date: 2020-09-15 15:46
  */
-import { clearBasicData, getBasicData, initBasicData } from '~/mixins/basic-data/helper'
+import {
+  clearBasicData,
+  getBasicData,
+  initBasicData,
+} from '~/mixins/basic-data/helper'
 
 export const basicDataMixin = {
   created() {
