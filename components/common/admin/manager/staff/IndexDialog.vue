@@ -1,7 +1,12 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="700px">
-    <v-card class="admin-staff-index-dialog-container">
-      <DialogHeader title="スタッフ追加" @close="visible = false" />
+  <fg-dialog
+    v-model="visible"
+    persistent
+    max-width="700px"
+    title="スタッフ追加"
+  >
+    <div class="admin-staff-index-dialog-container">
+      <!-- <DialogHeader @close="visible = false" /> -->
       <div class="body-wrapper">
         <fg-form label-width="180px">
           <fg-form-item label="メールアドレス">
@@ -18,15 +23,15 @@
       <div class="footer-wrapper">
         <fg-button type="primary" width="240px" @click="save">追加</fg-button>
       </div>
-    </v-card>
-  </v-dialog>
+    </div>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
+// import DialogHeader from '~/components/common/dialog-header/index'
 export default {
   components: {
-    DialogHeader,
+    // DialogHeader,
   },
   props: {
     value: Boolean,

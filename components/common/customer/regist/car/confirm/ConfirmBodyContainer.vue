@@ -16,7 +16,6 @@
         <fg-form-item label="車検証">
           <div>
             <fg-image-processor
-              :options="{ width: 2000, height: 'auto' }"
               icon="license-front"
               url=""
               readonly
@@ -185,9 +184,7 @@
           </h4>
         </fg-form-item>
         <fg-form-item label="タイヤ製造">
-          <h4>
-            -
-          </h4>
+          <h4>-</h4>
         </fg-form-item>
         <fg-form-item label="バッテリーサイズ">
           <h4>-</h4>

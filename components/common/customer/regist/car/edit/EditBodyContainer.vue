@@ -56,7 +56,6 @@
         <fg-form-item label="車検証">
           <div class="customer-regist-car-edit-wrapper__item">
             <fg-image-processor
-              :options="{ width: 2000, height: 'auto' }"
               icon="license-front"
               :url="form.photoKey"
               :validate="customValidate"
@@ -78,7 +77,6 @@
         </fg-form-item>
         <fg-form-item label="車両画像">
           <fg-image-processor
-            :options="{ width: 2000, height: 'auto' }"
             icon="car"
             :validate="customValidate"
             url=""

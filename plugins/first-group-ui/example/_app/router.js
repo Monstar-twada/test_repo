@@ -30,6 +30,7 @@ import Select from '../select/index'
 import Switch from '../switch/index'
 import Table from '../table/index'
 import TableExperiment from '../table-experiment/index'
+import Tabs from '../tabs/index'
 import Tag from '../tag/index'
 import Text from '../text/index'
 
@@ -65,6 +66,7 @@ export default new VueRouter({
     { path: '/switch', component: Switch },
     { path: '/table', component: Table },
     { path: '/table-experiment', component: TableExperiment },
+    { path: '/tabs', component: Tabs },
     { path: '/tag', component: Tag },
     { path: '/text', component: Text },
   ],

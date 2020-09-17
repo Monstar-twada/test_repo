@@ -9,23 +9,40 @@
               :key="column.show"
               :sort="sort"
               :column="column"
+              :group-by="groupBy"
               @click="changeSorting(column)"
             ></TableColumnHeader>
           </tr>
         </thead>
         <tbody :class="fullTableBodyClass">
-          <TableRow
-            v-for="row in displayedRows"
-            :key="row.vueTableComponentInternalRowId"
-            :row="row"
-            :columns="columns"
-            @rowClick="emitRowClick"
-          ></TableRow>
+          <template v-for="(row, index) in displayedRows">
+            <template v-if="isGroupBy">
+              <tr
+                v-if="beforeGroupByFlg(row, displayedRows[index - 1])"
+                :key="index"
+                :ref="`group-${groupIndex}`"
+                class="group-by-row"
+                @click="handleToggle(`group-${groupIndex}`, $event)"
+              >
+                <th :colspan="columns.length">
+                  {{ row.data[groupBy] }}
+                </th>
+              </tr>
+            </template>
+            <TableRow
+              :key="`first-${index}`"
+              :ref="`group-${groupIndex}-children`"
+              :row="row"
+              :columns="columns"
+              :group-by="groupBy"
+              @rowClick="emitRowClick"
+            ></TableRow>
+          </template>
         </tbody>
       </table>
     </div>
 
-    <div style="display: none;">
+    <div style="display: none">
       <slot></slot>
     </div>
   </div>
@@ -62,6 +79,10 @@ export default {
       type: String,
       default: '',
     },
+    groupBy: {
+      type: String,
+      default: '',
+    },
   },
 
   data: () => ({
@@ -72,6 +93,8 @@ export default {
       fieldName: '',
       order: '',
     },
+    groupByName: '',
+    groupIndex: 0,
   }),
 
   computed: {
@@ -93,6 +116,10 @@ export default {
 
     displayedRows() {
       return this.sortedRows
+    },
+
+    isGroupBy() {
+      return this.groupBy
     },
 
     sortedRows() {
@@ -134,7 +161,7 @@ export default {
     },
   },
 
-  async mounted() {
+  mounted() {
     const columnComponents = this.$slots.default
       .filter((column) => column.componentInstance)
       .map((column) => column.componentInstance)
@@ -149,7 +176,7 @@ export default {
       )
     })
 
-    await this.mapDataToRows()
+    this.mapDataToRows()
   },
 
   methods: {
@@ -175,7 +202,6 @@ export default {
     },
 
     changeSorting(column) {
-      console.log('column', column)
       if (this.sort.fieldName !== column.show) {
         this.sort.fieldName = column.show
         this.sort.order = 'asc'
@@ -196,6 +222,28 @@ export default {
 
     emitRowClick(row) {
       this.$emit('rowClick', row)
+    },
+
+    beforeGroupByFlg(row, beforeRow) {
+      let flg = false
+      if (this.isGroupBy) {
+        if (beforeRow) {
+          flg = row.data[this.groupBy] !== beforeRow.data[this.groupBy]
+        } else {
+          flg = true
+        }
+        if (flg === true) {
+          // this.groupIndex++
+        }
+      }
+      return flg
+    },
+    handleToggle(ndom, e) {
+      // TODO
+      // const dom = `${ndom}-children`
+      // const $el = this.$refs[dom]
+      // console.log('$refs', this.$refs[dom][0].$el.style)
+      // $el.style.display = 'none'
     },
   },
 }
@@ -299,6 +347,17 @@ export default {
     }
   }
   tbody {
+    tr.group-by-row {
+      text-align: left;
+      background-color: $--color-background;
+      border-top: 1px $--color-border solid;
+      height: 40px;
+      font-size: 12px;
+
+      th {
+        padding-left: 3%;
+      }
+    }
     tr {
       height: 70px;
       background-color: $--color-white;

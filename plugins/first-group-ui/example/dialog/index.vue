@@ -53,10 +53,10 @@
 
     <fg-dialog v-model="visible2" title="Hello World日本語テスト" persistent>
       content
-      <div style="padding: 24px;">
+      <div style="padding: 24px">
         <fg-calendar />
       </div>
-      <div style="padding: 24px;">
+      <div style="padding: 24px">
         <fg-calendar />
       </div>
     </fg-dialog>
@@ -77,7 +77,7 @@
 
     <!-- larger -->
     <fg-dialog v-model="visible5" title="larger">
-      <div style="overflow: hidden;">
+      <div style="overflow: hidden">
         <p v-for="item in 100" :key="item">text {{ item }}</p>
       </div>
     </fg-dialog>
@@ -102,7 +102,7 @@
       <fg-calendar />
     </fg-dialog>
 
-    <div style="height: 1000px;"></div>
+    <div style="height: 1000px"></div>
   </div>
 </template>
 

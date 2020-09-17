@@ -1,7 +1,7 @@
 <template>
   <div class="admin-service-icons-wrapper">
     <i v-for="(icon, i) in icons" :key="i" @click="handleClick(icon)">
-      <v-img :src="require('./img/table-icon-' + icon + '.svg')"></v-img>
+      <img :src="require('./img/table-icon-' + icon + '.svg')" />
     </i>
   </div>
 </template>

@@ -34,7 +34,7 @@
       ref="input"
       :accept="accept"
       type="file"
-      style="display: none;"
+      style="display: none"
       @change="inputChange"
     />
     <Cropper
@@ -135,6 +135,7 @@ export default {
     data: {
       deep: true,
       handler(val) {
+        console.log(val)
         this.$emit('change', { ...val })
       },
     },
@@ -173,6 +174,7 @@ export default {
       } else {
         handleMediaFile(file, this.options)
           .then((res) => {
+            res.raw.file = file
             this.data = res
           })
           .catch((err) => {
@@ -184,6 +186,7 @@ export default {
       this.cropperVisible = false
       handleMediaFile(this.file, { ...this.options, cropInfo })
         .then((res) => {
+          res.raw.file = this.file
           this.data = res
         })
         .catch((err) => {

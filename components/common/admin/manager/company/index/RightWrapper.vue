@@ -6,28 +6,16 @@
       </div>
       <div class="company-right-wrapper-top-wrapper_body">
         <div class="main-row">
-          <div class="main-row_left">
-            プラン
-          </div>
-          <div class="main-row_right">
-            ベーシック
-          </div>
+          <div class="main-row_left">プラン</div>
+          <div class="main-row_right">ベーシック</div>
         </div>
         <div class="main-row">
-          <div class="main-row_left">
-            契約店舗数
-          </div>
-          <div class="main-row_right">
-            10店
-          </div>
+          <div class="main-row_left">契約店舗数</div>
+          <div class="main-row_right">10店</div>
         </div>
         <div class="main-row">
-          <div class="main-row_left">
-            ユーザー数
-          </div>
-          <div class="main-row_right">
-            25名/30名
-          </div>
+          <div class="main-row_left">ユーザー数</div>
+          <div class="main-row_right">25名/30名</div>
         </div>
       </div>
     </div>
@@ -38,12 +26,12 @@
       <div class="company-right-wrapper-bottom-wrapper_body">
         <div class="company-right-wrapper-bottom-wrapper_body_guide">
           <p>使い方ガイド</p>
-          <v-img
-            :max-width="10"
-            :max-height="10"
+          <img
+            width="10"
+            height="10"
             :src="require(`./img/copy-icon.svg`)"
             @click="moveToForm"
-          ></v-img>
+          />
         </div>
       </div>
     </div>

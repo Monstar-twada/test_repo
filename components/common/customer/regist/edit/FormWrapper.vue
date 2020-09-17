@@ -135,13 +135,11 @@
 
         <fg-form-item label="免許証">
           <fg-image-processor
-            :options="{ width: 2000 }"
             url=""
             icon="license-front"
             :validate="customValidate"
           ></fg-image-processor>
           <fg-image-processor
-            :options="{ width: 2000 }"
             url=""
             icon="license-back"
             :validate="customValidate"

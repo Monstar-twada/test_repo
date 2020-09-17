@@ -33,12 +33,16 @@ import FgSwitch from './packages/switch/index'
 import FgTable from './packages/table/index'
 import FgTableColumn from './packages/table-column/index'
 import FgTableExperiment from './packages/table-experiment/index'
+import FgTabs from './packages/tabs/index'
+import FgTabsItem from './packages/tabs-item/index'
 import FgTag from './packages/tag/index'
 import FgText from './packages/text/index'
 
 import themeBlue from './plugins/theme-blue'
 import themeRed from './plugins/theme-red'
 import * as libs from './libs/index'
+
+import './assets/scss/common.scss'
 
 const components = [
   FgAvatar,
@@ -71,6 +75,8 @@ const components = [
   FgTable,
   FgTableColumn,
   FgTableExperiment,
+  FgTabs,
+  FgTabsItem,
   FgTag,
   FgText,
 ]

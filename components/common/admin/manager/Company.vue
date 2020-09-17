@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss">
 .admin-company-container-wrapper {
+  margin-top: 20px;
   width: 100%;
   display: flex;
   .admin-btn {

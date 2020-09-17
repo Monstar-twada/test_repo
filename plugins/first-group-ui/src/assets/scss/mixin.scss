@@ -113,10 +113,9 @@
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $--color-primary-active;
+    background-color: $--color-primary-placeholder;
     cursor: pointer;
     border-radius: $--border-radius-2;
-    border: 1px solid #fff;
   }
 }
 

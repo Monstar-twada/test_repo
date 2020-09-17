@@ -2,9 +2,7 @@
   <div class="login-complete-page-wrapper">
     <Logo />
     <div class="complete-form">
-      <h2 class="complete-form__title mb5">
-        パスワードの再設定が完了しました
-      </h2>
+      <h2 class="complete-form__title mb5">パスワードの再設定が完了しました</h2>
       <p class="complete-form__subtitle mb40">
         次回から新しいパスワードでログインしてください。
       </p>

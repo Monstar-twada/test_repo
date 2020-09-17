@@ -1,5 +1,5 @@
 <template>
-  <i class="fg-icon" @click="$emit('click')">
+  <i class="fg-icon" @click="handleClick">
     <svg
       ref="svg"
       xmlns="http://www.w3.org/2000/svg"
@@ -73,6 +73,11 @@ export default {
     this.$nextTick(() => {
       this.svg.innerHTML = this.html
     })
+  },
+  methods: {
+    handleClick(e) {
+      this.$emit('click', e)
+    },
   },
 }
 </script>

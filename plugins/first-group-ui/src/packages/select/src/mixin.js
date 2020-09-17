@@ -3,6 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-09-03 13:06
  */
+const MILLI_SECOND = 800
 export default {
   methods: {
     clearTimer() {
@@ -18,7 +19,7 @@ export default {
         if (val) {
           this.timer = setTimeout(() => {
             this.popVisible = false
-          }, 1000)
+          }, MILLI_SECOND)
         } else {
           this.clearTimer()
         }

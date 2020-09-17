@@ -39,7 +39,7 @@
           </dl>
         </td>
         <td>
-          <dl style="display: inline-block; text-align: left;">
+          <dl style="display: inline-block; text-align: left">
             <dd>{{ item.maker }}</dd>
             <dd>{{ item.class || '-' }}</dd>
           </dl>

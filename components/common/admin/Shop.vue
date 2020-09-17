@@ -10,6 +10,7 @@
         :items="itemList"
         :items-per-page="itemsPerPage"
         :page.sync="currentPage"
+        group-by="area"
         hide-default-footer
       >
         <template v-slot:item.shop_name="{ item }">

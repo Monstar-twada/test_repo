@@ -16,12 +16,20 @@ export default {
       type: String,
       default: '',
     },
+    width: {
+      type: [String, Number],
+      default: '',
+    },
   },
   computed: {
     style() {
       const ret = {}
+      const { isNumberLike } = this.$ui
       if (this.align) {
         ret.alignItems = this.align
+      }
+      if (this.width) {
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
       }
       return ret
     },

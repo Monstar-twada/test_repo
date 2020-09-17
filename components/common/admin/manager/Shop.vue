@@ -4,44 +4,58 @@
       <div class="header-wrapper">
         <h2>店舗一覧</h2>
         <div class="admin-btn">
-          <v-img
-            :max-width="105"
-            :max-height="30"
+          <img
+            width="105"
+            height="30"
             :src="require(`./img/area-btn.svg`)"
             @click="moveToForm"
-          ></v-img>
+          />
         </div>
       </div>
-      <v-data-table
+      <fg-table
         :headers="headers"
-        :items="itemList"
-        :items-per-page="itemsPerPage"
-        :page.sync="currentPage"
+        :data="itemList"
         group-by="area"
-        hide-default-footer
+        thead-class="thead-bg"
       >
-        <template v-slot:item.shop_name="{ item }">
-          <div>{{ item.shop_name }}</div>
-        </template>
-        <template v-slot:item.postcode="{ item }">
-          <div class="align-left">{{ item.postcode }}</div>
-          <div class="align-left">{{ item.address }}</div>
-        </template>
-        <template v-slot:item.service="{ item }">
-          <ServiceIcons :item="item" />
-        </template>
-        <template v-slot:item.editBtn="{ item }">
-          <fg-button
-            width="63"
-            border
-            size="mini"
-            prefix-icon="edit"
-            @click="moveToEdit(item.id)"
-          >
-            編集
-          </fg-button>
-        </template>
-      </v-data-table>
+        <fg-table-column show="shop_name" label="店名" :sortable="false">
+          <template v-slot="item">
+            <div>{{ item.shop_name }}</div>
+          </template>
+        </fg-table-column>
+        <fg-table-column
+          show="postcode"
+          label="所在地"
+          :sortable="false"
+          cell-class="left"
+        >
+          <template v-slot="item">
+            <div class="align-left">{{ item.postcode }}</div>
+            <div class="align-left">{{ item.address }}</div>
+          </template>
+        </fg-table-column>
+        <fg-table-column show="tel" label="電話番号" :sortable="false" />
+        <fg-table-column show="mail" label="メールアドレス" :sortable="false" />
+        <fg-table-column show="service" label="導入サービス" :sortable="false">
+          <template v-slot="item">
+            <ServiceIcons :item="item" />
+          </template>
+        </fg-table-column>
+        <fg-table-column :sortable="false">
+          <template v-slot="item">
+            <fg-button
+              width="63"
+              border
+              size="mini"
+              prefix-icon="edit"
+              @click="moveToEdit(item.id)"
+            >
+              編集
+            </fg-button>
+          </template>
+        </fg-table-column>
+        <fg-table-column show="area" label="" />
+      </fg-table>
     </div>
   </div>
 </template>
