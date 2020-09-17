@@ -3,6 +3,7 @@
 |Name|Description|
 |:--|:--|
 |project| project name: manager/dashboard/console|
+|isDev|Whether the development environment|
 
 ## Methods
 
@@ -45,14 +46,14 @@
 |warn|(...args: any): void| console.warn |
 |windowDispatcher|(eventName: string)||
 
-#### extend Methods
+### Extend Methods
 
 |Name|Parameters|Description|
 |:--|:--|:--|
-|getBasicData|(key: string, isNeedObject?: boolean)|get basic data|
+|getBasicData|(key: string, isNeedObject?: boolean)|get basic data, key: `prefectures/transaction_type/...`|
 |clearBasicData|()|clear basic data from localStorage||
 
-## colors
+## Colors
 
 `this.$colors.primaryPlaceholder`
 `// see assets/scss/theme-*.scss $--color-primary-placeholder`
