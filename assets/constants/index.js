@@ -5,37 +5,20 @@
  */
 import { CAR_BODY_TYPES } from './car-body-types'
 import { CAR_COLORS } from './car-colors'
-import { CAR_LIVES } from './car-lives'
-import { SELECTION_POINTS } from './selection-points'
 
-// 個人/法人
-const CUSTOMER_TYPES = [
-  {
-    text: '個人',
-    value: 1,
-  },
-  {
-    text: '法人',
-    value: 2,
-  },
-]
+/** local cache keys */
+const BASIC_MASTER_CACHE_KEY = 'BASIC_MASTER'
+const BASIC_PREFECTURE_CACHE_KEY = 'BASIC_PREFECTURE'
 
-// 性別
-const GENDERS = [
-  {
-    text: '男性',
-    value: '男',
-  },
-  {
-    text: '女性',
-    value: '女',
-  },
-]
-
-const BASIC_DATA_CACHE_KEY = 'BASIC_DATA_CACHE_KEY'
+// 以下は削除対象になり、マスターデータから取得してください
+const CAR_LIVES = []
+const CUSTOMER_TYPES = []
+const GENDERS = []
+const SELECTION_POINTS = []
 
 export {
-  BASIC_DATA_CACHE_KEY,
+  BASIC_MASTER_CACHE_KEY,
+  BASIC_PREFECTURE_CACHE_KEY,
   CAR_BODY_TYPES,
   CAR_COLORS,
   CAR_LIVES,
