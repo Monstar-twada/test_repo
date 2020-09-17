@@ -16,6 +16,7 @@
 |createUrlQuery|(params: object, fields?: string[]): string||
 |createRandomStr|(prefix: string): string| create a random string|
 |error|(...args: any): void| console.error |
+|formatDate|(date: date/string, format: string): string|this.$ui.formatDate(new Date(), 'yyyy-MM-dd') -> `2020-09-17`|
 |getCache|(key: string): any||
 |getMaxZIndex|(): number||
 |getParentComponent|(fgParentName: string): Component||
@@ -40,6 +41,7 @@
 |setCache|(key: string, value: any): void||
 |slice|(o: ArrayLike, index: number): any[]||
 |toCommaNumber|(value: string, keepDecimalPlaces?: boolean): string|Example: `123456` -> `123,456`|
+|toDate|(d: any): date/null||
 |toNumber|(a: any): number||
 |toTwoDigits|(a: any): string|Example: `3` -> `03`|
 |toHumpStr|(attr: string, spacer?: string)|Example: `font-size` -> `fontSize`|

@@ -3,6 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-09-15 12:39
  */
+import ZxCalendar from 'zx-calendar'
 import { isBoolean, isArray } from './check'
 
 /**
@@ -106,3 +107,11 @@ export function booleanToNumber(o, props) {
     }
   })
 }
+
+export function formatDate(str, fmt) {
+  return ZxCalendar.prototype.formatDate(str, fmt, {
+    weeks: ['日', '月', '火', '水', '木', '金', '土'],
+  })
+}
+
+export const toDate = ZxCalendar.prototype.toDate

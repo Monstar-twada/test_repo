@@ -30,6 +30,8 @@ import { getParentComponent } from './component'
 import { windowDispatcher } from './events'
 import {
   booleanToNumber,
+  formatDate,
+  toDate,
   toNumber,
   toTwoDigits,
   toHumpStr,
@@ -54,6 +56,7 @@ export {
   createRandomStr,
   createUrlQuery,
   error,
+  formatDate,
   fmtSort,
   getBasicData,
   getCache,
@@ -81,6 +84,7 @@ export {
   setCache,
   slice,
   toCommaNumber,
+  toDate,
   toNumber,
   toTwoDigits,
   toHumpStr,
