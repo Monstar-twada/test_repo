@@ -106,6 +106,7 @@ export default {
     },
     sortChange(field, sort) {
       this.query.sort[field] = sort
+      this.query.page = 1
     },
   },
 }

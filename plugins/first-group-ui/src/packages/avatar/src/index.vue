@@ -112,7 +112,7 @@ export default {
     },
     content() {
       const { name, lastName, firstName } = this.data
-      return name || [lastName, firstName].join(' ')
+      return name || [lastName, firstName].join('')
     },
   },
   methods: {

@@ -52,7 +52,7 @@
             label="車検間近"
           ></fg-checkbox>
           <fg-checkbox
-            v-model="form.sixManthContact"
+            v-model="form.sixMonthContact"
             size="small"
             label="6ヶ月内接点"
           ></fg-checkbox>
@@ -208,7 +208,7 @@ export default {
           'purchaseIntention',
           'transferTarget',
           'nearInspection',
-          'sixManthContact',
+          'sixMonthContact',
         ])
         this.$emit('change', form)
       }

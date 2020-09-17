@@ -38,5 +38,18 @@ export const DEFAULT_QUERY = {
   // 車検間近
   nearInspection: 0,
   // 6カ月内接点
-  sixManthContact: 0,
+  sixMonthContact: 0,
+}
+
+export const CAR_LIST_QUERY = {
+  page: 1,
+  limit: 10,
+  sort: {
+    registrationFirstDate: '',
+    registrationEndDate: '',
+    sellingDatetime: '',
+    carInspectionFlag: '',
+    reservationFlag: '',
+    tentiveReservationFlag: '',
+  },
 }

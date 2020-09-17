@@ -66,12 +66,13 @@ function fmtHyphen(text) {
 }
 
 /**
+ * 乗換対象
  * データが0の場合は”なし”、1の場合は”対象”を表示
- * @param alternativeTarget
+ * @param purchaseTarget
  * @returns {string}
  */
-function fmtAlternative(alternativeTarget) {
-  return alternativeTarget >> 0 ? '対象' : 'なし'
+function fmtPurchaseTarget(purchaseTarget) {
+  return purchaseTarget >> 0 ? '対象' : 'なし'
 }
 
 /**
@@ -109,7 +110,7 @@ function fmtMoney(value, noMark = false) {
  */
 function sumCost(cost) {
   const result =
-    ((cost.gasFee >> (0 + cost.insuranceFee)) >> (0 + cost.parkingFee)) >> 0
+    cost.monthlyGasolineCost + cost.monthlyParkingFee + cost.carInsuranceFee
   return fmtMoney(result ? result.toString() : '')
 }
 
@@ -199,7 +200,6 @@ function fmtSex(code) {
 export const customerMixin = {
   filters: {
     fmtAddress,
-    fmtAlternative,
     fmtAvatar,
     fmtCarNumber,
     fmtCarSize,
@@ -210,6 +210,7 @@ export const customerMixin = {
     fmtHyphen,
     fmtMoney,
     fmtNameKana,
+    fmtPurchaseTarget,
     fmtSex,
     fmtTransactionType,
     fmtWork,

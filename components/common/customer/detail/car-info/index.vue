@@ -16,32 +16,41 @@
       <fg-row gutter="60">
         <fg-col span="16">
           <div class="mt10 ml20">
-            <SubTitle :sub-title="carSummary.name | fmtHyphen" />
+            <SubTitle :sub-title="data.carType | fmtHyphen" />
           </div>
 
           <fg-row class="mt15">
             <fg-col span="8">
               <TextContent label="所有者" class="ml20" label-width="90px">
-                <v-avatar v-if="carSummary.owner" size="24" class="ml10">
-                  <v-img :src="require('./img/profile-edit.svg')" />
-                </v-avatar>
+                <fg-avatar
+                  v-if="data.ownerFacePhoto"
+                  :src="data.ownerFacePhoto"
+                  size="24"
+                  class="mr5"
+                />
                 <template v-else>-</template>
               </TextContent>
             </fg-col>
             <fg-col span="8">
               <TextContent label="意思決定者" class="ml20" label-width="80px">
-                <v-avatar v-if="carSummary.payer" size="24" class="ml10">
-                  <v-img :src="require('./img/profile-edit.svg')" />
-                </v-avatar>
+                <fg-avatar
+                  v-if="data.deciderFacePhoto"
+                  :src="data.deciderFacePhoto"
+                  size="24"
+                  class="mr5"
+                />
                 <template v-else>-</template>
               </TextContent>
             </fg-col>
             <fg-col span="8">
               <TextContent label="利用者" class="ml20" label-width="60px">
-                <v-avatar v-if="carSummary.user" size="24" class="ml10">
-                  <v-img :src="require('./img/profile-edit.svg')" />
-                </v-avatar>
-                <template v-else>-</template>
+                <fg-avatar
+                  v-for="(item, i) in data.users"
+                  :key="i"
+                  :src="item.facePhoto"
+                  size="24"
+                  class="mr5"
+                />
               </TextContent>
             </fg-col>
           </fg-row>
@@ -51,7 +60,9 @@
               v-for="(item, i) in carLives"
               :key="i"
               size="small"
-              :selected="item.active"
+              :selected="item.selected"
+              :border-color="$colors.border"
+              class="mb5"
               >{{ item.text }}</fg-tag
             >
           </TextContent>
@@ -64,8 +75,8 @@
               size="small"
               no-border
               color="#fff"
-              :bold="false"
-              :bg-color="carSummary[item.key] | fmtTransactionType"
+              :bold="item.selected"
+              :bg-color="item.selected ? $colors.primary : '#aaa'"
               >{{ item.text }}</fg-tag
             >
           </TextContent>
@@ -79,38 +90,30 @@
               <div class="right-border pt10 pl20 pr20">
                 <TextContent
                   label="メーカー"
-                  :content="carBase.maker | fmtHyphen"
+                  :content="data.maker | fmtHyphen"
                 />
-                <TextContent
-                  label="車種"
-                  :content="carBase.class | fmtHyphen"
-                />
+                <TextContent label="車種" :content="data.carType | fmtHyphen" />
                 <TextContent
                   label="登録ナンバー"
-                  :content="carBase | fmtCarNumber"
+                  :content="data | fmtCarNumber"
                 />
                 <TextContent
                   label="登録年月日"
-                  :content="carBase.registrationDate | fmtDate"
+                  :content="data.registrationFirstDate | fmtDate"
                 />
-                <TextContent
-                  label="新中区分"
-                  :content="carBase.newOldType | fmtHyphen"
-                />
+                <TextContent label="新中区分" :content="saleNewOldCarType" />
                 <TextContent
                   label="保険情報有無"
-                  :content="
-                    (carBase.insuranceNumber || '839294813493') | fmtHyphen
-                  "
-                  :copyable="!!carBase.insuranceNumber || true"
+                  :content="data.insuranceNumber | fmtHyphen"
+                  :copyable="!!data.insuranceNumber"
                   high-light
                   @click="insuranceVisible = true"
                 >
                   <fg-tag
-                    v-if="carBase.insuranceType"
+                    v-if="companyClassification"
                     size="mini"
                     class="ml5"
-                    >{{ carBase.insuranceType }}</fg-tag
+                    >{{ companyClassification }}</fg-tag
                   >
                 </TextContent>
               </div>
@@ -119,37 +122,35 @@
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="グレード"
-                  :content="carBase.grade | fmtHyphen"
+                  :content="data.grade | fmtHyphen"
                 />
                 <TextContent
                   label="初度登録年月"
-                  :content="carBase.firstRegistrationDate | fmtDate"
+                  :content="data.registrationFirstDate | fmtDate"
                 />
                 <TextContent
                   label="車検満了日"
-                  :content="carBase.inspectionExpirationDate | fmtDate"
+                  :content="data.registrationEndDate | fmtDate"
                   flex
                 ></TextContent>
                 <TextContent
                   label="走行距離"
-                  content="90,000km (2020/09/07時点)"
+                  :content="carMileage"
                 ></TextContent>
                 <TextContent
                   label="車検証有無"
-                  :content="
-                    (carBase.inspectionCertificate || 'test') | fmtHyphen
-                  "
-                  :copyable="!carBase.inspectionCertificate"
+                  :content="data.registrationNumber | fmtHyphen"
+                  :copyable="!!data.registrationNumber"
                   high-light
                   @click="vicVisible = true"
                 />
                 <TextContent
                   label="乗換対象"
-                  :content="carBase.alternativeTarget | fmtAlternative"
+                  :content="data.purchaseTargetFlg | fmtPurchaseTarget"
                 />
                 <TextContent
                   label="買換意向"
-                  :content="carBase.alternativeReaction"
+                  :content="data.purchaseIntention"
                 />
               </div>
             </fg-col>
@@ -164,19 +165,19 @@
               <div class="right-border pt10 pl20 pr20">
                 <TextContent
                   label="販売価格"
-                  :content="carTrade.retailPrice | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
                 <TextContent
                   label="査定価格"
-                  :content="carTrade.assessmentAmount | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
                 <TextContent
                   label="支払区分"
-                  :content="carTrade.paymentType | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
                 <TextContent
                   label="月々返済"
-                  :content="carTrade.repaymentMonthly | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
               </div>
             </fg-col>
@@ -184,17 +185,17 @@
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="AI査定額"
-                  :content="carTrade.aiAssessmentAmount | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
                 <TextContent
                   label="予想価格"
                   sub-label="(マッチング)"
                   is-small-sub-label
-                  :content="carTrade.estimatedPrice | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
                 <TextContent
                   label="支払残債"
-                  :content="carTrade.remainingAmount | fmtHyphen"
+                  :content="data.noSuchField | fmtHyphen"
                 />
               </div>
             </fg-col>
@@ -208,19 +209,19 @@
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="自動車税"
-                  :content="carExpense.carTax | fmtMoney"
+                  :content="data.carTax | fmtMoney"
                 />
                 <TextContent
                   label="自賠責保険"
-                  :content="carExpense.carInsurance | fmtMoney"
+                  :content="data.libilityInsurance | fmtMoney"
                 />
                 <TextContent
                   label="重量税"
-                  :content="carExpense.weightTax | fmtMoney"
+                  :content="data.weightTax | fmtMoney"
                 />
                 <TextContent
                   label="リサイクル"
-                  :content="carExpense.recycleFee | fmtMoney"
+                  :content="data.recycleFee | fmtMoney"
                 />
               </div>
             </fg-col>
@@ -231,18 +232,18 @@
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="ガソリン代"
-                  :content="carCost.gasFee | fmtMoney"
+                  :content="data.monthlyGasolineCost | fmtMoney"
                 />
                 <TextContent
                   label="保険料"
-                  :content="carCost.insuranceFee | fmtMoney"
+                  :content="data.monthlyParkingFee | fmtMoney"
                 />
                 <TextContent
                   label="駐車場代"
-                  :content="carCost.parkingFee | fmtMoney"
+                  :content="data.carInsuranceFee | fmtMoney"
                 />
                 <div class="double-line mt10 mb5"></div>
-                <TextContent label="月間コスト" :content="carCost | sumCost" />
+                <TextContent label="月間コスト" :content="data | sumCost" />
               </div>
             </fg-col>
           </fg-row>
@@ -260,40 +261,40 @@
               <div class="right-border pt10 pl20 pr20 pb20">
                 <TextContent
                   label="車台番号"
-                  :content="carDetail.chassisNumber | fmtHyphen"
+                  :content="data.chassisNumber | fmtHyphen"
                 />
                 <TextContent
                   label="通称型式"
-                  :content="carDetail.fullModel | fmtHyphen"
+                  :content="data.carInspectionType | fmtHyphen"
                 />
                 <TextContent
                   label="エンジン型式"
-                  :content="carDetail.engineType | fmtHyphen"
+                  :content="data.engineModel | fmtHyphen"
                 />
                 <TextContent
                   label="最大出力"
-                  :content="carDetail.maxOutput | fmtHyphen"
+                  :content="data.enginMaximumOutput | fmtHyphen"
                 />
                 <TextContent
                   label="最大トルク"
-                  :content="carDetail.maxTorque | fmtHyphen"
+                  :content="data.engineTorque | fmtHyphen"
                 />
                 <TextContent
                   label="燃料タンク"
-                  :content="carDetail.fuelTank | fmtHyphen"
+                  :content="data.fuelTankSize | fmtHyphen"
                 />
                 <TextContent
                   label="カラーコード"
-                  :content="carDetail.colorCode | fmtHyphen"
+                  :content="data.colorCode | fmtHyphen"
                 />
                 <TextContent
                   label="トリムコード"
-                  :content="carDetail.trimCode | fmtHyphen"
+                  :content="data.colorTrimCode | fmtHyphen"
                 />
                 <TextContent label="車両寸法"
-                  >全長 {{ carDetail.length | fmtCarSize }}<br />全幅
-                  {{ carDetail.width | fmtCarSize }}<br />全高
-                  {{ carDetail.height | fmtCarSize }}</TextContent
+                  >全長 {{ data.carFullLength | fmtCarSize }}<br />全幅
+                  {{ data.carFullWidth | fmtCarSize }}<br />全高
+                  {{ data.carTotalHeight | fmtCarSize }}</TextContent
                 >
               </div>
             </fg-col>
@@ -301,34 +302,34 @@
               <div class="pt10 pl20 pr20">
                 <TextContent
                   label="タイヤサイズ"
-                  :content="carDetail.tireSize | fmtHyphen"
+                  :content="data.tireSizeRear | fmtHyphen"
                 />
-                <TextContent label="タイヤ製造" content="2015年27週目" />
+                <TextContent
+                  label="タイヤ製造"
+                  :content="tireCreateYearMonth"
+                />
                 <TextContent
                   label="バッテリーサイズ"
-                  :content="carDetail.batterySize | fmtHyphen"
+                  :content="data.batterySize | fmtHyphen"
                 />
-                <TextContent
-                  label="モデル"
-                  :content="carDetail.model | fmtHyphen"
-                />
+                <TextContent label="モデル" :content="data.model | fmtHyphen" />
                 <TextContent
                   label="発売開始"
-                  :content="carDetail.salesPeriod | fmtHyphen"
+                  :content="data.salesPeriodStart | fmtHyphen"
                 />
                 <TextContent
                   label="保証期間"
-                  :content="carDetail.warrantyPeriod | fmtHyphen"
+                  :content="data.warrantyPeriodEnd | fmtHyphen"
                 />
                 <TextContent
                   label="燃費"
                   sub-label="(JC08モード)"
                   is-small-sub-label
-                  :content="carDetail.gasMileage | fmtHyphen"
+                  :content="data.fuelEconomy | fmtHyphen"
                 />
                 <TextContent
                   label="車両重量"
-                  :content="carDetail.weight | fmtCarWeight"
+                  :content="data.carWeight | fmtCarWeight"
                 />
               </div>
             </fg-col>
@@ -346,7 +347,7 @@
               >編集</fg-button
             >
           </div>
-          <CarInfoSide :car-summary="carSummary" />
+          <CarInfoSide :car-summary="data" />
         </fg-col>
       </fg-row>
     </div>
@@ -355,18 +356,21 @@
       v-model="selectCarVisible"
       :data="carListData"
       :query="carQuery"
-      :current-car-id="currentCarId"
+      :current-car-code="currentCarCode"
       @change="changeCar"
     />
     <EditReservationDialog v-model="reservationVisible" />
-    <VICDialog v-model="vicVisible" />
+    <VICDialog
+      v-model="vicVisible"
+      :car-code="data.carCode"
+      :customer-code="data.customerCode"
+    />
     <InsuranceDialog v-model="insuranceVisible" />
 
-    <CarTable class="customer-info mt30" :customer-id="customerId" />
+    <CarTable class="customer-info mt30" :customer-code="customerCode" />
   </div>
 </template>
 <script>
-import { TRANSACTION_TYPES } from '../../common/base'
 import SelectCarDialog from './select-car-dialog/index'
 import CarInfoSide from './CarInfoSide'
 import VICDialog from './vehicle-inspection-cert-dialog/index'
@@ -376,17 +380,7 @@ import TextContent from '~/components/common/customer/common/TextContent.vue'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import EditReservationDialog from '~/components/common/customer/detail/car-info/edit-reservation-dialog'
 import CarTable from '~/components/common/customer/detail/CarTable'
-import {
-  fmtHyphen,
-  fmtCarNumber,
-  fmtAlternative,
-  fmtTransactionType,
-  fmtMoney,
-  sumCost,
-  fmtCarSize,
-  fmtCarWeight,
-  fmtDate,
-} from '~/components/common/customer/common/helper'
+import { customerMixin } from '~/mixins/customer'
 
 const CAR_TABLE_QUERY = {
   page: 1,
@@ -394,17 +388,6 @@ const CAR_TABLE_QUERY = {
 }
 
 export default {
-  filters: {
-    fmtHyphen,
-    fmtCarNumber,
-    fmtAlternative,
-    fmtTransactionType,
-    fmtMoney,
-    sumCost,
-    fmtCarSize,
-    fmtCarWeight,
-    fmtDate,
-  },
   components: {
     SubTitle,
     TextContent,
@@ -416,36 +399,79 @@ export default {
     InsuranceDialog,
     CarTable,
   },
+  mixins: [customerMixin],
   props: {
-    customerId: {
+    customerCode: {
       type: [String, Number],
       default: 0,
     },
   },
-  data: () => ({
-    selectCarVisible: false,
-    reservationVisible: false,
-    carQuery: {
-      ...CAR_TABLE_QUERY,
+  data() {
+    return {
+      selectCarVisible: false,
+      reservationVisible: false,
+      carQuery: {
+        ...CAR_TABLE_QUERY,
+      },
+      data: {},
+      carListData: {},
+      currentCarCode: '',
+      vicVisible: false,
+      insuranceVisible: false,
+    }
+  },
+  computed: {
+    carLives() {
+      const classes = this.$ui.getBasicData('car_life')
+      const arr = (this.data.carLifeCodes || []).map((item) => item.carLifeCode)
+      return classes.map((item) => {
+        item.selected = arr.includes(item.value)
+        return item
+      })
     },
-    carListData: {},
-    currentCarId: '',
-    carBase: {},
-    carSummary: {},
-    carTrade: {},
-    carExpense: {},
-    carCost: {},
-    carDetail: {},
-    vicVisible: false,
-    insuranceVisible: false,
-    carLives: [],
-    transactionTypes: TRANSACTION_TYPES,
-  }),
+    transactionTypes() {
+      const classes = this.$ui.getBasicData('transaction_type')
+      const arr = (this.data.transactionTypes || []).map(
+        (item) => item.transactionType
+      )
+      return classes.map((item) => {
+        item.selected = arr.includes(item.value)
+        return item
+      })
+    },
+    saleNewOldCarType() {
+      const data = this.$ui.getBasicData('sale_new_old_car_type', true)
+      return data[this.data.saleNewOldCarType]
+    },
+    companyClassification() {
+      const data = this.$ui.getBasicData('company_classification', true)
+      return data[this.data.companyClassification]
+    },
+    carMileage() {
+      // 90,000km (2020/09/07時点)
+      const arr = []
+      const { carMileage, carMileageRegistrationDate } = this.data
+      if (carMileage) {
+        arr.push(this.$ui.toCommaNumber(carMileage) + 'km')
+      }
+      if (carMileageRegistrationDate) {
+        arr.push(`(${carMileageRegistrationDate}時点)`)
+      }
+      return arr.join(' ') || '-'
+    },
+    tireCreateYearMonth() {
+      // 2015年27週目
+      const { tireCreateYearMonth, tireCreateWeek } = this.data
+      if (tireCreateYearMonth) {
+        return `${tireCreateYearMonth}年${tireCreateWeek}週目`
+      }
+      return '-'
+    },
+  },
   watch: {
     carQuery: {
       deep: true,
-      handler(val) {
-        console.log(JSON.stringify(val, null, 2))
+      handler() {
         this.getCarList()
       },
     },
@@ -455,20 +481,18 @@ export default {
   },
   methods: {
     async getCarInfo() {
-      if (!this.currentCarId) return
+      if (!this.currentCarCode) {
+        this.data = {}
+        return
+      }
       try {
         const res = await this.$api.get(
-          `/v1/customer/${this.customerId}/car/${this.currentCarId}`
+          `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}`
         )
-        // console.log('getCarInfo', res)
-        this.carBase = res.customer.base || {}
-        this.carSummary = res.customer.summary || {}
-        this.carTrade = res.customer.trade || {}
-        this.carExpense = res.customer.expense || {}
-        this.carCost = res.customer.cost || {}
-        this.carDetail = res.customer.detail || {}
-      } catch (e) {
-        console.error(e)
+        this.data = res
+      } catch (err) {
+        console.error(err)
+        this.$alert(err.message)
       }
     },
     async getCarList() {
@@ -479,28 +503,27 @@ export default {
       }
       try {
         const res = await this.$api.get(
-          `/v1/customer/${this.customerId}/car`,
+          `/v1/customers/${this.customerCode}/cars`,
           params
         )
-        console.log('getCarList', res)
         this.carListData = res || {}
         const carList = this.carListData.results || []
-        if (!this.currentCarId && carList.length > 0) {
-          this.currentCarId = carList[0].carId
+        if (!this.currentCarCode && carList.length > 0) {
+          this.currentCarCode = carList[0].carCode
           await this.getCarInfo()
         }
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
+        console.error(err)
+        this.$alert(err.message)
       }
     },
     changeCar(item) {
-      // console.log(JSON.stringify(item, null, 2))
-      this.currentCarId = item.carId
+      this.currentCarCode = item.carCode
       this.getCarInfo()
     },
     goEditCar() {
       this.$router.push(
-        `/customer/regist/car/edit?id=${this.currentCarId}&customerId=${this.customerId}`
+        `/customer/regist/car/edit?id=${this.currentCarCode}&customerCode=${this.customerCode}`
       )
     },
   },

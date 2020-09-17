@@ -19,7 +19,7 @@
             <TextContent label="住所">
               〒{{ data.zipCode }}<br />{{ data | fmtAddress }}
             </TextContent>
-            <TextContent label="性別" :content="data.sex | fmtHyphen" />
+            <TextContent label="性別" :content="data.sex | fmtSex" />
             <TextContent
               label="携帯電話"
               :content="data.cellphoneNumber | fmtHyphen"
@@ -31,25 +31,22 @@
             <TextContent label="メール" :content="data.email | fmtHyphen" />
             <TextContent label="生年月日" :content="data.birthday | fmtDate" />
             <TextContent label="家族構成">
-              {{ data.family | fmtHyphen }}
+              <FamilyList :items="data.family"></FamilyList>
             </TextContent>
           </fg-col>
           <fg-col span="12" align-self="start" class="p20 pb-0">
             <TextContent label="勤務先" :content="data | fmtWork" />
-            <TextContent
-              label="勤続年数"
-              :content="data.workYear | fmtHyphen"
-            />
+            <TextContent label="勤続年数" :content="workingTerm" />
             <TextContent
               label="年収"
               :content="data.annualIncome | fmtHyphen"
             />
-            <TextContent label="住宅" :content="data.house | fmtHyphen" />
+            <TextContent label="住宅" :content="houseInfo" />
             <TextContent
               label="免許証"
-              :content="(data.licence || 'ゴールド 839294813493') | fmtHyphen"
+              :content="licence | fmtHyphen"
               high-light
-              :copyable="!!data.licence || true"
+              :copyable="!!licence"
               @click="clickLicence"
             />
             <TextContent
@@ -58,17 +55,17 @@
               high-light
               flex
             />
-            <TextContent
-              label="個人/法人 "
-              :content="data.customerType | fmtHyphen"
-            />
+            <TextContent label="個人/法人 " :content="privateBusiness" />
           </fg-col>
         </fg-row>
         <fg-row class="ma-0 pb20">
           <SubTitle sub-title="その他の情報" class="mt10 ml20" />
           <fg-col span="12" class="right-border p20 pb-0">
             <TextContent label="ペット" :content="data.pet | fmtHyphen" />
-            <TextContent label="実家" :content="data.home | fmtHyphen" />
+            <TextContent
+              label="実家"
+              :content="data.parentsHomeAddress | fmtHyphen"
+            />
           </fg-col>
           <fg-col span="12" class="p20 pb-0">
             <TextContent label="ドリンク" :content="data.drink | fmtHyphen" />
@@ -80,9 +77,7 @@
         <div class="side-customer-profile-wrapper">
           <fg-avatar
             size="80"
-            :src="
-              data.photoKey || require('~/static/common/person_default.svg')
-            "
+            :src="data.facePhoto || '/common/person_default.svg'"
           />
           <dl>
             <dt>
@@ -93,7 +88,7 @@
             </dt>
             <dd>{{ data | fmtNameKana }}</dd>
             <dd>
-              <h5>担当店舗：cars足立</h5>
+              <h5>担当店舗：{{ data.storeName }}</h5>
             </dd>
           </dl>
         </div>
@@ -102,7 +97,7 @@
           <fg-tag
             v-for="(item, i) in carLives"
             :key="i"
-            :selected="item.active"
+            :selected="item.selected"
             :border-color="$colors.border"
             >{{ item.text }}</fg-tag
           >
@@ -113,47 +108,34 @@
             v-for="(item, i) in selectionPoints"
             :key="i"
             fillet
-            :selected="item.active"
+            :selected="item.selected"
             :border-color="$colors.border"
             >{{ item.text }}</fg-tag
           >
         </div>
       </fg-col>
-      <LicenceDialog v-model="licenceVisible" :data="licenceInfo" />
+      <LicenceDialog v-model="licenceVisible" :data="data" />
     </fg-row>
   </div>
 </template>
 <script>
-import LicenceDialog from './licence-dialog/index'
-import { CAR_LIVES, SELECTION_POINTS } from '~/assets/constants/index'
-import SubTitle from '~/components/common/customer/common/SubTitle.vue'
-import TextContent from '~/components/common/customer/common/TextContent.vue'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import {
-  fmtCustomerName,
-  fmtHyphen,
-  fmtDate,
-  fmtAddress,
-  fmtNameKana,
-  fmtWork,
-} from '~/components/common/customer/common/helper'
+import LicenceDialog from '../licence-dialog/index'
+import SubTitle from '../../common/SubTitle.vue'
+import TextContent from '../../common/TextContent.vue'
+import ColumnTitle from '../../common/ColumnTitle'
+import FamilyList from './FamilyList'
+import { customerMixin } from '~/mixins/customer'
 
 export default {
   name: 'CustomerInfo',
-  filters: {
-    fmtHyphen,
-    fmtWork,
-    fmtDate,
-    fmtAddress,
-    fmtNameKana,
-    fmtCustomerName,
-  },
   components: {
     SubTitle,
     TextContent,
     ColumnTitle,
     LicenceDialog,
+    FamilyList,
   },
+  mixins: [customerMixin],
   props: {
     data: {
       type: Object,
@@ -163,51 +145,52 @@ export default {
     },
   },
   data() {
-    // const family = [
-    //   {
-    //     title: '配偶者',
-    //     list: ['米田直子（30歳）'],
-    //     link: true,
-    //   },
-    //   {
-    //     title: '子供',
-    //     list: ['米田 拓実（11歳）', '米田 咲（8歳）', '米田あや（2歳）'],
-    //     link: false,
-    //   },
-    // ]
-    // let familyContent = '<div>'
-    // family.forEach((item) => {
-    //   familyContent += `<dl style="display:flex;"><dt style="width: 40px">${item.title}</dt><dd class="ml10">`
-    //   item.list.forEach((child) => {
-    //     familyContent += `<div style="display: flex;align-items: center" class="${
-    //       item.link ? 'high-light' : ''
-    //     }"><img class="mr5" src="/customer/profile-edit.svg" width="16" />${child}${
-    //       item.link
-    //         ? '<a href=""><img src="/customer/link.svg" width="10"></a>'
-    //         : ''
-    //     }</div>`
-    //   })
-    //   familyContent += '</dd></dl>'
-    // })
-    // familyContent += '</div>'
     return {
-      headers: [
-        {
-          text: '取引種別',
-          width: 100,
-        },
-        { text: '回答日時' },
-        { text: '店舗' },
-      ],
       licenceVisible: false,
-      currentQrItem: {},
-      carLives: CAR_LIVES,
-      selectionPoints: SELECTION_POINTS,
     }
   },
   computed: {
-    licenceInfo() {
-      return {}
+    carLives() {
+      const classes = this.$ui.getBasicData('car_life')
+      const selectedItems = (this.data.carLives || []).map((item) => {
+        return item.carLife
+      })
+      return classes.map((item) => {
+        return {
+          ...item,
+          selected: selectedItems.includes(item.value),
+        }
+      })
+    },
+    selectionPoints() {
+      const classes = this.$ui.getBasicData('selection_points')
+      const selectedItems = (this.data.selectionPoints || []).map((item) => {
+        return item.selectionPoints
+      })
+      return classes.map((item) => {
+        return {
+          ...item,
+          selected: selectedItems.includes(item.value),
+        }
+      })
+    },
+    houseInfo() {
+      const classes = this.$ui.getBasicData('residence_type', true)
+      const { residenceType, residenceTerm } = this.data
+      return [classes[residenceType], residenceTerm + '年'].join('/ ')
+    },
+    workingTerm() {
+      const { workingTerm } = this.data
+      return workingTerm ? workingTerm + '年' : '-'
+    },
+    privateBusiness() {
+      const classes = this.$ui.getBasicData('private_business', true)
+      const { privateBusiness } = this.data
+      return classes[privateBusiness] || '-'
+    },
+    licence() {
+      const { licenseColor, licenseNumber } = this.data
+      return [licenseColor, licenseNumber].join(' ')
     },
   },
   methods: {
@@ -219,7 +202,7 @@ export default {
       this.licenceVisible = true
     },
     handleEdit() {
-      this.$router.push('/customer/regist/edit?id=' + this.data.customerId)
+      this.$router.push('/customer/regist/edit?id=' + this.data.customerCode)
     },
   },
 }
