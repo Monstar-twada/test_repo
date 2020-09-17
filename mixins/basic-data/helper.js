@@ -25,7 +25,6 @@ export function initBasicData() {
       })
       .catch((err) => {
         console.error(err)
-        this.$alert(err.message)
       })
   }
 
@@ -42,7 +41,6 @@ export function initBasicData() {
       })
       .catch((err) => {
         console.error(err)
-        this.$alert(err.message)
       })
   }
 }
