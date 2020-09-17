@@ -10,33 +10,47 @@
 
 |Name|Parameters|Description|
 |:--|:--|:--|
+|booleanToNumber|(obj: boolean/object, props?: string/string[]): void|Example: `false` -> `0`|
 |clearCache|(key: string): void|clear all cache data the domain localStorage.<br>該当ドメインのlocalStorage全部データを削除する|
-|createUrlQuery|(params: object[, fields: string[]]): string||
+|createUrlQuery|(params: object, fields?: string[]): string||
 |createRandomStr|(prefix: string): string| create a random string|
+|error|(...args: any): void| console.error |
 |getCache|(key: string): any||
 |getMaxZIndex|(): number||
 |getParentComponent|(fgParentName: string): Component||
-|getStyleValue|(el: HTMLElement, attr: string[, isInt: boolean]): string/number||
+|getStyleValue|(el: HTMLElement, attr: string, isInt?: boolean): string/number||
 |getScrollBarWidth|(): number||
 |getScrollParents|(el: HTMLElement): HTMLElement[]||
 |hasOwn|(o: object, attr: string): boolean|Object.hasOwnProperty|
 |init|(projectName: string): void|initial|
+|log|(...args: any): void| console.log |
+|logStr|(...args: any): void| console.log |
 |merge|(target: object, ...args: object): object||
+|isBoolean|(b: any): boolean||
 |isElement|(el: any): boolean||
 |isFunction|(fn: any): boolean||
 |isNumber|(n: any): boolean||
 |isNumberLike|(n: any): boolean||
+|isObject|(o: any): boolean||
 |isString|(s: any): boolean||
 |isUndefined|(a: any): boolean||
 |removeCache|(key: string): void||
 |resetZIndex|(el: HTMLElement): void||
 |setCache|(key: string, value: any): void||
 |slice|(o: ArrayLike, index: number): any[]||
-|toCommaNumber|(value: string[, keepDecimalPlaces: boolean]): string|Example: `123456` -> `123,456`|
+|toCommaNumber|(value: string, keepDecimalPlaces?: boolean): string|Example: `123456` -> `123,456`|
 |toNumber|(a: any): number||
 |toTwoDigits|(a: any): string|Example: `3` -> `03`|
-|toHumpStr|(attr: string[, spacer: string])|Example: `font-size` -> `fontSize`|
+|toHumpStr|(attr: string, spacer?: string)|Example: `font-size` -> `fontSize`|
+|warn|(...args: any): void| console.warn |
 |windowDispatcher|(eventName: string)||
+
+#### extend Methods
+
+|Name|Parameters|Description|
+|:--|:--|:--|
+|getBasicData|(key: string, isNeedObject?: boolean)|get basic data|
+|clearBasicData|()|clear basic data from localStorage||
 
 ## colors
 

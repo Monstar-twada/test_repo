@@ -3,6 +3,8 @@
  * https://github.com/capricorncd
  * Date: 2020-09-15 12:39
  */
+import { isBoolean, isArray } from './check'
+
 /**
  * to number
  * @param a
@@ -85,4 +87,22 @@ export function toCommaNumber(value, keepDecimalPlaces = false) {
   }
   arr[0] = result.reverse().join('')
   return keepDecimalPlaces ? arr.join('.') : arr[0]
+}
+
+/**
+ * boolean to number
+ * @param o
+ * @param props
+ * @returns {number}
+ */
+export function booleanToNumber(o, props) {
+  if (isBoolean(o)) return +o
+  if (!isArray(props)) {
+    props = [props]
+  }
+  Object.keys(o).forEach((key) => {
+    if (props.includes(key) && isBoolean(o[key])) {
+      o[key] = +o[key]
+    }
+  })
 }

@@ -11,6 +11,7 @@ import { login } from '~/components/dashboard/plugins/login'
 Vue.use(FirstGroupUI, {
   theme: 'blue',
   project: 'dashboard',
+  isDev: process.env.useMockData || process.env.NODE_ENV === 'development',
 })
 
 const extendsProps = {
