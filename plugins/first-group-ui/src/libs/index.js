@@ -37,6 +37,7 @@ import {
   createRandomStr,
   merge,
 } from './format'
+import { fmtSort, clearBasicData, getBasicData } from './extends/index'
 
 /**
  * init app
@@ -48,10 +49,13 @@ function init(project = 'fg') {
 
 export {
   booleanToNumber,
+  clearBasicData,
   clearCache,
   createRandomStr,
   createUrlQuery,
   error,
+  fmtSort,
+  getBasicData,
   getCache,
   getMaxZIndex,
   getParentComponent,

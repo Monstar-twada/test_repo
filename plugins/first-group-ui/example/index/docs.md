@@ -48,10 +48,13 @@
 
 ### Extend Methods
 
+業務に関するメソッド
+
 |Name|Parameters|Description|
 |:--|:--|:--|
-|getBasicData|(key: string, isNeedObject?: boolean)|get basic data, key: `prefectures/transaction_type/...`|
-|clearBasicData|()|clear basic data from localStorage||
+|clearBasicData|(): void|clear basic data from localStorage||
+|fmtSort|(sortData: object): array|format sort data to array|
+|getBasicData|(key: string, isNeedObject?: boolean): array/object |get basic data, key: `prefectures/transaction_type/...`|
 
 ## Colors
 

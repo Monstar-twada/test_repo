@@ -65,10 +65,11 @@ export class RequestApi {
       ...params,
     }
     /* eslint-disable no-prototype-builtins */
-    if (hasOwn(_params, 'offset') || hasOwn(_params, 'limit')) {
-      api += createUrlQuery(_params, ['offset', 'limit'])
+    if (hasOwn(_params, 'offset') || hasOwn(_params, 'limit') || hasOwn(_params, 'sort')) {
+      api += createUrlQuery(_params, ['offset', 'limit', 'sort'])
       delete _params.offset
       delete _params.limit
+      delete _params.sort
     }
     return new Promise((resolve, reject) => {
       if (process.env.useMockData) {

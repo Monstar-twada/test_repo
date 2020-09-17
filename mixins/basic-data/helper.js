@@ -16,7 +16,7 @@ export function initBasicData() {
   let basicData = this.$ui.getCache(BASIC_MASTER_CACHE_KEY)
   if (!basicData) {
     this.$api
-      .get('/code/codeType', { limit: 9999, offset: 0 })
+      .post('/code/all', { limit: 9999, offset: 0 })
       .then((res) => {
         basicData = formatMasterList(res.results)
         if (basicData) {
@@ -45,37 +45,6 @@ export function initBasicData() {
         this.$alert(err.message)
       })
   }
-}
-
-/**
- * get basic data
- * @param key
- * @param isNeedObject return object {}
- * @returns {*|*[]}
- */
-export function getBasicData(key, isNeedObject = false) {
-  let result
-  // prefecture
-  if (key === 'prefectures') {
-    result = this.getCache(BASIC_PREFECTURE_CACHE_KEY) || []
-  } else {
-    // master
-    const cache = this.getCache(BASIC_MASTER_CACHE_KEY) || {}
-    result = cache[key] || []
-  }
-
-  if (isNeedObject) {
-    const obj = {}
-    result.forEach(({ text, value }) => {
-      obj[value] = text
-    })
-    return obj
-  }
-  return result
-}
-
-export function clearBasicData() {
-  this.removeCache([BASIC_MASTER_CACHE_KEY, BASIC_PREFECTURE_CACHE_KEY])
 }
 
 function formatMasterList(res) {
