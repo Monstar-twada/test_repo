@@ -1,7 +1,7 @@
 <template>
   <div class="customer-car-info-right-side-wrapper mr20">
     <div class="car-photos-wrapper">
-      <fg-image v-if="carSummary.photoKey" :src="carSummary.photoKey" />
+      <fg-image v-if="data.imageFileCode" :src="data.imageFileCode" />
     </div>
 
     <h3 class="mt30">
@@ -13,13 +13,13 @@
       <TextContent
         label="価格"
         :label-width="labelWidth"
-        content="¥1,600,000"
+        content="-"
         label-font-weight="normal"
       />
       <TextContent
         label="掲載期間"
         :label-width="labelWidth"
-        content="R2/4/1 - R2/4/15"
+        content="-"
         label-font-weight="normal"
       />
     </div>
@@ -30,13 +30,13 @@
       <TextContent
         label="外装評価"
         :label-width="labelWidth"
-        content="A"
+        content="-"
         label-font-weight="normal"
       />
       <TextContent
         label="内装評価"
         :label-width="labelWidth"
-        content="B"
+        content="-"
         label-font-weight="normal"
       />
       <TextContent
@@ -44,20 +44,20 @@
         :label-width="labelWidth"
         label-font-weight="normal"
       >
-        トランクフロア
+        -
       </TextContent>
     </div>
   </div>
 </template>
 
 <script>
-import TextContent from '~/components/common/customer/common/TextContent.vue'
+import TextContent from '../../common/TextContent.vue'
 export default {
   components: {
     TextContent,
   },
   props: {
-    carSummary: {
+    data: {
       type: Object,
       default() {
         return {}

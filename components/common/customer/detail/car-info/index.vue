@@ -264,7 +264,7 @@
                   :content="data.chassisNumber | fmtHyphen"
                 />
                 <TextContent
-                  label="通称型式"
+                  label="型式"
                   :content="data.carInspectionType | fmtHyphen"
                 />
                 <TextContent
@@ -323,6 +323,7 @@
                 />
                 <TextContent
                   label="燃費"
+                  label-flex
                   sub-label="(JC08モード)"
                   is-small-sub-label
                   :content="data.fuelEconomy | fmtHyphen"
@@ -347,7 +348,7 @@
               >編集</fg-button
             >
           </div>
-          <CarInfoSide :car-summary="data" />
+          <CarInfoSide :data="data" />
         </fg-col>
       </fg-row>
     </div>
