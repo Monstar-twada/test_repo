@@ -29,7 +29,11 @@
 
     <CustomerInfo class="customer-info" :data="customerData" />
     <CarInfo :customer-code="query.id" />
-    <EventTable class="customer-info mt30" :customer-code="query.id" />
+    <EventTable
+      class="customer-info mt30"
+      :customer-code="query.id"
+      :customer-data="customerData"
+    />
   </div>
 </template>
 

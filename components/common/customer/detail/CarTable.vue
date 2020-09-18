@@ -184,6 +184,10 @@ export default {
           params
         )
         this.carListData = res || {}
+        // cache cars, use to 活動報告編集
+        if (this.query.page === 1) {
+          this.$ui.setCache('cars_customer_' + this.customerCode, res)
+        }
       } catch (err) {
         this.$ui.error('[CarTable.vue::getCarList]', err)
         this.$alert(err.message)
