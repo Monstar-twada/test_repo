@@ -114,4 +114,10 @@ export function formatDate(str, fmt) {
   })
 }
 
-export const toDate = ZxCalendar.prototype.toDate
+export function toDate(str) {
+  try {
+    return ZxCalendar.prototype.toDate(str)
+  } catch (e) {
+    return null
+  }
+}

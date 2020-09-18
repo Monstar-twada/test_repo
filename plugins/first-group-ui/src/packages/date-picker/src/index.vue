@@ -96,9 +96,6 @@ export default {
   },
   computed: {
     inputValue() {
-      console.warn(
-        this.date ? this.calendar.formatDate(this.date, this.format) : ''
-      )
       return this.date ? this.calendar.formatDate(this.date, this.format) : ''
     },
   },
