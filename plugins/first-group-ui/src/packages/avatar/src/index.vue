@@ -163,15 +163,15 @@ export default {
     display: inline-flex;
     font-weight: 800;
     margin-left: 10px;
-    line-height: 1;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
     .__name,
     .__summary {
       white-space: nowrap;
-      overflow-x: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+      line-height: 1;
     }
     .__name {
       font-size: $--font-size-14;
