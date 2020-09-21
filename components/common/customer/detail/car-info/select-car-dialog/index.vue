@@ -31,7 +31,6 @@
         >
           <td>{{ item.maker }}</td>
           <td>{{ item.carType }}</td>
-          <td>{{ item.grade }}</td>
           <td>{{ item | fmtCarNumber }}</td>
         </tr>
       </fg-table-experiment>
@@ -67,10 +66,9 @@ export default {
     return {
       visible: this.value,
       tableHeaders: [
-        { text: 'メーカー', width: 120 },
-        { text: '車種', width: 120 },
-        { text: 'グレード' },
-        { text: '登録ナンバー', width: 150 },
+        { text: 'メーカー', width: 150 },
+        { text: '車種', width: 150 },
+        { text: '登録ナンバー' },
       ],
     }
   },
