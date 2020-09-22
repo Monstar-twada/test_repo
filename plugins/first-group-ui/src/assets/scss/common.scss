@@ -1,19 +1,7 @@
 @import "./transition.scss";
 
-/** validate message */
-.is-error {
-  .fg-input input,
-  .fg-input textarea {
-    border-color: $--color-warning;
-  }
-  .error-message {
-    color: $--color-warning;
-    font-size: 12px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: translateY(100%);
-  }
+.overflow-hide {
+  overflow: hidden;
 }
 
 

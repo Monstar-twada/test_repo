@@ -50,14 +50,6 @@ import { getParentComponent } from '../../../libs/index'
 export default {
   name: 'FgRadio',
   mixins: [Broadcaster],
-  inject: {
-    fgForm: {
-      default: '',
-    },
-    fgFormItem: {
-      default: '',
-    },
-  },
   props: {
     value: {
       type: [String, Number],
@@ -104,21 +96,16 @@ export default {
           (this.$refs.radio.checked = this.model === this.label)
       },
     },
-    _fgFormItemSize() {
-      return (this.fgFormItem || {}).fgFormItemSize
-    },
     radioSize() {
-      const temRadioSize = this.size || this._fgFormItemSize
+      const temRadioSize = this.size
       return this.isGroup
         ? this.radioGroup.radioGroupSize || temRadioSize
         : temRadioSize
     },
     isDisabled() {
       return this.isGroup
-        ? this.radioGroup.disabled ||
-            this.disabled ||
-            (this.fgForm || {}).disabled
-        : this.disabled || (this.fgForm || {}).disabled
+        ? this.radioGroup.disabled || this.disabled
+        : this.disabled
     },
     tabIndex() {
       return this.isDisabled || (this.isGroup && this.model !== this.label)

@@ -24,7 +24,10 @@
       :unit="unit"
       :width="width"
       :offset-left="offsetLeft"
-      :offset-right="offsetRight + clearOffset"
+      :offset-right="offsetRight"
+      :is-error="isError"
+      :error-message="errorMessage"
+      :error-message-nowrap="errorMessageNowrap"
       @clear="inputClear"
       @input.native="handleInput"
     >
@@ -80,7 +83,6 @@
 
 <script>
 import Popup from '../../popup/index'
-import { DEF_CLEAR_ICON_OFFSET } from '../../input/src/constants'
 import { isFunction, isNumberLike } from '../../../libs/index'
 import Mixin from './mixin'
 export default {
@@ -150,12 +152,18 @@ export default {
     },
     offsetRight: {
       type: Number,
-      default: 0,
+      default: 20,
     },
     popupOffset: {
       type: [Number, String],
       default: undefined,
     },
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
   },
   data() {
     const item = this.items.find((item) => item.value === this.value) || {}
@@ -191,9 +199,6 @@ export default {
     },
     isNonEmpty() {
       return !!this.selectText
-    },
-    clearOffset() {
-      return this.clearable ? DEF_CLEAR_ICON_OFFSET[this.size] : 0
     },
   },
   watch: {

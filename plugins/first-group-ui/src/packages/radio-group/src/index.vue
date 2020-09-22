@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="_elTag"
+    :is="_fgTag"
     class="fg-radio-group"
     role="radioGroup"
     @keydown="handleKeydown"
@@ -19,40 +19,31 @@ const keyCode = Object.freeze({
 })
 export default {
   name: 'FgRadioGroup',
-  inject: {
-    FgFormItem: {
-      default: '',
-    },
-  },
   mixins: [Broadcaster],
   props: {
     value: {
       type: [String, Number],
       default: '',
     },
-    size: {
+    fill: {
+      type: String,
+      default: '',
+    },
+    textColor: {
       type: String,
       default: '',
     },
     disabled: Boolean,
+    size: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
-    _fgFormItemSize() {
-      return (this.FgFormItem || {}).fgFormItemSize
-    },
-    _elTag() {
+    _fgTag() {
       return (this.$vnode.data || {}).tag || 'div'
     },
-    radioGroupSize() {
-      return this.size || this._fgFormItemSize
-    },
   },
-  watch: {
-    value(val) {
-      this.dispatch('FgFormItem', 'fg.form.change', [val])
-    },
-  },
-
   created() {
     this.$on('handleChange', (value) => {
       this.$emit('change', value)

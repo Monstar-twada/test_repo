@@ -361,8 +361,9 @@ export default {
     left: 0;
     top: 100%;
     line-height: 1;
-    font-size: 12px;
-    padding-top: 2px;
+    font-size: 10px;
+    padding-top: 3px;
+    color: $--color-warning;
     &.__nowrap {
       white-space: nowrap;
     }

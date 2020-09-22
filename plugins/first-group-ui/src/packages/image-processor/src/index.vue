@@ -48,7 +48,7 @@
 
 <script>
 import { handleMediaFile, utils } from 'image-process'
-import { isFunction, isNumberLike } from '../../../libs/index'
+import { isFunction, isNumberLike, isUndefined } from '../../../libs/index'
 import Cropper from './cropper/index'
 
 export default {
@@ -122,6 +122,10 @@ export default {
       return ret
     },
     bgIconClass() {
+      // pdf
+      if (/application\/pdf/i.test(this.data.type)) {
+        return '__icon-pdf'
+      }
       const flg =
         this.icon &&
         ['car', 'license-back', 'license-front', 'pdf'].includes(this.icon)
@@ -135,7 +139,13 @@ export default {
     data: {
       deep: true,
       handler(val) {
-        console.log(val)
+        if (isUndefined(val.url)) {
+          const { base64, raw } = val
+          const blob = base64 ? utils.base64ToBlob(base64) : raw ? raw.file : ''
+          if (blob) {
+            val.url = utils.toBlobUrl(blob)
+          }
+        }
         this.$emit('change', { ...val })
       },
     },
@@ -167,9 +177,24 @@ export default {
     },
     handleFile(file) {
       this.file = file
+      const url = utils.toBlobUrl(file)
+      // image file
+      const { type, size } = file
+      if (!/^image\/\w+/i.test(type)) {
+        this.data = {
+          type,
+          size,
+          name,
+          url,
+          raw: {
+            file,
+          },
+        }
+        return
+      }
       const { width, height } = this.options
       if (width && height) {
-        this.blobUrl = utils.toBlobUrl(file)
+        this.blobUrl = url
         this.cropperVisible = true
       } else {
         handleMediaFile(file, this.options)
@@ -178,7 +203,7 @@ export default {
             this.data = res
           })
           .catch((err) => {
-            console.error(err)
+            this.$emit('error', err)
           })
       }
     },
@@ -190,7 +215,7 @@ export default {
           this.data = res
         })
         .catch((err) => {
-          console.error(err)
+          this.$emit('error', err)
         })
     },
   },
