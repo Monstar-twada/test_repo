@@ -28,11 +28,15 @@
     </Breadcrumbs>
 
     <CustomerInfo class="customer-info" :data="customerData" />
-    <CarInfo :customer-code="query.id" />
+    <CarInfo
+      :customer-code="query.id"
+      @current-car-code="(code) => (currentCarCode = code)"
+    />
     <EventTable
       class="customer-info mt30"
       :customer-code="query.id"
       :customer-data="customerData"
+      :current-car-code="currentCarCode"
     />
   </div>
 </template>
@@ -66,6 +70,7 @@ export default {
       ],
       query: this.$route.query || {},
       customerData: {},
+      currentCarCode: '',
     }
   },
   created() {

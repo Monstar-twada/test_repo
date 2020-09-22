@@ -476,6 +476,9 @@ export default {
         this.getCarList()
       },
     },
+    currentCarCode(val) {
+      this.$emit('current-car-code', val)
+    },
   },
   created() {
     this.getCarList()

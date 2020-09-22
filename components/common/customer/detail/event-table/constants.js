@@ -23,9 +23,9 @@ export const DEF_FORM = {
   // 対象車両コード
   carCode: '',
   // 取引種別
-  transactionType: '',
+  transactionType: '1',
   // チャネル
-  channel: '',
+  channel: '1',
   // コメント
   comment: '',
   // 担当店舗コード

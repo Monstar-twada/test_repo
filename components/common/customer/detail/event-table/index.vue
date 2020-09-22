@@ -78,6 +78,7 @@
       v-model="addVisible"
       :cars="carList"
       :customer-data="customerData"
+      :current-car-code="currentCarCode"
       @change="handleChange"
     />
   </div>
@@ -110,6 +111,10 @@ export default {
     customerData: {
       type: Object,
       default: () => {},
+    },
+    currentCarCode: {
+      type: String,
+      default: '',
     },
   },
   data() {

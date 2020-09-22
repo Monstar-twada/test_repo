@@ -2,8 +2,8 @@
   {
     "customerCode": "100",
     "carCode": "200",
-    "maker": "メーカー",
-    "carType": "車種",
+    "maker": "トヨタ",
+    "carType": "プリウス",
     "landTransportOffice": "足立",
     "carRegistrationNumberType": "310",
     "carRegistrationNumberKana": "あ",
@@ -19,8 +19,8 @@
   {
     "customerCode": "100",
     "carCode": "201",
-    "maker": "string",
-    "carType": "string",
+    "maker": "メーカー",
+    "carType": "車種",
     "landTransportOffice": "string",
     "carRegistrationNumberType": "string",
     "carRegistrationNumberKana": "string",
