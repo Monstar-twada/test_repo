@@ -1,8 +1,7 @@
 <template>
   <div class="example-page-wrapper">
     <header>
-      <h1>FG-UI</h1>
-      <h2>{{ pageTitle }}</h2>
+      <h1>First Group UI</h1>
       <a
         href="https://github.com/monstar-lab-consulting/first-group-ui"
         target="_blank"

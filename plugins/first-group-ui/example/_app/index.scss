@@ -28,7 +28,7 @@ h3, p {
 }
 
 $sideWidth: 210px;
-$headerHeight: 60px;
+$headerHeight: 40px;
 
 .example-page-wrapper {
   overflow-y: auto;
@@ -55,7 +55,8 @@ $headerHeight: 60px;
       text-indent: 20px;
     }
     h1 {
-      width: $sideWidth;
+      //width: $sideWidth;
+      font-size: 20px;
     }
     a {
       display: block;
@@ -112,8 +113,16 @@ $headerHeight: 60px;
   }
 
   .main-page-wrapper {
-    margin: 20px 20px 20px 230px;
+    margin: $headerHeight 20px 20px $sideWidth + 20;
     max-width: 1200px;
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      color: $--color-primary;
+    }
+    h1 {
+      border-bottom: 1px solid $--color-border;
+      padding: 10px 0;
+    }
   }
 }
 
