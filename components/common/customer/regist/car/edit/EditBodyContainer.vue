@@ -52,93 +52,132 @@
           <h3>車両基本情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px" class="ml20">
+      <fg-form label-width="140px">
         <fg-form-item label="車検証">
-          <div class="customer-regist-car-edit-wrapper__item">
-            <fg-image-processor
-              icon="license-front"
-              :url="form.photoKey"
-              :validate="customValidate"
-              @change="avatarChange"
-            ></fg-image-processor>
-          </div>
+          <fg-image-processor
+            accept="*"
+            icon="license-front"
+            :url="registrationImage"
+            :validate="customValidate"
+            @change="(res) => filerChange(res, 'registrationImageFileCode')"
+          ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="車検証番号">
-          <fg-input v-model="form.carBase.carId" width="440px"></fg-input>
+          <fg-input
+            v-model="form.registrationNumber"
+            width="440px"
+            :error-message="errors.registrationNumber"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="メーカー">
-          <fg-input v-model="form.carBase.maker" width="440px"></fg-input>
+          <fg-input
+            v-model="form.maker"
+            width="440px"
+            :error-message="errors.maker"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="車種">
-          <fg-input v-model="form.carBase.class" width="440px"></fg-input>
+          <fg-input
+            v-model="form.carType"
+            width="440px"
+            :error-message="errors.carType"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="グレード">
-          <fg-input v-model="form.carBase.grade" width="440px"></fg-input>
+          <fg-input
+            v-model="form.grade"
+            width="440px"
+            :error-message="errors.grade"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="車両画像">
           <fg-image-processor
             icon="car"
             :validate="customValidate"
             url=""
+            @change="(res) => filerChange(res, 'carPhoto')"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="ナンバー">
-          <div class="customer-regist-car-edit-wrapper__car-box">
-            <fg-input v-model="form.carBase.vinLTO" width="110px"></fg-input>
-            <fg-input v-model="form.carBase.vinNumber" width="110px"></fg-input>
-            <fg-input v-model="form.carBase.vinKana" width="80px"></fg-input>
-            <fg-input v-model="form.carBase.vin" width="110px"></fg-input>
-          </div>
+          <fg-input
+            v-model="form.landTransportOffice"
+            inline
+            width="110px"
+            placeholder="陸運事務局"
+            :error-message="errors.landTransportOffice"
+          ></fg-input>
+          <fg-input
+            v-model="form.carRegistrationNumberType"
+            class="ml5 mr5"
+            inline
+            width="110px"
+            placeholder="種別"
+            :error-message="errors.carRegistrationNumberType"
+          ></fg-input>
+          <fg-input
+            v-model="form.carRegistrationNumberKana"
+            inline
+            width="80px"
+            placeholder="カナ"
+            :error-message="errors.carRegistrationNumberKana"
+          ></fg-input>
+          <fg-input
+            v-model="form.carRegistrationNumber"
+            class="ml5"
+            inline
+            width="110px"
+            placeholder="プレート番号"
+            :error-message="errors.carRegistrationNumber"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="初度登録年月">
           <fg-calendar
-            v-model="form.carBase.firstRegistrationDate"
+            v-model="form.registrationFirstDate"
             width="160px"
             writable
             clearable
+            type="month"
+            value-format="yyyy-MM"
           />
         </fg-form-item>
         <fg-form-item label="登録年月日">
           <fg-calendar
-            v-model="form.carBase.registrationDate"
+            v-model="form.registrationStartDate"
             width="160px"
             writable
             clearable
+            value-format="yyyy-MM-dd"
           />
         </fg-form-item>
         <fg-form-item label="車検満了日">
           <fg-calendar
-            v-model="form.carBase.inspectionExpirationDate"
+            v-model="form.registrationEndDate"
             width="160px"
             writable
             clearable
+            value-format="yyyy-MM-dd"
           />
         </fg-form-item>
         <fg-form-item label="新中区分">
           <fg-select
-            v-model="form.carBase.newOldType"
-            :placeholder="form.carBase.newOldType"
+            v-model="form.saleNewOldCarType"
             width="160px"
+            :items="saleNewOldCarTypes"
           ></fg-select>
         </fg-form-item>
         <fg-form-item label="買換意向">
           <fg-checkbox
-            v-model="form.intentionToPurchase"
-            theme="blue"
+            v-model="form.purchaseIntention"
             label="あり"
           ></fg-checkbox>
         </fg-form-item>
         <fg-form-item label="走行距離">
-          <fg-input
-            v-model="form.carBase.mileage"
-            width="110px"
-            suffix-text-outside="km"
-          ></fg-input>
+          <fg-input v-model="form.carMileage" width="110" unit="km"></fg-input>
         </fg-form-item>
         <fg-form-item label="走行距離確認日">
           <fg-calendar
-            v-model="form.carBase.mileageCheckDate"
-            width="160px"
+            v-model="form.carMileageRegistrationDate"
+            width="160"
             writable
             clearable
           />
@@ -152,26 +191,20 @@
           <h3>売買情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form ref="form" :model="form" label-width="150px" class="ml20">
+      <fg-form label-width="150px">
         <fg-form-item label="販売価格">
-          <fg-input
-            v-model="form.carTrade.retailPrice"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.retailPrice" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="販売価格確認日">
           <fg-calendar
-            v-model="form.carTrade.salesPriceDate"
+            v-model="form.salesPriceDate"
             width="160px"
             writable
             clearable
           />
         </fg-form-item>
         <fg-form-item label="査定価格">
-          <fg-input
-            v-model="form.carTrade.assessmentAmount"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.assessmentAmount" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="査定価格確認日">
           <fg-calendar
@@ -182,39 +215,35 @@
           />
         </fg-form-item>
         <fg-form-item label="支払区分">
-          <div class="customer-regist-car-edit-wrapper__payment">
-            <fg-input
-              v-model="form.carTrade.paymentType"
-              width="110px"
-              placeholder="ローン種別"
-            ></fg-input>
-            <fg-input
-              v-model="form.carTrade.creditCompany"
-              width="110px"
-              placeholder="信販会社名"
-            ></fg-input>
-            <fg-input
-              v-model="form.carTrade.numberOfPayment"
-              width="110px"
-              placeholder="支払回数"
-              suffix-text-outside="回"
-            ></fg-input>
-          </div>
+          <fg-input
+            v-model="form.paymentType"
+            width="110px"
+            placeholder="ローン種別"
+            inline
+          ></fg-input>
+          <fg-input
+            v-model="form.creditCompany"
+            width="110px"
+            placeholder="信販会社名"
+            inline
+            class="ml5 mr5"
+          ></fg-input>
+          <fg-input
+            v-model="form.numberOfPayment"
+            width="110px"
+            placeholder="支払回数"
+            unit="回"
+            inline
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="月々返済">
-          <fg-input
-            v-model="form.carTrade.repaymentMonthly"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.repaymentMonthly" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="ボーナス時">
           <fg-input v-model="form.bonusDate" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="AI査定">
-          <fg-input
-            v-model="form.carTrade.aiAssessmentAmount"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.aiAssessmentAmount" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="AI査定確認日">
           <fg-calendar
@@ -225,10 +254,7 @@
           />
         </fg-form-item>
         <fg-form-item label="予想価格(マッチング)">
-          <fg-input
-            v-model="form.carTrade.estimatedPrice"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.estimatedPrice" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="予想価格確認日">
           <fg-calendar
@@ -258,27 +284,18 @@
           <h3>税金/諸費用</h3>
         </template>
       </ColumnTitle>
-      <fg-form ref="form" :model="form" label-width="150px" class="ml20">
+      <fg-form label-width="150px">
         <fg-form-item label="自動車税">
-          <fg-input v-model="form.carExpense.carTax" width="440px"></fg-input>
+          <fg-input v-model="form.carTax" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="自賠責保険">
-          <fg-input
-            v-model="form.carExpense.carInsurance"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.libilityInsurance" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="重量税">
-          <fg-input
-            v-model="form.carExpense.weightTax"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.weightTax" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="リサイクル">
-          <fg-input
-            v-model="form.carExpense.recycleFee"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.recycleFee" width="440px"></fg-input>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -289,18 +306,15 @@
           <h3>ランニングコスト/月</h3>
         </template>
       </ColumnTitle>
-      <fg-form ref="form" :model="form" label-width="150px" class="ml20">
+      <fg-form label-width="150px">
         <fg-form-item label="ガソリン代">
-          <fg-input v-model="form.carCost.gasFee" width="440px"></fg-input>
+          <fg-input v-model="form.monthlyGasolineCost" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="保険料">
-          <fg-input
-            v-model="form.carCost.insuranceFee"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.carInsuranceFee" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="駐車場代">
-          <fg-input v-model="form.carCost.parkingFee" width="440px"></fg-input>
+          <fg-input v-model="form.monthlyParkingFee" width="440px"></fg-input>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -311,133 +325,109 @@
           <h3>車両詳細情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form ref="form" :model="form" label-width="150px" class="ml20">
+      <fg-form label-width="150px">
         <fg-form-item label="車台番号">
-          <fg-input
-            v-model="form.carDetail.chassisNumber"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.chassisNumber" width="440px"></fg-input>
         </fg-form-item>
-        <fg-form-item label="通称型式">
-          <fg-input v-model="form.carDetail.fullModel" width="440px"></fg-input>
+        <fg-form-item label="型式">
+          <fg-input v-model="form.carInspectionType" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="エンジン型式">
-          <fg-input
-            v-model="form.carDetail.engineType"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.engineType" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="最大出力">
-          <fg-input v-model="form.carDetail.maxOutput" width="440px"></fg-input>
+          <fg-input v-model="form.engineMaximumOutput" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="最大トルク">
-          <fg-input v-model="form.carDetail.maxTorque" width="440px"></fg-input>
+          <fg-input v-model="form.engineTorque" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="タイヤサイズ">
-          <fg-row gutter="20">
-            <fg-col span="9" class="customer-regist-car-edit-wrapper__tire-box">
-              <h4>フロント</h4>
-              <fg-input
-                v-model="form.carDetail.tireSize"
-                width="110px"
-              ></fg-input>
-            </fg-col>
-            <fg-col span="9" class="customer-regist-car-edit-wrapper__tire-box">
-              <h4>リア</h4>
-              <fg-input v-model="form.tireSizeBack" width="110px"></fg-input>
-            </fg-col>
-          </fg-row>
+          <fg-form-item label="フロント" inline label-width="60">
+            <fg-input v-model="form.tireSizeFront" width="110px"></fg-input>
+          </fg-form-item>
+          <fg-form-item label="リア" inline label-width="40" class="ml30">
+            <fg-input v-model="form.tireSizeRear" width="110px"></fg-input>
+          </fg-form-item>
         </fg-form-item>
         <fg-form-item label="タイヤ製造">
-          <fg-row gutter="20">
-            <fg-col span="8" class="customer-regist-car-edit-wrapper__tire-box">
-              <fg-input
-                v-model="form.tireYear"
-                width="110px"
-                suffix-text-outside="年"
-              ></fg-input>
-            </fg-col>
-            <fg-col span="8" class="customer-regist-car-edit-wrapper__tire-box">
-              <fg-input
-                v-model="form.tireWeek"
-                width="110px"
-                suffix-text-outside="週目"
-              ></fg-input>
-            </fg-col>
-          </fg-row>
+          <fg-input
+            v-model="form.tireCreateYear"
+            width="110px"
+            unit="年"
+            inline
+            class="mr20"
+          ></fg-input>
+          <fg-input
+            v-model="form.tireCreateWeek"
+            width="110px"
+            unit="週目"
+            class="ml30"
+            inline
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="バッテリーサイズ">
           <fg-input v-model="form.batterySize" width="440px"></fg-input>
         </fg-form-item>
+        <fg-form-item label="バッテリー製造">
+          <fg-calendar
+            v-model="form.batteryCreateDate"
+            width="160"
+          ></fg-calendar>
+        </fg-form-item>
         <fg-form-item label="燃料タンク">
           <fg-input
-            v-model="form.carDetail.fuelTank"
+            v-model="form.fuelTankSize"
             width="110px"
-            suffix-text-outside="L"
+            unit="L"
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="カラーコード">
-          <fg-input v-model="form.carDetail.colorCode" width="440px"></fg-input>
+          <fg-input v-model="form.colorCodeType" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="トリムコード">
-          <fg-input v-model="form.carDetail.trimCode" width="440px"></fg-input>
+          <fg-input v-model="form.colorTrimCode" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="モデル">
-          <fg-input v-model="form.carDetail.model" width="440px"></fg-input>
+          <fg-input v-model="form.model" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="発売開始">
-          <fg-input
-            v-model="form.carDetail.salesPeriod"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.salesPeriodStart" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="保証期間">
-          <fg-input
-            v-model="form.carDetail.warrantyPeriod"
-            width="440px"
-          ></fg-input>
+          <fg-input v-model="form.warrantyPeriodEnd" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="燃費(JC08モード)">
           <fg-input
-            v-model="form.carDetail.gasMileage"
+            v-model="form.fuelEconomy"
             width="110px"
-            suffix-text-outside="km/L"
+            unit="km/L"
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="車両重量">
-          <fg-input
-            v-model="form.carDetail.weight"
-            width="110px"
-            suffix-text-outside="Kg"
-          ></fg-input>
+          <fg-input v-model="form.carWeight" width="110px" unit="Kg"></fg-input>
         </fg-form-item>
         <fg-form-item label="車両寸法">
-          <div class="customer-regist-car-edit-wrapper__car-info">
-            <h4>全長</h4>
+          <fg-form-item label="全長" label-width="45">
             <fg-input
-              v-model="form.carDetail.length"
-              class="mb20"
-              width="110px"
-              suffix-text-outside="mm"
+              v-model="form.carFullLength"
+              width="110"
+              unit="mm"
             ></fg-input>
-          </div>
-          <div class="customer-regist-car-edit-wrapper__car-info">
-            <h4>全幅</h4>
+          </fg-form-item>
+          <fg-form-item label="全幅" label-width="45" class="mt20">
             <fg-input
-              v-model="form.carDetail.width"
-              class="mb20"
-              width="110px"
-              suffix-text-outside="mm"
+              v-model="form.carFullWidth"
+              width="110"
+              unit="mm"
             ></fg-input>
-          </div>
-          <div class="customer-regist-car-edit-wrapper__car-info">
-            <h4>全高</h4>
+          </fg-form-item>
+          <fg-form-item label="全高" label-width="45" class="mt20">
             <fg-input
-              v-model="form.carDetail.height"
-              width="110px"
-              suffix-text-outside="mm"
+              v-model="form.carTotalHeight"
+              width="110"
+              unit="mm"
             ></fg-input>
-          </div>
+          </fg-form-item>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -458,13 +448,12 @@
 </template>
 
 <script>
+import { DEF_CAR_FORM } from './constants'
+import { validate } from './validate'
 import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { storage } from '~/assets/js/storage'
-const CAR_TABLE_QUERY = {
-  page: 1,
-  limit: 10,
-}
+import { REG_IMAGE_MIME, REG_PDF_MIME } from '~/assets/constants'
+
 export default {
   components: {
     WhiteBox,
@@ -474,93 +463,113 @@ export default {
     const query = this.$route.query
     return {
       query,
-      carQuery: {
-        ...CAR_TABLE_QUERY,
-      },
-      form: query.edit
-        ? storage.get('registCarEdit')
-        : {
-            carListData: {},
-            currentCarId: '',
-            carBase: {},
-            carSummary: {},
-            carTrade: {},
-            carExpense: {},
-            carCost: {},
-            carDetail: {},
-          },
+      form: {},
+      errors: {},
+      registrationImage: '',
+      isSubmitting: false,
     }
+  },
+  computed: {
+    saleNewOldCarTypes() {
+      return this.$ui.getBasicData('sale_new_old_car_type')
+    },
   },
   created() {
-    if (!this.query.edit) {
-      this.getCarList()
-    }
+    this.getCarInfo()
+    // 車検証画像取得
+    const { customerCode, carCode } = this.query
+    this.$api
+      .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
+      .then((res) => {
+        this.registrationImage = res.url
+      })
+      .catch(console.error)
   },
   methods: {
-    saveCache() {
-      storage.set('registCarEdit', this.form)
-    },
-    handleConfirm() {
-      this.saveCache()
-      this.$router.push(
-        `/customer/regist/car/confirm?id=${this.query.id}&customerId=${this.query.customerId}`
-      )
+    async handleConfirm() {
+      if (this.isSubmitting) return
+      this.isSubmitting = true
+      this.errors = validate(this.form)
+      if (this.errors.length) {
+        this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
+        return
+      }
+      const { customerCode, carCode } = this.query
+      try {
+        await this.$api.put(
+          `/v1/customers/${customerCode}/cars/${carCode}`,
+          this.form
+        )
+        await this.$alert('車両編集成功しました！', { type: 'success' })
+        this.handleBack()
+      } catch (err) {
+        if (err) this.$alert(err.message)
+      }
+      this.isSubmitting = false
     },
     handleBack() {
-      this.$router.push(`/customer/detail?id=${this.query.id}`)
+      this.$router.push(
+        `/customer/detail?customerCode=${this.query.customerCode}`
+      )
     },
-    avatarChange(data) {
-      console.log('avatarChange', data)
-      this.form.photoKey = data.url
+    filerChange(res, type) {
+      if (!res.data) {
+        // 削除処理を行う
+        this.deleteFile(type)
+        return
+      }
+
+      // upload file and delete old file
+      this.$api
+        .upload(res.data)
+        .then((data) => {
+          // delete old file
+          this.deleteFile(type)
+          // set new value of type
+          if (type === 'carPhoto') {
+            // new車両画像登録
+            // ...
+          } else {
+            this.form[type] = data.id
+          }
+        })
+        .catch((err) => {
+          this.$alert(err.message)
+        })
+    },
+    deleteFile(type) {
+      // delete
     },
     customValidate(file, next) {
-      if (!/^image\/(jpeg|png|pdf|heif)/.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+      if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
+        this.$alert('PDF・JPEG・PNG・HEIFファイルを選択してください')
         return
       }
 
       if (file.size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルが使用できます')
+        this.$alert('5MBまでのファイルを選択してください')
         return
       }
       next()
     },
     async getCarInfo() {
       try {
+        const { carCode, customerCode } = this.query
         const res = await this.$api.get(
-          `/v1/customer/${this.query.customerId}/car/${this.query.id}`
+          `/v1/customers/${customerCode}/cars/${carCode}`
         )
-        this.form.carBase = res.customer.base || {}
-        this.form.carSummary = res.customer.summary || {}
-        this.form.carTrade = res.customer.trade || {}
-        this.form.carExpense = res.customer.expense || {}
-        this.form.carCost = res.customer.cost || {}
-        this.form.carDetail = res.customer.detail || {}
-      } catch (e) {
-        console.error(e)
-      }
-    },
-    async getCarList() {
-      const { page, limit } = this.carQuery
-      const params = {
-        limit,
-        offset: (page - 1) * limit,
-      }
-      try {
-        const res = await this.$api.get(
-          `/v1/customer/${this.query.id}/car`,
-          params
-        )
-        console.log('getCarList', res)
-        this.carListData = res || {}
-        const carList = this.carListData.results || []
-        await this.getCarInfo()
-        if (!this.currentCarId && carList.length > 0) {
-          this.currentCarId = carList[0].carId
-          await this.getCarInfo()
+        const form = {}
+        Object.keys(DEF_CAR_FORM).forEach((key) => {
+          form[key] = res[key]
+        })
+        // string to boolean
+        if (form.purchaseIntention) {
+          form.purchaseIntention = form.purchaseIntention === '1'
         }
-      } catch (e) {
-        console.error(e)
+        this.form = form
+      } catch (err) {
+        this.$alert(err.message)
+        console.error(err)
       }
     },
   },
@@ -571,33 +580,8 @@ export default {
   margin: 0 auto;
   padding: 20px 0;
   width: 712px;
-  &__item {
-    display: flex;
-    align-items: flex-end;
-  }
-  &__car-box {
-    display: flex;
-    justify-content: space-between;
-    width: 440px;
-  }
-  &__payment {
-    display: flex;
-    .fg-input {
-      margin-right: 10px;
-    }
-  }
-  &__tire-box {
-    display: flex;
-    h4 {
-      margin-right: 15px;
-    }
-  }
-  &__car-info {
-    display: flex;
-    margin-bottom: 0px;
-    h4 {
-      margin-right: 20px;
-    }
+  .fg-form {
+    margin-left: 40px;
   }
   .footer-button-wrapper {
     display: flex;

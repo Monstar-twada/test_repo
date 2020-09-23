@@ -49,8 +49,8 @@
   "registrationFirstDate": "string",
   "registrationStartDate": "string",
   "registrationEndDate": "string",
-  "saleNewOldCarType": "string",
-  "purchaseIntention": "string",
+  "saleNewOldCarType": "2",
+  "purchaseIntention": "1",
   "carMileage": 0,
   "carMileageRegistrationDate": "string",
   "purchaseTargetFlg": 0,
@@ -83,8 +83,8 @@
   "warrantyPeriodEnd": "string",
   "fuelEconomy": "string",
   "carWeight": "string",
-  "carFullLength": "string",
-  "carFullWidth": "string",
-  "carTotalHeight": "string",
+  "carFullLength": "340",
+  "carFullWidth": "210",
+  "carTotalHeight": "160",
   "imageFileCode": "string"
 }

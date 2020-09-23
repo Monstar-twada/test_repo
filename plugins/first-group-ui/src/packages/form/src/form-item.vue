@@ -86,7 +86,7 @@ export default {
     itemStyle() {
       const ret = {}
       const itemSpacing = this.itemSpacing || this.form.itemSpacing
-      if (itemSpacing) {
+      if (itemSpacing || typeof itemSpacing === 'number') {
         ret.marginBottom = itemSpacing + (isNumberLike(itemSpacing) ? 'px' : '')
       }
       return ret
