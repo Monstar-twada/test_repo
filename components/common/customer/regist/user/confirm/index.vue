@@ -1,9 +1,9 @@
 <template>
-  <div class="customer-regist-edit-page">
+  <div class="customer-regist-user-confirm-page">
     <Breadcrumbs
       :breadcrumbs="breadcrumbs"
       title-image="customer.svg"
-      :sub-title="subTitle"
+      sub-title="登録確認"
       :page="pageTitle"
     >
     </Breadcrumbs>
@@ -20,10 +20,7 @@ export default {
     ConfirmWrapper,
   },
   data() {
-    const query = this.$route.query
-    console.log(query)
     return {
-      query,
       pageTitle: '顧客管理',
       breadcrumbs: [
         {
@@ -37,16 +34,5 @@ export default {
       ],
     }
   },
-  computed: {
-    subTitle() {
-      const isEdit = this.query.id > 0
-      return `[ 顧客${isEdit ? '編集' : '登録'} ]確認`
-    },
-  },
 }
 </script>
-
-<style lang="scss">
-.customer-regist-edit-page {
-}
-</style>
