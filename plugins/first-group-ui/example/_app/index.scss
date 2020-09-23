@@ -11,12 +11,14 @@ body {
   font-family: 'Avenir Next', 'Yantramanav', 'Noto Sans JP', 'Helvetica', Arial,
   'Microsoft Yahei';
 }
+
 body {
   overflow: hidden;
 }
 
-h2, h3, pre {
+h2, h3, h4, pre {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 h2 {
@@ -114,7 +116,7 @@ $headerHeight: 40px;
 
   .main-page-wrapper {
     margin: $headerHeight 20px 20px $sideWidth + 20;
-    max-width: 1200px;
+    max-width: 1000px;
     h1, h2, h3, h4 {
       font-weight: 600;
       color: $--color-primary;

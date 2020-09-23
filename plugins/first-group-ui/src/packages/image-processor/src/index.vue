@@ -18,6 +18,7 @@
         border
         circle
         size="mini"
+        :disabled="!editable"
         @click="edit"
       ></fg-button>
       <fg-button
@@ -26,7 +27,7 @@
         border
         circle
         size="mini"
-        :disabled="!picUrl"
+        :disabled="!deletable || !picUrl"
         @click="del"
       ></fg-button>
     </div>
@@ -48,7 +49,7 @@
 
 <script>
 import { handleMediaFile, utils } from 'image-process'
-import { isFunction, isNumberLike, isUndefined } from '../../../libs/index'
+import { isFunction, isNumberLike } from '../../../libs/index'
 import Cropper from './cropper/index'
 
 export default {
@@ -96,6 +97,14 @@ export default {
       type: Function,
       default: undefined,
     },
+    editable: {
+      type: Boolean,
+      default: true,
+    },
+    deletable: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -136,23 +145,11 @@ export default {
     },
   },
   watch: {
-    data: {
-      deep: true,
-      handler(val) {
-        if (isUndefined(val.url)) {
-          const { base64, raw } = val
-          const blob = base64 ? utils.base64ToBlob(base64) : raw ? raw.file : ''
-          if (blob) {
-            val.url = utils.toBlobUrl(blob)
-          }
-        }
-        this.$emit('change', { ...val })
-      },
-    },
     url(val) {
       if (this.data.url !== val) {
         this.data = {
           url: val,
+          type: this.$ui.getFileType(val, true),
         }
       }
     },
@@ -160,6 +157,7 @@ export default {
   methods: {
     del() {
       this.data = {}
+      this.$emit('change', {})
     },
     edit() {
       this.input.click()
@@ -184,12 +182,13 @@ export default {
         this.data = {
           type,
           size,
-          name,
           url,
+          data: file,
           raw: {
             file,
           },
         }
+        this.$emit('change', { ...this.data })
         return
       }
       const { width, height } = this.options
@@ -200,7 +199,14 @@ export default {
         handleMediaFile(file, this.options)
           .then((res) => {
             res.raw.file = file
+            if (!res.data) {
+              res.data = utils.base64ToBlob(res.base64)
+            }
+            if (!res.url) {
+              res.url = utils.toBlobUrl(res.data)
+            }
             this.data = res
+            this.$emit('change', { ...this.data })
           })
           .catch((err) => {
             this.$emit('error', err)
@@ -213,6 +219,7 @@ export default {
         .then((res) => {
           res.raw.file = this.file
           this.data = res
+          this.$emit('change', { ...this.data })
         })
         .catch((err) => {
           this.$emit('error', err)

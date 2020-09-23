@@ -38,6 +38,7 @@ import {
   toCommaNumber,
   createRandomStr,
   merge,
+  getFileType,
 } from './format'
 import { fmtSort, clearBasicData, getBasicData } from './extends/index'
 
@@ -60,6 +61,7 @@ export {
   fmtSort,
   getBasicData,
   getCache,
+  getFileType,
   getMaxZIndex,
   getParentComponent,
   getStyleValue,

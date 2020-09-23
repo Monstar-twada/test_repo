@@ -1,10 +1,5 @@
 <template>
-  <div
-    ref="wrapper"
-    class="fg-calendar"
-    :class="{ 'is-error': isError }"
-    :style="elStyle"
-  >
+  <div ref="wrapper" class="fg-calendar" :style="elStyle">
     <Input
       :value="inputValue"
       :placeholder="placeholder"
@@ -14,6 +9,9 @@
       :size="size"
       :offset-right="clearable ? 0 : 23"
       :calendar-icon="isTimePicker ? 'clock' : 'calendar'"
+      :is-error="isError"
+      :error-message-nowrap="errorMessageNowrap"
+      :error-message="errorMessage"
       @click="handleToggle"
       @change="inputChange"
     />
@@ -139,13 +137,13 @@ export default {
       type: Function,
       default: undefined,
     },
-    validators: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
     valueFormat: {
+      type: String,
+      default: '',
+    },
+    isError: Boolean,
+    errorMessageNowrap: Boolean,
+    errorMessage: {
       type: String,
       default: '',
     },
@@ -156,8 +154,6 @@ export default {
       currentDate: this.value,
       calendar: null,
       dashColor: this.$colors.primary,
-      isError: false,
-      errorMessage: '',
     }
   },
   computed: {
@@ -175,12 +171,21 @@ export default {
     },
     inputValue() {
       let currentDate = this.currentDate
-      if (Array.isArray(currentDate)) {
-        currentDate = currentDate.join(' ~ ')
-      }
+      let date
       if (isFunction(this.valueFormatter)) {
         currentDate = this.valueFormatter(currentDate)
+      } else if (Array.isArray(currentDate)) {
+        currentDate = currentDate
+          .map((item) => {
+            date = this.toDate(item)
+            return date ? this.formatDate(date, this.formatter) : ''
+          })
+          .join(' ~ ')
+      } else {
+        date = this.toDate(currentDate)
+        currentDate = date ? this.formatDate(date, this.formatter) : ''
       }
+
       return currentDate
     },
     elStyle() {
@@ -196,13 +201,28 @@ export default {
   },
   watch: {
     currentDate(val) {
-      this.handleValidate()
       const format = this.valueFormat || this.formatter
-      const date = this.toDate(val)
-      this.$emit('input', date ? this.formatDate(date, format) : '')
+      let res, date
+      if (Array.isArray(val)) {
+        res = []
+        val.forEach((item) => {
+          date = this.toDate(item)
+          if (date) {
+            res.push(this.formatDate(date, format))
+          }
+        })
+      } else {
+        date = this.toDate(val)
+        res = date ? this.formatDate(date, format) : ''
+      }
+      this.$emit('input', res)
+      this.$emit('change', res)
     },
     value(val) {
-      if (this.currentDate !== val) {
+      if (
+        this.currentDate !== val &&
+        JSON.stringify(this.currentDate) !== JSON.stringify(val)
+      ) {
         this.currentDate = val
         this.calendar.setDate(val)
       }
@@ -284,22 +304,6 @@ export default {
       if (!this.isTimePicker) {
         // hide popup
         this.popVisible = false
-      }
-    },
-    handleValidate() {
-      try {
-        this.validators.forEach((item) => {
-          console.log(item)
-          if (isFunction(item.validator)) {
-            item.validator(this.currentDate, () => {
-              this.isError = false
-              this.errorMessage = null
-            })
-          }
-        })
-      } catch (e) {
-        this.isError = true
-        this.errorMessage = e.message
       }
     },
   },

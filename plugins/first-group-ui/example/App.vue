@@ -31,7 +31,6 @@
       </div>
     </div>
     <div class="main-page-wrapper">
-      <h1 class="page-title">{{ pageTitle }}</h1>
       <router-view />
     </div>
   </div>

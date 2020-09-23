@@ -15,6 +15,9 @@
     is-time-picker
     :value-format="valueFormat"
     :value-formatter="calendarValueFormat"
+    :is-error="isError"
+    :error-message="errorMessage"
+    :error-message-nowrap="errorMessageNowrap"
     @calendar="(that) => (calendar = that)"
   >
     <template v-slot:time-picker>
@@ -82,6 +85,12 @@ export default {
     },
     width: {
       type: [String, Number],
+      default: '',
+    },
+    isError: Boolean,
+    errorMessageNowrap: Boolean,
+    errorMessage: {
+      type: String,
       default: '',
     },
   },

@@ -4,7 +4,7 @@
  * Date: 2020-09-15 12:39
  */
 import ZxCalendar from 'zx-calendar'
-import { isBoolean, isArray } from './check'
+import { isBoolean, isArray, isString } from './check'
 
 /**
  * to number
@@ -120,4 +120,29 @@ export function toDate(str) {
   } catch (e) {
     return null
   }
+}
+
+const MIME_TYPES = {
+  pdf: 'application',
+  jpg: 'image',
+  jpeg: 'image',
+  png: 'image',
+  pneg: 'image',
+}
+
+/**
+ * get file type
+ * @param url
+ * @param isMimeType
+ * @returns {string}
+ */
+export function getFileType(url, isMimeType) {
+  let result = ''
+  if (isString(url)) {
+    result = url.toLowerCase().split('?')[0].split('.').pop()
+    if (isMimeType) {
+      result = MIME_TYPES[result] + '/' + result
+    }
+  }
+  return result
 }
