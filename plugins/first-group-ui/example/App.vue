@@ -3,7 +3,7 @@
     <header>
       <h1>First Group UI</h1>
       <a
-        href="https://github.com/monstar-lab-consulting/first-group-ui"
+        href="https://github.com/monstar-lab-consulting/first_group"
         target="_blank"
         ><svg
           height="24"

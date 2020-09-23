@@ -1,9 +1,10 @@
 <template>
   <div class="example-form-wrapper">
-    <Doc />
+    <Docs />
 
     <h2>Example</h2>
     <Normal />
+    <ErrorMessage />
 
     <div style="background: #1e5199; padding: 20px;">
       <div class="form-inner-wrapper">
@@ -102,15 +103,18 @@
 
 <script>
 import { customMixin } from '../_app/mixins'
-import Doc from './doc.md'
+import Docs from '../../docs/form.md'
 import Normal from './Normal.md'
+import ErrorMessage from './ErrorMessage.md'
+
 function toDouble(n) {
   return n.toString()[1] ? n : '0' + n
 }
 export default {
   components: {
-    Doc,
+    Docs,
     Normal,
+    ErrorMessage,
   },
   mixins: [customMixin],
   data() {
