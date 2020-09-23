@@ -101,7 +101,7 @@ export default {
     clickRow(item) {
       this.$router.push({
         path: `/customer/detail/`,
-        query: { id: item.customerCode },
+        query: { customerCode: item.customerCode },
       })
     },
     sortChange(field, sort) {

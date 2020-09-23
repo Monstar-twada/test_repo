@@ -188,7 +188,7 @@
 
         <FamilyItem
           ref="family"
-          :customer-code="query.id"
+          :customer-code="query.customerCode"
           :items="form.family"
           @change="familyChange"
         />
@@ -322,10 +322,6 @@ export default {
       })
     },
   },
-  loading: {
-    color: 'red',
-    height: '100px',
-  },
   created() {
     this.getDetail()
     this.getFacePhoto()
@@ -358,7 +354,7 @@ export default {
 
       // submit
       try {
-        await this.$api.put(`/v1/customers/${this.query.id}`, form)
+        await this.$api.put(`/v1/customers/${this.query.customerCode}`, form)
         await this.$alert(`顧客編集成功しました！`)
         this.handleBack()
       } catch (err) {
@@ -367,7 +363,9 @@ export default {
       this.isSubmitting = false
     },
     handleBack() {
-      this.$router.push(`/customer/detail?id=${this.query.id}`)
+      this.$router.push(
+        `/customer/detail?customerCode=${this.query.customerCode}`
+      )
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
@@ -392,7 +390,9 @@ export default {
     },
     async getDetail() {
       try {
-        const res = await this.$api.get(`/v1/customers/${this.query.id}`)
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}`
+        )
         this.resetForm(res)
       } catch (err) {
         this.$alert(err.message)
@@ -402,7 +402,7 @@ export default {
     async getFacePhoto() {
       try {
         const res = await this.$api.get(
-          `/v1/customers/${this.query.id}/facePhoto`
+          `/v1/customers/${this.query.customerCode}/facePhoto`
         )
         this.facePhoto = res.url
       } catch (err) {
@@ -412,7 +412,7 @@ export default {
     async getLicenseImage() {
       try {
         const res = await this.$api.get(
-          `/v1/customers/${this.query.id}/licenseImage`
+          `/v1/customers/${this.query.customerCode}/licenseImage`
         )
         this.licenseImages = res
       } catch (err) {
@@ -438,7 +438,7 @@ export default {
       const fileId = this.form[type]
       if (!fileId) return
       console.error('delete file:', fileId)
-      const customerCode = this.query.id
+      const customerCode = this.query.customerCode
       switch (type) {
         case 'facePhoto':
           this.$api

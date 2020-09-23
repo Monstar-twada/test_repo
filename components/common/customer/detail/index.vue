@@ -29,12 +29,12 @@
 
     <CustomerInfo class="customer-info" :data="customerData" />
     <CarInfo
-      :customer-code="query.id"
+      :customer-code="query.customerCode"
       @current-car-code="(code) => (currentCarCode = code)"
     />
     <EventTable
       class="customer-info mt30"
-      :customer-code="query.id"
+      :customer-code="query.customerCode"
       :customer-data="customerData"
       :current-car-code="currentCarCode"
     />
@@ -80,7 +80,9 @@ export default {
     sendingRequestClick() {},
     async getDetail() {
       try {
-        const res = await this.$api.get(`/v1/customers/${this.query.id}`)
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}`
+        )
         this.customerData = {
           ...res,
         }

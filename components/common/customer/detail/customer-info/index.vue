@@ -190,7 +190,8 @@ export default {
     },
     licence() {
       const { licenseColor, licenseNumber } = this.data
-      return [licenseColor, licenseNumber].join(' ')
+      const classes = this.$ui.getBasicData('license_color', true)
+      return [classes[licenseColor], licenseNumber].join(' ')
     },
   },
   methods: {
@@ -202,7 +203,9 @@ export default {
       this.licenceVisible = true
     },
     handleEdit() {
-      this.$router.push('/customer/regist/edit?id=' + this.data.customerCode)
+      this.$router.push(
+        '/customer/regist/edit?customerCode=' + this.data.customerCode
+      )
     },
   },
 }

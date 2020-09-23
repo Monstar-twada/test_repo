@@ -527,7 +527,7 @@ export default {
     },
     goEditCar() {
       this.$router.push(
-        `/customer/regist/car/edit?id=${this.currentCarCode}&customerCode=${this.customerCode}`
+        `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
       )
     },
   },
