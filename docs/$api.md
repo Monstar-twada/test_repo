@@ -1,8 +1,8 @@
 # this.$api
 
-methods: post, get, put, delete
+methods: post, get, put, delete, upload
 
-## post(api, params[, headers])
+## post(api: string, params?: object, headers?: object): Promise
 
 ```javascript
 export default {
@@ -18,8 +18,10 @@ export default {
 }
 ```
 
-## get(api[, params[, headers]])
+## get(api: string, params?: object, headers?: object): Promise
 
-## put(api[, params[, headers]])
+## put(api: string, params?: object, headers?: object): Promise
 
-## delete(api[, params[, headers]])
+## delete(api: string, params?: object, headers?: object): Promise
+
+## upload(file: File/Blob, params?: object): Promise
