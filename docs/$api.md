@@ -2,7 +2,15 @@
 
 methods: post, get, put, delete, upload
 
-## post(api: string, params?: object, headers?: object): Promise
+## post
+
+#### Parameters:
+
+```bash
+post(api: string, params?: object, headers?: object): Promise
+```
+
+#### Example:
 
 ```javascript
 export default {
@@ -16,7 +24,15 @@ export default {
 }
 ```
 
-## get(api: string, params?: object, headers?: object): Promise
+## get
+
+#### Parameters:
+
+```bash
+get(api: string, params?: object, headers?: object): Promise
+```
+
+#### Example:
 
 ```javascript
 export default {
@@ -28,8 +44,17 @@ export default {
     })
   }
 }
+```
 
-## put(api: string, params?: object, headers?: object): Promise
+## put
+
+#### Parameters:
+
+```bash
+put(api: string, params?: object, headers?: object): Promise
+```
+
+#### Example:
 
 ```javascript
 export default {
@@ -43,7 +68,15 @@ export default {
 }
 ```
 
-## delete(api: string, params?: object, headers?: object): Promise
+## delete
+
+#### Parameters:
+
+```bash
+delete(api: string, params?: object, headers?: object): Promise
+```
+
+#### Example:
 
 ```javascript
 export default {
@@ -57,7 +90,15 @@ export default {
 }
 ```
 
-## upload(file: File/Blob, params?: object): Promise
+## upload
+
+#### Parameters:
+
+```bash
+upload(file: File/Blob, params?: object): Promise
+```
+
+#### Example:
 
 ```javascript
 export default {
