@@ -59,6 +59,7 @@
 |:--|:--|:--|
 |clearBasicData|(): void|clear basic data from localStorage||
 |fmtSort|(sortData: object): array|format sort data to array|
+|formSyncValidator|(rules: object, form: object): object||
 |getBasicData|(key: string, isNeedObject?: boolean): array/object |get basic data, key: `prefectures/transaction_type/...`|
 
 ## Colors

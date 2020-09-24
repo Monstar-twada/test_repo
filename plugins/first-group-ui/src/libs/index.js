@@ -41,6 +41,7 @@ import {
   getFileType,
 } from './format'
 import { fmtSort, clearBasicData, getBasicData } from './extends/index'
+import { formSyncValidator } from './extends/validate'
 
 /**
  * init app
@@ -58,6 +59,7 @@ export {
   createUrlQuery,
   error,
   formatDate,
+  formSyncValidator,
   fmtSort,
   getBasicData,
   getCache,
