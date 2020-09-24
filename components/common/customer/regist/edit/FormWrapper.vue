@@ -382,7 +382,6 @@ export default {
   methods: {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
-      console.error('formChange')
     },
     async handleConfirm() {
       if (this.isSubmitting) return
