@@ -6,7 +6,7 @@
           <h3>基本情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px">
+      <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="お客様の写真">
           <fg-image-processor
             width="80"
@@ -35,7 +35,7 @@
             inline
             width="210"
             placeholder="姓"
-            :error-message="errorMessages.lastName"
+            :error-message="errors.lastName"
           ></fg-input>
           <fg-input
             v-model="form.firstName"
@@ -43,7 +43,7 @@
             class="ml15"
             width="210"
             placeholder="名"
-            :error-message="errorMessages.firstName"
+            :error-message="errors.firstName"
           ></fg-input>
         </fg-form-item>
 
@@ -53,6 +53,7 @@
             placeholder="セイ"
             inline
             width="210"
+            :error-message="errors.lastNameKana"
           ></fg-input>
           <fg-input
             v-model="form.firstNameKana"
@@ -60,6 +61,7 @@
             class="ml15"
             width="210"
             placeholder="メイ"
+            :error-message="errors.firstNameKana"
           ></fg-input>
         </fg-form-item>
 
@@ -78,7 +80,7 @@
           <fg-input
             v-model="form.cellphoneNumber"
             placeholder="00-0000-0000"
-            :length="strLength.cellphoneNumber"
+            :error-message="errors.cellphoneNumber"
           ></fg-input>
         </fg-form-item>
 
@@ -86,7 +88,7 @@
           <fg-input
             v-model="form.phoneNumber"
             placeholder="000-0000-0000"
-            :length="strLength.phoneNumber"
+            :error-message="errors.phoneNumber"
           ></fg-input>
         </fg-form-item>
 
@@ -94,7 +96,7 @@
           <fg-input
             v-model="form.email"
             placeholder="user@cars-enjoy.com"
-            :length="strLength.email"
+            :error-message="errors.email"
           ></fg-input>
         </fg-form-item>
 
@@ -103,6 +105,7 @@
             v-model="form.zipCode"
             width="160"
             placeholder="000-0000"
+            :error-message="errors.zipCode"
           ></fg-input>
         </fg-form-item>
 
@@ -115,15 +118,24 @@
         </fg-form-item>
 
         <fg-form-item label="市区町村">
-          <fg-input v-model="form.address1"></fg-input>
+          <fg-input
+            v-model="form.address1"
+            :error-message="errors.address1"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="番地など">
-          <fg-input v-model="form.address2"></fg-input>
+          <fg-input
+            v-model="form.address2"
+            :error-message="errors.address2"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="建物名・部屋番号など">
-          <fg-input v-model="form.address3"></fg-input>
+          <fg-input
+            v-model="form.address3"
+            :error-message="errors.address3"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="生年月日">
@@ -131,26 +143,37 @@
             v-model="form.birthday"
             width="160px"
             writable
+            default-view="1985/01/01"
           ></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="勤務先">
-          <fg-input v-model="form.organizationName"></fg-input>
+          <fg-input
+            v-model="form.organizationName"
+            :error-message="errors.organizationName"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="勤務先電話番号">
-          <fg-input v-model="form.organizationPhoneNumber"></fg-input>
+          <fg-input
+            v-model="form.organizationPhoneNumber"
+            :error-message="errors.organizationPhoneNumber"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="勤続年数（入社日）">
-          <fg-calendar v-model="form.hireDate" width="160px"></fg-calendar>
+          <fg-calendar
+            v-model="form.hireDate"
+            width="160px"
+            value-format="yyyy-MM-dd"
+          ></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="年収">
           <fg-input
             v-model="form.annualIncome"
             width="160px"
-            :length="strLength.annualIncome"
+            :error-message="errors.annualIncome"
             unit="万円"
           ></fg-input>
         </fg-form-item>
@@ -200,11 +223,14 @@
         </fg-form-item>
 
         <fg-form-item label="免許証番号">
-          <fg-input v-model="form.licenseNumber" width="395px"></fg-input>
+          <fg-input
+            v-model="form.licenseNumber"
+            width="395px"
+            :error-message="errors.licenseNumber"
+          ></fg-input>
         </fg-form-item>
 
         <FamilyItem
-          ref="family"
           :customer-code="query.customerCode"
           :items="form.family"
           @change="familyChange"
@@ -218,7 +244,7 @@
           <h3>希望するカーライフ＆車両選定ポイント</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px">
+      <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="カーライフ">
           <fg-checkbox
             v-for="(item, index) in carLives"
@@ -246,21 +272,30 @@
           <h3>その他の情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px">
+      <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="ペット">
-          <fg-input v-model="form.pet" :length="strLength.pet"></fg-input>
+          <fg-input v-model="form.pet" :error-message="errors.pet"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="実家">
-          <fg-input v-model="form.parentsHomeAddress"></fg-input>
+          <fg-input
+            v-model="form.parentsHomeAddress"
+            :error-message="errors.parentsHomeAddress"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="ドリンク">
-          <fg-input v-model="form.drink" :length="strLength.drink"></fg-input>
+          <fg-input
+            v-model="form.drink"
+            :error-message="errors.drink"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="趣味">
-          <fg-input v-model="form.hobby" :length="strLength.hobby"></fg-input>
+          <fg-input
+            v-model="form.hobby"
+            :error-message="errors.hobby"
+          ></fg-input>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -283,7 +318,7 @@
 import WhiteBox from '../../common/WhiteBox'
 import ColumnTitle from '../../common/ColumnTitle'
 import FamilyItem from './FamilyItem'
-import { validate } from './validate'
+import { FORM_RULES } from './validate'
 import {
   DEF_CUSTOMER_FORM,
   CAR_LIVES_ENUM,
@@ -308,7 +343,7 @@ export default {
       form: {},
       selectedCarLives: [],
       selectedSelectionPoints: [],
-      errorMessages: {
+      errors: {
         firstName: '',
         lastName: '',
       },
@@ -345,6 +380,10 @@ export default {
     this.getLicenseImage()
   },
   methods: {
+    formChange() {
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+      console.error('formChange')
+    },
     async handleConfirm() {
       if (this.isSubmitting) return
       this.isSubmitting = true
@@ -362,8 +401,8 @@ export default {
       })
 
       // validate data
-      this.errorMessages = validate(form)
-      if (this.errorMessages.length > 0) {
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
+      if (this.errors.length > 0) {
         this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
         this.isSubmitting = false
         return
@@ -386,7 +425,7 @@ export default {
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
-        this.$alert('JPEG・PNGファイルのみ選択してください')
+        this.$alert('JPEG・PNG・HEIFファイルのみ選択できます')
         return
       }
       callback()
@@ -396,11 +435,11 @@ export default {
         !/^image\/(jpeg|png|pdf|heif)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択してください')
+        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
         return
       }
       if (size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルを選択してくだいさい')
+        this.$alert('5MBまでのファイルが使用できます')
         return
       }
       callback()

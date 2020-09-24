@@ -3,18 +3,31 @@
  * https://github.com/capricorncd
  * Date: 2020-09-21 15:53
  */
-export function validate(form) {
-  const errorMessages = {}
-  let count = 0
-  if (!form.lastName) {
-    errorMessages.lastName = `入力してください`
-    count++
+export const FORM_RULES = {
+  lastName: [{ required: true, max: 255 }],
+  firstName: 255,
+  lastNameKana: 255,
+  firstNameKana: 255,
+  cellphoneNumber: 100,
+  phoneNumber: 100,
+  email: 254,
+  zipCode: 20,
+  address1: 255,
+  address2: 255,
+  address3: 255,
+  organizationName: 255,
+  organizationPhoneNumber: 30,
+  annualIncome: 30,
+  licenseNumber: [{ max: 12 }, { validator: halfWidthNumber }],
+  pet: 255,
+  parentsHomeAddress: 255,
+  drink: 255,
+  hobby: 255,
+}
+
+function halfWidthNumber(value) {
+  if (value && !/^\d+$/.test(value)) {
+    return '半角数値のみ'
   }
-  if (!form.firstName) {
-    errorMessages.firstName = `入力してください`
-    count++
-  }
-  // phoneNumber
-  errorMessages.length = count
-  return errorMessages
+  return null
 }

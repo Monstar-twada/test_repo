@@ -33,6 +33,7 @@
         placeholder="生年月日"
         format="yyyy/MM/dd"
         value-format="yyyy-MM-dd"
+        default-view="1985/01/01"
         @change="handleChange"
       ></fg-calendar>
       <fg-button
@@ -44,17 +45,13 @@
       ></fg-button>
     </div>
 
-    <fg-row>
-      <fg-col>
-        <fg-button
-          size="small"
-          icon="plus"
-          circle
-          border
-          @click="addItem"
-        ></fg-button>
-      </fg-col>
-    </fg-row>
+    <fg-button
+      size="small"
+      icon="plus"
+      circle
+      border
+      @click="addItem"
+    ></fg-button>
   </fg-form-item>
 </template>
 
