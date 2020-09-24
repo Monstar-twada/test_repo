@@ -80,40 +80,22 @@ It's a custom global property of Vue
 
 | property    | type    | remark                                                      |
 | :---------- | :------ | :---------------------------------------------------------- |
-| \$api | object | methods: `get/put/post/delete` |
+| \$api | object | methods: `get/put/post/delete/upload` |
+| \$colors | object | please check `first-group-ui` document for details |
 
 #### Source
 
 /plugins/global-manager-properties.js
 
-```javascript
-import Vue from 'vue'
-
-const extendsProps = {
-  install(Vue) {
-    Vue.prototype.$api = new RequestApi(['headers'])
-    // ... other
-  },
-}
-
-Vue.use(extendsProps)
-```
-
-#### Usage
-
-```javascript
-export default {
-  created() {
-    this.$api.get('/v1/apiName').then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.error(err)
-    })
-  },
-}
-```
-
 ## Documents
+
+[docs](./docs)
+
+[$api](./docs/$api.md)
+
+[mock-data](./docs/mock-data.md)
+
+[first-group-ui docs](./plugins/first-group-ui/docs)
 
 #### Nuxt.js
 
