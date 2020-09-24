@@ -196,11 +196,6 @@ export default {
 
 <style lang="scss">
 .search-bar-form-wrapper {
-  &__error {
-    div {
-      color: $--color-warning;
-    }
-  }
   > .fg-row {
     padding-top: 20px;
   }
