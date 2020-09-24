@@ -1,6 +1,6 @@
-## Properties
+# fg-from
 
-#### fg-form
+## Properties
 
 |Props|Type|Default|Description|
 |:--|:--|:--|:--|
@@ -12,7 +12,15 @@
 |label-suffix|string|`''`||
 |split-vertical-line|boolean|`false`||
 
-#### fg-form-item
+## Methods
+
+|Name|Parameters|Description|
+|:--|:--|:--|
+|change|()|Triggered when INPUT, SELECT and other elements change|
+
+# fg-form-item
+
+## Properties
 
 |Props|Type|Default|Description|
 |:--|:--|:--|:--|
@@ -27,8 +35,6 @@
 |required|boolean|`false`||
 
 ## Slots
-
-#### fg-form-item 
 
 |Name|Description|
 |:--|:--|

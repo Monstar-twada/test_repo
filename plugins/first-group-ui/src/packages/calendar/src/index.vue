@@ -70,6 +70,7 @@ import { ZxVueCalendar } from 'zx-calendar/lib/vue-calendar'
 import Input from '../../input/index'
 import Popup from '../../popup/index'
 import { isFunction, isNumberLike } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import {
   DEF_ITEM_SUFFIXES,
   DEF_TITLE_FORMATTERS,
@@ -83,6 +84,7 @@ export default {
     Popup,
     ZxVueCalendar,
   },
+  mixins: [formEmitterMixin],
   props: {
     value: {
       type: [String, Array, Number, Date],
@@ -215,8 +217,16 @@ export default {
         date = this.toDate(val)
         res = date ? this.formatDate(date, format) : ''
       }
+      // フォマット後の値をチェックする
+      if (
+        res === this.value ||
+        JSON.stringify(res) === JSON.stringify(this.value)
+      )
+        return
+
       this.$emit('input', res)
       this.$emit('change', res)
+      this.emitFormChange()
     },
     value(val) {
       if (

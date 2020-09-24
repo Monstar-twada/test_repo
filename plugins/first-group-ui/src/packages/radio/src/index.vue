@@ -46,10 +46,11 @@
 <script>
 import Broadcaster from '../../../assets/js/broadcaster'
 import { getParentComponent } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 
 export default {
   name: 'FgRadio',
-  mixins: [Broadcaster],
+  mixins: [Broadcaster, formEmitterMixin],
   props: {
     value: {
       type: [String, Number],
@@ -117,6 +118,7 @@ export default {
     handleChange() {
       this.$nextTick(() => {
         this.$emit('change', this.model)
+        this.emitFormChange()
         this.isGroup &&
           this.dispatch('FgRadioGroup', 'handleChange', this.model)
       })

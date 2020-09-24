@@ -84,13 +84,15 @@
 <script>
 import Popup from '../../popup/index'
 import { isFunction, isNumberLike } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import Mixin from './mixin'
+
 export default {
   name: 'FgSelect',
   components: {
     Popup,
   },
-  mixins: [Mixin],
+  mixins: [Mixin, formEmitterMixin],
   props: {
     value: {
       type: [Number, String],
@@ -241,6 +243,7 @@ export default {
       this.selectValue = item.value
       this.popVisible = false
       this.$emit('change', item)
+      this.emitFormChange()
     },
     addPrefix(t) {
       return this.itemPrefix + t
@@ -252,6 +255,7 @@ export default {
       this.list = this.items
       // emit change
       this.$emit('change', null)
+      this.emitFormChange()
     },
     handleInput(e) {
       if (!this.filterable) return

@@ -42,12 +42,15 @@
 </template>
 
 <script>
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import TimePicker from './time-picker'
+
 export default {
   name: 'FgDatePicker',
   components: {
     TimePicker,
   },
+  mixins: [formEmitterMixin],
   props: {
     value: {
       type: [String, Number, Date],
@@ -114,6 +117,7 @@ export default {
       const res = val ? this.calendar.formatDate(val, format) : ''
       this.$emit('input', res)
       this.$emit('change', res, val)
+      this.emitFormChange()
     },
     value(val) {
       this.resetDateTime(val)

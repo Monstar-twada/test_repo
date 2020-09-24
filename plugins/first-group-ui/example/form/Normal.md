@@ -2,7 +2,9 @@
 ```html
 <fg-form 
   ref="form" 
-  label-width="120px" >
+  label-width="120px"
+  @change="formChange"
+  >
   <fg-form-item label="Event Name" required>
     <fg-input v-model="form.name"></fg-input>
   </fg-form-item>
@@ -11,7 +13,7 @@
     </fg-select>
   </fg-form-item>
   <fg-form-item label="Date" required>
-    <fg-row gutter="20">
+    <fg-row gutter="20" overflow-hide>
       <fg-col span="12">
         <fg-form-item>
           <fg-calendar type="date" v-model="form.date1" show-after-dash clearable />
@@ -47,6 +49,10 @@
       };
     },
     methods: {
+      formChange() {
+        // validate
+        console.log(JSON.stringify(this.form, null, 2))
+      },
       submitForm() {
         console.log('submit')
       },

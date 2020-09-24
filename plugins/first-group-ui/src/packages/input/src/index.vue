@@ -93,6 +93,7 @@
 <script>
 import Broadcaster from '../../../assets/js/broadcaster'
 import { isFunction, isNumberLike } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import {
   DEF_PADDING,
   DEF_SIDE_PADDING,
@@ -101,7 +102,7 @@ import {
 
 export default {
   name: 'FgInput',
-  mixins: [Broadcaster],
+  mixins: [Broadcaster, formEmitterMixin],
   props: {
     value: {
       type: [Number, String],
@@ -284,6 +285,7 @@ export default {
       })
       this.$emit('clear')
       this.$emit('change', '')
+      this.emitFormChange()
     },
     handleClick(e) {
       this.$emit('click', e)
@@ -297,6 +299,7 @@ export default {
     handleChange(e) {
       this.text = e.target.value
       this.$emit('change', this.text)
+      this.emitFormChange()
     },
     focus() {
       if (this.readonly || this.disabled) return
@@ -312,7 +315,6 @@ export default {
     },
     handleBlur() {
       this.isFocus = false
-      this.dispatch('FgFormItem', 'fg.form.blur', [this.value])
     },
   },
 }
