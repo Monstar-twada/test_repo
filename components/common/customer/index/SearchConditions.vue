@@ -102,6 +102,8 @@
               show-after-dash
               type="month"
               clearable
+              :error-message="registrationDateError"
+              error-message-nowrap
             ></fg-calendar>
           </fg-col>
           <fg-col span="6">
@@ -110,6 +112,7 @@
               size="small"
               type="month"
               clearable
+              :is-error="!!registrationDateError"
             ></fg-calendar>
           </fg-col>
           <fg-col span="6">
@@ -119,6 +122,8 @@
               placeholder="車検満了年月"
               show-after-dash
               clearable
+              :error-message="registrationEndDateError"
+              error-message-nowrap
             ></fg-calendar>
           </fg-col>
           <fg-col span="6">
@@ -127,25 +132,8 @@
               size="small"
               placeholder=""
               clearable
+              :is-error="!!registrationEndDateError"
             ></fg-calendar>
-          </fg-col>
-        </fg-row>
-        <fg-row
-          v-if="
-            validationMessage.firstRegistration ||
-            validationMessage.inspectionExpiration
-          "
-          gutter="20"
-        >
-          <fg-col span="12">
-            <fg-text class="search-bar-form-wrapper__error mt10">{{
-              validationMessage.firstRegistration
-            }}</fg-text>
-          </fg-col>
-          <fg-col span="12">
-            <fg-text class="search-bar-form-wrapper__error mt10">{{
-              validationMessage.inspectionExpiration
-            }}</fg-text>
           </fg-col>
         </fg-row>
       </fg-col>
@@ -172,46 +160,35 @@ export default {
       form: {
         ...this.query,
       },
-      validationMessage: {
-        firstRegistration: '',
-        inspectionExpiration: '',
-      },
     }
   },
-  methods: {
-    validation() {
-      let count = 0
-      const frFrom = new Date(this.form.registrationFirstDateFrom)
-      const frTo = new Date(this.form.registrationFirstDateTo)
-      if (frFrom > frTo) {
-        this.validationMessage.firstRegistration =
-          '日付を正しく設定してください'
-        count += 1
-      } else this.validationMessage.firstRegistration = ''
-
-      const inspectionFrom = new Date(this.form.registrationEndDateFrom)
-      const inspectionTo = new Date(this.form.registrationEndDateTo)
-      if (inspectionFrom > inspectionTo) {
-        this.validationMessage.inspectionExpiration =
-          '日付を正しく設定してください'
-        count += 1
-      } else this.validationMessage.inspectionExpiration = ''
-      return count
+  computed: {
+    registrationDateError() {
+      const { registrationFirstDateFrom, registrationFirstDateTo } = this.form
+      const frFrom = new Date(registrationFirstDateFrom)
+      const frTo = new Date(registrationFirstDateTo)
+      return frFrom > frTo ? '日付を正しく設定してください' : ''
     },
+    registrationEndDateError() {
+      const { registrationEndDateFrom, registrationEndDateTo } = this.form
+      const frFrom = new Date(registrationEndDateFrom)
+      const frTo = new Date(registrationEndDateTo)
+      return frFrom > frTo ? '日付を正しく設定してください' : ''
+    },
+  },
+  methods: {
     search() {
-      const count = this.validation()
-      if (count === 0) {
-        const form = {
-          ...this.form,
-        }
-        this.$ui.booleanToNumber(form, [
-          'purchaseIntention',
-          'transferTarget',
-          'nearInspection',
-          'sixMonthContact',
-        ])
-        this.$emit('change', form)
+      if (this.registrationDateError) return
+      const form = {
+        ...this.form,
       }
+      this.$ui.booleanToNumber(form, [
+        'purchaseIntention',
+        'transferTarget',
+        'nearInspection',
+        'sixMonthContact',
+      ])
+      this.$emit('change', form)
     },
   },
 }
