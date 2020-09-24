@@ -26,10 +26,19 @@
 |v-model/value|String, Array, Number, Date|`''`||
 |width|string, number|`''`||
 |writable|boolean|`false`||
-|* is-time-picker|boolean|`single`|Only for `fg-date-picker` component|
+|* is-time-picker|boolean|`false`|Only for `fg-date-picker` component|
 
 ## Events
 
 |Name|Parameters|Description|
 |:--|:--|:--|
+|calendar|(calendar: VueComponent)|fg-calendar|
+|change|(value: string)|selected date, or null|
 |click|(src: string, e: Event)|if `clickable`  is `true`, triggers when left button is clicked|
+|error|(err: Error)||
+
+## Slots
+
+|Name|Description|
+|:--|:--|
+|time-picker||
