@@ -5,6 +5,7 @@
 |Props|Type|Default|Description|
 |:--|:--|:--|:--|
 |clearable|boolean|`false`||
+|default-view|string|`''`||
 |date-range|array|`[]`||
 |disabled|boolean|`false`||
 |error-message|string|`''`||

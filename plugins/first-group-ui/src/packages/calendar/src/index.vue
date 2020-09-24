@@ -149,6 +149,10 @@ export default {
       type: String,
       default: '',
     },
+    defaultView: {
+      type: [String, Number, Date],
+      default: '',
+    },
   },
   data() {
     return {
@@ -248,6 +252,10 @@ export default {
   methods: {
     getCalendar(calendar) {
       this.calendar = calendar
+      // initial defaultView
+      if (!this.value && this.defaultView) {
+        calendar.setCurrentDate(this.defaultView)
+      }
       this.$emit('calendar', this)
     },
     formatDate(str, fmt) {
