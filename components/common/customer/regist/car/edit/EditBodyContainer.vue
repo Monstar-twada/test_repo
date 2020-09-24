@@ -67,6 +67,7 @@
             v-model="form.registrationNumber"
             width="440px"
             :error-message="errors.registrationNumber"
+            :length="strLength.registrationNumber"
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="メーカー">
@@ -74,6 +75,7 @@
             v-model="form.maker"
             width="440px"
             :error-message="errors.maker"
+            :length="strLength.maker"
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="車種">
@@ -81,6 +83,7 @@
             v-model="form.carType"
             width="440px"
             :error-message="errors.carType"
+            :length="strLength.carType"
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="グレード">
@@ -88,6 +91,7 @@
             v-model="form.grade"
             width="440px"
             :error-message="errors.grade"
+            :length="strLength.grade"
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="車両画像">
@@ -240,7 +244,11 @@
           <fg-input v-model="form.repaymentMonthly" width="440px"></fg-input>
         </fg-form-item>
         <fg-form-item label="ボーナス時">
-          <fg-input v-model="form.bonusDate" width="440px"></fg-input>
+          <fg-input
+            v-model="form.bonusDate"
+            width="440px"
+            :length="strLength.bonusDate"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="AI査定">
           <fg-input v-model="form.aiAssessmentAmount" width="440px"></fg-input>
@@ -265,7 +273,11 @@
           />
         </fg-form-item>
         <fg-form-item label="支払残債">
-          <fg-input v-model="form.balancePayment" width="440px"></fg-input>
+          <fg-input
+            v-model="form.balancePayment"
+            width="440px"
+            :length="strLength.balancePayment"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="支払残債確認日">
           <fg-calendar
@@ -366,7 +378,11 @@
           ></fg-input>
         </fg-form-item>
         <fg-form-item label="バッテリーサイズ">
-          <fg-input v-model="form.batterySize" width="440px"></fg-input>
+          <fg-input
+            v-model="form.batterySize"
+            width="440px"
+            :length="strLength.batterySize"
+          ></fg-input>
         </fg-form-item>
         <fg-form-item label="バッテリー製造">
           <fg-calendar
@@ -467,6 +483,7 @@ export default {
       errors: {},
       registrationImage: '',
       isSubmitting: false,
+      strLength: {},
     }
   },
   computed: {
@@ -540,6 +557,40 @@ export default {
     deleteFile(type) {
       // delete
     },
+    validation() {
+      let count = 0
+      Object.keys(this.strLength).forEach((key) => {
+        if (this.form[key]) {
+          if (Number.isInteger(this.form[key])) {
+            if (this.form[key].length > this.strLength[key]) {
+              count += 1
+            }
+          } else {
+            Object.keys(this.form[key]).forEach((key2) => {
+              if (this.form[key][key2]) {
+                if (this.form[key][key2].length > this.strLength[key][key2]) {
+                  count += 1
+                }
+              }
+            })
+          }
+        }
+      })
+      return count === 0
+    },
+    changeToHankakuAndGetNumber(target, secTarget, str) {
+      const hankaku = str.replace(/[０-９]/g, function (s) {
+        // eslint-disable-next-line
+        return String.fromCharCode(s.charCodeAt(0) - 0xfee0)
+      })
+      const justNumber = hankaku.replace(/\D/g, '')
+      if (secTarget) {
+        this.form[target][secTarget] = justNumber
+      } else {
+        this.form[target] = justNumber
+      }
+      return justNumber
+    },
     customValidate(file, next) {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
         this.$alert('PDF・JPEG・PNG・HEIFファイルを選択してください')
@@ -575,6 +626,7 @@ export default {
   },
 }
 </script>
+
 <style lang="scss" scoped>
 .customer-regist-car-edit-wrapper {
   margin: 0 auto;

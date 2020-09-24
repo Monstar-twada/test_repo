@@ -75,19 +75,35 @@
         </fg-form-item>
 
         <fg-form-item label="携帯電話">
-          <fg-input v-model="form.cellphoneNumber"></fg-input>
+          <fg-input
+            v-model="form.cellphoneNumber"
+            placeholder="00-0000-0000"
+            :length="strLength.cellphoneNumber"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="電話番号">
-          <fg-input v-model="form.phoneNumber"></fg-input>
+          <fg-input
+            v-model="form.phoneNumber"
+            placeholder="000-0000-0000"
+            :length="strLength.phoneNumber"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="メールアドレス">
-          <fg-input v-model="form.email"></fg-input>
+          <fg-input
+            v-model="form.email"
+            placeholder="user@cars-enjoy.com"
+            :length="strLength.email"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="郵便番号">
-          <fg-input v-model="form.zipCode" width="160"></fg-input>
+          <fg-input
+            v-model="form.zipCode"
+            width="160"
+            placeholder="000-0000"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="都道府県">
@@ -134,6 +150,7 @@
           <fg-input
             v-model="form.annualIncome"
             width="160px"
+            :length="strLength.annualIncome"
             unit="万円"
           ></fg-input>
         </fg-form-item>
@@ -231,7 +248,7 @@
       </ColumnTitle>
       <fg-form label-width="140px">
         <fg-form-item label="ペット">
-          <fg-input v-model="form.pet"></fg-input>
+          <fg-input v-model="form.pet" :length="strLength.pet"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="実家">
@@ -239,15 +256,14 @@
         </fg-form-item>
 
         <fg-form-item label="ドリンク">
-          <fg-input v-model="form.drink"></fg-input>
+          <fg-input v-model="form.drink" :length="strLength.drink"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="趣味">
-          <fg-input v-model="form.hobby"></fg-input>
+          <fg-input v-model="form.hobby" :length="strLength.hobby"></fg-input>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
-
     <div class="footer-button-wrapper">
       <fg-button width="240px" suffix-icon="arrow-right" @click="handleConfirm"
         >確認</fg-button
@@ -300,6 +316,7 @@ export default {
       isSubmitting: false,
       facePhoto: '',
       licenseImages: {},
+      strLength: {},
     }
   },
   computed: {
@@ -499,7 +516,7 @@ export default {
       } else {
         this.selectedCarLives = []
       }
-      // selectionPoints
+      // selection points
       if (Array.isArray(res.selectionPoints)) {
         this.selectedSelectionPoints = res.selectionPoints.map(
           (item) => item.selectionPoints
