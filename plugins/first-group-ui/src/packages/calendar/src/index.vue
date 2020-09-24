@@ -306,10 +306,10 @@ export default {
     },
     inputChange(val) {
       const date = this.calendar.toDate(val)
-      if (date) {
-        this.currentDate = this.calendar.formatDate(date, this.formatter)
-        this.calendar.setDate(date)
-      }
+      this.currentDate = date
+        ? this.calendar.formatDate(date, this.formatter)
+        : ''
+      this.calendar.setDate(date)
     },
     hidePop() {
       this.popVisible = false
