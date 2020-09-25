@@ -121,19 +121,19 @@ export default {
     return {
       headers: [
         { text: '日時', width: 120 },
-        { text: 'チェック', width: 80, sortable: true, field: 'checkFlag' },
+        { text: 'チェック', width: 100, sortable: true, field: 'checkFlag' },
         { text: '対象車両', width: 100, sortable: true, field: 'carCode' },
         {
           text: '取引種別',
-          width: 80,
+          width: 100,
           sortable: true,
           field: 'transactionType',
         },
-        { text: 'チャネル', width: 80, sortable: true, field: 'channel' },
+        { text: 'チャネル', width: 100, sortable: true, field: 'channel' },
         { text: 'コメント' },
         {
           text: '担当者',
-          width: 80,
+          width: 100,
           sortable: true,
           field: 'contactStaffCode',
         },

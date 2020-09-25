@@ -68,12 +68,13 @@ export default {
           align: 'center',
           field: 'customerCode',
           sortable: true,
+          width: 100,
         },
         {
           text: '顧客名',
           field: 'lastName',
           align: 'center',
-          width: '200px',
+          width: 200,
           sortable: true,
         },
         { text: '連絡先情報', align: 'center', width: 180 },
@@ -88,7 +89,7 @@ export default {
           align: 'center',
         },
         { text: '最終取引日', align: 'center' },
-        { text: 'フラグ', align: 'center', width: 150 },
+        { text: 'フラグ', align: 'center', width: 120 },
       ],
     }
   },

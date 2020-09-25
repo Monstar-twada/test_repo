@@ -141,6 +141,7 @@ export default {
         {
           text: '活動報告',
           align: 'center',
+          width: 100,
         },
       ],
       query: {
