@@ -3,7 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-08-26 14:53
  */
-import { isString } from '~/assets/js/utils'
+import { isString } from '~/assets/app/index'
 
 // kane map
 /* eslint-disable */

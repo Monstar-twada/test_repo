@@ -80,8 +80,8 @@
 
 <script>
 import Popup from '../../popup/index'
-import { isFunction, isNumberLike } from '../../../libs'
 import { DEF_CLEAR_ICON_OFFSET } from '../../input/src/constants'
+import { isFunction, isNumberLike } from '../../../libs/index'
 import Mixin from './mixin'
 export default {
   name: 'FgSelect',

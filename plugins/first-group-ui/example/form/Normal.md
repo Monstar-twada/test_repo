@@ -10,9 +10,7 @@
     <fg-input v-model="ruleForm.name"></fg-input>
   </fg-form-item>
   <fg-form-item label="Area" prop="region">
-    <fg-select v-model="ruleForm.region">
-      <fg-option label="Tokyo" value="tokyo"></fg-option>
-      <fg-option label="Osaka" value="osaka"></fg-option>
+    <fg-select v-model="ruleForm.region" :items="[{text: 'Tokyo'}, {text: 'Osaka'}]">
     </fg-select>
   </fg-form-item>
   <fg-form-item label="Date" required>

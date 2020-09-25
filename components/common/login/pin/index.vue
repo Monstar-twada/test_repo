@@ -84,7 +84,6 @@ export default {
 
 <style lang="scss">
 .login-index-page-wrapper {
-  padding-top: 95px;
   .pin-form {
     padding-top: 50px;
     max-width: 270px;

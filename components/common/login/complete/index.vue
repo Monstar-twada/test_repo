@@ -36,7 +36,6 @@ export default {
 
 <style lang="scss">
 .login-complete-page-wrapper {
-  padding-top: 250px;
   .complete-form {
     padding-top: 50px;
     max-width: 350px;

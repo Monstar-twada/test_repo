@@ -128,7 +128,6 @@ export default {
 
 <style lang="scss">
 .login-forgot-page-wrapper {
-  padding-top: 160px;
   .forgot-form {
     padding-top: 50px;
     max-width: 420px;

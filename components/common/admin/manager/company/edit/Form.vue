@@ -5,10 +5,10 @@
         <h2>企業情報</h2>
       </div>
       <fg-form label-width="150px">
-        <fg-form-item label="会社名" show-suffix-required-icon>
+        <fg-form-item label="会社名" required>
           <fg-input placeholder="株式会社XXXXXX"></fg-input>
         </fg-form-item>
-        <fg-form-item label="代表者" show-suffix-required-icon>
+        <fg-form-item label="代表者" required>
           <fg-input placeholder="田中 太郎"></fg-input>
         </fg-form-item>
         <fg-form-item label="郵便番号">
@@ -41,7 +41,7 @@
         <fg-form-item label="建物名・部屋番号など">
           <fg-input placeholder=""></fg-input>
         </fg-form-item>
-        <fg-form-item label="電話番号" show-suffix-required-icon>
+        <fg-form-item label="電話番号" required>
           <fg-input v-model="phone" placeholder="000-0000-0000"></fg-input>
           <fg-text
             v-if="validationMessage.phone"
@@ -49,7 +49,7 @@
             >{{ validationMessage.phone }}</fg-text
           >
         </fg-form-item>
-        <fg-form-item label="メールアドレス" show-suffix-required-icon>
+        <fg-form-item label="メールアドレス" required>
           <fg-input
             v-model="email"
             placeholder="aaaa@cars-enjoy.com"

@@ -4,7 +4,11 @@
       :breadcrumbs="breadcrumbs"
       :page="page"
       title-image="setting.svg"
-    />
+    >
+      <template v-slot:left>
+        <h2>[ 店舗詳細 ]</h2>
+      </template>
+    </Breadcrumbs>
     <Form />
   </div>
 </template>
@@ -20,7 +24,7 @@ export default {
   },
   data() {
     return {
-      page: '管理 [エリア設定]',
+      page: '管理',
       breadcrumbs: [
         {
           text: '管理',

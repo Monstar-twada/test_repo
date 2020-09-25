@@ -27,7 +27,7 @@
               <fg-avatar
                 size="30"
                 :data="{
-                  url: `${item.image_path}`,
+                  url: `/common/${item.image_path}`,
                   name: `${item.name}`,
                 }"
                 text-width="120px"
@@ -51,13 +51,13 @@
             </div>
           </template>
         </fg-table-column>
-        <fg-table-column show="tel" label="電話番号" :sortable="false" />
+        <fg-table-column show="tel" label="電話番号1" :sortable="false" />
         <fg-table-column
           show="email"
           label="メールアドレス"
           :sortable="false"
         />
-        <fg-table-column show label :sortable="false">
+        <fg-table-column show="manager" label="" :sortable="false">
           <template v-slot="item">
             <fg-button
               width="63"

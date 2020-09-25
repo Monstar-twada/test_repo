@@ -109,7 +109,6 @@ export default {
 
 <style lang="scss">
 .login-reset-page-wrapper {
-  padding-top: 160px;
   .reset-form {
     padding-top: 50px;
     max-width: 290px;

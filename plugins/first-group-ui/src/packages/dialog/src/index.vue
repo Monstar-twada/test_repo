@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { resetZIndex, toNumber } from '../../../libs'
+import { resetZIndex, toNumber } from '../../../libs/index'
 
 export default {
   name: 'FgDialog',

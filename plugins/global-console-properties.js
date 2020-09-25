@@ -3,10 +3,13 @@
  */
 import Vue from 'vue'
 import FirstGroupUI from './first-group-ui/src/index'
-import { RequestApi } from './api'
+import { RequestApi } from './api/index'
 import { login } from '~/components/console/plugins/login'
 
-Vue.use(FirstGroupUI, { theme: 'red' })
+Vue.use(FirstGroupUI, {
+  theme: 'red',
+  project: 'console',
+})
 
 const extendsProps = {
   install(Vue) {

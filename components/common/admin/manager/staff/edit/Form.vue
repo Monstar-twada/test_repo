@@ -12,7 +12,7 @@
               :key="`${item.title}-${i}`"
               class="scrollable_item"
             >
-              <fg-checkbox v-model="value2"></fg-checkbox>
+              <fg-checkbox></fg-checkbox>
               <p>{{ item.title }}</p>
             </div>
           </div>
@@ -44,11 +44,11 @@
               class="job-items_item"
             >
               <div class="job-items_item_img">
-                <v-img
-                  :max-width="24"
-                  :max-height="24"
+                <img
+                  width="24"
+                  height="24"
                   :src="require(`./img/${item.icon}-icon-white.svg`)"
-                ></v-img>
+                />
               </div>
               <div class="job-items_item_text">
                 {{ item.text }}

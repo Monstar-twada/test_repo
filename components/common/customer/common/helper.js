@@ -3,8 +3,6 @@
  * https://github.com/capricorncd
  * Date: 2020-07-21 11:23
  */
-import { toCommaNumber } from '~/assets/js/utils'
-
 /**
  * 陸運事務局名称
  * + 半角スペース + 車両登録番号（種別）
@@ -92,7 +90,8 @@ export function fmtTransactionType(value) {
  */
 export function fmtMoney(value, noMark = false) {
   const mark = noMark ? '' : '¥'
-  const result = toCommaNumber(value)
+  /* eslint-disable */
+  const result = $nuxt.$ui.toCommaNumber(value)
   return result ? mark + result : '-'
 }
 
@@ -102,7 +101,7 @@ export function fmtMoney(value, noMark = false) {
  ・保険料
  ・駐車場代
  * 合計対象のデータがすべてブランクの場合は、ブランク表示
- * @param data
+ * @param cost
  */
 export function sumCost(cost) {
   const result =

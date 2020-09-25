@@ -116,7 +116,6 @@ export default {
 
 <style lang="scss">
 .login-mailreset-page-wrapper {
-  padding-top: 160px;
   .mailreset-form {
     padding-top: 50px;
     max-width: 320px;

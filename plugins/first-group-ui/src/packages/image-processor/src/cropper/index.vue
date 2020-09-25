@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { getStyleValue } from '../../../../libs'
+import { getStyleValue } from '../../../../libs/index'
 import cropperMixin, { resetCropImagePosition } from './mixin'
 import {
   resetImageAttrs,
