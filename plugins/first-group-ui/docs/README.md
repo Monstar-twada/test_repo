@@ -9,7 +9,9 @@
 
 ## Methods
 
-`this.$ui.isNumber(2323123) // return true`
+```javascript
+this.$ui.isNumber(2323123) // return true
+```
 
 |Name|Parameters|Description|
 |:--|:--|:--|
@@ -62,10 +64,31 @@
 |formSyncValidator|(rules: object, form: object): object||
 |getBasicData|(key: string, isNeedObject?: boolean): array/object |get basic data, key: `prefectures/transaction_type/...`|
 
+* getBasicData
+
+```javascript
+export default {
+  created() {
+    // example: sex
+    // get array data
+    const sexArray = this.$ui.getBasicData('sex')
+    console.log(sexArray) 
+    // [{ value: '1', text: '男性' },{ value: '2', text: '女性' },{ value: '3', text: 'その他' }]
+
+    // get object data
+    const sexObject = this.$ui.getBasicData('sex', true)
+    console.log(sexObject) 
+    // { 1: '男性' },{ 2: '女性' },{ 3: 'その他' }
+  }
+}
+```
+
 ## Colors
 
-`this.$colors.primaryPlaceholder`
-`// see assets/scss/theme-*.scss $--color-primary-placeholder`
+```javascript
+this.$colors.primaryPlaceholder
+// please check assets/scss/theme-*.scss for details.
+```
 
 |Name|Value(assets/scss/theme-*.scss)|
 |:--|:--|
