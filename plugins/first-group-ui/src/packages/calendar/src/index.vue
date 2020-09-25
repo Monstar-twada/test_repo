@@ -20,12 +20,14 @@
       name="dash"
       :color="dashColor"
       class="__dash __before"
+      :style="dashStyle"
     ></fg-icon>
     <fg-icon
       v-if="showAfterDash"
       name="dash"
       :color="dashColor"
       class="__dash __after"
+      :style="dashStyle"
     ></fg-icon>
     <Popup
       ref="popup"
@@ -60,7 +62,7 @@
       <slot name="time-picker"></slot>
     </Popup>
     <transition name="fg-slide-in-top">
-      <div v-show="isError" class="error-message">{{ errorMessage }}</div>
+      <div v-if="isError" class="error-message">{{ errorMessage }}</div>
     </transition>
   </div>
 </template>
@@ -108,6 +110,10 @@ export default {
     },
     showBeforeDash: Boolean,
     showAfterDash: Boolean,
+    dashOffset: {
+      type: Number,
+      default: undefined,
+    },
     width: {
       type: [String, Number],
       default: '',
@@ -157,7 +163,7 @@ export default {
   data() {
     return {
       popVisible: false,
-      currentDate: this.value,
+      currentDate: this.valueFormat ? null : this.value,
       calendar: null,
       dashColor: this.$colors.primary,
     }
@@ -201,6 +207,14 @@ export default {
       }
       if (this.inline) {
         ret.display = 'inline-flex'
+      }
+      return ret
+    },
+    dashStyle() {
+      const ret = {}
+      if (typeof this.dashOffset !== 'undefined') {
+        ret.right =
+          this.dashOffset + (isNumberLike(this.dashOffset) ? 'px' : '')
       }
       return ret
     },
@@ -248,6 +262,11 @@ export default {
         this.calendar.setRange()
       }
     },
+  },
+  mounted() {
+    if (this.valueFormat) {
+      this.currentDate = this.formatDate(this.value, this.valueFormat)
+    }
   },
   methods: {
     getCalendar(calendar) {

@@ -22,6 +22,9 @@
       {{ label }}
     </span>
     <slot></slot>
+    <transition name="fg-slide-in-top">
+      <div v-if="isError" class="error-message">{{ errorMessage }}</div>
+    </transition>
   </label>
 </template>
 <script>
@@ -45,6 +48,12 @@ export default {
     theme: {
       type: String,
       default: 'blue',
+    },
+    isError: Boolean,
+    errorMessageNowrap: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
     },
   },
   data() {

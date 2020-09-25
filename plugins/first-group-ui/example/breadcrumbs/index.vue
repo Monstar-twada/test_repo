@@ -1,43 +1,23 @@
 <template>
-  <div class="breadcrumb-wrapper">
-    <fg-breadcrumbs :items="items">
-      <template v-slot:default="{ item }">
-        <fg-breadcrumbs-item>
-          <template v-slot>
-            <h4>{{ item.href }}</h4>
-          </template>
-        </fg-breadcrumbs-item>
-      </template>
-    </fg-breadcrumbs>
+  <div class="example-fg-breadcrumb-wrapper">
+    <Docs />
+    <h2>Example</h2>
+    <Normal />
   </div>
 </template>
 
 <script>
+import Docs from '../../docs/breadcrumbs.md'
+import { customMixin } from '../_app/mixins'
+import Normal from './Normal.md'
+
 export default {
-  data() {
-    return {
-      items: [
-        {
-          text: 'HOME',
-          href: '/home',
-        },
-        {
-          text: '御客一覧',
-          href: '/customer',
-        },
-        {
-          text: '御客詳細',
-        },
-      ],
-    }
+  components: {
+    Docs,
+    Normal,
   },
+  mixins: [customMixin],
 }
 </script>
 
-<style lang="scss">
-.breadcrumb-wrapper {
-  width: 100%;
-  height: 50px;
-  background: $--color-primary-active;
-}
-</style>
+<style lang="scss"></style>

@@ -105,7 +105,8 @@ export default {
     textStyle() {
       const ret = {}
       if (this.textWidth) {
-        ret.maxWidth = this.textWidth
+        ret.maxWidth =
+          this.textWidth + (isNumberLike(this.textWidth) ? 'px' : '')
       }
       ret.height = this.wrapperStyle.height
       return ret

@@ -1,18 +1,20 @@
+# fg-avatar
+
 ## Properties
 
 |Props|Type|Default|Description|
 |:--|:--|:--|:--|
-|src|string|`''`|Avatar image file URL|
-|data|object|`{}`|`{url: '', name: '', summary: '', ...}`|
-|size|string|`37`|set avatar size|
+|background|boolean|`false`|-|
+|clickable|boolean|`false`|-|
 |circle|boolean|`true`|Whether to display as a circle|
-|clickable|boolean|`false`||
-|fillet|boolean|`false`||
-|background|boolean|`false`||
-|name-font-weight-normal|boolean|`false`||
-|text-flex-direction-column|boolean|`false`||
-|text-summary-no-offset|boolean|`false`||
-|text-width|string|`''`|単位が必要|
+|data|object|`{}`|`{url: '', name: '', summary: '', ...}`|
+|fillet|boolean|`false`|-|
+|name-font-weight-normal|boolean|`false`|-|
+|size|string|`37`|set avatar size|
+|src|string|`''`|Avatar image file URL|
+|text-flex-direction-column|boolean|`false`|-|
+|text-summary-no-offset|boolean|`false`|-|
+|text-width|string|`''`|set max width of text wrapper|
 
 ### data
 
