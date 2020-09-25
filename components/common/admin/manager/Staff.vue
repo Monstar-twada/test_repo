@@ -16,8 +16,11 @@
         </div>
       </div>
       <fg-table :data="itemList" thead-class="thead-bg">
-        <fg-table-column show="id" label="cars Manager ID" :sortable="false">
-        </fg-table-column>
+        <fg-table-column
+          show="id"
+          label="cars Manager ID"
+          :sortable="false"
+        ></fg-table-column>
         <fg-table-column show="name" label="氏名" :sortable="false">
           <template v-slot="item">
             <div class="table-avatar-wrapper">
@@ -30,8 +33,7 @@
                 text-width="120px"
                 circle
                 text-flex-direction-column
-              >
-              </fg-avatar>
+              ></fg-avatar>
             </div>
           </template>
         </fg-table-column>
@@ -55,7 +57,7 @@
           label="メールアドレス"
           :sortable="false"
         />
-        <fg-table-column show="" label="" :sortable="false">
+        <fg-table-column show label :sortable="false">
           <template v-slot="item">
             <fg-button
               width="63"
@@ -63,9 +65,8 @@
               size="mini"
               prefix-icon="edit"
               @click="moveToEdit(item.id)"
+              >編集</fg-button
             >
-              編集
-            </fg-button>
           </template>
         </fg-table-column>
       </fg-table>
@@ -237,6 +238,7 @@ export default {
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   .left-wrapper {
     background-color: $--color-white;
     width: 100%;

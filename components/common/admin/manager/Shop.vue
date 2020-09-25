@@ -49,12 +49,11 @@
               size="mini"
               prefix-icon="edit"
               @click="moveToEdit(item.id)"
+              >編集</fg-button
             >
-              編集
-            </fg-button>
           </template>
         </fg-table-column>
-        <fg-table-column show="area" label="" />
+        <fg-table-column show="area" label />
       </fg-table>
     </div>
   </div>
@@ -80,11 +79,11 @@ export default {
       company_katakana: 'カブシキガイシャファーストグループ',
     }
     const item2 = {
-      id: 10000001,
+      id: 10000005,
       area: '奈良エリア',
       shop_name: 'cars足立',
       postcode: '〒120-0011',
-      address: '東京都足立区中央本町1-20-1',
+      address: '奈良県奈良市中央本町1-20-1',
       tel: '03-1234-1234',
       mail: 'aaaa@cars-enjoy.com',
       company_name: '株式会社ファーストグループ',
@@ -169,6 +168,7 @@ export default {
 .admin-body-container-wrapper {
   width: 100%;
   display: flex;
+  margin-top: 20px;
   .admin-btn {
     cursor: pointer;
   }

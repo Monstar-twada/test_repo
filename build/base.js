@@ -74,13 +74,13 @@ export const baseConfig = {
   router: {
     base: process.env.BASE_URL,
   },
-  vuetify: {
-    customVariables: ['~/assets/scss/variables.scss'],
-    treeShake: true,
-    theme: {
-      dark: false,
-    },
-  },
+  // vuetify: {
+  //   customVariables: ['~/assets/scss/variables.scss'],
+  //   treeShake: true,
+  //   theme: {
+  //     dark: false,
+  //   },
+  // },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -108,7 +108,7 @@ export const baseConfig = {
     respectDoNotTrack: true,
     noscript: true,
     noscriptId: 'gtm-noscript',
-    noscriptURL: 'https://www.googletagmanager.com/ns.html'
+    noscriptURL: 'https://www.googletagmanager.com/ns.html',
   },
   /*
    ** Build configuration

@@ -18,20 +18,18 @@
           <template v-for="(row, index) in displayedRows">
             <template v-if="isGroupBy">
               <tr
-                v-if="beforeGroupByFlg(row, displayedRows[index - 1])"
+                v-if="beforeGroupByFlg(row, displayedRows[index - 1], index)"
                 :key="index"
-                :ref="`group-${groupIndex}`"
+                :ref="isGroupBy ? `group-${row.data.groupIndex}` : ''"
                 class="group-by-row"
-                @click="handleToggle(`group-${groupIndex}`, $event)"
+                @click="handleToggle(`group-${row.data.groupIndex}`, $event)"
               >
-                <th :colspan="columns.length">
-                  {{ row.data[groupBy] }}
-                </th>
+                <th :colspan="columns.length">{{ row.data[groupBy] }}</th>
               </tr>
             </template>
             <TableRow
-              :key="`first-${index}`"
-              :ref="`group-${groupIndex}-children`"
+              :key="`group-${index}-children`"
+              :ref="`group-${row.data.groupIndex}-children`"
               :row="row"
               :columns="columns"
               :group-by="groupBy"
@@ -114,12 +112,27 @@ export default {
       return Array.isArray(this.data)
     },
 
-    displayedRows() {
-      return this.sortedRows
+    isGroupBy() {
+      return !!this.groupBy
     },
 
-    isGroupBy() {
-      return this.groupBy
+    displayedRows() {
+      if (!this.isGroupBy) {
+        return this.sortedRows
+      } else {
+        let groupIndexCode = 0
+        this.sortedRows.forEach((row, index) => {
+          if (
+            index === 0 ||
+            row.data[this.groupBy] !==
+              this.sortedRows[index - 1].data[this.groupBy]
+          ) {
+            groupIndexCode += 1
+          }
+          row.data.groupIndex = groupIndexCode
+        })
+        return this.sortedRows
+      }
     },
 
     sortedRows() {
@@ -177,6 +190,8 @@ export default {
     })
 
     this.mapDataToRows()
+
+    console.log('$ref', this.$refs)
   },
 
   methods: {
@@ -223,27 +238,29 @@ export default {
     emitRowClick(row) {
       this.$emit('rowClick', row)
     },
-
-    beforeGroupByFlg(row, beforeRow) {
+    handleToggle(pdom, e) {
+      // TODO
+      const dom = `${pdom}-children`
+      const list = this.$refs[dom]
+      const clickIcon = this.$refs[pdom][0]
+      clickIcon.classList.toggle('is-close')
+      console.log('ndme', this.$refs[pdom][0])
+      for (const i in list) {
+        if (list[i].$el.style.display === 'none') {
+          list[i].$el.style.display = ''
+        } else {
+          list[i].$el.style.display = 'none'
+        }
+      }
+    },
+    beforeGroupByFlg(row, beforeRow, index) {
       let flg = false
       if (this.isGroupBy) {
-        if (beforeRow) {
-          flg = row.data[this.groupBy] !== beforeRow.data[this.groupBy]
-        } else {
+        if (index === 0 || row.data.groupIndex !== beforeRow.data.groupIndex) {
           flg = true
-        }
-        if (flg === true) {
-          // this.groupIndex++
         }
       }
       return flg
-    },
-    handleToggle(ndom, e) {
-      // TODO
-      // const dom = `${ndom}-children`
-      // const $el = this.$refs[dom]
-      // console.log('$refs', this.$refs[dom][0].$el.style)
-      // $el.style.display = 'none'
     },
   },
 }
@@ -355,7 +372,28 @@ export default {
       font-size: 12px;
 
       th {
-        padding-left: 3%;
+        padding-left: 4%;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 2%;
+          top: 15px;
+          width: 7px;
+          height: 7px;
+          border-left: 2px $--color-primary solid;
+          border-top: 2px $--color-primary solid;
+          transform: rotate(-135deg);
+          transition: transform 0.3s;
+        }
+      }
+    }
+    tr.group-by-row.is-close {
+      th {
+        &:before {
+          top: 18px;
+          transform: rotate(45deg);
+        }
       }
     }
     tr {

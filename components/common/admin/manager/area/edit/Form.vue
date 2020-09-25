@@ -45,7 +45,7 @@
           <fg-input placeholder="1-20-1"></fg-input>
         </fg-form-item>
         <fg-form-item label="建物名・部屋番号など">
-          <fg-input placeholder=""></fg-input>
+          <fg-input placeholder></fg-input>
         </fg-form-item>
         <fg-form-item label="電話番号">
           <fg-input v-model="phone" placeholder="0120-161-135"></fg-input>
@@ -74,15 +74,13 @@
               class="service-items_item"
             >
               <div class="service-items_item_img">
-                <v-img
-                  :max-width="24"
-                  :max-height="24"
+                <img
+                  width="24"
+                  height="24"
                   :src="require(`./img/${item.icon}-icon-white.svg`)"
-                ></v-img>
+                />
               </div>
-              <div class="service-items_item_text">
-                {{ item.text }}
-              </div>
+              <div class="service-items_item_text">{{ item.text }}</div>
             </div>
           </div>
         </fg-form-item>

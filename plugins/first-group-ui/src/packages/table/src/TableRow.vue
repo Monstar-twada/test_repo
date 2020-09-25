@@ -1,5 +1,5 @@
 <template>
-  <tr ref="index-1" @click="$emit('rowClick', row)">
+  <tr @click="$emit('rowClick', row)">
     <TableCell
       v-for="column in visibleColumns"
       :key="column.id"
@@ -60,13 +60,6 @@ export default {
     },
   },
 
-  created() {
-    // this.groupByColumnName = this.row.data[this.groupBy]
-    // console.log('this.groupBy', this.groupBy)
-    // console.log('groupByColumnName', this.groupByColumnName)
-    // console.log('columns', this.columns)
-    // console.log('groupByName', this.beforeRow)
-  },
   methods: {},
 }
 </script>

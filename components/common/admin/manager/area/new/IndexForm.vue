@@ -17,11 +17,11 @@
               >
                 <fg-input v-model="item.value" placeholder="エリア" clearable />
               </div>
-              <v-img
-                :max-width="24"
-                :max-height="24"
+              <img
+                width="24"
+                height="24"
                 :src="require(`./img/trash-icon.svg`)"
-              ></v-img>
+              />
             </div>
           </div>
         </div>
