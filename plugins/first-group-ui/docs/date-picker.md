@@ -1,4 +1,4 @@
-# fg-calendar
+# fg-date-picker
 
 ## Properties
 
@@ -11,10 +11,10 @@
 |disabled|boolean|`false`|-|
 |error-message|string|`''`|-|
 |error-message-nowrap|boolean|`false`|-|
-|format|string|``|view format, Example: `yyyy/MM/dd` or `timestamp`|
+|format|string|`yyyy/MM/dd hh:mm:ss`|view format, Example: `yyyy/MM/dd hh:mm` or `timestamp`|
 |inline|boolean|`false`|-|
 |is-error|boolean|`false`|-|
-|placeholder|string|`選択`|-|
+|placeholder|string|`選択してください`|-|
 |popup-class|string|`''`|popup class name|
 |popup-position|string|`''`|Optional values: `left/right`|
 |select-mode|string|`single`|Optional values: `single/multiple/range`|
@@ -27,20 +27,11 @@
 |v-model/value|String, Array, Number, Date|`''`|-|
 |width|string, number|`''`|-|
 |writable|boolean|`false`|-|
-|* is-time-picker|boolean|`false`|Only for `fg-date-picker` component|
 
 ## Events
 
 |Name|Parameters|Description|
 |:--|:--|:--|
-|calendar|(calendar: VueComponent)|fg-calendar|
-|change|(value: string)|selected date, or null|
-|clear|(e: Event)|-|
-|click|(src: string, e: Event)|if `clickable`  is `true`, triggers when left button is clicked|
+|change|(value: string, original: any)|selected date, or null|
 |error|(err: Error)|-|
 
-## Slots
-
-|Name|Description|
-|:--|:--|
-|time-picker|-|

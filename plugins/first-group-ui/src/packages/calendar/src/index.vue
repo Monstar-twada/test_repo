@@ -7,6 +7,7 @@
       :disabled="disabled"
       :readonly="!writable"
       :size="size"
+      :width="width"
       :offset-right="clearable ? 0 : 23"
       :calendar-icon="isTimePicker ? 'clock' : 'calendar'"
       :is-error="isError"
@@ -14,6 +15,7 @@
       :error-message="errorMessage"
       @click="handleToggle"
       @change="inputChange"
+      @clear="$emit('clear')"
     />
     <fg-icon
       v-if="showBeforeDash"
