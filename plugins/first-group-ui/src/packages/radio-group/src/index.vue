@@ -2,10 +2,20 @@
   <component
     :is="_fgTag"
     class="fg-radio-group"
+    :class="{ 'is-error': isError || !!errorMessage }"
     role="radioGroup"
     @keydown="handleKeydown"
   >
     <slot></slot>
+    <transition name="fg-zoom-in-top">
+      <div
+        v-if="errorMessage"
+        class="error-message"
+        :class="{ __nowrap: errorMessageNowrap }"
+      >
+        {{ errorMessage }}
+      </div>
+    </transition>
   </component>
 </template>
 <script>
@@ -38,6 +48,12 @@ export default {
       type: String,
       default: '',
     },
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
   },
   computed: {
     _fgTag() {
@@ -100,6 +116,7 @@ export default {
 
 <style lang="scss">
 .fg-radio-group {
+  position: relative;
   /*
   .fg-radio {
     margin-right: 30px;
@@ -108,5 +125,25 @@ export default {
     }
   }
   */
+  &.is-error {
+    .fg-radio {
+      color: $--color-warning;
+      .fg-radio__inner {
+        border-color: $--color-warning;
+      }
+    }
+  }
+  .error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    // padding-top: 2px;
+    font-size: 10px;
+    color: $--color-warning;
+    line-height: 1;
+    &.__nowrap {
+      white-space: nowrap;
+    }
+  }
 }
 </style>

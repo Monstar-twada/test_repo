@@ -111,6 +111,9 @@ export default {
     height: 100%;
     background: $--color-border;
   }
+  .fg-form-item__error {
+    font-size: 10px;
+  }
 }
 
 @include b(form) {

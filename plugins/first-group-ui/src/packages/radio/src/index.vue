@@ -7,6 +7,7 @@
       { 'is-focus': focus },
       { 'is-bordered': border },
       { 'is-checked': model === label },
+      { 'is-error': isError || !!errorMessage },
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -41,6 +42,15 @@
       <slot></slot>
       <template v-if="!$slots.default">{{ label }}</template>
     </span>
+    <transition name="fg-zoom-in-top">
+      <div
+        v-if="errorMessage"
+        class="error-message"
+        :class="{ __nowrap: errorMessageNowrap }"
+      >
+        {{ errorMessage }}
+      </div>
+    </transition>
   </label>
 </template>
 <script>
@@ -70,6 +80,12 @@ export default {
       type: String,
       default: '',
     },
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
   },
   data() {
     return {
@@ -130,6 +146,19 @@ export default {
 <style lang="scss">
 @import '../../../assets/scss/mixin';
 @import '../../../assets/scss/function';
+
+.fg-radio {
+  position: relative;
+  &.is-error {
+    color: $--color-warning;
+    .fg-radio__inner {
+      border-color: $--color-warning;
+    }
+  }
+  .error-message {
+    padding-top: 4px;
+  }
+}
 
 @include b(radio) {
   color: $--color-primary;
