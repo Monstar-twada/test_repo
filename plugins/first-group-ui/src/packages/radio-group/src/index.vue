@@ -1,11 +1,21 @@
 <template>
   <component
-    :is="_elTag"
+    :is="_fgTag"
     class="fg-radio-group"
+    :class="{ 'is-error': isError || !!errorMessage }"
     role="radioGroup"
     @keydown="handleKeydown"
   >
     <slot></slot>
+    <transition name="fg-zoom-in-top">
+      <div
+        v-if="errorMessage"
+        class="error-message"
+        :class="{ __nowrap: errorMessageNowrap }"
+      >
+        {{ errorMessage }}
+      </div>
+    </transition>
   </component>
 </template>
 <script>
@@ -19,40 +29,29 @@ const keyCode = Object.freeze({
 })
 export default {
   name: 'FgRadioGroup',
-  inject: {
-    FgFormItem: {
-      default: '',
-    },
-  },
   mixins: [Broadcaster],
   props: {
     value: {
       type: [String, Number],
       default: '',
     },
+    disabled: Boolean,
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
     size: {
       type: String,
       default: '',
     },
-    disabled: Boolean,
   },
   computed: {
-    _fgFormItemSize() {
-      return (this.FgFormItem || {}).fgFormItemSize
-    },
-    _elTag() {
+    _fgTag() {
       return (this.$vnode.data || {}).tag || 'div'
     },
-    radioGroupSize() {
-      return this.size || this._fgFormItemSize
-    },
   },
-  watch: {
-    value(val) {
-      this.dispatch('FgFormItem', 'fg.form.change', [val])
-    },
-  },
-
   created() {
     this.$on('handleChange', (value) => {
       this.$emit('change', value)
@@ -109,6 +108,7 @@ export default {
 
 <style lang="scss">
 .fg-radio-group {
+  position: relative;
   /*
   .fg-radio {
     margin-right: 30px;
@@ -117,5 +117,25 @@ export default {
     }
   }
   */
+  &.is-error {
+    .fg-radio {
+      color: $--color-warning;
+      .fg-radio__inner {
+        border-color: $--color-warning;
+      }
+    }
+  }
+  .error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    // padding-top: 2px;
+    font-size: 10px;
+    color: $--color-warning;
+    line-height: 1;
+    &.__nowrap {
+      white-space: nowrap;
+    }
+  }
 }
 </style>

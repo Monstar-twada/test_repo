@@ -20,8 +20,6 @@ export default {
     FormWrapper,
   },
   data() {
-    const query = this.$route.query
-    console.log(query)
     return {
       pageTitle: '顧客管理',
       breadcrumbs: [

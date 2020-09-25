@@ -92,7 +92,9 @@ function getLocalData(api, load, isYaml) {
               }
               resolve(res)
             })
-            .catch(reject)
+            .catch(() => {
+              reject(err)
+            })
           return
         }
         reject(err)

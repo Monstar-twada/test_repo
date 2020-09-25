@@ -9,6 +9,7 @@ import { login } from '~/components/console/plugins/login'
 Vue.use(FirstGroupUI, {
   theme: 'red',
   project: 'console',
+  isDev: process.env.useMockData || process.env.NODE_ENV === 'development',
 })
 
 const extendsProps = {

@@ -15,6 +15,9 @@
     is-time-picker
     :value-format="valueFormat"
     :value-formatter="calendarValueFormat"
+    :is-error="isError"
+    :error-message="errorMessage"
+    :error-message-nowrap="errorMessageNowrap"
     @calendar="(that) => (calendar = that)"
   >
     <template v-slot:time-picker>
@@ -39,12 +42,15 @@
 </template>
 
 <script>
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import TimePicker from './time-picker'
+
 export default {
   name: 'FgDatePicker',
   components: {
     TimePicker,
   },
+  mixins: [formEmitterMixin],
   props: {
     value: {
       type: [String, Number, Date],
@@ -84,6 +90,12 @@ export default {
       type: [String, Number],
       default: '',
     },
+    isError: Boolean,
+    errorMessageNowrap: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -96,9 +108,6 @@ export default {
   },
   computed: {
     inputValue() {
-      console.warn(
-        this.date ? this.calendar.formatDate(this.date, this.format) : ''
-      )
       return this.date ? this.calendar.formatDate(this.date, this.format) : ''
     },
   },
@@ -108,6 +117,7 @@ export default {
       const res = val ? this.calendar.formatDate(val, format) : ''
       this.$emit('input', res)
       this.$emit('change', res, val)
+      this.emitFormChange()
     },
     value(val) {
       this.resetDateTime(val)

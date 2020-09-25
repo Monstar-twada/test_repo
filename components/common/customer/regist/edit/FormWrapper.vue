@@ -6,68 +6,70 @@
           <h3>基本情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px">
+      <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="お客様の写真">
           <fg-image-processor
-            width="80px"
-            height="80px"
+            width="80"
+            height="80"
             :options="{ width: 720, height: 720 }"
-            :url="form.photoKey"
-            :validate="customValidate"
-            @change="avatarChange"
+            :url="facePhoto"
+            :validate="avatarValidator"
+            @change="(res) => fileChange(res, 'facePhoto')"
           ></fg-image-processor>
         </fg-form-item>
 
         <fg-form-item label="個人/法人">
-          <fg-radio-group v-model="form.customerType">
+          <fg-radio-group
+            v-model="form.privateBusiness"
+            :error-message="errors.privateBusiness"
+          >
             <fg-radio
               v-for="(item, i) in customerTypes"
               :key="i"
-              :label="item.text"
-            ></fg-radio>
+              :label="item.value"
+              >{{ item.text }}</fg-radio
+            >
           </fg-radio-group>
         </fg-form-item>
 
-        <fg-form-item label="氏名" show-suffix-required-icon>
-          <fg-row gutter="20">
-            <fg-col span="10">
-              <fg-input
-                v-model="form.lastName"
-                placeholder="姓"
-                :length="strLength.lastName"
-              ></fg-input>
-            </fg-col>
-            <fg-col span="10">
-              <fg-input
-                v-model="form.firstName"
-                placeholder="名"
-                :length="strLength.firstName"
-              ></fg-input>
-            </fg-col>
-          </fg-row>
+        <fg-form-item label="氏名" required>
+          <fg-input
+            v-model="form.lastName"
+            inline
+            width="210"
+            placeholder="姓"
+            :error-message="errors.lastName"
+          ></fg-input>
+          <fg-input
+            v-model="form.firstName"
+            inline
+            class="ml15"
+            width="210"
+            placeholder="名"
+            :error-message="errors.firstName"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="フリガナ">
-          <fg-row gutter="20">
-            <fg-col span="10">
-              <fg-input
-                v-model="form.lastNameKana"
-                placeholder="セイ"
-                :length="strLength.lastNameKana"
-              ></fg-input>
-            </fg-col>
-            <fg-col span="10">
-              <fg-input
-                v-model="form.firstNameKana"
-                placeholder="メイ"
-                :length="strLength.firstNameKana"
-              ></fg-input>
-            </fg-col>
-          </fg-row>
+          <fg-input
+            v-model="form.lastNameKana"
+            placeholder="セイ"
+            inline
+            width="210"
+            :error-message="errors.lastNameKana"
+          ></fg-input>
+          <fg-input
+            v-model="form.firstNameKana"
+            inline
+            class="ml15"
+            width="210"
+            placeholder="メイ"
+            :error-message="errors.firstNameKana"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="性別">
-          <fg-radio-group v-model="form.sex">
+          <fg-radio-group v-model="form.sex" :error-message="errors.sex">
             <fg-radio
               v-for="(item, i) in genders"
               :key="i"
@@ -81,7 +83,7 @@
           <fg-input
             v-model="form.cellphoneNumber"
             placeholder="00-0000-0000"
-            :length="strLength.cellphoneNumber"
+            :error-message="errors.cellphoneNumber"
           ></fg-input>
         </fg-form-item>
 
@@ -89,7 +91,7 @@
           <fg-input
             v-model="form.phoneNumber"
             placeholder="000-0000-0000"
-            :length="strLength.phoneNumber"
+            :error-message="errors.phoneNumber"
           ></fg-input>
         </fg-form-item>
 
@@ -97,38 +99,46 @@
           <fg-input
             v-model="form.email"
             placeholder="user@cars-enjoy.com"
-            :length="strLength.email"
+            :error-message="errors.email"
           ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="郵便番号">
           <fg-input
             v-model="form.zipCode"
-            width="160px"
+            width="160"
             placeholder="000-0000"
-            :length="strLength.zipCode"
+            :error-message="errors.zipCode"
           ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="都道府県">
-          <fg-select width="160px"></fg-select>
+          <fg-select
+            v-model="form.prefecturesCode"
+            width="160px"
+            :items="prefectures"
+            :error-message="errors.prefecturesCode"
+          ></fg-select>
         </fg-form-item>
 
         <fg-form-item label="市区町村">
-          <fg-input v-model="form.city" :length="strLength.city"></fg-input>
+          <fg-input
+            v-model="form.address1"
+            :error-message="errors.address1"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="番地など">
           <fg-input
-            v-model="form.address1"
-            :length="strLength.address1"
+            v-model="form.address2"
+            :error-message="errors.address2"
           ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="建物名・部屋番号など">
           <fg-input
-            v-model="form.address2"
-            :length="strLength.address2"
+            v-model="form.address3"
+            :error-message="errors.address3"
           ></fg-input>
         </fg-form-item>
 
@@ -137,104 +147,98 @@
             v-model="form.birthday"
             width="160px"
             writable
+            default-view="1985/01/01"
           ></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="勤務先">
           <fg-input
-            v-model="form.workName"
-            :length="strLength.workName"
+            v-model="form.organizationName"
+            :error-message="errors.organizationName"
           ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="勤務先電話番号">
           <fg-input
-            v-model="form.workPhoneNumber"
-            :length="strLength.workPhoneNumber"
+            v-model="form.organizationPhoneNumber"
+            :error-message="errors.organizationPhoneNumber"
           ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="勤続年数（入社日）">
-          <fg-calendar v-model="form.workYear" width="160px"></fg-calendar>
+          <fg-calendar
+            v-model="form.hireDate"
+            width="160px"
+            value-format="yyyy-MM-dd"
+          ></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="年収">
           <fg-input
             v-model="form.annualIncome"
-            type="number"
             width="160px"
-            :length="strLength.annualIncome"
+            :error-message="errors.annualIncome"
             unit="万円"
           ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="住宅（入居日）">
-          <fg-row gutter="20">
-            <fg-col span="5">
-              <fg-select v-model="form.homeX" placeholder="選択"></fg-select>
-            </fg-col>
-            <fg-col span="10">
-              <fg-calendar v-model="form.homeInDate" writable></fg-calendar>
-            </fg-col>
-          </fg-row>
+          <fg-select
+            v-model="form.residenceType"
+            :items="residenceTypes"
+            width="160"
+            inline
+            placeholder="選択"
+          ></fg-select>
+          <fg-calendar
+            v-model="form.moveInDate"
+            value-format="yyyy-MM-dd"
+            inline
+            width="210"
+            writable
+            class="ml15"
+          ></fg-calendar>
         </fg-form-item>
 
         <fg-form-item label="免許証">
           <fg-image-processor
-            url=""
+            accept="*"
+            :url="licenseImages.frontUrl"
             icon="license-front"
-            :validate="customValidate"
+            :validate="licenseValidator"
+            @change="(res) => fileChange(res, 'licenseImageFront')"
           ></fg-image-processor>
           <fg-image-processor
-            url=""
+            accept="*"
+            :url="licenseImages.backUrl"
             icon="license-back"
-            :validate="customValidate"
+            :validate="licenseValidator"
+            @change="(res) => fileChange(res, 'licenseImageBack')"
           ></fg-image-processor>
         </fg-form-item>
 
         <fg-form-item label="免許証の色">
           <fg-select
-            v-model="form.licenceColor"
+            v-model="form.licenseColor"
             width="110px"
             placeholder="選択"
+            :items="licenseColors"
           ></fg-select>
         </fg-form-item>
 
         <fg-form-item label="免許証番号">
           <fg-input
-            v-model="form.license"
+            v-model="form.licenseNumber"
             width="395px"
-            :length="strLength.license"
-            :custom-formatter="
-              (val) => changeToHankakuAndGetNumber('license', val)
-            "
+            :error-message="errors.licenseNumber"
           ></fg-input>
         </fg-form-item>
-        {{ form }}
-        <fg-form-item label="家族構成" class="plus-row-wrapper">
-          <fg-row gutter="15">
-            <fg-col span="5">
-              <fg-select placeholder="選択"></fg-select>
-            </fg-col>
-            <fg-col span="5">
-              <fg-input></fg-input>
-            </fg-col>
-            <fg-col span="5">
-              <fg-input></fg-input>
-            </fg-col>
-            <fg-col span="7">
-              <fg-calendar writable></fg-calendar>
-            </fg-col>
-            <fg-col span="1">
-              <fg-button size="mini" icon="trash" circle border></fg-button>
-            </fg-col>
-          </fg-row>
-          <fg-row>
-            <fg-col>
-              <fg-button size="small" icon="plus" circle border></fg-button>
-            </fg-col>
-          </fg-row>
-        </fg-form-item>
+
+        <FamilyItem
+          :customer-code="query.customerCode"
+          :items="form.family"
+          @change="familyChange"
+        />
       </fg-form>
     </WhiteBox>
 
@@ -244,13 +248,13 @@
           <h3>希望するカーライフ＆車両選定ポイント</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px">
+      <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="カーライフ">
           <fg-checkbox
             v-for="(item, index) in carLives"
             :key="index"
+            v-model="item.checked"
             :label="item.text"
-            :value="item.active"
             class="mr30"
           ></fg-checkbox>
         </fg-form-item>
@@ -258,8 +262,8 @@
           <fg-checkbox
             v-for="(item, index) in selectionPoints"
             :key="index"
+            v-model="item.checked"
             :label="item.text"
-            :value="item.active"
             class="mr30"
           ></fg-checkbox>
         </fg-form-item>
@@ -272,21 +276,30 @@
           <h3>その他の情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="140px">
+      <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="ペット">
-          <fg-input v-model="form.pet" :length="strLength.pet"></fg-input>
+          <fg-input v-model="form.pet" :error-message="errors.pet"></fg-input>
         </fg-form-item>
 
         <fg-form-item label="実家">
-          <fg-input v-model="form.home" :length="strLength.home"></fg-input>
+          <fg-input
+            v-model="form.parentsHomeAddress"
+            :error-message="errors.parentsHomeAddress"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="ドリンク">
-          <fg-input v-model="form.drink" :length="strLength.drink"></fg-input>
+          <fg-input
+            v-model="form.drink"
+            :error-message="errors.drink"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="趣味">
-          <fg-input v-model="form.hobby" :length="strLength.hobby"></fg-input>
+          <fg-input
+            v-model="form.hobby"
+            :error-message="errors.hobby"
+          ></fg-input>
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -306,127 +319,257 @@
 </template>
 
 <script>
-import WhiteBox from '~/components/common/customer/common/WhiteBox'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { storage } from '~/assets/js/storage'
+import WhiteBox from '../../common/WhiteBox'
+import ColumnTitle from '../../common/ColumnTitle'
+import FamilyItem from './FamilyItem'
+import { FORM_RULES } from './validate'
 import {
-  CAR_LIVES,
-  SELECTION_POINTS,
-  CUSTOMER_TYPES,
-  GENDERS,
-} from '~/assets/constants/index'
+  DEF_CUSTOMER_FORM,
+  CAR_LIVES_ENUM,
+  SELECTION_POINT_ENUM,
+} from './constants'
 
 export default {
   components: {
     ColumnTitle,
     WhiteBox,
+    FamilyItem,
   },
   data() {
     const query = this.$route.query
     return {
       query,
-      customerTypes: CUSTOMER_TYPES,
-      genders: GENDERS,
-      avatarData: {
-        url: '/common/person_default.svg',
-        name: '米田 道春',
-        summary: '（31歳）',
+      customerTypes: this.$ui.getBasicData('private_business'),
+      genders: this.$ui.getBasicData('sex'),
+      prefectures: this.$ui.getBasicData('prefectures'),
+      residenceTypes: this.$ui.getBasicData('residence_type'),
+      licenseColors: this.$ui.getBasicData('license_color'),
+      form: {},
+      selectedCarLives: [],
+      selectedSelectionPoints: [],
+      errors: {
+        firstName: '',
+        lastName: '',
       },
-      carLives: CAR_LIVES,
-      selectionPoints: SELECTION_POINTS,
-      form: query.edit ? storage.get('registCustomEdit') : {},
-      strLength: {
-        lastName: 255,
-        firstName: 255,
-        lastNameKana: 255,
-        firstNameKana: 255,
-        cellphoneNumber: 100,
-        phoneNumber: 100,
-        email: 254,
-        zipCode: 20,
-        city: 255,
-        address1: 255,
-        address2: 255,
-        workName: 255,
-        workPhoneNumber: 30,
-        annualIncome: 30,
-        license: 12,
-        pet: 255,
-        home: 255,
-        drink: 255,
-        hobby: 255,
-      },
+      family: [],
+      isSubmitting: false,
+      facePhoto: '',
+      licenseImages: {},
+      strLength: {},
     }
   },
-  created() {
-    if (!this.query.edit) {
-      this.getDetail()
-    }
-  },
-  methods: {
-    saveCache() {
-      storage.set('registCustomEdit', this.form)
-    },
-    handleConfirm() {
-      if (this.validation()) {
-        this.saveCache()
-        this.$router.push(`/customer/regist/user/confirm?id=${this.query.id}`)
-      }
-    },
-    handleBack() {
-      this.$router.push(`/customer/detail?id=${this.query.id}`)
-    },
-    changeToHankakuAndGetNumber(target, str) {
-      const hankaku = str.replace(/[０-９]/g, function (s) {
-        // eslint-disable-next-line
-        return String.fromCharCode(s.charCodeAt(0) - 0xfee0)
-      })
-      const justNumber = hankaku.replace(/\D/g, '')
-      this.form[target] = justNumber
-      return justNumber
-    },
-    validation() {
-      let count = 0
-      if (!this.form.lastName) {
-        count += 1
-      }
-      Object.keys(this.strLength).forEach((key) => {
-        if (this.form[key]) {
-          if (this.form[key].length > this.strLength[key]) {
-            count += 1
-          }
+  computed: {
+    carLives() {
+      return this.$ui.getBasicData('car_life').map((item) => {
+        return {
+          ...item,
+          checked: this.selectedCarLives.includes(item.value),
+          field: CAR_LIVES_ENUM[item.value],
         }
       })
-      return count === 0
     },
-    customValidate(file, next) {
-      if (!/^image\/(jpeg|png|pdf|heif)/.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+    selectionPoints() {
+      return this.$ui.getBasicData('selection_points').map((item) => {
+        return {
+          ...item,
+          checked: this.selectedSelectionPoints.includes(item.value),
+          field: SELECTION_POINT_ENUM[item.value],
+        }
+      })
+    },
+  },
+  created() {
+    this.getDetail()
+    this.getFacePhoto()
+    this.getLicenseImage()
+  },
+  methods: {
+    formChange() {
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+    },
+    async handleConfirm() {
+      if (this.isSubmitting) return
+      this.isSubmitting = true
+      const form = {
+        ...this.form,
+        family: this.family,
+      }
+      // car lives
+      this.carLives.forEach((item) => {
+        form[item.field] = +item.checked
+      })
+      // selection points
+      this.selectionPoints.forEach((item) => {
+        form[item.field] = +item.checked
+      })
+
+      // validate data
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
+      if (this.errors.length > 0) {
+        this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
+        this.isSubmitting = false
         return
       }
 
-      if (file.size / 1024 > 5120) {
+      // submit
+      try {
+        await this.$api.put(`/v1/customers/${this.query.customerCode}`, form)
+        await this.$alert(`顧客編集成功しました！`, { type: 'success' })
+        this.handleBack()
+      } catch (err) {
+        if (err) this.$alert(err.message)
+      }
+      this.isSubmitting = false
+    },
+    handleBack() {
+      this.$router.push(
+        `/customer/detail?customerCode=${this.query.customerCode}`
+      )
+    },
+    avatarValidator(file, callback) {
+      if (!/^image\/\w+/.test(file.type)) {
+        this.$alert('JPEG・PNG・HEIFファイルのみ選択できます')
+        return
+      }
+      callback()
+    },
+    licenseValidator({ type, size }, callback) {
+      if (
+        !/^image\/(jpeg|png|pdf|heif)/i.test(type) &&
+        !/^application\/pdf/i.test(type)
+      ) {
+        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        return
+      }
+      if (size / 1024 > 5120) {
         this.$alert('5MBまでのファイルが使用できます')
         return
       }
-      next()
+      callback()
     },
     async getDetail() {
       try {
-        const { customer, enquete } = await this.$api.get(
-          `/v1/customer/${this.query.id}`
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}`
         )
-        console.log('customer detail index.vue', customer, enquete)
-        if (customer) {
-          this.form = customer
-        }
-      } catch (e) {
-        console.error(e)
+        this.resetForm(res)
+      } catch (err) {
+        this.$alert(err.message)
+        console.error(err)
       }
     },
-    avatarChange(data) {
-      console.log('avatarChange', data)
-      this.form.photoKey = data.url
+    async getFacePhoto() {
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}/facePhoto`
+        )
+        this.facePhoto = res.url
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async getLicenseImage() {
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}/licenseImage`
+        )
+        this.licenseImages = res
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    fileChange(res, type) {
+      if (res && res.data) {
+        this.uploadFile(res.data)
+          .then((fileId) => {
+            this.deleteFile(type)
+            this.form[type] = fileId
+          })
+          .catch((err) => {
+            this.$alert(err.message)
+          })
+      } else {
+        // delete
+        this.deleteFile(type)
+      }
+    },
+    deleteFile(type) {
+      const fileId = this.form[type]
+      if (!fileId) return
+      console.error('delete file:', fileId)
+      const customerCode = this.query.customerCode
+      switch (type) {
+        case 'facePhoto':
+          this.$api
+            .delete(`/v1/customers/${customerCode}/facePhoto`)
+            .then(() => {
+              console.log(`delete ${type}: ${fileId} successfully!`)
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+          break
+        case 'licenseImageFront':
+        case 'licenseImageBack':
+          this.$api
+            .delete(`/v1/customers/${customerCode}/licenseImage`)
+            .then(() => {
+              console.log(`delete ${type}: ${fileId} successfully!`)
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+          break
+      }
+    },
+    uploadFile(file) {
+      return new Promise((resolve, reject) => {
+        this.$api
+          .upload(file, {
+            onProgress(per) {
+              console.log('onProgress', per + '%')
+            },
+          })
+          .then((res) => {
+            resolve(res.id)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    resetForm(res) {
+      const form = {}
+      Object.keys(DEF_CUSTOMER_FORM).forEach((key) => {
+        // licenseColor
+        if (key === 'licenseColor' && res[key]) {
+          const item =
+            this.licenseColors.find((item) => item.text === res[key]) || {}
+          form[key] = item.value || '1'
+          return
+        }
+        if (res[key]) {
+          form[key] = res[key]
+        }
+      })
+      // car life
+      if (Array.isArray(res.carLives)) {
+        this.selectedCarLives = res.carLives.map((item) => item.carLife)
+      } else {
+        this.selectedCarLives = []
+      }
+      // selection points
+      if (Array.isArray(res.selectionPoints)) {
+        this.selectedSelectionPoints = res.selectionPoints.map(
+          (item) => item.selectionPoints
+        )
+      } else {
+        this.selectedSelectionPoints = []
+      }
+      this.form = form
+    },
+    familyChange(arr) {
+      this.family = arr
     },
   },
 }

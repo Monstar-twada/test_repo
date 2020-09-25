@@ -1,5 +1,9 @@
 <template>
   <div class="example-table-experiment-wrapper">
+    <Docs />
+
+    <h2>Example</h2>
+
     <fg-table-experiment
       :headers="headers"
       :list="list"
@@ -55,7 +59,14 @@
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
+import Docs from './doc.md'
+
 export default {
+  components: {
+    Docs,
+  },
+  mixins: [customMixin],
   data() {
     return {
       headers: [

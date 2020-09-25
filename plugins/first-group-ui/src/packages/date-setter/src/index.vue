@@ -10,9 +10,11 @@
 
 <script>
 import ZxCalendar from 'zx-calendar'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
+
 export default {
   name: 'FgDateSetter',
-  components: {},
+  mixins: [formEmitterMixin],
   props: {
     value: {
       type: [Date, Number, String],

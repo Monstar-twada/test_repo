@@ -142,6 +142,9 @@ export default {
 
 <style lang="scss">
 .customer-insurance-dialog {
+  .fg-dialog__body {
+    margin: 2px 2px 2px 0;
+  }
   .body-wrapper {
     padding: 40px 90px;
     .fg-row {

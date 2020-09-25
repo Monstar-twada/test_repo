@@ -27,7 +27,7 @@ export default {
         },
         {
           text: '車両登録',
-          href: '/customer/car',
+          // href: '/customer/car',
         },
       ],
     }

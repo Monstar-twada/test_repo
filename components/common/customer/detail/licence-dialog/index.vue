@@ -9,10 +9,10 @@
     <div class="body-wrapper">
       <fg-row gutter="20">
         <fg-col span="12">
-          <img src="/common/licence-photo-a.jpg" alt="" />
+          <img :src="data.licenseImageFront" alt="" />
         </fg-col>
         <fg-col span="12">
-          <img src="/common/licence-photo-b.jpg" alt="" />
+          <img :src="data.licenseImageBack" alt="" />
         </fg-col>
       </fg-row>
     </div>
@@ -23,6 +23,10 @@
 export default {
   props: {
     value: Boolean,
+    data: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {

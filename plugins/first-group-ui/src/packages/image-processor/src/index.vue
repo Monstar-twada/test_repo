@@ -18,6 +18,7 @@
         border
         circle
         size="mini"
+        :disabled="!editable"
         @click="edit"
       ></fg-button>
       <fg-button
@@ -26,7 +27,7 @@
         border
         circle
         size="mini"
-        :disabled="!picUrl"
+        :disabled="!deletable || !picUrl"
         @click="del"
       ></fg-button>
     </div>
@@ -34,7 +35,7 @@
       ref="input"
       :accept="accept"
       type="file"
-      style="display: none"
+      style="display: none;"
       @change="inputChange"
     />
     <Cropper
@@ -96,6 +97,14 @@ export default {
       type: Function,
       default: undefined,
     },
+    editable: {
+      type: Boolean,
+      default: true,
+    },
+    deletable: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -122,6 +131,10 @@ export default {
       return ret
     },
     bgIconClass() {
+      // pdf
+      if (/application\/pdf/i.test(this.data.type)) {
+        return '__icon-pdf'
+      }
       const flg =
         this.icon &&
         ['car', 'license-back', 'license-front', 'pdf'].includes(this.icon)
@@ -132,17 +145,11 @@ export default {
     },
   },
   watch: {
-    data: {
-      deep: true,
-      handler(val) {
-        console.log(val)
-        this.$emit('change', { ...val })
-      },
-    },
     url(val) {
       if (this.data.url !== val) {
         this.data = {
           url: val,
+          type: this.$ui.getFileType(val, true),
         }
       }
     },
@@ -150,6 +157,7 @@ export default {
   methods: {
     del() {
       this.data = {}
+      this.$emit('change', {})
     },
     edit() {
       this.input.click()
@@ -167,18 +175,41 @@ export default {
     },
     handleFile(file) {
       this.file = file
+      const url = utils.toBlobUrl(file)
+      // image file
+      const { type, size } = file
+      if (!/^image\/\w+/i.test(type)) {
+        this.data = {
+          type,
+          size,
+          url,
+          data: file,
+          raw: {
+            file,
+          },
+        }
+        this.$emit('change', { ...this.data })
+        return
+      }
       const { width, height } = this.options
       if (width && height) {
-        this.blobUrl = utils.toBlobUrl(file)
+        this.blobUrl = url
         this.cropperVisible = true
       } else {
         handleMediaFile(file, this.options)
           .then((res) => {
             res.raw.file = file
+            if (!res.data) {
+              res.data = utils.base64ToBlob(res.base64)
+            }
+            if (!res.url) {
+              res.url = utils.toBlobUrl(res.data)
+            }
             this.data = res
+            this.$emit('change', { ...this.data })
           })
           .catch((err) => {
-            console.error(err)
+            this.$emit('error', err)
           })
       }
     },
@@ -188,9 +219,10 @@ export default {
         .then((res) => {
           res.raw.file = this.file
           this.data = res
+          this.$emit('change', { ...this.data })
         })
         .catch((err) => {
-          console.error(err)
+          this.$emit('error', err)
         })
     },
   },

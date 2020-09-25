@@ -1,6 +1,6 @@
 <template>
   <div class="example-image-processor-wrapper">
-    <Doc />
+    <Docs />
     <h2>Example</h2>
     <UserPhotoCrop />
     <IconType />
@@ -10,13 +10,13 @@
 
 <script>
 import { customMixin } from '../_app/mixins'
-import Doc from './doc.md'
+import Docs from '../../docs/image-processor.md'
 import UserPhotoCrop from './UserPhotoCrop.md'
 import IconType from './IconType.md'
 import Validate from './Validate.md'
 export default {
   components: {
-    Doc,
+    Docs,
     UserPhotoCrop,
     IconType,
     Validate,
