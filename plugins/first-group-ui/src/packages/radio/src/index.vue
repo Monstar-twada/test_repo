@@ -115,9 +115,7 @@ export default {
     },
     radioSize() {
       const temRadioSize = this.size
-      return this.isGroup
-        ? this.radioGroup.radioGroupSize || temRadioSize
-        : temRadioSize
+      return this.isGroup ? this.radioGroup.size || temRadioSize : temRadioSize
     },
     isDisabled() {
       return this.isGroup
@@ -173,7 +171,7 @@ export default {
   @include utils-user-select(none);
 
   @include when(bordered) {
-    padding: 12px 20px 0 10px;
+    padding: 8px 20px 0 10px;
     border-radius: 4px;
     border: 1px solid $--color-border;
     box-sizing: border-box;

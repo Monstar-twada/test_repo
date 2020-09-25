@@ -35,25 +35,17 @@ export default {
       type: [String, Number],
       default: '',
     },
-    fill: {
-      type: String,
-      default: '',
-    },
-    textColor: {
-      type: String,
-      default: '',
-    },
     disabled: Boolean,
-    size: {
-      type: String,
-      default: '',
-    },
     isError: Boolean,
     errorMessage: {
       type: String,
       default: '',
     },
     errorMessageNowrap: Boolean,
+    size: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     _fgTag() {
