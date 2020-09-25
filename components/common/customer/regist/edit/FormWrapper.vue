@@ -19,7 +19,10 @@
         </fg-form-item>
 
         <fg-form-item label="個人/法人">
-          <fg-radio-group v-model="form.privateBusiness">
+          <fg-radio-group
+            v-model="form.privateBusiness"
+            :error-message="errors.privateBusiness"
+          >
             <fg-radio
               v-for="(item, i) in customerTypes"
               :key="i"
@@ -66,7 +69,7 @@
         </fg-form-item>
 
         <fg-form-item label="性別">
-          <fg-radio-group v-model="form.sex">
+          <fg-radio-group v-model="form.sex" :error-message="errors.sex">
             <fg-radio
               v-for="(item, i) in genders"
               :key="i"
@@ -114,6 +117,7 @@
             v-model="form.prefecturesCode"
             width="160px"
             :items="prefectures"
+            :error-message="errors.prefecturesCode"
           ></fg-select>
         </fg-form-item>
 
