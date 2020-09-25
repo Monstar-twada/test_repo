@@ -4,7 +4,7 @@
     <div class="login-form">
       <div class="mb20">
         <fg-input
-          v-model="email"
+          v-model="form.email"
           placeholder="メールアドレス"
           clearable
           size="medium"
@@ -16,7 +16,7 @@
       </div>
       <div class="mb30">
         <fg-input
-          v-model="password"
+          v-model="form.password"
           placeholder="パスワード"
           size="medium"
           suffix-icon="eye"
@@ -35,7 +35,7 @@
         suffix-icon="arrow-right"
         round
         bold
-        @click="confirm"
+        @click="signIn"
         >ログイン</fg-button
       >
       <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+import Auth from '@aws-amplify/auth'
+// import { CognitoUser } from 'amazon-cognito-identity-js'
 import Logo from '~/components/common/logo/index'
 export default {
   components: {
@@ -81,8 +83,10 @@ export default {
   },
   data() {
     return {
-      email: '',
-      password: '',
+      form: {
+        email: 'test01@ml.local',
+        password: '845yVs@hj9K*',
+      },
       // eslint-disable-next-line no-useless-escape
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
@@ -135,6 +139,29 @@ export default {
     confirm() {
       const count = this.validation()
       if (count === 0) this.$login.success.call(this)
+    },
+
+    async signIn() {
+      const { email, password } = this.form
+      console.log(email, password)
+      try {
+        const cognitoUser = await Auth.currentAuthenticatedUser()
+        const currentSession = await Auth.currentSession()
+        cognitoUser.refreshSession(
+          currentSession.refreshToken,
+          (err, session) => {
+            console.log('session', err, session)
+            const { idToken, refreshToken, accessToken } = session
+            console.log(idToken, refreshToken, accessToken)
+            // do whatever you want to do now :)
+          }
+        )
+      } catch (e) {
+        console.log('Unable to refresh Token', e)
+      }
+      // const user = await Auth.signIn(email, password)
+      // console.log(user)
+      // return user
     },
   },
 }

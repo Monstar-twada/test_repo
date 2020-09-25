@@ -25,5 +25,6 @@ export default merge(baseConfig, {
   buildDir: 'dist/.manager',
   plugins: [
     { src: '~/plugins/global-manager-properties.js', ssr: false },
+    '~/plugins/aws',
   ],
 })
