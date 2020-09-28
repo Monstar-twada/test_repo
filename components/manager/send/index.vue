@@ -7,10 +7,18 @@
       icon-width="30"
     >
       <template v-slot:right>
-        <PlusButton @click="$router.push('/send/form')" />
+        <fg-button
+          type="primary"
+          width="106"
+          size="small"
+          border
+          round
+          prefix-icon="car-line"
+          >送客依頼</fg-button
+        >
       </template>
     </Breadcrumbs>
-    <CustomerInfo class="mt10 mb30" />
+    <SendSales />
     <SearchBar />
     <SendList />
   </div>
@@ -18,8 +26,7 @@
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import PlusButton from '~/components/common/breadcrumbs/PlusButton'
-import CustomerInfo from '~/components/manager/send/index/customer-info/index'
+import SendSales from '~/components/manager/send/index/send-sales/index'
 import SearchBar from '~/components/manager/send/index/search-bar/index'
 import SendList from '~/components/manager/send/index/send-list/index'
 
@@ -28,8 +35,7 @@ export default {
   // middleware: 'authenticated',
   components: {
     Breadcrumbs,
-    PlusButton,
-    CustomerInfo,
+    SendSales,
     SearchBar,
     SendList,
   },

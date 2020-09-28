@@ -11,32 +11,41 @@
         <fg-col span="7">
           <b>日時</b>
           <fg-date-picker
-            v-model="form.date"
+            v-model="form.activityReportDatetime"
             format="yyyy/MM/dd (W) hh:mm"
+            value-format="yyyy-MM-dd hh:mm"
           ></fg-date-picker>
         </fg-col>
         <fg-col span="7">
           <b>対象車両</b>
-          <fg-select />
+          <fg-select v-model="form.carCode" :items="cars" placeholder="選択" />
         </fg-col>
         <fg-col span="4">
           <b>取引種別</b>
-          <fg-select placeholder="選択" />
+          <fg-select
+            v-model="form.transactionType"
+            :items="transactionTypes"
+            placeholder="選択"
+          />
         </fg-col>
         <fg-col span="6">
           <b>チャネル</b>
-          <fg-select />
+          <fg-select
+            v-model="form.channel"
+            placeholder="選択"
+            :items="channels"
+          />
         </fg-col>
       </fg-row>
       <div class="check-wrapper mt25">
         <h3>要チェック</h3>
-        <fg-checkbox label="チェック"></fg-checkbox>
+        <fg-checkbox v-model="form.checkFlag" label="チェック"></fg-checkbox>
       </div>
       <div class="info-body mt25">
         <h3>コメント</h3>
         <div class="mt15">
           <fg-input
-            v-model="form.content"
+            v-model="form.comment"
             class="event-textarea"
             type="textarea"
           ></fg-input>
@@ -44,30 +53,59 @@
       </div>
     </div>
     <div class="footer-wrapper">
-      <fg-button type="primary" width="240px" @click="save">保存</fg-button>
+      <fg-button
+        type="primary"
+        width="240px"
+        :disabled="isDisabled"
+        @click="save"
+        >保存</fg-button
+      >
     </div>
   </fg-dialog>
 </template>
 
 <script>
+import { DEF_FORM } from './constants'
+
 export default {
   props: {
     value: Boolean,
+    item: {
+      type: Object,
+      default: () => {},
+    },
+    cars: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
-      carModel: '',
       visible: this.value,
       form: {
-        date: '',
-        content: `ギアアップの不具合を感じるとのことで入庫されたが、テスターを当てても、特に該当するような症状は見受けられず、何度か走行テストも実施した結果、万が一あり得るとしたら触媒の劣化であることが考察されたが、テストで取り替えるにはあまりに高いので、50万相当の工賃がかかる旨と若干の違和感を感じるかもしれないが、走行に問題が生じているわけではない旨を説明し車は戻していたが、再度やはりおかしいとの問い合わせ。`,
+        ...DEF_FORM,
       },
+      isDisabled: false,
     }
   },
-  computed: {},
+  computed: {
+    transactionTypes() {
+      return this.$ui.getBasicData('transaction_type')
+    },
+    channels() {
+      return this.$ui.getBasicData('channel')
+    },
+  },
   watch: {
     value(val) {
       this.visible = val
+      if (val) {
+        this.form = {
+          ...this.item,
+          activityReportDatetime: this.item.actitionDatetime,
+          checkFlag: +this.item.checkFlag,
+        }
+      }
     },
     visible(val) {
       this.$emit('input', val)
@@ -75,7 +113,28 @@ export default {
   },
   methods: {
     save() {
-      this.visible = false
+      if (this.isDisabled) return
+      this.isDisabled = true
+      const form = {}
+      Object.keys(DEF_FORM).forEach((key) => {
+        form[key] = this.form[key]
+      })
+      form.checkFlag = +form.checkFlag
+      this.$api
+        .put(
+          `/v1/customers/${this.form.customerCode}/activityReports/${this.form.activityId}`,
+          form
+        )
+        .then(() => {
+          this.visible = false
+          this.$alert('活動報告編集成功しました！')
+          this.$emit('change')
+          this.isDisabled = false
+        })
+        .catch((err) => {
+          if (err) this.$alert(err.message)
+          this.isDisabled = false
+        })
     },
   },
 }

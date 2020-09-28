@@ -12,7 +12,7 @@
           size="small"
           class="mr10"
           width="106"
-          style="display: none"
+          style="display: none;"
           >車両追加</fg-button
         >
         <fg-button
@@ -20,7 +20,7 @@
           justify="center"
           size="small"
           width="106"
-          style="display: none"
+          style="display: none;"
           @click="sendingRequestClick"
           >送客依頼</fg-button
         >
@@ -28,20 +28,26 @@
     </Breadcrumbs>
 
     <CustomerInfo class="customer-info" :data="customerData" />
-    <CarInfo :customer-id="query.id" />
-    <EventTable class="customer-info mt30" :customer-id="query.id" />
+    <CarInfo
+      :customer-code="query.customerCode"
+      @current-car-code="(code) => (currentCarCode = code)"
+    />
+    <EventTable
+      class="customer-info mt30"
+      :customer-code="query.customerCode"
+      :customer-data="customerData"
+      :current-car-code="currentCarCode"
+    />
   </div>
 </template>
 
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import CustomerInfo from '~/components/common/customer/detail/CustomerInfo.vue'
+import CustomerInfo from '~/components/common/customer/detail/customer-info/index.vue'
 import CarInfo from '~/components/common/customer/detail/car-info/index.vue'
 import EventTable from '~/components/common/customer/detail/event-table/index.vue'
 
 export default {
-  layout: 'manager',
-  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     CustomerInfo,
@@ -63,12 +69,10 @@ export default {
         },
       ],
       query: this.$route.query || {},
-      customerData: {
-        enquete: {},
-      },
+      customerData: {},
+      currentCarCode: '',
     }
   },
-  watch: {},
   created() {
     this.getDetail()
   },
@@ -76,19 +80,21 @@ export default {
     sendingRequestClick() {},
     async getDetail() {
       try {
-        const res = await this.$api.get(`/v1/customer/${this.query.id}`)
-        // console.log('customer detail index.vue', res)
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}`
+        )
         this.customerData = {
-          ...res.customer,
-          enquete: res.enquete || {},
+          ...res,
         }
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
+        this.$alert(err.message)
+        console.error(err)
       }
     },
   },
 }
 </script>
+
 <style lang="scss">
 .customer-detail-page-wrapper {
   color: $--color-primary;

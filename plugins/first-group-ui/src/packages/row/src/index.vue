@@ -17,6 +17,7 @@ export default {
       type: String,
       default: 'top',
     },
+    overflowHide: Boolean,
   },
 
   computed: {
@@ -38,6 +39,7 @@ export default {
           this.justify !== 'start' ? `is-justify-${this.justify}` : '',
           this.align !== 'top' ? `is-align-${this.align}` : '',
           { 'fg-row--flex': this.type === 'flex' },
+          { 'overflow-hide': this.overflowHide }
         ],
         style: this.style,
       },
@@ -51,7 +53,6 @@ export default {
 .fg-row {
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
   &:before,
   &:after {
     display: table;

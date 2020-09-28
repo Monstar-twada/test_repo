@@ -11,12 +11,14 @@ body {
   font-family: 'Avenir Next', 'Yantramanav', 'Noto Sans JP', 'Helvetica', Arial,
   'Microsoft Yahei';
 }
+
 body {
   overflow: hidden;
 }
 
-h2, h3, pre {
+h2, h3, h4, pre {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 h2 {
@@ -28,7 +30,7 @@ h3, p {
 }
 
 $sideWidth: 210px;
-$headerHeight: 60px;
+$headerHeight: 40px;
 
 .example-page-wrapper {
   overflow-y: auto;
@@ -55,7 +57,8 @@ $headerHeight: 60px;
       text-indent: 20px;
     }
     h1 {
-      width: $sideWidth;
+      //width: $sideWidth;
+      font-size: 20px;
     }
     a {
       display: block;
@@ -112,31 +115,49 @@ $headerHeight: 60px;
   }
 
   .main-page-wrapper {
-    margin: 20px 20px 20px 230px;
-    max-width: 1200px;
+    margin: $headerHeight 20px 20px $sideWidth + 20;
+    max-width: 1000px;
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      color: $--color-primary;
+    }
+    h1 {
+      border-bottom: 1px solid $--color-border;
+      padding: 20px 0 10px;
+    }
+    ul {
+      margin: 20px 0 0 0;
+      li {
+        margin-left: 20px;
+      }
+    }
   }
 }
 
 table {
   width: 100%;
-  border: 0;
   color: #555;
+  border-spacing: 0;
   border-collapse: collapse;
+  border: 1px solid $--color-border;
   tr {
     th,
     td {
       padding: 10px;
       font-size: 14px;
+      border: 1px solid $--color-border;
     }
     th {
-      background: $--color-background-hover;
+      background: $--color-background;
     }
-    td {
-      border-bottom: 1px solid $--color-border;
-    }
-    &:hover {
+    &:nth-child(2n) {
       td {
         background: $--color-background;
+      }
+    }
+    &:last-child {
+      td {
+        border-bottom: 0;
       }
     }
   }

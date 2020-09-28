@@ -1,7 +1,8 @@
 <template>
   <div class="example-calendar-wrapper">
-    <Doc />
+    <Docs />
     <ValidateDemo />
+
     <h2>Example</h2>
     <fg-row gutter="20">
       <fg-col span="12">
@@ -129,11 +130,11 @@
 
 <script>
 import { customMixin } from '../_app/mixins'
-import Doc from './doc.md'
+import Docs from '../../docs/calendar.md'
 import ValidateDemo from './ValidateDemo.md'
 export default {
   components: {
-    Doc,
+    Docs,
     ValidateDemo,
   },
   mixins: [customMixin],
