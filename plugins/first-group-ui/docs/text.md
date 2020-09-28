@@ -4,13 +4,10 @@
 
 |Props|Type|Default|Description|
 |:--|:--|:--|:--|
-|-|-|-|-|
-
-## Events
-
-|Name|Parameters|Description|
-|:--|:--|:--|
-|change|(value: any)|-|
+|rows|number|`1`|-|
+|line-height|number|`18`|-|
+|font-size|number|`12px`|-|
+|unit|string|`px`|example: `em`, `rem`|
 
 ## Slots
 
