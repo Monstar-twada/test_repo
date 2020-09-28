@@ -1,12 +1,10 @@
-### round
-
 ```html
-<fg-input v-model="value" round width="210" />
+<fg-month-picker v-model="current" />
 <script>
 export default {
   data() {
     return {
-      value: 'round',
+      current: { year: 2020, month: 8 },
     }
   }
 }

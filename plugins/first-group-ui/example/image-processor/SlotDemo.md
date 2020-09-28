@@ -7,7 +7,6 @@
     <div class="ml5">placeholder</div>
   </template>
 </fg-image-processor>
-
 <script>
 export default {
   data() {

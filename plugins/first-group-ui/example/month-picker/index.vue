@@ -1,26 +1,26 @@
 <template>
   <div class="example-month-picker-wrapper">
-    <fg-month-picker v-model="current"></fg-month-picker>
+    <Docs />
+    <h2>Example</h2>
+    <Normal />
   </div>
 </template>
 
 <script>
 import { customMixin } from '../_app/mixins'
+import Docs from '../../docs/month-picker.md'
+import Normal from './Normal.md'
 
 export default {
-  mixins: [customMixin],
-  data() {
-    return {
-      current: { year: 2020, month: 8 },
-    }
+  components: {
+    Docs,
+    Normal,
   },
+  mixins: [customMixin],
 }
 </script>
 
 <style lang="scss">
 .example-month-picker-wrapper {
-  .fg-row {
-    padding-bottom: 20px;
-  }
 }
 </style>

@@ -9,7 +9,6 @@
   :custom-formatter="customFormatter">
   <template v-slot:prefix>$</template>
 </fg-input>
-
 <script>
 import { toCommaNumber } from '~/plugins/first-group-ui/src/libs/index'
 

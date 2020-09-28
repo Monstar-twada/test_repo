@@ -7,7 +7,6 @@
   :url="url"
   :validate="customValidate"
   @change="change" />
-
 <script>
 export default {
   data() {
