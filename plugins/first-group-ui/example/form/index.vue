@@ -5,7 +5,7 @@
     <h2>Example</h2>
     <Normal />
 
-    <div style="background: #1e5199; padding: 20px;">
+    <div style="background: #1e5199; padding: 20px">
       <div class="form-inner-wrapper">
         <h5>基本情報</h5>
         <fg-form ref="form" size="mini" label-width="150px">

@@ -113,7 +113,7 @@
         :offset-left="22"
       >
         <template v-slot:prefix>
-          <img :src="iconShop" alt="" style="margin-right: 5px;" />
+          <img :src="iconShop" alt="" style="margin-right: 5px" />
         </template>
       </fg-select>
     </div>

@@ -32,6 +32,7 @@ import { plus } from './plus'
 import { tel } from './tel'
 import { trash } from './trash'
 import { questionMaskCircle } from './question-mask-circle'
+import { shop } from './shop'
 
 export default {
   'arrow-top': arrowTop,
@@ -63,4 +64,5 @@ export default {
   'qm-circle': questionMaskCircle,
   tel,
   trash,
+  shop,
 }

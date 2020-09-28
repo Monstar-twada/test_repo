@@ -1,13 +1,13 @@
 <template>
-  <Company />
+  <Edit />
 </template>
 
 <script>
-import Company from '~/components/console/company_all/index/index'
+import Edit from '~/components/console/company_all/edit/index'
 export default {
   layout: 'console',
   components: {
-    Company,
+    Edit,
   },
 }
 </script>

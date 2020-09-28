@@ -30,7 +30,7 @@
         @click="handleMessageBox('multiple')"
         >alert</fg-button
       >
-      <div style="height: 1000px;"></div>
+      <div style="height: 1000px"></div>
     </fg-form-item>
   </fg-form>
 </template>

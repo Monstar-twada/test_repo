@@ -1,13 +1,13 @@
 <template>
-  <Company />
+  <Regist />
 </template>
 
 <script>
-import Company from '~/components/console/company_all/index/index'
+import Regist from '~/components/console/company_all/regist/index'
 export default {
   layout: 'console',
   components: {
-    Company,
+    Regist,
   },
 }
 </script>
