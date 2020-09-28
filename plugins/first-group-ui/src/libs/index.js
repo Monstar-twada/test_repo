@@ -4,7 +4,7 @@
  * Date: 2020-09-14 16:17
  */
 import { getCache, setCache, removeCache, clearCache } from './storage'
-import { logStr } from './console'
+import { logStr, log, warn, error } from './console'
 import {
   getMaxZIndex,
   getStyleValue,
@@ -15,8 +15,10 @@ import {
 import {
   hasOwn,
   isArray,
+  isBoolean,
   isElement,
   isFunction,
+  isObject,
   isUndefined,
   isString,
   isNumber,
@@ -27,27 +29,41 @@ import { slice } from './array'
 import { getParentComponent } from './component'
 import { windowDispatcher } from './events'
 import {
+  booleanToNumber,
+  formatDate,
+  toDate,
   toNumber,
   toTwoDigits,
   toHumpStr,
   toCommaNumber,
   createRandomStr,
   merge,
+  getFileType,
 } from './format'
+import { fmtSort, clearBasicData, getBasicData } from './extends/index'
+import { formSyncValidator } from './extends/validate'
 
 /**
  * init app
  * @param project
  */
-function init(project = 'manager') {
+function init(project = 'fg') {
   this.project = project
 }
 
 export {
+  booleanToNumber,
+  clearBasicData,
   clearCache,
   createRandomStr,
   createUrlQuery,
+  error,
+  formatDate,
+  formSyncValidator,
+  fmtSort,
+  getBasicData,
   getCache,
+  getFileType,
   getMaxZIndex,
   getParentComponent,
   getStyleValue,
@@ -55,13 +71,16 @@ export {
   getScrollParents,
   hasOwn,
   init,
+  log,
   logStr,
   merge,
   isArray,
+  isBoolean,
   isElement,
   isFunction,
   isNumber,
   isNumberLike,
+  isObject,
   isString,
   isUndefined,
   removeCache,
@@ -69,8 +88,10 @@ export {
   setCache,
   slice,
   toCommaNumber,
+  toDate,
   toNumber,
   toTwoDigits,
   toHumpStr,
+  warn,
   windowDispatcher,
 }

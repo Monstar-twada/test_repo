@@ -25,8 +25,10 @@
   </label>
 </template>
 <script>
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 export default {
   name: 'FgCheckbox',
+  mixins: [formEmitterMixin],
   props: {
     value: {
       type: [Boolean, Number, String],
@@ -64,6 +66,7 @@ export default {
       if (!this.sync) this.checked = value
       this.$emit('change', value)
       this.$emit('input', value)
+      this.emitFormChange()
     },
   },
 }

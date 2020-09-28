@@ -7,6 +7,7 @@
       { 'is-focus': focus },
       { 'is-bordered': border },
       { 'is-checked': model === label },
+      { 'is-error': isError || !!errorMessage },
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -41,23 +42,25 @@
       <slot></slot>
       <template v-if="!$slots.default">{{ label }}</template>
     </span>
+    <transition name="fg-zoom-in-top">
+      <div
+        v-if="errorMessage"
+        class="error-message"
+        :class="{ __nowrap: errorMessageNowrap }"
+      >
+        {{ errorMessage }}
+      </div>
+    </transition>
   </label>
 </template>
 <script>
 import Broadcaster from '../../../assets/js/broadcaster'
 import { getParentComponent } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 
 export default {
   name: 'FgRadio',
-  mixins: [Broadcaster],
-  inject: {
-    fgForm: {
-      default: '',
-    },
-    fgFormItem: {
-      default: '',
-    },
-  },
+  mixins: [Broadcaster, formEmitterMixin],
   props: {
     value: {
       type: [String, Number],
@@ -77,6 +80,12 @@ export default {
       type: String,
       default: '',
     },
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
   },
   data() {
     return {
@@ -104,21 +113,14 @@ export default {
           (this.$refs.radio.checked = this.model === this.label)
       },
     },
-    _fgFormItemSize() {
-      return (this.fgFormItem || {}).fgFormItemSize
-    },
     radioSize() {
-      const temRadioSize = this.size || this._fgFormItemSize
-      return this.isGroup
-        ? this.radioGroup.radioGroupSize || temRadioSize
-        : temRadioSize
+      const temRadioSize = this.size
+      return this.isGroup ? this.radioGroup.size || temRadioSize : temRadioSize
     },
     isDisabled() {
       return this.isGroup
-        ? this.radioGroup.disabled ||
-            this.disabled ||
-            (this.fgForm || {}).disabled
-        : this.disabled || (this.fgForm || {}).disabled
+        ? this.radioGroup.disabled || this.disabled
+        : this.disabled
     },
     tabIndex() {
       return this.isDisabled || (this.isGroup && this.model !== this.label)
@@ -130,6 +132,7 @@ export default {
     handleChange() {
       this.$nextTick(() => {
         this.$emit('change', this.model)
+        this.emitFormChange()
         this.isGroup &&
           this.dispatch('FgRadioGroup', 'handleChange', this.model)
       })
@@ -141,6 +144,19 @@ export default {
 <style lang="scss">
 @import '../../../assets/scss/mixin';
 @import '../../../assets/scss/function';
+
+.fg-radio {
+  position: relative;
+  &.is-error {
+    color: $--color-warning;
+    .fg-radio__inner {
+      border-color: $--color-warning;
+    }
+  }
+  .error-message {
+    padding-top: 4px;
+  }
+}
 
 @include b(radio) {
   color: $--color-primary;
@@ -155,7 +171,7 @@ export default {
   @include utils-user-select(none);
 
   @include when(bordered) {
-    padding: 12px 20px 0 10px;
+    padding: 8px 20px 0 10px;
     border-radius: 4px;
     border: 1px solid $--color-border;
     box-sizing: border-box;

@@ -5,24 +5,45 @@
  */
 const md = require('markdown-it')()
   .use(require('markdown-it-multimd-table'))
-const { escapeTag } = require('./helper')
+const { escapeTag, esDoublesBrackets } = require('./helper')
 
 module.exports = function(source) {
   const lines = []
+  // vue code
   const codes = []
+  // other code
+  const tempCodes = []
   const tables = []
-  let hasCode = false
+  // let hasCode = false
   let isCode = false
+  let isHtml = false
   source.split(/[\n\r]/).forEach(line => {
-    if (!line) return
+    // keep blank lines in the code
+    if (!isCode && !line) return
     // check code
-    if (/^```/.test(line)) {
-      hasCode = true
-      isCode = line.length > 3
+    if (/^```(\w*)/.test(line.trim())) {
+      // hasCode = true
+      isCode = line.trim().length > 3
+      // Multiple HTML code blocks cannot appear
+      if (isCode && RegExp.$1 === 'html') {
+        isHtml = true
+      }
+      if (!isCode) {
+        if (!isHtml && tempCodes.length) {
+          lines.push(`<pre><code class="${RegExp.$1}">`)
+          lines.push(...tempCodes)
+          lines.push(`</code></pre>`)
+          tempCodes.length = 0
+        }
+      }
       return
     }
     if (isCode) {
-      codes.push(line)
+      if (isHtml) {
+        codes.push(line)
+      } else {
+        tempCodes.push(escapeTag(line))
+      }
     } else {
       // check table
       if (/\s*\|.*\|/.test(line)) {
@@ -48,33 +69,36 @@ module.exports = function(source) {
     arr.push(line)
   })
 
-  // create pre
-  let isTemplate = true
-  const pres = ['<pre><code class="html hljs">', escapeTag('<template>')]
-  pres.push(escapeTag('  <div>'))
-  codes.forEach(line => {
-    if (/^<script/.test(line)) {
-      pres.push(escapeTag('  </div>'))
-      pres.push(escapeTag('</template>'))
-      pres.push('')
-      isTemplate = false
-    }
-    pres.push((isTemplate ? '    ' : '') + escapeTag(line))
-  })
-  pres.push('</code></pre>')
+  if (codes.length) {
+    // create pre
+    let isTemplate = true
+    const pres = ['<pre><code class="html hljs">', escapeTag('<template>')]
+    pres.push(escapeTag('  <div>'))
+    codes.forEach(line => {
+      if (/^<script/.test(line)) {
+        pres.push(escapeTag('  </div>'))
+        pres.push(escapeTag('</template>'))
+        pres.push('')
+        isTemplate = false
+      }
+      pres.push((isTemplate ? '    ' : '') + escapeTag(esDoublesBrackets(line)))
+    })
+    pres.push('</code></pre>')
 
-  // codes
-  codes.forEach(line => {
-    if (/^<script/.test(line)) {
-      arr.push(pres.join('\n'))
-      arr.push('</div></template>')
-    }
-    arr.push(line)
-  })
-
-  if (!hasCode) {
+    // codes
+    codes.forEach(line => {
+      if (/^<script/.test(line)) {
+        arr.push(pres.join('\n'))
+        arr.push('</div></template>')
+      }
+      arr.push(line)
+    })
+  } else {
     arr.push('</div></template>')
   }
+  // if (!hasCode) {
+  //   arr.push('</div></template>')
+  // }
 
   // console.log(arr.join('\n'))
   return arr.join('\n')

@@ -25,57 +25,66 @@
       td-space-vertical-line
       stripe
       small-header
+      @sort-change="sortChange"
     >
       <tr v-for="(item, i) in list" :key="i" @click="clickRow(item)">
         <td>{{ item.maker }}</td>
-        <td>{{ item.class }}</td>
-        <td>{{ fmtCarNumber(item) }}</td>
-        <td>2020/09/20</td>
-        <td>2020/09/20</td>
-        <td>2020/09/02</td>
+        <td>{{ item.carType }}</td>
+        <td>{{ item | fmtCarNumber }}</td>
+        <td>{{ item.registrationFirstDate | fmtDate }}</td>
+        <td>{{ item.registrationEndDate | fmtDate }}</td>
+        <td>{{ item.sellingDatetime | fmtDate }}</td>
         <td>
           <fg-tag
             size="medium"
             width="60px"
             round
             bold
-            :color="i % 4 === 1 ? '#fff' : '$--color-primary-active'"
-            :bg-color="i % 4 === 1 ? '$--color-primary-active' : '#DFE6F0'"
-            >{{ i % 4 === 1 ? 'YES' : 'No' }}</fg-tag
+            :color="
+              item.carInspectionFlag === '1' ? '#fff' : $colors.primaryActive
+            "
+            :bg-color="
+              item.carInspectionFlag === '1' ? $colors.primaryActive : '#DFE6F0'
+            "
+            >{{ item.carInspectionFlag === '1' ? 'YES' : 'No' }}</fg-tag
           >
         </td>
         <td>
-          <span v-if="i % 4 === 1" class="temp-checkbox">
+          <span v-if="item.reservationFlag === '1'" class="temp-checkbox">
             <fg-icon name="hook" color="#fff"></fg-icon>
           </span>
         </td>
         <td>
-          <span v-if="i % 3 === 0" class="temp-checkbox">
+          <span
+            v-if="item.tentiveReservationFlag === '1'"
+            class="temp-checkbox"
+          >
             <fg-icon name="hook" color="#fff"></fg-icon>
           </span>
         </td>
-        <td>10</td>
+        <td>{{ item.activityCount }}</td>
       </tr>
     </fg-table-experiment>
   </div>
 </template>
 
 <script>
+import { CAR_LIST_QUERY } from '../common/base'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { fmtCarNumber } from '~/components/common/customer/common/helper'
+import { customerMixin } from '~/mixins/customer'
 
 export default {
   components: {
     ColumnTitle,
   },
+  mixins: [customerMixin],
   props: {
-    customerId: {
+    customerCode: {
       type: [Number, String],
       default: 0,
     },
   },
   data() {
-    console.log(JSON.stringify(this.carListData, null, 2))
     return {
       addCarVisible: false,
       headers: [
@@ -95,42 +104,48 @@ export default {
           text: '初度登録年月',
           align: 'center',
           sortable: true,
+          field: 'registrationFirstDate',
         },
         {
           text: '車検満了日',
           align: 'center',
           sortable: true,
+          field: 'registrationEndDate',
         },
         {
           text: '最終取引日',
           align: 'center',
           sortable: true,
+          field: 'sellingDatetime',
         },
         {
           text: '車検入庫',
           align: 'center',
           sortable: true,
+          field: 'carInspectionFlag',
         },
         {
           text: '本予約',
           align: 'center',
           sortable: true,
           width: 100,
+          field: 'reservationFlag',
         },
         {
           text: '仮予約',
           align: 'center',
           sortable: true,
           width: 100,
+          field: 'tentiveReservationFlag',
         },
         {
           text: '活動報告',
           align: 'center',
+          width: 100,
         },
       ],
       query: {
-        page: 1,
-        limit: 10,
+        ...CAR_LIST_QUERY,
       },
       carListData: {},
     }
@@ -152,26 +167,36 @@ export default {
     this.getCarList()
   },
   methods: {
-    fmtCarNumber,
     clickRow(row) {
       this.$emit('change', row)
     },
     async getCarList() {
-      const { page, limit } = this.query
       const params = {
-        limit,
-        offset: (page - 1) * limit,
+        ...this.query,
       }
+      // sort
+      params.sort = this.$ui.fmtSort(this.query.sort)
+      // offset
+      params.offset = (params.page - 1) * params.limit
+      delete params.page
       try {
         const res = await this.$api.get(
-          `/v1/customer/${this.customerId}/car`,
+          `/v1/customers/${this.customerCode}/cars`,
           params
         )
-        console.log('getCarList', res)
         this.carListData = res || {}
-      } catch (e) {
-        console.error(e)
+        // cache cars, use to 活動報告編集
+        if (this.query.page === 1) {
+          this.$ui.setCache('cars_customer_' + this.customerCode, res)
+        }
+      } catch (err) {
+        this.$ui.error('[CarTable.vue::getCarList]', err)
+        this.$alert(err.message)
       }
+    },
+    sortChange(field, sort) {
+      this.query.sort[field] = sort
+      this.query.page = 1
     },
   },
 }

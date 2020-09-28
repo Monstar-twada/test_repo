@@ -137,7 +137,6 @@ export default {
   },
   data() {
     const headWidthList = this.headers.map((item) => item.width)
-    // console.log(this.$slots)
     return {
       headWidthList,
       headOffsetRight: '0',

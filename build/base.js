@@ -70,7 +70,8 @@ export const baseConfig = {
   env: {
     //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    useMockData: process.env.MOCK_DATA === '1'
+    useMockData: process.env.MOCK_DATA === '1',
+    NODE_ENV: process.env.NODE_ENV
   },
   router: {
     base: process.env.BASE_URL,

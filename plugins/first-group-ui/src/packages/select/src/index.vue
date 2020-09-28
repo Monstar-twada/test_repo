@@ -24,7 +24,10 @@
       :unit="unit"
       :width="width"
       :offset-left="offsetLeft"
-      :offset-right="offsetRight + clearOffset"
+      :offset-right="offsetRight"
+      :is-error="isError"
+      :error-message="errorMessage"
+      :error-message-nowrap="errorMessageNowrap"
       @clear="inputClear"
       @input.native="handleInput"
     >
@@ -80,15 +83,16 @@
 
 <script>
 import Popup from '../../popup/index'
-import { DEF_CLEAR_ICON_OFFSET } from '../../input/src/constants'
 import { isFunction, isNumberLike } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import Mixin from './mixin'
+
 export default {
   name: 'FgSelect',
   components: {
     Popup,
   },
-  mixins: [Mixin],
+  mixins: [Mixin, formEmitterMixin],
   props: {
     value: {
       type: [Number, String],
@@ -150,12 +154,18 @@ export default {
     },
     offsetRight: {
       type: Number,
-      default: 0,
+      default: 20,
     },
     popupOffset: {
       type: [Number, String],
       default: undefined,
     },
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
   },
   data() {
     const item = this.items.find((item) => item.value === this.value) || {}
@@ -191,9 +201,6 @@ export default {
     },
     isNonEmpty() {
       return !!this.selectText
-    },
-    clearOffset() {
-      return this.clearable ? DEF_CLEAR_ICON_OFFSET[this.size] : 0
     },
   },
   watch: {
@@ -236,6 +243,7 @@ export default {
       this.selectValue = item.value
       this.popVisible = false
       this.$emit('change', item)
+      this.emitFormChange()
     },
     addPrefix(t) {
       return this.itemPrefix + t
@@ -247,6 +255,7 @@ export default {
       this.list = this.items
       // emit change
       this.$emit('change', null)
+      this.emitFormChange()
     },
     handleInput(e) {
       if (!this.filterable) return

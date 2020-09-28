@@ -51,6 +51,7 @@ module.exports = function(isDev, theme) {
         {
           test: /\.md$/,
           use: [
+            resolve(__dirname, '../md-loader/end.js'),
             'vue-loader',
             resolve(__dirname, '../md-loader/index.js')
           ],

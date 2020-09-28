@@ -30,9 +30,8 @@
           @click="handleSelect(item)"
         >
           <td>{{ item.maker }}</td>
-          <td>{{ item.class }}</td>
-          <td>{{ item.grade }}</td>
-          <td>{{ fmtCarNumber(item) }}</td>
+          <td>{{ item.carType }}</td>
+          <td>{{ item | fmtCarNumber }}</td>
         </tr>
       </fg-table-experiment>
     </div>
@@ -40,9 +39,10 @@
 </template>
 
 <script>
-import { fmtCarNumber } from '~/components/common/customer/common/helper'
+import { customerMixin } from '~/mixins/customer'
 
 export default {
+  mixins: [customerMixin],
   props: {
     value: Boolean,
     data: {
@@ -53,7 +53,7 @@ export default {
         }
       },
     },
-    currentCarId: {
+    currentCarCode: {
       type: [String, Number],
       default: '',
     },
@@ -66,10 +66,9 @@ export default {
     return {
       visible: this.value,
       tableHeaders: [
-        { text: 'メーカー', width: 120 },
-        { text: '車種', width: 120 },
-        { text: 'グレード' },
-        { text: '登録ナンバー', width: 150 },
+        { text: 'メーカー', width: 150 },
+        { text: '車種', width: 150 },
+        { text: '登録ナンバー' },
       ],
     }
   },
@@ -89,9 +88,8 @@ export default {
     },
   },
   methods: {
-    fmtCarNumber,
     handleSelect(item) {
-      if (item.carId !== this.currentCarId) {
+      if (item.carCode !== this.currentCarCode) {
         this.$emit('change', item)
         this.visible = false
       }

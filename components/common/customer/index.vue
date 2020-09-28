@@ -64,20 +64,23 @@ export default {
       const params = {
         ...this.query,
       }
+      // sort
+      params.sort = this.$ui.fmtSort(this.query.sort)
+      // offset
       params.offset = (params.page - 1) * params.limit
       delete params.page
-      if (/^(\d{4})-(\d{2})/.test(params.firstRegistrationDateFrom)) {
-        params.firstRegistrationDateFrom = RegExp.$1 + RegExp.$2
+      if (/^(\d{4})-(\d{2})/.test(params.registrationFirstDateFrom)) {
+        params.registrationFirstDateFrom = RegExp.$1 + RegExp.$2
       }
-      if (/^(\d{4})-(\d{2})/.test(params.firstRegistrationDateTo)) {
-        params.firstRegistrationDateTo = RegExp.$1 + RegExp.$2
+      if (/^(\d{4})-(\d{2})/.test(params.registrationFirstDateTo)) {
+        params.registrationFirstDateTo = RegExp.$1 + RegExp.$2
       }
-      console.log(JSON.stringify(params, null, 2))
       try {
-        const res = await this.$api.post('/v1/customer', params)
+        const res = await this.$api.post('/v1/customers', params)
         this.tableData = res || {}
-      } catch (e) {
-        console.error(e)
+      } catch (err) {
+        this.$alert(err.message)
+        console.error(err)
       }
     },
   },
