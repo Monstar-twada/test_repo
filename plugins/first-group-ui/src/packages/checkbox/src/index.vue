@@ -1,5 +1,8 @@
 <template>
-  <label class="fg-checkbox" :class="['__' + theme]">
+  <label
+    class="fg-checkbox"
+    :class="['__' + theme, { 'is-error': isError || !!errorMessage }]"
+  >
     <span
       class="fg-checkbox-input"
       :class="{
@@ -22,8 +25,14 @@
       {{ label }}
     </span>
     <slot></slot>
-    <transition name="fg-slide-in-top">
-      <div v-if="isError" class="error-message">{{ errorMessage }}</div>
+    <transition name="fg-zoom-in-top">
+      <div
+        v-if="errorMessage"
+        class="error-message"
+        :class="{ __nowrap: errorMessageNowrap }"
+      >
+        {{ errorMessage }}
+      </div>
     </transition>
   </label>
 </template>
@@ -93,6 +102,29 @@ export default {
   user-select: none;
   border-radius: 3px;
   vertical-align: middle;
+
+  &.is-error {
+    color: $--color-warning;
+    .fg-checkbox-inner {
+      border-color: $--color-warning;
+    }
+    .fg-checkbox-label {
+      color: $--color-warning !important;
+    }
+  }
+  .error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 4px;
+    font-size: 10px;
+    color: $--color-warning;
+    line-height: 1;
+    font-weight: normal;
+    &.__nowrap {
+      white-space: nowrap;
+    }
+  }
 
   &-input {
     white-space: nowrap;
