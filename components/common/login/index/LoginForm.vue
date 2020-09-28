@@ -35,7 +35,7 @@
         suffix-icon="arrow-right"
         round
         bold
-        @click="signIn"
+        @click="login"
         >ログイン</fg-button
       >
       <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
@@ -74,8 +74,6 @@
 </template>
 
 <script>
-import Auth from '@aws-amplify/auth'
-// import { CognitoUser } from 'amazon-cognito-identity-js'
 import Logo from '~/components/common/logo/index'
 export default {
   components: {
@@ -105,63 +103,61 @@ export default {
       this.validation()
     },
   },
+  // checks if already logged in AWS COGNITO
+  async beforeCreate() {
+    try {
+      await this.$store.dispatch('auth/load')
+      this.$login.success.call(this)
+    } catch (err) {
+      console.log({ err })
+    }
+  },
   methods: {
     isEmailValid() {
-      return this.email === ''
+      const { email } = this.form
+      return email === ''
         ? ''
-        : this.reg.test(this.email)
+        : this.reg.test(email)
         ? false
         : ['login-form__error', true]
     },
     isValid() {
-      if (this.isEmailValid() === false && this.password !== '') {
+      const { password } = this.form
+      if (this.isEmailValid() === false && password !== '') {
         return false
       } else {
         return true
       }
     },
     validation() {
+      const { email, password } = this.form
       let count = 0
-      if (this.email === '') {
+      if (email === '') {
         this.validationMessage.email = 'メールアドレスが空欄です'
         count += 1
       } else this.validationMessage.email = ''
-      if (this.password === '') {
+      if (password === '') {
         this.validationMessage.password = 'パスワードが空欄です'
         count += 1
       } else this.validationMessage.password = ''
       return count
     },
-    // nextUrl(url) {
-    //   this.$store.commit('user/signIn', true)
-    //   this.$router.push({ path: url })
-    // },
-    confirm() {
-      const count = this.validation()
-      if (count === 0) this.$login.success.call(this)
-    },
 
-    async signIn() {
-      const { email, password } = this.form
-      console.log(email, password)
-      try {
-        const cognitoUser = await Auth.currentAuthenticatedUser()
-        const currentSession = await Auth.currentSession()
-        cognitoUser.refreshSession(
-          currentSession.refreshToken,
-          (err, session) => {
-            console.log('session', err, session)
-            const { idToken, refreshToken, accessToken } = session
-            console.log(idToken, refreshToken, accessToken)
-            // do whatever you want to do now :)
-          }
-        )
-      } catch (e) {
-        console.log('Unable to refresh Token', e)
+    // confirm() {
+    //   const count = this.validation()
+    //   if (count === 0)
+    // },
+
+    async login() {
+      const count = this.validation()
+      if (count === 0) {
+        try {
+          await this.$store.dispatch('auth/login', this.form)
+          this.$login.success.call(this)
+        } catch (error) {
+          console.log({ error })
+        }
       }
-      // const user = await Auth.signIn(email, password)
-      // console.log(user)
-      // return user
     },
   },
 }
