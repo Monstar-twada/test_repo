@@ -141,7 +141,7 @@ $headerHeight: 40px;
  * table
  */
 
-table {
+table:not([class^=fg-table]) {
   width: 100%;
   color: #555;
   border-spacing: 0;
