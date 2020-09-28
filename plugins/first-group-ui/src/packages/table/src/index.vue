@@ -190,8 +190,6 @@ export default {
     })
 
     this.mapDataToRows()
-
-    console.log('$ref', this.$refs)
   },
 
   methods: {
