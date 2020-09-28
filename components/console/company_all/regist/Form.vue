@@ -1,95 +1,139 @@
 <template>
-  <div class="admin-company-edit-form-container">
-    <div class="admin-company-edit-form-container_body">
+  <div class="console-company_all-regist-form-container">
+    <div class="console-company_all-regist-form-container_body">
       <div class="page-title-wrapper">
         <h2>企業情報</h2>
       </div>
       <fg-form label-width="150px">
         <fg-form-item label="会社名" required>
-          <fg-input placeholder="株式会社XXXXXX"></fg-input>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input placeholder="株式会社XXXXXX"></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="代表者" required>
           <fg-row gutter="20">
-            <fg-col span="12">
+            <fg-col span="11">
               <fg-input placeholder="田中"></fg-input>
             </fg-col>
-            <fg-col span="12">
+            <fg-col span="11">
               <fg-input placeholder="太郎"></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
         <fg-form-item label="郵便番号">
-          <fg-input
-            v-model="zipcode"
-            placeholder="1200011"
-            width="160px"
-          ></fg-input>
-          <fg-text
-            v-if="validationMessage.zipcode"
-            class="admin-company-edit-form-container__error"
-            >{{ validationMessage.zipcode }}</fg-text
-          >
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input
+                v-model="zipcode"
+                placeholder="1200011"
+                width="160px"
+              ></fg-input>
+              <fg-text
+                v-if="validationMessage.zipcode"
+                class="console-company_all-regist-form-container__error"
+                >{{ validationMessage.zipcode }}</fg-text
+              >
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="都道府県">
-          <fg-select
-            v-model="areaName"
-            :options="areaItems"
-            width="160px"
-            placeholder="東京都"
-            item-prefix="- "
-          />
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-select
+                v-model="areaName"
+                :options="areaItems"
+                width="160px"
+                placeholder="東京都"
+                item-prefix="- "
+              />
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="市区町村">
-          <fg-input placeholder="足立区中央町"></fg-input>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input placeholder="足立区中央町"></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="番地など">
-          <fg-input placeholder="1-20-1"></fg-input>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input placeholder="1-20-1"></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="建物名・部屋番号など">
-          <fg-input placeholder=""></fg-input>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input placeholder=""></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="電話番号" required>
-          <fg-input v-model="phone" placeholder="000-0000-0000"></fg-input>
-          <fg-text
-            v-if="validationMessage.phone"
-            class="admin-company-edit-form-container__error"
-            >{{ validationMessage.phone }}</fg-text
-          >
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input v-model="phone" placeholder="000-0000-0000"></fg-input>
+              <fg-text
+                v-if="validationMessage.phone"
+                class="console-company_all-regist-form-container__error"
+                >{{ validationMessage.phone }}</fg-text
+              >
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="メールアドレス" required>
-          <fg-input
-            v-model="email"
-            placeholder="aaaa@cars-enjoy.com"
-          ></fg-input>
-          <fg-text
-            v-if="validationMessage.email"
-            class="admin-company-edit-form-container__error"
-            >{{ validationMessage.email }}</fg-text
-          >
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input
+                v-model="email"
+                placeholder="aaaa@cars-enjoy.com"
+              ></fg-input>
+              <fg-text
+                v-if="validationMessage.email"
+                class="console-company_all-regist-form-container__error"
+                >{{ validationMessage.email }}</fg-text
+              >
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="店舗数">
-          <fg-input placeholder="30店"></fg-input>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input placeholder="30店"></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="社員数">
-          <fg-input placeholder="210名"></fg-input>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <fg-input placeholder="210名"></fg-input>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="年度">
-          <p>4月〜3月</p>
+          <fg-row gutter="20">
+            <fg-col span="22">
+              <p>4月〜3月</p>
+            </fg-col>
+          </fg-row>
         </fg-form-item>
         <fg-form-item label="銀行口座" class="form-bankaccount">
           <fg-row gutter="20">
-            <fg-col span="18">
+            <fg-col span="17">
               <fg-input v-model="a" placeholder="銀行名"></fg-input>
             </fg-col>
-            <fg-col span="6">
+            <fg-col span="5">
               <fg-input v-model="b" placeholder="銀行コード"></fg-input>
             </fg-col>
           </fg-row>
           <fg-row gutter="20">
-            <fg-col span="18">
+            <fg-col span="17">
               <fg-input v-model="a" placeholder="支店名"></fg-input>
             </fg-col>
-            <fg-col span="6">
+            <fg-col span="5">
               <fg-input v-model="b" placeholder="支店コード"></fg-input>
             </fg-col>
           </fg-row>
@@ -104,20 +148,20 @@
             </fg-col>
           </fg-row>
           <fg-row gutter="20">
-            <fg-col span="18">
+            <fg-col span="17">
               <fg-input
                 v-model="a"
                 placeholder="口座名義人（全角カナ）"
               ></fg-input>
             </fg-col>
-            <fg-col span="6">
+            <fg-col span="5">
               <fg-input v-model="b" placeholder="口座番号"></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
       </fg-form>
     </div>
-    <div class="admin-company-edit-form-container_bottom">
+    <div class="console-company_all-regist-form-container_bottom">
       <fg-button
         suffix-icon="arrow-right"
         bold
@@ -200,7 +244,7 @@ export default {
 </script>
 
 <style lang="scss">
-.admin-company-edit-form-container {
+.console-company_all-regist-form-container {
   max-width: 712px;
   width: 100%;
   margin: 0 auto;
