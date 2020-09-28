@@ -5,7 +5,10 @@
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
+
 export default {
+  mixins: [customMixin],
   data() {
     return {
       current: { year: 2020, month: 8 },

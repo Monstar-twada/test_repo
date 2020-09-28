@@ -105,14 +105,13 @@ $headerHeight: 40px;
         text-decoration: none;
 
         &:hover {
-          color: $--color-primary-hover;
-          background: $--color-background-hover;
+          text-decoration: underline;
         }
 
         &.__current {
-          color: $--color-white !important;
-          background: $--color-primary-active;
-          font-weight: 600;
+          font-weight: bold;
+          text-decoration: underline;
+          background: $--color-background-hover;
         }
       }
     }

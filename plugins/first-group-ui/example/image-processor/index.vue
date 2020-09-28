@@ -5,6 +5,7 @@
     <UserPhotoCrop />
     <IconType />
     <Validate />
+    <SlotDemo />
   </div>
 </template>
 
@@ -14,12 +15,14 @@ import Docs from '../../docs/image-processor.md'
 import UserPhotoCrop from './UserPhotoCrop.md'
 import IconType from './IconType.md'
 import Validate from './Validate.md'
+import SlotDemo from './SlotDemo.md'
 export default {
   components: {
     Docs,
     UserPhotoCrop,
     IconType,
     Validate,
+    SlotDemo,
   },
   mixins: [customMixin],
 }

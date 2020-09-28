@@ -183,8 +183,10 @@
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
 import iconShop from './img/shop.svg'
 export default {
+  mixins: [customMixin],
   data() {
     const list = [
       {

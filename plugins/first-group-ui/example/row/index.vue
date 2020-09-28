@@ -80,7 +80,10 @@
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
+
 export default {
+  mixins: [customMixin],
   data() {
     return {}
   },

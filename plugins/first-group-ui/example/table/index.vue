@@ -121,11 +121,13 @@
   </div>
 </template>
 <script>
+import { customMixin } from '../_app/mixins'
 import Doc from './doc.md'
 export default {
   components: {
     Doc,
   },
+  mixins: [customMixin],
   data() {
     return {
       itemList: [
