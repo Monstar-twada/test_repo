@@ -87,7 +87,7 @@ export default {
     },
     viewMode: {
       type: String,
-      default: 'fill',
+      default: '',
     },
     cropperTitle: {
       type: String,
