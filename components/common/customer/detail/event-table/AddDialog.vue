@@ -65,7 +65,7 @@
           type="primary"
           width="240px"
           bold
-          :disabled="isDisabled"
+          :disabled="isSubmitting"
           @click="save"
           >活動報告を追加する</fg-button
         >
@@ -100,7 +100,7 @@ export default {
         ...DEF_FORM,
         carCode: this.currentCarCode,
       },
-      isDisabled: false,
+      isSubmitting: false,
     }
   },
   computed: {
@@ -117,12 +117,15 @@ export default {
         this.visible = val
       }
       if (val) {
-        const { myStoreCode } = this.customerData
-        this.form.contactStoreCode = myStoreCode
         // currentCarCode
         if (this.currentCarCode && this.currentCarCode !== this.form.carCode) {
           this.form.carCode = this.currentCarCode
         }
+        // 「担当店舗コード」と「担当者コード」のセット
+        // 取得方法：QAのNo.11を参照してください
+        // https://docs.google.com/spreadsheets/d/1AntambplP9bKb0RSyx-Fsv8n2rjSjSHyHFIEfha4L_c/edit#gid=0
+        this.form.contactStoreCode = ''
+        this.form.contactStaffCode = ''
       }
     },
     visible(val) {
@@ -131,8 +134,8 @@ export default {
   },
   methods: {
     save() {
-      if (this.isDisabled) return
-      this.isDisabled = true
+      if (this.isSubmitting) return
+      this.isSubmitting = true
       const form = { ...this.form }
       form.checkFlag = +form.checkFlag
       this.$api
@@ -144,11 +147,11 @@ export default {
           this.visible = false
           this.$alert('活動報告追加成功しました！')
           this.$emit('change')
-          this.isDisabled = false
+          this.isSubmitting = false
         })
         .catch((err) => {
           if (err) this.$alert(err.message)
-          this.isDisabled = false
+          this.isSubmitting = false
         })
     },
   },
