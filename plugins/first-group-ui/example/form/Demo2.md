@@ -50,7 +50,7 @@
   </fg-form-item>
 
   <fg-form-item label="氏名" required>
-    <fg-row gutter="20" overflow-hide>
+    <fg-row gutter="20" type="flex">
       <fg-col span="12">
         <fg-input placeholder="fg-form-item"></fg-input>
       </fg-col>
@@ -63,7 +63,7 @@
   </fg-form-item>
 
   <fg-form-item label="birthday">
-    <fg-row gutter="20" overflow-hide>
+    <fg-row gutter="20" type="flex">
       <fg-col span="8">
         <fg-select v-model="form.year" :items="years"></fg-select>
       </fg-col>
