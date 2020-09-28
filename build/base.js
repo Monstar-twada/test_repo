@@ -71,7 +71,10 @@ export const baseConfig = {
   env: {
     //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    useMockData: process.env.MOCK_DATA === '1'
+    useMockData: process.env.MOCK_DATA === '1',
+    // COGNITO_REGION: process.env.COGNITO_REGION,
+    // COGNITO_USERPOOL_ID: process.env.COGNITO_USERPOOL_ID,
+    // COGNITO_USERPOOL_CLIENT_ID: process.env.COGNITO_USERPOOL_CLIENT_ID,
   },
   router: {
     base: process.env.BASE_URL,
@@ -103,15 +106,15 @@ export const baseConfig = {
   //   customVariables: ["~/assets/scss/variables.scss"],
   //   treeShake: true
   // },
-  gtm: {
-    enabled: true,
-    id: 'GTM-N8RJT4T',
-    autoInit: true,
-    respectDoNotTrack: true,
-    noscript: true,
-    noscriptId: 'gtm-noscript',
-    noscriptURL: 'https://www.googletagmanager.com/ns.html'
-  },
+  // gtm: {
+  //   enabled: true,
+  //   id: 'GTM-N8RJT4T',
+  //   autoInit: true,
+  //   respectDoNotTrack: true,
+  //   noscript: true,
+  //   noscriptId: 'gtm-noscript',
+  //   noscriptURL: 'https://www.googletagmanager.com/ns.html'
+  // },
   /*
    ** Build configuration
    */
