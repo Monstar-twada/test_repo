@@ -17,19 +17,20 @@
 </fg-row>
 
 <script>
-const AVATAR_URL = 'https://i.pinimg.com/originals/b9/09/d7/b909d7450a19279f53fb2b86571dcbfe.jpg'
-export default {
-  data() {
-    return {
-      src: AVATAR_URL,
-      avatarData: {
-        url: AVATAR_URL,
-        name: '米田 道春',
-        summary: 'カタカナカタカナカタカナ',
-        subName: '（47歳）',
+  const AVATAR_URL =
+    'https://i.pinimg.com/originals/b9/09/d7/b909d7450a19279f53fb2b86571dcbfe.jpg'
+  export default {
+    data() {
+      return {
+        src: AVATAR_URL,
+        avatarData: {
+          url: AVATAR_URL,
+          name: '米田 道春',
+          summary: 'カタカナカタカナカタカナ',
+          subName: '（47歳）',
+        },
       }
-    }
+    },
   }
-}
 </script>
 ```

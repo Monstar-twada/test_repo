@@ -74,12 +74,14 @@ export default {
   position: relative;
   font-size: 14px;
   height: 26px;
+  line-height: 20px;
   vertical-align: middle;
 
   &-label {
     transition: 0.2s;
     margin-left: 10px;
     height: 20px;
+    line-height: 20px;
     display: inline-block;
     font-size: 14px;
     font-weight: 500;
@@ -129,7 +131,6 @@ export default {
         color: $--color-primary-active;
         position: absolute;
         left: 22px;
-        top: 2px;
       }
     }
   }
@@ -149,7 +150,6 @@ export default {
           color: $--color-white;
           position: absolute;
           left: -28px;
-          top: 2px;
         }
       }
     }

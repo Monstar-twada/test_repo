@@ -48,7 +48,8 @@ export default {
   background-size: cover !important;
   background-attachment: fixed !important;
   overflow: auto;
-  height: 100%;
+  min-height: 100vh;
+  max-height: 100%;
 
   .global-main-wrapper {
     margin: 0 $sideSpaceWidth 0 $sideWidthNormal + $sideSpaceWidth;

@@ -1,6 +1,20 @@
 <template>
   <div class="breadcrumb-wrapper">
-    <fg-breadcrumbs :items="items">
+    <fg-breadcrumbs
+      :items="[
+        {
+          text: 'HOME',
+          href: '/home',
+        },
+        {
+          text: '御客一覧',
+          href: '/customer',
+        },
+        {
+          text: '御客詳細',
+        },
+      ]"
+    >
       <template v-slot:default="{ item }">
         <fg-breadcrumbs-item>
           <template v-slot>
@@ -15,21 +29,7 @@
 <script>
 export default {
   data() {
-    return {
-      items: [
-        {
-          text: 'HOME',
-          href: '/home',
-        },
-        {
-          text: '御客一覧',
-          href: '/customer',
-        },
-        {
-          text: '御客詳細',
-        },
-      ],
-    }
+    return {}
   },
 }
 </script>

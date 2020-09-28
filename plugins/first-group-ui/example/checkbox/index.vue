@@ -1,5 +1,7 @@
 <template>
   <div class="example-checkbox-wrapper">
+    <Doc />
+    <Checkbox />
     <fg-form label-font-size="16px">
       <fg-form-item label="disable">
         <fg-checkbox v-model="value2" disabled></fg-checkbox>
@@ -42,8 +44,14 @@
 </template>
 <script>
 import { customMixin } from '../_app/mixins'
+import Doc from './doc.md'
+import Checkbox from './checkbox.md'
 
 export default {
+  components: {
+    Doc,
+    Checkbox,
+  },
   mixins: [customMixin],
   data() {
     return {
