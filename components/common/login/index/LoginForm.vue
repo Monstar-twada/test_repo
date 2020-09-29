@@ -112,7 +112,7 @@ export default {
         await this.$store.dispatch('auth/load')
       }
     } catch (err) {
-      console.log({ err })
+      console.error({ err })
     }
   },
   methods: {
@@ -158,7 +158,7 @@ export default {
           await this.$store.dispatch('auth/login', this.form)
           this.$login.success.call(this)
         } catch (error) {
-          console.log({ error })
+          console.error({ error })
         }
       }
     },

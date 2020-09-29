@@ -16,7 +16,6 @@ export const actions = {
   async load({ commit }) {
     try {
       const user = await Auth.currentAuthenticatedUser()
-      console.log(user)
       commit('set', user)
       return user
     } catch (error) {
