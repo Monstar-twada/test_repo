@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Regist from '~/components/console/company_all/regist/index'
+import Regist from '~/components/console/company_all/regist/index/index'
 export default {
   layout: 'console',
   components: {
