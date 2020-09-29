@@ -7,7 +7,7 @@
     title="車検証"
   >
     <div class="body-wrapper">
-      <img src="/common/vehicle-inspection-certificate.jpg" alt="" />
+      <img :src="url" alt="" />
     </div>
   </fg-dialog>
 </template>
@@ -16,15 +16,21 @@
 export default {
   props: {
     value: Boolean,
+    customerCode: {
+      type: String,
+      default: '',
+    },
+    carCode: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
-      carModel: '',
       visible: this.value,
-      carModels: ['A', 'B', 'C'],
+      url: '',
     }
   },
-  computed: {},
   watch: {
     value(val) {
       this.visible = val
@@ -32,8 +38,26 @@ export default {
     visible(val) {
       this.$emit('input', val)
     },
+    carCode() {
+      this.getImage()
+    },
   },
-  methods: {},
+  mounted() {
+    this.getImage()
+  },
+  methods: {
+    async getImage() {
+      if (!this.customerCode || !this.carCode) return
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.customerCode}/cars/${this.carCode}/registrationImage`
+        )
+        this.url = res.url
+      } catch (err) {
+        this.$ui.error('[vehicle-inspection-cert-dialog]', err)
+      }
+    },
+  },
 }
 </script>
 

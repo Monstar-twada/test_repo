@@ -105,14 +105,15 @@ export default {
     textStyle() {
       const ret = {}
       if (this.textWidth) {
-        ret.maxWidth = this.textWidth
+        ret.maxWidth =
+          this.textWidth + (isNumberLike(this.textWidth) ? 'px' : '')
       }
       ret.height = this.wrapperStyle.height
       return ret
     },
     content() {
       const { name, lastName, firstName } = this.data
-      return name || [lastName, firstName].join(' ')
+      return name || [lastName, firstName].join('')
     },
   },
   methods: {
@@ -163,15 +164,15 @@ export default {
     display: inline-flex;
     font-weight: 800;
     margin-left: 10px;
-    line-height: 1;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
     .__name,
     .__summary {
       white-space: nowrap;
-      overflow-x: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
+      line-height: 1;
     }
     .__name {
       font-size: $--font-size-14;

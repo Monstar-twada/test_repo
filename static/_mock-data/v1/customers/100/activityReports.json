@@ -1,0 +1,52 @@
+[
+  {
+    "activity": {
+      "activityId": 40,
+      "customerCode": "100",
+      "actitionDatetime": "2020-09-09 12:32:33.234",
+      "checkFlag": "1",
+      "carCode": "200",
+      "transactionType": "1",
+      "channel": "1",
+      "comment": "ギアアップの不具合を感じるとのことで入庫されたが、テスターを当てても、特に該当するような症状は見受けられず、何 度か走行テストも実施した結果、万が一あり得るとしたら触媒の劣化であることが考察されたが、テストで取り替えるには あまりに高いので、50万相当の工賃がかかる旨と若干の違和感を感じるかもしれないが、走行に問題が生じているわけでは ない旨を説明し車は戻していたが、再度やはりおかしいとの問い合わせ。",
+      "contactStoreCode": "1223",
+      "contactStaffCode": "5555",
+      "car": {
+        "maker": "トヨタ",
+        "carType": "プリウス"
+      },
+      "store": {
+        "storeName": "cars足立店"
+      },
+      "staff": {
+        "lastName": "山田",
+        "firstName": "太郎"
+      }
+    }
+  },
+  {
+    "activity": {
+      "activityId": 41,
+      "customerCode": "100",
+      "actitionDatetime": "2020-06-16 12:32:33.234",
+      "checkFlag": "0",
+      "carCode": "201",
+      "transactionType": "1",
+      "channel": "1",
+      "comment": "ギアアップの不具合を感じるとのことで入庫されたが、テスターを当てても、特に該当するような症状は見受けられず、何 度か走行テストも実施した結果、万が一あり得るとしたら触媒の劣化であることが考察されたが、テストで取り替えるには あまりに高いので、50万相当の工賃がかかる旨と若干の違和感を感じるかもしれないが、走行に問題が生じているわけでは ない旨を説明し車は戻していたが、再度やはりおかしいとの問い合わせ。",
+      "contactStoreCode": "1223",
+      "contactStaffCode": "5555",
+      "car": {
+        "maker": "メーカー",
+        "carType": "車種"
+      },
+      "store": {
+        "storeName": "cars新宿店"
+      },
+      "staff": {
+        "lastName": "山田",
+        "firstName": "太郎"
+      }
+    }
+  }
+]

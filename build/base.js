@@ -72,9 +72,13 @@ export const baseConfig = {
     //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     useMockData: process.env.MOCK_DATA === '1',
+<<<<<<< HEAD
     // COGNITO_REGION: process.env.COGNITO_REGION,
     // COGNITO_USERPOOL_ID: process.env.COGNITO_USERPOOL_ID,
     // COGNITO_USERPOOL_CLIENT_ID: process.env.COGNITO_USERPOOL_CLIENT_ID,
+=======
+    NODE_ENV: process.env.NODE_ENV
+>>>>>>> develop
   },
   router: {
     base: process.env.BASE_URL,

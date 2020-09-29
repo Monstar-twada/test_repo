@@ -6,24 +6,25 @@
     max-width="840px"
     title="活動報告詳細"
   >
-    <template v-slot:title-suffex>
-      <fg-icon class="ml20" name="flag" :color="$colors.warning"></fg-icon>
+    <template v-slot:title-suffix>
+      <fg-icon
+        class="ml20"
+        name="flag"
+        :color="item.checkFlag === '0' ? $colors.border : $colors.warning"
+      ></fg-icon>
     </template>
     <div class="body-wrapper">
       <fg-row gutter="20" class="info-header">
-        <fg-col span="8"> <b>日時</b>2020/09/02 (水) 14:34</fg-col>
-        <fg-col span="6"> <b>対象車両</b>トヨタプリウス</fg-col>
-        <fg-col span="5"> <b>取引種別</b>車検</fg-col>
-        <fg-col span="5"> <b>チャネル</b>電話</fg-col>
+        <fg-col span="8"> <b>日時</b>{{ date }}</fg-col>
+        <fg-col span="6"> <b>対象車両</b>{{ carInfo }}</fg-col>
+        <fg-col span="5">
+          <b>取引種別</b>{{ transactionTypes[item.transactionType] }}</fg-col
+        >
+        <fg-col span="5"> <b>チャネル</b>{{ channels[item.channel] }}</fg-col>
       </fg-row>
       <div class="info-body mt25">
         <h3>コメント</h3>
-        <div class="mt15">
-          ギアアップの不具合を感じるとのことで入庫されたが、テスターを当てても、特に該当するような症状は見受けられず、何
-          度か走行テストも実施した結果、万が一あり得るとしたら触媒の劣化であることが考察されたが、テストで取り替えるには
-          あまりに高いので、50万相当の工賃がかかる旨と若干の違和感を感じるかもしれないが、走行に問題が生じているわけでは
-          ない旨を説明し車は戻していたが、再度やはりおかしいとの問い合わせ。
-        </div>
+        <div class="mt15">{{ item.comment }}</div>
       </div>
     </div>
     <div class="footer-wrapper">
@@ -53,11 +54,25 @@ export default {
   },
   data() {
     return {
-      carModel: '',
       visible: this.value,
     }
   },
-  computed: {},
+  computed: {
+    date() {
+      const date = this.$ui.toDate(this.item.actitionDatetime)
+      return date ? this.$ui.formatDate(date, 'yyyy/MM/dd (W) hh:mm') : '-'
+    },
+    carInfo() {
+      const { car } = this.item
+      return car ? [car.maker, car.carType].join(' ') : '-'
+    },
+    transactionTypes() {
+      return this.$ui.getBasicData('transaction_type', true)
+    },
+    channels() {
+      return this.$ui.getBasicData('channel', true)
+    },
+  },
   watch: {
     value(val) {
       this.visible = val

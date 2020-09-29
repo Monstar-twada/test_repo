@@ -40,6 +40,7 @@ export default {
       type: String,
       default: '',
     },
+    labelFlex: Boolean,
     highLight: {
       type: Boolean,
       default: false,
@@ -69,6 +70,10 @@ export default {
       }
       if (this.labelWidth) {
         ret.flex = `0 0 ${this.labelWidth}`
+      }
+      if (this.labelFlex) {
+        ret.display = 'flex'
+        ret.alignItems = 'center'
       }
       return ret
     },

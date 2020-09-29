@@ -15,32 +15,45 @@
           <fg-col span="7">
             <b>日時</b>
             <fg-date-picker
-              v-model="form.date"
+              v-model="form.activityReportDatetime"
               format="yyyy/MM/dd (W) hh:mm"
+              value-format="yyyy-MM-dd hh:mm"
             ></fg-date-picker>
           </fg-col>
           <fg-col span="7">
             <b>対象車両</b>
-            <fg-select />
+            <fg-select
+              v-model="form.carCode"
+              placeholder="選択"
+              :items="cars"
+            />
           </fg-col>
-          <fg-col span="4">
+          <fg-col span="5">
             <b>取引種別</b>
-            <fg-select placeholder="選択" />
+            <fg-select
+              v-model="form.transactionType"
+              :items="transactionTypes"
+              placeholder="選択"
+            />
           </fg-col>
-          <fg-col span="6">
+          <fg-col span="5">
             <b>チャネル</b>
-            <fg-select />
+            <fg-select
+              v-model="form.channel"
+              placeholder="選択"
+              :items="channels"
+            />
           </fg-col>
         </fg-row>
         <div class="check-wrapper mt25">
           <h3>要チェック</h3>
-          <fg-checkbox label="チェック"></fg-checkbox>
+          <fg-checkbox v-model="form.checkFlag" label="チェック"></fg-checkbox>
         </div>
         <div class="info-body mt25">
           <h3>コメント</h3>
           <div class="mt15">
             <fg-input
-              v-model="form.content"
+              v-model="form.comment"
               class="event-textarea"
               type="textarea"
             ></fg-input>
@@ -48,7 +61,12 @@
         </div>
       </div>
       <div class="footer-wrapper">
-        <fg-button type="primary" width="240px" bold @click="save"
+        <fg-button
+          type="primary"
+          width="240px"
+          bold
+          :disabled="isSubmitting"
+          @click="save"
           >活動報告を追加する</fg-button
         >
       </div>
@@ -57,25 +75,58 @@
 </template>
 
 <script>
+import { DEF_FORM } from './constants'
+
 export default {
-  components: {},
   props: {
     value: Boolean,
+    cars: {
+      type: Array,
+      default: () => [],
+    },
+    customerData: {
+      type: Object,
+      default: () => {},
+    },
+    currentCarCode: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
-      carModel: '',
       visible: this.value,
       form: {
-        date: +new Date(),
-        content: '',
+        ...DEF_FORM,
+        carCode: this.currentCarCode,
       },
+      isSubmitting: false,
     }
   },
-  computed: {},
+  computed: {
+    transactionTypes() {
+      return this.$ui.getBasicData('transaction_type')
+    },
+    channels() {
+      return this.$ui.getBasicData('channel')
+    },
+  },
   watch: {
     value(val) {
-      this.visible = val
+      if (this.visible !== val) {
+        this.visible = val
+      }
+      if (val) {
+        // currentCarCode
+        if (this.currentCarCode && this.currentCarCode !== this.form.carCode) {
+          this.form.carCode = this.currentCarCode
+        }
+        // 「担当店舗コード」と「担当者コード」のセット
+        // 取得方法：QAのNo.11を参照してください
+        // https://docs.google.com/spreadsheets/d/1AntambplP9bKb0RSyx-Fsv8n2rjSjSHyHFIEfha4L_c/edit#gid=0
+        this.form.contactStoreCode = ''
+        this.form.contactStaffCode = ''
+      }
     },
     visible(val) {
       this.$emit('input', val)
@@ -83,7 +134,25 @@ export default {
   },
   methods: {
     save() {
-      this.visible = false
+      if (this.isSubmitting) return
+      this.isSubmitting = true
+      const form = { ...this.form }
+      form.checkFlag = +form.checkFlag
+      this.$api
+        .post(
+          `/v1/customers/${this.customerData.customerCode}/activityReports`,
+          form
+        )
+        .then(() => {
+          this.visible = false
+          this.$alert('活動報告追加成功しました！')
+          this.$emit('change')
+          this.isSubmitting = false
+        })
+        .catch((err) => {
+          if (err) this.$alert(err.message)
+          this.isSubmitting = false
+        })
     },
   },
 }

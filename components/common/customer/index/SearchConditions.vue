@@ -24,7 +24,7 @@
           </fg-col>
           <fg-col span="8">
             <fg-input
-              v-model="form.tel"
+              v-model="form.phoneNumber"
               size="small"
               placeholder="電話番号"
               clearable
@@ -36,10 +36,26 @@
       <fg-col span="13" class="right-item-wrapper">
         <h3>属性で探す</h3>
         <div class="checkbox-wrapper">
-          <fg-checkbox size="small" label="買換意向"></fg-checkbox>
-          <fg-checkbox size="small" label="乗換対象"></fg-checkbox>
-          <fg-checkbox size="small" label="車検間近"></fg-checkbox>
-          <fg-checkbox size="small" label="6ヶ月内接点"></fg-checkbox>
+          <fg-checkbox
+            v-model="form.purchaseIntention"
+            size="small"
+            label="買換意向"
+          ></fg-checkbox>
+          <fg-checkbox
+            v-model="form.transferTarget"
+            size="small"
+            label="乗換対象"
+          ></fg-checkbox>
+          <fg-checkbox
+            v-model="form.nearInspection"
+            size="small"
+            label="車検間近"
+          ></fg-checkbox>
+          <fg-checkbox
+            v-model="form.sixMonthContact"
+            size="small"
+            label="6ヶ月内接点"
+          ></fg-checkbox>
         </div>
       </fg-col>
     </fg-row>
@@ -58,7 +74,7 @@
           </fg-col>
           <fg-col span="8">
             <fg-input
-              v-model="form.class"
+              v-model="form.carType"
               size="small"
               placeholder="車種"
               clearable
@@ -67,7 +83,7 @@
           </fg-col>
           <fg-col span="8">
             <fg-input
-              v-model="form.vin"
+              v-model="form.carRegistrationNumber"
               size="small"
               placeholder="登録ナンバー"
               clearable
@@ -80,56 +96,44 @@
         <fg-row gutter="20">
           <fg-col span="6">
             <fg-calendar
-              v-model="form.firstRegistrationDateFrom"
+              v-model="form.registrationFirstDateFrom"
               size="small"
               placeholder="初度登録年月"
               show-after-dash
               type="month"
               clearable
+              :error-message="registrationDateError"
+              error-message-nowrap
             ></fg-calendar>
           </fg-col>
           <fg-col span="6">
             <fg-calendar
-              v-model="form.firstRegistrationDateTo"
+              v-model="form.registrationFirstDateTo"
               size="small"
               type="month"
               clearable
+              :is-error="!!registrationDateError"
             ></fg-calendar>
           </fg-col>
           <fg-col span="6">
             <fg-calendar
-              v-model="form.inspectionExpirationDateFrom"
+              v-model="form.registrationEndDateFrom"
               size="small"
               placeholder="車検満了年月"
               show-after-dash
               clearable
+              :error-message="registrationEndDateError"
+              error-message-nowrap
             ></fg-calendar>
           </fg-col>
           <fg-col span="6">
             <fg-calendar
-              v-model="form.inspectionExpirationDateTo"
+              v-model="form.registrationEndDateTo"
               size="small"
               placeholder=""
               clearable
+              :is-error="!!registrationEndDateError"
             ></fg-calendar>
-          </fg-col>
-        </fg-row>
-        <fg-row
-          v-if="
-            validationMessage.firstRegistration ||
-            validationMessage.inspectionExpiration
-          "
-          gutter="20"
-        >
-          <fg-col span="12">
-            <fg-text class="search-bar-form-wrapper__error mt10">{{
-              validationMessage.firstRegistration
-            }}</fg-text>
-          </fg-col>
-          <fg-col span="12">
-            <fg-text class="search-bar-form-wrapper__error mt10">{{
-              validationMessage.inspectionExpiration
-            }}</fg-text>
           </fg-col>
         </fg-row>
       </fg-col>
@@ -156,37 +160,35 @@ export default {
       form: {
         ...this.query,
       },
-      makerItems: [],
-      carModels: [],
-      validationMessage: {
-        firstRegistration: '',
-        inspectionExpiration: '',
-      },
     }
   },
-  methods: {
-    validation() {
-      let count = 0
-      const frFrom = new Date(this.form.firstRegistrationDateFrom)
-      const frTo = new Date(this.form.firstRegistrationDateTo)
-      if (frFrom > frTo) {
-        this.validationMessage.firstRegistration =
-          '日付を正しく設定してください'
-        count += 1
-      } else this.validationMessage.firstRegistration = ''
-
-      const inspectionFrom = new Date(this.form.inspectionExpirationDateFrom)
-      const inspectionTo = new Date(this.form.inspectionExpirationDateTo)
-      if (inspectionFrom > inspectionTo) {
-        this.validationMessage.inspectionExpiration =
-          '日付を正しく設定してください'
-        count += 1
-      } else this.validationMessage.inspectionExpiration = ''
-      return count
+  computed: {
+    registrationDateError() {
+      const { registrationFirstDateFrom, registrationFirstDateTo } = this.form
+      const frFrom = new Date(registrationFirstDateFrom)
+      const frTo = new Date(registrationFirstDateTo)
+      return frFrom > frTo ? '日付を正しく設定してください' : ''
     },
+    registrationEndDateError() {
+      const { registrationEndDateFrom, registrationEndDateTo } = this.form
+      const frFrom = new Date(registrationEndDateFrom)
+      const frTo = new Date(registrationEndDateTo)
+      return frFrom > frTo ? '日付を正しく設定してください' : ''
+    },
+  },
+  methods: {
     search() {
-      const count = this.validation()
-      if (count === 0) this.$emit('change', this.form)
+      if (this.registrationDateError || this.registrationEndDateError) return
+      const form = {
+        ...this.form,
+      }
+      this.$ui.booleanToNumber(form, [
+        'purchaseIntention',
+        'transferTarget',
+        'nearInspection',
+        'sixMonthContact',
+      ])
+      this.$emit('change', form)
     },
   },
 }
@@ -194,11 +196,6 @@ export default {
 
 <style lang="scss">
 .search-bar-form-wrapper {
-  &__error {
-    div {
-      color: $--color-warning;
-    }
-  }
   > .fg-row {
     padding-top: 20px;
   }

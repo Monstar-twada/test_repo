@@ -6,7 +6,7 @@
 
 <script>
 import { customMixin } from '../_app/mixins'
-import Docs from './docs.md'
+import Docs from '../../docs/README.md'
 export default {
   components: {
     Docs,

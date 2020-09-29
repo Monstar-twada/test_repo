@@ -6,111 +6,91 @@
           <h3>車両基本情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form
-        ref="form"
-        :model="form"
-        label-width="150px"
-        class="ml20"
-        split-vertical-line
-      >
+      <fg-form label-width="150px" split-vertical-line item-spacing="0">
         <fg-form-item label="車検証">
           <div>
             <fg-image-processor
               icon="license-front"
-              url=""
+              :url="registrationImage"
               readonly
             ></fg-image-processor>
           </div>
         </fg-form-item>
         <fg-form-item label="車検証番号">
-          <h4>{{ form.carBase.carId | fmtHyphen }}</h4>
+          {{ form.registrationNumber | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="メーカー">
-          <h4>{{ form.carBase.maker | fmtHyphen }}</h4>
+          {{ form.maker | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="車種">
-          <h4>{{ form.carBase.class | fmtHyphen }}</h4>
+          {{ form.carType | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="グレード">
-          <h4>{{ form.carBase.grade | fmtHyphen }}</h4>
+          {{ form.grade | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="登録ナンバー">
-          <h4>
-            {{ form.carBase | fmtCarNumber }}
-          </h4>
+          {{ form | fmtCarNumber }}
         </fg-form-item>
         <fg-form-item label="初度登録年月">
-          <h4>{{ form.carBase.firstRegistrationDate | fmtDate }}</h4>
+          {{ form.registrationFirstDate | fmtDate }}
         </fg-form-item>
         <fg-form-item label="登録年月日">
-          <h4>{{ form.carBase.registrationDate | fmtDate }}</h4>
+          {{ form.registrationStartDate | fmtDate }}
         </fg-form-item>
         <fg-form-item label="車検満了日">
-          <h4>{{ form.carBase.inspectionExpirationDate | fmtDate }}</h4>
+          {{ form.registrationEndDate | fmtDate }}
         </fg-form-item>
         <fg-form-item label="新中区分">
-          <h4>{{ form.carBase.newOldType }}</h4>
+          {{ saleNewOldCarType }}
         </fg-form-item>
         <fg-form-item label="買換意向">
-          <h4>{{ form.intentionToPurchase ? 'あり' : 'なし' }}</h4>
+          {{ form.purchaseIntention === '1' ? 'あり' : 'なし' }}
         </fg-form-item>
-        <fg-form-item label="走行距離">
-          <h4>{{ form.carBase.mileage }} km</h4>
-        </fg-form-item>
+        <fg-form-item label="走行距離"> {{ form.carMileage }} km </fg-form-item>
         <fg-form-item label="走行距離確認日">
-          <h4>{{ form.carBase.mileageCheckDate | fmtDate }}</h4>
+          {{ form.carMileageRegistrationDate | fmtDate }}
         </fg-form-item>
       </fg-form>
     </WhiteBox>
+
     <WhiteBox class="mt30">
       <ColumnTitle>
         <template v-slot:title>
           <h3>売買情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="150px" class="ml20" split-vertical-line>
+      <fg-form label-width="150px" item-spacing="0" split-vertical-line>
         <fg-form-item label="販売価格">
-          <h4>
-            {{ form.carTrade.retailPrice | fmtMoney }}
-            {{ form.carTrade.salesPriceDate }}
-          </h4>
+          {{ form.retailPrice | fmtMoney }}
+          {{ form.salesPriceDate }}
         </fg-form-item>
         <fg-form-item label="査定価格">
-          <h4>
-            {{ form.carTrade.assessmentAmount | fmtMoney }}
-            {{ form.carTrade.assessmentDate }}
-          </h4>
+          {{ form.assessmentAmount | fmtMoney }}
+          {{ form.assessmentDate }}
         </fg-form-item>
         <fg-form-item label="支払区分">
-          <h4>
-            {{ form.carTrade.paymentType }}
-            {{ form.carTrade.creditCompany }}
-            {{ form.carTrade.numberOfPayment }}回
-          </h4>
+          {{ form.paymentType }}
+          {{ form.creditCompany }}
+          {{ form.numberOfPayment }}回
         </fg-form-item>
         <fg-form-item label="月々返済">
-          <h4>
-            {{ form.carTrade.repaymentMonthly }}
-            {{ form.bonusDate | fmtDate }}
-          </h4>
+          {{ form.repaymentMonthly }}
+          {{ form.bonusDate | fmtDate }}
         </fg-form-item>
         <fg-form-item label="AI査定">
-          <h4>
-            {{ form.carTrade.aiAssessmentAmount | fmtMoney }}
-            {{ form.aiAssessmentDate | fmtDate }}
-          </h4>
+          {{ form.aiAssessmentAmount | fmtMoney }}
+          {{ form.aiAssessmentDate | fmtDate }}
         </fg-form-item>
-        <fg-form-item label="予想価格(マッチング)">
-          <h4>
-            {{ form.carTrade.estimatedPrice | fmtMoney }}
-            {{ form.expectedDatePriceDate | fmtDate }}
-          </h4>
+        <fg-form-item>
+          <template v-slot:label>
+            <h4 style="line-height: 1.2;">予想価格<br />(マッチング)</h4>
+          </template>
+          {{ form.estimatedPrice | fmtMoney }}
+          {{ form.expectedDatePriceDate | fmtDate }}
         </fg-form-item>
         <fg-form-item label="支払残債">
-          <h4>
-            {{ form.balancePayment | fmtMoney }}
-            {{ form.payableConfimationDate | fmtDate }}
-          </h4>
+          {{ form.balancePayment | fmtMoney }}
+          {{ form.payableConfimationDate | fmtDate }}
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -121,18 +101,18 @@
           <h3>税金/諸費用</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="150px" class="ml20" split-vertical-line>
+      <fg-form label-width="150px" item-spacing="0" split-vertical-line>
         <fg-form-item label="自動車税">
-          <h4>{{ form.carExpense.carTax | fmtMoney }}</h4>
+          {{ form.carTax | fmtMoney }}
         </fg-form-item>
         <fg-form-item label="自賠責保険">
-          <h4>{{ form.liabilityInsurance | fmtMoney }}</h4>
+          {{ form.libilityInsurance | fmtMoney }}
         </fg-form-item>
         <fg-form-item label="重量税">
-          <h4>{{ form.weightTax | fmtMoney }}</h4>
+          {{ form.weightTax | fmtMoney }}
         </fg-form-item>
         <fg-form-item label="リサイクル">
-          <h4>{{ form.recycle | fmtMoney }}</h4>
+          {{ form.recycleFee | fmtMoney }}
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -143,15 +123,15 @@
           <h3>ランニングコスト/月</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="150px" class="ml20" split-vertical-line>
+      <fg-form label-width="150px" item-spacing="0" split-vertical-line>
         <fg-form-item label="ガソリン代">
-          <h4>{{ form.carCost.gasFee | fmtMoney }}</h4>
+          {{ form.monthlyGasolineCost | fmtMoney }}
         </fg-form-item>
         <fg-form-item label="保険料">
-          <h4>{{ form.carCost.insuranceFee | fmtMoney }}</h4>
+          {{ form.carInsuranceFee | fmtMoney }}
         </fg-form-item>
         <fg-form-item label="駐車場代">
-          <h4>{{ form.carCost.parkingFee | fmtMoney }}</h4>
+          {{ form.monthlyParkingFee | fmtMoney }}
         </fg-form-item>
       </fg-form>
     </WhiteBox>
@@ -162,69 +142,67 @@
           <h3>車両詳細情報</h3>
         </template>
       </ColumnTitle>
-      <fg-form label-width="150px" class="ml20" split-vertical-line>
+      <fg-form label-width="150px" item-spacing="0" split-vertical-line>
         <fg-form-item label="車台番号">
-          <h4>{{ form.carDetail.chassisNumber | fmtHyphen }}</h4>
+          {{ form.chassisNumber | fmtHyphen }}
         </fg-form-item>
-        <fg-form-item label="通称型式">
-          <h4>{{ form.carDetail.fullModel | fmtHyphen }}</h4>
+        <fg-form-item label="型式">
+          {{ form.carInspectionType | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="エンジン型式">
-          <h4>{{ form.carDetail.engineType | fmtHyphen }}</h4>
+          {{ form.engineType | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="最大出力">
-          <h4>{{ form.carDetail.maxOutput | fmtHyphen }}</h4>
+          {{ form.engineMaximumOutput | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="最大トルク">
-          <h4>{{ form.carDetail.maxTorque | fmtHyphen }}</h4>
+          {{ form.engineTorque | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="タイヤサイズ">
-          <h4>
-            {{ 'フロント : -' + ' / リア : -' }}
-          </h4>
+          {{ tireSize }}
         </fg-form-item>
         <fg-form-item label="タイヤ製造">
-          <h4>-</h4>
+          {{ tireCreateDate }}
         </fg-form-item>
         <fg-form-item label="バッテリーサイズ">
-          <h4>-</h4>
+          {{ batterySize }}
         </fg-form-item>
         <fg-form-item label="燃料タンク">
-          <h4>{{ form.carDetail.fuelTank | fmtHyphen }}L</h4>
+          {{ form.fuelTankSize | fmtHyphen }}L
         </fg-form-item>
         <fg-form-item label="カラーコード">
-          <h4>{{ form.carDetail.colorCode | fmtHyphen }}</h4>
+          {{ form.colorCodeType | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="トリムコード">
-          <h4>{{ form.carDetail.trimCode | fmtHyphen }}</h4>
+          {{ form.colorTrimCode | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="モデル">
-          <h4>{{ form.carDetail.model | fmtHyphen }}</h4>
+          {{ form.model | fmtHyphen }}
         </fg-form-item>
         <fg-form-item label="発売開始">
-          <h4>{{ form.carDetail.salesPeriod | fmtDate }}</h4>
+          {{ form.salesPeriodStart | fmtDate }}
         </fg-form-item>
         <fg-form-item label="保証期間">
-          <h4>{{ form.carDetail.warrantyPeriod | fmtDate }}</h4>
+          {{ form.warrantyPeriodEnd | fmtDate }}
         </fg-form-item>
         <fg-form-item label="燃費(JC08モード)">
-          <h4>{{ form.carDetail.gasMileage | fmtHyphen }}km/L</h4>
+          {{ form.fuelEconomy | fmtHyphen }}km/L
         </fg-form-item>
         <fg-form-item label="車両重量">
-          <h4>{{ form.carDetail.weight | fmtCarWeight }}</h4>
+          {{ form.carWeight | fmtCarWeight }}
         </fg-form-item>
         <fg-form-item label="車両寸法">
-          <div class="customer-regist-confirm-form-wrapper__car-info">
-            <h4>全長</h4>
-            <h4>{{ form.carDetail.length | fmtCarSizeMm }}</h4>
+          <div class="line-height">
+            <span class="mr30">全長</span>
+            {{ form.carFullLength | fmtCarSizeMm }}
           </div>
-          <div class="customer-regist-confirm-form-wrapper__car-info">
-            <h4>全幅</h4>
-            <h4>{{ form.carDetail.width | fmtCarSizeMm }}</h4>
+          <div class="line-height">
+            <span class="mr30">全幅</span>
+            {{ form.carFullWidth | fmtCarSizeMm }}
           </div>
-          <div class="customer-regist-confirm-form-wrapper__car-info">
-            <h4>全高</h4>
-            <h4>{{ form.carDetail.height | fmtCarSizeMm }}</h4>
+          <div class="line-height">
+            <span class="mr30">全高</span>
+            {{ form.carTotalHeight | fmtCarSizeMm }}
           </div>
         </fg-form-item>
       </fg-form>
@@ -243,49 +221,66 @@
 </template>
 
 <script>
-import { storage } from '~/assets/js/storage'
 import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import {
-  fmtHyphen,
-  fmtCarNumber,
-  fmtAlternative,
-  fmtTransactionType,
-  fmtMoney,
-  sumCost,
-  fmtCarSizeMm,
-  fmtCarWeight,
-  fmtDate,
-} from '~/components/common/customer/common/helper'
+import { customerMixin } from '~/mixins/customer'
+
 export default {
   name: 'ConfirmBodyContainer',
-  filters: {
-    fmtHyphen,
-    fmtCarNumber,
-    fmtAlternative,
-    fmtTransactionType,
-    fmtMoney,
-    sumCost,
-    fmtCarSizeMm,
-    fmtCarWeight,
-    fmtDate,
-  },
   components: {
     WhiteBox,
     ColumnTitle,
   },
+  mixins: [customerMixin],
   data() {
     return {
       query: {
         ...this.$route.query,
       },
-      form: storage.get('registCarEdit'),
+      form: this.$ui.getCache('carEditCacheData'),
+      registrationImage: '',
     }
+  },
+  computed: {
+    saleNewOldCarType() {
+      const classes = this.$ui.getBasicData('sale_new_old_car_type', true)
+      return classes[this.form.saleNewOldCarType]
+    },
+    tireSize() {
+      const arr = []
+      const { tireSizeFront, tireSizeRear } = this.form
+      if (tireSizeFront) {
+        arr.push(`フロント : ${tireSizeFront}`)
+      }
+      if (tireSizeRear) {
+        arr.push(`リア : ${tireSizeRear}`)
+      }
+      return arr.join(' / ')
+    },
+    tireCreateDate() {
+      const { tireCreateYear, tireCreateWeek } = this.form
+      return `${tireCreateYear || '-'}年${tireCreateWeek || '-'}週目`
+    },
+    batterySize() {
+      const { batterySize, batteryCreateDate } = this.form
+      return `${batterySize} 製造：${batteryCreateDate}`
+    },
+  },
+  created() {
+    // 車検証画像取得
+    const { customerCode, carCode } = this.query
+    this.$api
+      .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
+      .then((res) => {
+        this.registrationImage = res.url
+      })
+      .catch(console.error)
   },
   methods: {
     goBack() {
+      const { carCode, customerCode } = this.query
       this.$router.push(
-        `/customer/regist/car/edit?id=${this.currentCarId}&customerId=${this.customerId}&edit=1`
+        `/customer/regist/car/edit?customerCode=${customerCode}&carCode=${carCode}&edit=1`
       )
     },
   },
@@ -296,12 +291,11 @@ export default {
   margin: 0 auto;
   padding: 20px 0;
   width: 712px;
-  &__car-info {
-    display: flex;
-    margin-bottom: 0px;
-    h4 {
-      margin-right: 20px;
-    }
+  .fg-form {
+    margin-left: 40px;
+  }
+  .line-height {
+    line-height: 30px;
   }
   .footer-button-wrapper {
     display: flex;

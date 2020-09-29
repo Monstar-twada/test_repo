@@ -5,7 +5,13 @@
       title-image="send.svg"
       :page="page"
       icon-width="30"
-    />
+    >
+      <template v-slot:right>
+        <fg-button type="primary" width="180px" white-transparent
+          >キャンセル</fg-button
+        >
+      </template>
+    </Breadcrumbs>
     <DetailContainer />
   </div>
 </template>
@@ -16,13 +22,12 @@ import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 
 export default {
   layout: 'manager',
-  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     DetailContainer,
   },
   data: () => ({
-    page: '送客',
+    page: '送客案件詳細',
     breadcrumbs: [
       {
         text: '送客',

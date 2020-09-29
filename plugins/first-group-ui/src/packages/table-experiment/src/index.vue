@@ -17,7 +17,7 @@
     ]"
   >
     <div class="table-head-wrapper" :style="{ paddingRight: headOffsetRight }">
-      <table cellpadding="0" cellspacing="0">
+      <table class="fg-table-experiment__table" cellpadding="0" cellspacing="0">
         <colgroup>
           <col v-for="(width, i) in headWidthList" :key="i" :width="width" />
         </colgroup>
@@ -56,7 +56,7 @@
         <slot name="placeholder"></slot>
         {{ placeholder }}
       </div>
-      <table cellpadding="0" cellspacing="0">
+      <table class="fg-table-experiment__table" cellpadding="0" cellspacing="0">
         <colgroup>
           <col v-for="(width, i) in headWidthList" :key="i" :width="width" />
         </colgroup>
@@ -137,7 +137,6 @@ export default {
   },
   data() {
     const headWidthList = this.headers.map((item) => item.width)
-    // console.log(this.$slots)
     return {
       headWidthList,
       headOffsetRight: '0',

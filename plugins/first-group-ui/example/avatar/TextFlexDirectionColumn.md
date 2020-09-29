@@ -1,8 +1,7 @@
 ### text-flex-direction-column
 
 ```html
-<fg-avatar :data="avatarData" text-flex-direction-column></fg-avatar>
-
+<fg-avatar :data="avatarData" text-flex-direction-column />
 <script>
 export default {
   data() {

@@ -3,8 +3,12 @@
     <div class="fg-message-box__inner" :style="innerStyle">
       <div class="__header"></div>
       <div class="__body">
-        <div class="icon-wrapper">
-          <FgIcon name="exclamation-circle-line" color="#DB3394"></FgIcon>
+        <div class="icon-wrapper" :style="'border-color:' + iconInfo.color">
+          <FgIcon
+            :name="iconInfo.name"
+            :color="iconInfo.color"
+            :size="iconInfo.size"
+          ></FgIcon>
         </div>
         <div class="content-wrapper">
           <p v-for="(p, i) in content" :key="i">{{ p }}</p>
@@ -15,7 +19,7 @@
           okBtnText
         }}</FgButton>
         <FgButton
-          v-if="type === 'confirm'"
+          v-if="dialogType === 'confirm'"
           :type="cancelBtnType"
           border
           @click="handleClick('cancel')"
@@ -41,7 +45,8 @@ export default {
     return {
       visible: false,
       message: '',
-      type: 'alert',
+      dialogType: 'alert',
+      type: 'warning',
       okBtnText: 'ok',
       okBtnType: 'primary',
       cancelBtnText: 'キャンセル',
@@ -77,6 +82,24 @@ export default {
         ret.opacity = this.maskOpacity
       }
       return ret
+    },
+    iconInfo() {
+      const { warning, primaryActive } = this.$colors
+      let name = 'exclamation'
+      let color = warning
+      let size = 8
+      switch (this.type) {
+        case 'success':
+          color = primaryActive
+          name = 'hook'
+          size = 24
+          break
+      }
+      return {
+        name,
+        color,
+        size,
+      }
     },
   },
   watch: {
@@ -122,7 +145,14 @@ export default {
     opacity: 0;
     transition: inherit;
     .icon-wrapper {
-      margin: 30px auto;
+      margin: 40px auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+      height: 55px;
+      border: 2px solid $--color-border;
+      border-radius: 50%;
     }
     .content-wrapper {
       margin: 0 50px;

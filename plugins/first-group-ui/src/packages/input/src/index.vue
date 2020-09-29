@@ -9,7 +9,7 @@
       size ? '__' + size : '',
       round ? '__round' : '',
       { 'is-focus': isFocus },
-      { 'is-error': isError },
+      { 'is-error': isError || _isError },
       { 'is-inline': inline },
     ]"
     :style="elStyle"
@@ -48,7 +48,7 @@
         v-if="prefixIcon"
         :name="prefixIcon"
         :color="prefixIconColor"
-        @click="$emit('click:prefix-icon')"
+        @click="$emit('click:prefix-icon', $event)"
       ></fg-icon>
       <slot name="prefix"></slot>
     </div>
@@ -62,7 +62,7 @@
         v-if="suffixIcon"
         :name="suffixIcon"
         :color="suffixIconColor"
-        @click="$emit('click:suffix-icon')"
+        @click="$emit('click:suffix-icon', $event)"
       ></fg-icon>
       <fg-icon
         v-if="!!calendarIcon"
@@ -78,12 +78,22 @@
     >
       {{ unit || suffixTextOutside }}
     </div>
+    <transition name="fg-zoom-in-top">
+      <div
+        v-if="errorMessage"
+        class="error-message"
+        :class="{ __nowrap: errorMessageNowrap }"
+      >
+        {{ errorMessage }}
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 import Broadcaster from '../../../assets/js/broadcaster'
 import { isFunction, isNumberLike } from '../../../libs/index'
+import { formEmitterMixin } from '../../../mixins/form-emitter'
 import {
   DEF_PADDING,
   DEF_SIDE_PADDING,
@@ -92,7 +102,7 @@ import {
 
 export default {
   name: 'FgInput',
-  mixins: [Broadcaster],
+  mixins: [Broadcaster, formEmitterMixin],
   props: {
     value: {
       type: [Number, String],
@@ -173,6 +183,12 @@ export default {
       type: Number,
       default: 0,
     },
+    isError: Boolean,
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    errorMessageNowrap: Boolean,
   },
   data() {
     const clearOffset = DEF_CLEAR_ICON_OFFSET[this.size]
@@ -204,8 +220,7 @@ export default {
         paddingLeft: this.offsetLeft + defaultPadding + 'px',
         paddingRight:
           this.offsetRight +
-          this.clearableOffset +
-          defaultPadding +
+          (this.clearableOffset || defaultPadding) +
           lenWidth +
           'px',
       }
@@ -217,10 +232,14 @@ export default {
     clearIconColor() {
       return this.iconColor || this.$colors.primary
     },
-    isError() {
+    _isError() {
       let flag = false
       if (this.length) {
         flag = this.text.length > this.length
+      }
+      // has error message
+      if (this.errorMessage) {
+        flag = true
       }
       return flag
     },
@@ -241,16 +260,22 @@ export default {
       }
     },
     isFocus(val) {
-      if (val) {
+      this.fmtViewText(val)
+    },
+  },
+  created() {
+    this.fmtViewText()
+  },
+  methods: {
+    fmtViewText(isFocus) {
+      if (isFocus) {
         this.viewText = this.text
       } else {
         this.viewText = isFunction(this.customFormatter)
-          ? this.customFormatter(this.text)
+          ? this.customFormatter(this.text, this)
           : this.text
       }
     },
-  },
-  methods: {
     handleClear(e) {
       e.stopPropagation()
       this.input.value = ''
@@ -258,11 +283,12 @@ export default {
       this.$nextTick(() => {
         this.input.focus()
       })
-      this.$emit('clear')
+      this.$emit('clear', e)
       this.$emit('change', '')
+      this.emitFormChange()
     },
-    handleClick() {
-      this.$emit('click')
+    handleClick(e) {
+      this.$emit('click', e)
     },
     handleInput() {
       this.text = this.input.value
@@ -273,6 +299,7 @@ export default {
     handleChange(e) {
       this.text = e.target.value
       this.$emit('change', this.text)
+      this.emitFormChange()
     },
     focus() {
       if (this.readonly || this.disabled) return
@@ -288,7 +315,6 @@ export default {
     },
     handleBlur() {
       this.isFocus = false
-      this.dispatch('FgFormItem', 'fg.form.blur', [this.value])
     },
   },
 }
@@ -297,7 +323,9 @@ export default {
 <style lang="scss">
 @mixin inputSizeMixin($height, $fontSize, $offset) {
   &.__round {
-    border-radius: $height / 2;
+    input {
+      border-radius: $height / 2;
+    }
   }
   input {
     padding: 0 10px;
@@ -329,6 +357,18 @@ export default {
   align-items: center;
   &.is-inline {
     display: inline-flex;
+  }
+  .error-message {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    line-height: 1;
+    font-size: 10px;
+    padding-top: 3px;
+    color: $--color-warning;
+    &.__nowrap {
+      white-space: nowrap;
+    }
   }
   input {
     text-overflow: ellipsis;
@@ -392,6 +432,7 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
+    font-size: 12px;
   }
 
   .__l {

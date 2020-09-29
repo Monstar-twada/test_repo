@@ -22,7 +22,8 @@
     "start:m": "nuxt start -c ./build/config.manager.js -p 3001",
     "start:c": "nuxt start -c ./build/config.console.js -p 3002",
     "ui:prefix": "node plugins/first-group-ui/build/index.js",
-    "ui": "npm run ui:prefix && webpack-dev-server --config plugins/first-group-ui/build/webpack/dev.config.js"
+    "ui": "npm run ui:prefix && webpack-dev-server --config plugins/first-group-ui/build/webpack/dev.config.js",
+    "ui:red": "npm run ui:prefix && webpack-dev-server --theme red --config plugins/first-group-ui/build/webpack/dev.config.js"
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.4.2",
@@ -32,14 +33,13 @@
     "@nuxtjs/style-resources": "^1.0.0",
     "@nuxtjs/vuetify": "^1.11.2",
     "amazon-cognito-identity-js": "^4.4.0",
-    "async-validator": "^3.4.0",
     "chart.js": "^2.9.3",
     "deepmerge": "^4.2.2",
     "image-process": "^4.0.0",
     "nuxt": "^2.0.0",
     "throttle-debounce": "^2.2.1",
     "vue-chartjs": "^3.5.0",
-    "zx-calendar": "^0.5.3"
+    "zx-calendar": "^0.5.6"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

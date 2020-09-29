@@ -44,3 +44,11 @@ export function isElement(obj) {
 export function isArray(arr) {
   return Array.isArray(arr)
 }
+
+export function isBoolean(b) {
+  return typeof b === 'boolean'
+}
+
+export function isObject(o) {
+  return o && typeof o === 'object' && !isArray(o)
+}

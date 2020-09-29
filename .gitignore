@@ -6,7 +6,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
 
 # Runtime data
 pids
@@ -93,4 +92,3 @@ sw.*
 # vscode
 .vscode
 
-package-lock.json
