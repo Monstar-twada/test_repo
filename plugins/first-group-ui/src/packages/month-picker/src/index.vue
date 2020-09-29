@@ -122,7 +122,7 @@ export default {
         this.popVisible = false
       })
       calendar.on('error', (err) => {
-        console.error(err)
+        this.$emit('error', err)
       })
       this.calendar = calendar
     })

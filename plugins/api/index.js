@@ -49,6 +49,53 @@ export class RequestApi {
   }
 
   /**
+   * upload
+   * @param file
+   * @param params
+   * @returns {Promise<unknown>}
+   */
+  upload(file, params = {}) {
+    return new Promise((resolve, reject) => {
+      const configs = {
+        url: params.url || '/v1/tempfile',
+        method: params.method || 'POST',
+        headers: {
+          ...this.getHeaders(),
+          ...params.headers,
+        },
+        data: file,
+        onUploadProgress: ({ loaded, total }) => {
+          if (typeof params.onProgress === 'function') {
+            params.onProgress(Math.floor(100 * loaded / total))
+          }
+        },
+      }
+      Axios.request(configs)
+        .then((res) => {
+          if (res.status === 200) {
+            if (/<!doctype/i.test(res.data)) {
+              throw new Error(`${configs.url} request failed!`)
+            }
+            resolve(res.data.s3TempFile || {})
+          } else {
+            throw res
+          }
+        })
+        .catch((err) => {
+          if (err.response) {
+            reject(err.response.data)
+            return
+          }
+          /* eslint-disable prefer-promise-reject-errors */
+          reject({
+            message: err.message,
+            errors: [err],
+          })
+        })
+    })
+  }
+
+  /**
    * handle request
    * @param api
    * @param params Request Data
@@ -65,10 +112,11 @@ export class RequestApi {
       ...params,
     }
     /* eslint-disable no-prototype-builtins */
-    if (hasOwn(_params, 'offset') || hasOwn(_params, 'limit')) {
-      api += createUrlQuery(_params, ['offset', 'limit'])
+    if (hasOwn(_params, 'offset') || hasOwn(_params, 'limit') || hasOwn(_params, 'sort')) {
+      api += createUrlQuery(_params, ['offset', 'limit', 'sort'])
       delete _params.offset
       delete _params.limit
+      delete _params.sort
     }
     return new Promise((resolve, reject) => {
       if (process.env.useMockData) {

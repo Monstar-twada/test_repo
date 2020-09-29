@@ -21,6 +21,7 @@ const DEFAULT_OPTIONS = {
   maskColor: '',
   maskOpacity: '',
   boxShadow: '',
+  type: 'warning',
 }
 
 let instance
@@ -32,13 +33,13 @@ function initInstance() {
   })
 }
 
-function showMessage(resolve, reject, type, msg, options = {}) {
+function showMessage(resolve, reject, dialogType, msg, options = {}) {
   const _options = merge(DEFAULT_OPTIONS, options)
   if (!instance) {
     initInstance()
   }
   instance.message = msg
-  instance.type = type
+  instance.dialogType = dialogType
   try {
     const { ok, cancel } = _options.buttons
     if (ok) {
@@ -55,7 +56,9 @@ function showMessage(resolve, reject, type, msg, options = {}) {
         instance[key] = _options[key]
       }
     })
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
 
   instance.callback = function (btnType) {
     switch (btnType) {

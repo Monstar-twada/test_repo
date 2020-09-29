@@ -1,10 +1,9 @@
 <template>
   <div class="example-page-wrapper">
     <header>
-      <h1>FG-UI</h1>
-      <h2>{{ pageTitle }}</h2>
+      <h1>First Group UI</h1>
       <a
-        href="https://github.com/monstar-lab-consulting/first-group-ui"
+        href="https://github.com/monstar-lab-consulting/first_group"
         target="_blank"
         ><svg
           height="24"
@@ -32,7 +31,6 @@
       </div>
     </div>
     <div class="main-page-wrapper">
-      <h1 class="page-title">{{ pageTitle }}</h1>
       <router-view />
     </div>
   </div>

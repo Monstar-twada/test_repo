@@ -11,6 +11,7 @@ import { login } from '~/components/manager/plugins/login'
 Vue.use(FirstGroupUI, {
   theme: 'blue',
   project: 'manager',
+  isDev: process.env.useMockData || process.env.NODE_ENV === 'development',
 })
 
 const extendsProps = {

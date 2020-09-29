@@ -1,72 +1,49 @@
 # fg-input
 
+## Properties
 
-
-## Usage
-
-```html
-<template>
-    <fg-input
-        v-model="inputValue"
-        placeholder="入力ください"
-        clearable
-    />
-</template>
-
-<script>
-export default {
-    data() {
-        return {
-            inputValue: '',
-        }
-    },
-}
-</script>
-```
-
-## Attributes
-
-|Attribute|Type|Description|Default|
+|Props|Type|Default|Description|
 |:--|:--|:--|:--|
-|v-model / value|String, Number|||
-|items|Array||`[{text: '', value: ''}]`|
-|readonly|Boolean||`false`|
-|disabled|Boolean||`false`|
-|clearable|Boolean||`false`|
-|placeholder|String||`入力ください`|
-|size|String|medium / small / mini|`-`|
-|type|String|textarea / password / date / number ...|`text`|
-|round|Boolean|determine whether it's a round input|`false`|
-|rows|String, Number|textarea only|`5`|
+|clearable|boolean|`false`||
+|custom-formatter|function|`-`||
+|disabled|boolean|`false`||
+|error-message|string|`''`||
+|error-message-nowrap|boolean|`false`||
+|inline|boolean|`false`||
+|is-error|boolean|`false`||
+|icon-color|string|`''`|clear Icon Color|
+|length|number|`0`|Enter the content warning length|
+|offset-left|number|`0`||
+|offset-right|number|`0`||
+|placeholder|string|`入力ください`||
+|prefix-icon|string|`''`||
+|prefix-icon-color|string|`''`||
+|readonly|boolean|`false`||
+|resizable|boolean|`false`|textarea use only|
+|round|boolean|`false`|input use only|
+|rows|number/string|`5`|textarea use only|
+|size|string|`regular`|`regular/medium/small/mini`|
+|suffix-icon|string|`''`||
+|suffix-icon-color|string|`''`||
+|type|string|`text`|input types: `text/textarea/...`|
+|unit|string|`''`|The text content displayed outside the input box|
+|v-model/value|string|`''`||
+|width|string|`''`||
+|* calendar-icon|string|`''`||
 
 ## Events
 
-|Event Name|Description|Parameters|
+|Name|Parameters|Description|
 |:--|:--|:--|
-|@change|on change|(value: any)|
+|change|(value: string)||
+|clear|()||
+|click|(e: Event)||
+|click:prefix-icon|(e: Event)||
+|click:suffix-icon|(e: Event)||
 
-```html
-<fg-input @change="handleChange" />
-
-<script>
-export default {
-    methods: {
-        handleChange(value) {
-            console.log(value)
-        },
-    },
-}
-</script>
-```
-
-## Methods
-
-|Event Name|Description|Parameters|
-|:--|:--|:--|
-|@focus|focus the input element|-|
-
-## slots
+## Slots
 
 |Name|Description|
 |:--|:--|
-|-|-|
+|prefix||
+|suffix||

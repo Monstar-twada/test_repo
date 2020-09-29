@@ -1,0 +1,36 @@
+[
+  {
+    "customerCode": "100",
+    "carCode": "200",
+    "maker": "トヨタ",
+    "carType": "プリウス",
+    "landTransportOffice": "足立",
+    "carRegistrationNumberType": "310",
+    "carRegistrationNumberKana": "あ",
+    "carRegistrationNumber": "1234",
+    "registrationFirstDate": "string",
+    "registrationEndDate": "string",
+    "sellingDatetime": "string",
+    "carInspectionFlag": "0",
+    "reservationFlag": "1",
+    "tentiveReservationFlag": "0",
+    "activityCount": 3
+  },
+  {
+    "customerCode": "100",
+    "carCode": "201",
+    "maker": "メーカー",
+    "carType": "車種",
+    "landTransportOffice": "string",
+    "carRegistrationNumberType": "string",
+    "carRegistrationNumberKana": "string",
+    "carRegistrationNumber": "string",
+    "registrationFirstDate": "初度登録月日",
+    "registrationEndDate": "車検満了日",
+    "sellingDatetime": "最終取引日",
+    "carInspectionFlag": "1",
+    "reservationFlag": "0",
+    "tentiveReservationFlag": "1",
+    "activityCount": 10
+  }
+]

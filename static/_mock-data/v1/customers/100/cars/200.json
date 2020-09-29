@@ -1,0 +1,90 @@
+{
+  "customerCode": "100",
+  "carCode": "200",
+  "ownerCustomerCode": "string",
+  "ownerFirstName": "string",
+  "ownerLastName": "string",
+  "ownerAge": 0,
+  "ownerFacePhoto": "/common/avatar.jpg",
+  "deciderCustomerCode": "string",
+  "deciderFirstName": "string",
+  "deciderLastName": "string",
+  "deciderAge": 0,
+  "deciderFacePhoto": "/common/person_default.svg",
+  "users": [
+    {
+      "customerCode": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "age": 0,
+      "facePhoto": "/common/person_default.svg"
+    },
+    {
+      "customerCode": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "age": 0,
+      "facePhoto": "/common/avatar.jpg"
+    }
+  ],
+  "carLifeCodes": [
+    {
+      "carLifeCode": "2"
+    }
+  ],
+  "transactionTypes": [
+    {
+      "transactionType": "3"
+    }
+  ],
+  "registrationImageFileCode": "string",
+  "registrationNumber": "string",
+  "maker": "トヨタ",
+  "carType": "プリウス",
+  "grade": "string",
+  "landTransportOffice": "string",
+  "carRegistrationNumberType": "string",
+  "carRegistrationNumberKana": "string",
+  "carRegistrationNumber": "string",
+  "registrationFirstDate": "string",
+  "registrationStartDate": "string",
+  "registrationEndDate": "string",
+  "saleNewOldCarType": "2",
+  "purchaseIntention": "1",
+  "carMileage": 0,
+  "carMileageRegistrationDate": "string",
+  "purchaseTargetFlg": 0,
+  "insuranceNumber": "string",
+  "companyClassification": "string",
+  "carTax": 20390,
+  "libilityInsurance": 234234230,
+  "weightTax": 3420,
+  "recycleFee": 3424220,
+  "monthlyGasolineCost": 14440,
+  "monthlyParkingFee": 23330,
+  "carInsuranceFee": 233330,
+  "runningCostAmount": 233230,
+  "chassisNumber": "string",
+  "carInspectionType": "string",
+  "engineModel": "string",
+  "enginMaximumOutput": "string",
+  "engineTorque": "string",
+  "tireSizeRear": "string",
+  "tireSizeFront": "string",
+  "tireCreateYearMonth": "string",
+  "tireCreateWeek": "string",
+  "batterySize": "string",
+  "batteryCreateDate": "string",
+  "fuelTankSize": "string",
+  "colorCode": "string",
+  "colorTrimCode": "string",
+  "model": "string",
+  "salesPeriodStart": "string",
+  "warrantyPeriodEnd": "string",
+  "fuelEconomy": "string",
+  "carWeight": "string",
+  "carFullLength": "340",
+  "carFullWidth": "210",
+  "carTotalHeight": "160",
+  "imageFileCode": "string"
+}

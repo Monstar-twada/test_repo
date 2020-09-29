@@ -16,6 +16,6 @@ export default {
   border-radius: 6px;
   overflow: hidden;
   color: $--color-primary;
-  padding: 10px 0;
+  padding: 10px 0 20px;
 }
 </style>

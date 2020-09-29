@@ -88,8 +88,9 @@ function install(Vue, opts = {}) {
   })
 
   const $ui = {
-    ...opts,
+    project: 'fg',
     ...libs,
+    ...opts,
   }
 
   Vue.prototype.$ui = $ui

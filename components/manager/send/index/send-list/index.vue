@@ -1,175 +1,263 @@
 <template>
-  <div class="list page mt30 mb30">
-    <PaginationComponent
-      :current-page.sync="currentPage"
-      :total="table.items.length"
-      :per-page="itemsPerPage"
-      @updateEvent="updatePageNumber"
+  <div class="send-list page mt30 mb30">
+    <fg-pagination
+      v-model="currentPage"
+      class="pagination-link"
+      :total="table.total"
+      :page-size="table.limit"
     />
-    <v-data-table
-      :headers="table.headers"
-      :items="table.items"
-      :items-per-page="itemsPerPage"
-      :page.sync="currentPage"
-      hide-default-footer
-    >
-      <template v-slot:item.id="{ item }">
-        <div class="id">
-          <nuxt-link to="/send/detail">{{ item.id }}</nuxt-link>
-        </div>
-      </template>
-      <template v-slot:item.customerName="{ item }">
-        <div class="customerName">
-          <v-avatar :size="36">
-            <img :src="require(`./img/${item.img}`)" alt="" />
-          </v-avatar>
-          <div class="customerName--content">
-            <span>{{ item.customerName[0] }}</span>
-            <span>{{ item.customerName[1] }}</span>
+    <fg-table :data="table.items">
+      <fg-table-column
+        show="date"
+        label="送客日時"
+        cell-class="center"
+        :sortable="true"
+        width="8%"
+      >
+      </fg-table-column>
+      <fg-table-column
+        show="customerName"
+        label="顧客名"
+        cell-class="left"
+        :sortable="true"
+      >
+        <template v-slot="item">
+          <div>
+            <fg-avatar
+              class="user"
+              :data="{
+                url: '/common/person_default.svg',
+                name: `${item.lastName} ${item.firstName}`,
+                summary: `（${item.age || '-'}歳）`,
+              }"
+              text-width="120px"
+              circle
+              text-flex-direction-column
+            ></fg-avatar>
           </div>
-        </div>
-      </template>
-      <template v-slot:item.carInfo="{ item }">
-        <div class="carInfo">
-          {{ item.carInfo[0] }}<br />{{ item.carInfo[1] }}
-          <div v-if="item.carInfo[2]" class="carInfo--badge">
-            {{ item.carInfo[2] }}
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="carInfo"
+        label="依頼対象車"
+        cell-class="left"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <div class="carInfo">
+            {{ item.carInfo[0] }}
+            <br />
+            {{ item.carInfo[1] }}
+            <div v-if="item.carInfo[2]" class="carInfo--badge">
+              {{ item.carInfo[2] }}
+            </div>
           </div>
-        </div>
-      </template>
-    </v-data-table>
-    <PaginationComponent
-      :current-page.sync="currentPage"
-      :total="table.items.length"
-      :per-page="itemsPerPage"
-      @updateEvent="updatePageNumber"
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="sendInfo"
+        label="送客先"
+        cell-class="center"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <div class="sendInfo">{{ item.sendInfo }}</div>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="progress"
+        label="進捗"
+        cell-class="center"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <div :class="progressList[item.progressCode][0]">
+            {{ progressList[item.progressCode][1] }}
+          </div>
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="projectProgress"
+        label="進行中案件"
+        cell-class="center"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <ProjectProgress :project="item.project" />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="expectedAmount"
+        label="獲得予定金額"
+        cell-class="center"
+        :sortable="false"
+      >
+        <template v-slot="item">
+          <div class="price">¥{{ item.price.toLocaleString() }}</div>
+        </template>
+      </fg-table-column>
+    </fg-table>
+    <fg-pagination
+      v-model="currentPage"
+      class="mt15"
+      :total="table.total"
+      :page-size="table.limit"
     />
   </div>
 </template>
 
 <script>
-import PaginationComponent from '~/components/common/PaginationComponent.vue'
+import ProjectProgress from '~/components/manager/send/index/send-list/ProjectProgress.vue'
 export default {
   name: 'SendList',
   components: {
-    PaginationComponent,
+    ProjectProgress,
   },
   data: () => ({
     currentPage: 1,
     itemsPerPage: 10,
     table: {
-      headers: [
-        { text: '案件ID', value: 'id', sortable: true },
-        { text: '顧客名', value: 'customerName', sortable: true },
-        { text: '連絡先情報', value: 'tel', sortable: false },
-        { text: '所有車', value: 'carInfo', sortable: false },
-        { text: '登録ナンバー', value: 'number', sortable: false },
-        { text: '依頼種別', value: 'kind', sortable: false },
-        { text: 'ステータス', value: 'status', sortable: false },
-      ],
       items: [
         {
           id: '1234567890',
-          customerName: ['米田 道治', '（64歳）'],
+          lastName: '米田',
+          firstName: '道治',
+          age: 64,
+          date: '2020/09/09/ 12:34',
           tel: '0743-66-2840',
           carInfo: ['トヨタ', 'プリウス', ''],
-          img: 'person_default.svg',
-          number: '奈良 335 ら 318',
-          kind: '購入',
-          status: '送客中',
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 0,
+          price: 40000,
+          project: ['buy', 'sale', 'inspection'],
         },
         {
           id: '1234567891',
-          customerName: ['山本篤', '（42歳）'],
-          tel: '090-2323-4455',
-          carInfo: ['マツダ', 'CX-5', ''],
-          img: 'person_default.svg',
-          number: '品川 500 さ 3423',
-          kind: '売却',
-          status: '対応中',
+          lastName: '山本',
+          firstName: '篤',
+          age: 42,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 0,
+          price: 40000,
+          project: ['buy'],
         },
         {
           id: '1234567892',
-          customerName: ['北中真希子', '（36歳）'],
-          tel: '080-8888-2040',
-          carInfo: ['フォルクスワーゲン', 'ポロ', ''],
-          img: 'person_default.svg',
-          number: '大阪 103 す 4785',
-          kind: '整備',
-          status: '対応中',
+          lastName: '北中',
+          firstName: '真希子',
+          age: 36,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 1,
+          price: 40000,
+          project: ['sale', 'inspection'],
         },
         {
           id: '1234567893',
-          customerName: ['斎藤拓', '（58歳）'],
-          tel: '080-7490-2041',
-          carInfo: ['メルセデスベンツ', 'Aクラス', ''],
-          img: 'person_default.svg',
-          number: '神奈川 211 う 3984',
-          kind: '鈑金',
-          status: '対応中',
+          lastName: '斎藤',
+          firstName: '斎藤',
+          age: 51,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 1,
+          price: 40000,
+          project: ['inspection', 'buy', 'sale'],
         },
         {
           id: '1234567894',
-          customerName: ['島田一郎', '（47歳）'],
-          tel: '080-5454-9745',
-          carInfo: ['スバル', 'レガシー', ''],
-          img: 'person_default.svg',
-          number: '高松 659 ろ 3030',
-          kind: '保険',
-          status: '成約済',
+          lastName: '島田',
+          firstName: '一郎',
+          age: 47,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 1,
+          price: 40000,
+          project: ['inspection', 'sale'],
         },
         {
           id: '1234567895',
-          customerName: ['長谷川宏美', '（30歳）'],
-          tel: '080-0090-3090',
-          carInfo: ['ホンダ', 'N-BOX', ''],
-          img: 'person_default.svg',
-          number: '熊本 540 あ 2094',
-          kind: 'アクセサリー',
-          status: '成約済',
+          lastName: '長谷川',
+          firstName: '宏美',
+          age: 30,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 2,
+          price: 40000,
+          project: ['sale', 'inspection'],
         },
         {
           id: '1234567896',
-          customerName: ['森下千絵', '（29歳）'],
-          tel: '090-2323-4455',
-          carInfo: ['日産', 'ノート', ''],
-          img: 'person_default.svg',
-          number: '成田 870 ろ 2354',
-          kind: '購入',
-          status: '成約済',
+          lastName: '森下',
+          firstName: '千絵',
+          age: 29,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 2,
+          price: 40000,
+          project: ['buy', 'sale'],
         },
         {
           id: '1234567897',
-          customerName: ['加藤雅之', '（39歳）'],
-          tel: '080-8888-2040',
-          carInfo: ['トヨタ', 'ヴェルファイア', ''],
-          img: 'person_default.svg',
-          number: '松戸 599 あ 2020',
-          kind: '売却',
-          status: '成約済',
+          lastName: '加藤',
+          firstName: '雅之',
+          age: 39,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 3,
+          price: 40000,
+          project: ['sale', 'inspection'],
         },
         {
           id: '1234567898',
-          customerName: ['平岡和正', '（56歳）'],
-          tel: '080-7490-2041',
-          carInfo: ['BMW', 'Z4', ''],
-          img: 'person_default.svg',
-          number: '船橋 890 い 3294',
-          kind: '整備',
-          status: '成約済',
+          lastName: '平岡',
+          firstName: '和正',
+          age: 56,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 3,
+          price: 40000,
+          project: ['inspection'],
         },
         {
           id: '1234567899',
-          customerName: ['鈴木翔子', '（46歳）'],
-          tel: '080-5454-9745',
-          carInfo: ['レクサス', 'NX', ''],
-          img: 'person_default.svg',
-          number: '市原 498 お 6931',
-          kind: '鈑金',
-          status: '見送済',
+          lastName: '鈴木',
+          firstName: '翔子',
+          age: 46,
+          date: '2020/09/09/ 12:34',
+          tel: '0743-66-2840',
+          carInfo: ['トヨタ', 'プリウス', ''],
+          sendInfo: '株式会社ファーストグループ 車検の速太郎',
+          progressCode: 3,
+          price: 40000,
+          project: ['sale', 'inspection', 'buy'],
         },
       ],
+      total: 10,
+      limit: 10,
     },
+    progressList: [
+      ['not-started', '未着手'],
+      ['proposing', '提案中'],
+      ['working', '作業中'],
+      ['finish', '見送済'],
+    ],
   }),
   methods: {
     updatePageNumber(newPage) {
@@ -179,91 +267,85 @@ export default {
 }
 </script>
 <style lang="scss">
-.list {
-  .theme--light.v-pagination {
-    justify-content: flex-end !important;
-    display: inline-flex;
-    .v-pagination__navigation {
-      box-shadow: none !important;
-      width: 28px;
-      height: 24px;
-    }
-    .v-pagination__item {
-      display: inline-block;
-      font-size: 14px !important;
-      font-weight: bold !important;
-      min-width: 16px !important;
-      width: 20px !important;
-      height: 20px !important;
-      line-height: 20px !important;
-      background: none !important;
-      box-shadow: none !important;
-      color: $--color-white !important;
-      border-radius: 0px !important;
-      transition: none !important;
-    }
-    .v-pagination__item--active {
-      border-bottom: 1px $--color-white solid !important;
-    }
-
-    .v-pagination__item--active .primary {
-      border-color: none !important;
-    }
+.send-list {
+  .v-application--is-ltr
+    .send-list
+    .v-data-table
+    .v-data-table__wrapper
+    table
+    thead
+    tr
+    th {
+    text-align: center;
   }
+}
+.send-list {
   .v-data-table {
     table {
       border-radius: 6px !important;
-      border-collapse: separate !important;
-      border-spacing: 0 1em !important;
+      // border-collapse: separate !important;
+      // border-spacing: 0 1em !important;
       thead {
         tr {
           th {
+            font-size: 12px;
+            font-weight: normal;
+            height: 40px !important;
             color: $--color-primary !important;
-            text-align: center !important;
-            &:first-child {
-              border-radius: 6px 0 0 0 !important;
+            padding: 0 2px !important;
+            i {
+              display: none;
             }
-            &:last-child {
-              border-radius: 0 6px 0 0 !important;
+          }
+          th.sortable {
+            span {
+              position: relative;
+              &:before {
+                content: '';
+                position: absolute;
+                top: calc(50% - 4px);
+                right: -10px;
+                width: 7px;
+                height: 4px;
+                background: url('./img/table-sort-arrow-normal.svg') no-repeat 0
+                  0;
+                transform: rotate(180deg);
+              }
+              &:after {
+                content: '';
+                position: absolute;
+                top: calc(50% + 2px);
+                right: -10px;
+                width: 7px;
+                height: 4px;
+                background: url('./img/table-sort-arrow-normal.svg') no-repeat 0
+                  0;
+              }
             }
           }
         }
       }
       tbody {
         tr {
-          height: 60px !important;
+          height: 70px !important;
           &:nth-child(even) {
             background-color: $--color-background;
           }
           td {
-            text-align: center;
+            padding: 0 10px !important;
             color: $--color-primary !important;
             border-bottom: none !important;
             font-size: 12px !important;
-            .id {
-              a {
-                text-decoration: none;
-                color: $--color-primary-active;
-              }
-            }
-            .customerName {
-              display: flex;
-              .v-avatar {
-                margin-right: 10px;
-              }
-              &--content {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                span:first-child {
-                  font-size: 14px;
-                  font-weight: bold;
-                }
-                span:last-child {
-                  font-size: 10px;
-                  font-weight: bold;
-                }
-              }
+            height: 70px !important;
+            position: relative;
+            &:not(:last-child):after {
+              content: '';
+              position: absolute;
+              width: 1px;
+              height: 70%;
+              top: 15%;
+              right: 0;
+              // background: $gray-100;
             }
             .carInfo {
               position: relative;
@@ -288,31 +370,24 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-.list {
+.send-list {
   width: 100%;
-  &__paging {
-    width: 100%;
-    padding-top: 18.5px;
-    padding-bottom: 9px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    &--info {
-      width: 100%;
-      display: flex;
-      align-items: baseline;
-      p {
-        margin-bottom: 0;
-        color: $--color-white;
-        font-size: 14px;
-        &.total {
-          margin-right: 4.3px;
-          font-size: 24px;
-          font-weight: bold;
-        }
-      }
-    }
+  .user {
+    margin-left: 20px;
+  }
+
+  .not-started {
+    color: $--color-success;
+  }
+
+  .proposing {
+    color: $--color-primary;
+  }
+  .working {
+    color: $--color-warning;
+  }
+  .finish {
+    color: #ccc;
   }
 }
 </style>

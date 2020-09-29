@@ -3,6 +3,9 @@
  * https://github.com/capricorncd
  * Date: 2020-09-15 12:39
  */
+import ZxCalendar from 'zx-calendar'
+import { isBoolean, isArray, isString } from './check'
+
 /**
  * to number
  * @param a
@@ -85,4 +88,61 @@ export function toCommaNumber(value, keepDecimalPlaces = false) {
   }
   arr[0] = result.reverse().join('')
   return keepDecimalPlaces ? arr.join('.') : arr[0]
+}
+
+/**
+ * boolean to number
+ * @param o
+ * @param props
+ * @returns {number}
+ */
+export function booleanToNumber(o, props) {
+  if (isBoolean(o)) return +o
+  if (!isArray(props)) {
+    props = [props]
+  }
+  Object.keys(o).forEach((key) => {
+    if (props.includes(key) && isBoolean(o[key])) {
+      o[key] = +o[key]
+    }
+  })
+}
+
+export function formatDate(str, fmt) {
+  return ZxCalendar.prototype.formatDate(str, fmt, {
+    weeks: ['日', '月', '火', '水', '木', '金', '土'],
+  })
+}
+
+export function toDate(str) {
+  try {
+    return ZxCalendar.prototype.toDate(str)
+  } catch (e) {
+    return null
+  }
+}
+
+const MIME_TYPES = {
+  pdf: 'application',
+  jpg: 'image',
+  jpeg: 'image',
+  png: 'image',
+  pneg: 'image',
+}
+
+/**
+ * get file type
+ * @param url
+ * @param isMimeType
+ * @returns {string}
+ */
+export function getFileType(url, isMimeType) {
+  let result = ''
+  if (isString(url)) {
+    result = url.toLowerCase().split('?')[0].split('.').pop()
+    if (isMimeType) {
+      result = MIME_TYPES[result] + '/' + result
+    }
+  }
+  return result
 }
