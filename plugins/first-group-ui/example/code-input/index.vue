@@ -1,24 +1,23 @@
 <template>
   <div class="example-code-input-wrapper">
-    <fg-form label-position="top">
-      <fg-form-item label="code-input">
-        <fg-code-input v-model="code" width="300" />
-      </fg-form-item>
-      <fg-form-item label="code-input">
-        <fg-code-input v-model="code2" width="300" />
-      </fg-form-item>
-    </fg-form>
+    <Docs />
+    <h2>Example</h2>
+
+    <Normal />
   </div>
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
+import Docs from '../../docs/code-input.md'
+import Normal from './Normal.md'
+
 export default {
-  data() {
-    return {
-      code: '',
-      code2: '198987',
-    }
+  components: {
+    Docs,
+    Normal,
   },
+  mixins: [customMixin],
 }
 </script>
 

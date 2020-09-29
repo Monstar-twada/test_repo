@@ -1,17 +1,24 @@
 <template>
   <div class="example-image-wrapper">
-    <fg-image :src="src"></fg-image>
+    <Docs />
+    <h2>Example</h2>
+    <Normal />
+    <ViewMode />
   </div>
 </template>
 
 <script>
+import Docs from '../../docs/image.md'
+import { customMixin } from '../_app/mixins'
+import Normal from './Normal.md'
+import ViewMode from './ViewMode.md'
 export default {
-  data() {
-    return {
-      src:
-        'https://i.pinimg.com/originals/b9/09/d7/b909d7450a19279f53fb2b86571dcbfe.jpg',
-    }
+  components: {
+    Docs,
+    Normal,
+    ViewMode,
   },
+  mixins: [customMixin],
 }
 </script>
 

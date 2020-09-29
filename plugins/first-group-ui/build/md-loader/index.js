@@ -17,6 +17,7 @@ module.exports = function(source) {
   // let hasCode = false
   let isCode = false
   let isHtml = false
+  let codeType = ''
   source.split(/[\n\r]/).forEach(line => {
     // keep blank lines in the code
     if (!isCode && !line) return
@@ -24,13 +25,16 @@ module.exports = function(source) {
     if (/^```(\w*)/.test(line.trim())) {
       // hasCode = true
       isCode = line.trim().length > 3
+      if (isCode) {
+        codeType = RegExp.$1
+      }
       // Multiple HTML code blocks cannot appear
-      if (isCode && RegExp.$1 === 'html') {
+      if (isCode && codeType === 'html') {
         isHtml = true
       }
       if (!isCode) {
         if (!isHtml && tempCodes.length) {
-          lines.push(`<pre><code class="${RegExp.$1}">`)
+          lines.push(`<pre><code class="${codeType}">`)
           lines.push(...tempCodes)
           lines.push(`</code></pre>`)
           tempCodes.length = 0
