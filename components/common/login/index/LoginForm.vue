@@ -105,9 +105,12 @@ export default {
   },
   // checks if already logged in AWS COGNITO
   async beforeCreate() {
+    // console.log(this.$store)
     try {
-      await this.$store.dispatch('auth/load')
-      this.$login.success.call(this)
+      // await this.$store.dispatch('auth/load')
+      if (this.$store.state.auth.isAuthenticated === false) {
+        await this.$store.dispatch('auth/load')
+      }
     } catch (err) {
       console.log({ err })
     }

@@ -16,25 +16,26 @@ export const actions = {
   async load({ commit }) {
     try {
       const user = await Auth.currentAuthenticatedUser()
+      console.log(user)
       commit('set', user)
       return user
     } catch (error) {
       commit('set', null)
     }
     // try {
-    //     const cognitoUser = await Auth.currentAuthenticatedUser()
-    //     const currentSession = await Auth.currentSession()
-    //     cognitoUser.refreshSession(
-    //       currentSession.refreshToken,
-    //       (err, session) => {
-    //         console.log('session', err, session)
-    //         const { idToken, refreshToken, accessToken } = session
-    //         console.log(idToken, refreshToken, accessToken)
-    //       }
-    //     )
-    //   } catch (e) {
-    //     console.log('Unable to refresh Token', e)
-    //   }
+    //   const cognitoUser = await Auth.currentAuthenticatedUser()
+    //   const currentSession = await Auth.currentSession()
+    //   cognitoUser.refreshSession(
+    //     currentSession.refreshToken,
+    //     (err, session) => {
+    //       console.log('session', err, session)
+    //       const { idToken, refreshToken, accessToken } = session
+    //       console.log(idToken, refreshToken, accessToken)
+    //     }
+    //   )
+    // } catch (e) {
+    //   console.log('Unable to refresh Token', e)
+    // }
   },
 
   async login({ commit }, { email, password }) {
@@ -46,5 +47,6 @@ export const actions = {
   async logout({ commit }) {
     await Auth.signOut()
     commit('set', null)
+    this.$router.push('/login')
   },
 }
