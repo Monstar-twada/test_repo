@@ -36,9 +36,5 @@ export default {
       return this.columns.filter((column) => !column.hidden)
     },
   },
-
-  created() {
-    console.log('row', this.row)
-  },
 }
 </script>

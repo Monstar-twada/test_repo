@@ -48,7 +48,9 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => [],
+      default: () => {
+        return []
+      },
     },
     tableClass: {
       type: String,
@@ -134,7 +136,7 @@ export default {
     },
   },
 
-  async mounted() {
+  mounted() {
     const columnComponents = this.$slots.default
       .filter((column) => column.componentInstance)
       .map((column) => column.componentInstance)
@@ -149,7 +151,7 @@ export default {
       )
     })
 
-    await this.mapDataToRows()
+    this.mapDataToRows()
   },
 
   methods: {
@@ -175,7 +177,6 @@ export default {
     },
 
     changeSorting(column) {
-      console.log('column', column)
       if (this.sort.fieldName !== column.show) {
         this.sort.fieldName = column.show
         this.sort.order = 'asc'
