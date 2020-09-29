@@ -10,15 +10,31 @@
         <tr>
           <td class="pt10 pb10">
             <p>コール済</p>
-            <h4><strong>34</strong> /162</h4>
-            <p>（40%）</p>
+            <h4>
+              <strong>{{
+                Number(status.callTotalCount).toLocaleString()
+              }}</strong
+              >&nbsp;/&nbsp;{{
+                Number(status.targetTotalCount).toLocaleString()
+              }}
+            </h4>
+            <p>（{{ status.callTotalRatio }}%）</p>
           </td>
         </tr>
         <tr>
           <td>
             <div>
-              <fg-checkbox label="SMS送付" class="mr25" />
-              <fg-checkbox label="DM送付" />
+              <fg-checkbox
+                label="SMS送付"
+                class="mr25"
+                :value="status.smsSendFlag"
+                @change="handleClick('smsSendFlag', $event.val)"
+              />
+              <fg-checkbox
+                label="DM送付"
+                :value="status.dmSendFlag"
+                @change="handleClick('dmSendFlag', $event.val)"
+              />
             </div>
           </td>
         </tr>
@@ -30,20 +46,43 @@
           <td class="main">
             <div class="ml20">
               <label>継続顧客：</label>
-              <span> <strong>9999</strong> /9999（40%） </span>
+              <span>
+                <strong>{{
+                  Number(status.continueTotalCount).toLocaleString()
+                }}</strong>
+                /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
+                  status.continueTotalRetio
+                }}%）
+              </span>
             </div>
           </td>
           <td class="detail">
             <div class="detail-wrapper">
-              <div
-                v-for="(item, i) in continueCustomer"
-                :key="i"
-                class="detail-item"
-              >
-                <label>{{ item.title }}</label>
+              <div class="detail-item">
+                <label>納車済</label>
                 <span>
-                  <strong>{{ item.data }}</strong>
-                  （{{ item.percent }}）
+                  <strong>{{
+                    Number(status.deliveredTotalCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.deliveredTotalRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>車検入庫</label>
+                <span>
+                  <strong>{{
+                    Number(status.carInspectionTotalCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.carInspectionTotalRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>本予約</label>
+                <span>
+                  <strong>{{
+                    Number(status.reservationTotalCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.reservationTotalRatio }}%）
                 </span>
               </div>
             </div>
@@ -53,16 +92,61 @@
           <td class="main">
             <div class="ml20">
               <label>未確定：</label>
-              <span> <strong>9999</strong> /9999（40%） </span>
+              <span>
+                <strong>{{
+                  Number(status.pendingTotalCount).toLocaleString()
+                }}</strong>
+                /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
+                  status.pendingTotalRatio
+                }}%）
+              </span>
             </div>
           </td>
           <td class="detail">
             <div class="detail-wrapper">
-              <div v-for="(item, i) in unsettled" :key="i" class="detail-item">
-                <label>{{ item.title }}</label>
+              <div class="detail-item">
+                <label>検討中</label>
                 <span>
-                  <strong>{{ item.data }}</strong>
-                  （{{ item.percent }}）
+                  <strong>{{
+                    Number(status.underReviewCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.underReviewRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>買換意向</label>
+                <span>
+                  <strong>{{
+                    Number(status.purchaseIntentionTotalCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.carInspectionTotalRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>仮予約</label>
+                <span>
+                  <strong>{{
+                    Number(status.tentiveReservationTotalCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.tentiveReservationTotalRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>不通</label>
+                <span>
+                  <strong>{{
+                    Number(status.failureCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.failureRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>流出先不明</label>
+                <span>
+                  <strong>{{
+                    Number(status.outflowUnknownCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.outflowUnknownRatio }}%）
                 </span>
               </div>
             </div>
@@ -72,20 +156,43 @@
           <td class="main">
             <div class="ml20">
               <label>他社流出：</label>
-              <span> <strong>9999</strong> /9999（40%） </span>
+              <span>
+                <strong>{{
+                  Number(status.outflowTotalCount).toLocaleString()
+                }}</strong>
+                /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
+                  status.outflowTotalCount
+                }}%）
+              </span>
             </div>
           </td>
           <td class="detail">
             <div class="detail-wrapper">
-              <div
-                v-for="(item, i) in otherCompany"
-                :key="`continue${i}}`"
-                class="detail-item"
-              >
-                <label>{{ item.title }}</label>
+              <div class="detail-item">
+                <label>買換</label>
                 <span>
-                  <strong>{{ item.data }}</strong>
-                  （{{ item.percent }}）
+                  <strong>{{
+                    Number(status.outflowReplacementCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.outflowReplacementRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>車検</label>
+                <span>
+                  <strong>{{
+                    Number(status.outflowInspectionCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.outflowInspectionRatio }}%）
+                </span>
+              </div>
+              <div class="detail-item">
+                <label>廃車</label>
+                <span>
+                  <strong>{{
+                    Number(status.outflowScrappedCount).toLocaleString()
+                  }}</strong>
+                  （{{ status.outflowScrappedRatio }}%）
                 </span>
               </div>
             </div>
@@ -98,70 +205,23 @@
 <script>
 export default {
   name: 'StatusBar',
+  props: {
+    status: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
-    return {
-      continueCustomer: [
-        {
-          title: '納車済',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '車検入庫',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '本予約',
-          data: 9999,
-          percent: '40%',
-        },
-      ],
-      unsettled: [
-        {
-          title: '検討中',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '買換意向',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '仮予約',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '不通',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '流出先不明',
-          data: 9999,
-          percent: '40%',
-        },
-      ],
-      otherCompany: [
-        {
-          title: '買換',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '車検',
-          data: 9999,
-          percent: '40%',
-        },
-        {
-          title: '廃車',
-          data: 9999,
-          percent: '40%',
-        },
-      ],
-    }
+    return {}
+  },
+  methods: {
+    handleClick(property, val) {
+      // do something
+      // const params = { property, val }
+      // this.$api.put('/v1/attaractingCustomers/0000/202009', params)
+    },
   },
 }
 </script>
@@ -244,6 +304,9 @@ export default {
         }
 
         strong {
+          display: inline-block;
+          width: 60px;
+          text-align: right;
           font-size: 16px;
         }
       }

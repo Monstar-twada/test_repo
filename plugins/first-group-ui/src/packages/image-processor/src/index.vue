@@ -34,7 +34,7 @@
       ref="input"
       :accept="accept"
       type="file"
-      style="display: none"
+      style="display: none;"
       @change="inputChange"
     />
     <Cropper

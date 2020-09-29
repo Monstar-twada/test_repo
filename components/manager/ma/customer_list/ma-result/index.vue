@@ -4,8 +4,8 @@
       <fg-pagination
         v-model="currentPage"
         class="pagination-link"
-        :total="itemList.total"
-        :page-size="itemList.limit"
+        :total="10"
+        :page-size="10"
         :before-change="handleBeforeChange"
       />
       <fg-button
@@ -20,7 +20,7 @@
         >保存</fg-button
       >
     </div>
-    <fg-table :data="itemList.results">
+    <fg-table :data="itemList">
       <fg-table-column
         show="customerName"
         label="顧客名"
@@ -54,14 +54,14 @@
         <template v-slot="item">
           <div class="car">
             <h4>{{ item.maker }}</h4>
-            <h4>{{ item.class }}</h4>
+            <h4>{{ item.carType }}</h4>
           </div>
         </template>
       </fg-table-column>
       <fg-table-column
-        show="email"
+        show="registrationEndDate"
         label="車検満了日"
-        cell-class="left"
+        cell-class="center"
         :sortable="false"
         width="10%"
       ></fg-table-column>
@@ -80,7 +80,7 @@
         </template>
       </fg-table-column>
       <fg-table-column
-        show="intention_to_replace"
+        show="purchase"
         label="買換意向"
         :sortable="true"
         width="7%"
@@ -88,9 +88,13 @@
         <template v-slot="item">
           <fg-checkbox
             theme="red"
-            :value="item.statusSMS === '1'"
+            :value="item.purchaseIntention === '1'"
             @change="
-              handleChange('intentionToReplace', item.customerId, $event)
+              handleChange(
+                'purchaseIntention',
+                item.attractingCustomersId,
+                $event
+              )
             "
           />
         </template>
@@ -104,74 +108,117 @@
         <template v-slot="item">
           <fg-checkbox
             theme="red"
-            :value="item.statusSMS === '1'"
-            @change="handleChange('delivered', item.customerId, $event)"
+            :value="item.deliveredFlag === 1"
+            @change="
+              handleChange('deliveredFlag', item.attractingCustomersId, $event)
+            "
           />
         </template>
       </fg-table-column>
       <fg-table-column
-        show="warehouse"
+        show="carInspection"
         label="車検入庫"
         :sortable="true"
         width="10%"
       >
         <template v-slot="item">
           <fg-switch
-            :value="item.warehouse === '1'"
-            @change="handleChange('warehouse', item.customerId, $event)"
+            :value="item.carInspectionFlag === 1"
+            @change="
+              handleChange(
+                'carInspectionFlag',
+                item.attractingCustomersId,
+                $event
+              )
+            "
           />
         </template>
       </fg-table-column>
       <fg-table-column
-        show="reserve"
+        show="reservation"
         label="本予約"
         :sortable="true"
         width="5%"
       >
         <template v-slot="item">
           <fg-checkbox
-            :value="item.reserve === '1'"
-            @change="handleChange('reserve', item.customerId, $event)"
-          />
-        </template>
-      </fg-table-column>
-      <fg-table-column show="dm" label="仮予約" :sortable="true" width="5%">
-        <template v-slot="item">
-          <fg-checkbox
-            :value="item.statusDM === '1'"
-            @change="handleChange('dm', item.customerId, $event)"
-          />
-        </template>
-      </fg-table-column>
-      <fg-table-column show="sms" label="検討中" :sortable="true" width="5%">
-        <template v-slot="item">
-          <fg-checkbox
-            :value="item.statusSMS === '1'"
+            :value="item.reservationFlag === 1"
             @change="
-              handleChange('intentionToReplace', item.customerId, $event)
+              handleChange(
+                'reservationFlag',
+                item.attractingCustomersId,
+                $event
+              )
             "
           />
         </template>
       </fg-table-column>
-      <fg-table-column show="call" label="不通" :sortable="true" width="5%">
+      <fg-table-column
+        show="tentiveReservation"
+        label="仮予約"
+        :sortable="true"
+        width="5%"
+      >
         <template v-slot="item">
           <fg-checkbox
-            :value="item.statusCall === '1'"
-            @change="handleChange('call', item.customerId, $event)"
+            :value="item.tentiveReservationFlag === 1"
+            @change="
+              handleChange(
+                'tentiveReservationFlag',
+                item.attractingCustomersId,
+                $event
+              )
+            "
           />
         </template>
       </fg-table-column>
       <fg-table-column
-        show="call"
+        show="underReview"
+        label="検討中"
+        :sortable="true"
+        width="5%"
+      >
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.underReviewFlag === 1"
+            @change="
+              handleChange(
+                'underReviewFlag',
+                item.attractingCustomersId,
+                $event
+              )
+            "
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column show="failure" label="不通" :sortable="true" width="5%">
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.failureFlag === 1"
+            @change="
+              handleChange('failureFlag', item.attractingCustomersId, $event)
+            "
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="outflow"
         label="他社流出"
         :sortable="true"
         width="10%"
       >
         <template v-slot="item">
           <fg-select
-            :value="item.warehouse"
+            :value="item.outflow"
             :items="options"
             placeholder="選択"
+            @change="
+              handleChangeSelect(
+                'outflow',
+                item.attractingCustomersId,
+                $event.value
+              )
+            "
           />
         </template>
       </fg-table-column>
@@ -180,8 +227,8 @@
       <fg-pagination
         v-model="currentPage"
         class="pagination-link"
-        :total="itemList.total"
-        :page-size="itemList.limit"
+        :total="10"
+        :page-size="10"
         :before-change="handleBeforeChange"
       />
       <fg-button
@@ -203,8 +250,10 @@ export default {
   name: 'MaResult',
   props: {
     itemList: {
-      type: Object,
-      default: null,
+      type: Array,
+      default: () => {
+        return []
+      },
     },
     value: {
       type: Number,
@@ -214,10 +263,6 @@ export default {
   data: () => ({
     currentPage: 1,
     options: [
-      {
-        text: '選択',
-        value: 0,
-      },
       {
         text: '車検',
         value: 1,
@@ -276,10 +321,42 @@ export default {
       this.saveFlg = !!Object.keys(this.status).length > 0
     },
 
-    saveChange() {
+    handleChangeSelect(property, id, val) {
+      const item = this.findItemInfoById(id)
+      if (val !== item[property]) {
+        if (!this.status[id]) {
+          this.status[id] = {}
+          this.status[id][property] = val
+        } else if (!this.status[id][property]) {
+          this.status[id][property] = val
+        }
+      } else if (this.status[id][property]) {
+        delete this.status[id][property]
+        if (Object.keys(this.status[id]).length === 0) {
+          delete this.status[id]
+        }
+      }
+      this.saveFlg = !!Object.keys(this.status).length > 0
+    },
+
+    async saveChange() {
+      // const promises = []
+      // Object.keys(this.status).forEach((index) => {
+      //   const itemData = this.findItemInfoById(index.toString())
+      //   const params = { ...itemData, ...this.status[index] }
+      //   console.log('params', params)
+      //   promises.push(
+      //     this.$api.put(`/v1/attaractingCustomer/0000/${index}`, params)
+      //   )
+      // })
+      // await Promise.all(promises).then(console.log(1234))
+    },
+
+    saveChangeDailog() {
       if (this.saveFlg) {
         this.$confirm('入力したデータを保存しますか？')
           .then(() => {
+            this.saveChangeDai()
             this.saveFlg = false
             this.status = []
           })
@@ -323,6 +400,11 @@ export default {
       } else {
         next()
       }
+    },
+    findItemInfoById(id) {
+      return this.itemList.find(
+        (item) => item.attractingCustomersId === Number(id)
+      )
     },
   },
 }
