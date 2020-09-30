@@ -87,7 +87,7 @@ export default {
     },
     viewMode: {
       type: String,
-      default: 'fill',
+      default: '',
     },
     cropperTitle: {
       type: String,
@@ -274,6 +274,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 12px;
     }
   }
   .__tool-wrapper {

@@ -6,7 +6,6 @@
 <fg-input v-model="value" disabled size="small" style="margin-top: 10px;" />
 <fg-input value="mini size" disabled size="mini" style="margin-top: 10px;" />
 <fg-input value="readonly" readonly style="margin-top: 10px;" />
-
 <script>
 export default {
   data() {

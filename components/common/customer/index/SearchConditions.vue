@@ -178,7 +178,7 @@ export default {
   },
   methods: {
     search() {
-      if (this.registrationDateError) return
+      if (this.registrationDateError || this.registrationEndDateError) return
       const form = {
         ...this.form,
       }

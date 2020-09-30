@@ -9,7 +9,6 @@ user photo crop
   width="240"
   height="240"
   @change="change" />
-
 <script>
 export default {
   data() {

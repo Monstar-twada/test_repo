@@ -12,7 +12,6 @@ import Calendar from '../calendar/index'
 import Checkbox from '../checkbox/index'
 import CodeInput from '../code-input/index'
 import DatePicker from '../date-picker/index'
-import DateSetter from '../date-setter/index'
 import Dialog from '../dialog/index'
 import Form from '../form/index'
 import Icon from '../icon/index'
@@ -47,7 +46,6 @@ export default new VueRouter({
     { path: '/checkbox', component: Checkbox },
     { path: '/code-input', component: CodeInput },
     { path: '/date-picker', component: DatePicker },
-    { path: '/date-setter', component: DateSetter },
     { path: '/dialog', component: Dialog },
     { path: '/form', component: Form },
     { path: '/icon', component: Icon },

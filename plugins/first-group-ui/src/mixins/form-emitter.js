@@ -14,7 +14,9 @@ export const formEmitterMixin = {
   methods: {
     emitFormChange() {
       if (this.form) {
-        this.form.$emit('change')
+        this.$nextTick(() => {
+          this.form.$emit('change')
+        })
       }
     },
   },

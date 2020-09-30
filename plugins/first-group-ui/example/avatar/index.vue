@@ -1,6 +1,7 @@
 <template>
   <div class="example-avatar-wrapper">
-    <Doc />
+    <Docs />
+    <h2>Example</h2>
     <TableAvatarData />
     <TextFlexDirectionColumn />
     <TextSummaryNoOffset />
@@ -11,7 +12,7 @@
 
 <script>
 import { customMixin } from '../_app/mixins'
-import Doc from './doc.md'
+import Docs from '../../docs/avatar.md'
 import TableAvatarData from './TableAvatarData.md'
 import TextFlexDirectionColumn from './TextFlexDirectionColumn.md'
 import TextSummaryNoOffset from './TextSummaryNoOffset.md'
@@ -19,7 +20,7 @@ import AvatarOnly from './AvatarOnly.md'
 import LongTextData from './LongTextData.md'
 export default {
   components: {
-    Doc,
+    Docs,
     TableAvatarData,
     TextFlexDirectionColumn,
     TextSummaryNoOffset,

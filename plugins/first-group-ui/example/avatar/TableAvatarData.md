@@ -1,8 +1,5 @@
-## Usage
-
 ```html
-<fg-avatar :data="tableAvatarData"></fg-avatar>
-
+<fg-avatar :data="tableAvatarData" />
 <script>
 export default {
   data() {

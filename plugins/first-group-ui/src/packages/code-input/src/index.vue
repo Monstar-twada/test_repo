@@ -17,6 +17,7 @@
         :key="i"
         :for="inputId"
         :class="{ active: isFocus === true && i === currentIndex }"
+        :style="labelStyle"
         v-text="list[i]"
       >
       </label>
@@ -42,9 +43,9 @@ export default {
       type: [Number, String],
       default: 0,
     },
-    gutter: {
+    itemWidth: {
       type: [Number, String],
-      default: 12,
+      default: 0,
     },
   },
   data() {
@@ -74,6 +75,13 @@ export default {
       const ret = {}
       if (this.width) {
         ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+      }
+      return ret
+    },
+    labelStyle() {
+      const ret = {}
+      if (this.itemWidth) {
+        ret.width = this.itemWidth + (isNumberLike(this.itemWidth) ? 'px' : '')
       }
       return ret
     },

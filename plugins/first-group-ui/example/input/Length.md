@@ -2,7 +2,6 @@
 
 ```html
 <fg-input v-model="form.field" clearable size="medium" :length="10" />
-
 <script>
 export default {
   data() {

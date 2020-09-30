@@ -12,7 +12,6 @@ import FgCheckbox from './packages/checkbox/index'
 import FgCodeInput from './packages/code-input/index'
 import FgCol from './packages/row/col'
 import FgDatePicker from './packages/date-picker/index'
-import FgDateSetter from './packages/date-setter/index'
 import FgDialog from './packages/dialog/index'
 import FgForm from './packages/form/index'
 import FgFormItem from './packages/form-item/index'
@@ -54,7 +53,6 @@ const components = [
   FgCodeInput,
   FgCol,
   FgDatePicker,
-  FgDateSetter,
   FgDialog,
   FgForm,
   FgFormItem,

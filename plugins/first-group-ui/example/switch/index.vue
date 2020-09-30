@@ -1,30 +1,25 @@
 <template>
-  <dov class="switch-wrapper">
-    <fg-form label-font-size="16px">
-      <fg-form-item label="default off">
-        <fg-switch :value="value1"></fg-switch>
-      </fg-form-item>
-      <fg-form-item label="ddefault on">
-        <fg-switch :value="value2"></fg-switch>
-      </fg-form-item>
-      <fg-form-item label="タイトル">
-        <fg-switch :value="value2" label="タイトル"></fg-switch>
-      </fg-form-item>
-      <fg-form-item label="disable">
-        <fg-switch :value="value2" disabled></fg-switch>
-      </fg-form-item>
-    </fg-form>
-  </dov>
+  <div>
+    <Docs />
+    <h2>Example</h2>
+    <Normal />
+    <Title />
+  </div>
 </template>
 
 <script>
+import { customMixin } from '../_app/mixins'
+import Docs from '../../docs/switch.md'
+import Normal from './Normal.md'
+import Title from './Title.md'
+
 export default {
-  data() {
-    return {
-      value1: false,
-      value2: true,
-    }
+  components: {
+    Docs,
+    Normal,
+    Title,
   },
+  mixins: [customMixin],
 }
 </script>
 
