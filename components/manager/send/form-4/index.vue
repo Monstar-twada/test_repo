@@ -77,7 +77,7 @@ export default {
 
   methods: {
     handleClick: (e) => {
-      console.log(e)
+      // console.log(e)
     },
   },
 }

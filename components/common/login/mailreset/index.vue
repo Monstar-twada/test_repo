@@ -106,9 +106,8 @@ export default {
       return count
     },
     confirm() {
-      console.log('@@@@@@@')
-      const count = this.validation()
-      if (count === 0) console.log('submitted')
+      // const count = this.validation()
+      // if (count === 0) console.log('submitted')
     },
   },
 }

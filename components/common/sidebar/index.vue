@@ -127,7 +127,7 @@ export default {
   },
   watch: {
     selectedResult(val) {
-      console.log('selectedResult change', val)
+      // console.log('selectedResult change', val)
     },
     $route() {
       this.resetRouteIndex()

@@ -4,6 +4,7 @@
     persistent
     max-width="700px"
     title="スタッフ追加"
+    class="admin-staff-index-dialog"
   >
     <div class="admin-staff-index-dialog-container">
       <!-- <DialogHeader @close="visible = false" /> -->
@@ -60,31 +61,34 @@ export default {
 </script>
 
 <style lang="scss">
-.admin-staff-index-dialog-container {
-  position: relative;
-  .body-wrapper {
-    margin: 0 0;
-    color: $--color-primary;
-    overflow: hidden;
-    font-size: 14px;
-    .fg-form {
-      .fg-form-item {
-        padding: 20px 40px;
-        margin-bottom: 0;
-        border-bottom: 1px solid $--color-background-hover;
-        .fg-form-item__label {
-          font-weight: normal;
+.admin-staff-index-dialog {
+  &-container {
+    position: relative;
+    height: 330px;
+    .body-wrapper {
+      margin: 0 0;
+      color: $--color-primary;
+      overflow: hidden;
+      font-size: 14px;
+      .fg-form {
+        .fg-form-item {
+          padding: 20px 40px;
+          margin-bottom: 0;
+          border-bottom: 1px solid $--color-background-hover;
+          .fg-form-item__label {
+            font-weight: normal;
+          }
         }
       }
     }
-  }
-  .footer-wrapper {
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 27px;
+    .footer-wrapper {
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 27px;
+    }
   }
 }
 </style>

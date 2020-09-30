@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     handleClick(type) {
-      console.log(type, this.item)
+      // console.log(type, this.item)
     },
   },
 }

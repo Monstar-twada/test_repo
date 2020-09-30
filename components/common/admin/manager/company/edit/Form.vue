@@ -178,8 +178,8 @@ export default {
       return count
     },
     handleSubmit() {
-      const count = this.validation()
-      if (count === 0) console.log('submitted')
+      // const count = this.validation()
+      // if (count === 0) console.log('submitted')
       // if (count === 0) this.nextUrl('/login/passwordreset')
     },
   },

@@ -30,7 +30,7 @@ export default {
       type: String,
       default: '',
     },
-    isDisabled: {
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -47,7 +47,7 @@ export default {
       return this.id ? this.id : this.name.toLowerCase().replace(/ /g, '-')
     },
     hash() {
-      if (this.isDisabled) {
+      if (this.disabled) {
         return '#'
       }
       return '#' + this.computedId

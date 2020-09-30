@@ -242,7 +242,6 @@ export default {
       const list = this.$refs[dom]
       const clickIcon = this.$refs[pdom][0]
       clickIcon.classList.toggle('is-close')
-      console.log('ndme', this.$refs[pdom][0])
       for (const i in list) {
         if (list[i].$el.style.display === 'none') {
           list[i].$el.style.display = ''

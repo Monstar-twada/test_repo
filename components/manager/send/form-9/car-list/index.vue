@@ -194,7 +194,7 @@ export default {
   }),
   methods: {
     handleChange(id) {
-      console.log('id', id)
+      // console.log('id', id)
     },
   },
 }

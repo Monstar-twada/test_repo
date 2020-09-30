@@ -28,7 +28,6 @@
 </template>
 
 <script>
-// import expiringStorage from '../expiringStorage'
 export default {
   name: 'FgTabs',
   props: {},
@@ -38,11 +37,6 @@ export default {
     activeTabIndex: 0,
     lastActiveTabHash: '',
   }),
-  // computed: {
-  //   // storageKey() {
-  //   //   return `vue-tabs-component.cache.${window.location.host}${window.location.pathname}`
-  //   // },
-  // },
   created() {
     this.tabs = this.$children
   },
@@ -71,30 +65,11 @@ export default {
       this.tabs.forEach((tab) => {
         tab.isActive = tab.hash === selectedTab.hash
       })
-      // this.$emit('changed', { tab: selectedTab })
       this.activeTabHash = selectedTab.hash
       this.activeTabIndex = this.getTabIndex(selectedTabHash)
       this.lastActiveTabHash = this.activeTabHash = selectedTab.hash
       this.resetLinePosition()
     },
-    // setTabVisible(hash, visible) {
-    //   const tab = this.findTab(hash)
-    //   if (!tab) {
-    //     return
-    //   }
-    //   tab.isVisible = visible
-    //   if (tab.isActive) {
-    //     // If tab is active, set a different one as active.
-    //     tab.isActive = visible
-    //     this.tabs.every((tab, index, array) => {
-    //       if (tab.isVisible) {
-    //         tab.isActive = true
-    //         return false
-    //       }
-    //       return true
-    //     })
-    //   }
-    // },
 
     getTabIndex(hash) {
       const tab = this.findTab(hash)
@@ -178,5 +153,9 @@ export default {
   display: flex;
   padding: 10px 0;
   text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

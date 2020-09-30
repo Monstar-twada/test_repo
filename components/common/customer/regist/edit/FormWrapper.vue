@@ -503,7 +503,7 @@ export default {
           this.$api
             .delete(`/v1/customers/${customerCode}/facePhoto`)
             .then(() => {
-              console.log(`delete ${type}: ${fileId} successfully!`)
+              // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
               console.error(err)
@@ -514,7 +514,7 @@ export default {
           this.$api
             .delete(`/v1/customers/${customerCode}/licenseImage`)
             .then(() => {
-              console.log(`delete ${type}: ${fileId} successfully!`)
+              // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
               console.error(err)
@@ -527,7 +527,7 @@ export default {
         this.$api
           .upload(file, {
             onProgress(per) {
-              console.log('onProgress', per + '%')
+              // console.log('onProgress', per + '%')
             },
           })
           .then((res) => {

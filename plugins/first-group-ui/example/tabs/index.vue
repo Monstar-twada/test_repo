@@ -1,36 +1,22 @@
 <template>
-  <div class="fg-tabs-wrapper">
-    <fg-tabs
-      :options="{ useUrlFragment: false }"
-      @clicked="tabClicked"
-      @changed="tabChanged"
-    >
-      <fg-tabs-item name="First tab">
-        This is the content of the first tab
-      </fg-tabs-item>
-      <fg-tabs-item name="Second tab">
-        This is the content of the second tab
-      </fg-tabs-item>
-      <fg-tabs-item name="Third tab">
-        This content will be unavailable while :is-disabled prop set to true
-      </fg-tabs-item>
-      <fg-tabs-item name="Forth tab">
-        The fragment that is appended to the url can be customized
-      </fg-tabs-item>
-    </fg-tabs>
+  <div>
+    <Docs />
+    <h2>Example</h2>
+    <div class="fg-tabs-wrapper">
+      <Normal />
+    </div>
   </div>
 </template>
 <script>
+import { customMixin } from '../_app/mixins'
+import Docs from '../../docs/tabs.md'
+import Normal from './Normal.md'
 export default {
-  data() {
-    return {
-      itemList: [],
-    }
+  components: {
+    Docs,
+    Normal,
   },
-  methods: {
-    tabClicked() {},
-    tabChanged() {},
-  },
+  mixins: [customMixin],
 }
 </script>
 
@@ -38,6 +24,7 @@ export default {
 .fg-tabs-wrapper {
   width: 100%;
   height: 500px;
+  color: $--color-white;
   background: $--color-primary-active;
 }
 </style>
