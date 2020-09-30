@@ -3,12 +3,16 @@ import Auth from '@aws-amplify/auth'
 export const state = () => ({
   isAuthenticated: false,
   user: null,
+  token: null,
 })
 
 export const mutations = {
-  set(state, user) {
+  setUser(state, user) {
     state.isAuthenticated = !!user
     state.user = user
+  },
+  setToken(state, token) {
+    state.token = token
   },
 }
 
@@ -16,8 +20,15 @@ export const actions = {
   async load({ commit }) {
     try {
       const user = await Auth.currentAuthenticatedUser()
-      commit('set', user)
-      return user
+      // const user = await Auth.currentUserInfo()
+      if (user) {
+        const session = await Auth.currentSession()
+        const token = session?.getIdToken()?.getJwtToken()
+        if (token) {
+          commit('setToken', token)
+        }
+      }
+      commit('setUser', user)
     } catch (error) {
       commit('set', null)
     }
@@ -39,13 +50,14 @@ export const actions = {
 
   async login({ commit }, { email, password }) {
     const user = await Auth.signIn(email, password)
-    commit('set', user)
+    commit('setUser', user)
     return user
   },
 
   async logout({ commit }) {
     await Auth.signOut()
-    commit('set', null)
+    commit('setUser', null)
+    commit('setToken', null)
     this.$router.push('/login')
   },
 }
