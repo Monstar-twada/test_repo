@@ -32,7 +32,7 @@ export default {
     value(val) {
       this.selected = val
     },
-    selscted(val) {
+    selected(val) {
       this.$emit('input', val)
     },
   },
@@ -41,25 +41,36 @@ export default {
 </script>
 <style lang="scss" scoped>
 .mark-icon {
-  width: 40px;
+  width: 80px;
+  height: 80px;
   text-align: center;
+  margin: 0 -20px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: flex-start;
   .icon {
+    width: 40px;
     height: 40px;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $--color-primary;
+    background: $--color-primary-placeholder;
     border-radius: 5px;
 
     img {
       width: 25px;
     }
   }
+  .icon.__selected {
+    background: $--color-primary;
+  }
   span {
-    width: 40px;
+    width: 100%;
+    text-align: center;
     font-size: 12px;
     font-weight: normal;
-    color: $--color-primary;
   }
 }
 </style>
