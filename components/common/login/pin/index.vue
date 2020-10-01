@@ -16,10 +16,10 @@
         validationMessage.code
       }}</fg-text>
     </div>
-    <div class="pin-form__buttons mt25">
+    <div class="pin-form__button mt25">
       <fg-button
-        class="mb20"
-        width="30%"
+        class="pin-form__button-send"
+        width="220"
         type="primary"
         suffix-icon="arrow-right"
         round
@@ -32,7 +32,7 @@
         type="primary"
         border
         bold
-        width="30%"
+        width="220"
         @click="nextUrl('/login/forgot')"
         >戻る</fg-button
       >
@@ -116,14 +116,19 @@ export default {
       justify-content: center;
     }
     &__requirements {
+      font-size: 14px;
       text-align: center;
       color: $--color-primary;
     }
-    &__buttons {
+    &__button {
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-items: center;
+
+      &-send {
+        margin-bottom: 20px;
+      }
     }
   }
 }

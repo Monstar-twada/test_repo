@@ -7,7 +7,7 @@
           <p>株式会社ファーストグループ</p>
         </fg-form-item>
         <fg-form-item label="氏名">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="12">
               <fg-input placeholder="姓"></fg-input>
             </fg-col>
@@ -17,7 +17,7 @@
           </fg-row>
         </fg-form-item>
         <fg-form-item label="フリガナ">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="12">
               <fg-input placeholder="セイ"></fg-input>
             </fg-col>
@@ -32,23 +32,28 @@
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
             <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
-              <div class="signin-index-form-item">
+              <!-- <div class="signin-index-form-item">
                 <div class="signin-index-form-item_img">
                   <fg-avatar
                     :src="require(`./img/${item.icon}-icon-white.svg`)"
-                    :size="25"
+                    size="25"
                     fillet
                   ></fg-avatar>
                 </div>
                 <div class="signin-index-form-item_title">
                   <p>{{ item.title }}</p>
                 </div>
-              </div>
+              </div>-->
+              <MarkIcon
+                :value="true"
+                :icon-src="item.icon"
+                :text="item.title"
+              />
             </div>
           </div>
         </fg-form-item>
         <fg-form-item label="資格">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="21">
               <fg-input placeholder="例）1級小型自動車整備士"></fg-input>
             </fg-col>
@@ -73,10 +78,10 @@
             v-model="password"
             placeholder="password"
             suffix-icon="eye"
-            :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
+            :suffix-icon-color="showPassword1 ? '#1E5199' : '#DFE6F0'"
             :type="showPassword1 ? 'text' : 'password'"
             :offset-right="30"
-            @click:suffix-icon="showPassword = !showPassword"
+            @click:suffix-icon="showPassword1 = !showPassword1"
           />
         </fg-form-item>
         <fg-form-item label="初期パスワード(確認)">
@@ -84,10 +89,10 @@
             v-model="password"
             placeholder="password"
             suffix-icon="eye"
-            :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
+            :suffix-icon-color="showPassword2 ? '#1E5199' : '#DFE6F0'"
             :type="showPassword2 ? 'text' : 'password'"
             :offset-right="30"
-            @click:suffix-icon="showPassword = !showPassword"
+            @click:suffix-icon="showPassword2 = !showPassword2"
           />
         </fg-form-item>
       </fg-form>
@@ -102,14 +107,17 @@
 
 <script>
 import Header from '~/components/common/signin/common/Header'
+import MarkIcon from '~/components/common/mark-icon/index'
 export default {
   components: {
     Header,
+    MarkIcon,
   },
   data() {
     return {
       showPassword1: false,
       showPassword2: false,
+      password: '',
       icons: [
         {
           title: '購入',
@@ -148,12 +156,14 @@ export default {
 
 <style lang="scss">
 .signin-index-page-wrapper {
+  height: 100%;
   .signin-index-form-wrapper {
     .fg-form {
       padding: 20px 40px;
     }
     .signin-index-form-items {
       display: flex;
+      justify-content: space-between;
       .signin-index-form-item {
         display: flex;
         flex-direction: column;

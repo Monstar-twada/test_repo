@@ -140,8 +140,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login-index-page-wrapper {
+  margin-top: -10%;
   .login-form {
     padding-top: 50px;
     max-width: 270px;
@@ -192,6 +193,7 @@ export default {
       }
     }
     &__requirements {
+      font-size: 14px;
       text-align: center;
       color: $--color-primary-placeholder;
     }

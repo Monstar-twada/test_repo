@@ -30,7 +30,7 @@
         <fg-calendar
           v-model="birthday"
           class="forgot-form__input-box__calendar"
-          width="100%"
+          width="160px"
           clearable
         ></fg-calendar>
       </div>
@@ -147,7 +147,7 @@ export default {
 
     &__input-box {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       &__email {
         width: 270px;
@@ -165,6 +165,7 @@ export default {
       }
       h4 {
         color: $--color-primary;
+        width: 100px;
       }
     }
     &__button {
