@@ -73,14 +73,15 @@
               :key="`${item}-${i}`"
               class="service-items_item"
             >
-              <div class="service-items_item_img">
+              <!-- <div class="service-items_item_img">
                 <img
                   width="24"
                   height="24"
                   :src="require(`./img/${item.icon}-icon-white.svg`)"
                 />
               </div>
-              <div class="service-items_item_text">{{ item.text }}</div>
+              <div class="service-items_item_text">{{ item.text }}</div> -->
+              <MarkIcon :value="true" :icon-src="item.icon" :text="item.text" />
             </div>
           </div>
         </fg-form-item>
@@ -104,7 +105,11 @@
 </template>
 
 <script>
+import MarkIcon from '~/components/common/mark-icon/index'
 export default {
+  components: {
+    MarkIcon,
+  },
   data() {
     return {
       areaItems: {},

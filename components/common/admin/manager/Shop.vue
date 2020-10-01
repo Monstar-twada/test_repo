@@ -12,12 +12,7 @@
           />
         </div>
       </div>
-      <fg-table
-        :headers="headers"
-        :data="itemList"
-        group-by="area"
-        thead-class="thead-bg"
-      >
+      <fg-table :data="itemList" group-by="area" thead-class="thead-bg">
         <fg-table-column show="shop_name" label="店名" :sortable="false">
           <template v-slot="item">
             <div>{{ item.shop_name }}</div>
