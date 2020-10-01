@@ -30,7 +30,8 @@ export const actions = {
       }
       commit('setUser', user)
     } catch (error) {
-      commit('set', null)
+      commit('setUser', null)
+      commit('setToken', null)
     }
     // try {
     //   const cognitoUser = await Auth.currentAuthenticatedUser()
