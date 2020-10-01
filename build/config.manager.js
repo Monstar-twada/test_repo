@@ -17,6 +17,10 @@ export default merge(baseConfig, {
       '~/plugins/first-group-ui/src/assets/scss/index.scss',
     ],
   },
+  modules: ['@nuxtjs/gtm'],
+  gtm: {
+    id: 'GTM-N8RJT4T',
+  },
   // https://nuxtjs.org/api/configuration-generate
   generate: {
     dir: 'dist/manager',
@@ -25,5 +29,6 @@ export default merge(baseConfig, {
   buildDir: 'dist/.manager',
   plugins: [
     { src: '~/plugins/global-manager-properties.js', ssr: false },
+    '~/plugins/aws',
   ],
 })

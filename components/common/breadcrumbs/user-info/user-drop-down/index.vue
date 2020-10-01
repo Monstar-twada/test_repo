@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     handleLogout() {
-      this.$store.commit('user/signOut', false)
+      this.$store.dispatch('auth/logout')
     },
   },
 }

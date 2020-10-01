@@ -71,7 +71,7 @@ export const baseConfig = {
     //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     useMockData: process.env.MOCK_DATA === '1',
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
   },
   router: {
     base: process.env.BASE_URL,
@@ -103,15 +103,16 @@ export const baseConfig = {
   //   customVariables: ["~/assets/scss/variables.scss"],
   //   treeShake: true
   // },
-  gtm: {
-    enabled: true,
-    id: 'GTM-N8RJT4T',
-    autoInit: true,
-    respectDoNotTrack: true,
-    noscript: true,
-    noscriptId: 'gtm-noscript',
-    noscriptURL: 'https://www.googletagmanager.com/ns.html',
-  },
+
+  // gtm: {
+  //   enabled: true,
+  //   id: 'GTM-N8RJT4T',
+  //   autoInit: true,
+  //   respectDoNotTrack: true,
+  //   noscript: true,
+  //   noscriptId: 'gtm-noscript',
+  //   noscriptURL: 'https://www.googletagmanager.com/ns.html'
+  // },
   /*
    ** Build configuration
    */
