@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { resetZIndex, toNumber } from '../../../libs/index'
+import { resetZIndex, toNumber, isNumberLike } from '../../../libs/index'
 
 export default {
   name: 'FgDialog',
@@ -93,7 +93,7 @@ export default {
     innerStyle() {
       const ret = {}
       if (this.maxWidth) {
-        ret.maxWidth = this.maxWidth
+        ret.maxWidth = this.maxWidth + (isNumberLike(this.maxWidth) ? 'px' : '')
       }
       return ret
     },

@@ -4,7 +4,9 @@
       :breadcrumbs="breadcrumbs"
       :page="page"
       title-image="setting.svg"
-    />
+    >
+      <h2>[ 店舗詳細 ]</h2>
+    </Breadcrumbs>
     <IndexForm />
   </div>
 </template>
@@ -20,7 +22,7 @@ export default {
   },
   data() {
     return {
-      page: '管理 [エリア設定]',
+      page: '管理',
       breadcrumbs: [
         {
           text: '管理',

@@ -11,7 +11,6 @@
   @click:suffix-icon="showPassword = !showPassword"
   width="210"
 />
-
 <script>
 export default {
   data() {

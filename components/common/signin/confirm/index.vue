@@ -2,7 +2,7 @@
   <div class="signin-index-page-wrapper">
     <Header title="新規アカウント登録" />
     <div class="signin-index-form-wrapper">
-      <fg-form label-width="250px" split-vertical-line>
+      <fg-form label-width="140px" split-vertical-line>
         <fg-form-item label="会社名">
           <p>株式会社ファーストグループ</p>
         </fg-form-item>
@@ -18,7 +18,7 @@
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
             <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
-              <div
+              <!-- <div
                 v-if="selectedJob.includes(i)"
                 class="signin-index-form-item"
               >
@@ -32,7 +32,12 @@
                 <div class="signin-index-form-item_title">
                   <p>{{ item.title }}</p>
                 </div>
-              </div>
+              </div> -->
+              <MarkIcon
+                :value="true"
+                :icon-src="item.icon"
+                :text="item.title"
+              />
             </div>
           </div>
         </fg-form-item>
@@ -68,9 +73,11 @@
 
 <script>
 import Header from '~/components/common/signin/common/Header'
+import MarkIcon from '~/components/common/mark-icon/index'
 export default {
   components: {
     Header,
+    MarkIcon,
   },
   data() {
     return {
@@ -115,12 +122,15 @@ export default {
 
 <style lang="scss">
 .signin-index-page-wrapper {
+  height: 100%;
   .signin-index-form-wrapper {
     .fg-form {
       padding: 20px 40px;
     }
     .signin-index-form-items {
+      min-width: 400px;
       display: flex;
+      justify-content: space-between;
       .signin-index-form-item {
         display: flex;
         flex-direction: column;

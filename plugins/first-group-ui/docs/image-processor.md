@@ -43,7 +43,7 @@
 |data|File/Blob|yes||
 |element|HTMLElement|no|img/canvas|
 |height|number|no|image only|
-|raw|object|yes||
+|**raw**|object|yes||
 |size|number|yes|file size|
 |type|string|yes|file type|
 |url|string|yes||
@@ -54,3 +54,9 @@
 |Name|Type|Required|Description|
 |:--|:--|:--|:--|
 |file|File|yes|original file|
+
+## Slots
+
+|Name|Description|
+|:--|:--|
+|placeholder|-|

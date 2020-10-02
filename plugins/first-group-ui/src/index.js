@@ -12,7 +12,6 @@ import FgCheckbox from './packages/checkbox/index'
 import FgCodeInput from './packages/code-input/index'
 import FgCol from './packages/row/col'
 import FgDatePicker from './packages/date-picker/index'
-import FgDateSetter from './packages/date-setter/index'
 import FgDialog from './packages/dialog/index'
 import FgForm from './packages/form/index'
 import FgFormItem from './packages/form-item/index'
@@ -33,6 +32,8 @@ import FgSwitch from './packages/switch/index'
 import FgTable from './packages/table/index'
 import FgTableColumn from './packages/table-column/index'
 import FgTableExperiment from './packages/table-experiment/index'
+import FgTabs from './packages/tabs/index'
+import FgTabsItem from './packages/tabs-item/index'
 import FgTag from './packages/tag/index'
 import FgText from './packages/text/index'
 
@@ -52,7 +53,6 @@ const components = [
   FgCodeInput,
   FgCol,
   FgDatePicker,
-  FgDateSetter,
   FgDialog,
   FgForm,
   FgFormItem,
@@ -73,6 +73,8 @@ const components = [
   FgTable,
   FgTableColumn,
   FgTableExperiment,
+  FgTabs,
+  FgTabsItem,
   FgTag,
   FgText,
 ]

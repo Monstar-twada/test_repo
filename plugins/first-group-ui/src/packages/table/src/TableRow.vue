@@ -1,5 +1,5 @@
 <template>
-  <tr @click="$emit('rowClick', row)">
+  <tr @click="$emit('row-click', row)">
     <TableCell
       v-for="column in visibleColumns"
       :key="column.id"
@@ -10,13 +10,17 @@
 </template>
 
 <script>
-import TableCell from './TableCell'
+import TableCell from './TableCell.vue'
 
 export default {
   components: {
     TableCell,
   },
   props: {
+    value: {
+      type: String,
+      default: null,
+    },
     columns: {
       type: Array,
       default: () => {
@@ -29,12 +33,32 @@ export default {
         return {}
       },
     },
+    groupBy: {
+      type: String,
+      default: null,
+    },
   },
 
   computed: {
     visibleColumns() {
-      return this.columns.filter((column) => !column.hidden)
+      return this.columns.filter(
+        (column) => !column.hidden && column.show !== this.groupBy
+      )
+    },
+
+    getGroupByIndex() {
+      return this.columns.findIndex((column) => column.show === this.groupBy)
     },
   },
+  watch: {
+    value(val) {
+      this.gronpByName = val
+    },
+    groupByName(val) {
+      this.$emit('input', val)
+    },
+  },
+
+  methods: {},
 }
 </script>

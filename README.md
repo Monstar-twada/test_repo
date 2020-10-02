@@ -78,9 +78,9 @@ It's a custom global property of Vue
 
 #### Properties
 
-| property    | type    | remark                                                      |
-| :---------- | :------ | :---------------------------------------------------------- |
-| \$api | object | methods: `get/put/post/delete/upload` |
+| property | type   | remark                                             |
+| :------- | :----- | :------------------------------------------------- |
+| \$api    | object | methods: `get/put/post/delete/upload`              |
 | \$colors | object | please check `first-group-ui` document for details |
 
 #### Source
@@ -91,7 +91,7 @@ It's a custom global property of Vue
 
 [docs](./docs)
 
-[$api](./docs/$api.md)
+[\$api](./docs/$api.md)
 
 [mock-data](./docs/mock-data.md)
 

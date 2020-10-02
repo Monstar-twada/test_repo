@@ -172,7 +172,6 @@ export default {
   },
 }
 </script>
-
 <style lang="scss">
 .ma-index {
   .fg-table {
@@ -221,6 +220,15 @@ export default {
     }
   }
 }
+.fg-table__table__body.ma-index-table-tbody {
+  tr {
+    height: 105px;
+
+    &:last-child {
+      border: 1px $--color-border solid;
+    }
+  }
+}
 </style>
 <style lang="scss" scoped>
 .ma-index {
@@ -252,7 +260,6 @@ export default {
   padding-right: 5%;
   dl {
     margin: 5px 10px;
-    font-family: 'Avenir Next';
     font-size: 14px;
     display: inline-flex;
     justify-content: space-between;
@@ -277,7 +284,6 @@ export default {
 
 .count {
   display: inline-block;
-  font-family: 'Avenir Next';
   font-size: 21px;
   font-weight: bold;
   text-align: right;
@@ -285,7 +291,6 @@ export default {
 
 .progress {
   display: block;
-  font-family: 'Avenir Next';
   font-size: 14px;
   height: 70px;
   line-height: 70px;

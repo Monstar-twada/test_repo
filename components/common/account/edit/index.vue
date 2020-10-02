@@ -16,7 +16,7 @@
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="氏名">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="12">
               <fg-input placeholder="姓"></fg-input>
             </fg-col>
@@ -26,7 +26,7 @@
           </fg-row>
         </fg-form-item>
         <fg-form-item label="フリガナ">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="12">
               <fg-input placeholder="セイ"></fg-input>
             </fg-col>
@@ -44,23 +44,24 @@
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
             <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
-              <div class="signin-index-form-item">
+              <!-- <div class="signin-index-form-item">
                 <div class="signin-index-form-item_img">
                   <fg-avatar
                     :src="require(`./img/${item.icon}-icon-white.svg`)"
-                    :size="25"
+                    size="25"
                     fillet
                   ></fg-avatar>
                 </div>
                 <div class="signin-index-form-item_title">
                   <p>{{ item.title }}</p>
                 </div>
-              </div>
+              </div> -->
+              <MarkIcon :value="true" :icon-src="item.icon" :text="item.text" />
             </div>
           </div>
         </fg-form-item>
         <fg-form-item label="資格">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="21">
               <fg-input placeholder="例）1級小型自動車整備士"></fg-input>
             </fg-col>
@@ -100,9 +101,11 @@
 
 <script>
 import Header from '~/components/common/account/common/Header'
+import MarkIcon from '~/components/common/mark-icon/index'
 export default {
   components: {
     Header,
+    MarkIcon,
   },
   data() {
     return {
@@ -110,48 +113,52 @@ export default {
       showPassword2: false,
       icons: [
         {
-          title: '購入',
+          text: '購入',
           icon: 'car',
         },
         {
-          title: '売却',
+          text: '売却',
           icon: 'money',
         },
         {
-          title: '整備',
+          text: '整備',
           icon: 'wrench',
         },
         {
-          title: '鈑金',
+          text: '鈑金',
           icon: 'hammer',
         },
         {
-          title: '保険',
+          text: '保険',
           icon: 'heart',
         },
         {
-          title: 'アクセサリー',
+          text: 'アクセサリー',
           icon: 'tire',
         },
         {
-          title: '車検',
+          text: '車検',
           icon: 'paper',
         },
       ],
     }
   },
-  methods: {},
+  methods: {
+    avatarChange() {},
+  },
 }
 </script>
 
 <style lang="scss">
 .signin-index-page-wrapper {
+  height: 100%;
   .signin-index-form-wrapper {
     .fg-form {
       padding: 20px 40px;
     }
     .signin-index-form-items {
       display: flex;
+      justify-content: space-between;
       .signin-index-form-item {
         display: flex;
         flex-direction: column;
@@ -164,7 +171,7 @@ export default {
           display: flex;
           justify-content: center;
           align-items: center;
-          // background-color: $blue-200;
+          background-color: $--color-primary;
           border-radius: 6px;
           .fg-avatar {
             width: 25px;

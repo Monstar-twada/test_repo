@@ -4,7 +4,7 @@
     <div class="login-form">
       <div class="mb20">
         <fg-input
-          v-model="email"
+          v-model="form.email"
           placeholder="メールアドレス"
           clearable
           size="medium"
@@ -16,7 +16,7 @@
       </div>
       <div class="mb30">
         <fg-input
-          v-model="password"
+          v-model="form.password"
           placeholder="パスワード"
           size="medium"
           suffix-icon="eye"
@@ -35,7 +35,7 @@
         suffix-icon="arrow-right"
         round
         bold
-        @click="confirm"
+        @click="login"
         >ログイン</fg-button
       >
       <!-- <nuxt-link to="/login/forgot" class="login-form__link mt25">
@@ -81,8 +81,10 @@ export default {
   },
   data() {
     return {
-      email: '',
-      password: '',
+      form: {
+        email: 'test01@ml.local',
+        password: '845yVs@hj9K*',
+      },
       // eslint-disable-next-line no-useless-escape
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
@@ -101,47 +103,72 @@ export default {
       this.validation()
     },
   },
+  // checks if already logged in AWS COGNITO
+  async beforeCreate() {
+    // console.log(this.$store)
+    try {
+      // await this.$store.dispatch('auth/load')
+      if (this.$store.state.auth.isAuthenticated === false) {
+        await this.$store.dispatch('auth/load')
+      }
+    } catch (err) {
+      console.error({ err })
+    }
+  },
   methods: {
     isEmailValid() {
-      return this.email === ''
+      const { email } = this.form
+      return email === ''
         ? ''
-        : this.reg.test(this.email)
+        : this.reg.test(email)
         ? false
         : ['login-form__error', true]
     },
     isValid() {
-      if (this.isEmailValid() === false && this.password !== '') {
+      const { password } = this.form
+      if (this.isEmailValid() === false && password !== '') {
         return false
       } else {
         return true
       }
     },
     validation() {
+      const { email, password } = this.form
       let count = 0
-      if (this.email === '') {
+      if (email === '') {
         this.validationMessage.email = 'メールアドレスが空欄です'
         count += 1
       } else this.validationMessage.email = ''
-      if (this.password === '') {
+      if (password === '') {
         this.validationMessage.password = 'パスワードが空欄です'
         count += 1
       } else this.validationMessage.password = ''
       return count
     },
-    // nextUrl(url) {
-    //   this.$store.commit('user/signIn', true)
-    //   this.$router.push({ path: url })
+
+    // confirm() {
+    //   const count = this.validation()
+    //   if (count === 0)
     // },
-    confirm() {
+
+    async login() {
       const count = this.validation()
-      if (count === 0) this.$login.success.call(this)
+      if (count === 0) {
+        try {
+          await this.$store.dispatch('auth/login', this.form)
+          this.$login.success.call(this)
+        } catch (error) {
+          console.error({ error })
+        }
+      }
     },
   },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login-index-page-wrapper {
+  margin-top: -10%;
   .login-form {
     padding-top: 50px;
     max-width: 270px;
@@ -192,6 +219,7 @@ export default {
       }
     }
     &__requirements {
+      font-size: 14px;
       text-align: center;
       color: $--color-primary-placeholder;
     }

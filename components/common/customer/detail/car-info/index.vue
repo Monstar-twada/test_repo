@@ -337,7 +337,7 @@
           </fg-row>
         </fg-col>
         <fg-col span="8">
-          <div class="mt15 pb15 pr20" style="text-align: right;">
+          <div class="mt15 pb15 pr20" style="text-align: right">
             <fg-button
               prefix-icon="edit"
               size="mini"

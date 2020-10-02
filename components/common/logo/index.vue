@@ -1,5 +1,5 @@
 <template>
-  <v-img
+  <img
     class="logo"
     :src="require(`~/components/common/sidebar/img/logo-${logoName}.svg`)"
     :width="logoWidth"
@@ -27,7 +27,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .logo {
-  width: 100%;
+  display: flex;
   margin: 0 auto;
 }
 </style>

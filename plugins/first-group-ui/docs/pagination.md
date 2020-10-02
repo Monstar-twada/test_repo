@@ -1,42 +1,21 @@
 # fg-pagination
 
-## Usage
+## Properties
 
-```html
-<template>
-    <fg-pagination
-        v-model="currentPage"
-        :page-size="pageSize"
-        :total="total"
-    />
-</template>
-
-<script>
-export default {
-    data() {
-        return {
-            currentPage: 1,
-            total: 199,
-            pageSize: 10,
-        }
-    },
-}
-</script>
-```
-
-## Attributes
-
-|Attribute|Type|Description|Default|
+|Props|Type|Default|Description|
 |:--|:--|:--|:--|
-|v-model / value|Number|current page|`-`|
-|page-size|Number|page size / sql limit|`10`|
-|total|Number|data total|`0`|
-|show-number|Number|show page items|`10`|
-|hide-page-info|Boolean|hide left info|`false`|
+|before-change|function|`undefined`|-|
+|hide-page-info|boolean|`false`|hide left info|
+|page-size|number|`10`|page size / sql limit|
+|show-number|number|`10`|show page items|
+|size|string|`medium`|Optional values: `medium/small`|
+|theme|string|`white`|Optional values: `blue/white`|
+|total|number|`0`|data total|
+|v-model/value|number|`-`|current page|
 
 ## Events
 
-|Event Name|Description|Parameters|
+|Event Name|Parameters|Description|
 |:--|:--|:--|
-|@change|on change|(newPage: number)|
+|change|(newPage: number)|on change|
 

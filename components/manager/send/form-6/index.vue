@@ -15,7 +15,7 @@
         class="context-form"
       >
         <fg-form-item label="氏名">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="12">
               <fg-input
                 v-model="form.lastName"
@@ -34,7 +34,7 @@
         </fg-form-item>
 
         <fg-form-item label="フリカナ">
-          <fg-row gutter="20">
+          <fg-row gutter="20" type="flex">
             <fg-col span="12">
               <fg-input
                 v-model="form.lastName"
@@ -121,7 +121,6 @@
 </template>
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import { genders } from '~/components/common/customer/common/base'
 export default {
   components: {
     Breadcrumbs,
@@ -150,7 +149,7 @@ export default {
           href: '',
         },
       ],
-      genders,
+      genders: this.$ui.getBasicData('sex'),
     }
   },
 }

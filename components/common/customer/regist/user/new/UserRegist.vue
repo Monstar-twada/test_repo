@@ -308,7 +308,6 @@ export default {
   },
   methods: {
     familyInputAdd() {
-      console.log('familyLength', this.familyLength)
       this.familyLength++
     },
     familyInputRem() {

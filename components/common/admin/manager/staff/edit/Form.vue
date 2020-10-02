@@ -5,14 +5,14 @@
         <h2>基本情報</h2>
       </div>
       <fg-form label-width="120px">
-        <fg-form-item label="権限">
+        <fg-form-item label="所属店舗" class="mt20">
           <div class="scrollable">
             <div
               v-for="(item, i) in scrollItem"
               :key="`${item.title}-${i}`"
               class="scrollable_item"
             >
-              <fg-checkbox v-model="value2"></fg-checkbox>
+              <fg-checkbox></fg-checkbox>
               <p>{{ item.title }}</p>
             </div>
           </div>
@@ -30,10 +30,10 @@
           <p class="just-text">df1s082829</p>
         </fg-form-item>
         <fg-form-item label="権限">
-          <fg-radio-group>
-            <fg-radio label="スタッフ" value="1"></fg-radio>
-            <fg-radio label="マネージャー" value="2"></fg-radio>
-            <fg-radio label="オーナー" value="2"></fg-radio>
+          <fg-radio-group v-model="form.authority">
+            <fg-radio key="1" label="1">スタッフ</fg-radio>
+            <fg-radio key="2" label="2">マネージャー</fg-radio>
+            <fg-radio key="3" label="3">オーナー</fg-radio>
           </fg-radio-group>
         </fg-form-item>
         <fg-form-item label="職種">
@@ -44,11 +44,11 @@
               class="job-items_item"
             >
               <div class="job-items_item_img">
-                <v-img
-                  :max-width="24"
-                  :max-height="24"
+                <img
+                  width="24"
+                  height="24"
                   :src="require(`./img/${item.icon}-icon-white.svg`)"
-                ></v-img>
+                />
               </div>
               <div class="job-items_item_text">
                 {{ item.text }}
@@ -134,6 +134,7 @@ export default {
         areaName: '',
         avatarUrl:
           'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2700073372,1831939333&fm=26&gp=0.jpg',
+        authority: '1',
       },
     }
   },
@@ -183,6 +184,7 @@ export default {
         &_item {
           display: flex;
           align-items: center;
+          line-height: 30px;
           .fg-checkbox {
             padding-right: 8px;
             margin-right: 0;

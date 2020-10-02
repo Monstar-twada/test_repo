@@ -178,12 +178,12 @@ export default {
     }
   },
   watch: {
-    value1(val) {
-      console.log('value1', val)
-    },
-    value2(val) {
-      console.log('value2', val)
-    },
+    // value1(val) {
+    //   console.log('value1', val)
+    // },
+    // value2(val) {
+    //   console.log('value2', val)
+    // },
   },
   methods: {
     search() {

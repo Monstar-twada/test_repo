@@ -1,6 +1,6 @@
 <template>
   <div class="fg-month-picker">
-    <div>
+    <div class="fg-month-picker-wrapper">
       <button
         :class="isStartDate() ? '__disable' : ''"
         @click="changeMonth('prev')"
@@ -233,7 +233,13 @@ export default {
 
 <style lang="scss">
 .fg-month-picker {
+  display: inline-flex;
   position: relative;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+  }
 
   .fg-icon {
     cursor: pointer;

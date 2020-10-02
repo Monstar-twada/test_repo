@@ -18,7 +18,7 @@ export default {
     return { userAvatar: '/common/person_default.svg' }
   },
   mounted() {
-    console.log(this.user)
+    // console.log(this.user)
   },
   methods: {},
 }

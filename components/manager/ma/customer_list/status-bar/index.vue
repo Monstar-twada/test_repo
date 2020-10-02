@@ -222,6 +222,9 @@ export default {
       // const params = { property, val }
       // this.$api.put('/v1/attaractingCustomers/0000/202009', params)
     },
+    fmtNumber(number) {
+      return number.toLocaleString()
+    },
   },
 }
 </script>
@@ -235,6 +238,7 @@ export default {
   border-spacing: 0;
   display: flex;
   flex: 1 1 auto;
+  font-family: 'Noto Sans JP';
   .left {
     width: 20%;
     font-size: 14px;
@@ -255,6 +259,7 @@ export default {
       strong {
         margin-left: 5px;
         font-size: 21px;
+        font-family: 'Avenir Next';
       }
     }
   }
@@ -289,6 +294,7 @@ export default {
       }
       strong {
         font-size: 21px;
+        font-family: 'Avenir Next';
       }
     }
     .detail {
@@ -308,6 +314,7 @@ export default {
           width: 60px;
           text-align: right;
           font-size: 16px;
+          font-family: 'Avenir Next';
         }
       }
     }
