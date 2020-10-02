@@ -164,7 +164,7 @@
       <fg-table-column
         show="call"
         label="他社流出"
-        :sortable="true"
+        :sortable="false"
         width="10%"
       >
         <template v-slot="item">
@@ -283,8 +283,8 @@ export default {
             this.saveFlg = false
             this.status = []
           })
-          .catch(() => {
-            console.log('cancel')
+          .catch((error) => {
+            console.error({ error })
           })
       }
     },
@@ -305,7 +305,7 @@ export default {
           this.$router.back()
         })
         .catch(() => {
-          console.log('cancel')
+          // console.log('cancel')
         })
     },
 
@@ -318,7 +318,7 @@ export default {
             next()
           })
           .catch(() => {
-            console.log('cancel')
+            // console.log('cancel')
           })
       } else {
         next()

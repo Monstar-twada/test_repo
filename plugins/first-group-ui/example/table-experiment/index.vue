@@ -1,7 +1,6 @@
 <template>
   <div class="example-table-experiment-wrapper">
     <Docs />
-
     <h2>Example</h2>
     <Normal />
   </div>

@@ -4,7 +4,11 @@
       <h2>今月のアクションリスト</h2>
       <fg-month-picker v-model="currentMonth" />
     </div>
-    <fg-table :data="itemList.results">
+    <fg-table
+      :data="itemList.results"
+      thead-class="thead-bg"
+      tbody-class="ma-index-table-tbody"
+    >
       <fg-table-column
         show="車検"
         lable="vehicleInspection"
@@ -229,64 +233,14 @@ export default {
   },
 }
 </script>
-
 <style lang="scss">
-.ma-index {
-  .fg-table {
-    thead {
-      tr {
-        th {
-          font-size: 12px;
-          font-weight: normal;
-          height: 30px !important;
-          color: $--color-primary !important;
-          padding: 0 2px !important;
-          background: $--color-background;
-          border-bottom: none !important;
-          i {
-            display: none;
-          }
-        }
-      }
-    }
-    tbody {
-      tr {
-        font-size: 12px;
-        color: $--color-primary;
-        cursor: pointer;
-        td {
-          padding: 10px 5px !important;
-          font-size: 12px !important;
-          position: relative;
-          font-weight: 300;
-          height: 80px;
-          &:not(:last-child):after {
-            content: '';
-            position: absolute;
-            width: 1px;
-            height: 70%;
-            top: 15%;
-            right: 0;
-            background: $--color-border;
-          }
-        }
-        td:nth-child(2):after,
-        td:nth-child(4):after {
-          display: none;
-        }
-      }
-    }
-  }
+.fg-table__table__body.ma-index-table-tbody {
+  tr {
+    height: 105px;
 
-  .theme--light.v-data-table .v-data-table__empty-wrapper {
-    color: $--color-primary !important;
-  }
-
-  .theme--light.v-data-table .v-data-table__wrapper table tbody tr td {
-    border-bottom: 1px $--color-border solid !important;
-  }
-  .theme--light.v-icon {
-    color: $--color-primary !important;
+    &:last-child {
+      border: 1px $--color-border solid;
+    }
   }
 }
 </style>
@@ -320,7 +274,6 @@ export default {
   padding-right: 5%;
   dl {
     margin: 5px 10px;
-    font-family: 'Avenir Next';
     font-size: 14px;
     display: inline-flex;
     justify-content: space-between;
@@ -345,7 +298,6 @@ export default {
 
 .count {
   display: inline-block;
-  font-family: 'Avenir Next';
   font-size: 21px;
   font-weight: bold;
   text-align: right;
@@ -353,7 +305,6 @@ export default {
 
 .progress {
   display: block;
-  font-family: 'Avenir Next';
   font-size: 14px;
   height: 70px;
   line-height: 70px;

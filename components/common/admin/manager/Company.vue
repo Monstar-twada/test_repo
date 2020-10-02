@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss">
 .admin-company-container-wrapper {
+  margin-top: 10px;
   width: 100%;
   display: flex;
   .admin-btn {
@@ -48,7 +49,7 @@ export default {
   }
   .right-wrapper {
     flex: 0 0 220px;
-    background: #fff;
+    background: $--color-white;
     border-radius: 6px;
     height: fit-content;
   }

@@ -1,6 +1,6 @@
 <template>
   <th
-    v-if="isVisible"
+    v-if="isVisible && !isGroupBy"
     :class="headerClass"
     role="columnheader"
     :aria-sort="ariaSort"
@@ -29,6 +29,10 @@ export default {
     width: {
       type: String,
       default: '',
+    },
+    groupBy: {
+      type: String,
+      default: null,
     },
   },
 
@@ -70,6 +74,10 @@ export default {
 
     isVisible() {
       return !this.column.hidden
+    },
+
+    isGroupBy() {
+      return this.column.show === this.groupBy
     },
 
     label() {

@@ -10,7 +10,9 @@
         <tr>
           <td class="pt10 pb10">
             <p>コール済</p>
-            <h4><strong>34</strong> /162</h4>
+            <h4>
+              <strong>{{ fmtNumber(9999) }}</strong> /{{ fmtNumber(9999) }}
+            </h4>
             <p>（40%）</p>
           </td>
         </tr>
@@ -30,7 +32,11 @@
           <td class="main">
             <div class="ml20">
               <label>継続顧客：</label>
-              <span> <strong>9999</strong> /9999（40%） </span>
+              <span>
+                <strong>{{ fmtNumber(9999) }}</strong> /{{
+                  fmtNumber(9999)
+                }}（40%）
+              </span>
             </div>
           </td>
           <td class="detail">
@@ -42,7 +48,7 @@
               >
                 <label>{{ item.title }}</label>
                 <span>
-                  <strong>{{ item.data }}</strong>
+                  <strong>{{ item.data.toLocaleString() }}</strong>
                   （{{ item.percent }}）
                 </span>
               </div>
@@ -53,7 +59,10 @@
           <td class="main">
             <div class="ml20">
               <label>未確定：</label>
-              <span> <strong>9999</strong> /9999（40%） </span>
+              <span>
+                <strong>{{ fmtNumber(9999) }}</strong>
+                /{{ fmtNumber(9999) }}（40%）
+              </span>
             </div>
           </td>
           <td class="detail">
@@ -61,7 +70,7 @@
               <div v-for="(item, i) in unsettled" :key="i" class="detail-item">
                 <label>{{ item.title }}</label>
                 <span>
-                  <strong>{{ item.data }}</strong>
+                  <strong>{{ item.data.toLocaleString() }}</strong>
                   （{{ item.percent }}）
                 </span>
               </div>
@@ -72,7 +81,11 @@
           <td class="main">
             <div class="ml20">
               <label>他社流出：</label>
-              <span> <strong>9999</strong> /9999（40%） </span>
+              <span>
+                <strong>{{ fmtNumber(9999) }}</strong> /{{
+                  fmtNumber(9999)
+                }}（40%）
+              </span>
             </div>
           </td>
           <td class="detail">
@@ -84,7 +97,7 @@
               >
                 <label>{{ item.title }}</label>
                 <span>
-                  <strong>{{ item.data }}</strong>
+                  <strong>{{ item.data.toLocaleString() }}</strong>
                   （{{ item.percent }}）
                 </span>
               </div>
@@ -163,6 +176,11 @@ export default {
       ],
     }
   },
+  methods: {
+    fmtNumber(number) {
+      return number.toLocaleString()
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -175,6 +193,7 @@ export default {
   border-spacing: 0;
   display: flex;
   flex: 1 1 auto;
+  font-family: 'Noto Sans JP';
   .left {
     width: 20%;
     font-size: 14px;
@@ -195,6 +214,7 @@ export default {
       strong {
         margin-left: 5px;
         font-size: 21px;
+        font-family: 'Avenir Next';
       }
     }
   }
@@ -229,6 +249,7 @@ export default {
       }
       strong {
         font-size: 21px;
+        font-family: 'Avenir Next';
       }
     }
     .detail {
@@ -245,6 +266,7 @@ export default {
 
         strong {
           font-size: 16px;
+          font-family: 'Avenir Next';
         }
       }
     }

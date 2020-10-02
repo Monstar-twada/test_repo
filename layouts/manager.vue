@@ -1,5 +1,5 @@
 <template>
-  <v-app
+  <div
     :class="[
       'default-manager-layout-container',
       { 'next-action-is-collapsed': isCollapsed },
@@ -13,7 +13,7 @@
     <!-- ProtoType版表示しない--->
     <!-- <NextAction v-model="isCollapsed" /> -->
     <!-- <OnePointAdvice /> -->
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -48,7 +48,8 @@ export default {
   background-size: cover !important;
   background-attachment: fixed !important;
   overflow: auto;
-  height: 100%;
+  min-height: 100vh;
+  max-height: 100%;
 
   .global-main-wrapper {
     margin: 0 $sideSpaceWidth 0 $sideWidthNormal + $sideSpaceWidth;

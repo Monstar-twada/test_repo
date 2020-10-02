@@ -1,6 +1,6 @@
 <template>
   <div class="signin-header-wrapper">
-    <Logo logo-width="83" />
+    <Logo :logo-width="83" />
     <h1 class="signin-index-header-wrapper_head">
       {{ title }}
     </h1>

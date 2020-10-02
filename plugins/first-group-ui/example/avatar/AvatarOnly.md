@@ -16,13 +16,14 @@
   </fg-col>
 </fg-row>
 <script>
-const AVATAR_URL = 'https://i.pinimg.com/originals/b9/09/d7/b909d7450a19279f53fb2b86571dcbfe.jpg'
-export default {
-  data() {
-    return {
-      src: AVATAR_URL
-    }
+  const AVATAR_URL =
+    'https://i.pinimg.com/originals/b9/09/d7/b909d7450a19279f53fb2b86571dcbfe.jpg'
+  export default {
+    data() {
+      return {
+        src: AVATAR_URL,
+      }
+    },
   }
-}
 </script>
 ```

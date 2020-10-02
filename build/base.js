@@ -63,7 +63,6 @@ export const baseConfig = {
     // Doc: https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/gtm',
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify',
     '@nuxtjs/svg',
     '@nuxtjs/style-resources',
     ['@nuxtjs/eslint-module', { fix: true }],
@@ -77,13 +76,13 @@ export const baseConfig = {
   router: {
     base: process.env.BASE_URL,
   },
-  vuetify: {
-    customVariables: ['~/assets/scss/variables.scss'],
-    treeShake: true,
-    theme: {
-      dark: false,
-    },
-  },
+  // vuetify: {
+  //   customVariables: ['~/assets/scss/variables.scss'],
+  //   treeShake: true,
+  //   theme: {
+  //     dark: false,
+  //   },
+  // },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -104,6 +103,7 @@ export const baseConfig = {
   //   customVariables: ["~/assets/scss/variables.scss"],
   //   treeShake: true
   // },
+
   // gtm: {
   //   enabled: true,
   //   id: 'GTM-N8RJT4T',
