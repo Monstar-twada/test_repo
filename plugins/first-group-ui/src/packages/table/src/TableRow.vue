@@ -1,5 +1,5 @@
 <template>
-  <tr @click="$emit('rowClick', row)">
+  <tr @click="$emit('row-click', row)">
     <TableCell
       v-for="column in visibleColumns"
       :key="column.id"
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import TableCell from './TableCell'
+import TableCell from './TableCell.vue'
 
 export default {
   components: {
