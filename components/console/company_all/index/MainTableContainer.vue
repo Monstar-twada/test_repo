@@ -258,6 +258,17 @@ export default {
                 tel: '0120-161-135',
                 email: 'aaaa@cars-enjoy.com',
               },
+              {
+                carManagerId: 'df1s082829',
+                name: {
+                  firstName: '道春',
+                  lastName: '米田',
+                },
+                role: 'オーナー',
+                shopName: 'cars足立',
+                tel: '0120-161-135',
+                email: 'aaaa@cars-enjoy.com',
+              },
             ],
           },
         },
@@ -345,6 +356,7 @@ export default {
             tr {
               height: 30px !important;
               th {
+                border: none !important;
                 height: 30px !important;
                 padding: 0 !important;
                 color: #999999 !important;
@@ -356,6 +368,7 @@ export default {
               height: 65px;
               text-align: center;
               td {
+                background-color: #fafafa;
                 p,
                 dd {
                   color: #333333;
