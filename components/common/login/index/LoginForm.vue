@@ -79,11 +79,15 @@ export default {
   components: {
     Logo,
   },
+  // motoya.ishii@firstgroup.jp
+  // hB6JY7LwC$x*
   data() {
     return {
       form: {
-        email: 'test01@ml.local',
-        password: '845yVs@hj9K*',
+        // email: 'test01@ml.local',
+        // password: '845yVs@hj9K*',
+        email: '',
+        password: '',
       },
       // eslint-disable-next-line no-useless-escape
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,

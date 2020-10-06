@@ -12,6 +12,7 @@ import { getMockData } from './mock-data'
 /**
  * Request Api
  */
+
 export class RequestApi {
   constructor(headers = []) {
     this.headers = headers
@@ -66,7 +67,7 @@ export class RequestApi {
         data: file,
         onUploadProgress: ({ loaded, total }) => {
           if (typeof params.onProgress === 'function') {
-            params.onProgress(Math.floor(100 * loaded / total))
+            params.onProgress(Math.floor((100 * loaded) / total))
           }
         },
       }
@@ -106,13 +107,21 @@ export class RequestApi {
    */
   _handleRequest(api, params, headers, method) {
     /* eslint-disable */
+
+    // get the token from the store
+    const token = $nuxt.$store.state.auth.token
+
     const { hasOwn, createUrlQuery } = $nuxt.$ui
     // handle parameter
     const _params = {
       ...params,
     }
     /* eslint-disable no-prototype-builtins */
-    if (hasOwn(_params, 'offset') || hasOwn(_params, 'limit') || hasOwn(_params, 'sort')) {
+    if (
+      hasOwn(_params, 'offset') ||
+      hasOwn(_params, 'limit') ||
+      hasOwn(_params, 'sort')
+    ) {
       api += createUrlQuery(_params, ['offset', 'limit', 'sort'])
       delete _params.offset
       delete _params.limit
@@ -131,6 +140,8 @@ export class RequestApi {
           ...headers,
           // 一時的テストのため
           'X-CARS-MANAGER': 'textX-CARS-MANAGER',
+          // set up the token here for header
+          Authorization: `Bearer ${token}`,
         },
         data: _params,
       })
