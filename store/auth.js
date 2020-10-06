@@ -16,10 +16,10 @@ export const mutations = {
   setToken(state, token) {
     state.token = token
   },
-  setStoreId(state, storeId) {
+  setStoreCode(state, storeId) {
     state.storeId = storeId
   },
-  setCompanyId(state, companyId) {
+  setCompanyCode(state, companyId) {
     state.companyId = companyId
   },
 }
@@ -33,8 +33,8 @@ export const actions = {
         const userInfo = session?.getIdToken().payload
         // eslint-disable-next-line camelcase
         const { store_code, company_code } = userInfo
-        commit('setStoreId', store_code)
-        commit('setCompanyId', company_code)
+        commit('setStoreCode', store_code)
+        commit('setCompanyCode', company_code)
       }
       const checkUser = await Auth.currentAuthenticatedUser()
       if (checkUser) {
@@ -48,8 +48,8 @@ export const actions = {
     } catch (error) {
       commit('setUser', null)
       commit('setToken', null)
-      commit('storeId', null)
-      commit('companyId', null)
+      commit('setStoreCode', null)
+      commit('setCompanyCode', null)
       this.$router.push('/login')
     }
     // try {
@@ -71,14 +71,14 @@ export const actions = {
   async login({ commit }, { email, password }) {
     const user = await Auth.signIn(email, password)
     if (user) {
-      // check auth session data
+      // check if auth session data
       const session = await Auth.currentSession()
       // set store and company code
       const userInfo = session?.getIdToken().payload
       // eslint-disable-next-line camelcase
       const { store_code, company_code } = userInfo
-      commit('setStoreId', store_code)
-      commit('setCompanyId', company_code)
+      commit('setStoreCode', store_code)
+      commit('setCompanyCode', company_code)
       // set TOKEN here
       const checkUser = await Auth.currentAuthenticatedUser()
       if (checkUser) {
@@ -97,8 +97,8 @@ export const actions = {
     await Auth.signOut()
     commit('setUser', null)
     commit('setToken', null)
-    commit('storeId', null)
-    commit('companyId', null)
+    commit('setStoreCode', null)
+    commit('setCompanyCode', null)
     this.$router.push('/login')
   },
 }
