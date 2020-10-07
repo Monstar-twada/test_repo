@@ -16,11 +16,11 @@ export const mutations = {
   setToken(state, token) {
     state.token = token
   },
-  setStoreCode(state, storeId) {
-    state.storeId = storeId
+  setStoreCode(state, storeCode) {
+    state.store_code = storeCode
   },
-  setCompanyCode(state, companyId) {
-    state.companyId = companyId
+  setCompanyCode(state, companyCode) {
+    state.company_code = companyCode
   },
 }
 
