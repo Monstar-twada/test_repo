@@ -4,8 +4,8 @@ export const state = () => ({
   isAuthenticated: false,
   user: null,
   token: null,
-  store_code: null,
-  company_code: null,
+  storeCode: null,
+  companyCode: null,
 })
 
 export const mutations = {
@@ -17,10 +17,10 @@ export const mutations = {
     state.token = token
   },
   setStoreCode(state, storeCode) {
-    state.store_code = storeCode
+    state.storeCode = storeCode
   },
   setCompanyCode(state, companyCode) {
-    state.company_code = companyCode
+    state.companyCode = companyCode
   },
 }
 
