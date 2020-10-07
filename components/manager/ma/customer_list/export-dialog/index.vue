@@ -86,45 +86,51 @@ export default {
         '\n'
       const line2 =
         ',,,' +
-        list.callTotalRatio +
-        '%,' +
-        list.continueTotalRatio +
-        '%,' +
-        list.deliveredTotalRatio +
-        '%,' +
-        list.carInspectionTotalRatio +
-        '%,' +
-        list.reservationTotalRatio +
-        '%,' +
-        list.pendingTotalRatio +
-        '%,' +
-        list.underReviewRatio +
-        '%,' +
-        list.purchaseIntentionTotalRatio +
-        '%,' +
-        list.tentiveReservationTotalRatio +
-        '%,' +
-        list.failureRatio +
-        '%,' +
-        list.outflowUnknownRatio +
-        '%,' +
-        list.outflowTotalRatio +
-        '%,' +
-        list.outflowReplacementRatio +
-        '%,' +
-        list.outflowInspectionRatio +
-        '%,' +
-        list.outflowScrappedRatio +
-        '%,' +
+        this.fmtRatio(list.callTotalRatio) +
+        ',' +
+        this.fmtRatio(list.continueTotalRatio) +
+        ',' +
+        this.fmtRatio(list.deliveredTotalRatio) +
+        ',' +
+        this.fmtRatio(list.carInspectionTotalRatio) +
+        ',' +
+        this.fmtRatio(list.reservationTotalRatio) +
+        ',' +
+        this.fmtRatio(list.pendingTotalRatio) +
+        ',' +
+        this.fmtRatio(list.underReviewRatio) +
+        ',' +
+        this.fmtRatio(list.purchaseIntentionTotalRatio) +
+        ',' +
+        this.fmtRatio(list.tentiveReservationTotalRatio) +
+        ',' +
+        this.fmtRatio(list.failureRatio) +
+        ',' +
+        this.fmtRatio(list.outflowUnknownRatio) +
+        ',' +
+        this.fmtRatio(list.outflowTotalRatio) +
+        ',' +
+        this.fmtRatio(list.outflowReplacementRatio) +
+        ',' +
+        this.fmtRatio(list.outflowInspectionRatio) +
+        ',' +
+        this.fmtRatio(list.outflowScrappedRatio) +
+        ',' +
         '\n'
       csv += line1
       csv += line2
       const blob = new Blob([csv], { type: 'text/csv' })
+      const fileName = `対象者リスト進捗率_${this.$route.query.date}.csv`
       const link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
-      link.download = 'total.csv'
+      link.download = fileName
+      link.setAttribute('download', fileName)
       link.click()
       this.visible = false
+    },
+
+    fmtRatio(ratio) {
+      return Math.round(ratio * 100) + '%'
     },
   },
 }

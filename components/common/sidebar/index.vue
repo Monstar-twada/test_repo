@@ -11,7 +11,7 @@
 
       <div class="select-wrapper">
         <fg-select
-          v-model="selectedResult"
+          :value="selectedResult"
           :items="selectList"
           theme="light-blue"
           size="medium"
@@ -72,45 +72,45 @@ export default {
     const isConsole = this.$isConsole
     return {
       collapsed: this.value,
-      selectedResult: 8,
+      selectedResult: 0,
       // item's index in menu
       index: -1,
       logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
       selectList: [
-        {
-          title: '営業管理',
-        },
-        {
-          text: 'cars全店',
-          value: 1,
-        },
-        {
-          text: '関西エリア',
-          value: 2,
-        },
-        {
-          text: '関東エリア',
-          value: 3,
-        },
-        {
-          title: '店舗管理',
-        },
-        {
-          text: 'cars奈良中央',
-          value: 5,
-        },
-        {
-          text: 'cars大阪',
-          value: 6,
-        },
-        {
-          text: 'cars足立',
-          value: 7,
-        },
-        {
-          text: 'cars天理',
-          value: 8,
-        },
+        // {
+        //   title: '営業管理',
+        // },
+        // {
+        //   text: 'cars全店',
+        //   value: 1,
+        // },
+        // {
+        //   text: '関西エリア',
+        //   value: 2,
+        // },
+        // {
+        //   text: '関東エリア',
+        //   value: 3,
+        // },
+        // {
+        //   title: '店舗管理',
+        // },
+        // {
+        //   text: 'cars奈良中央',
+        //   value: 5,
+        // },
+        // {
+        //   text: 'cars大阪',
+        //   value: 6,
+        // },
+        // {
+        //   text: 'cars足立',
+        //   value: 7,
+        // },
+        // {
+        //   text: 'cars天理',
+        //   value: 8,
+        // },
       ],
     }
   },
@@ -126,9 +126,9 @@ export default {
     },
   },
   watch: {
-    selectedResult(val) {
-      // console.log('selectedResult change', val)
-    },
+    // selectedResult(val) {
+    //   console.log('selectedResult change', val)
+    // },
     $route() {
       this.resetRouteIndex()
     },
@@ -143,6 +143,9 @@ export default {
   },
   created() {
     this.resetRouteIndex()
+    this.getStoreList().then(() => {
+      this.selectedResult = 1
+    })
   },
   methods: {
     resetRouteIndex() {
@@ -156,6 +159,27 @@ export default {
         this.index = tempIndex
         clearTimeout(timer)
       }, 0)
+    },
+    async getStoreList() {
+      await this.$api
+        .get(`/v1/store`)
+        .then((res) => {
+          const storeList = res.results[0].area
+          const storeCode = $nuxt.$store.state.auth.storeCode
+          if (storeCode) {
+            this.selectList = storeList
+              .filter((item) => item.store.storeCode === storeCode)
+              .map((item, index) => {
+                return {
+                  value: index + 1,
+                  text: `Cars${item.store.storeName}`,
+                }
+              })
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+        })
     },
   },
 }
