@@ -56,6 +56,7 @@ export class RequestApi {
    * @returns {Promise<unknown>}
    */
   upload(file, params = {}) {
+    const token = $nuxt.$store.state.auth.token
     return new Promise((resolve, reject) => {
       const configs = {
         url: params.url || '/v1/tempfile',
@@ -63,6 +64,7 @@ export class RequestApi {
         headers: {
           ...this.getHeaders(),
           ...params.headers,
+          Authorization: `Bearer ${token}`,
         },
         data: file,
         onUploadProgress: ({ loaded, total }) => {
