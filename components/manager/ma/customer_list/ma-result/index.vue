@@ -4,8 +4,8 @@
       <fg-pagination
         v-model="currentPage"
         class="pagination-link"
-        :total="10"
-        :page-size="10"
+        :total="itemList.total"
+        :page-size="itemList.limit"
         :before-change="handleBeforeChange"
       />
       <fg-button
@@ -20,7 +20,7 @@
         >保存</fg-button
       >
     </div>
-    <fg-table :data="itemList">
+    <fg-table :data="itemList.results">
       <fg-table-column
         show="customerName"
         label="顧客名"
@@ -93,7 +93,8 @@
               handleChange(
                 'purchaseIntention',
                 item.attractingCustomersId,
-                $event
+                $event,
+                true
               )
             "
           />
@@ -209,7 +210,7 @@
       >
         <template v-slot="item">
           <fg-select
-            :value="item.outflow"
+            :value="Number(item.outflow)"
             :items="options"
             placeholder="選択"
             @change="
@@ -227,8 +228,8 @@
       <fg-pagination
         v-model="currentPage"
         class="pagination-link"
-        :total="10"
-        :page-size="10"
+        :total="itemList.total"
+        :page-size="itemList.limit"
         :before-change="handleBeforeChange"
       />
       <fg-button
@@ -250,10 +251,8 @@ export default {
   name: 'MaResult',
   props: {
     itemList: {
-      type: Array,
-      default: () => {
-        return []
-      },
+      type: [Object, Array],
+      default: null,
     },
     value: {
       type: Number,
@@ -263,6 +262,10 @@ export default {
   data: () => ({
     currentPage: 1,
     options: [
+      {
+        text: '選択',
+        value: 0,
+      },
       {
         text: '車検',
         value: 1,
@@ -282,6 +285,7 @@ export default {
     ],
     status: {},
     saveFlg: false,
+    storeCode: '',
   }),
   watch: {
     value(val) {
@@ -292,6 +296,7 @@ export default {
     },
   },
   mounted() {
+    this.storeCode = $nuxt.$store.state.auth.storeCode
     history.pushState(null, null, window.location.href)
     window.addEventListener(
       'popstate',
@@ -305,8 +310,9 @@ export default {
     window.removeEventListener('popstate', this.clickBrowserSystemButton)
   },
   methods: {
-    handleChange(property, id, val) {
-      const value = Number(val).toString()
+    handleChange(property, id, val, isToString = false) {
+      let value = Number(val)
+      if (isToString) value = value.toString()
       if (!this.status[id]) {
         this.status[id] = {}
         this.status[id][property] = value
@@ -322,13 +328,14 @@ export default {
     },
 
     handleChangeSelect(property, id, val) {
+      const value = val.toString()
       const item = this.findItemInfoById(id)
-      if (val !== item[property]) {
+      if (value !== item[property]) {
         if (!this.status[id]) {
           this.status[id] = {}
-          this.status[id][property] = val
+          this.status[id][property] = value
         } else if (!this.status[id][property]) {
-          this.status[id][property] = val
+          this.status[id][property] = value
         }
       } else if (this.status[id][property]) {
         delete this.status[id][property]
@@ -340,16 +347,42 @@ export default {
     },
 
     async saveChange() {
-      // const promises = []
-      // Object.keys(this.status).forEach((index) => {
-      //   const itemData = this.findItemInfoById(index.toString())
-      //   const params = { ...itemData, ...this.status[index] }
-      //   console.log('params', params)
-      //   promises.push(
-      //     this.$api.put(`/v1/attaractingCustomer/0000/${index}`, params)
-      //   )
-      // })
-      // await Promise.all(promises).then(console.log(1234))
+      const promises = []
+      Object.keys(this.status).forEach((index) => {
+        const itemData = this.findItemInfoById(index.toString())
+        const {
+          deliveredFlag,
+          carInspectionFlag,
+          reservationFlag,
+          tentiveReservationFlag,
+          underReviewFlag,
+          failureFlag,
+          outflow,
+          purchaseIntention,
+        } = itemData
+        const params = {
+          deliveredFlag,
+          carInspectionFlag,
+          reservationFlag,
+          tentiveReservationFlag,
+          underReviewFlag,
+          failureFlag,
+          outflow,
+          purchaseIntention,
+          ...this.status[index],
+        }
+        promises.push(
+          this.$api.put(
+            `/v1/attractingCustomer/${this.storeCode}/${index}`,
+            params
+          )
+        )
+      })
+      await Promise.all(promises).then(() => {
+        this.saveFlg = false
+        this.status = []
+        this.$emit('update-event')
+      })
     },
 
     saveChangeDailog() {
@@ -402,7 +435,7 @@ export default {
       }
     },
     findItemInfoById(id) {
-      return this.itemList.find(
+      return this.itemList.results.find(
         (item) => item.attractingCustomersId === Number(id)
       )
     },

@@ -88,7 +88,7 @@ export default {
         ',,,' +
         list.callTotalRatio +
         '%,' +
-        list.continueTotalRetio +
+        list.continueTotalRatio +
         '%,' +
         list.deliveredTotalRatio +
         '%,' +

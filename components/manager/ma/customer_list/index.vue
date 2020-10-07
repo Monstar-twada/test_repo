@@ -17,6 +17,7 @@
       v-model="searchParams.page"
       class="mt30"
       :item-list="maResultList"
+      @update-event="updateStatusBar"
     />
   </div>
 </template>
@@ -28,25 +29,13 @@ import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
 import ExportButton from '~/components/manager/ma/customer_list/ExportButton.vue'
 import ExportDialog from '~/components/manager/ma/customer_list/export-dialog/index'
 
-// const SEARCH_PARAMS = {
-//   offset: 0,
-//   limit: 10,
-//   name: '',
-//   city: '',
-//   maker: '',
-//   class: '',
-//   tel: '',
-//   email: '',
-//   statusCall: '',
-//   statusDM: '',
-//   statusSMS: '',
-//   reserve: '',
-//   warehouse: '',
-//   page: 1,
-// }
+const SEARCH_PARAMS = {
+  offset: 0,
+  limit: 10,
+  page: 1,
+}
 export default {
   layout: 'manager',
-  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     MaResult,
@@ -83,18 +72,20 @@ export default {
     maResultList: [],
     exportVisible: false,
     maStatus: {},
+    stateCode: null,
   }),
   watch: {
-    // searchParams: {
-    //   deep: true,
-    //   handler() {
-    //     this.getMaResult()
-    //   },
-    // },
+    searchParams: {
+      deep: true,
+      handler() {
+        this.getMaResult()
+      },
+    },
   },
   created() {
+    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.apiParams = {
-      ...this.$route.params,
+      ...this.$route.query,
     }
     this.getMaResult()
     this.getMaStatus()
@@ -102,14 +93,16 @@ export default {
   },
   methods: {
     async getMaResult() {
-      const params = {}
-      // params.offset = (params.page - 1) * params.limit
+      const params = {
+        ...SEARCH_PARAMS,
+        ...this.searchParams,
+      }
+      params.offset = (params.page - 1) * params.limit
       try {
-        const res = await this.$api.post(
-          `/v1/attaractingCustomers/1234/202009`,
+        const res = await this.$api.get(
+          `/v1/attractingCustomers/${this.storeCode}/${this.apiParams.date}`,
           params
         )
-
         this.maResultList = res
       } catch (e) {
         console.error(e)
@@ -117,14 +110,15 @@ export default {
     },
 
     async getMaStatus() {
-      const params = {}
-      // params.offset = (params.page - 1) * params.limit
+      const params = {
+        additionalDataNumber: 0,
+      }
       try {
         const res = await this.$api.post(
-          `/v1/attaractingCustomersMonth/10001/202010`,
+          `/v1/attractingCustomersMonth/${this.storeCode}/${this.apiParams.date}`,
           params
         )
-        this.maStatus = res[0]
+        this.maStatus = res.results[0]
       } catch (e) {
         console.error(e)
       }

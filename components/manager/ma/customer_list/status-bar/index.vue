@@ -18,7 +18,7 @@
                 Number(status.targetTotalCount).toLocaleString()
               }}
             </h4>
-            <p>（{{ status.callTotalRatio }}%）</p>
+            <p>（{{ fmtRatio(status.callTotalRatio) }}）</p>
           </td>
         </tr>
         <tr>
@@ -28,12 +28,12 @@
                 label="SMS送付"
                 class="mr25"
                 :value="status.smsSendFlag"
-                @change="handleClick('smsSendFlag', $event.val)"
+                @change="handleClick('smsSendFlag', $event)"
               />
               <fg-checkbox
                 label="DM送付"
                 :value="status.dmSendFlag"
-                @change="handleClick('dmSendFlag', $event.val)"
+                @change="handleClick('dmSendFlag', $event)"
               />
             </div>
           </td>
@@ -51,8 +51,8 @@
                   Number(status.continueTotalCount).toLocaleString()
                 }}</strong>
                 /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
-                  status.continueTotalRetio
-                }}%）
+                  fmtRatio(status.continueTotalRatio)
+                }}）
               </span>
             </div>
           </td>
@@ -64,7 +64,7 @@
                   <strong>{{
                     Number(status.deliveredTotalCount).toLocaleString()
                   }}</strong>
-                  （{{ status.deliveredTotalRatio }}%）
+                  （{{ fmtRatio(status.deliveredTotalRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -73,7 +73,7 @@
                   <strong>{{
                     Number(status.carInspectionTotalCount).toLocaleString()
                   }}</strong>
-                  （{{ status.carInspectionTotalRatio }}%）
+                  （{{ fmtRatio(status.carInspectionTotalRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -82,7 +82,7 @@
                   <strong>{{
                     Number(status.reservationTotalCount).toLocaleString()
                   }}</strong>
-                  （{{ status.reservationTotalRatio }}%）
+                  （{{ fmtRatio(status.reservationTotalRatio) }}）
                 </span>
               </div>
             </div>
@@ -97,8 +97,8 @@
                   Number(status.pendingTotalCount).toLocaleString()
                 }}</strong>
                 /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
-                  status.pendingTotalRatio
-                }}%）
+                  fmtRatio(status.pendingTotalRatio)
+                }}）
               </span>
             </div>
           </td>
@@ -110,7 +110,7 @@
                   <strong>{{
                     Number(status.underReviewCount).toLocaleString()
                   }}</strong>
-                  （{{ status.underReviewRatio }}%）
+                  （{{ fmtRatio(status.underReviewRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -119,7 +119,7 @@
                   <strong>{{
                     Number(status.purchaseIntentionTotalCount).toLocaleString()
                   }}</strong>
-                  （{{ status.carInspectionTotalRatio }}%）
+                  （{{ fmtRatio(status.carInspectionTotalRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -128,7 +128,7 @@
                   <strong>{{
                     Number(status.tentiveReservationTotalCount).toLocaleString()
                   }}</strong>
-                  （{{ status.tentiveReservationTotalRatio }}%）
+                  （{{ fmtRatio(status.tentiveReservationTotalRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -137,7 +137,7 @@
                   <strong>{{
                     Number(status.failureCount).toLocaleString()
                   }}</strong>
-                  （{{ status.failureRatio }}%）
+                  （{{ fmtRatio(status.failureRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -146,7 +146,7 @@
                   <strong>{{
                     Number(status.outflowUnknownCount).toLocaleString()
                   }}</strong>
-                  （{{ status.outflowUnknownRatio }}%）
+                  （{{ fmtRatio(status.outflowUnknownRatio) }}）
                 </span>
               </div>
             </div>
@@ -161,8 +161,8 @@
                   Number(status.outflowTotalCount).toLocaleString()
                 }}</strong>
                 /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
-                  status.outflowTotalCount
-                }}%）
+                  fmtRatio(status.outflowTotalCount)
+                }}）
               </span>
             </div>
           </td>
@@ -174,7 +174,7 @@
                   <strong>{{
                     Number(status.outflowReplacementCount).toLocaleString()
                   }}</strong>
-                  （{{ status.outflowReplacementRatio }}%）
+                  （{{ fmtRatio(status.outflowReplacementRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -183,7 +183,7 @@
                   <strong>{{
                     Number(status.outflowInspectionCount).toLocaleString()
                   }}</strong>
-                  （{{ status.outflowInspectionRatio }}%）
+                  （{{ fmtRatio(status.outflowInspectionRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -192,7 +192,7 @@
                   <strong>{{
                     Number(status.outflowScrappedCount).toLocaleString()
                   }}</strong>
-                  （{{ status.outflowScrappedRatio }}%）
+                  （{{ fmtRatio(status.outflowScrappedRatio) }}）
                 </span>
               </div>
             </div>
@@ -214,16 +214,32 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      storeCode: null,
+    }
+  },
+  mounted() {
+    this.storeCode = $nuxt.$store.state.auth.storeCode
   },
   methods: {
     handleClick(property, val) {
       // do something
-      // const params = { property, val }
-      // this.$api.put('/v1/attaractingCustomers/0000/202009', params)
+      const params = {
+        smsSendFlag: this.status.smsSendFlag,
+        dmSendFlag: this.status.dmSendFlag,
+      }
+
+      params[property] = Number(val)
+      this.$api.put(
+        `/v1/attractingCustomers/${this.storeCode}/${this.$route.query.date}`,
+        params
+      )
     },
     fmtNumber(number) {
       return number.toLocaleString()
+    },
+    fmtRatio(ratio) {
+      return Math.round(ratio * 100) + '%'
     },
   },
 }

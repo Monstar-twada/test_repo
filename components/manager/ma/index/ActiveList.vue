@@ -128,6 +128,7 @@ export default {
     maIndexResultList: [],
     currentPage: 1,
     currentMonth: '',
+    storeCode: null,
   }),
   watch: {
     value(val) {
@@ -136,11 +137,14 @@ export default {
     currentPage(val) {
       this.$emit('input', val)
     },
-    currentMonth(val) {
-      this.getMaIndexResult()
+    currentMonth(val, oldVal) {
+      if (val !== oldVal) {
+        this.getMaIndexResult()
+      }
     },
   },
   created() {
+    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.getCurrentMonth()
     this.getMaIndexResult()
   },
@@ -159,11 +163,11 @@ export default {
       const params = {}
       await this.$api
         .post(
-          `/v1//attaractingCustomersMonth/10001/${this.currentMonth}`,
+          `/v1/attractingCustomersMonth/${this.storeCode}/${this.currentMonth}`,
           params
         )
-        .then((data) => {
-          this.maIndexResultList = data
+        .then((res) => {
+          this.maIndexResultList = res.results
         })
         .catch((err) => {
           console.error(err)
