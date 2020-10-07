@@ -31,7 +31,6 @@
 <script>
 import ZxCalendar from 'zx-calendar'
 import Popup from '../../popup/index'
-import { toNumber } from '../../../libs/index'
 const DEF_TITLE_FORMATTERS = {
   date: 'yyyy年MM月',
   month: 'yyyy年',
@@ -44,12 +43,6 @@ const DEF_ITEM_SUFFIXES = {
   year: '年',
 }
 
-// const DEF_VALUE_FORMATTERS = {
-//   date: 'yyyy/MM/dd',
-//   month: 'yyyy/MM',
-//   year: 'yyyy',
-// }
-
 export default {
   name: 'FgMonthPicker',
   components: {
@@ -57,10 +50,8 @@ export default {
   },
   props: {
     value: {
-      type: Object,
-      default: () => {
-        return {}
-      },
+      type: String,
+      default: '',
     },
     size: {
       type: String,
@@ -82,7 +73,10 @@ export default {
   data() {
     return {
       popVisible: false,
-      current: this.value,
+      current: {
+        year: this.value.slice(0, 4),
+        month: this.value.slice(4, 6),
+      },
       dateRange: {},
     }
   },
@@ -96,19 +90,17 @@ export default {
       deep: true,
       handler(val) {
         this.calendar.setDate(this.fmtValBeforeSetDate(val))
-        this.$emit('input', val)
+        this.$emit('input', this.toStringCurrentMonth(val))
       },
     },
-    value(val) {
-      if (this.current.year !== val.year) {
-        this.current = {
-          ...val,
-        }
-      }
-    },
+    // value(val) {
+    //   if (this.current.year !== val.year || this.current.year !== val.month) {
+    //     this.current = this.val
+    //   }
+    // },
   },
   mounted() {
-    this.setDateRange(this.value, this.range)
+    this.setDateRange(this.fmtCurrentMonth(this.value), this.range)
     this.$nextTick(() => {
       const config = {
         el: this.$refs.pop.$el,
@@ -122,8 +114,8 @@ export default {
       }
       const calendar = new ZxCalendar(config)
       calendar.on('change', (list) => {
-        this.current.year = Number(list[0].value.toString().slice(0, 4))
-        this.current.month = Number(list[0].value.toString().slice(4, 6))
+        this.current.year = list[0].value.toString().slice(0, 4)
+        this.current.month = list[0].value.toString().slice(4, 6)
         this.popVisible = false
       })
       calendar.on('cancel', () => {
@@ -134,6 +126,9 @@ export default {
       })
       this.calendar = calendar
     })
+  },
+  created() {
+    console.log('month', this.value)
   },
   methods: {
     handleToggle() {
@@ -148,26 +143,32 @@ export default {
     changeMonth(type) {
       if (type === 'next') {
         if (this.isEndDate()) return
-        if (this.current.month + 1 > 12) {
-          this.current.year += 1
-          this.current.month = 1
+        if (Number(this.current.month) + 1 > 12) {
+          this.current.year = Number(this.current.year) + 1
+          this.current.month = '01'
         } else {
-          this.current.month += 1
+          this.current.month = this.current.month =
+            Number(this.current.month) + 1 >= 10
+              ? Number(this.current.month) + 1
+              : `0${Number(this.current.month) + 1}`
         }
       } else if (type === 'prev') {
         if (this.isStartDate()) return
-        if (this.current.month - 1 === 0) {
-          this.current.year -= 1
-          this.current.month = 12
+        if (Number(this.current.month) - 1 === 0) {
+          this.current.year = Number(this.current.year) - 1
+          this.current.month = '12'
         } else {
-          this.current.month -= 1
+          this.current.month =
+            Number(this.current.month) - 1 >= 10
+              ? Number(this.current.month) - 1
+              : `0${Number(this.current.month) - 1}`
         }
       }
       this.calendar.setDate(this.fmtValBeforeSetDate(this.current))
     },
     fmtValBeforeSetDate(val) {
-      if (!val || !toNumber(val.year) || !toNumber(val.month)) return null
-      return `${toNumber(val.year)}/${toNumber(val.month)}`
+      if (!val || !Number(val.year) || !Number(val.month)) return null
+      return `${Number(val.year)}/${Number(val.month)}`
     },
     setDateRange(val, range) {
       if (!val) return val
@@ -214,6 +215,17 @@ export default {
         arr[1] = `${val.endYear}/${val.endMonth}`
       }
       return arr
+    },
+    fmtCurrentMonth(val) {
+      if (!val) return
+      const __obj = {}
+      __obj.year = val.slice(0, 4)
+      __obj.month = val.slice(5, 6)
+      return __obj
+    },
+    toStringCurrentMonth(val) {
+      if (!val) return
+      return val.year.toString() + val.month.toString()
     },
   },
 }
