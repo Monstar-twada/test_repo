@@ -65,7 +65,7 @@ export default {
         ...this.query,
       }
       // sort
-      params.sort = this.$ui.fmtSort(this.query.sort)
+      // params.sort = this.$ui.fmtSort(this.query.sort)
       // offset
       params.offset = (params.page - 1) * params.limit
       delete params.page
