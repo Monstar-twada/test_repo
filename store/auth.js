@@ -4,6 +4,8 @@ export const state = () => ({
   isAuthenticated: false,
   user: null,
   token: null,
+  storeCode: null,
+  companyCode: null,
 })
 
 export const mutations = {
@@ -14,14 +16,28 @@ export const mutations = {
   setToken(state, token) {
     state.token = token
   },
+  setStoreCode(state, storeCode) {
+    state.storeCode = storeCode
+  },
+  setCompanyCode(state, companyCode) {
+    state.companyCode = companyCode
+  },
 }
 
 export const actions = {
   async load({ commit }) {
     try {
       const user = await Auth.currentAuthenticatedUser()
-      // const user = await Auth.currentUserInfo()
       if (user) {
+        const session = await Auth.currentSession()
+        const userInfo = session?.getIdToken().payload
+        // eslint-disable-next-line camelcase
+        const { store_code, company_code } = userInfo
+        commit('setStoreCode', store_code)
+        commit('setCompanyCode', company_code)
+      }
+      const checkUser = await Auth.currentAuthenticatedUser()
+      if (checkUser) {
         const session = await Auth.currentSession()
         const token = session?.getIdToken()?.getJwtToken()
         if (token) {
@@ -32,6 +48,9 @@ export const actions = {
     } catch (error) {
       commit('setUser', null)
       commit('setToken', null)
+      commit('setStoreCode', null)
+      commit('setCompanyCode', null)
+      this.$router.push('/login')
     }
     // try {
     //   const cognitoUser = await Auth.currentAuthenticatedUser()
@@ -51,6 +70,25 @@ export const actions = {
 
   async login({ commit }, { email, password }) {
     const user = await Auth.signIn(email, password)
+    if (user) {
+      // check if auth session data
+      const session = await Auth.currentSession()
+      // set store and company code
+      const userInfo = session?.getIdToken().payload
+      // eslint-disable-next-line camelcase
+      const { store_code, company_code } = userInfo
+      commit('setStoreCode', store_code)
+      commit('setCompanyCode', company_code)
+      // set TOKEN here
+      const checkUser = await Auth.currentAuthenticatedUser()
+      if (checkUser) {
+        const session = await Auth.currentSession()
+        const token = session?.getIdToken()?.getJwtToken()
+        if (token) {
+          commit('setToken', token)
+        }
+      }
+    }
     commit('setUser', user)
     return user
   },
@@ -59,6 +97,8 @@ export const actions = {
     await Auth.signOut()
     commit('setUser', null)
     commit('setToken', null)
+    commit('setStoreCode', null)
+    commit('setCompanyCode', null)
     this.$router.push('/login')
   },
 }
