@@ -6,7 +6,6 @@ export const state = () => ({
   token: null,
   storeCode: null,
   companyCode: null,
-  userCode: null,
 })
 
 export const mutations = {
@@ -23,9 +22,6 @@ export const mutations = {
   setCompanyCode(state, companyCode) {
     state.companyCode = companyCode
   },
-  setUserCode(state, userCode) {
-    state.userCode = userCode
-  },
 }
 
 export const actions = {
@@ -36,10 +32,9 @@ export const actions = {
         const session = await Auth.currentSession()
         const userInfo = session?.getIdToken().payload
         // eslint-disable-next-line camelcase
-        const { store_code, company_code, user_code } = userInfo
+        const { store_code, company_code } = userInfo
         commit('setStoreCode', store_code)
         commit('setCompanyCode', company_code)
-        commit('setUserCode', user_code)
       }
       const checkUser = await Auth.currentAuthenticatedUser()
       if (checkUser) {
@@ -55,7 +50,6 @@ export const actions = {
       commit('setToken', null)
       commit('setStoreCode', null)
       commit('setCompanyCode', null)
-      commit('setUserCode', null)
       this.$router.push('/login')
     }
     // try {
@@ -82,10 +76,9 @@ export const actions = {
       // set store and company code
       const userInfo = session?.getIdToken().payload
       // eslint-disable-next-line camelcase
-      const { store_code, company_code, user_code } = userInfo
+      const { store_code, company_code } = userInfo
       commit('setStoreCode', store_code)
       commit('setCompanyCode', company_code)
-      commit('setUserCode', user_code)
       // set TOKEN here
       const checkUser = await Auth.currentAuthenticatedUser()
       if (checkUser) {
@@ -106,7 +99,6 @@ export const actions = {
     commit('setToken', null)
     commit('setStoreCode', null)
     commit('setCompanyCode', null)
-    commit('setUserCode', null)
     this.$router.push('/login')
   },
 }
