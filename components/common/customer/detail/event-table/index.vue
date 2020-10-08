@@ -22,7 +22,7 @@
     >
       <tr v-for="(item, i) in list" :key="i" @click="clickRow(item)">
         <td>
-          <TableDate :value="item.actitionDatetime" />
+          <TableDate :value="item.activityReportDatetime" />
         </td>
         <td>
           <fg-icon
@@ -216,9 +216,14 @@ export default {
       e.stopPropagation()
       try {
         await this.$confirm('この活動情報を削除してもよろしいですか？')
-        await this.$api.delete(
-          `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
-        )
+        await this.$api
+          .delete(
+            `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
+          )
+          .then(() => {
+            this.getCarList()
+            this.getList()
+          })
         this.$alert('削除成功！')
       } catch (err) {
         if (err) this.$alert(err.message)

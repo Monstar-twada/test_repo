@@ -152,6 +152,8 @@ export default {
           this.$alert('活動報告追加成功しました！')
           this.$emit('change')
           this.isSubmitting = false
+          this.$parent.$emit('getList')
+          this.$parent.$emit('getCarList')
         })
         .catch((err) => {
           if (err) this.$alert(err.message)
