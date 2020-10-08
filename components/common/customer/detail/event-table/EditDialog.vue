@@ -111,6 +111,10 @@ export default {
       this.$emit('input', val)
     },
   },
+  created() {
+    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
+    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
+  },
   methods: {
     save() {
       if (this.isDisabled) return
