@@ -172,7 +172,7 @@ export default {
               .map((item, index) => {
                 return {
                   value: index + 1,
-                  text: `Cars${item.store.storeName}`,
+                  text: `${item.store.storeName}`,
                 }
               })
           }

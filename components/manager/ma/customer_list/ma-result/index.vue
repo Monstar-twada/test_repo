@@ -399,10 +399,9 @@ export default {
       }
     },
     handleClickName(item) {
-      // console.log(JSON.stringify(item, null, 2))
       this.$router.push({
         path: `/customer/detail/`,
-        query: { id: item.customerId },
+        query: { customerCode: item.customerCode },
       })
     },
 
@@ -445,6 +444,7 @@ export default {
 <style lang="scss" scoped>
 .user {
   margin-left: 20px;
+  cursor: pointer;
 }
 .car,
 .tel {

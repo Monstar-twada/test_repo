@@ -406,7 +406,9 @@ export default {
       // validate data
       this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
       if (this.errors.length > 0) {
-        this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
+        this.$alert(
+          '必須項目が未入力か、入力データに誤りがあります。エラーを確認してください。'
+        )
         this.isSubmitting = false
         return
       }

@@ -38,7 +38,7 @@
           <span class="progress">
             -&nbsp;{{
               item.callTotalCount.toLocaleString()
-            }}&nbsp;コール済&nbsp;&nbsp;({{ item.callTotalRatio }}%)
+            }}&nbsp;コール済&nbsp;&nbsp;({{ fmtRatio(item.callTotalRatio) }})
           </span>
         </template>
       </fg-table-column>
@@ -172,6 +172,9 @@ export default {
         .catch((err) => {
           console.error(err)
         })
+    },
+    fmtRatio(ratio) {
+      return Math.round(ratio * 100) + '%'
     },
   },
 }
