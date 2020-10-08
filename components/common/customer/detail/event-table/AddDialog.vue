@@ -124,8 +124,8 @@ export default {
         // 「担当店舗コード」と「担当者コード」のセット
         // 取得方法：QAのNo.11を参照してください
         // https://docs.google.com/spreadsheets/d/1AntambplP9bKb0RSyx-Fsv8n2rjSjSHyHFIEfha4L_c/edit#gid=0
-        // this.form.contactStoreCode = '00000002'
-        // this.form.contactStaffCode = '00000002'
+        // this.form.contactStoreCode = ''
+        // this.form.contactStaffCode = ''
       }
     },
     visible(val) {

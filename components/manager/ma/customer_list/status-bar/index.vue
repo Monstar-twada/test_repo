@@ -10,7 +10,7 @@
         <tr>
           <td class="pt10 pb10">
             <p>コール済</p>
-            <h4>
+            <h4 v-show="showDataFlg">
               <strong>{{
                 Number(status.callTotalCount).toLocaleString()
               }}</strong
@@ -46,7 +46,7 @@
           <td class="main">
             <div class="ml20">
               <label>継続顧客：</label>
-              <span>
+              <span v-show="showDataFlg">
                 <strong>{{
                   Number(status.continueTotalCount).toLocaleString()
                 }}</strong>
@@ -60,7 +60,7 @@
             <div class="detail-wrapper">
               <div class="detail-item">
                 <label>納車済</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.deliveredTotalCount).toLocaleString()
                   }}</strong>
@@ -69,7 +69,7 @@
               </div>
               <div class="detail-item">
                 <label>車検入庫</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.carInspectionTotalCount).toLocaleString()
                   }}</strong>
@@ -78,7 +78,7 @@
               </div>
               <div class="detail-item">
                 <label>本予約</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.reservationTotalCount).toLocaleString()
                   }}</strong>
@@ -92,7 +92,7 @@
           <td class="main">
             <div class="ml20">
               <label>未確定：</label>
-              <span>
+              <span v-show="showDataFlg">
                 <strong>{{
                   Number(status.pendingTotalCount).toLocaleString()
                 }}</strong>
@@ -106,7 +106,7 @@
             <div class="detail-wrapper">
               <div class="detail-item">
                 <label>検討中</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.underReviewCount).toLocaleString()
                   }}</strong>
@@ -115,7 +115,7 @@
               </div>
               <div class="detail-item">
                 <label>買換意向</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.purchaseIntentionTotalCount).toLocaleString()
                   }}</strong>
@@ -124,7 +124,7 @@
               </div>
               <div class="detail-item">
                 <label>仮予約</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.tentiveReservationTotalCount).toLocaleString()
                   }}</strong>
@@ -133,7 +133,7 @@
               </div>
               <div class="detail-item">
                 <label>不通</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.failureCount).toLocaleString()
                   }}</strong>
@@ -142,7 +142,7 @@
               </div>
               <div class="detail-item">
                 <label>流出先不明</label>
-                <span>
+                <span v-show="showDataFlg">
                   <strong>{{
                     Number(status.outflowUnknownCount).toLocaleString()
                   }}</strong>
@@ -156,7 +156,7 @@
           <td class="main">
             <div class="ml20">
               <label>他社流出：</label>
-              <span>
+              <span v-if="showDataFlg">
                 <strong>{{
                   Number(status.outflowTotalCount).toLocaleString()
                 }}</strong>
@@ -170,7 +170,7 @@
             <div class="detail-wrapper">
               <div class="detail-item">
                 <label>買換</label>
-                <span>
+                <span v-if="showDataFlg">
                   <strong>{{
                     Number(status.outflowReplacementCount).toLocaleString()
                   }}</strong>
@@ -179,7 +179,7 @@
               </div>
               <div class="detail-item">
                 <label>車検</label>
-                <span>
+                <span v-if="showDataFlg">
                   <strong>{{
                     Number(status.outflowInspectionCount).toLocaleString()
                   }}</strong>
@@ -188,7 +188,7 @@
               </div>
               <div class="detail-item">
                 <label>廃車</label>
-                <span>
+                <span v-if="showDataFlg">
                   <strong>{{
                     Number(status.outflowScrappedCount).toLocaleString()
                   }}</strong>
@@ -216,10 +216,15 @@ export default {
   data() {
     return {
       storeCode: null,
+      showDataFlg: false,
     }
   },
   mounted() {
     this.storeCode = $nuxt.$store.state.auth.storeCode
+    // display data wait 1000ms
+    setTimeout(() => {
+      this.showDataFlg = true
+    }, 1000)
   },
   methods: {
     handleClick(property, val) {
@@ -245,6 +250,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+[v-cloak] {
+  display: none;
+}
+
 .status-bar {
   font-size: 12px;
   background: $--color-white;
