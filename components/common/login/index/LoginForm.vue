@@ -79,6 +79,10 @@ export default {
   components: {
     Logo,
   },
+  // USER1
+  // motoya.ishii@firstgroup.jp
+  // hB6JY7LwC$x*
+  // USER2
   // shinobu.takai@firstgroup.jp
   // (Kw2!u_NA3~D
   data() {
