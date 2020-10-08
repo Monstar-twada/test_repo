@@ -416,7 +416,7 @@ export default {
       // submit
       try {
         await this.$api.put(`/v1/customers/${this.query.customerCode}`, form)
-        await this.$alert(`顧客編集成功しました！`, { type: 'success' })
+        // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
         this.handleBack()
       } catch (err) {
         if (err) this.$alert(err.message)
