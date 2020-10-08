@@ -127,9 +127,6 @@ export default {
       this.calendar = calendar
     })
   },
-  created() {
-    console.log('month', this.value)
-  },
   methods: {
     handleToggle() {
       if (!this.popVisible) {
