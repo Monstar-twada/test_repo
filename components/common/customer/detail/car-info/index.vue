@@ -416,7 +416,7 @@ export default {
       },
       data: {},
       carListData: {},
-      currentCarCode: '',
+      currentCarCode: null,
       vicVisible: false,
       insuranceVisible: false,
     }

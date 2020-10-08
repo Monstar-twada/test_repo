@@ -307,7 +307,10 @@ export default {
     )
   },
   destroyed() {
-    window.removeEventListener('popstate', this.clickBrowserSystemButton)
+    // TODO
+    // 2改目バックボターを押したら、前のページを戻すという事象があるのため
+    // 他のページテストが必要
+    // window.removeEventListener('popstate', this.clickBrowserSystemButton)
   },
   methods: {
     handleChange(property, id, val, isToString = false) {

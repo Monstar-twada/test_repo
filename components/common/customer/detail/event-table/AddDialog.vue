@@ -90,7 +90,7 @@ export default {
     },
     currentCarCode: {
       type: String,
-      default: '',
+      default: null,
     },
   },
   data() {
