@@ -14,7 +14,7 @@ export const FORM_RULES = {
   phoneNumber: 100,
   email: 254,
   zipCode: 20,
-  prefecturesCode: [{ required: true }],
+  // prefecturesCode: [{ required: true }],
   address1: 255,
   address2: 255,
   address3: 255,
