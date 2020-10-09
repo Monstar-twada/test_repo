@@ -31,8 +31,10 @@
           ></fg-icon>
         </td>
         <td>
-          {{ item.car.maker }}<br />
-          {{ item.car.carType }}
+          <template v-if="item.car && item.car.length > 0">
+            {{ item.car.maker }}<br />
+            {{ item.car.carType }}
+          </template>
         </td>
         <td>{{ transactionTypes[item.transactionType] }}</td>
         <td>{{ channels[item.channel] }}</td>

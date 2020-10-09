@@ -70,7 +70,7 @@ export default {
       ],
       query: this.$route.query || {},
       customerData: {},
-      currentCarCode: '',
+      currentCarCode: null,
     }
   },
   created() {
