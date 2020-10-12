@@ -633,6 +633,7 @@ export default {
         this.isSubmitting = false
         return
       }
+      this.form.storeCode = $nuxt.$store.state.auth.storeCode
       const { customerCode, carCode } = this.query
       try {
         await this.$api.put(
@@ -704,6 +705,13 @@ export default {
         // string to boolean
         if (form.purchaseIntention) {
           form.purchaseIntention = form.purchaseIntention === '1'
+        }
+        // TODO
+        if (form.weightTax) {
+          form.weightTax = form.weightTax.toString()
+        }
+        if (form.libilityInsurance) {
+          form.libilityInsurance = form.libilityInsurance.toString()
         }
         this.form = form
       } catch (err) {
