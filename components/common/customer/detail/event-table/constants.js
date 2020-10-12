@@ -19,7 +19,7 @@ export const DEF_FORM = {
   // 活動日時
   activityReportDatetime: '',
   // チェック
-  checkFlag: false,
+  checkFlag: 0,
   // 対象車両コード
   carCode: '',
   // 取引種別
