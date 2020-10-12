@@ -57,16 +57,20 @@ export class RequestApi {
    */
   upload(file, params = {}) {
     const token = $nuxt.$store.state.auth.token
+
+    const formData = new FormData()
+    formData.append('filename', file.raw.file)
+    formData.append('content-type', file.data.type)
+
     return new Promise((resolve, reject) => {
       const configs = {
-        url: params.url || '/v1/tempfile',
+        url: params.url || '/api/v1/tempfile',
         method: params.method || 'POST',
         headers: {
-          ...this.getHeaders(),
-          ...params.headers,
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
-        data: file,
+        data: formData,
         onUploadProgress: ({ loaded, total }) => {
           if (typeof params.onProgress === 'function') {
             params.onProgress(Math.floor((100 * loaded) / total))

@@ -653,31 +653,47 @@ export default {
     },
     filerChange(res, type) {
       if (!res.data) {
-        // 削除処理を行う
         this.deleteFile(type)
-        return
       }
 
-      // upload file and delete old file
       this.$api
-        .upload(res.data)
+        .upload(res)
         .then((data) => {
-          // delete old file
           this.deleteFile(type)
-          // set new value of type
-          if (type === 'carPhoto') {
-            // new車両画像登録
-            // ...
-          } else {
-            this.form[type] = data.id
-          }
+          this.form[type] = data.id
         })
         .catch((err) => {
           this.$alert(err.message)
         })
     },
     deleteFile(type) {
-      // delete
+      const fileId = this.form[type]
+      if (!fileId) return
+      console.error('delete file:', fileId)
+      const customerCode = this.query.customerCode
+      switch (type) {
+        case 'facePhoto':
+          this.$api
+            .delete(`/v1/customers/${customerCode}/facePhoto`)
+            .then(() => {
+              // console.log(`delete ${type}: ${fileId} successfully!`)
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+          break
+        case 'licenseImageFront':
+        case 'licenseImageBack':
+          this.$api
+            .delete(`/v1/customers/${customerCode}/licenseImage`)
+            .then(() => {
+              // console.log(`delete ${type}: ${fileId} successfully!`)
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+          break
+      }
     },
     customValidate(file, next) {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
