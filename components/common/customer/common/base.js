@@ -8,10 +8,10 @@ export const DEFAULT_QUERY = {
   limit: 10,
   page: 1,
   // 一旦ソートの機能は後回しにします。
-  // sort: {
-  //   customerCode: '',
-  //   lastName: '',
-  // },
+  sort: {
+    customerCode: '',
+    lastName: '',
+  },
   // // 顧客名（姓）
   // lastName: '',
   // // 顧客名（名）
@@ -24,7 +24,7 @@ export const DEFAULT_QUERY = {
   // carType: '',
   // // 登録ナンバー
   // carRegistrationNumber: '',
-  // // 初度登録年月開始
+  // 初度登録年月開始
   // registrationFirstDateFrom: '',
   // // 初度登録年月終了
   // registrationFirstDateTo: '',
@@ -32,7 +32,7 @@ export const DEFAULT_QUERY = {
   // registrationEndDateFrom: '',
   // // 車検満了年月終了
   // registrationEndDateTo: '',
-  // // 買替意向
+  // 買替意向
   // purchaseIntention: 0,
   // // 乗換対象
   // transferTarget: 0,

@@ -172,7 +172,7 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 100%;
-      line-height: 1;
+      line-height: 1.4;
     }
     .__name {
       font-size: $--font-size-14;

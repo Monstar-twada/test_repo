@@ -406,7 +406,9 @@ export default {
       // validate data
       this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
       if (this.errors.length > 0) {
-        this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
+        this.$alert(
+          '必須項目が未入力か、入力データに誤りがあります。エラーを確認してください。'
+        )
         this.isSubmitting = false
         return
       }
@@ -414,7 +416,7 @@ export default {
       // submit
       try {
         await this.$api.put(`/v1/customers/${this.query.customerCode}`, form)
-        await this.$alert(`顧客編集成功しました！`, { type: 'success' })
+        // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
         this.handleBack()
       } catch (err) {
         if (err) this.$alert(err.message)

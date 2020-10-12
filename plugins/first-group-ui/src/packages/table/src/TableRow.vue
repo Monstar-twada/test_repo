@@ -50,7 +50,6 @@ export default {
       return this.columns.findIndex((column) => column.show === this.groupBy)
     },
   },
-
   watch: {
     value(val) {
       this.gronpByName = val

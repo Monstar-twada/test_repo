@@ -41,24 +41,21 @@
             round
             bold
             :color="
-              item.carInspectionFlag === '1' ? '#fff' : $colors.primaryActive
+              item.carInspectionFlag === 1 ? '#fff' : $colors.primaryActive
             "
             :bg-color="
-              item.carInspectionFlag === '1' ? $colors.primaryActive : '#DFE6F0'
+              item.carInspectionFlag === 1 ? $colors.primaryActive : '#DFE6F0'
             "
-            >{{ item.carInspectionFlag === '1' ? 'YES' : 'No' }}</fg-tag
+            >{{ item.carInspectionFlag === 1 ? 'YES' : 'No' }}</fg-tag
           >
         </td>
         <td>
-          <span v-if="item.reservationFlag === '1'" class="temp-checkbox">
+          <span v-if="item.reservationFlag === 1" class="temp-checkbox">
             <fg-icon name="hook" color="#fff"></fg-icon>
           </span>
         </td>
         <td>
-          <span
-            v-if="item.tentiveReservationFlag === '1'"
-            class="temp-checkbox"
-          >
+          <span v-if="item.tentiveReservationFlag === 1" class="temp-checkbox">
             <fg-icon name="hook" color="#fff"></fg-icon>
           </span>
         </td>

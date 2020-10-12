@@ -90,7 +90,7 @@ export default {
     },
     currentCarCode: {
       type: String,
-      default: '',
+      default: null,
     },
   },
   data() {
@@ -124,13 +124,17 @@ export default {
         // 「担当店舗コード」と「担当者コード」のセット
         // 取得方法：QAのNo.11を参照してください
         // https://docs.google.com/spreadsheets/d/1AntambplP9bKb0RSyx-Fsv8n2rjSjSHyHFIEfha4L_c/edit#gid=0
-        this.form.contactStoreCode = ''
-        this.form.contactStaffCode = ''
+        // this.form.contactStoreCode = ''
+        // this.form.contactStaffCode = ''
       }
     },
     visible(val) {
       this.$emit('input', val)
     },
+  },
+  created() {
+    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
+    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
   },
   methods: {
     save() {
@@ -148,6 +152,8 @@ export default {
           this.$alert('活動報告追加成功しました！')
           this.$emit('change')
           this.isSubmitting = false
+          this.$parent.$emit('getList')
+          this.$parent.$emit('getCarList')
         })
         .catch((err) => {
           if (err) this.$alert(err.message)
