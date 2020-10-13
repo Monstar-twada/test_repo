@@ -149,12 +149,14 @@ export default {
       this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
       this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
     },
-    save() {
+    async save() {
       if (this.isSubmitting) return
       this.isSubmitting = true
       const form = { ...this.form }
       form.checkFlag = +form.checkFlag
-      this.$api
+      // eslint-disable-next-line promise/param-names
+      const delay = (ms = 200) => new Promise((r) => setTimeout(r, ms))
+      await this.$api
         .post(
           `/v1/customers/${this.customerData.customerCode}/activityReports`,
           form
@@ -162,16 +164,15 @@ export default {
         .then(() => {
           this.visible = false
           this.$alert('活動報告追加成功しました！')
-          this.$emit('change')
           this.isSubmitting = false
           this.resetForm()
-          this.$parent.$emit('getList')
-          this.$parent.$emit('getCarList')
         })
         .catch((err) => {
           if (err) this.$alert(err.message)
           this.isSubmitting = false
         })
+      await delay()
+      this.$emit('change')
     },
   },
 }
