@@ -403,9 +403,6 @@ export default {
         form[item.field] = +item.checked
       })
 
-      form.facePhoto = 1234567890
-      form.licenseImageFront = 123456780123
-
       // validate data
       this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
       if (this.errors.length > 0) {
