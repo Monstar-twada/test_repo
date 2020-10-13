@@ -236,11 +236,11 @@
                 />
                 <TextContent
                   label="保険料"
-                  :content="data.monthlyParkingFee | fmtMoney"
+                  :content="data.carInsuranceFee | fmtMoney"
                 />
                 <TextContent
                   label="駐車場代"
-                  :content="data.carInsuranceFee | fmtMoney"
+                  :content="data.monthlyParkingFee | fmtMoney"
                 />
                 <div class="double-line mt10 mb5"></div>
                 <TextContent label="月間コスト" :content="data | sumCost" />
@@ -526,9 +526,11 @@ export default {
       this.getCarInfo()
     },
     goEditCar() {
-      this.$router.push(
-        `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
-      )
+      if (this.carListData.results && this.carListData.results.length > 0) {
+        this.$router.push(
+          `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
+        )
+      }
     },
   },
 }
