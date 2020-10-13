@@ -155,7 +155,7 @@ export default {
       const form = { ...this.form }
       form.checkFlag = +form.checkFlag
       // eslint-disable-next-line promise/param-names
-      const delay = (ms = 200) => new Promise((r) => setTimeout(r, ms))
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
       await this.$api
         .post(
           `/v1/customers/${this.customerData.customerCode}/activityReports`,
@@ -163,7 +163,6 @@ export default {
         )
         .then(() => {
           this.visible = false
-          this.$alert('活動報告追加成功しました！')
           this.isSubmitting = false
           this.resetForm()
         })
@@ -171,6 +170,7 @@ export default {
           if (err) this.$alert(err.message)
           this.isSubmitting = false
         })
+      this.$alert('活動報告追加成功しました！')
       await delay()
       this.$emit('change')
     },

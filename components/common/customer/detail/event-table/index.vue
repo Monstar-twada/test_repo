@@ -223,7 +223,7 @@ export default {
         await this.$api.delete(
           `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
         )
-        this.$alert('削除成功！')
+        // this.$alert('削除成功！')
       } catch (err) {
         if (err) this.$alert(err.message)
       }
