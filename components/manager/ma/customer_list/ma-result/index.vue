@@ -267,11 +267,11 @@ export default {
         value: 0,
       },
       {
-        text: '車検',
+        text: '買替',
         value: 1,
       },
       {
-        text: '買替',
+        text: '車検',
         value: 2,
       },
       {
