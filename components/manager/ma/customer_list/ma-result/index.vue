@@ -410,7 +410,13 @@ export default {
 
     clickBrowserSystemButton() {
       if (!this.saveFlg) return
-      this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+        buttons: {
+          ok: {
+            text: '遷移する',
+          },
+        },
+      })
         .then(() => {
           this.saveFlg = false
           this.status = []
@@ -423,7 +429,13 @@ export default {
 
     handleBeforeChange(next) {
       if (this.saveFlg) {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
           .then(() => {
             this.saveFlg = false
             this.status = []
