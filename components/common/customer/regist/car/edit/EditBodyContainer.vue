@@ -476,6 +476,7 @@
           <fg-calendar
             v-model="form.batteryCreateDate"
             width="160"
+            clearable
             value-format="yyyy-MM-dd"
           ></fg-calendar>
         </fg-form-item>
@@ -634,6 +635,30 @@ export default {
         return
       }
       this.form.storeCode = $nuxt.$store.state.auth.storeCode
+      // String  => Integer (API設計)
+      this.carMileage = this.fmtDataToNumber(this.carMileage)
+      // Integer => String (API設計)
+      this.form.carTax = this.fmtDataToString(this.form.carTax)
+
+      this.form.weightTax = this.fmtDataToString(this.form.weightTax)
+      this.form.libilityInsurance = this.fmtDataToString(
+        this.form.libilityInsurance
+      )
+      this.form.recycleFee = this.fmtDataToString(this.form.recycleFee)
+      this.form.monthlyGasolineCost = this.fmtDataToString(
+        this.form.monthlyGasolineCost
+      )
+      this.form.monthlyParkingFee = this.fmtDataToString(
+        this.form.monthlyParkingFee
+      )
+      this.form.carInsuranceFee = this.fmtDataToString(
+        this.form.carInsuranceFee
+      )
+      Object.keys(this.form).forEach((key) => {
+        if (typeof this.form[key] === 'string' && this.form[key] === '') {
+          this.form[key] = null
+        }
+      })
       const { customerCode, carCode } = this.query
       try {
         await this.$api.put(
@@ -722,18 +747,24 @@ export default {
         if (form.purchaseIntention) {
           form.purchaseIntention = form.purchaseIntention === '1'
         }
-        // TODO
-        if (form.weightTax) {
-          form.weightTax = form.weightTax.toString()
-        }
-        if (form.libilityInsurance) {
-          form.libilityInsurance = form.libilityInsurance.toString()
-        }
+
         this.form = form
       } catch (err) {
         this.$alert(err.message)
         console.error(err)
       }
+    },
+
+    fmtDataToNumber(data) {
+      if (data === null) return null
+      if (typeof data === 'number') return data
+      if (typeof data === 'string') return Number(data)
+    },
+
+    fmtDataToString(data) {
+      if (data === null) return null
+      if (typeof data === 'string') return data
+      if (typeof data === 'number') return data.toString()
     },
   },
 }
