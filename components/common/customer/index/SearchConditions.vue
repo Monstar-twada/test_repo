@@ -10,6 +10,7 @@
               size="small"
               placeholder="顧客名（姓）"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -18,6 +19,7 @@
               size="small"
               placeholder="顧客名（名）"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -26,6 +28,7 @@
               size="small"
               placeholder="電話番号"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
         </fg-row>
@@ -66,6 +69,7 @@
               size="small"
               placeholder="メーカー"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -83,6 +87,7 @@
               size="small"
               placeholder="登録ナンバー"
               clearable
+              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
         </fg-row>

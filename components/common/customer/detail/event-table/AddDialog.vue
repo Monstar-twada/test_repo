@@ -137,6 +137,18 @@ export default {
     this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
   },
   methods: {
+    resetForm() {
+      const reset = {
+        ...DEF_FORM,
+        carCode: this.currentCarCode,
+      }
+      this.form = reset
+      if (this.currentCarCode && this.currentCarCode !== this.form.carCode) {
+        this.form.carCode = this.currentCarCode
+      }
+      this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
+      this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
+    },
     save() {
       if (this.isSubmitting) return
       this.isSubmitting = true
@@ -152,6 +164,7 @@ export default {
           this.$alert('活動報告追加成功しました！')
           this.$emit('change')
           this.isSubmitting = false
+          this.resetForm()
           this.$parent.$emit('getList')
           this.$parent.$emit('getCarList')
         })

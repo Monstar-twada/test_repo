@@ -49,9 +49,9 @@ export const DEF_CUSTOMER_FORM = {
   // 年収
   annualIncome: '',
   // 顧客免許証画像(表)
-  licenseImageFront: '',
+  licenseImageFront: null,
   // 顧客免許証画像(裏)
-  licenseImageBack: '',
+  licenseImageBack: null,
   // 免許証の色(コード)
   licenseColor: '1',
   // 免許証番号

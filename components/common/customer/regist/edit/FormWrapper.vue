@@ -484,19 +484,19 @@ export default {
       }
     },
     fileChange(res, type) {
-      if (res && res.data) {
-        this.uploadFile(res.data)
-          .then((fileId) => {
-            this.deleteFile(type)
-            this.form[type] = fileId
-          })
-          .catch((err) => {
-            this.$alert(err.message)
-          })
-      } else {
-        // delete
+      if (!res.data) {
         this.deleteFile(type)
       }
+
+      this.$api
+        .upload(res)
+        .then((data) => {
+          this.deleteFile(type)
+          this.form[type] = data.id
+        })
+        .catch((err) => {
+          this.$alert(err.message)
+        })
     },
     deleteFile(type) {
       const fileId = this.form[type]
