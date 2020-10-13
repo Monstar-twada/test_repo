@@ -216,20 +216,20 @@ export default {
     },
     async delEvent(item, e) {
       e.stopPropagation()
+      // eslint-disable-next-line promise/param-names
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
       try {
         await this.$confirm('この活動情報を削除してもよろしいですか？')
-        await this.$api
-          .delete(
-            `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
-          )
-          .then(() => {
-            this.getCarList()
-            this.getList()
-          })
-        this.$alert('削除成功！')
+        await this.$api.delete(
+          `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
+        )
+        // this.$alert('削除成功！')
       } catch (err) {
         if (err) this.$alert(err.message)
       }
+      await delay()
+      this.getCarList()
+      this.getList()
     },
     async getCarList() {
       try {
