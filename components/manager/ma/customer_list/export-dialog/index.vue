@@ -44,11 +44,13 @@ export default {
   methods: {
     handleExport() {
       const list = this.exportList
+      const storelist = this.$ui.getCache('store_list')
       let csv =
         '\uFEFF' +
-        '店舗名,対象月,対象者総数,アクション進捗,継続顧客,納車済,車検入庫,本予約,未確定,検討中,買替意向,仮予約,不通,流出先不明,他社流出,買替,車検,廃車\n'
+        '店舗名,対象月,対象者総数,アクション進捗,継続顧客,納車済,車検入庫,本予約,未確定,検討中,買替意向,仮予約,不通,流出先不明,他社流出,買換,車検,廃車\n'
       const line1 =
-        '10001,' +
+        storelist[0].text +
+        ',' +
         list.registrationEndMonth +
         ',' +
         list.targetTotalCount +
@@ -82,7 +84,6 @@ export default {
         list.outflowInspectionCount +
         ',' +
         list.outflowScrappedCount +
-        ',' +
         '\n'
       const line2 =
         ',,,' +
@@ -115,7 +116,6 @@ export default {
         this.fmtRatio(list.outflowInspectionRatio) +
         ',' +
         this.fmtRatio(list.outflowScrappedRatio) +
-        ',' +
         '\n'
       csv += line1
       csv += line2
