@@ -9,6 +9,7 @@
           clearable
           size="medium"
           :class="validationMessage.email ? 'login-form__error' : ''"
+          @keyup.native.enter="login"
         />
         <fg-text v-if="validationMessage.email" class="login-form__error">{{
           validationMessage.email
@@ -24,6 +25,7 @@
           :type="showPassword ? 'text' : 'password'"
           :class="validationMessage.password ? 'login-form__error' : ''"
           @click:suffix-icon="showPassword = !showPassword"
+          @keyup.native.enter="login"
         />
         <fg-text v-if="validationMessage.password" class="login-form__error">{{
           validationMessage.password

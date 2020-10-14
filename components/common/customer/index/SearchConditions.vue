@@ -101,8 +101,8 @@
               placeholder="初度登録年月"
               show-after-dash
               clearable
-              format="yyyy-MM-dd"
-              value-format="yyyy-MM-dd"
+              format="yyyy-MM"
+              value-format="yyyy-MM"
               :error-message="registrationDateError"
               error-message-nowrap
             ></fg-calendar>
@@ -113,8 +113,8 @@
               size="small"
               clearable
               show-after-dash
-              format="yyyy-MM-dd"
-              value-format="yyyy-MM-dd"
+              format="yyyy-MM"
+              value-format="yyyy-MM"
               :is-error="!!registrationDateError"
             ></fg-calendar>
           </fg-col>
