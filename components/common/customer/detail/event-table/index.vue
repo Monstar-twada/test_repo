@@ -27,7 +27,7 @@
         <td>
           <fg-icon
             name="flag"
-            :color="item.checkFlag === '0' ? $colors.border : $colors.warning"
+            :color="item.checkFlag === 0 ? $colors.border : $colors.warning"
           ></fg-icon>
         </td>
         <td>
@@ -175,6 +175,9 @@ export default {
       if (val) this.getCarList()
     },
   },
+  mounted() {
+    console.log('carlist', this.carList)
+  },
   created() {
     this.getList()
   },
@@ -231,18 +234,20 @@ export default {
       this.getCarList()
       this.getList()
     },
-    async getCarList() {
+    getCarList() {
       try {
         /* eslint-disable prefer-const */
-        let { total, results } =
+        let { results } =
           this.$ui.getCache('cars_customer_' + this.customerCode) || {}
-        if (!Array.isArray(results) || results.length !== total) {
-          results = await this._getAllCars()
-          this.$ui.setCache('cars_customer_' + this.customerCode, {
-            total: results.length,
-            results,
-          })
-        }
+        // let { total, results } =
+        //   this.$ui.getCache('cars_customer_' + this.customerCode) || {}
+        // if (!Array.isArray(results) || results.length !== total) {
+        //   results = await this._getAllCars()
+        //   this.$ui.setCache('cars_customer_' + this.customerCode, {
+        //     total: results.length,
+        //     results,
+        //   })
+        // }
         this.carList = results.map((item) => {
           return {
             text: item.text || `${item.maker} ${item.carType}`,
@@ -254,13 +259,15 @@ export default {
       }
     },
     _getAllCars() {
+      console.log('getAllCars')
       return new Promise((resolve, reject) => {
-        const limit = 500
+        const limit = 100
         let page = 1
         let arr = []
+        let $this = this
         function getData() {
-          this.$api
-            .get(`/v1/customers/${this.customerCode}/cars`, {
+          $this.$api
+            .get(`/v1/customers/${$this.customerCode}/cars`, {
               limit,
               offset: (page - 1) * limit,
             })
