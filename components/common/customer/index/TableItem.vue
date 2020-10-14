@@ -26,7 +26,7 @@
       </div>
     </td>
     <td>
-      <dl style="display: inline-block; text-align: left">
+      <dl style="display: inline-block; text-align: left;">
         <dd>{{ carItem.maker }}</dd>
         <dd>
           {{ carItem.carType | fmtHyphen }}
@@ -41,7 +41,7 @@
     <td>{{ carItem.registrationStartDate | fmtDate }}</td>
     <td>{{ carItem.sellingDatetime | fmtDate }}</td>
     <td>
-      <div style="text-align: center">
+      <div style="text-align: center;">
         <fg-tag
           :class="{ hide: carItem.purchaseIntention === '0' }"
           color="#fff"
@@ -63,7 +63,7 @@
           >乗換</fg-tag
         >
       </div>
-      <div style="text-align: center">
+      <div style="text-align: center;">
         <fg-tag
           :class="{ hide: carItem.nearRegistration === '0' }"
           color="#fff"
