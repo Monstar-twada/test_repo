@@ -124,6 +124,7 @@
         <fg-form-item label="市区町村">
           <fg-input
             v-model="form.address1"
+            placeholder=""
             :error-message="errors.address1"
           ></fg-input>
         </fg-form-item>
@@ -131,6 +132,7 @@
         <fg-form-item label="番地など">
           <fg-input
             v-model="form.address2"
+            placeholder=""
             :error-message="errors.address2"
           ></fg-input>
         </fg-form-item>
@@ -138,6 +140,7 @@
         <fg-form-item label="建物名・部屋番号など">
           <fg-input
             v-model="form.address3"
+            placeholder=""
             :error-message="errors.address3"
           ></fg-input>
         </fg-form-item>
@@ -155,6 +158,7 @@
         <fg-form-item label="勤務先">
           <fg-input
             v-model="form.organizationName"
+            placeholder=""
             :error-message="errors.organizationName"
           ></fg-input>
         </fg-form-item>
@@ -162,6 +166,7 @@
         <fg-form-item label="勤務先電話番号">
           <fg-input
             v-model="form.organizationPhoneNumber"
+            placeholder=""
             :error-message="errors.organizationPhoneNumber"
           ></fg-input>
         </fg-form-item>
@@ -178,6 +183,7 @@
           <fg-input
             v-model="form.annualIncome"
             width="160px"
+            placeholder=""
             :error-message="errors.annualIncome"
             unit="万円"
           ></fg-input>
@@ -231,6 +237,7 @@
           <fg-input
             v-model="form.licenseNumber"
             width="395px"
+            placeholder=""
             :error-message="errors.licenseNumber"
           ></fg-input>
         </fg-form-item>
@@ -279,12 +286,17 @@
       </ColumnTitle>
       <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="ペット">
-          <fg-input v-model="form.pet" :error-message="errors.pet"></fg-input>
+          <fg-input
+            v-model="form.pet"
+            placeholder=""
+            :error-message="errors.pet"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="実家">
           <fg-input
             v-model="form.parentsHomeAddress"
+            placeholder=""
             :error-message="errors.parentsHomeAddress"
           ></fg-input>
         </fg-form-item>
@@ -292,6 +304,7 @@
         <fg-form-item label="ドリンク">
           <fg-input
             v-model="form.drink"
+            placeholder=""
             :error-message="errors.drink"
           ></fg-input>
         </fg-form-item>
@@ -299,6 +312,7 @@
         <fg-form-item label="趣味">
           <fg-input
             v-model="form.hobby"
+            placeholder=""
             :error-message="errors.hobby"
           ></fg-input>
         </fg-form-item>
