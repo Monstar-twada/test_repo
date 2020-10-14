@@ -76,42 +76,7 @@ export default {
       // item's index in menu
       index: -1,
       logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
-      selectList: [
-        // {
-        //   title: '営業管理',
-        // },
-        // {
-        //   text: 'cars全店',
-        //   value: 1,
-        // },
-        // {
-        //   text: '関西エリア',
-        //   value: 2,
-        // },
-        // {
-        //   text: '関東エリア',
-        //   value: 3,
-        // },
-        // {
-        //   title: '店舗管理',
-        // },
-        // {
-        //   text: 'cars奈良中央',
-        //   value: 5,
-        // },
-        // {
-        //   text: 'cars大阪',
-        //   value: 6,
-        // },
-        // {
-        //   text: 'cars足立',
-        //   value: 7,
-        // },
-        // {
-        //   text: 'cars天理',
-        //   value: 8,
-        // },
-      ],
+      selectList: [],
     }
   },
   computed: {
@@ -175,6 +140,7 @@ export default {
                   text: `${item.store.storeName}`,
                 }
               })
+            this.$ui.setCache('store_list', this.selectList)
           }
         })
         .catch((err) => {

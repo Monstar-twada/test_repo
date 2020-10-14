@@ -119,7 +119,7 @@
                   <strong>{{
                     Number(status.purchaseIntentionTotalCount).toLocaleString()
                   }}</strong>
-                  （{{ fmtRatio(status.carInspectionTotalRatio) }}）
+                  （{{ fmtRatio(status.purchaseIntentionTotalRatio) }}）
                 </span>
               </div>
               <div class="detail-item">
@@ -161,7 +161,7 @@
                   Number(status.outflowTotalCount).toLocaleString()
                 }}</strong>
                 /{{ Number(status.targetTotalCount).toLocaleString() }}（{{
-                  fmtRatio(status.outflowTotalCount)
+                  fmtRatio(status.outflowTotalRatio)
                 }}）
               </span>
             </div>

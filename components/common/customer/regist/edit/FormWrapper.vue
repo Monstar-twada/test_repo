@@ -147,6 +147,7 @@
             v-model="form.birthday"
             width="160px"
             writable
+            value-format="yyyy-MM-dd"
             default-view="1985/01/01"
           ></fg-calendar>
         </fg-form-item>
@@ -414,8 +415,10 @@ export default {
       }
 
       // submit
+      const customer = { ...form }
+      const data = { customer }
       try {
-        await this.$api.put(`/v1/customers/${this.query.customerCode}`, form)
+        await this.$api.put(`/v1/customers/${this.query.customerCode}`, data)
         // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
         this.handleBack()
       } catch (err) {
