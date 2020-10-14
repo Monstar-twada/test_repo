@@ -417,7 +417,12 @@ export default {
       this.selectionPoints.forEach((item) => {
         form[item.field] = +item.checked
       })
-
+      // if the property is empty change to null
+      for (const property in form) {
+        if (form[property] === '') {
+          form[property] = null
+        }
+      }
       // validate data
       this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
       if (this.errors.length > 0) {
