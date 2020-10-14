@@ -162,6 +162,10 @@ export default {
   },
   created() {
     this.getCarList()
+    // To be called function when Activity added
+    this.$root.$on('getCarList', () => {
+      this.getCarList()
+    })
   },
   methods: {
     clickRow(row) {

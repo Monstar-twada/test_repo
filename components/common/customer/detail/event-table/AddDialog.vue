@@ -172,6 +172,7 @@ export default {
         })
       this.$alert('活動報告追加成功しました！')
       await delay()
+      this.$root.$emit('getCarList')
       this.$emit('change')
     },
   },
