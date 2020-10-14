@@ -10,7 +10,7 @@
       <fg-icon
         class="ml20"
         name="flag"
-        :color="item.checkFlag === '0' ? $colors.border : $colors.warning"
+        :color="item.checkFlag === 0 ? $colors.border : $colors.warning"
       ></fg-icon>
     </template>
     <div class="body-wrapper">
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     date() {
-      const date = this.$ui.toDate(this.item.actitionDatetime)
+      const date = this.$ui.toDate(this.item.activityReportDatetime)
       return date ? this.$ui.formatDate(date, 'yyyy/MM/dd (W) hh:mm') : '-'
     },
     carInfo() {
