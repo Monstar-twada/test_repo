@@ -31,7 +31,7 @@
           ></fg-icon>
         </td>
         <td>
-          <template v-if="item.car && item.car.length > 0">
+          <template v-if="item.car">
             {{ item.car.maker }}<br />
             {{ item.car.carType }}
           </template>
@@ -53,7 +53,7 @@
               icon="trash"
               border
               size="mini"
-              style="width: 24px;"
+              style="width: 24px"
               @click="delEvent(item, $event)"
             ></fg-button>
           </div>
