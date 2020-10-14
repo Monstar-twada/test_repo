@@ -150,7 +150,7 @@
                 />
                 <TextContent
                   label="買換意向"
-                  :content="data.purchaseIntention"
+                  :content="data.purchaseIntention === '1' ? 'あり' : 'なし'"
                 />
               </div>
             </fg-col>
@@ -269,11 +269,11 @@
                 />
                 <TextContent
                   label="エンジン型式"
-                  :content="data.engineModel | fmtHyphen"
+                  :content="data.engineType | fmtHyphen"
                 />
                 <TextContent
                   label="最大出力"
-                  :content="data.enginMaximumOutput | fmtHyphen"
+                  :content="data.engineMaximumOutput | fmtHyphen"
                 />
                 <TextContent
                   label="最大トルク"
@@ -285,7 +285,7 @@
                 />
                 <TextContent
                   label="カラーコード"
-                  :content="data.colorCode | fmtHyphen"
+                  :content="data.colorCodeType | fmtHyphen"
                 />
                 <TextContent
                   label="トリムコード"
@@ -306,7 +306,7 @@
                 />
                 <TextContent
                   label="タイヤ製造"
-                  :content="tireCreateYearMonth"
+                  :content="data.tireCreateYear"
                 />
                 <TextContent
                   label="バッテリーサイズ"
