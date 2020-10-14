@@ -189,6 +189,11 @@ export default {
       const form = {
         ...this.form,
       }
+      for (const property in form) {
+        if (form[property] === '') {
+          form[property] = null
+        }
+      }
       this.$ui.booleanToNumber(form, [
         'purchaseIntention',
         'transferTarget',
