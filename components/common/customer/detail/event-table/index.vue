@@ -230,6 +230,7 @@ export default {
       await delay()
       this.getCarList()
       this.getList()
+      this.$root.$emit('getCarList')
     },
     async getCarList() {
       try {
@@ -249,7 +250,6 @@ export default {
             value: item.value || item.carCode,
           }
         })
-        console.log(this.carList)
       } catch (err) {
         console.error(err)
       }

@@ -30,8 +30,8 @@
         <dd>{{ carItem.maker }}</dd>
         <dd>
           {{ carItem.carType | fmtHyphen }}
-          <fg-tag v-if="item.carTotal" size="mini" round selected
-            >+{{ item.carTotal }}</fg-tag
+          <fg-tag v-if="item.carTotal > 1" size="mini" round selected
+            >+{{ item.carTotal - 1 }}</fg-tag
           >
         </dd>
       </dl>
