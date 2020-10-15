@@ -147,12 +147,21 @@ export default {
           await this.$store.dispatch('auth/login', this.form)
           this.$login.success.call(this)
         } catch (error) {
-          this.count += 1
-          this.emailError = true
-          this.passwordError = true
-          this.validationMessage.password =
-            'メールアドレスまたはパスワードが一致しないか、ユーザーが存在しません'
-          console.error({ error })
+          if (
+            // eslint-disable-next-line no-constant-condition
+            error.message === 'Incorrect username or password.' ||
+            "PreAuthentication failed with error 'email'."
+          ) {
+            this.count += 1
+            this.emailError = true
+            this.passwordError = true
+            this.validationMessage.password =
+              'メールアドレスまたはパスワードが一致しないか、ユーザーが存在しません'
+            console.error({ error })
+          } else {
+            this.$alert(error.message)
+            console.error({ error })
+          }
         }
       }
     },
