@@ -723,9 +723,11 @@ export default {
       this.isSubmitting = false
     },
     handleBack() {
-      this.$router.push(
-        `/customer/detail?customerCode=${this.query.customerCode}`
-      )
+      setTimeout(() => {
+        this.$router.push(
+          `/customer/detail?customerCode=${this.query.customerCode}`
+        )
+      }, 300)
     },
     filerChange(res, type) {
       if (!res.data) {
