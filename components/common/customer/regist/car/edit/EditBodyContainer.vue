@@ -636,7 +636,10 @@ export default {
       }
       this.form.storeCode = $nuxt.$store.state.auth.storeCode
       // String  => Integer (API設計)
-      this.carMileage = this.fmtDataToNumber(this.carMileage)
+      this.form.registrationImageFileCode = this.fmtDataToNumber(
+        this.form.registrationImageFileCode
+      )
+      this.form.carMileage = this.fmtDataToNumber(this.form.carMileage)
       // Integer => String (API設計)
       this.form.carTax = this.fmtDataToString(this.form.carTax)
 
@@ -654,6 +657,13 @@ export default {
       this.form.carInsuranceFee = this.fmtDataToString(
         this.form.carInsuranceFee
       )
+
+      // Boolean => String (API設計)
+      if (typeof this.form.purchaseIntention === 'boolean') {
+        this.form.purchaseIntention = Number(
+          this.form.purchaseIntention
+        ).toString()
+      }
       Object.keys(this.form).forEach((key) => {
         if (typeof this.form[key] === 'string' && this.form[key] === '') {
           this.form[key] = null
