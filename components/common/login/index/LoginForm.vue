@@ -81,10 +81,7 @@ export default {
   components: {
     Logo,
   },
-  // USER1
-  // motoya.ishii@firstgroup.jp
-  // hB6JY7LwC$x*
-  // USER2
+  // USER
   // shinobu.takai@firstgroup.jp
   // (Kw2!u_NA3~D
   data() {
@@ -126,22 +123,6 @@ export default {
     }
   },
   methods: {
-    isEmailValid() {
-      const { email } = this.form
-      return email === ''
-        ? ''
-        : this.reg.test(email)
-        ? false
-        : ['login-form__error', true]
-    },
-    isValid() {
-      const { password } = this.form
-      if (this.isEmailValid() === false && password !== '') {
-        return false
-      } else {
-        return true
-      }
-    },
     validation() {
       const { email, password } = this.form
       let count = 0
@@ -155,12 +136,6 @@ export default {
       } else this.validationMessage.password = ''
       return count
     },
-
-    // confirm() {
-    //   const count = this.validation()
-    //   if (count === 0)
-    // },
-
     async login() {
       const count = this.validation()
       if (count === 0) {
@@ -168,6 +143,17 @@ export default {
           await this.$store.dispatch('auth/login', this.form)
           this.$login.success.call(this)
         } catch (error) {
+          if (error.code === 'UserLambdaValidationException') {
+            this.count += 1
+            this.validationMessage.email = 'メールアドレスが正しくありません。'
+          } else if (error.code === 'NotAuthorizedException') {
+            this.count += 1
+            this.validationMessage.email = ' '
+            this.validationMessage.password =
+              'メールまたはパスワードが正しくありません。'
+          } else {
+            this.$alert(error.message)
+          }
           console.error({ error })
         }
       }
@@ -176,7 +162,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login-index-page-wrapper {
   margin-top: -10%;
   .login-form {
