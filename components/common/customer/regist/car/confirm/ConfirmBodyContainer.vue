@@ -83,7 +83,7 @@
         </fg-form-item>
         <fg-form-item>
           <template v-slot:label>
-            <h4 style="line-height: 1.2;">予想価格<br />(マッチング)</h4>
+            <h4 style="line-height: 1.2">予想価格<br />(マッチング)</h4>
           </template>
           {{ form.estimatedPrice | fmtMoney }}
           {{ form.expectedDatePriceDate | fmtDate }}

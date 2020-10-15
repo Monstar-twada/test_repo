@@ -66,6 +66,7 @@
           <fg-input
             v-model="form.registrationNumber"
             width="440px"
+            placeholder=""
             :error-message="errors.registrationNumber"
           ></fg-input>
         </fg-form-item>
@@ -73,6 +74,7 @@
           <fg-input
             v-model="form.maker"
             width="440px"
+            placeholder=""
             :error-message="errors.maker"
           ></fg-input>
         </fg-form-item>
@@ -80,6 +82,7 @@
           <fg-input
             v-model="form.carType"
             width="440px"
+            placeholder=""
             :error-message="errors.carType"
           ></fg-input>
         </fg-form-item>
@@ -87,6 +90,7 @@
           <fg-input
             v-model="form.grade"
             width="440px"
+            placeholder=""
             :error-message="errors.grade"
           ></fg-input>
         </fg-form-item>
@@ -176,6 +180,7 @@
             v-model="form.carMileage"
             width="110"
             unit="km"
+            placeholder=""
             :error-message="errors.carMileage"
           ></fg-input>
         </fg-form-item>
@@ -202,6 +207,7 @@
           <fg-input
             v-model="form.retailPrice"
             width="440px"
+            placeholder=""
             :error-message="errors.retailPrice"
           ></fg-input>
         </fg-form-item>
@@ -218,6 +224,7 @@
           <fg-input
             v-model="form.assessmentAmount"
             width="440px"
+            placeholder=""
             :error-message="errors.assessmentAmount"
           ></fg-input>
         </fg-form-item>
@@ -259,6 +266,7 @@
           <fg-input
             v-model="form.repaymentMonthly"
             width="440px"
+            placeholder=""
             :error-message="errors.repaymentMonthly"
           ></fg-input>
         </fg-form-item>
@@ -266,6 +274,7 @@
           <fg-input
             v-model="form.bonusDate"
             width="440px"
+            placeholder=""
             :error-message="errors.bonusDate"
           ></fg-input>
         </fg-form-item>
@@ -273,6 +282,7 @@
           <fg-input
             v-model="form.aiAssessmentAmount"
             width="440px"
+            placeholder=""
             :error-message="errors.aiAssessmentAmount"
           ></fg-input>
         </fg-form-item>
@@ -289,6 +299,7 @@
           <fg-input
             v-model="form.estimatedPrice"
             width="440px"
+            placeholder=""
             :error-message="errors.estimatedPrice"
           ></fg-input>
         </fg-form-item>
@@ -305,6 +316,7 @@
           <fg-input
             v-model="form.balancePayment"
             width="440px"
+            placeholder=""
             :error-message="errors.balancePayment"
           ></fg-input>
         </fg-form-item>
@@ -331,6 +343,7 @@
           <fg-input
             v-model="form.carTax"
             width="440px"
+            placeholder=""
             :error-message="errors.carTax"
           ></fg-input>
         </fg-form-item>
@@ -338,6 +351,7 @@
           <fg-input
             v-model="form.libilityInsurance"
             width="440px"
+            placeholder=""
             :error-message="errors.libilityInsurance"
           ></fg-input>
         </fg-form-item>
@@ -345,6 +359,7 @@
           <fg-input
             v-model="form.weightTax"
             width="440px"
+            placeholder=""
             :error-message="errors.weightTax"
           ></fg-input>
         </fg-form-item>
@@ -352,6 +367,7 @@
           <fg-input
             v-model="form.recycleFee"
             width="440px"
+            placeholder=""
             :error-message="errors.recycleFee"
           ></fg-input>
         </fg-form-item>
@@ -369,6 +385,7 @@
           <fg-input
             v-model="form.monthlyGasolineCost"
             width="440px"
+            placeholder=""
             :error-message="errors.monthlyGasolineCost"
           ></fg-input>
         </fg-form-item>
@@ -376,6 +393,7 @@
           <fg-input
             v-model="form.carInsuranceFee"
             width="440px"
+            placeholder=""
             :error-message="errors.carInsuranceFee"
           ></fg-input>
         </fg-form-item>
@@ -383,6 +401,7 @@
           <fg-input
             v-model="form.monthlyParkingFee"
             width="440px"
+            placeholder=""
             :error-message="errors.monthlyParkingFee"
           ></fg-input>
         </fg-form-item>
@@ -400,6 +419,7 @@
           <fg-input
             v-model="form.chassisNumber"
             width="440px"
+            placeholder=""
             :error-message="errors.chassisNumber"
           ></fg-input>
         </fg-form-item>
@@ -407,6 +427,7 @@
           <fg-input
             v-model="form.carInspectionType"
             width="440px"
+            placeholder=""
             :error-message="errors.carInspectionType"
           ></fg-input>
         </fg-form-item>
@@ -414,6 +435,7 @@
           <fg-input
             v-model="form.engineType"
             width="440px"
+            placeholder=""
             :error-message="errors.engineType"
           ></fg-input>
         </fg-form-item>
@@ -421,6 +443,7 @@
           <fg-input
             v-model="form.engineMaximumOutput"
             width="440px"
+            placeholder=""
             :error-message="errors.engineMaximumOutput"
           ></fg-input>
         </fg-form-item>
@@ -428,6 +451,7 @@
           <fg-input
             v-model="form.engineTorque"
             width="440px"
+            placeholder=""
             :error-message="errors.engineTorque"
           ></fg-input>
         </fg-form-item>
@@ -436,6 +460,7 @@
             <fg-input
               v-model="form.tireSizeFront"
               width="110px"
+              placeholder=""
               :error-message="errors.tireSizeFront"
             ></fg-input>
           </fg-form-item>
@@ -443,6 +468,7 @@
             <fg-input
               v-model="form.tireSizeRear"
               width="110px"
+              placeholder=""
               :error-message="errors.tireSizeRear"
             ></fg-input>
           </fg-form-item>
@@ -454,6 +480,7 @@
             unit="年"
             inline
             class="mr20"
+            placeholder=""
             :error-message="errors.tireCreateYear"
           ></fg-input>
           <fg-input
@@ -462,6 +489,7 @@
             unit="週目"
             class="ml30"
             inline
+            placeholder=""
             :error-message="errors.tireCreateWeek"
           ></fg-input>
         </fg-form-item>
@@ -469,6 +497,7 @@
           <fg-input
             v-model="form.batterySize"
             width="440px"
+            placeholder=""
             :error-message="errors.batterySize"
           ></fg-input>
         </fg-form-item>
@@ -485,6 +514,7 @@
             v-model="form.fuelTankSize"
             width="110px"
             unit="L"
+            placeholder=""
             :error-message="errors.fuelTankSize"
           ></fg-input>
         </fg-form-item>
@@ -492,6 +522,7 @@
           <fg-input
             v-model="form.colorCodeType"
             width="440px"
+            placeholder=""
             :error-message="errors.colorCodeType"
           ></fg-input>
         </fg-form-item>
@@ -499,6 +530,7 @@
           <fg-input
             v-model="form.colorTrimCode"
             width="440px"
+            placeholder=""
             :error-message="errors.colorTrimCode"
           ></fg-input>
         </fg-form-item>
@@ -506,6 +538,7 @@
           <fg-input
             v-model="form.model"
             width="440px"
+            placeholder=""
             :error-message="errors.model"
           ></fg-input>
         </fg-form-item>
@@ -513,6 +546,7 @@
           <fg-input
             v-model="form.salesPeriodStart"
             width="440px"
+            placeholder=""
             :error-message="errors.salesPeriodStart"
           ></fg-input>
         </fg-form-item>
@@ -520,6 +554,7 @@
           <fg-input
             v-model="form.warrantyPeriodEnd"
             width="440px"
+            placeholder=""
             :error-message="errors.warrantyPeriodEnd"
           ></fg-input>
         </fg-form-item>
@@ -528,6 +563,7 @@
             v-model="form.fuelEconomy"
             width="110px"
             unit="km/L"
+            placeholder=""
             :error-message="errors.fuelEconomy"
           ></fg-input>
         </fg-form-item>
@@ -536,6 +572,7 @@
             v-model="form.carWeight"
             width="110px"
             unit="Kg"
+            placeholder=""
             :error-message="errors.carWeight"
           ></fg-input>
         </fg-form-item>
@@ -545,6 +582,7 @@
               v-model="form.carFullLength"
               width="110"
               unit="mm"
+              placeholder=""
               :error-message="errors.carFullLength"
             ></fg-input>
           </fg-form-item>
@@ -553,6 +591,7 @@
               v-model="form.carFullWidth"
               width="110"
               unit="mm"
+              placeholder=""
               :error-message="errors.carFullWidth"
             ></fg-input>
           </fg-form-item>
@@ -561,6 +600,7 @@
               v-model="form.carTotalHeight"
               width="110"
               unit="mm"
+              placeholder=""
               :error-message="errors.carTotalHeight"
             ></fg-input>
           </fg-form-item>
