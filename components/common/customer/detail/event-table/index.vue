@@ -175,9 +175,6 @@ export default {
       if (val) this.getCarList()
     },
   },
-  mounted() {
-    console.log('carlist', this.carList)
-  },
   created() {
     this.getList()
   },
@@ -259,9 +256,8 @@ export default {
       }
     },
     _getAllCars() {
-      console.log('getAllCars')
       return new Promise((resolve, reject) => {
-        const limit = 100
+        const limit = 500
         let page = 1
         let arr = []
         let $this = this
