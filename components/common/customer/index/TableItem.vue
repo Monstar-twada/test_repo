@@ -38,7 +38,7 @@
     </td>
     <td>{{ carItem | fmtCarNumber }}</td>
     <td>{{ carItem.registrationEndDate | fmtDate }}</td>
-    <td>{{ carItem.registrationStartDate | fmtDate }}</td>
+    <td>{{ carItem.registrationFirstDate | fmtDate }}</td>
     <td>{{ carItem.sellingDatetime | fmtDate }}</td>
     <td>
       <div style="text-align: center;">

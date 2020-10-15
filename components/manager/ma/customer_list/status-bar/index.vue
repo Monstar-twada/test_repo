@@ -285,6 +285,7 @@ export default {
         margin-left: 5px;
         font-size: 21px;
         font-family: 'Avenir Next';
+        font-weight: bold;
       }
     }
   }
