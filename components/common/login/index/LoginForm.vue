@@ -8,7 +8,7 @@
           placeholder="メールアドレス"
           clearable
           size="medium"
-          :class="validationMessage.email ? 'login-form__error' : ''"
+          :class="emailError ? 'login-form__error' : ''"
           @keyup.native.enter="login"
         />
         <fg-text v-if="validationMessage.email" class="login-form__error">{{
@@ -23,7 +23,7 @@
           suffix-icon="eye"
           :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
           :type="showPassword ? 'text' : 'password'"
-          :class="validationMessage.password ? 'login-form__error' : ''"
+          :class="passwordError ? 'login-form__error' : ''"
           @click:suffix-icon="showPassword = !showPassword"
           @keyup.native.enter="login"
         />
@@ -92,6 +92,8 @@ export default {
         email: '',
         password: '',
       },
+      emailError: false,
+      passwordError: false,
       // eslint-disable-next-line no-useless-escape
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
@@ -127,10 +129,12 @@ export default {
       const { email, password } = this.form
       let count = 0
       if (email === '') {
+        this.emailError = true
         this.validationMessage.email = 'メールアドレスが空欄です'
         count += 1
       } else this.validationMessage.email = ''
       if (password === '') {
+        this.passwordError = true
         this.validationMessage.password = 'パスワードが空欄です'
         count += 1
       } else this.validationMessage.password = ''
@@ -143,17 +147,11 @@ export default {
           await this.$store.dispatch('auth/login', this.form)
           this.$login.success.call(this)
         } catch (error) {
-          if (error.code === 'UserLambdaValidationException') {
-            this.count += 1
-            this.validationMessage.email = 'メールアドレスが正しくありません。'
-          } else if (error.code === 'NotAuthorizedException') {
-            this.count += 1
-            this.validationMessage.email = ' '
-            this.validationMessage.password =
-              'メールまたはパスワードが正しくありません。'
-          } else {
-            this.$alert(error.message)
-          }
+          this.count += 1
+          this.emailError = true
+          this.passwordError = true
+          this.validationMessage.password =
+            'メールアドレスまたはパスワードが一致しないか、ユーザーが存在しません'
           console.error({ error })
         }
       }
@@ -181,6 +179,8 @@ export default {
       }
       div {
         color: $--color-warning;
+        white-space: normal !important;
+        overflow: visible !important;
       }
     }
     &__link {
