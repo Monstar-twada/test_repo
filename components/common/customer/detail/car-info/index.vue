@@ -99,7 +99,7 @@
                 />
                 <TextContent
                   label="登録年月日"
-                  :content="data.registrationFirstDate | fmtDate"
+                  :content="data.registrationStartDate | fmtDate"
                 />
                 <TextContent label="新中区分" :content="saleNewOldCarType" />
                 <TextContent
