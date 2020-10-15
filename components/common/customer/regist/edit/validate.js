@@ -4,12 +4,12 @@
  * Date: 2020-09-21 15:53
  */
 export const FORM_RULES = {
-  privateBusiness: [{ required: true }],
+  // privateBusiness: [{ required: true }],
   lastName: [{ required: true, max: 255 }],
   firstName: 255,
   lastNameKana: 255,
   firstNameKana: 255,
-  sex: [{ required: true }],
+  // sex: [{ required: true }],
   cellphoneNumber: 100,
   phoneNumber: 100,
   email: 254,

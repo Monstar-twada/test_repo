@@ -53,7 +53,7 @@
               icon="trash"
               border
               size="mini"
-              style="width: 24px"
+              style="width: 24px;"
               @click="delEvent(item, $event)"
             ></fg-button>
           </div>
