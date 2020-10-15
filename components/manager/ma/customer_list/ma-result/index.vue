@@ -384,7 +384,9 @@ export default {
       await Promise.all(promises).then(() => {
         this.saveFlg = false
         this.status = []
-        this.$emit('update-event')
+        setTimeout(() => {
+          this.$emit('update-event')
+        }, 300)
       })
     },
 

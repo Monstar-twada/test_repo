@@ -123,13 +123,6 @@ export default {
         console.error(e)
       }
     },
-    // updateSearch(params) {
-    //   this.searchParams = {
-    //     ...this.searchParams,
-    //     ...params,
-    //     page: 1,
-    //   }
-    // },
     handleExportClick() {
       this.exportVisible = true
     },
@@ -145,6 +138,7 @@ export default {
     },
     updateStatusBar() {
       this.getMaStatus()
+      this.getMaResult()
     },
   },
 }
