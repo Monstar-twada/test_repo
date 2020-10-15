@@ -8,7 +8,7 @@
           placeholder="メールアドレス"
           clearable
           size="medium"
-          :class="validationMessage.email ? 'login-form__error' : ''"
+          :class="emailError ? 'login-form__error' : ''"
           @keyup.native.enter="login"
         />
         <fg-text v-if="validationMessage.email" class="login-form__error">{{
@@ -23,7 +23,7 @@
           suffix-icon="eye"
           :suffix-icon-color="showPassword ? $colors.primary : $colors.border"
           :type="showPassword ? 'text' : 'password'"
-          :class="validationMessage.password ? 'login-form__error' : ''"
+          :class="passwordError ? 'login-form__error' : ''"
           @click:suffix-icon="showPassword = !showPassword"
           @keyup.native.enter="login"
         />
@@ -81,10 +81,7 @@ export default {
   components: {
     Logo,
   },
-  // USER1
-  // motoya.ishii@firstgroup.jp
-  // hB6JY7LwC$x*
-  // USER2
+  // USER
   // shinobu.takai@firstgroup.jp
   // (Kw2!u_NA3~D
   data() {
@@ -95,6 +92,8 @@ export default {
         email: '',
         password: '',
       },
+      emailError: false,
+      passwordError: false,
       // eslint-disable-next-line no-useless-escape
       reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
       showPassword: false,
@@ -126,41 +125,21 @@ export default {
     }
   },
   methods: {
-    isEmailValid() {
-      const { email } = this.form
-      return email === ''
-        ? ''
-        : this.reg.test(email)
-        ? false
-        : ['login-form__error', true]
-    },
-    isValid() {
-      const { password } = this.form
-      if (this.isEmailValid() === false && password !== '') {
-        return false
-      } else {
-        return true
-      }
-    },
     validation() {
       const { email, password } = this.form
       let count = 0
       if (email === '') {
+        this.emailError = true
         this.validationMessage.email = 'メールアドレスが空欄です'
         count += 1
       } else this.validationMessage.email = ''
       if (password === '') {
+        this.passwordError = true
         this.validationMessage.password = 'パスワードが空欄です'
         count += 1
       } else this.validationMessage.password = ''
       return count
     },
-
-    // confirm() {
-    //   const count = this.validation()
-    //   if (count === 0)
-    // },
-
     async login() {
       const count = this.validation()
       if (count === 0) {
@@ -168,7 +147,21 @@ export default {
           await this.$store.dispatch('auth/login', this.form)
           this.$login.success.call(this)
         } catch (error) {
-          console.error({ error })
+          if (
+            // eslint-disable-next-line no-constant-condition
+            error.message === 'Incorrect username or password.' ||
+            error.message === "PreAuthentication failed with error 'email'."
+          ) {
+            this.count += 1
+            this.emailError = true
+            this.passwordError = true
+            this.validationMessage.password =
+              'メールアドレスまたはパスワードが一致しないか、ユーザーが存在しません'
+            console.error({ error })
+          } else {
+            this.$alert(error.message)
+            console.error({ error })
+          }
         }
       }
     },
@@ -176,7 +169,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .login-index-page-wrapper {
   margin-top: -10%;
   .login-form {
@@ -195,6 +188,8 @@ export default {
       }
       div {
         color: $--color-warning;
+        white-space: normal !important;
+        overflow: visible !important;
       }
     }
     &__link {
