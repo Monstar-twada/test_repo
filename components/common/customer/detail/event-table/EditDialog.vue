@@ -102,7 +102,7 @@ export default {
       if (val) {
         this.form = {
           ...this.item,
-          activityReportDatetime: this.item.actitionDatetime,
+          activityReportDatetime: this.item.activityReportDatetime,
           checkFlag: +this.item.checkFlag,
         }
       }

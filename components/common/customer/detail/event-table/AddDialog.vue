@@ -18,6 +18,7 @@
               v-model="form.activityReportDatetime"
               format="yyyy/MM/dd (W) hh:mm"
               value-format="yyyy-MM-dd hh:mm"
+              @change="checkFormVal()"
             ></fg-date-picker>
           </fg-col>
           <fg-col span="7">
@@ -34,6 +35,7 @@
               v-model="form.transactionType"
               :items="transactionTypes"
               placeholder="選択"
+              @change="checkFormVal()"
             />
           </fg-col>
           <fg-col span="5">
@@ -42,6 +44,7 @@
               v-model="form.channel"
               placeholder="選択"
               :items="channels"
+              @change="checkFormVal()"
             />
           </fg-col>
         </fg-row>
@@ -56,6 +59,7 @@
               v-model="form.comment"
               class="event-textarea"
               type="textarea"
+              @change="checkFormVal()"
             ></fg-input>
           </div>
         </div>
@@ -65,7 +69,7 @@
           type="primary"
           width="240px"
           bold
-          :disabled="isSubmitting"
+          :disabled="!isSubmitting"
           @click="save"
           >活動報告を追加する</fg-button
         >
@@ -149,9 +153,20 @@ export default {
       this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
       this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
     },
+    checkFormVal() {
+      let index = 0
+      for (const key in this.form) {
+        if (
+          this.form[key] === '' &&
+          (key !== 'carCode' || key !== 'checkFlag')
+        ) {
+          index += 1
+        }
+      }
+      this.isSubmitting = index === 0
+    },
     async save() {
-      if (this.isSubmitting) return
-      this.isSubmitting = true
+      if (!this.isSubmitting) return
       const form = { ...this.form }
       form.checkFlag = +form.checkFlag
       // eslint-disable-next-line promise/param-names

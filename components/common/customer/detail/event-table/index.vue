@@ -27,11 +27,11 @@
         <td>
           <fg-icon
             name="flag"
-            :color="item.checkFlag === '0' ? $colors.border : $colors.warning"
+            :color="item.checkFlag === 0 ? $colors.border : $colors.warning"
           ></fg-icon>
         </td>
         <td>
-          <template v-if="item.car && item.car.length > 0">
+          <template v-if="item.car">
             {{ item.car.maker }}<br />
             {{ item.car.carType }}
           </template>
@@ -53,7 +53,7 @@
               icon="trash"
               border
               size="mini"
-              style="width: 24px;"
+              style="width: 24px"
               @click="delEvent(item, $event)"
             ></fg-button>
           </div>
@@ -232,18 +232,20 @@ export default {
       this.getList()
       this.$root.$emit('getCarList')
     },
-    async getCarList() {
+    getCarList() {
       try {
         /* eslint-disable prefer-const */
-        let { total, results } =
+        let { results } =
           this.$ui.getCache('cars_customer_' + this.customerCode) || {}
-        if (!Array.isArray(results) || results.length !== total) {
-          results = await this._getAllCars()
-          this.$ui.setCache('cars_customer_' + this.customerCode, {
-            total: results.length,
-            results,
-          })
-        }
+        // let { total, results } =
+        //   this.$ui.getCache('cars_customer_' + this.customerCode) || {}
+        // if (!Array.isArray(results) || results.length !== total) {
+        //   results = await this._getAllCars()
+        //   this.$ui.setCache('cars_customer_' + this.customerCode, {
+        //     total: results.length,
+        //     results,
+        //   })
+        // }
         this.carList = results.map((item) => {
           return {
             text: item.text || `${item.maker} ${item.carType}`,
@@ -259,9 +261,10 @@ export default {
         const limit = 500
         let page = 1
         let arr = []
+        let $this = this
         function getData() {
-          this.$api
-            .get(`/v1/customers/${this.customerCode}/cars`, {
+          $this.$api
+            .get(`/v1/customers/${$this.customerCode}/cars`, {
               limit,
               offset: (page - 1) * limit,
             })
