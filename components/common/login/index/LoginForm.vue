@@ -150,7 +150,7 @@ export default {
           if (
             // eslint-disable-next-line no-constant-condition
             error.message === 'Incorrect username or password.' ||
-            "PreAuthentication failed with error 'email'."
+            error.message === "PreAuthentication failed with error 'email'."
           ) {
             this.count += 1
             this.emailError = true
