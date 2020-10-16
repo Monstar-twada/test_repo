@@ -751,7 +751,12 @@ export default {
           this.form
         )
         await this.$alert('車両編集成功しました！', { type: 'success' })
-        this.handleBack()
+        setTimeout(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.$router.push(
+            `/customer/detail?customerCode=${this.query.customerCode}`
+          )
+        }, 300)
       } catch (err) {
         if (err) this.$alert(err.message)
       }

@@ -10,7 +10,6 @@
               size="small"
               placeholder="顧客名（姓）"
               clearable
-              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
