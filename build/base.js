@@ -94,8 +94,8 @@ export const baseConfig = {
   // : 'https://manager.cars-enjoy.com',
   proxy: {
     '/api/': isDevelopment
-      ? 'https://test.manager.test-mars.com'
-      : 'https://test.manager.test-mars.com',
+      ? 'https://manager.cars-enjoy.com'
+      : 'https://manager.cars-enjoy.com',
   },
   /*
    ** vuetify module configuration

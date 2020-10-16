@@ -10,8 +10,8 @@ const plugin = () => {
 
       // テスト環境
       region: 'ap-northeast-1',
-      userPoolId: 'ap-northeast-1_WYQfDG450',
-      userPoolWebClientId: '6hqcphuul6im51a9nh3jmuhtu1',
+      userPoolId: 'ap-northeast-1_YyK6I2IJj',
+      userPoolWebClientId: '3pkisfuvl6jua28gribcoctgln',
     },
   })
 }
