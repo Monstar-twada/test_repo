@@ -486,6 +486,10 @@ export default {
     },
   },
   created() {
+    if (this.$route.query.carCode) {
+      this.currentCarCode = this.$route.query.carCode
+      this.getCarInfo()
+    }
     this.getCarList()
   },
   methods: {
@@ -529,6 +533,17 @@ export default {
     changeCar(item) {
       this.currentCarCode = item.carCode
       this.getCarInfo()
+      if (
+        this.$route.query.carCode &&
+        this.$route.query.carCode !== this.currentCarCode
+      ) {
+        this.$router.replace({
+          query: {
+            customerCode: this.customerCode,
+            carCode: this.currentCarCode,
+          },
+        })
+      }
     },
     goEditCar() {
       if (this.carListData.results && this.carListData.results.length > 0) {

@@ -464,17 +464,17 @@ export default {
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
-        this.$alert('JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       callback()
     },
     licenseValidator({ type, size }, callback) {
       if (
-        !/^image\/(jpeg|png|pdf|heif)/i.test(type) &&
+        !/^image\/(jpeg|png|pdf|heic)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       if (size / 1024 > 5120) {
