@@ -35,9 +35,9 @@
           i === index ? 'sidebar-list-item--active' : '',
           i === index + 1 ? 'radius-tr' : '',
         ]"
-        @click="handleMenuClick"
+        @click="handleMenuClick(item.link)"
       >
-        <nuxt-link :to="item.link">
+        <a>
           <div class="sidebar-list-item__icon">
             <img
               :width="item.width"
@@ -49,7 +49,7 @@
           <div class="sidebar-list-item__content">
             <h4 class="sidebar-list-item__title">{{ item.text }}</h4>
           </div>
-        </nuxt-link>
+        </a>
       </li>
     </ul>
     <div :class="['bottom-space', isLastIndex ? 'radius-tr' : '']"></div>
@@ -118,12 +118,41 @@ export default {
       const path = '/' + route.path.split('/')[1] + '/'
       this.index = this.menuItems.findIndex((item) => item.link === path)
     },
-    handleMenuClick(e) {
-      const tempIndex = this.index
-      const timer = setTimeout(() => {
-        this.index = tempIndex
-        clearTimeout(timer)
-      }, 0)
+    handleMenuClick(link) {
+      if (!this.$store.getters['popup/getSaveFlg']) {
+        const tempIndex = this.index
+        const timer = setTimeout(() => {
+          this.index = tempIndex
+          clearTimeout(timer)
+          this.$router.push(link)
+        }, 0)
+      } else {
+        let content = ''
+        let okBtn = ''
+        if (window.location.href.includes('/ma/customer_list')) {
+          content = '入力中のデータが失われます。画面遷移をしますか？'
+          okBtn = '遷移する'
+        } else {
+          content = '対象データを削除してよろしいですか？'
+          okBtn = '削除する'
+        }
+
+        this.$confirm(content, {
+          buttons: {
+            ok: {
+              text: okBtn,
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            this.status = []
+            this.$router.push(link)
+          })
+          .catch(() => {
+            // console.log('cancel')
+          })
+      }
     },
     async getStoreList() {
       await this.$api
