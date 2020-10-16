@@ -127,10 +127,20 @@ export default {
           this.$router.push(link)
         }, 0)
       } else {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+        let content = ''
+        let okBtn = ''
+        if (window.location.href.includes('/ma/customer_list')) {
+          content = '入力中のデータが失われます。画面遷移をしますか？'
+          okBtn = '遷移する'
+        } else {
+          content = '対象データを削除してよろしいですか？'
+          okBtn = '削除する'
+        }
+
+        this.$confirm(content, {
           buttons: {
             ok: {
-              text: '遷移する',
+              text: okBtn,
             },
           },
         })
