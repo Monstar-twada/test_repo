@@ -25,7 +25,7 @@ export const DEF_CAR_FORM = {
     },
   ],
   // 車両基本情報.車検証画
-  registrationImageFileCode: '',
+  tmpRegistrationImageFileCode: '',
   // 車両基本情報.車検証番号
   registrationNumber: '',
   // メーカー
