@@ -214,5 +214,10 @@ export default {
     height: 19px;
     background: $--color-primary;
   }
+  .fg-table-experiment__table {
+    tbody tr:hover {
+      cursor: pointer;
+    }
+  }
 }
 </style>
