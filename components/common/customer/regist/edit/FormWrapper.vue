@@ -417,10 +417,20 @@ export default {
       this.selectionPoints.forEach((item) => {
         form[item.field] = +item.checked
       })
-      // if the property is empty change to null
+      // if the form in family is empty change to null
       for (const property in form) {
         if (form[property] === '') {
           form[property] = null
+        }
+      }
+      // if the family is empty change to null
+      const family = this.family
+      for (let i = 0; i < family.length; i++) {
+        const childArray = family[i]
+        for (const property in childArray) {
+          if (childArray[property] === '') {
+            childArray[property] = null
+          }
         }
       }
       // validate data

@@ -59,7 +59,7 @@
             icon="license-front"
             :url="registrationImage"
             :validate="customValidate"
-            @change="(res) => filerChange(res, 'registrationImageFileCode')"
+            @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="車検証番号">
@@ -676,8 +676,8 @@ export default {
       }
       this.form.storeCode = $nuxt.$store.state.auth.storeCode
       // String  => Integer (API設計)
-      this.form.registrationImageFileCode = this.fmtDataToNumber(
-        this.form.registrationImageFileCode
+      this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
+        this.form.tmpRegistrationImageFileCode
       )
       this.form.carMileage = this.fmtDataToNumber(this.form.carMileage)
       // Integer => String (API設計)
