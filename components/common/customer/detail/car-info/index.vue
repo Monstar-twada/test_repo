@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="carInfo">
     <div class="customer-info mt30 customer-detail-car-info-wrapper pb20">
       <ColumnTitle title="車両情報" border>
         <fg-button
@@ -306,7 +306,7 @@
                 />
                 <TextContent
                   label="タイヤ製造"
-                  :content="data.tireCreateYear"
+                  :content="`${data.tireCreateYear}年${data.tireCreateWeek}週目`"
                 />
                 <TextContent
                   label="バッテリーサイズ"
@@ -368,7 +368,12 @@
     />
     <InsuranceDialog v-model="insuranceVisible" />
 
-    <CarTable class="customer-info mt30" :customer-code="customerCode" />
+    <CarTable
+      ref="carTable"
+      class="customer-info mt30"
+      :customer-code="customerCode"
+      @change="changeCar"
+    />
   </div>
 </template>
 <script>
