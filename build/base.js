@@ -75,6 +75,12 @@ export const baseConfig = {
   },
   router: {
     base: process.env.BASE_URL,
+    // test to cloudfront bug on reload
+    extendRoutes(routes, resolve) {
+      for (const route of routes) {
+        route.alias = resolve(route.path, 'index.html')
+      }
+    },
   },
   // vuetify: {
   //   customVariables: ['~/assets/scss/variables.scss'],
