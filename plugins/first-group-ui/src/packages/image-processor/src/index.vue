@@ -14,6 +14,7 @@
     </div>
     <div v-if="!readonly" class="__tool-wrapper">
       <fg-button
+        v-if="!noEditBtn"
         icon="edit"
         border
         circle
@@ -22,6 +23,7 @@
         @click="edit"
       ></fg-button>
       <fg-button
+        v-if="!noDeleteBtn"
         class="ml5"
         icon="trash"
         border
@@ -104,6 +106,14 @@ export default {
     deletable: {
       type: Boolean,
       default: true,
+    },
+    noEditBtn: {
+      type: Boolean,
+      default: false,
+    },
+    noDeleteBtn: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
