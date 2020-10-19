@@ -775,7 +775,7 @@ export default {
     },
     customValidate(file, next) {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルを選択してください')
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
         return
       }
 
