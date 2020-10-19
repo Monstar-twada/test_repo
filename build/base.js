@@ -75,6 +75,11 @@ export const baseConfig = {
   },
   router: {
     base: process.env.BASE_URL,
+    extendRoutes(routes, resolve) {
+      for (const route of routes) {
+        route.alias = resolve(route.path, 'index.html')
+      }
+    },
   },
   // vuetify: {
   //   customVariables: ['~/assets/scss/variables.scss'],
@@ -120,16 +125,10 @@ export const baseConfig = {
    */
   build: {
     // test another for caching
-    hardSource: true,
     publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
     /*
      ** You can extend webpack config here
      */
-    extendRoutes(routes, resolve) {
-      for (const route of routes) {
-        route.alias = resolve(route.path, 'index.html')
-      }
-    },
     extend(config, { isDev, isClient }) {
       // Run ESLint on save
       if (isDev && isClient) {
