@@ -125,6 +125,8 @@ export const baseConfig = {
    ** Build configuration
    */
   build: {
+    // test another for caching
+    hardSource: true,
     publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
     /*
      ** You can extend webpack config here
