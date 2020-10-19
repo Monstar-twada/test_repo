@@ -40,7 +40,7 @@
     <td>{{ carItem.registrationEndDate | fmtDate }}</td>
     <td>{{ carItem.registrationFirstDate | fmtDate }}</td>
     <td>{{ carItem.sellingDatetime | fmtDate }}</td>
-    <td>
+    <!-- <td>
       <div style="text-align: center">
         <fg-tag
           :class="{ hide: carItem.purchaseIntention === '0' }"
@@ -85,7 +85,7 @@
           >6ヶ月</fg-tag
         >
       </div>
-    </td>
+    </td> -->
   </tr>
 </template>
 

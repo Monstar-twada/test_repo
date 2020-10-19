@@ -67,7 +67,7 @@ export default {
           text: '顧客ID',
           align: 'center',
           field: 'customerCode',
-          sortable: true,
+          // sortable: true,
           width: '8%',
         },
         {
@@ -75,7 +75,7 @@ export default {
           field: 'lastName',
           align: 'center',
           width: '16%',
-          sortable: true,
+          // sortable: true,
         },
         { text: '連絡先情報', align: 'center', width: '12%' },
         { text: '所有車', align: 'start', width: '12%' },
@@ -91,7 +91,7 @@ export default {
           width: '10%',
         },
         { text: '最終取引日', align: 'center', width: '10%' },
-        { text: 'フラグ', align: 'center', width: '10%' },
+        // { text: 'フラグ', align: 'center', width: '10%' },
       ],
     }
   },
