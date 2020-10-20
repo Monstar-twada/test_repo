@@ -464,7 +464,7 @@ export default {
     handleBack() {
       setTimeout(() => {
         this.$router.push(
-          `/customer/detail?customerCode=${this.query.customerCode}`
+          `/customer/detail/?customerCode=${this.query.customerCode}`
         )
       }, 300)
     },

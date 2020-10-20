@@ -7,7 +7,7 @@ export const managerMenuItems = [
   {
     icon: 'customer',
     iconHover: 'customer-hover',
-    link: '/customer',
+    link: '/customer/',
     text: '顧客管理',
     width: 16,
   },

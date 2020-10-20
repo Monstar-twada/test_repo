@@ -33,7 +33,7 @@ export default {
       this.$router.push({ path: url })
     },
     handleSubmit() {
-      this.nextUrl('/login')
+      this.nextUrl('/login/')
     },
   },
 }

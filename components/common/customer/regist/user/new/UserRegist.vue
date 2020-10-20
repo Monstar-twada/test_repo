@@ -315,7 +315,7 @@ export default {
     },
     handleClick() {
       this.$router.push({
-        path: `/customer/user/confirm`,
+        path: `/customer/user/confirm/`,
       })
     },
   },

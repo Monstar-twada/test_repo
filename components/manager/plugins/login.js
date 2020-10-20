@@ -5,12 +5,12 @@
  */
 export const login = {
   success() {
-    this.$router.push('/customer')
+    this.$router.push('/customer/')
   },
 }
 
 export const forgot = {
   success() {
-    this.$router.push('/pin')
+    this.$router.push('/pin/')
   },
 }
