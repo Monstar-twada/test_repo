@@ -7,14 +7,14 @@ export const managerMenuItems = [
   {
     icon: 'customer',
     iconHover: 'customer-hover',
-    link: '/customer',
+    link: '/customer/',
     text: '顧客管理',
     width: 16,
   },
   {
     icon: 'ma',
     iconHover: 'ma-hover',
-    link: '/ma',
+    link: '/ma/',
     text: '集客',
     width: 16,
   },

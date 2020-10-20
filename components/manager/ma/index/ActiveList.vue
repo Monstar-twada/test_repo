@@ -90,7 +90,7 @@
       <fg-table-column label width="16%" :sortable="false">
         <template v-slot="item">
           <nuxt-link
-            :to="`/ma/customer_list?type=0000&date=${item.registrationEndMonth}`"
+            :to="`/ma/customer_list/?type=0000&date=${item.registrationEndMonth}`"
           >
             <fg-button
               v-if="item.listCount != 0"

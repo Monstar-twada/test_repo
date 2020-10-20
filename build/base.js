@@ -75,6 +75,7 @@ export const baseConfig = {
   },
   router: {
     base: process.env.BASE_URL,
+    trailingSlash: true,
     extendRoutes(routes, resolve) {
       for (const route of routes) {
         route.alias = resolve(route.path, 'index.html')

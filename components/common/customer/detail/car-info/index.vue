@@ -548,7 +548,7 @@ export default {
     goEditCar() {
       if (this.carListData.results && this.carListData.results.length > 0) {
         this.$router.push(
-          `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
+          `/customer/regist/car/edit/?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
         )
       }
     },
