@@ -280,7 +280,7 @@ export default {
     goBack() {
       const { carCode, customerCode } = this.query
       this.$router.push(
-        `/customer/regist/car/edit?customerCode=${customerCode}&carCode=${carCode}&edit=1`
+        `/customer/regist/car/edit/?customerCode=${customerCode}&carCode=${carCode}&edit=1`
       )
     },
   },

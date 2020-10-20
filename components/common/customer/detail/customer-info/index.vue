@@ -204,7 +204,7 @@ export default {
     },
     handleEdit() {
       this.$router.push(
-        '/customer/regist/edit?customerCode=' + this.data.customerCode
+        '/customer/regist/edit/?customerCode=' + this.data.customerCode
       )
     },
   },
