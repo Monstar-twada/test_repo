@@ -53,7 +53,7 @@
               icon="trash"
               border
               size="mini"
-              style="width: 24px"
+              style="width: 24px;"
               @click="delEvent(item, $event)"
             ></fg-button>
           </div>
@@ -248,7 +248,11 @@ export default {
         // }
         this.carList = results.map((item) => {
           return {
-            text: item.text || `${item.maker} ${item.carType}`,
+            text:
+              item.text ||
+              `${item.maker ? item.maker : ''} ${
+                item.carType ? item.carType : ''
+              }`,
             value: item.value || item.carCode,
           }
         })
