@@ -35,10 +35,6 @@ export default {
         return {}
       },
     },
-    sortActive: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
