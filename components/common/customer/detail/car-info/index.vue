@@ -304,10 +304,7 @@
                   label="タイヤサイズ"
                   :content="data.tireSizeRear | fmtHyphen"
                 />
-                <TextContent
-                  label="タイヤ製造"
-                  :content="`${data.tireCreateYear}年${data.tireCreateWeek}週目`"
-                />
+                <TextContent label="タイヤ製造" :content="tireCreateYear" />
                 <TextContent
                   label="バッテリーサイズ"
                   :content="data.batterySize | fmtHyphen"
@@ -337,7 +334,7 @@
           </fg-row>
         </fg-col>
         <fg-col span="8">
-          <div class="mt15 pb15 pr20" style="text-align: right">
+          <div class="mt15 pb15 pr20" style="text-align: right;">
             <fg-button
               prefix-icon="edit"
               size="mini"
@@ -465,11 +462,11 @@ export default {
       }
       return arr.join(' ') || '-'
     },
-    tireCreateYearMonth() {
+    tireCreateYear() {
       // 2015年27週目
-      const { tireCreateYearMonth, tireCreateWeek } = this.data
-      if (tireCreateYearMonth) {
-        return `${tireCreateYearMonth}年${tireCreateWeek}週目`
+      const { tireCreateYear, tireCreateWeek } = this.data
+      if (tireCreateYear) {
+        return `${tireCreateYear}年${tireCreateWeek}週目`
       }
       return '-'
     },

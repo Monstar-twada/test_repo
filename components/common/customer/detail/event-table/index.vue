@@ -273,7 +273,11 @@ export default {
         // }
         this.carList = results.map((item) => {
           return {
-            text: item.text || `${item.maker} ${item.carType}`,
+            text:
+              item.text ||
+              `${item.maker ? item.maker : ''} ${
+                item.carType ? item.carType : ''
+              }`,
             value: item.value || item.carCode,
           }
         })
