@@ -10,7 +10,7 @@ export const DEFAULT_QUERY = {
   // 一旦ソートの機能は後回しにします。
   sort: {
     customerCode: '',
-    lastName: '',
+    customerName: '',
   },
   // // 顧客名（姓）
   // lastName: '',
