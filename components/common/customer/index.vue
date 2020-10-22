@@ -66,10 +66,7 @@ export default {
     },
 
     getDatawithThrottle: throttle(async function () {
-      this.loading = true
       await this.getData()
-      this.loading = false
-      console.log('fired')
     }, 3000),
 
     async getData() {
@@ -87,6 +84,7 @@ export default {
       // if (/^(\d{4})-(\d{2})/.test(params.registrationFirstDateTo)) {
       //   params.registrationFirstDateTo = RegExp.$1 + '-' + RegExp.$2
       // }
+      // this.$nuxt.$loading.start()
       try {
         const res = await this.$api.post('/v1/customers', params)
         this.tableData = res || {}

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import throttle from 'lodash.throttle'
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
 import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
@@ -78,20 +79,26 @@ export default {
     searchParams: {
       deep: true,
       handler() {
-        this.getMaResult()
+        this.getDatawithThrottle()
       },
     },
   },
   created() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
-    this.apiParams = {
-      ...this.$route.query,
-    }
-    this.getMaResult()
-    this.getMaStatus()
-    this.updateBreadCrumbs()
+    this.$nextTick(() => {
+      this.storeCode = $nuxt.$store.state.auth.storeCode
+      this.$nuxt.$loading.start()
+      this.apiParams = {
+        ...this.$route.query,
+      }
+      this.getMaResult()
+      this.getMaStatus()
+      this.updateBreadCrumbs()
+    })
   },
   methods: {
+    getDatawithThrottle: throttle(async function () {
+      await this.getMaResult()
+    }, 3000),
     async getMaResult() {
       const params = {
         ...SEARCH_PARAMS,
@@ -119,6 +126,7 @@ export default {
           params
         )
         this.maStatus = res.results[0]
+        this.$nuxt.$loading.finish()
       } catch (e) {
         console.error(e)
       }
