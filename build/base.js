@@ -37,7 +37,8 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$--color-background' },
+  // loading: { color: '$--color-background' },
+  loading: '~/components/common/loading/index.vue',
   /*
    ** Global CSS
    */

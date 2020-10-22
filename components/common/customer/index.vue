@@ -51,7 +51,10 @@ export default {
     },
   },
   created() {
-    this.getData()
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      this.getData()
+    })
   },
   methods: {
     conditionChange(data) {
@@ -87,6 +90,7 @@ export default {
       try {
         const res = await this.$api.post('/v1/customers', params)
         this.tableData = res || {}
+        this.$nuxt.$loading.finish()
       } catch (err) {
         this.$alert(err.message)
         console.error(err)
