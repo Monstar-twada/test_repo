@@ -6,7 +6,7 @@
 
     <h3 class="mt30">
       マッチング情報
-      <!-- <fg-tag class="ml5" size="mini" selected round>出品中</fg-tag> -->
+      <fg-tag class="ml5" size="mini" selected round>出品中</fg-tag>
     </h3>
 
     <div class="card-wrapper">

@@ -11,13 +11,13 @@ export const managerMenuItems = [
     text: '顧客管理',
     width: 16,
   },
-  // {
-  //   icon: 'ma',
-  //   iconHover: 'ma-hover',
-  //   link: '/ma',
-  //   text: '集客',
-  //   width: 16,
-  // },
+  {
+    icon: 'ma',
+    iconHover: 'ma-hover',
+    link: '/ma/',
+    text: '集客',
+    width: 16,
+  },
   // {
   //   icon: 'send',
   //   iconHover: 'send-hover',

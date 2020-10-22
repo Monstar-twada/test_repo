@@ -33,7 +33,7 @@
           </fg-col>
         </fg-row>
       </fg-col>
-      <!-- <fg-col span="13" class="right-item-wrapper">
+      <fg-col span="13" class="right-item-wrapper">
         <h3>属性で探す</h3>
         <div class="checkbox-wrapper">
           <fg-checkbox
@@ -57,7 +57,7 @@
             label="6ヶ月内接点"
           ></fg-checkbox>
         </div>
-      </fg-col> -->
+      </fg-col>
     </fg-row>
     <fg-row gutter="20">
       <fg-col span="11" class="left-item-wrapper">

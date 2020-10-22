@@ -14,7 +14,6 @@
     </div>
     <div v-if="!readonly" class="__tool-wrapper">
       <fg-button
-        v-if="!noEditBtn"
         icon="edit"
         border
         circle
@@ -23,7 +22,6 @@
         @click="edit"
       ></fg-button>
       <fg-button
-        v-if="!noDeleteBtn"
         class="ml5"
         icon="trash"
         border
@@ -37,7 +35,7 @@
       ref="input"
       :accept="accept"
       type="file"
-      style="display: none"
+      style="display: none;"
       @change="inputChange"
     />
     <Cropper
@@ -106,14 +104,6 @@ export default {
     deletable: {
       type: Boolean,
       default: true,
-    },
-    noEditBtn: {
-      type: Boolean,
-      default: false,
-    },
-    noDeleteBtn: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {

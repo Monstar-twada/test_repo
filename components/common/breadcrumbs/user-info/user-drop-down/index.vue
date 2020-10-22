@@ -7,7 +7,7 @@
         <span>ログアウト</span>
       </div>
     </div>
-    <!-- <fg-form ref="form" label-width="110px">
+    <fg-form ref="form" label-width="110px">
       <fg-form-item label="基本情報" class="__long"></fg-form-item>
       <fg-form-item label="会社名" class="__short">
         <span>{{ profile.company }}</span>
@@ -39,15 +39,15 @@
       <fg-form-item label="パスワード" class="__long">
         <span>{{ profile.password }}</span>
       </fg-form-item>
-    </fg-form> -->
+    </fg-form>
   </div>
 </template>
 <script>
-// import MarkIcon from '~/components/common/mark-icon/index'
+import MarkIcon from '~/components/common/mark-icon/index'
 export default {
   name: 'UserDropDown',
   components: {
-    // MarkIcon,
+    MarkIcon,
   },
   data() {
     return {
