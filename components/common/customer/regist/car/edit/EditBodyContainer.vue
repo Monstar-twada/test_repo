@@ -59,7 +59,6 @@
             icon="license-front"
             :url="registrationImage"
             :validate="customValidate"
-            :no-delete-btn="true"
             @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
         </fg-form-item>

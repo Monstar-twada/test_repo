@@ -93,7 +93,7 @@ export default {
           width: '10%',
         },
         { text: '最終取引日', align: 'center', width: '10%' },
-        { text: 'フラグ', align: 'center', width: '10%' },
+        { text: 'フラグ', align: 'center', width: '12%' },
       ],
     }
   },
