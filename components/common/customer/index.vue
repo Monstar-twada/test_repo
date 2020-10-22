@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import throttle from 'lodash.throttle'
 import SearchConditions from './index/SearchConditions'
 import { DEFAULT_QUERY } from './common/base'
 import Table from './index/Table'
@@ -45,7 +46,7 @@ export default {
     query: {
       deep: true,
       handler() {
-        this.getData()
+        this.getDatawithThrottle()
       },
     },
   },
@@ -60,6 +61,14 @@ export default {
         page: 1,
       }
     },
+
+    getDatawithThrottle: throttle(async function () {
+      this.loading = true
+      await this.getData()
+      this.loading = false
+      console.log('fired')
+    }, 3000),
+
     async getData() {
       const params = {
         ...this.query,
