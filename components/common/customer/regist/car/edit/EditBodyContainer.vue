@@ -100,8 +100,6 @@
             icon="car"
             :validate="customValidate"
             url=""
-            :no-edit-btn="true"
-            :no-delete-btn="true"
             @change="(res) => filerChange(res, 'carPhoto')"
           ></fg-image-processor>
         </fg-form-item>
@@ -199,7 +197,7 @@
       </fg-form>
     </WhiteBox>
 
-    <!-- <WhiteBox class="mt30">
+    <WhiteBox class="mt30">
       <ColumnTitle>
         <template v-slot:title>
           <h3>売買情報</h3>
@@ -333,7 +331,7 @@
           />
         </fg-form-item>
       </fg-form>
-    </WhiteBox> -->
+    </WhiteBox>
 
     <WhiteBox class="mt30">
       <ColumnTitle>
