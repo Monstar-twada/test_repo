@@ -14,6 +14,8 @@
             :options="{ width: 720, height: 720 }"
             :url="facePhoto"
             :validate="avatarValidator"
+            :no-edit-btn="true"
+            :no-delete-btn="true"
             @change="(res) => fileChange(res, 'facePhoto')"
           ></fg-image-processor>
         </fg-form-item>
@@ -213,6 +215,8 @@
             :url="licenseImages.frontUrl"
             icon="license-front"
             :validate="licenseValidator"
+            :no-edit-btn="true"
+            :no-delete-btn="true"
             @change="(res) => fileChange(res, 'licenseImageFront')"
           ></fg-image-processor>
           <fg-image-processor
@@ -220,6 +224,8 @@
             :url="licenseImages.backUrl"
             icon="license-back"
             :validate="licenseValidator"
+            :no-edit-btn="true"
+            :no-delete-btn="true"
             @change="(res) => fileChange(res, 'licenseImageBack')"
           ></fg-image-processor>
         </fg-form-item>
@@ -250,7 +256,7 @@
       </fg-form>
     </WhiteBox>
 
-    <WhiteBox class="mt30">
+    <!-- <WhiteBox class="mt30">
       <ColumnTitle>
         <template v-slot:title>
           <h3>希望するカーライフ＆車両選定ポイント</h3>
@@ -276,7 +282,7 @@
           ></fg-checkbox>
         </fg-form-item>
       </fg-form>
-    </WhiteBox>
+    </WhiteBox> -->
 
     <WhiteBox class="mt30">
       <ColumnTitle>
