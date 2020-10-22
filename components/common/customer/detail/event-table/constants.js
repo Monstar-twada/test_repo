@@ -11,7 +11,7 @@ export const ACTIVITY_LIST_QUERY = {
     carCode: '',
     transactionType: '',
     channel: '',
-    contactStaffCode: '',
+    contactStaffId: '',
   },
 }
 
@@ -31,5 +31,5 @@ export const DEF_FORM = {
   // 担当店舗コード
   contactStoreCode: '',
   // 担当者コード
-  contactStaffCode: '',
+  contactStaffId: '',
 }
