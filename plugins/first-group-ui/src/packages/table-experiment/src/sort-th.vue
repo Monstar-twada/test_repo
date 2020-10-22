@@ -1,11 +1,17 @@
 <template>
   <div class="table-th-item sortable" @click="handleClick">
-    <span :class="{ bold: isAsc || isDesc }">
+    <span :class="{ bold: (isAsc || isDesc) && item.sortactive }">
       <slot></slot>
     </span>
     <i class="sort-icon">
-      <Icon :active="isAsc" @click.native="sortClick('asc', $event)" />
-      <Icon :active="isDesc" @click.native="sortClick('desc', $event)" />
+      <Icon
+        :active="isAsc && item.sortactive"
+        @click.native="sortClick('asc', $event)"
+      />
+      <Icon
+        :active="isDesc && item.sortactive"
+        @click.native="sortClick('desc', $event)"
+      />
     </i>
   </div>
 </template>

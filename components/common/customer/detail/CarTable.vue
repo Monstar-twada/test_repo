@@ -101,30 +101,35 @@ export default {
           text: '初度登録年月',
           align: 'center',
           // sortable: true,
+          // sortactive: true,
           field: 'registrationFirstDate',
         },
         {
           text: '車検満了日',
           align: 'center',
           // sortable: true,
+          // sortactive: true,
           field: 'registrationEndDate',
         },
         {
           text: '最終取引日',
           align: 'center',
           // sortable: true,
+          // sortactive: true,
           field: 'sellingDatetime',
         },
         {
           text: '車検入庫',
           align: 'center',
           // sortable: true,
+          // sortactive: true,
           field: 'carInspectionFlag',
         },
         {
           text: '本予約',
           align: 'center',
           // sortable: true,
+          // sortactive: true,
           width: 100,
           field: 'reservationFlag',
         },
@@ -132,6 +137,7 @@ export default {
           text: '仮予約',
           align: 'center',
           // sortable: true,
+          // sortactive: true,
           width: 100,
           field: 'tentiveReservationFlag',
         },
@@ -196,7 +202,12 @@ export default {
       }
     },
     sortChange(field, sort) {
-      this.query.sort[field] = sort
+      this.headers.map((item) => {
+        item.sortactive = item.field === field
+      })
+      for (const item in this.query.sort) {
+        this.query.sort[item] = item === field ? sort : ''
+      }
       this.query.page = 1
     },
   },
