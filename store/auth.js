@@ -56,7 +56,7 @@ export const actions = {
       commit('setStoreCode', null)
       commit('setCompanyCode', null)
       commit('setUserCode', null)
-      this.$router.push('/login')
+      this.$router.push('/login/')
     }
     // try {
     //   const cognitoUser = await Auth.currentAuthenticatedUser()
@@ -107,6 +107,6 @@ export const actions = {
     commit('setStoreCode', null)
     commit('setCompanyCode', null)
     commit('setUserCode', null)
-    this.$router.push('/login')
+    this.$router.push('/login/')
   },
 }

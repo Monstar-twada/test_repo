@@ -123,20 +123,40 @@ export default {
     return {
       headers: [
         { text: '日時', width: 120 },
-        { text: 'チェック', width: 100, sortable: true, field: 'checkFlag' },
-        { text: '対象車両', width: 100, sortable: true, field: 'carCode' },
+        {
+          text: 'チェック',
+          width: 100,
+          sortable: true,
+          sortactive: true,
+          field: 'checkFlag',
+        },
+        {
+          text: '対象車両',
+          width: 100,
+          sortable: true,
+          sortactive: true,
+          field: 'carCode',
+        },
         {
           text: '取引種別',
           width: 100,
           sortable: true,
+          sortactive: true,
           field: 'transactionType',
         },
-        { text: 'チャネル', width: 100, sortable: true, field: 'channel' },
+        {
+          text: 'チャネル',
+          width: 100,
+          sortable: true,
+          sortactive: true,
+          field: 'channel',
+        },
         { text: 'コメント' },
         {
           text: '担当者',
           width: 100,
           sortable: true,
+          sortactive: true,
           field: 'contactStaffCode',
         },
         { text: '', width: 60 },
@@ -211,7 +231,12 @@ export default {
       this.editVisible = true
     },
     sortChange(field, sort) {
-      this.query.sort[field] = sort
+      this.headers.map((item) => {
+        item.sortactive = item.field === field
+      })
+      for (const item in this.query.sort) {
+        this.query.sort[item] = item === field ? sort : ''
+      }
       this.query.page = 1
     },
     async delEvent(item, e) {
@@ -248,7 +273,11 @@ export default {
         // }
         this.carList = results.map((item) => {
           return {
-            text: item.text || `${item.maker} ${item.carType}`,
+            text:
+              item.text ||
+              `${item.maker ? item.maker : ''} ${
+                item.carType ? item.carType : ''
+              }`,
             value: item.value || item.carCode,
           }
         })

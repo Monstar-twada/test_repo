@@ -59,7 +59,7 @@
             icon="license-front"
             :url="registrationImage"
             :validate="customValidate"
-            @change="(res) => filerChange(res, 'registrationImageFileCode')"
+            @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="車検証番号">
@@ -711,8 +711,8 @@ export default {
       }
       this.form.storeCode = $nuxt.$store.state.auth.storeCode
       // String  => Integer (API設計)
-      this.form.registrationImageFileCode = this.fmtDataToNumber(
-        this.form.registrationImageFileCode
+      this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
+        this.form.tmpRegistrationImageFileCode
       )
       this.form.carMileage = this.fmtDataToNumber(this.form.carMileage)
       // Integer => String (API設計)
@@ -766,7 +766,7 @@ export default {
       this.popup(() =>
         setTimeout(() => {
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}`
+            `/customer/detail?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
           )
         }, 300)
       )
@@ -817,7 +817,7 @@ export default {
     },
     customValidate(file, next) {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルを選択してください')
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
         return
       }
 

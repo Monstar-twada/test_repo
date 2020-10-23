@@ -115,7 +115,7 @@ export default {
   methods: {
     resetRouteIndex() {
       const route = this.$route
-      const path = '/' + route.path.split('/')[1]
+      const path = '/' + route.path.split('/')[1] + '/'
       this.index = this.menuItems.findIndex((item) => item.link === path)
     },
     handleMenuClick(link) {

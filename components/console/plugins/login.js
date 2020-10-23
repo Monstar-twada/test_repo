@@ -5,6 +5,6 @@
  */
 export const login = {
   success() {
-    this.$router.push('/company_all')
+    this.$router.push('/company_all/')
   },
 }

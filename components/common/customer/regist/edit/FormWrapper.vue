@@ -432,10 +432,20 @@ export default {
       this.selectionPoints.forEach((item) => {
         form[item.field] = +item.checked
       })
-      // if the property is empty change to null
+      // if the form in family is empty change to null
       for (const property in form) {
         if (form[property] === '') {
           form[property] = null
+        }
+      }
+      // if the family is empty change to null
+      const family = this.family
+      for (let i = 0; i < family.length; i++) {
+        const childArray = family[i]
+        for (const property in childArray) {
+          if (childArray[property] === '') {
+            childArray[property] = null
+          }
         }
       }
       // validate data
@@ -491,17 +501,17 @@ export default {
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
-        this.$alert('JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       callback()
     },
     licenseValidator({ type, size }, callback) {
       if (
-        !/^image\/(jpeg|png|pdf|heif)/i.test(type) &&
+        !/^image\/(jpeg|png|pdf|heic)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       if (size / 1024 > 5120) {

@@ -37,7 +37,8 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$--color-background' },
+  // loading: { color: '$--color-background' },
+  loading: '~/components/common/loading/index.vue',
   /*
    ** Global CSS
    */
@@ -75,6 +76,12 @@ export const baseConfig = {
   },
   router: {
     base: process.env.BASE_URL,
+    trailingSlash: true,
+    extendRoutes(routes, resolve) {
+      for (const route of routes) {
+        route.alias = resolve(route.path, 'index.html')
+      }
+    },
   },
   // vuetify: {
   //   customVariables: ['~/assets/scss/variables.scss'],
@@ -119,6 +126,7 @@ export const baseConfig = {
    ** Build configuration
    */
   build: {
+    // test another for caching
     publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
     /*
      ** You can extend webpack config here

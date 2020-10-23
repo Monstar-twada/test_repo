@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="carInfo">
     <div class="customer-info mt30 customer-detail-car-info-wrapper pb20">
       <ColumnTitle title="車両情報" border>
         <fg-button
@@ -304,10 +304,7 @@
                   label="タイヤサイズ"
                   :content="data.tireSizeRear | fmtHyphen"
                 />
-                <TextContent
-                  label="タイヤ製造"
-                  :content="data.tireCreateYear"
-                />
+                <TextContent label="タイヤ製造" :content="tireCreateYear" />
                 <TextContent
                   label="バッテリーサイズ"
                   :content="data.batterySize | fmtHyphen"
@@ -368,7 +365,12 @@
     />
     <InsuranceDialog v-model="insuranceVisible" />
 
-    <CarTable class="customer-info mt30" :customer-code="customerCode" />
+    <CarTable
+      ref="carTable"
+      class="customer-info mt30"
+      :customer-code="customerCode"
+      @change="changeCar"
+    />
   </div>
 </template>
 <script>
@@ -460,11 +462,11 @@ export default {
       }
       return arr.join(' ') || '-'
     },
-    tireCreateYearMonth() {
+    tireCreateYear() {
       // 2015年27週目
-      const { tireCreateYearMonth, tireCreateWeek } = this.data
-      if (tireCreateYearMonth) {
-        return `${tireCreateYearMonth}年${tireCreateWeek}週目`
+      const { tireCreateYear, tireCreateWeek } = this.data
+      if (tireCreateYear) {
+        return `${tireCreateYear}年${tireCreateWeek}週目`
       }
       return '-'
     },
@@ -481,6 +483,10 @@ export default {
     },
   },
   created() {
+    if (this.$route.query.carCode) {
+      this.currentCarCode = this.$route.query.carCode
+      this.getCarInfo()
+    }
     this.getCarList()
   },
   methods: {
@@ -524,11 +530,22 @@ export default {
     changeCar(item) {
       this.currentCarCode = item.carCode
       this.getCarInfo()
+      if (
+        this.$route.query.carCode &&
+        this.$route.query.carCode !== this.currentCarCode
+      ) {
+        this.$router.replace({
+          query: {
+            customerCode: this.customerCode,
+            carCode: this.currentCarCode,
+          },
+        })
+      }
     },
     goEditCar() {
       if (this.carListData.results && this.carListData.results.length > 0) {
         this.$router.push(
-          `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
+          `/customer/regist/car/edit/?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
         )
       }
     },

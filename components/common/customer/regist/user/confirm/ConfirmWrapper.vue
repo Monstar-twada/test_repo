@@ -229,7 +229,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push(`/customer/regist/edit?id=${this.query.id}&edit=1`)
+      this.$router.push(`/customer/regist/edit/?id=${this.query.id}&edit=1`)
     },
   },
 }

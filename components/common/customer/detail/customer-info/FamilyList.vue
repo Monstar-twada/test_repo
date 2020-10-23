@@ -38,7 +38,11 @@ export default {
         }
         temp[type].push({
           ...item,
-          text: [item.lastName, item.firstName, ` (${item.age}歳)`].join(''),
+          text: [
+            item.lastName,
+            item.firstName,
+            ` (${item.age ? item.age : ' - '}歳)`,
+          ].join(''),
         })
       })
       return temp
