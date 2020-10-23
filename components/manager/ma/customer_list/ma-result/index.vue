@@ -397,7 +397,7 @@ export default {
         this.status = []
         setTimeout(() => {
           this.$emit('update-event')
-        }, 300)
+        }, 800)
       })
     },
 
