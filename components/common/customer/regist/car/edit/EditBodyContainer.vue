@@ -670,25 +670,52 @@ export default {
       .catch(console.error)
   },
   mounted() {
-    history.pushState(null, null, window.location.href)
-    window.addEventListener(
-      'popstate',
-      () => {
-        this.popup(() => this.router.back())
-      },
-      false
-    )
+    this.addWindowPopstateEvent()
   },
   methods: {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
+    addWindowPopstateEvent() {
+      history.pushState(null, null, window.location.href)
+      window.addEventListener(
+        'popstate',
+        () => {
+          this.clickBrowserSystemButton()
+        },
+        false
+      )
+    },
+    removeWindowPopstateEvent() {
+      window.removeEventListener('popstate', () => {
+        this.clickBrowserSystemButton()
+      })
+    },
+
+    clickBrowserSystemButton() {
+      if (!this.$store.getters['popup/getSaveFlg']) return
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+        buttons: {
+          ok: {
+            text: '遷移する',
+          },
+        },
+      })
+        .then(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.removeWindowPopstateEvent()
+          this.$router.back()
+        })
+        .catch(() => {
+          this.addWindowPopstateEvent()
+        })
+    },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('対象データを削除してよろしいですか？', {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
           buttons: {
             ok: {
-              text: '削除する',
+              text: '遷移する',
             },
           },
         })
@@ -753,11 +780,11 @@ export default {
           `/v1/customers/${customerCode}/cars/${carCode}`,
           this.form
         )
-        await this.$alert('車両編集成功しました！', { type: 'success' })
+        // await this.$alert('車両編集成功しました！', { type: 'success' })
         setTimeout(() => {
           this.$store.dispatch('popup/setFlg', false)
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}`
+            `/customer/detail/?customerCode=${this.query.customerCode}`
           )
         }, 300)
       } catch (err) {
@@ -769,7 +796,7 @@ export default {
       this.popup(() =>
         setTimeout(() => {
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+            `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
           )
         }, 300)
       )
