@@ -766,7 +766,7 @@ export default {
       this.popup(() =>
         setTimeout(() => {
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+            `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
           )
         }, 300)
       )
