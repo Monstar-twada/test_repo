@@ -415,10 +415,31 @@ export default {
       }
     },
     handleClickName(item) {
-      this.$router.push({
-        path: `/customer/detail/`,
-        query: { customerCode: item.customerCode },
-      })
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            this.status = []
+            this.$router.push({
+              path: `/customer/detail/`,
+              query: { customerCode: item.customerCode },
+            })
+          })
+          .catch(() => {
+            // console.log('cancel')
+          })
+      } else {
+        this.$router.push({
+          path: `/customer/detail/`,
+          query: { customerCode: item.customerCode },
+        })
+      }
     },
 
     clickBrowserSystemButton() {
