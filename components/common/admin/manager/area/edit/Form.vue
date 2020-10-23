@@ -45,7 +45,7 @@
           <fg-input placeholder="1-20-1"></fg-input>
         </fg-form-item>
         <fg-form-item label="建物名・部屋番号など">
-          <fg-input placeholder=""></fg-input>
+          <fg-input placeholder></fg-input>
         </fg-form-item>
         <fg-form-item label="電話番号">
           <fg-input v-model="phone" placeholder="0120-161-135"></fg-input>
@@ -73,16 +73,15 @@
               :key="`${item}-${i}`"
               class="service-items_item"
             >
-              <div class="service-items_item_img">
-                <v-img
-                  :max-width="24"
-                  :max-height="24"
+              <!-- <div class="service-items_item_img">
+                <img
+                  width="24"
+                  height="24"
                   :src="require(`./img/${item.icon}-icon-white.svg`)"
-                ></v-img>
+                />
               </div>
-              <div class="service-items_item_text">
-                {{ item.text }}
-              </div>
+              <div class="service-items_item_text">{{ item.text }}</div> -->
+              <MarkIcon :value="true" :icon-src="item.icon" :text="item.text" />
             </div>
           </div>
         </fg-form-item>
@@ -106,7 +105,11 @@
 </template>
 
 <script>
+import MarkIcon from '~/components/common/mark-icon/index'
 export default {
+  components: {
+    MarkIcon,
+  },
   data() {
     return {
       areaItems: {},
@@ -187,8 +190,8 @@ export default {
       return count
     },
     handleSubmit() {
-      const count = this.validation()
-      if (count === 0) console.log('submitted')
+      // const count = this.validation()
+      // if (count === 0) console.log('submitted')
       // if (count === 0) this.nextUrl('/login/passwordreset')
     },
   },

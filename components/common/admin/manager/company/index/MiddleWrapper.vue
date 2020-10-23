@@ -9,7 +9,6 @@
       </div>
       <div class="company-middle-wrapper_body_row">
         <fg-input
-          v-model="inputValue8"
           placeholder="システムの改善点や機能開発要望など、ご意見はこちらから
 お送りください。可能な限り対応するよう尽力いたします。"
           type="textarea"
@@ -34,7 +33,7 @@ export default {
   methods: {
     moveToForm() {
       this.$router.push({
-        path: `/admin/area/new`,
+        path: `/admin/area/new/`,
       })
     },
     moveToEdit(id) {

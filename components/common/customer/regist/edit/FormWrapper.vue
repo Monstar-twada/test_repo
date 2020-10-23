@@ -124,6 +124,7 @@
         <fg-form-item label="市区町村">
           <fg-input
             v-model="form.address1"
+            placeholder=""
             :error-message="errors.address1"
           ></fg-input>
         </fg-form-item>
@@ -131,6 +132,7 @@
         <fg-form-item label="番地など">
           <fg-input
             v-model="form.address2"
+            placeholder=""
             :error-message="errors.address2"
           ></fg-input>
         </fg-form-item>
@@ -138,6 +140,7 @@
         <fg-form-item label="建物名・部屋番号など">
           <fg-input
             v-model="form.address3"
+            placeholder=""
             :error-message="errors.address3"
           ></fg-input>
         </fg-form-item>
@@ -147,6 +150,7 @@
             v-model="form.birthday"
             width="160px"
             writable
+            value-format="yyyy-MM-dd"
             default-view="1985/01/01"
           ></fg-calendar>
         </fg-form-item>
@@ -154,6 +158,7 @@
         <fg-form-item label="勤務先">
           <fg-input
             v-model="form.organizationName"
+            placeholder=""
             :error-message="errors.organizationName"
           ></fg-input>
         </fg-form-item>
@@ -161,6 +166,7 @@
         <fg-form-item label="勤務先電話番号">
           <fg-input
             v-model="form.organizationPhoneNumber"
+            placeholder=""
             :error-message="errors.organizationPhoneNumber"
           ></fg-input>
         </fg-form-item>
@@ -177,6 +183,7 @@
           <fg-input
             v-model="form.annualIncome"
             width="160px"
+            placeholder=""
             :error-message="errors.annualIncome"
             unit="万円"
           ></fg-input>
@@ -230,6 +237,7 @@
           <fg-input
             v-model="form.licenseNumber"
             width="395px"
+            placeholder=""
             :error-message="errors.licenseNumber"
           ></fg-input>
         </fg-form-item>
@@ -278,12 +286,17 @@
       </ColumnTitle>
       <fg-form label-width="140px" @change="formChange">
         <fg-form-item label="ペット">
-          <fg-input v-model="form.pet" :error-message="errors.pet"></fg-input>
+          <fg-input
+            v-model="form.pet"
+            placeholder=""
+            :error-message="errors.pet"
+          ></fg-input>
         </fg-form-item>
 
         <fg-form-item label="実家">
           <fg-input
             v-model="form.parentsHomeAddress"
+            placeholder=""
             :error-message="errors.parentsHomeAddress"
           ></fg-input>
         </fg-form-item>
@@ -291,6 +304,7 @@
         <fg-form-item label="ドリンク">
           <fg-input
             v-model="form.drink"
+            placeholder=""
             :error-message="errors.drink"
           ></fg-input>
         </fg-form-item>
@@ -298,6 +312,7 @@
         <fg-form-item label="趣味">
           <fg-input
             v-model="form.hobby"
+            placeholder=""
             :error-message="errors.hobby"
           ></fg-input>
         </fg-form-item>
@@ -378,6 +393,21 @@ export default {
       })
     },
   },
+  watch: {
+    form() {
+      this.$store.dispatch('popup/setFlg', true)
+    },
+  },
+  mounted() {
+    history.pushState(null, null, window.location.href)
+    window.addEventListener(
+      'popstate',
+      () => {
+        this.popup(() => this.router.back())
+      },
+      false
+    )
+  },
   created() {
     this.getDetail()
     this.getFacePhoto()
@@ -388,6 +418,7 @@ export default {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
     async handleConfirm() {
+      this.$store.dispatch('popup/setFlg', false)
       if (this.isSubmitting) return
       this.isSubmitting = true
       const form = {
@@ -402,43 +433,86 @@ export default {
       this.selectionPoints.forEach((item) => {
         form[item.field] = +item.checked
       })
-
+      // if the form in family is empty change to null
+      for (const property in form) {
+        if (form[property] === '') {
+          form[property] = null
+        }
+      }
+      // if the family is empty change to null
+      const family = this.family
+      for (let i = 0; i < family.length; i++) {
+        const childArray = family[i]
+        for (const property in childArray) {
+          if (childArray[property] === '') {
+            childArray[property] = null
+          }
+        }
+      }
       // validate data
       this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
       if (this.errors.length > 0) {
-        this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
+        this.$alert(
+          '必須項目が未入力か、入力データに誤りがあります。エラーを確認してください。'
+        )
         this.isSubmitting = false
         return
       }
 
       // submit
+      const customer = { ...form }
+      const data = { customer }
       try {
-        await this.$api.put(`/v1/customers/${this.query.customerCode}`, form)
-        await this.$alert(`顧客編集成功しました！`, { type: 'success' })
+        await this.$api.put(`/v1/customers/${this.query.customerCode}`, data)
+        // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
         this.handleBack()
       } catch (err) {
         if (err) this.$alert(err.message)
       }
       this.isSubmitting = false
     },
+    popup(callback) {
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            callback()
+          })
+          .catch((error) => {
+            console.error({ error })
+          })
+      } else {
+        callback()
+      }
+    },
     handleBack() {
-      this.$router.push(
-        `/customer/detail?customerCode=${this.query.customerCode}`
+      this.popup(() =>
+        setTimeout(() => {
+          this.$router.push(
+            `/customer/detail/?customerCode=${this.query.customerCode}`
+          )
+        }, 300)
       )
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
-        this.$alert('JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       callback()
     },
     licenseValidator({ type, size }, callback) {
       if (
-        !/^image\/(jpeg|png|pdf|heif)/i.test(type) &&
+        !/^image\/(jpeg|png|pdf|heic)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       if (size / 1024 > 5120) {
@@ -479,19 +553,19 @@ export default {
       }
     },
     fileChange(res, type) {
-      if (res && res.data) {
-        this.uploadFile(res.data)
-          .then((fileId) => {
-            this.deleteFile(type)
-            this.form[type] = fileId
-          })
-          .catch((err) => {
-            this.$alert(err.message)
-          })
-      } else {
-        // delete
+      if (!res.data) {
         this.deleteFile(type)
       }
+
+      this.$api
+        .upload(res)
+        .then((data) => {
+          this.deleteFile(type)
+          this.form[type] = data.id
+        })
+        .catch((err) => {
+          this.$alert(err.message)
+        })
     },
     deleteFile(type) {
       const fileId = this.form[type]
@@ -503,7 +577,7 @@ export default {
           this.$api
             .delete(`/v1/customers/${customerCode}/facePhoto`)
             .then(() => {
-              console.log(`delete ${type}: ${fileId} successfully!`)
+              // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
               console.error(err)
@@ -514,7 +588,7 @@ export default {
           this.$api
             .delete(`/v1/customers/${customerCode}/licenseImage`)
             .then(() => {
-              console.log(`delete ${type}: ${fileId} successfully!`)
+              // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
               console.error(err)
@@ -527,7 +601,7 @@ export default {
         this.$api
           .upload(file, {
             onProgress(per) {
-              console.log('onProgress', per + '%')
+              // console.log('onProgress', per + '%')
             },
           })
           .then((res) => {

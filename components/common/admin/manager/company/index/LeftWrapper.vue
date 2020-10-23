@@ -90,7 +90,7 @@ export default {
   width: 100%;
   max-height: 591px;
   color: $--color-primary;
-  margin: 10px;
+  margin: 10px 10px 10px 0;
   &_body {
     padding: 20px 30px;
     .main-row {

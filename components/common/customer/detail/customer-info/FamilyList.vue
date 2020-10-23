@@ -6,7 +6,7 @@
       :label="key"
       label-font-weight="normal"
       label-width="60px"
-      style="padding: 2px 0 !important;"
+      style="padding: 2px 0 !important"
     >
       <div v-for="(item, i) in arr" :key="key + i">
         {{ item.text }}
@@ -38,7 +38,11 @@ export default {
         }
         temp[type].push({
           ...item,
-          text: [item.lastName, item.firstName, ` (${item.age}歳)`].join(''),
+          text: [
+            item.lastName,
+            item.firstName,
+            ` (${item.age ? item.age : ' - '}歳)`,
+          ].join(''),
         })
       })
       return temp

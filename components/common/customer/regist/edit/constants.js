@@ -5,114 +5,114 @@
  */
 export const DEF_CUSTOMER_FORM = {
   // 顔写真
-  facePhoto: '',
+  // facePhoto: '',
   // 個人法人区分
   privateBusiness: '1',
   // 姓
-  lastName: '',
+  lastName: null,
   // 名
-  firstName: '',
+  firstName: null,
   // 姓カナ
-  lastNameKana: '',
+  lastNameKana: null,
   // 名カナ
-  firstNameKana: '',
+  firstNameKana: null,
   // 性別(コード)
   sex: '1',
   // 電話番号
-  phoneNumber: '',
+  phoneNumber: null,
   // 携帯番号
-  cellphoneNumber: '',
+  cellphoneNumber: null,
   // メール
-  email: '',
+  email: null,
   // 郵便番号
-  zipCode: '',
+  zipCode: null,
   // 住所（都道府県コード）
-  prefecturesCode: '',
+  prefecturesCode: null,
   // 住所（市区町村）
-  address1: '',
+  address1: null,
   // 住所（番地）
-  address2: '',
+  address2: null,
   // 住所（建物名）
-  address3: '',
+  address3: null,
   // 住宅（種類コード）
   residenceType: '1',
   // 住宅（入居日）
-  moveInDate: '',
+  moveInDate: null,
   // 生年月日
-  birthday: '',
+  birthday: null,
   // 勤務先名
-  organizationName: '',
+  organizationName: null,
   // 勤務先電話番号
-  organizationPhoneNumber: '',
+  organizationPhoneNumber: null,
   // 入社日
-  hireDate: '',
+  hireDate: null,
   // 年収
-  annualIncome: '',
+  annualIncome: null,
   // 顧客免許証画像(表)
-  licenseImageFront: '',
+  licenseImageFront: null,
   // 顧客免許証画像(裏)
-  licenseImageBack: '',
+  licenseImageBack: null,
   // 免許証の色(コード)
   licenseColor: '1',
   // 免許証番号
-  licenseNumber: '',
+  licenseNumber: null,
   family: [],
   // ペット
-  pet: '',
+  pet: null,
   // 実家
-  parentsHomeAddress: '',
+  parentsHomeAddress: null,
   // 趣味
-  hobby: '',
+  hobby: null,
   // ドリンク
-  drink: '',
-  // // 通勤
-  // useCompany: 0,
-  // // 通学
-  // useStady: 0,
-  // // 通院
-  // useHospital: 0,
-  // // 送迎
-  // usePickup: 0,
-  // // 買い物
-  // useShop: 0,
-  // // ドライブ
-  // useDrive: 0,
-  // // アウトドア
-  // useOutdoor: 0,
-  // // 子育て
-  // useChild: 0,
-  // // レジャー
-  // useLeisure: 0,
-  // // 趣味
-  // useHobby: 0,
-  // // 商用業務
-  // useBuissiness: 0,
-  // // 運搬
-  // useTrasfer: 0,
-  // // 価格
-  // pointPrise: 0,
-  // // 燃費
-  // pointFuel: 0,
-  // // 乗り心地
-  // pointRideQuality: 0,
-  // // 安全性
-  // pointSafty: 0,
-  // // デザイン性
-  // pointDesign: 0,
-  // // ブランド
-  // pointBrand: 0,
-  // // 走行性能
-  // pointRunQuality: 0,
-  // // 走行距離
-  // pointMileage: 0,
-  // // 修復歴
-  // pointRepair: 0,
-  // // 年式
-  // pointAge: 0,
-  // // 禁煙
-  // pointSmoke: 0,
-  // // 車検年数
-  // pointInspection: 0,
+  drink: null,
+  // 通勤
+  useCompany: 0,
+  // 通学
+  useStady: 0,
+  // 通院
+  useHospital: 0,
+  // 送迎
+  usePickup: 0,
+  // 買い物
+  useShop: 0,
+  // ドライブ
+  useDrive: 0,
+  // アウトドア
+  useOutdoor: 0,
+  // 子育て
+  useChild: 0,
+  // レジャー
+  useLeisure: 0,
+  // 趣味
+  useHobby: 0,
+  // 商用業務
+  useBuissiness: 0,
+  // 運搬
+  useTrasfer: 0,
+  // 価格
+  pointPrise: 0,
+  // 燃費
+  pointFuel: 0,
+  // 乗り心地
+  pointRideQuality: 0,
+  // 安全性
+  pointSafty: 0,
+  // デザイン性
+  pointDesign: 0,
+  // ブランド
+  pointBrand: 0,
+  // 走行性能
+  pointRunQuality: 0,
+  // 走行距離
+  pointMileage: 0,
+  // 修復歴
+  pointRepair: 0,
+  // 年式
+  pointAge: 0,
+  // 禁煙
+  pointSmoke: 0,
+  // 車検年数
+  pointInspection: 0,
 }
 
 export const CAR_LIVES_ENUM = {
@@ -173,9 +173,9 @@ export const SELECTION_POINT_ENUM = {
 export const DEF_CUSTOMER_FAMILY = {
   // 続柄(コード)
   familyRelationship: '1',
-  lastName: '',
-  firstName: '',
-  birthday: '',
+  lastName: null,
+  firstName: null,
+  birthday: null,
   // 家族顧客コード
-  familyCustomerCode: '',
+  familyCustomerCode: null,
 }

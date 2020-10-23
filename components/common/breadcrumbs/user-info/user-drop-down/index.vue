@@ -75,7 +75,19 @@ export default {
   },
   methods: {
     handleLogout() {
-      this.$store.commit('user/signOut', false)
+      this.$confirm('ログアウトしますか？', {
+        buttons: {
+          ok: {
+            text: 'ログアウト',
+          },
+        },
+      })
+        .then(() => {
+          this.$store.dispatch('auth/logout')
+        })
+        .catch(() => {
+          // console.log('cancel')
+        })
     },
   },
 }

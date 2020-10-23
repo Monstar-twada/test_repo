@@ -25,7 +25,7 @@ export default {
   middleware: 'authenticated',
   layout: 'login',
   mounted() {
-    this.$router.push('/bi')
+    this.$router.push('/bi/')
   },
 }
 </script>

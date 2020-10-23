@@ -95,6 +95,7 @@ export default {
             ]
     },
     addItem() {
+      if (this.list.length > 5) return null
       this.list.push({
         ...DEF_CUSTOMER_FAMILY,
       })

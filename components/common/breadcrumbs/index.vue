@@ -1,17 +1,16 @@
 <template>
   <header class="breadcrumbs-container">
     <div class="breadcrumbs-wrapper">
-      <v-breadcrumbs :items="items" class="pa-0">
-        <template v-slot:item="{ item }">
-          <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
-            <i v-if="item.text === 'home'" class="icon-home"></i>
+      <div class="fg-breadcrumbs">
+        <li v-for="(item, i) in items" :key="i">
+          <fg-breadcrumbs-item :item="item" :final-flg="i === items.length - 1">
+            <template v-if="item.text === 'home'">
+              <i class="icon-home"></i>
+            </template>
             <template v-else>{{ item.text }}</template>
-          </v-breadcrumbs-item>
-        </template>
-        <template v-slot:divider>
-          <i class="icon-divider"></i>
-        </template>
-      </v-breadcrumbs>
+          </fg-breadcrumbs-item>
+        </li>
+      </div>
       <UserInfo :task="task" />
     </div>
     <div class="page-title-wrapper">

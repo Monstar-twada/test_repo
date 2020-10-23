@@ -117,7 +117,6 @@
 </template>
 <script>
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import { genders } from '~/components/common/customer/common/base'
 export default {
   components: {
     Breadcrumbs,
@@ -146,7 +145,7 @@ export default {
           href: '',
         },
       ],
-      genders,
+      genders: this.$ui.getBasicData('sex'),
       years: ['1999'],
     }
   },

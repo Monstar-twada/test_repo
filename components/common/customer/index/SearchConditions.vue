@@ -10,7 +10,6 @@
               size="small"
               placeholder="顧客名（姓）"
               clearable
-              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -100,8 +99,9 @@
               size="small"
               placeholder="初度登録年月"
               show-after-dash
-              type="month"
               clearable
+              format="yyyy-MM"
+              value-format="yyyy-MM"
               :error-message="registrationDateError"
               error-message-nowrap
             ></fg-calendar>
@@ -110,8 +110,10 @@
             <fg-calendar
               v-model="form.registrationFirstDateTo"
               size="small"
-              type="month"
               clearable
+              show-after-dash
+              format="yyyy-MM"
+              value-format="yyyy-MM"
               :is-error="!!registrationDateError"
             ></fg-calendar>
           </fg-col>
@@ -122,6 +124,8 @@
               placeholder="車検満了年月"
               show-after-dash
               clearable
+              format="yyyy-MM-dd"
+              value-format="yyyy-MM-dd"
               :error-message="registrationEndDateError"
               error-message-nowrap
             ></fg-calendar>
@@ -132,6 +136,8 @@
               size="small"
               placeholder=""
               clearable
+              format="yyyy-MM-dd"
+              value-format="yyyy-MM-dd"
               :is-error="!!registrationEndDateError"
             ></fg-calendar>
           </fg-col>
@@ -178,9 +184,14 @@ export default {
   },
   methods: {
     search() {
-      if (this.registrationDateError) return
+      if (this.registrationDateError || this.registrationEndDateError) return
       const form = {
         ...this.form,
+      }
+      for (const property in form) {
+        if (form[property] === '') {
+          form[property] = null
+        }
       }
       this.$ui.booleanToNumber(form, [
         'purchaseIntention',

@@ -15,44 +15,61 @@
           <IndexDialog v-model="visibleDialog" />
         </div>
       </div>
-      <v-data-table
-        :headers="headers"
-        :items="itemList"
-        :items-per-page="itemsPerPage"
-        :page.sync="currentPage"
-        hide-default-footer
-      >
-        <template v-slot:item.name="{ item }">
-          <div class="table-avatar-wrapper">
-            <v-avatar size="30">
-              <v-img :src="`/common/${item.image_path}`"></v-img>
-            </v-avatar>
-            {{ item.name }}
-          </div>
-        </template>
-        <template v-slot:item.shop_name="{ item }">
-          <div class="table-shop-wrapper">
-            <p
-              v-for="(shop, i) in item.shop_name"
-              :key="`${i}`"
-              class="table-shop-wrapper_item"
+      <fg-table :data="itemList" thead-class="thead-bg">
+        <fg-table-column
+          show="id"
+          label="cars Manager ID"
+          :sortable="false"
+        ></fg-table-column>
+        <fg-table-column show="name" label="氏名" :sortable="false">
+          <template v-slot="item">
+            <div class="table-avatar-wrapper">
+              <fg-avatar
+                size="30"
+                :data="{
+                  url: `/common/${item.image_path}`,
+                  name: `${item.name}`,
+                }"
+                text-width="120px"
+                circle
+                text-flex-direction-column
+              ></fg-avatar>
+            </div>
+          </template>
+        </fg-table-column>
+        <fg-table-column show="job" label="権限" :sortable="false" />
+        <fg-table-column show="shop_name" label="所属店舗" :sortable="false">
+          <template v-slot="item">
+            <div class="table-shop-wrapper">
+              <p
+                v-for="(shop, i) in item.shop_name"
+                :key="`${i}`"
+                class="table-shop-wrapper_item"
+              >
+                {{ shop }}
+              </p>
+            </div>
+          </template>
+        </fg-table-column>
+        <fg-table-column show="tel" label="電話番号1" :sortable="false" />
+        <fg-table-column
+          show="email"
+          label="メールアドレス"
+          :sortable="false"
+        />
+        <fg-table-column show="manager" label="" :sortable="false">
+          <template v-slot="item">
+            <fg-button
+              width="63"
+              border
+              size="mini"
+              prefix-icon="edit"
+              @click="moveToEdit(item.id)"
+              >編集</fg-button
             >
-              {{ shop }}
-            </p>
-          </div>
-        </template>
-        <template v-slot:item.edit="{ item }">
-          <fg-button
-            width="63"
-            border
-            size="mini"
-            prefix-icon="edit"
-            @click="moveToEdit(item.id)"
-          >
-            編集
-          </fg-button>
-        </template>
-      </v-data-table>
+          </template>
+        </fg-table-column>
+      </fg-table>
     </div>
     <dl class="bottom-pagenation">
       <dd>
@@ -221,6 +238,7 @@ export default {
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   .left-wrapper {
     background-color: $--color-white;
     width: 100%;

@@ -74,12 +74,14 @@ export default {
   position: relative;
   font-size: 14px;
   height: 26px;
+  line-height: 20px;
   vertical-align: middle;
 
   &-label {
     transition: 0.2s;
     margin-left: 10px;
     height: 20px;
+    line-height: 20px;
     display: inline-block;
     font-size: 14px;
     font-weight: 500;

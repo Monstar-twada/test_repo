@@ -16,7 +16,7 @@ export function initBasicData() {
   let basicData = this.$ui.getCache(BASIC_MASTER_CACHE_KEY)
   if (!basicData) {
     this.$api
-      .post('/code/all', { limit: 9999, offset: 0 })
+      .get('/v1/code/all', { limit: 9999, offset: 0 })
       .then((res) => {
         basicData = formatMasterList(res.results)
         if (basicData) {

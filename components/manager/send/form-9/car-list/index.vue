@@ -3,21 +3,48 @@
     <fg-pagination
       v-model="currentPage"
       class="m15"
-      :total="table.items.length"
+      :total="35"
       :page-size="table.limit"
       theme="blue"
     />
-    <v-data-table
-      :headers="table.headers"
-      :items="table.items"
-      :items-per-page="itemsPerPage"
-      :page.sync="currentPage"
-      hide-default-footer
-    >
-      <template v-slot:item.check="{ item }">
-        <fg-checkbox @change="handleChange(item.id)" />
-      </template>
-    </v-data-table>
+    <fg-table :data="table.items" :page.sync="currentPage">
+      <fg-table-column show="option" label="" :sortable="false" width="6%">
+        <template v-slot="item">
+          <fg-checkbox @change="handleChange(item.id)" />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="maker"
+        label="メーカー"
+        width="10%"
+        :sortable="false"
+      />
+      <fg-table-column show="type" label="車種" width="10%" :sortable="false" />
+      <fg-table-column
+        show="carNumber"
+        label="登録ナンバー"
+        width="16%"
+        :sortable="false"
+      />
+      <fg-table-column
+        show="firstRegistrationDate"
+        label="初度登録年月"
+        width="16%"
+        :sortable="false"
+      />
+      <fg-table-column
+        show="inspectionExpirationDate"
+        label="車検満了日"
+        width="16%"
+        :sortable="false"
+      />
+      <fg-table-column
+        show="lastTradingDate"
+        label="最終取引日"
+        width="16%"
+        :sortable="false"
+      />
+    </fg-table>
   </div>
 </template>
 
@@ -170,31 +197,31 @@ export default {
           inspectionExpirationDate: '2022/09/20',
           lastTradingDate: '2020/09/20',
         },
-        {
-          id: '2234567890',
-          maker: 'トヨタ',
-          type: 'プリウス',
-          carNumber: '足立 310 あ 1234',
-          firstRegistrationDate: '2020/09/20',
-          inspectionExpirationDate: '2022/09/20',
-          lastTradingDate: '2020/09/20',
-        },
-        {
-          id: '2234567891',
-          maker: 'マツダ',
-          type: 'CX-5',
-          carNumber: '品川 500 さ 3423',
-          firstRegistrationDate: '2020/09/20',
-          inspectionExpirationDate: '2022/09/20',
-          lastTradingDate: '2020/09/20',
-        },
+        // {
+        //   id: '2234567890',
+        //   maker: 'トヨタ',
+        //   type: 'プリウス',
+        //   carNumber: '足立 310 あ 1234',
+        //   firstRegistrationDate: '2020/09/20',
+        //   inspectionExpirationDate: '2022/09/20',
+        //   lastTradingDate: '2020/09/20',
+        // },
+        // {
+        //   id: '2234567891',
+        //   maker: 'マツダ',
+        //   type: 'CX-5',
+        //   carNumber: '品川 500 さ 3423',
+        //   firstRegistrationDate: '2020/09/20',
+        //   inspectionExpirationDate: '2022/09/20',
+        //   lastTradingDate: '2020/09/20',
+        // },
       ],
-      limit: 10,
+      limit: 20,
     },
   }),
   methods: {
     handleChange(id) {
-      console.log('id', id)
+      // console.log('id', id)
     },
   },
 }

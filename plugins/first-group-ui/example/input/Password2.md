@@ -16,7 +16,6 @@
       ></fg-icon>
     </template>
   </fg-input>
-
 <script>
 export default {
   data() {

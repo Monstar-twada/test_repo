@@ -308,7 +308,6 @@ export default {
   },
   methods: {
     familyInputAdd() {
-      console.log('familyLength', this.familyLength)
       this.familyLength++
     },
     familyInputRem() {
@@ -316,7 +315,7 @@ export default {
     },
     handleClick() {
       this.$router.push({
-        path: `/customer/user/confirm`,
+        path: `/customer/user/confirm/`,
       })
     },
   },
