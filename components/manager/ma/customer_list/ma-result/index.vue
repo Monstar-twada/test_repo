@@ -302,14 +302,7 @@ export default {
   },
   mounted() {
     this.storeCode = $nuxt.$store.state.auth.storeCode
-    history.pushState(null, null, window.location.href)
-    window.addEventListener(
-      'popstate',
-      () => {
-        this.clickBrowserSystemButton()
-      },
-      false
-    )
+    this.addWindowPopstateEvent()
   },
   destroyed() {
     // TODO
@@ -318,6 +311,19 @@ export default {
     // window.removeEventListener('popstate', this.clickBrowserSystemButton)
   },
   methods: {
+    addWindowPopstateEvent() {
+      history.pushState(null, null, window.location.href)
+      window.addEventListener(
+        'popstate',
+        () => {
+          this.clickBrowserSystemButton()
+        },
+        false
+      )
+    },
+    removeWindowPopstateEvent() {
+      window.removeEventListener('popstate', this.clickBrowserSystemButton)
+    },
     handleChange(property, id, val, isToString = false) {
       let value = Number(val)
       if (isToString) value = value.toString()
@@ -453,11 +459,12 @@ export default {
       })
         .then(() => {
           this.$store.dispatch('popup/setFlg', false)
+          this.removeWindowPopstateEvent()
           this.status = []
           this.$router.back()
         })
         .catch(() => {
-          // console.log('cancel')
+          this.addWindowPopstateEvent()
         })
     },
 

@@ -670,18 +670,45 @@ export default {
       .catch(console.error)
   },
   mounted() {
-    history.pushState(null, null, window.location.href)
-    window.addEventListener(
-      'popstate',
-      () => {
-        this.popup(() => this.router.back())
-      },
-      false
-    )
+    this.addWindowPopstateEvent()
   },
   methods: {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+    },
+    addWindowPopstateEvent() {
+      history.pushState(null, null, window.location.href)
+      window.addEventListener(
+        'popstate',
+        () => {
+          this.clickBrowserSystemButton()
+        },
+        false
+      )
+    },
+    removeWindowPopstateEvent() {
+      window.removeEventListener('popstate', () => {
+        this.clickBrowserSystemButton()
+      })
+    },
+
+    clickBrowserSystemButton() {
+      if (!this.$store.getters['popup/getSaveFlg']) return
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+        buttons: {
+          ok: {
+            text: '遷移する',
+          },
+        },
+      })
+        .then(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.removeWindowPopstateEvent()
+          this.$router.back()
+        })
+        .catch(() => {
+          this.addWindowPopstateEvent()
+        })
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
