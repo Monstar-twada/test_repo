@@ -682,10 +682,10 @@ export default {
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('対象データを削除してよろしいですか？', {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
           buttons: {
             ok: {
-              text: '削除する',
+              text: '遷移する',
             },
           },
         })
@@ -750,11 +750,11 @@ export default {
           `/v1/customers/${customerCode}/cars/${carCode}`,
           this.form
         )
-        await this.$alert('車両編集成功しました！', { type: 'success' })
+        // await this.$alert('車両編集成功しました！', { type: 'success' })
         setTimeout(() => {
           this.$store.dispatch('popup/setFlg', false)
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}`
+            `/customer/detail/?customerCode=${this.query.customerCode}`
           )
         }, 300)
       } catch (err) {
