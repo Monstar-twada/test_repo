@@ -473,10 +473,10 @@ export default {
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('対象データを削除してよろしいですか？', {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
           buttons: {
             ok: {
-              text: '削除する',
+              text: '遷移する',
             },
           },
         })
