@@ -11,7 +11,7 @@ export const ACTIVITY_LIST_QUERY = {
     carCode: '',
     transactionType: '',
     channel: '',
-    contactStaffCode: '',
+    contactStaffId: '',
   },
 }
 

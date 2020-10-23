@@ -264,7 +264,7 @@ export default {
     options: [
       {
         text: '選択',
-        value: 0,
+        value: null,
       },
       {
         text: '買替',
@@ -331,7 +331,7 @@ export default {
     },
 
     handleChangeSelect(property, id, val) {
-      const value = val.toString()
+      const value = val === null ? val : val.toString()
       const item = this.findItemInfoById(id)
       if (value !== item[property]) {
         if (!this.status[id]) {
