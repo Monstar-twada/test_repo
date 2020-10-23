@@ -7,9 +7,11 @@
     :popup-position="popupPosition"
     :show-before-dash="showBeforeDash"
     :show-after-dash="showAfterDash"
+    :dash-offset="dashOffset"
     :disabled="disabled"
     :inline="inline"
     :writable="writable"
+    :clearable="clearable"
     :width="width"
     class="fg-date-picker"
     is-time-picker
@@ -18,7 +20,10 @@
     :is-error="isError"
     :error-message="errorMessage"
     :error-message-nowrap="errorMessageNowrap"
+    :default-view="defaultView"
     @calendar="(that) => (calendar = that)"
+    @error="$emit('error')"
+    @clear="handleClear"
   >
     <template v-slot:time-picker>
       <div class="fg-calendar__time-wrapper" @click="clickTimeWrapper">
@@ -96,6 +101,14 @@ export default {
       type: String,
       default: '',
     },
+    defaultView: {
+      type: String,
+      default: '',
+    },
+    dashOffset: {
+      type: Number,
+      default: undefined,
+    },
   },
   data() {
     return {
@@ -133,13 +146,17 @@ export default {
     resetDateTime(val) {
       if (!this.calendar) return
       const { toDate, formatDate } = this.calendar
-      let date = toDate(val)
+      const date = toDate(val)
+      if ((!date && !this.date) || this.date === date) return
       if (!date) {
-        date = new Date()
+        this.date = null
+        this.ymd = ''
+        this.time = '00:00:00'
+      } else {
+        this.date = date
+        this.ymd = formatDate(date, 'yyyy/MM/dd')
+        this.time = formatDate(date, 'hh:mm:ss')
       }
-      this.date = date
-      this.ymd = formatDate(date, 'yyyy/MM/dd')
-      this.time = formatDate(date, 'hh:mm:ss')
       this.calendar.setDate(this.ymd)
     },
     clickTimeWrapper(e) {
@@ -161,6 +178,11 @@ export default {
     calendarValueFormat(val) {
       this.ymd = val ? this.calendar.formatDate(val, 'yyyy/MM/dd') : ''
       return this.inputValue
+    },
+    handleClear() {
+      this.date = null
+      this.ymd = ''
+      this.time = '00:00:00'
     },
   },
 }

@@ -15,7 +15,7 @@
         border
         bold
         width="110"
-        :disabled="saveFlg === false"
+        :disabled="disabledBtn"
         @click="saveChange"
         >保存</fg-button
       >
@@ -54,14 +54,14 @@
         <template v-slot="item">
           <div class="car">
             <h4>{{ item.maker }}</h4>
-            <h4>{{ item.class }}</h4>
+            <h4>{{ item.carType }}</h4>
           </div>
         </template>
       </fg-table-column>
       <fg-table-column
-        show="email"
+        show="registrationEndDate"
         label="車検満了日"
-        cell-class="left"
+        cell-class="center"
         :sortable="false"
         width="10%"
       ></fg-table-column>
@@ -80,7 +80,7 @@
         </template>
       </fg-table-column>
       <fg-table-column
-        show="intention_to_replace"
+        show="purchase"
         label="買換意向"
         :sortable="true"
         width="7%"
@@ -88,9 +88,14 @@
         <template v-slot="item">
           <fg-checkbox
             theme="red"
-            :value="item.statusSMS === '1'"
+            :value="item.purchaseIntention === '1'"
             @change="
-              handleChange('intentionToReplace', item.customerId, $event)
+              handleChange(
+                'purchaseIntention',
+                item.attractingCustomersId,
+                $event,
+                true
+              )
             "
           />
         </template>
@@ -104,74 +109,117 @@
         <template v-slot="item">
           <fg-checkbox
             theme="red"
-            :value="item.statusSMS === '1'"
-            @change="handleChange('delivered', item.customerId, $event)"
+            :value="item.deliveredFlag === 1"
+            @change="
+              handleChange('deliveredFlag', item.attractingCustomersId, $event)
+            "
           />
         </template>
       </fg-table-column>
       <fg-table-column
-        show="warehouse"
+        show="carInspection"
         label="車検入庫"
         :sortable="true"
         width="10%"
       >
         <template v-slot="item">
           <fg-switch
-            :value="item.warehouse === '1'"
-            @change="handleChange('warehouse', item.customerId, $event)"
+            :value="item.carInspectionFlag === 1"
+            @change="
+              handleChange(
+                'carInspectionFlag',
+                item.attractingCustomersId,
+                $event
+              )
+            "
           />
         </template>
       </fg-table-column>
       <fg-table-column
-        show="reserve"
+        show="reservation"
         label="本予約"
         :sortable="true"
         width="5%"
       >
         <template v-slot="item">
           <fg-checkbox
-            :value="item.reserve === '1'"
-            @change="handleChange('reserve', item.customerId, $event)"
-          />
-        </template>
-      </fg-table-column>
-      <fg-table-column show="dm" label="仮予約" :sortable="true" width="5%">
-        <template v-slot="item">
-          <fg-checkbox
-            :value="item.statusDM === '1'"
-            @change="handleChange('dm', item.customerId, $event)"
-          />
-        </template>
-      </fg-table-column>
-      <fg-table-column show="sms" label="検討中" :sortable="true" width="5%">
-        <template v-slot="item">
-          <fg-checkbox
-            :value="item.statusSMS === '1'"
+            :value="item.reservationFlag === 1"
             @change="
-              handleChange('intentionToReplace', item.customerId, $event)
+              handleChange(
+                'reservationFlag',
+                item.attractingCustomersId,
+                $event
+              )
             "
           />
         </template>
       </fg-table-column>
-      <fg-table-column show="call" label="不通" :sortable="true" width="5%">
+      <fg-table-column
+        show="tentiveReservation"
+        label="仮予約"
+        :sortable="true"
+        width="5%"
+      >
         <template v-slot="item">
           <fg-checkbox
-            :value="item.statusCall === '1'"
-            @change="handleChange('call', item.customerId, $event)"
+            :value="item.tentiveReservationFlag === 1"
+            @change="
+              handleChange(
+                'tentiveReservationFlag',
+                item.attractingCustomersId,
+                $event
+              )
+            "
           />
         </template>
       </fg-table-column>
       <fg-table-column
-        show="call"
-        label="他社流出"
+        show="underReview"
+        label="検討中"
         :sortable="true"
+        width="5%"
+      >
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.underReviewFlag === 1"
+            @change="
+              handleChange(
+                'underReviewFlag',
+                item.attractingCustomersId,
+                $event
+              )
+            "
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column show="failure" label="不通" :sortable="true" width="5%">
+        <template v-slot="item">
+          <fg-checkbox
+            :value="item.failureFlag === 1"
+            @change="
+              handleChange('failureFlag', item.attractingCustomersId, $event)
+            "
+          />
+        </template>
+      </fg-table-column>
+      <fg-table-column
+        show="outflow"
+        label="他社流出"
+        :sortable="false"
         width="10%"
       >
         <template v-slot="item">
           <fg-select
-            :value="item.warehouse"
+            :value="Number(item.outflow)"
             :items="options"
             placeholder="選択"
+            @change="
+              handleChangeSelect(
+                'outflow',
+                item.attractingCustomersId,
+                $event.value
+              )
+            "
           />
         </template>
       </fg-table-column>
@@ -191,7 +239,7 @@
         border
         bold
         width="110"
-        :disabled="saveFlg === false"
+        :disabled="disabledBtn"
         @click="saveChange"
         >保存</fg-button
       >
@@ -203,7 +251,7 @@ export default {
   name: 'MaResult',
   props: {
     itemList: {
-      type: Object,
+      type: [Object, Array],
       default: null,
     },
     value: {
@@ -216,14 +264,14 @@ export default {
     options: [
       {
         text: '選択',
-        value: 0,
-      },
-      {
-        text: '車検',
-        value: 1,
+        value: null,
       },
       {
         text: '買替',
+        value: 1,
+      },
+      {
+        text: '車検',
         value: 2,
       },
       {
@@ -237,7 +285,13 @@ export default {
     ],
     status: {},
     saveFlg: false,
+    storeCode: '',
   }),
+  computed: {
+    disabledBtn() {
+      return this.$store.getters['popup/getSaveFlg'] === false
+    },
+  },
   watch: {
     value(val) {
       this.currentPage = val
@@ -247,6 +301,7 @@ export default {
     },
   },
   mounted() {
+    this.storeCode = $nuxt.$store.state.auth.storeCode
     history.pushState(null, null, window.location.href)
     window.addEventListener(
       'popstate',
@@ -257,11 +312,15 @@ export default {
     )
   },
   destroyed() {
-    window.removeEventListener('popstate', this.clickBrowserSystemButton)
+    // TODO
+    // 2改目バックボターを押したら、前のページを戻すという事象があるのため
+    // 他のページテストが必要
+    // window.removeEventListener('popstate', this.clickBrowserSystemButton)
   },
   methods: {
-    handleChange(property, id, val) {
-      const value = Number(val).toString()
+    handleChange(property, id, val, isToString = false) {
+      let value = Number(val)
+      if (isToString) value = value.toString()
       if (!this.status[id]) {
         this.status[id] = {}
         this.status[id][property] = value
@@ -273,56 +332,160 @@ export default {
           delete this.status[id]
         }
       }
-      this.saveFlg = !!Object.keys(this.status).length > 0
+      this.$store.dispatch(
+        'popup/setFlg',
+        !!Object.keys(this.status).length > 0
+      )
     },
 
-    saveChange() {
-      if (this.saveFlg) {
+    handleChangeSelect(property, id, val) {
+      const value = val === null ? val : val.toString()
+      const item = this.findItemInfoById(id)
+      if (value !== item[property]) {
+        if (!this.status[id]) {
+          this.status[id] = {}
+          this.status[id][property] = value
+        } else if (!this.status[id][property]) {
+          this.status[id][property] = value
+        }
+      } else if (this.status[id][property]) {
+        delete this.status[id][property]
+        if (Object.keys(this.status[id]).length === 0) {
+          delete this.status[id]
+        }
+      }
+      this.$store.dispatch(
+        'popup/setFlg',
+        !!Object.keys(this.status).length > 0
+      )
+    },
+
+    async saveChange() {
+      const promises = []
+      Object.keys(this.status).forEach((index) => {
+        const itemData = this.findItemInfoById(index.toString())
+        const {
+          deliveredFlag,
+          carInspectionFlag,
+          reservationFlag,
+          tentiveReservationFlag,
+          underReviewFlag,
+          failureFlag,
+          outflow,
+          purchaseIntention,
+        } = itemData
+        const params = {
+          deliveredFlag,
+          carInspectionFlag,
+          reservationFlag,
+          tentiveReservationFlag,
+          underReviewFlag,
+          failureFlag,
+          outflow,
+          purchaseIntention,
+          ...this.status[index],
+        }
+        promises.push(
+          this.$api.put(
+            `/v1/attractingCustomer/${this.storeCode}/${index}`,
+            params
+          )
+        )
+      })
+      await Promise.all(promises).then(() => {
+        this.$store.dispatch('popup/setFlg', false)
+        this.status = []
+        setTimeout(() => {
+          this.$emit('update-event')
+        }, 800)
+      })
+    },
+
+    saveChangeDailog() {
+      if (this.$store.getters['popup/getSaveFlg']) {
         this.$confirm('入力したデータを保存しますか？')
           .then(() => {
-            this.saveFlg = false
+            this.saveChangeDai()
+            this.$store.dispatch('popup/setFlg', false)
             this.status = []
           })
-          .catch(() => {
-            console.log('cancel')
+          .catch((error) => {
+            console.error({ error })
           })
       }
     },
     handleClickName(item) {
-      // console.log(JSON.stringify(item, null, 2))
-      this.$router.push({
-        path: `/customer/detail/`,
-        query: { id: item.customerId },
-      })
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            this.status = []
+            this.$router.push({
+              path: `/customer/detail/`,
+              query: { customerCode: item.customerCode },
+            })
+          })
+          .catch(() => {
+            // console.log('cancel')
+          })
+      } else {
+        this.$router.push({
+          path: `/customer/detail/`,
+          query: { customerCode: item.customerCode },
+        })
+      }
     },
 
     clickBrowserSystemButton() {
-      if (!this.saveFlg) return
-      this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+      if (!this.$store.getters['popup/getSaveFlg']) return
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+        buttons: {
+          ok: {
+            text: '遷移する',
+          },
+        },
+      })
         .then(() => {
-          this.saveFlg = false
+          this.$store.dispatch('popup/setFlg', false)
           this.status = []
           this.$router.back()
         })
         .catch(() => {
-          console.log('cancel')
+          // console.log('cancel')
         })
     },
 
     handleBeforeChange(next) {
-      if (this.saveFlg) {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？')
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
           .then(() => {
-            this.saveFlg = false
+            this.$store.dispatch('popup/setFlg', false)
             this.status = []
             next()
           })
           .catch(() => {
-            console.log('cancel')
+            // console.log('cancel')
           })
       } else {
         next()
       }
+    },
+    findItemInfoById(id) {
+      return this.itemList.results.find(
+        (item) => item.attractingCustomersId === Number(id)
+      )
     },
   },
 }
@@ -330,6 +493,7 @@ export default {
 <style lang="scss" scoped>
 .user {
   margin-left: 20px;
+  cursor: pointer;
 }
 .car,
 .tel {

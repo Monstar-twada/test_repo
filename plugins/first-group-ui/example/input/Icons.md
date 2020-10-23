@@ -8,7 +8,6 @@
   :offset-left="22"
   :offset-right="30"
 />
-
 <script>
 export default {
   data() {

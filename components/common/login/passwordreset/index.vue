@@ -20,21 +20,18 @@
         v-model="password2"
         placeholder="新しいパスワード（確認）"
         size="medium"
-        class="mb20"
         suffix-icon="eye"
         :suffix-icon-color="showPassword ? '#1E5199' : '#DFE6F0'"
         :type="showPassword ? 'text' : 'password'"
         @click:suffix-icon="showPassword = !showPassword"
       />
       <div class="reset-form__error__wrapper"></div>
-      <fg-text
-        v-if="validationMessage.password"
-        class="reset-form__error mb30"
-        >{{ validationMessage.password }}</fg-text
-      >
+      <fg-text v-if="validationMessage.password" class="reset-form__error">{{
+        validationMessage.password
+      }}</fg-text>
       <fg-button
         class="reset-form__button"
-        width="90%"
+        width="220"
         type="primary"
         suffix-icon="arrow-right"
         round
@@ -85,11 +82,7 @@ export default {
     },
     validation() {
       let count = 0
-      if (
-        this.password1 === '' ||
-        this.password2 === '' ||
-        this.password1 !== this.password2
-      ) {
+      if (this.password2 !== '' && this.password1 !== this.password2) {
         this.validationMessage.password = 'パスワードが空欄か一致していません。'
         count += 1
       } else if (!this.reg.test(this.password1)) {
@@ -115,6 +108,7 @@ export default {
     margin: 0 auto;
     h2,
     p {
+      font-size: 14px;
       text-align: center;
       color: $--color-primary;
     }
@@ -123,9 +117,10 @@ export default {
       font-family: 'Noto Sans JP';
     }
     &__button {
-      margin: 0 20px;
+      margin: 30px 20px 0;
     }
     &__error {
+      margin-top: 10px;
       input {
         border: 1px solid $--color-warning;
       }

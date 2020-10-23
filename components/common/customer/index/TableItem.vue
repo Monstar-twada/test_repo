@@ -26,22 +26,22 @@
       </div>
     </td>
     <td>
-      <dl style="display: inline-block; text-align: left;">
+      <dl style="display: inline-block; text-align: left">
         <dd>{{ carItem.maker }}</dd>
         <dd>
           {{ carItem.carType | fmtHyphen }}
-          <fg-tag v-if="item.carTotal" size="mini" round selected
-            >+{{ item.carTotal }}</fg-tag
+          <fg-tag v-if="item.carTotal > 1" size="mini" round selected
+            >+{{ item.carTotal - 1 }}</fg-tag
           >
         </dd>
       </dl>
     </td>
     <td>{{ carItem | fmtCarNumber }}</td>
     <td>{{ carItem.registrationEndDate | fmtDate }}</td>
-    <td>{{ carItem.registrationStartDate | fmtDate }}</td>
+    <td>{{ carItem.registrationFirstDate | fmtDate }}</td>
     <td>{{ carItem.sellingDatetime | fmtDate }}</td>
     <td>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         <fg-tag
           :class="{ hide: carItem.purchaseIntention === '0' }"
           color="#fff"
@@ -63,7 +63,7 @@
           >乗換</fg-tag
         >
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center">
         <fg-tag
           :class="{ hide: carItem.nearRegistration === '0' }"
           color="#fff"

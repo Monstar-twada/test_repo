@@ -8,20 +8,22 @@
       <template v-slot:right>
         <div class="export-area">
           <ExportButton @click="handleExportClick" />
-          <ExportDialog v-model="exportVisible" />
+          <ExportDialog v-model="exportVisible" :export-list="maStatus" />
         </div>
       </template>
     </Breadcrumbs>
-    <StatusBar />
+    <StatusBar :status="maStatus" />
     <MaResult
       v-model="searchParams.page"
       class="mt30"
       :item-list="maResultList"
+      @update-event="updateStatusBar"
     />
   </div>
 </template>
 
 <script>
+import throttle from 'lodash.throttle'
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
 import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
@@ -31,22 +33,10 @@ import ExportDialog from '~/components/manager/ma/customer_list/export-dialog/in
 const SEARCH_PARAMS = {
   offset: 0,
   limit: 10,
-  name: '',
-  city: '',
-  maker: '',
-  class: '',
-  tel: '',
-  email: '',
-  statusCall: '',
-  statusDM: '',
-  statusSMS: '',
-  reserve: '',
-  warehouse: '',
   page: 1,
 }
 export default {
   layout: 'manager',
-  // middleware: 'authenticated',
   components: {
     Breadcrumbs,
     MaResult,
@@ -54,66 +44,109 @@ export default {
     ExportDialog,
     StatusBar,
   },
+  props: {
+    date: {
+      type: Object,
+      default: () => {
+        return {
+          month: '09',
+          year: '2020',
+        }
+      },
+    },
+  },
   data: () => ({
-    page: '対象者リスト：2020年9月車検満期',
+    page: null,
     breadcrumbs: [
       {
         text: '集客',
         href: '',
       },
-      {
-        text: '対象者リスト：2020年9月車検満期',
-        href: '',
-      },
+      // {
+      //   text: `対象者リスト：${this.date.month}車検満期`,
+      //   href: '',
+      // },
     ],
     searchParams: {
-      ...SEARCH_PARAMS,
+      page: 1,
     },
-    maResultList: {},
+    maResultList: [],
     exportVisible: false,
+    maStatus: {},
+    stateCode: null,
   }),
   watch: {
     searchParams: {
       deep: true,
       handler() {
-        this.getMaResult()
+        this.getDatawithThrottle()
       },
     },
   },
   created() {
-    this.apiParams = {
-      ...this.$route.params,
-    }
-    this.getMaResult()
-    // this.bindWindowPopStateEvent()
+    this.$nextTick(() => {
+      this.storeCode = $nuxt.$store.state.auth.storeCode
+      this.$nuxt.$loading.start()
+      this.apiParams = {
+        ...this.$route.query,
+      }
+      this.getMaResult()
+      this.getMaStatus()
+      this.updateBreadCrumbs()
+    })
   },
   methods: {
+    getDatawithThrottle: throttle(async function () {
+      await this.getMaResult()
+    }, 3000),
     async getMaResult() {
       const params = {
+        ...SEARCH_PARAMS,
         ...this.searchParams,
       }
       params.offset = (params.page - 1) * params.limit
-      await this.$api
-        .post(
-          `/v1/marketing/targeting/${this.$route.query.type}/${this.$route.query.date}`,
+      try {
+        const res = await this.$api.get(
+          `/v1/attractingCustomers/${this.storeCode}/${this.apiParams.date}`,
           params
         )
-        .then((data) => {
-          this.maResultList = data
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+        this.maResultList = res
+      } catch (e) {
+        console.error(e)
+      }
     },
-    updateSearch(params) {
-      this.searchParams = {
-        ...this.searchParams,
-        ...params,
-        page: 1,
+
+    async getMaStatus() {
+      const params = {
+        additionalDataNumber: 0,
+      }
+      try {
+        const res = await this.$api.post(
+          `/v1/attractingCustomersMonth/${this.storeCode}/${this.apiParams.date}`,
+          params
+        )
+        this.maStatus = res.results[0]
+        this.$nuxt.$loading.finish()
+      } catch (e) {
+        console.error(e)
       }
     },
     handleExportClick() {
       this.exportVisible = true
+    },
+    updateBreadCrumbs() {
+      const date = this.$route.query.date
+      const year = `${date.slice(0, 4)}年`
+      const month = `${date.slice(4, 6)}月`
+      const crumb = {}
+      crumb.text = `対象者リスト：${year}${month}車検満期`
+      crumb.href = ''
+      this.breadcrumbs.push(crumb)
+      this.page = crumb.text
+    },
+    updateStatusBar() {
+      this.getMaStatus()
+      this.getMaResult()
     },
   },
 }

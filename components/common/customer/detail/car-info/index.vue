@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="carInfo">
     <div class="customer-info mt30 customer-detail-car-info-wrapper pb20">
       <ColumnTitle title="車両情報" border>
         <fg-button
@@ -99,7 +99,7 @@
                 />
                 <TextContent
                   label="登録年月日"
-                  :content="data.registrationFirstDate | fmtDate"
+                  :content="data.registrationStartDate | fmtDate"
                 />
                 <TextContent label="新中区分" :content="saleNewOldCarType" />
                 <TextContent
@@ -150,7 +150,7 @@
                 />
                 <TextContent
                   label="買換意向"
-                  :content="data.purchaseIntention"
+                  :content="data.purchaseIntention === '1' ? 'あり' : 'なし'"
                 />
               </div>
             </fg-col>
@@ -236,11 +236,11 @@
                 />
                 <TextContent
                   label="保険料"
-                  :content="data.monthlyParkingFee | fmtMoney"
+                  :content="data.carInsuranceFee | fmtMoney"
                 />
                 <TextContent
                   label="駐車場代"
-                  :content="data.carInsuranceFee | fmtMoney"
+                  :content="data.monthlyParkingFee | fmtMoney"
                 />
                 <div class="double-line mt10 mb5"></div>
                 <TextContent label="月間コスト" :content="data | sumCost" />
@@ -269,11 +269,11 @@
                 />
                 <TextContent
                   label="エンジン型式"
-                  :content="data.engineModel | fmtHyphen"
+                  :content="data.engineType | fmtHyphen"
                 />
                 <TextContent
                   label="最大出力"
-                  :content="data.enginMaximumOutput | fmtHyphen"
+                  :content="data.engineMaximumOutput | fmtHyphen"
                 />
                 <TextContent
                   label="最大トルク"
@@ -285,7 +285,7 @@
                 />
                 <TextContent
                   label="カラーコード"
-                  :content="data.colorCode | fmtHyphen"
+                  :content="data.colorCodeType | fmtHyphen"
                 />
                 <TextContent
                   label="トリムコード"
@@ -304,10 +304,7 @@
                   label="タイヤサイズ"
                   :content="data.tireSizeRear | fmtHyphen"
                 />
-                <TextContent
-                  label="タイヤ製造"
-                  :content="tireCreateYearMonth"
-                />
+                <TextContent label="タイヤ製造" :content="tireCreateYear" />
                 <TextContent
                   label="バッテリーサイズ"
                   :content="data.batterySize | fmtHyphen"
@@ -337,7 +334,7 @@
           </fg-row>
         </fg-col>
         <fg-col span="8">
-          <div class="mt15 pb15 pr20" style="text-align: right;">
+          <div class="mt15 pb15 pr20" style="text-align: right">
             <fg-button
               prefix-icon="edit"
               size="mini"
@@ -368,7 +365,12 @@
     />
     <InsuranceDialog v-model="insuranceVisible" />
 
-    <CarTable class="customer-info mt30" :customer-code="customerCode" />
+    <CarTable
+      ref="carTable"
+      class="customer-info mt30"
+      :customer-code="customerCode"
+      @change="changeCar"
+    />
   </div>
 </template>
 <script>
@@ -416,7 +418,7 @@ export default {
       },
       data: {},
       carListData: {},
-      currentCarCode: '',
+      currentCarCode: null,
       vicVisible: false,
       insuranceVisible: false,
     }
@@ -460,11 +462,11 @@ export default {
       }
       return arr.join(' ') || '-'
     },
-    tireCreateYearMonth() {
+    tireCreateYear() {
       // 2015年27週目
-      const { tireCreateYearMonth, tireCreateWeek } = this.data
-      if (tireCreateYearMonth) {
-        return `${tireCreateYearMonth}年${tireCreateWeek}週目`
+      const { tireCreateYear, tireCreateWeek } = this.data
+      if (tireCreateYear) {
+        return `${tireCreateYear}年${tireCreateWeek}週目`
       }
       return '-'
     },
@@ -481,6 +483,10 @@ export default {
     },
   },
   created() {
+    if (this.$route.query.carCode) {
+      this.currentCarCode = this.$route.query.carCode
+      this.getCarInfo()
+    }
     this.getCarList()
   },
   methods: {
@@ -524,11 +530,24 @@ export default {
     changeCar(item) {
       this.currentCarCode = item.carCode
       this.getCarInfo()
+      if (
+        this.$route.query.carCode &&
+        this.$route.query.carCode !== this.currentCarCode
+      ) {
+        this.$router.replace({
+          query: {
+            customerCode: this.customerCode,
+            carCode: this.currentCarCode,
+          },
+        })
+      }
     },
     goEditCar() {
-      this.$router.push(
-        `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
-      )
+      if (this.carListData.results && this.carListData.results.length > 0) {
+        this.$router.push(
+          `/customer/regist/car/edit/?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
+        )
+      }
     },
   },
 }

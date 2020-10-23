@@ -68,28 +68,32 @@ export default {
           align: 'center',
           field: 'customerCode',
           sortable: true,
-          width: 100,
+          sortactive: true,
+          width: '8%',
         },
         {
           text: '顧客名',
-          field: 'lastName',
+          field: 'customerName',
           align: 'center',
-          width: 200,
+          width: '16%',
+          sortactive: true,
           sortable: true,
         },
-        { text: '連絡先情報', align: 'center', width: 180 },
-        { text: '所有車', align: 'start', width: '120px' },
-        { text: '登録ナンバー', align: 'center' },
+        { text: '連絡先情報', align: 'center', width: '10%' },
+        { text: '所有車', align: 'start', width: '14%' },
+        { text: '登録ナンバー', align: 'center', width: '10%' },
         {
           text: '車検満了日',
           align: 'center',
+          width: '10%',
         },
         {
           text: '初度登録年月',
           align: 'center',
+          width: '10%',
         },
-        { text: '最終取引日', align: 'center' },
-        { text: 'フラグ', align: 'center', width: 120 },
+        { text: '最終取引日', align: 'center', width: '10%' },
+        { text: 'フラグ', align: 'center', width: '12%' },
       ],
     }
   },
@@ -106,7 +110,12 @@ export default {
       })
     },
     sortChange(field, sort) {
-      this.query.sort[field] = sort
+      this.headers.map((item) => {
+        item.sortactive = item.field === field
+      })
+      for (const item in this.query.sort) {
+        this.query.sort[item] = item === field ? sort : ''
+      }
       this.query.page = 1
     },
   },

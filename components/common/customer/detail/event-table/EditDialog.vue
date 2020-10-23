@@ -102,7 +102,7 @@ export default {
       if (val) {
         this.form = {
           ...this.item,
-          activityReportDatetime: this.item.actitionDatetime,
+          activityReportDatetime: this.item.activityReportDatetime,
           checkFlag: +this.item.checkFlag,
         }
       }
@@ -111,8 +111,12 @@ export default {
       this.$emit('input', val)
     },
   },
+  created() {
+    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
+    this.form.contactStaffId = $nuxt.$store.state.auth.userCode
+  },
   methods: {
-    save() {
+    async save() {
       if (this.isDisabled) return
       this.isDisabled = true
       const form = {}
@@ -120,21 +124,24 @@ export default {
         form[key] = this.form[key]
       })
       form.checkFlag = +form.checkFlag
-      this.$api
+      // eslint-disable-next-line promise/param-names
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
+      await this.$api
         .put(
           `/v1/customers/${this.form.customerCode}/activityReports/${this.form.activityId}`,
           form
         )
         .then(() => {
           this.visible = false
-          this.$alert('活動報告編集成功しました！')
-          this.$emit('change')
           this.isDisabled = false
         })
         .catch((err) => {
           if (err) this.$alert(err.message)
           this.isDisabled = false
         })
+      this.$alert('活動報告編集成功しました！')
+      await delay()
+      this.$emit('change')
     },
   },
 }

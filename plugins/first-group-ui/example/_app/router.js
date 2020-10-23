@@ -12,7 +12,6 @@ import Calendar from '../calendar/index'
 import Checkbox from '../checkbox/index'
 import CodeInput from '../code-input/index'
 import DatePicker from '../date-picker/index'
-import DateSetter from '../date-setter/index'
 import Dialog from '../dialog/index'
 import Form from '../form/index'
 import Icon from '../icon/index'
@@ -31,6 +30,7 @@ import Select from '../select/index'
 import Switch from '../switch/index'
 import Table from '../table/index'
 import TableExperiment from '../table-experiment/index'
+import Tabs from '../tabs/index'
 import Tag from '../tag/index'
 import Text from '../text/index'
 
@@ -46,7 +46,6 @@ export default new VueRouter({
     { path: '/checkbox', component: Checkbox },
     { path: '/code-input', component: CodeInput },
     { path: '/date-picker', component: DatePicker },
-    { path: '/date-setter', component: DateSetter },
     { path: '/dialog', component: Dialog },
     { path: '/form', component: Form },
     { path: '/icon', component: Icon },
@@ -64,6 +63,7 @@ export default new VueRouter({
     { path: '/switch', component: Switch },
     { path: '/table', component: Table },
     { path: '/table-experiment', component: TableExperiment },
+    { path: '/tabs', component: Tabs },
     { path: '/tag', component: Tag },
     { path: '/text', component: Text },
   ],

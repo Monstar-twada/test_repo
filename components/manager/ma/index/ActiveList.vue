@@ -4,7 +4,7 @@
       <h2>今月のアクションリスト</h2>
       <fg-month-picker v-model="currentMonth" />
     </div>
-    <fg-table :data="itemList.results">
+    <fg-table :data="maIndexResultList">
       <fg-table-column
         show="車検"
         lable="vehicleInspection"
@@ -12,8 +12,8 @@
         :sortable="false"
       >
         <template v-slot="item">
-          <h3>{{ item.vehicleInspection }}</h3>
-          <h3>({{ item.year }})</h3>
+          <h3>{{ Number(item.registrationEndMonth.slice(4, 6)) }}月満期</h3>
+          <h3>({{ Number(item.registrationEndMonth.slice(0, 4)) }})</h3>
         </template>
       </fg-table-column>
       <fg-table-column
@@ -24,7 +24,7 @@
         :sortable="false"
       >
         <template v-slot="item">
-          <div class="count">{{ item.listCount.toLocaleString() }}</div>
+          <div class="count">{{ item.targetTotalCount.toLocaleString() }}</div>
         </template>
       </fg-table-column>
       <fg-table-column
@@ -37,8 +37,8 @@
         <template v-slot="item">
           <span class="progress">
             -&nbsp;{{
-              item.goal_count.toLocaleString()
-            }}&nbsp;コール済&nbsp;&nbsp;({{ item.goal_percent }})
+              item.callTotalCount.toLocaleString()
+            }}&nbsp;コール済&nbsp;&nbsp;({{ fmtRatio(item.callTotalRatio) }})
           </span>
         </template>
       </fg-table-column>
@@ -48,35 +48,39 @@
             <dl>
               <dt>車検入庫</dt>
               <dd>
-                <span>{{ item.warehouse.toLocaleString() }}</span
+                <span>{{ item.carInspectionTotalCount.toLocaleString() }}</span
                 >件
               </dd>
             </dl>
             <dl>
               <dt>本予約</dt>
               <dd>
-                <span>{{ item.reserve.toLocaleString() }}</span
+                <span>{{ item.reservationTotalCount.toLocaleString() }}</span
                 >件
               </dd>
             </dl>
             <dl>
               <dt>仮予約</dt>
               <dd>
-                <span>{{ item.tentative_reserve.toLocaleString() }}</span
+                <span>{{
+                  item.tentiveReservationTotalCount.toLocaleString()
+                }}</span
                 >件
               </dd>
             </dl>
             <dl>
               <dt>買換意向</dt>
               <dd>
-                <span>{{ item.intention_to_replace.toLocaleString() }}</span
+                <span>{{
+                  item.purchaseIntentionTotalCount.toLocaleString()
+                }}</span
                 >件
               </dd>
             </dl>
             <dl>
               <dt>納車済</dt>
               <dd>
-                <span>{{ item.delivered.toLocaleString() }}</span
+                <span>{{ item.deliveredTotalCount.toLocaleString() }}</span
                 >件
               </dd>
             </dl>
@@ -85,7 +89,9 @@
       </fg-table-column>
       <fg-table-column label width="16%" :sortable="false">
         <template v-slot="item">
-          <nuxt-link to="/ma/customer_list?type=0000&date=202009">
+          <nuxt-link
+            :to="`/ma/customer_list/?date=${item.registrationEndMonth}`"
+          >
             <fg-button
               v-if="item.listCount != 0"
               class="button"
@@ -116,97 +122,13 @@ export default {
   },
   data: () => ({
     itemList: {
-      results: [
-        {
-          vehicleInspection: '1月満期',
-          year: 2021,
-          listCount: 1415,
-          goal_count: 34,
-          goal_percent: '40%',
-          warehouse: 83,
-          reserve: 1032,
-          tentative_reserve: 233,
-          intention_to_replace: 11,
-          delivered: 3,
-        },
-        {
-          vehicleInspection: '12月満期',
-          year: 2020,
-          listCount: 0,
-          goal_count: 0,
-          goal_percent: 0,
-          warehouse: 0,
-          reserve: 0,
-          tentative_reserve: 0,
-          intention_to_replace: 0,
-          delivered: '0',
-        },
-        {
-          vehicleInspection: '11月満期',
-          year: 2020,
-          listCount: 938,
-          goal_count: 34,
-          goal_percent: '40%',
-          warehouse: 120,
-          reserve: 83,
-          tentative_reserve: 44,
-          intention_to_replace: 23,
-          delivered: 11,
-        },
-        {
-          vehicleInspection: '10月満期',
-          year: 2020,
-          listCount: 917,
-          goal_count: 34,
-          goal_percent: '40%',
-          warehouse: 92,
-          reserve: 28,
-          tentative_reserve: 12,
-          intention_to_replace: 19,
-          delivered: 11,
-        },
-        {
-          vehicleInspection: '9月満期',
-          year: 2020,
-          listCount: 839,
-          goal_count: 34,
-          goal_percent: '40%',
-          warehouse: 52,
-          reserve: 43,
-          tentative_reserve: 82,
-          intention_to_replace: 9,
-          delivered: 2,
-        },
-        {
-          vehicleInspection: '8月満期',
-          year: 2020,
-          listCount: 938,
-          goal_count: 34,
-          goal_percent: '40%',
-          warehouse: 120,
-          reserve: 83,
-          tentative_reserve: 44,
-          intention_to_replace: 23,
-          delivered: 11,
-        },
-        {
-          vehicleInspection: '7月満期',
-          year: 2020,
-          listCount: 917,
-          goal_count: 34,
-          goal_percent: '40%',
-          warehouse: 92,
-          reserve: 28,
-          tentative_reserve: 12,
-          intention_to_replace: 19,
-          delivered: 11,
-        },
-      ],
       total: 7,
       limit: 7,
     },
+    maIndexResultList: [],
     currentPage: 1,
-    currentMonth: {},
+    currentMonth: '',
+    storeCode: null,
   }),
   watch: {
     value(val) {
@@ -215,21 +137,52 @@ export default {
     currentPage(val) {
       this.$emit('input', val)
     },
+    currentMonth(val, oldVal) {
+      if (val !== oldVal) {
+        this.getMaIndexResult()
+      }
+    },
   },
   created() {
     this.getCurrentMonth()
+    this.storeCode = $nuxt.$store.state.auth.storeCode
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      this.getMaIndexResult()
+    })
   },
   methods: {
     getCurrentMonth() {
       const date = new Date()
       const year = date.getFullYear()
-      const month = date.getMonth()
-      this.currentMonth = { year, month }
+      const month =
+        date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1
+      this.currentMonth = year.toString() + month.toString()
+    },
+
+    async getMaIndexResult() {
+      const params = {}
+      await this.$api
+        .post(
+          `/v1/attractingCustomersMonth/${this.storeCode}/${this.currentMonth}`,
+          params
+        )
+        .then((res) => {
+          this.maIndexResultList = res.results
+          this.$nuxt.$loading.finish()
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+    fmtRatio(ratio) {
+      return Math.round(ratio * 100) + '%'
     },
   },
 }
 </script>
-
 <style lang="scss">
 .ma-index {
   .fg-table {
@@ -277,16 +230,14 @@ export default {
       }
     }
   }
+}
+.fg-table__table__body.ma-index-table-tbody {
+  tr {
+    height: 105px;
 
-  .theme--light.v-data-table .v-data-table__empty-wrapper {
-    color: $--color-primary !important;
-  }
-
-  .theme--light.v-data-table .v-data-table__wrapper table tbody tr td {
-    border-bottom: 1px $--color-border solid !important;
-  }
-  .theme--light.v-icon {
-    color: $--color-primary !important;
+    &:last-child {
+      border: 1px $--color-border solid;
+    }
   }
 }
 </style>
@@ -320,7 +271,6 @@ export default {
   padding-right: 5%;
   dl {
     margin: 5px 10px;
-    font-family: 'Avenir Next';
     font-size: 14px;
     display: inline-flex;
     justify-content: space-between;
@@ -345,7 +295,6 @@ export default {
 
 .count {
   display: inline-block;
-  font-family: 'Avenir Next';
   font-size: 21px;
   font-weight: bold;
   text-align: right;
@@ -353,7 +302,6 @@ export default {
 
 .progress {
   display: block;
-  font-family: 'Avenir Next';
   font-size: 14px;
   height: 70px;
   line-height: 70px;

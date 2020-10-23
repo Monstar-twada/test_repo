@@ -41,24 +41,21 @@
             round
             bold
             :color="
-              item.carInspectionFlag === '1' ? '#fff' : $colors.primaryActive
+              item.carInspectionFlag === 1 ? '#fff' : $colors.primaryActive
             "
             :bg-color="
-              item.carInspectionFlag === '1' ? $colors.primaryActive : '#DFE6F0'
+              item.carInspectionFlag === 1 ? $colors.primaryActive : '#DFE6F0'
             "
-            >{{ item.carInspectionFlag === '1' ? 'YES' : 'No' }}</fg-tag
+            >{{ item.carInspectionFlag === 1 ? 'YES' : 'No' }}</fg-tag
           >
         </td>
         <td>
-          <span v-if="item.reservationFlag === '1'" class="temp-checkbox">
+          <span v-if="item.reservationFlag === 1" class="temp-checkbox">
             <fg-icon name="hook" color="#fff"></fg-icon>
           </span>
         </td>
         <td>
-          <span
-            v-if="item.tentiveReservationFlag === '1'"
-            class="temp-checkbox"
-          >
+          <span v-if="item.tentiveReservationFlag === 1" class="temp-checkbox">
             <fg-icon name="hook" color="#fff"></fg-icon>
           </span>
         </td>
@@ -104,30 +101,35 @@ export default {
           text: '初度登録年月',
           align: 'center',
           sortable: true,
+          sortactive: true,
           field: 'registrationFirstDate',
         },
         {
           text: '車検満了日',
           align: 'center',
           sortable: true,
+          sortactive: true,
           field: 'registrationEndDate',
         },
         {
           text: '最終取引日',
           align: 'center',
           sortable: true,
+          sortactive: true,
           field: 'sellingDatetime',
         },
         {
           text: '車検入庫',
           align: 'center',
           sortable: true,
+          sortactive: true,
           field: 'carInspectionFlag',
         },
         {
           text: '本予約',
           align: 'center',
           sortable: true,
+          sortactive: true,
           width: 100,
           field: 'reservationFlag',
         },
@@ -135,6 +137,7 @@ export default {
           text: '仮予約',
           align: 'center',
           sortable: true,
+          sortactive: true,
           width: 100,
           field: 'tentiveReservationFlag',
         },
@@ -165,6 +168,10 @@ export default {
   },
   created() {
     this.getCarList()
+    // To be called function when Activity added
+    this.$root.$on('getCarList', () => {
+      this.getCarList()
+    })
   },
   methods: {
     clickRow(row) {
@@ -186,16 +193,21 @@ export default {
         )
         this.carListData = res || {}
         // cache cars, use to 活動報告編集
-        if (this.query.page === 1) {
-          this.$ui.setCache('cars_customer_' + this.customerCode, res)
-        }
+        // if (this.query.page === 1) {
+        this.$ui.setCache('cars_customer_' + this.customerCode, res)
+        // }
       } catch (err) {
         this.$ui.error('[CarTable.vue::getCarList]', err)
         this.$alert(err.message)
       }
     },
     sortChange(field, sort) {
-      this.query.sort[field] = sort
+      this.headers.map((item) => {
+        item.sortactive = item.field === field
+      })
+      for (const item in this.query.sort) {
+        this.query.sort[item] = item === field ? sort : ''
+      }
       this.query.page = 1
     },
   },
@@ -212,6 +224,11 @@ export default {
     width: 19px;
     height: 19px;
     background: $--color-primary;
+  }
+  .fg-table-experiment__table {
+    tbody tr:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>

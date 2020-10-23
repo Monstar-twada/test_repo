@@ -59,13 +59,14 @@
             icon="license-front"
             :url="registrationImage"
             :validate="customValidate"
-            @change="(res) => filerChange(res, 'registrationImageFileCode')"
+            @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="車検証番号">
           <fg-input
             v-model="form.registrationNumber"
             width="440px"
+            placeholder=""
             :error-message="errors.registrationNumber"
           ></fg-input>
         </fg-form-item>
@@ -73,6 +74,7 @@
           <fg-input
             v-model="form.maker"
             width="440px"
+            placeholder=""
             :error-message="errors.maker"
           ></fg-input>
         </fg-form-item>
@@ -80,6 +82,7 @@
           <fg-input
             v-model="form.carType"
             width="440px"
+            placeholder=""
             :error-message="errors.carType"
           ></fg-input>
         </fg-form-item>
@@ -87,6 +90,7 @@
           <fg-input
             v-model="form.grade"
             width="440px"
+            placeholder=""
             :error-message="errors.grade"
           ></fg-input>
         </fg-form-item>
@@ -176,6 +180,7 @@
             v-model="form.carMileage"
             width="110"
             unit="km"
+            placeholder=""
             :error-message="errors.carMileage"
           ></fg-input>
         </fg-form-item>
@@ -202,6 +207,7 @@
           <fg-input
             v-model="form.retailPrice"
             width="440px"
+            placeholder=""
             :error-message="errors.retailPrice"
           ></fg-input>
         </fg-form-item>
@@ -218,6 +224,7 @@
           <fg-input
             v-model="form.assessmentAmount"
             width="440px"
+            placeholder=""
             :error-message="errors.assessmentAmount"
           ></fg-input>
         </fg-form-item>
@@ -259,6 +266,7 @@
           <fg-input
             v-model="form.repaymentMonthly"
             width="440px"
+            placeholder=""
             :error-message="errors.repaymentMonthly"
           ></fg-input>
         </fg-form-item>
@@ -266,6 +274,7 @@
           <fg-input
             v-model="form.bonusDate"
             width="440px"
+            placeholder=""
             :error-message="errors.bonusDate"
           ></fg-input>
         </fg-form-item>
@@ -273,6 +282,7 @@
           <fg-input
             v-model="form.aiAssessmentAmount"
             width="440px"
+            placeholder=""
             :error-message="errors.aiAssessmentAmount"
           ></fg-input>
         </fg-form-item>
@@ -289,6 +299,7 @@
           <fg-input
             v-model="form.estimatedPrice"
             width="440px"
+            placeholder=""
             :error-message="errors.estimatedPrice"
           ></fg-input>
         </fg-form-item>
@@ -305,6 +316,7 @@
           <fg-input
             v-model="form.balancePayment"
             width="440px"
+            placeholder=""
             :error-message="errors.balancePayment"
           ></fg-input>
         </fg-form-item>
@@ -331,6 +343,7 @@
           <fg-input
             v-model="form.carTax"
             width="440px"
+            placeholder=""
             :error-message="errors.carTax"
           ></fg-input>
         </fg-form-item>
@@ -338,6 +351,7 @@
           <fg-input
             v-model="form.libilityInsurance"
             width="440px"
+            placeholder=""
             :error-message="errors.libilityInsurance"
           ></fg-input>
         </fg-form-item>
@@ -345,6 +359,7 @@
           <fg-input
             v-model="form.weightTax"
             width="440px"
+            placeholder=""
             :error-message="errors.weightTax"
           ></fg-input>
         </fg-form-item>
@@ -352,6 +367,7 @@
           <fg-input
             v-model="form.recycleFee"
             width="440px"
+            placeholder=""
             :error-message="errors.recycleFee"
           ></fg-input>
         </fg-form-item>
@@ -369,6 +385,7 @@
           <fg-input
             v-model="form.monthlyGasolineCost"
             width="440px"
+            placeholder=""
             :error-message="errors.monthlyGasolineCost"
           ></fg-input>
         </fg-form-item>
@@ -376,6 +393,7 @@
           <fg-input
             v-model="form.carInsuranceFee"
             width="440px"
+            placeholder=""
             :error-message="errors.carInsuranceFee"
           ></fg-input>
         </fg-form-item>
@@ -383,6 +401,7 @@
           <fg-input
             v-model="form.monthlyParkingFee"
             width="440px"
+            placeholder=""
             :error-message="errors.monthlyParkingFee"
           ></fg-input>
         </fg-form-item>
@@ -400,6 +419,7 @@
           <fg-input
             v-model="form.chassisNumber"
             width="440px"
+            placeholder=""
             :error-message="errors.chassisNumber"
           ></fg-input>
         </fg-form-item>
@@ -407,6 +427,7 @@
           <fg-input
             v-model="form.carInspectionType"
             width="440px"
+            placeholder=""
             :error-message="errors.carInspectionType"
           ></fg-input>
         </fg-form-item>
@@ -414,6 +435,7 @@
           <fg-input
             v-model="form.engineType"
             width="440px"
+            placeholder=""
             :error-message="errors.engineType"
           ></fg-input>
         </fg-form-item>
@@ -421,6 +443,7 @@
           <fg-input
             v-model="form.engineMaximumOutput"
             width="440px"
+            placeholder=""
             :error-message="errors.engineMaximumOutput"
           ></fg-input>
         </fg-form-item>
@@ -428,6 +451,7 @@
           <fg-input
             v-model="form.engineTorque"
             width="440px"
+            placeholder=""
             :error-message="errors.engineTorque"
           ></fg-input>
         </fg-form-item>
@@ -436,6 +460,7 @@
             <fg-input
               v-model="form.tireSizeFront"
               width="110px"
+              placeholder=""
               :error-message="errors.tireSizeFront"
             ></fg-input>
           </fg-form-item>
@@ -443,6 +468,7 @@
             <fg-input
               v-model="form.tireSizeRear"
               width="110px"
+              placeholder=""
               :error-message="errors.tireSizeRear"
             ></fg-input>
           </fg-form-item>
@@ -454,6 +480,7 @@
             unit="年"
             inline
             class="mr20"
+            placeholder=""
             :error-message="errors.tireCreateYear"
           ></fg-input>
           <fg-input
@@ -462,6 +489,7 @@
             unit="週目"
             class="ml30"
             inline
+            placeholder=""
             :error-message="errors.tireCreateWeek"
           ></fg-input>
         </fg-form-item>
@@ -469,6 +497,7 @@
           <fg-input
             v-model="form.batterySize"
             width="440px"
+            placeholder=""
             :error-message="errors.batterySize"
           ></fg-input>
         </fg-form-item>
@@ -476,6 +505,7 @@
           <fg-calendar
             v-model="form.batteryCreateDate"
             width="160"
+            clearable
             value-format="yyyy-MM-dd"
           ></fg-calendar>
         </fg-form-item>
@@ -484,6 +514,7 @@
             v-model="form.fuelTankSize"
             width="110px"
             unit="L"
+            placeholder=""
             :error-message="errors.fuelTankSize"
           ></fg-input>
         </fg-form-item>
@@ -491,6 +522,7 @@
           <fg-input
             v-model="form.colorCodeType"
             width="440px"
+            placeholder=""
             :error-message="errors.colorCodeType"
           ></fg-input>
         </fg-form-item>
@@ -498,6 +530,7 @@
           <fg-input
             v-model="form.colorTrimCode"
             width="440px"
+            placeholder=""
             :error-message="errors.colorTrimCode"
           ></fg-input>
         </fg-form-item>
@@ -505,6 +538,7 @@
           <fg-input
             v-model="form.model"
             width="440px"
+            placeholder=""
             :error-message="errors.model"
           ></fg-input>
         </fg-form-item>
@@ -512,6 +546,7 @@
           <fg-input
             v-model="form.salesPeriodStart"
             width="440px"
+            placeholder=""
             :error-message="errors.salesPeriodStart"
           ></fg-input>
         </fg-form-item>
@@ -519,6 +554,7 @@
           <fg-input
             v-model="form.warrantyPeriodEnd"
             width="440px"
+            placeholder=""
             :error-message="errors.warrantyPeriodEnd"
           ></fg-input>
         </fg-form-item>
@@ -527,6 +563,7 @@
             v-model="form.fuelEconomy"
             width="110px"
             unit="km/L"
+            placeholder=""
             :error-message="errors.fuelEconomy"
           ></fg-input>
         </fg-form-item>
@@ -535,6 +572,7 @@
             v-model="form.carWeight"
             width="110px"
             unit="Kg"
+            placeholder=""
             :error-message="errors.carWeight"
           ></fg-input>
         </fg-form-item>
@@ -544,6 +582,7 @@
               v-model="form.carFullLength"
               width="110"
               unit="mm"
+              placeholder=""
               :error-message="errors.carFullLength"
             ></fg-input>
           </fg-form-item>
@@ -552,6 +591,7 @@
               v-model="form.carFullWidth"
               width="110"
               unit="mm"
+              placeholder=""
               :error-message="errors.carFullWidth"
             ></fg-input>
           </fg-form-item>
@@ -560,6 +600,7 @@
               v-model="form.carTotalHeight"
               width="110"
               unit="mm"
+              placeholder=""
               :error-message="errors.carTotalHeight"
             ></fg-input>
           </fg-form-item>
@@ -609,6 +650,11 @@ export default {
       return this.$ui.getBasicData('sale_new_old_car_type')
     },
   },
+  watch: {
+    form() {
+      this.$store.dispatch('popup/setFlg', true)
+    },
+  },
   created() {
     this.getCarInfo()
     // 車検証画像取得
@@ -620,9 +666,39 @@ export default {
       })
       .catch(console.error)
   },
+  mounted() {
+    history.pushState(null, null, window.location.href)
+    window.addEventListener(
+      'popstate',
+      () => {
+        this.popup(() => this.router.back())
+      },
+      false
+    )
+  },
   methods: {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+    },
+    popup(callback) {
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            callback()
+          })
+          .catch((error) => {
+            console.error({ error })
+          })
+      } else {
+        callback()
+      }
     },
     async handleConfirm() {
       if (this.isSubmitting) return
@@ -633,55 +709,115 @@ export default {
         this.isSubmitting = false
         return
       }
+      this.form.storeCode = $nuxt.$store.state.auth.storeCode
+      // String  => Integer (API設計)
+      this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
+        this.form.tmpRegistrationImageFileCode
+      )
+      this.form.carMileage = this.fmtDataToNumber(this.form.carMileage)
+      // Integer => String (API設計)
+      this.form.carTax = this.fmtDataToString(this.form.carTax)
+
+      this.form.weightTax = this.fmtDataToString(this.form.weightTax)
+      this.form.libilityInsurance = this.fmtDataToString(
+        this.form.libilityInsurance
+      )
+      this.form.recycleFee = this.fmtDataToString(this.form.recycleFee)
+      this.form.monthlyGasolineCost = this.fmtDataToString(
+        this.form.monthlyGasolineCost
+      )
+      this.form.monthlyParkingFee = this.fmtDataToString(
+        this.form.monthlyParkingFee
+      )
+      this.form.carInsuranceFee = this.fmtDataToString(
+        this.form.carInsuranceFee
+      )
+
+      // Boolean => String (API設計)
+      if (typeof this.form.purchaseIntention === 'boolean') {
+        this.form.purchaseIntention = Number(
+          this.form.purchaseIntention
+        ).toString()
+      }
+      Object.keys(this.form).forEach((key) => {
+        if (typeof this.form[key] === 'string' && this.form[key] === '') {
+          this.form[key] = null
+        }
+      })
       const { customerCode, carCode } = this.query
       try {
         await this.$api.put(
           `/v1/customers/${customerCode}/cars/${carCode}`,
           this.form
         )
-        await this.$alert('車両編集成功しました！', { type: 'success' })
-        this.handleBack()
+        // await this.$alert('車両編集成功しました！', { type: 'success' })
+        setTimeout(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.$router.push(
+            `/customer/detail/?customerCode=${this.query.customerCode}`
+          )
+        }, 300)
       } catch (err) {
         if (err) this.$alert(err.message)
       }
       this.isSubmitting = false
     },
     handleBack() {
-      this.$router.push(
-        `/customer/detail?customerCode=${this.query.customerCode}`
+      this.popup(() =>
+        setTimeout(() => {
+          this.$router.push(
+            `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+          )
+        }, 300)
       )
     },
     filerChange(res, type) {
       if (!res.data) {
-        // 削除処理を行う
         this.deleteFile(type)
-        return
       }
 
-      // upload file and delete old file
       this.$api
-        .upload(res.data)
+        .upload(res)
         .then((data) => {
-          // delete old file
           this.deleteFile(type)
-          // set new value of type
-          if (type === 'carPhoto') {
-            // new車両画像登録
-            // ...
-          } else {
-            this.form[type] = data.id
-          }
+          this.form[type] = data.id
         })
         .catch((err) => {
           this.$alert(err.message)
         })
     },
     deleteFile(type) {
-      // delete
+      const fileId = this.form[type]
+      if (!fileId) return
+      console.error('delete file:', fileId)
+      const customerCode = this.query.customerCode
+      switch (type) {
+        case 'facePhoto':
+          this.$api
+            .delete(`/v1/customers/${customerCode}/facePhoto`)
+            .then(() => {
+              // console.log(`delete ${type}: ${fileId} successfully!`)
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+          break
+        case 'licenseImageFront':
+        case 'licenseImageBack':
+          this.$api
+            .delete(`/v1/customers/${customerCode}/licenseImage`)
+            .then(() => {
+              // console.log(`delete ${type}: ${fileId} successfully!`)
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+          break
+      }
     },
     customValidate(file, next) {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルを選択してください')
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
         return
       }
 
@@ -705,11 +841,24 @@ export default {
         if (form.purchaseIntention) {
           form.purchaseIntention = form.purchaseIntention === '1'
         }
+
         this.form = form
       } catch (err) {
         this.$alert(err.message)
         console.error(err)
       }
+    },
+
+    fmtDataToNumber(data) {
+      if (data === null) return null
+      if (typeof data === 'number') return data
+      if (typeof data === 'string') return Number(data)
+    },
+
+    fmtDataToString(data) {
+      if (data === null) return null
+      if (typeof data === 'string') return data
+      if (typeof data === 'number') return data.toString()
     },
   },
 }

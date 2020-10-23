@@ -28,16 +28,24 @@ export default {
     link.setAttribute('role', 'link')
     link.addEventListener('click', (_) => {
       const { item, $router } = this
-      if (!item.link || !$router) return
-      $router.replace(item.link)
+      if (!item.href || !$router) return
+      $router.replace(item.href)
     })
   },
 }
 </script>
 <style lang="scss" scoped>
 .fg-breadcrumb-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-size: 14px;
   color: $--color-background;
+
+  .fg-breadcrumb-item-inner {
+    display: inline-flex;
+    align-items: center;
+  }
 
   .is-link {
     cursor: pointer;

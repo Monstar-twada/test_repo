@@ -1,7 +1,13 @@
 <template>
-  <v-dialog v-model="visible" persistent max-width="700px">
-    <v-card class="admin-staff-index-dialog-container">
-      <DialogHeader title="スタッフ追加" @close="visible = false" />
+  <fg-dialog
+    v-model="visible"
+    persistent
+    max-width="700px"
+    title="スタッフ追加"
+    class="admin-staff-index-dialog"
+  >
+    <div class="admin-staff-index-dialog-container">
+      <!-- <DialogHeader @close="visible = false" /> -->
       <div class="body-wrapper">
         <fg-form label-width="180px">
           <fg-form-item label="メールアドレス">
@@ -18,15 +24,15 @@
       <div class="footer-wrapper">
         <fg-button type="primary" width="240px" @click="save">追加</fg-button>
       </div>
-    </v-card>
-  </v-dialog>
+    </div>
+  </fg-dialog>
 </template>
 
 <script>
-import DialogHeader from '~/components/common/dialog-header/index'
+// import DialogHeader from '~/components/common/dialog-header/index'
 export default {
   components: {
-    DialogHeader,
+    // DialogHeader,
   },
   props: {
     value: Boolean,
@@ -55,31 +61,34 @@ export default {
 </script>
 
 <style lang="scss">
-.admin-staff-index-dialog-container {
-  position: relative;
-  .body-wrapper {
-    margin: 0 0;
-    color: $--color-primary;
-    overflow: hidden;
-    font-size: 14px;
-    .fg-form {
-      .fg-form-item {
-        padding: 20px 40px;
-        margin-bottom: 0;
-        border-bottom: 1px solid $--color-background-hover;
-        .fg-form-item__label {
-          font-weight: normal;
+.admin-staff-index-dialog {
+  &-container {
+    position: relative;
+    height: 330px;
+    .body-wrapper {
+      margin: 0 0;
+      color: $--color-primary;
+      overflow: hidden;
+      font-size: 14px;
+      .fg-form {
+        .fg-form-item {
+          padding: 20px 40px;
+          margin-bottom: 0;
+          border-bottom: 1px solid $--color-background-hover;
+          .fg-form-item__label {
+            font-weight: normal;
+          }
         }
       }
     }
-  }
-  .footer-wrapper {
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 27px;
+    .footer-wrapper {
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 27px;
+    }
   }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="example-dialog-wrapper">
+<<<<<<< HEAD
     <Doc />
     <h2>default</h2>
     <div>
@@ -103,30 +104,37 @@
     </fg-dialog>
 
     <div style="height: 1000px"></div>
+=======
+    <Docs />
+    <h2>Example</h2>
+    <Normal />
+    <Persistent />
+    <MaxWidth />
+    <HideHeaderBorder />
+    <SlotDemo />
+>>>>>>> develop
   </div>
 </template>
 
 <script>
 import { customMixin } from '../_app/mixins'
-import Doc from './doc.md'
+import Docs from '../../docs/dialog.md'
+import Normal from './Normal.md'
+import Persistent from './Persistent.md'
+import MaxWidth from './MaxWidth.md'
+import HideHeaderBorder from './HideHeaderBorder.md'
+import SlotDemo from './SlotDemo.md'
+
 export default {
   components: {
-    Doc,
+    Docs,
+    Normal,
+    Persistent,
+    MaxWidth,
+    HideHeaderBorder,
+    SlotDemo,
   },
   mixins: [customMixin],
-  data() {
-    return {
-      visible1: false,
-      visible2: false,
-      visible3: false,
-      visible4: false,
-      visible5: false,
-      visible6: false,
-      visible7: false,
-      visible8: false,
-      visible9: false,
-    }
-  },
 }
 </script>
 

@@ -1,13 +1,12 @@
-### subName
+### text-summary-no-offset and subName
 
-text-summary-no-offset, text-flex-direction-column, data={subName: ''}
+text-flex-direction-column, data={subName: ''}
 
 ```html
 <fg-avatar
  :data="avatarData"
  text-summary-no-offset
- text-flex-direction-column></fg-avatar>
-
+ text-flex-direction-column />
 <script>
 export default {
   data() {

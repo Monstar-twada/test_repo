@@ -283,7 +283,7 @@ export default {
       this.$nextTick(() => {
         this.input.focus()
       })
-      this.$emit('clear')
+      this.$emit('clear', e)
       this.$emit('change', '')
       this.emitFormChange()
     },

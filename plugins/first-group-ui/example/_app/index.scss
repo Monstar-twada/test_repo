@@ -32,6 +32,9 @@ h3, p {
 $sideWidth: 210px;
 $headerHeight: 40px;
 
+/**
+ * page wrapper
+ */
 .example-page-wrapper {
   overflow-y: auto;
   height: 100%;
@@ -102,13 +105,13 @@ $headerHeight: 40px;
         text-decoration: none;
 
         &:hover {
-          color: $--color-primary-hover;
-          background: $--color-background-hover;
+          text-decoration: underline;
         }
 
         &.__current {
-          color: $--color-white !important;
-          background: $--color-primary-active;
+          font-weight: bold;
+          text-decoration: underline;
+          background: $--color-background-hover;
         }
       }
     }
@@ -134,7 +137,11 @@ $headerHeight: 40px;
   }
 }
 
-table {
+/**
+ * table
+ */
+
+table:not([class^=fg-table]) {
   width: 100%;
   color: #555;
   border-spacing: 0;
@@ -163,6 +170,9 @@ table {
   }
 }
 
+/**
+ * code
+ */
 code {
   padding: 2px 5px;
   //background: #2b2b2b;
@@ -179,4 +189,54 @@ pre {
   code.hljs {
     padding-top: 0 !important;
   }
+}
+
+/**
+ * margin, padding
+ */
+@for $i from 1 through 10
+{
+  $temp: $i * 5;
+  $tempPx: $temp + px;
+  .p#{$temp} {
+    padding:($tempPx);
+  }
+  .pl#{$temp} {
+    padding-left:($tempPx);
+  }
+  .pr#{$temp} {
+    padding-right:($tempPx);
+  }
+  .pt#{$temp} {
+    padding-top:($tempPx);
+  }
+  .pb#{$temp} {
+    padding-bottom:($tempPx);
+  }
+  .m#{$temp} {
+    margin:($tempPx);
+  }
+  .ml#{$temp} {
+    margin-left:($tempPx);
+  }
+  .mr#{$temp} {
+    margin-right:($tempPx);
+  }
+  .mt#{$temp} {
+    margin-top:($tempPx);
+  }
+  .mb#{$temp} {
+    margin-bottom:($tempPx);
+  }
+}
+
+/**
+ * background
+ */
+.bg-primary {
+  background: $--color-primary;
+}
+
+.bg-primary-active {
+  background: $--color-primary-active;
 }

@@ -11,7 +11,7 @@
 
       <div class="select-wrapper">
         <fg-select
-          v-model="selectedResult"
+          :value="selectedResult"
           :items="selectList"
           theme="light-blue"
           size="medium"
@@ -20,40 +20,38 @@
           :popup-position="popupPosition"
         >
           <template v-slot:prefix>
-            <img :src="require('./img/icon-shop-select.svg')" alt="" />
+            <img :src="require('./img/icon-shop-select.svg')" alt />
           </template>
         </fg-select>
       </div>
     </div>
-    <v-list>
-      <v-list-item-group ref="menu" v-model="index">
-        <v-list-item
-          v-for="(item, i) in menuItems"
-          :key="i"
-          :class="[
-            i === index - 1 ? 'radius-br' : '',
-            i === index + 1 ? 'radius-tr' : '',
-          ]"
-          @click="handleMenuClick"
-        >
-          <template v-slot:default="{ active }">
-            <nuxt-link :to="item.link">
-              <v-list-item-icon>
-                <img
-                  :width="item.width"
-                  :src="
-                    require(`./img/${active ? item.iconHover : item.icon}.svg`)
-                  "
-                />
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
-              </v-list-item-content>
-            </nuxt-link>
-          </template>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
+    <ul class="sidebar-list">
+      <li
+        v-for="(item, i) in menuItems"
+        :key="i"
+        class="sidebar-list-item"
+        :class="[
+          i === index - 1 ? 'radius-br' : '',
+          i === index ? 'sidebar-list-item--active' : '',
+          i === index + 1 ? 'radius-tr' : '',
+        ]"
+        @click="handleMenuClick(item.link)"
+      >
+        <a>
+          <div class="sidebar-list-item__icon">
+            <img
+              :width="item.width"
+              :src="
+                require(`./img/${i === index ? item.iconHover : item.icon}.svg`)
+              "
+            />
+          </div>
+          <div class="sidebar-list-item__content">
+            <h4 class="sidebar-list-item__title">{{ item.text }}</h4>
+          </div>
+        </a>
+      </li>
+    </ul>
     <div :class="['bottom-space', isLastIndex ? 'radius-tr' : '']"></div>
   </div>
 </template>
@@ -74,46 +72,11 @@ export default {
     const isConsole = this.$isConsole
     return {
       collapsed: this.value,
-      selectedResult: 8,
+      selectedResult: 0,
       // item's index in menu
       index: -1,
       logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
-      selectList: [
-        {
-          title: '営業管理',
-        },
-        {
-          text: 'cars全店',
-          value: 1,
-        },
-        {
-          text: '関西エリア',
-          value: 2,
-        },
-        {
-          text: '関東エリア',
-          value: 3,
-        },
-        {
-          title: '店舗管理',
-        },
-        {
-          text: 'cars奈良中央',
-          value: 5,
-        },
-        {
-          text: 'cars大阪',
-          value: 6,
-        },
-        {
-          text: 'cars足立',
-          value: 7,
-        },
-        {
-          text: 'cars天理',
-          value: 8,
-        },
-      ],
+      selectList: [],
     }
   },
   computed: {
@@ -128,9 +91,9 @@ export default {
     },
   },
   watch: {
-    selectedResult(val) {
-      console.log('selectedResult change', val)
-    },
+    // selectedResult(val) {
+    //   console.log('selectedResult change', val)
+    // },
     $route() {
       this.resetRouteIndex()
     },
@@ -145,19 +108,73 @@ export default {
   },
   created() {
     this.resetRouteIndex()
+    this.getStoreList().then(() => {
+      this.selectedResult = 1
+    })
   },
   methods: {
     resetRouteIndex() {
       const route = this.$route
-      const path = '/' + route.path.split('/')[1]
+      const path = '/' + route.path.split('/')[1] + '/'
       this.index = this.menuItems.findIndex((item) => item.link === path)
     },
-    handleMenuClick(e) {
-      const tempIndex = this.index
-      const timer = setTimeout(() => {
-        this.index = tempIndex
-        clearTimeout(timer)
-      }, 0)
+    handleMenuClick(link) {
+      if (!this.$store.getters['popup/getSaveFlg']) {
+        const tempIndex = this.index
+        const timer = setTimeout(() => {
+          this.index = tempIndex
+          clearTimeout(timer)
+          this.$router.push(link)
+        }, 0)
+      } else {
+        let content = ''
+        let okBtn = ''
+        if (window.location.href.includes('/ma/customer_list')) {
+          content = '入力中のデータが失われます。画面遷移をしますか？'
+          okBtn = '遷移する'
+        } else {
+          content = '対象データを削除してよろしいですか？'
+          okBtn = '削除する'
+        }
+
+        this.$confirm(content, {
+          buttons: {
+            ok: {
+              text: okBtn,
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            this.status = []
+            this.$router.push(link)
+          })
+          .catch(() => {
+            // console.log('cancel')
+          })
+      }
+    },
+    async getStoreList() {
+      await this.$api
+        .get(`/v1/store`)
+        .then((res) => {
+          const storeList = res.results[0].area
+          const storeCode = $nuxt.$store.state.auth.storeCode
+          if (storeCode) {
+            this.selectList = storeList
+              .filter((item) => item.store.storeCode === storeCode)
+              .map((item, index) => {
+                return {
+                  value: index + 1,
+                  text: `${item.store.storeName}`,
+                }
+              })
+            this.$ui.setCache('store_list', this.selectList)
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+        })
     },
   },
 }
@@ -206,7 +223,7 @@ export default {
 
   .top-wrapper {
     padding-bottom: 15px;
-    background: #fff;
+    background: $--color-white;
     overflow: hidden;
     .company {
       margin: 26px 15px 0 15px;
@@ -247,37 +264,53 @@ export default {
     background: #fff;
   }
 
-  .v-list-item__content {
+  .sidebar-list-item__content {
+    align-items: center;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1;
+    overflow: hidden;
+    padding: 12px 0;
     @include transitionMixin(all);
   }
 
-  .v-list {
-    padding: 0 !important;
-    margin: 0 !important;
-    background: none !important;
+  .sidebar-list {
+    padding: 0;
+    margin: 0;
+    background: none;
+    display: block;
+    position: static;
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: box-shadow;
 
-    .v-list-item__title {
-      font-size: 14px !important;
-      color: $--color-primary !important;
-    }
-
-    .v-list-item {
+    &-item {
+      align-items: center;
+      display: flex;
+      flex: 1 1 100%;
+      letter-spacing: normal;
+      min-height: 48px;
+      outline: none;
+      padding: 0 16px;
+      position: relative;
+      text-decoration: none;
       background: $--color-white;
       padding: 0;
       a {
         display: flex;
         align-items: center;
+        justify-content: center;
         height: 50px;
         width: 100%;
         text-decoration: none;
         box-sizing: border-box;
         padding: 0 16px;
-        .v-list-item__icon {
+        .sidebar-list-item__icon {
           display: flex;
           align-items: center;
           justify-content: center;
           align-self: auto;
-          margin: 0 12px 0 0;
+          margin: 0;
           width: 24px;
           height: 24px;
           img {
@@ -286,19 +319,26 @@ export default {
           }
         }
       }
-      // remove black background when on click
-      .v-ripple__container {
-        display: none;
-      }
-    }
 
-    .v-list-item--active {
-      background: transparent !important;
-      .v-list-item__title {
-        color: $--color-background !important;
+      &__title {
+        flex: 1 1 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: normal;
+        color: $--color-primary;
+        margin: 0 0 0 12px;
       }
-      &::before {
-        opacity: 0 !important;
+
+      &--active {
+        background: transparent;
+        .sidebar-list-item__title {
+          color: $--color-background;
+        }
+        &::before {
+          opacity: 0;
+        }
       }
     }
   }

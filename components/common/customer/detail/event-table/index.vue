@@ -22,17 +22,19 @@
     >
       <tr v-for="(item, i) in list" :key="i" @click="clickRow(item)">
         <td>
-          <TableDate :value="item.actitionDatetime" />
+          <TableDate :value="item.activityReportDatetime" />
         </td>
         <td>
           <fg-icon
             name="flag"
-            :color="item.checkFlag === '0' ? $colors.border : $colors.warning"
+            :color="item.checkFlag === 0 ? $colors.border : $colors.warning"
           ></fg-icon>
         </td>
         <td>
-          {{ item.car.maker }}<br />
-          {{ item.car.carType }}
+          <template v-if="item.car">
+            {{ item.car.maker }}<br />
+            {{ item.car.carType }}
+          </template>
         </td>
         <td>{{ transactionTypes[item.transactionType] }}</td>
         <td>{{ channels[item.channel] }}</td>
@@ -51,7 +53,7 @@
               icon="trash"
               border
               size="mini"
-              style="width: 24px;"
+              style="width: 24px"
               @click="delEvent(item, $event)"
             ></fg-button>
           </div>
@@ -121,21 +123,41 @@ export default {
     return {
       headers: [
         { text: '日時', width: 120 },
-        { text: 'チェック', width: 100, sortable: true, field: 'checkFlag' },
-        { text: '対象車両', width: 100, sortable: true, field: 'carCode' },
+        {
+          text: 'チェック',
+          width: 100,
+          sortable: true,
+          sortactive: true,
+          field: 'checkFlag',
+        },
+        {
+          text: '対象車両',
+          width: 100,
+          sortable: true,
+          sortactive: true,
+          field: 'carCode',
+        },
         {
           text: '取引種別',
           width: 100,
           sortable: true,
+          sortactive: true,
           field: 'transactionType',
         },
-        { text: 'チャネル', width: 100, sortable: true, field: 'channel' },
+        {
+          text: 'チャネル',
+          width: 100,
+          sortable: true,
+          sortactive: true,
+          field: 'channel',
+        },
         { text: 'コメント' },
         {
           text: '担当者',
           width: 100,
           sortable: true,
-          field: 'contactStaffCode',
+          sortactive: true,
+          field: 'contactStaffId',
         },
         { text: '', width: 60 },
       ],
@@ -209,36 +231,53 @@ export default {
       this.editVisible = true
     },
     sortChange(field, sort) {
-      this.query.sort[field] = sort
+      this.headers.map((item) => {
+        item.sortactive = item.field === field
+      })
+      for (const item in this.query.sort) {
+        this.query.sort[item] = item === field ? sort : ''
+      }
       this.query.page = 1
     },
     async delEvent(item, e) {
       e.stopPropagation()
+      // eslint-disable-next-line promise/param-names
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
       try {
         await this.$confirm('この活動情報を削除してもよろしいですか？')
         await this.$api.delete(
           `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
         )
-        this.$alert('削除成功！')
+        // this.$alert('削除成功！')
       } catch (err) {
         if (err) this.$alert(err.message)
       }
+      await delay()
+      this.getCarList()
+      this.getList()
+      this.$root.$emit('getCarList')
     },
-    async getCarList() {
+    getCarList() {
       try {
         /* eslint-disable prefer-const */
-        let { total, results } =
+        let { results } =
           this.$ui.getCache('cars_customer_' + this.customerCode) || {}
-        if (!Array.isArray(results) || results.length !== total) {
-          results = await this._getAllCars()
-          this.$ui.setCache('cars_customer_' + this.customerCode, {
-            total: results.length,
-            results,
-          })
-        }
+        // let { total, results } =
+        //   this.$ui.getCache('cars_customer_' + this.customerCode) || {}
+        // if (!Array.isArray(results) || results.length !== total) {
+        //   results = await this._getAllCars()
+        //   this.$ui.setCache('cars_customer_' + this.customerCode, {
+        //     total: results.length,
+        //     results,
+        //   })
+        // }
         this.carList = results.map((item) => {
           return {
-            text: item.text || `${item.maker} ${item.carType}`,
+            text:
+              item.text ||
+              `${item.maker ? item.maker : ''} ${
+                item.carType ? item.carType : ''
+              }`,
             value: item.value || item.carCode,
           }
         })
@@ -251,9 +290,10 @@ export default {
         const limit = 500
         let page = 1
         let arr = []
+        let $this = this
         function getData() {
-          this.$api
-            .get(`/v1/customers/${this.customerCode}/cars`, {
+          $this.$api
+            .get(`/v1/customers/${$this.customerCode}/cars`, {
               limit,
               offset: (page - 1) * limit,
             })

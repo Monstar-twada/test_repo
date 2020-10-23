@@ -9,18 +9,33 @@
               :key="column.show"
               :sort="sort"
               :column="column"
+              :group-by="groupBy"
               @click="changeSorting(column)"
             ></TableColumnHeader>
           </tr>
         </thead>
         <tbody :class="fullTableBodyClass">
-          <TableRow
-            v-for="row in displayedRows"
-            :key="row.vueTableComponentInternalRowId"
-            :row="row"
-            :columns="columns"
-            @rowClick="emitRowClick"
-          ></TableRow>
+          <template v-for="(row, index) in displayedRows">
+            <template v-if="isGroupBy">
+              <tr
+                v-if="beforeGroupByFlg(row, displayedRows[index - 1], index)"
+                :key="index"
+                :ref="isGroupBy ? `group-${row.data.groupIndex}` : ''"
+                class="group-by-row"
+                @click="handleToggle(`group-${row.data.groupIndex}`, $event)"
+              >
+                <th :colspan="columns.length">{{ row.data[groupBy] }}</th>
+              </tr>
+            </template>
+            <TableRow
+              :key="`group-${index}-children`"
+              :ref="`group-${row.data.groupIndex}-children`"
+              :row="row"
+              :columns="columns"
+              :group-by="groupBy"
+              @rowClick="emitRowClick"
+            ></TableRow>
+          </template>
         </tbody>
       </table>
     </div>
@@ -48,7 +63,9 @@ export default {
   props: {
     data: {
       type: Array,
-      default: () => [],
+      default: () => {
+        return []
+      },
     },
     tableClass: {
       type: String,
@@ -62,6 +79,10 @@ export default {
       type: String,
       default: '',
     },
+    groupBy: {
+      type: String,
+      default: '',
+    },
   },
 
   data: () => ({
@@ -72,6 +93,8 @@ export default {
       fieldName: '',
       order: '',
     },
+    groupByName: '',
+    groupIndex: 0,
   }),
 
   computed: {
@@ -91,8 +114,27 @@ export default {
       return Array.isArray(this.data)
     },
 
+    isGroupBy() {
+      return !!this.groupBy
+    },
+
     displayedRows() {
-      return this.sortedRows
+      if (!this.isGroupBy) {
+        return this.sortedRows
+      } else {
+        let groupIndexCode = 0
+        this.sortedRows.forEach((row, index) => {
+          if (
+            index === 0 ||
+            row.data[this.groupBy] !==
+              this.sortedRows[index - 1].data[this.groupBy]
+          ) {
+            groupIndexCode += 1
+          }
+          row.data.groupIndex = groupIndexCode
+        })
+        return this.sortedRows
+      }
     },
 
     sortedRows() {
@@ -134,7 +176,7 @@ export default {
     },
   },
 
-  async mounted() {
+  mounted() {
     const columnComponents = this.$slots.default
       .filter((column) => column.componentInstance)
       .map((column) => column.componentInstance)
@@ -149,7 +191,7 @@ export default {
       )
     })
 
-    await this.mapDataToRows()
+    this.mapDataToRows()
   },
 
   methods: {
@@ -175,7 +217,6 @@ export default {
     },
 
     changeSorting(column) {
-      console.log('column', column)
       if (this.sort.fieldName !== column.show) {
         this.sort.fieldName = column.show
         this.sort.order = 'asc'
@@ -196,6 +237,29 @@ export default {
 
     emitRowClick(row) {
       this.$emit('rowClick', row)
+    },
+    handleToggle(pdom, e) {
+      // TODO
+      const dom = `${pdom}-children`
+      const list = this.$refs[dom]
+      const clickIcon = this.$refs[pdom][0]
+      clickIcon.classList.toggle('is-close')
+      for (const i in list) {
+        if (list[i].$el.style.display === 'none') {
+          list[i].$el.style.display = ''
+        } else {
+          list[i].$el.style.display = 'none'
+        }
+      }
+    },
+    beforeGroupByFlg(row, beforeRow, index) {
+      let flg = false
+      if (this.isGroupBy) {
+        if (index === 0 || row.data.groupIndex !== beforeRow.data.groupIndex) {
+          flg = true
+        }
+      }
+      return flg
     },
   },
 }
@@ -244,7 +308,6 @@ export default {
       }
       th.fg-table__th--sort span {
         display: inline-block;
-        margin-left: 4px;
       }
 
       th.fg-table__th--sort span:before {
@@ -300,6 +363,38 @@ export default {
     }
   }
   tbody {
+    tr.group-by-row {
+      text-align: left;
+      background-color: $--color-background;
+      border-top: 1px $--color-border solid;
+      height: 40px;
+      font-size: 12px;
+
+      th {
+        padding-left: 4%;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 2%;
+          top: 15px;
+          width: 7px;
+          height: 7px;
+          border-left: 2px $--color-primary solid;
+          border-top: 2px $--color-primary solid;
+          transform: rotate(-135deg);
+          transition: transform 0.3s;
+        }
+      }
+    }
+    tr.group-by-row.is-close {
+      th {
+        &:before {
+          top: 18px;
+          transform: rotate(45deg);
+        }
+      }
+    }
     tr {
       height: 70px;
       background-color: $--color-white;
