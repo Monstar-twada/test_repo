@@ -418,6 +418,7 @@ export default {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
     async handleConfirm() {
+      this.$store.dispatch('popup/setFlg', false)
       if (this.isSubmitting) return
       this.isSubmitting = true
       const form = {
@@ -494,7 +495,7 @@ export default {
       this.popup(() =>
         setTimeout(() => {
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}`
+            `/customer/detail/?customerCode=${this.query.customerCode}`
           )
         }, 300)
       )
