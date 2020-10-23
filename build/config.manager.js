@@ -10,7 +10,11 @@ export default merge(baseConfig, {
   dir: {
     pages: 'pages/manager',
   },
-  title: 'Cars Manager' || '',
+  head: {
+    // titleTemplate: '%s - ' + process.env.npm_package_name || '',
+    title: 'Cars Manager' || '',
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
   // import color css
   styleResources: {
     scss: [
@@ -18,7 +22,6 @@ export default merge(baseConfig, {
       '~/plugins/first-group-ui/src/assets/scss/index.scss',
     ],
   },
-  link: [{ rel: 'icon', type: 'image/x-icon', href: '/manager.ico' }],
   modules: ['@nuxtjs/gtm'],
   gtm: {
     id: 'GTM-N8RJT4T',
