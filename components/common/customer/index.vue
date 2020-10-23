@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import throttle from 'lodash.throttle'
 import SearchConditions from './index/SearchConditions'
 import { DEFAULT_QUERY } from './common/base'
 import Table from './index/Table'
@@ -45,12 +46,15 @@ export default {
     query: {
       deep: true,
       handler() {
-        this.getData()
+        this.getDatawithThrottle()
       },
     },
   },
   created() {
-    this.getData()
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      this.getData()
+    })
   },
   methods: {
     conditionChange(data) {
@@ -60,6 +64,11 @@ export default {
         page: 1,
       }
     },
+
+    getDatawithThrottle: throttle(async function () {
+      await this.getData()
+    }, 3000),
+
     async getData() {
       const params = {
         ...this.query,
@@ -75,9 +84,11 @@ export default {
       // if (/^(\d{4})-(\d{2})/.test(params.registrationFirstDateTo)) {
       //   params.registrationFirstDateTo = RegExp.$1 + '-' + RegExp.$2
       // }
+      // this.$nuxt.$loading.start()
       try {
         const res = await this.$api.post('/v1/customers', params)
         this.tableData = res || {}
+        this.$nuxt.$loading.finish()
       } catch (err) {
         this.$alert(err.message)
         console.error(err)

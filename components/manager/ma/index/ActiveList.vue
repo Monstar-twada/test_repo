@@ -144,9 +144,12 @@ export default {
     },
   },
   created() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
-    this.getCurrentMonth()
-    this.getMaIndexResult()
+    this.$nextTick(() => {
+      this.storeCode = $nuxt.$store.state.auth.storeCode
+      this.$nuxt.$loading.start()
+      this.getCurrentMonth()
+      this.getMaIndexResult()
+    })
   },
   methods: {
     getCurrentMonth() {
@@ -168,6 +171,7 @@ export default {
         )
         .then((res) => {
           this.maIndexResultList = res.results
+          this.$nuxt.$loading.finish()
         })
         .catch((err) => {
           console.error(err)
