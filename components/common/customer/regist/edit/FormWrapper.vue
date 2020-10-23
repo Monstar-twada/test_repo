@@ -418,6 +418,7 @@ export default {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
     async handleConfirm() {
+      this.$store.dispatch('popup/setFlg', false)
       if (this.isSubmitting) return
       this.isSubmitting = true
       const form = {
@@ -472,10 +473,10 @@ export default {
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('対象データを削除してよろしいですか？', {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
           buttons: {
             ok: {
-              text: '削除する',
+              text: '遷移する',
             },
           },
         })
@@ -494,7 +495,7 @@ export default {
       this.popup(() =>
         setTimeout(() => {
           this.$router.push(
-            `/customer/detail?customerCode=${this.query.customerCode}`
+            `/customer/detail/?customerCode=${this.query.customerCode}`
           )
         }, 300)
       )
