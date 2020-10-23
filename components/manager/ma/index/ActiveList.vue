@@ -144,8 +144,8 @@ export default {
     },
   },
   created() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.getCurrentMonth()
+    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
       this.getMaIndexResult()
