@@ -653,6 +653,11 @@ export default {
       return this.$ui.getBasicData('sale_new_old_car_type')
     },
   },
+  watch: {
+    form() {
+      this.$store.dispatch('popup/setFlg', true)
+    },
+  },
   created() {
     this.getCarInfo()
     // 車検証画像取得
@@ -664,9 +669,39 @@ export default {
       })
       .catch(console.error)
   },
+  mounted() {
+    history.pushState(null, null, window.location.href)
+    window.addEventListener(
+      'popstate',
+      () => {
+        this.popup(() => this.router.back())
+      },
+      false
+    )
+  },
   methods: {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+    },
+    popup(callback) {
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('対象データを削除してよろしいですか？', {
+          buttons: {
+            ok: {
+              text: '削除する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            callback()
+          })
+          .catch((error) => {
+            console.error({ error })
+          })
+      } else {
+        callback()
+      }
     },
     async handleConfirm() {
       if (this.isSubmitting) return
@@ -719,18 +754,25 @@ export default {
           this.form
         )
         await this.$alert('車両編集成功しました！', { type: 'success' })
-        this.handleBack()
+        setTimeout(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.$router.push(
+            `/customer/detail?customerCode=${this.query.customerCode}`
+          )
+        }, 300)
       } catch (err) {
         if (err) this.$alert(err.message)
       }
       this.isSubmitting = false
     },
     handleBack() {
-      setTimeout(() => {
-        this.$router.push(
-          `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
-        )
-      }, 300)
+      this.popup(() =>
+        setTimeout(() => {
+          this.$router.push(
+            `/customer/detail?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+          )
+        }, 300)
+      )
     },
     filerChange(res, type) {
       if (!res.data) {

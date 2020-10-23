@@ -399,6 +399,21 @@ export default {
       })
     },
   },
+  watch: {
+    form() {
+      this.$store.dispatch('popup/setFlg', true)
+    },
+  },
+  mounted() {
+    history.pushState(null, null, window.location.href)
+    window.addEventListener(
+      'popstate',
+      () => {
+        this.popup(() => this.router.back())
+      },
+      false
+    )
+  },
   created() {
     this.getDetail()
     this.getFacePhoto()
@@ -461,12 +476,34 @@ export default {
       }
       this.isSubmitting = false
     },
+    popup(callback) {
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('対象データを削除してよろしいですか？', {
+          buttons: {
+            ok: {
+              text: '削除する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            callback()
+          })
+          .catch((error) => {
+            console.error({ error })
+          })
+      } else {
+        callback()
+      }
+    },
     handleBack() {
-      setTimeout(() => {
-        this.$router.push(
-          `/customer/detail/?customerCode=${this.query.customerCode}`
-        )
-      }, 300)
+      this.popup(() =>
+        setTimeout(() => {
+          this.$router.push(
+            `/customer/detail?customerCode=${this.query.customerCode}`
+          )
+        }, 300)
+      )
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
