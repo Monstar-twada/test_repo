@@ -138,7 +138,7 @@ export default {
   },
   created() {
     this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
-    this.form.contactStaffId = $nuxt.$store.state.auth.userCode
+    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
   },
   methods: {
     resetForm() {
@@ -151,7 +151,7 @@ export default {
         this.form.carCode = this.currentCarCode
       }
       this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
-      this.form.contactStaffId = $nuxt.$store.state.auth.userCode
+      this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
     },
     checkFormVal() {
       let index = 0
