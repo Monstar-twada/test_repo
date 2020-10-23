@@ -157,7 +157,7 @@ export default {
           width: 100,
           sortable: true,
           sortactive: true,
-          field: 'contactStaffCode',
+          field: 'contactStaffId',
         },
         { text: '', width: 60 },
       ],
