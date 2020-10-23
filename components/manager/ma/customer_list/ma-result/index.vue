@@ -15,7 +15,7 @@
         border
         bold
         width="110"
-        :disabled="saveFlg === false"
+        :disabled="disabledBtn"
         @click="saveChange"
         >保存</fg-button
       >
@@ -239,7 +239,7 @@
         border
         bold
         width="110"
-        :disabled="saveFlg === false"
+        :disabled="disabledBtn"
         @click="saveChange"
         >保存</fg-button
       >
@@ -287,6 +287,11 @@ export default {
     saveFlg: false,
     storeCode: '',
   }),
+  computed: {
+    disabledBtn() {
+      return this.$store.getters['popup/getSaveFlg'] === false
+    },
+  },
   watch: {
     value(val) {
       this.currentPage = val
@@ -327,7 +332,10 @@ export default {
           delete this.status[id]
         }
       }
-      this.saveFlg = !!Object.keys(this.status).length > 0
+      this.$store.dispatch(
+        'popup/setFlg',
+        !!Object.keys(this.status).length > 0
+      )
     },
 
     handleChangeSelect(property, id, val) {
@@ -346,7 +354,10 @@ export default {
           delete this.status[id]
         }
       }
-      this.saveFlg = !!Object.keys(this.status).length > 0
+      this.$store.dispatch(
+        'popup/setFlg',
+        !!Object.keys(this.status).length > 0
+      )
     },
 
     async saveChange() {
@@ -382,7 +393,7 @@ export default {
         )
       })
       await Promise.all(promises).then(() => {
-        this.saveFlg = false
+        this.$store.dispatch('popup/setFlg', false)
         this.status = []
         setTimeout(() => {
           this.$emit('update-event')
@@ -391,11 +402,11 @@ export default {
     },
 
     saveChangeDailog() {
-      if (this.saveFlg) {
+      if (this.$store.getters['popup/getSaveFlg']) {
         this.$confirm('入力したデータを保存しますか？')
           .then(() => {
             this.saveChangeDai()
-            this.saveFlg = false
+            this.$store.dispatch('popup/setFlg', false)
             this.status = []
           })
           .catch((error) => {
@@ -404,14 +415,35 @@ export default {
       }
     },
     handleClickName(item) {
-      this.$router.push({
-        path: `/customer/detail/`,
-        query: { customerCode: item.customerCode },
-      })
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            this.status = []
+            this.$router.push({
+              path: `/customer/detail/`,
+              query: { customerCode: item.customerCode },
+            })
+          })
+          .catch(() => {
+            // console.log('cancel')
+          })
+      } else {
+        this.$router.push({
+          path: `/customer/detail/`,
+          query: { customerCode: item.customerCode },
+        })
+      }
     },
 
     clickBrowserSystemButton() {
-      if (!this.saveFlg) return
+      if (!this.$store.getters['popup/getSaveFlg']) return
       this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
         buttons: {
           ok: {
@@ -420,7 +452,7 @@ export default {
         },
       })
         .then(() => {
-          this.saveFlg = false
+          this.$store.dispatch('popup/setFlg', false)
           this.status = []
           this.$router.back()
         })
@@ -430,7 +462,7 @@ export default {
     },
 
     handleBeforeChange(next) {
-      if (this.saveFlg) {
+      if (this.$store.getters['popup/getSaveFlg']) {
         this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
           buttons: {
             ok: {
@@ -439,7 +471,7 @@ export default {
           },
         })
           .then(() => {
-            this.saveFlg = false
+            this.$store.dispatch('popup/setFlg', false)
             this.status = []
             next()
           })
