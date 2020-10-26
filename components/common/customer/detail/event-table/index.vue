@@ -217,6 +217,7 @@ export default {
         )
         this.list = (res.results || []).map((item) => item.activity)
         this.total = res.total
+        this.$nuxt.$loading.finish()
       } catch (err) {
         this.$ui.error('[event-table/index.vue]', err)
         this.$alert(err.message)
@@ -231,6 +232,7 @@ export default {
       this.editVisible = true
     },
     sortChange(field, sort) {
+      this.$nuxt.$loading.start()
       this.headers.map((item) => {
         item.sortactive = item.field === field
       })
