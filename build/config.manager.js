@@ -10,6 +10,11 @@ export default merge(baseConfig, {
   dir: {
     pages: 'pages/manager',
   },
+  head: {
+    // titleTemplate: '%s - ' + process.env.npm_package_name || '',
+    title: 'Cars Manager' || '',
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
   // import color css
   styleResources: {
     scss: [

@@ -9,8 +9,8 @@ export const baseConfig = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name || '',
-    title: process.env.npm_package_name || '',
+    // titleTemplate: '%s - ' + process.env.npm_package_name || '',
+    // title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -21,7 +21,7 @@ export const baseConfig = {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       {
         rel: 'stylesheet',
         href:
@@ -36,7 +36,8 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$--color-background' },
+  // loading: { color: '$--color-background' },
+  loading: '~/components/common/loading/index.vue',
   /*
    ** Global CSS
    */
@@ -77,6 +78,12 @@ export const baseConfig = {
   },
   router: {
     base: process.env.BASE_URL,
+    trailingSlash: true,
+    extendRoutes(routes, resolve) {
+      for (const route of routes) {
+        route.alias = resolve(route.path, 'index.html')
+      }
+    },
   },
   // vuetify: {
   //   customVariables: ['~/assets/scss/variables.scss'],
@@ -119,6 +126,7 @@ export const baseConfig = {
    ** Build configuration
    */
   build: {
+    // test another for caching
     publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
     /*
      ** You can extend webpack config here

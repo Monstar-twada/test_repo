@@ -37,10 +37,7 @@
           <fg-col span="12" align-self="start" class="p20 pb-0">
             <TextContent label="勤務先" :content="data | fmtWork" />
             <TextContent label="勤続年数" :content="workingTerm" />
-            <TextContent
-              label="年収"
-              :content="data.annualIncome | fmtHyphen"
-            />
+            <TextContent label="年収" :content="annualIncome" />
             <TextContent label="住宅" :content="houseInfo" />
             <TextContent
               label="免許証"
@@ -82,7 +79,7 @@
           <dl>
             <dt>
               {{ data | fmtCustomerName }}
-              <span style="font-size: 10px;"
+              <span style="font-size: 10px"
                 >（{{ data.age | fmtHyphen }}歳）</span
               >
             </dt>
@@ -177,11 +174,18 @@ export default {
     houseInfo() {
       const classes = this.$ui.getBasicData('residence_type', true)
       const { residenceType, residenceTerm } = this.data
-      return [classes[residenceType], residenceTerm + '年'].join('/ ')
+      return [
+        classes[residenceType] ? classes[residenceType] : '- ',
+        residenceTerm !== null ? residenceTerm + '年' : '-',
+      ].join('/ ')
     },
     workingTerm() {
       const { workingTerm } = this.data
-      return workingTerm ? workingTerm + '年' : '-'
+      return workingTerm !== null ? workingTerm + '年' : '-'
+    },
+    annualIncome() {
+      const { annualIncome } = this.data
+      return annualIncome ? `${annualIncome}万円` : '-'
     },
     privateBusiness() {
       const classes = this.$ui.getBasicData('private_business', true)
@@ -204,7 +208,7 @@ export default {
     },
     handleEdit() {
       this.$router.push(
-        '/customer/regist/edit?customerCode=' + this.data.customerCode
+        '/customer/regist/edit/?customerCode=' + this.data.customerCode
       )
     },
   },

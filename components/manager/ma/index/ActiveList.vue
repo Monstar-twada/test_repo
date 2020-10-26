@@ -90,7 +90,7 @@
       <fg-table-column label width="16%" :sortable="false">
         <template v-slot="item">
           <nuxt-link
-            :to="`/ma/customer_list?type=0000&date=${item.registrationEndMonth}`"
+            :to="`/ma/customer_list/?date=${item.registrationEndMonth}`"
           >
             <fg-button
               v-if="item.listCount != 0"
@@ -144,9 +144,12 @@ export default {
     },
   },
   created() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.getCurrentMonth()
-    this.getMaIndexResult()
+    this.storeCode = $nuxt.$store.state.auth.storeCode
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      this.getMaIndexResult()
+    })
   },
   methods: {
     getCurrentMonth() {
@@ -168,6 +171,7 @@ export default {
         )
         .then((res) => {
           this.maIndexResultList = res.results
+          this.$nuxt.$loading.finish()
         })
         .catch((err) => {
           console.error(err)

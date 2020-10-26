@@ -393,6 +393,14 @@ export default {
       })
     },
   },
+  watch: {
+    form() {
+      this.$store.dispatch('popup/setFlg', true)
+    },
+  },
+  mounted() {
+    this.addWindowPopstateEvent()
+  },
   created() {
     this.getDetail()
     this.getFacePhoto()
@@ -402,7 +410,42 @@ export default {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
+    addWindowPopstateEvent() {
+      history.pushState(null, null, window.location.href)
+      window.addEventListener(
+        'popstate',
+        () => {
+          this.clickBrowserSystemButton()
+        },
+        false
+      )
+    },
+    removeWindowPopstateEvent() {
+      window.removeEventListener('popstate', () => {
+        this.clickBrowserSystemButton()
+      })
+    },
+
+    clickBrowserSystemButton() {
+      if (!this.$store.getters['popup/getSaveFlg']) return
+      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+        buttons: {
+          ok: {
+            text: '遷移する',
+          },
+        },
+      })
+        .then(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.removeWindowPopstateEvent()
+          this.$router.back()
+        })
+        .catch(() => {
+          this.addWindowPopstateEvent()
+        })
+    },
     async handleConfirm() {
+      this.$store.dispatch('popup/setFlg', false)
       if (this.isSubmitting) return
       this.isSubmitting = true
       const form = {
@@ -417,10 +460,20 @@ export default {
       this.selectionPoints.forEach((item) => {
         form[item.field] = +item.checked
       })
-      // if the property is empty change to null
+      // if the form in family is empty change to null
       for (const property in form) {
         if (form[property] === '') {
           form[property] = null
+        }
+      }
+      // if the family is empty change to null
+      const family = this.family
+      for (let i = 0; i < family.length; i++) {
+        const childArray = family[i]
+        for (const property in childArray) {
+          if (childArray[property] === '') {
+            childArray[property] = null
+          }
         }
       }
       // validate data
@@ -445,26 +498,48 @@ export default {
       }
       this.isSubmitting = false
     },
+    popup(callback) {
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            callback()
+          })
+          .catch((error) => {
+            console.error({ error })
+          })
+      } else {
+        callback()
+      }
+    },
     handleBack() {
-      setTimeout(() => {
-        this.$router.push(
-          `/customer/detail?customerCode=${this.query.customerCode}`
-        )
-      }, 300)
+      this.popup(() =>
+        setTimeout(() => {
+          this.$router.push(
+            `/customer/detail/?customerCode=${this.query.customerCode}`
+          )
+        }, 300)
+      )
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
-        this.$alert('JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       callback()
     },
     licenseValidator({ type, size }, callback) {
       if (
-        !/^image\/(jpeg|png|pdf|heif)/i.test(type) &&
+        !/^image\/(jpeg|png|pdf|heic)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルのみ選択できます')
+        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
       if (size / 1024 > 5120) {
