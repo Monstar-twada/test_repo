@@ -111,6 +111,7 @@
   </div>
 </template>
 <script>
+import throttle from 'lodash.throttle'
 export default {
   name: 'ActiveList',
   components: {},
@@ -139,7 +140,7 @@ export default {
     },
     currentMonth(val, oldVal) {
       if (val !== oldVal) {
-        this.getMaIndexResult()
+        this.getDatawithThrottle()
       }
     },
   },
@@ -161,7 +162,9 @@ export default {
           : date.getMonth() + 1
       this.currentMonth = year.toString() + month.toString()
     },
-
+    getDatawithThrottle: throttle(async function () {
+      await this.getMaIndexResult()
+    }, 3000),
     async getMaIndexResult() {
       const params = {}
       await this.$api

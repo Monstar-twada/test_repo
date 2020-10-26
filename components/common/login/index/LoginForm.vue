@@ -144,7 +144,9 @@ export default {
       const count = this.validation()
       if (count === 0) {
         try {
+          this.$nuxt.$loading.start()
           await this.$store.dispatch('auth/login', this.form)
+          this.$nuxt.$loading.finish()
           this.$login.success.call(this)
         } catch (error) {
           if (

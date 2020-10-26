@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 // development
 let isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -73,6 +72,9 @@ export const baseConfig = {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     useMockData: process.env.MOCK_DATA === '1',
     NODE_ENV: process.env.NODE_ENV,
+    COGNITO_REGION: process.env.COGNITO_REGION,
+    COGNITO_USERPOOL_ID: process.env.COGNITO_USERPOOL_ID,
+    COGNITO_USERPOOL_CLIENT_ID: process.env.COGNITO_USERPOOL_CLIENT_ID,
   },
   router: {
     base: process.env.BASE_URL,
@@ -100,9 +102,7 @@ export const baseConfig = {
   // ? 'https://manager.cars-enjoy.com'
   // : 'https://manager.cars-enjoy.com',
   proxy: {
-    '/api/': isDevelopment
-      ? 'https://test.manager.test-mars.com'
-      : 'https://test.manager.test-mars.com',
+    '/api/': isDevelopment ? process.env.API_URL : process.env.API_URL,
   },
   /*
    ** vuetify module configuration

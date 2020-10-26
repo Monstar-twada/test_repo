@@ -110,6 +110,7 @@ export default {
       })
     },
     sortChange(field, sort) {
+      this.$nuxt.$loading.start()
       this.headers.map((item) => {
         item.sortactive = item.field === field
       })
