@@ -57,7 +57,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { browserMixin } from '~/mixins/browser'
 export default {
+  mixins: [browserMixin],
   props: {
     value: Boolean,
     menuItems: {
@@ -80,6 +83,8 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('popup', ['getSaveFlg']),
+    ...mapGetters('auth', ['getStortCode']),
     isFirstIndex() {
       return this.index === 0
     },
@@ -119,7 +124,7 @@ export default {
       this.index = this.menuItems.findIndex((item) => item.link === path)
     },
     handleMenuClick(link) {
-      if (!this.$store.getters['popup/getSaveFlg']) {
+      if (!this.getSaveFlg) {
         const tempIndex = this.index
         const timer = setTimeout(() => {
           this.index = tempIndex
@@ -127,31 +132,48 @@ export default {
           this.$router.push(link)
         }, 0)
       } else {
-        const content = '入力中のデータが失われます。画面遷移をしますか？'
-        const okBtn = '遷移する'
-        this.$confirm(content, {
-          buttons: {
-            ok: {
-              text: okBtn,
-            },
-          },
-        })
-          .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
+        this.popupConfirm(
+          this.getSaveFlg,
+          () => {
             this.status = []
             this.$router.push(link)
-          })
-          .catch(() => {
-            // console.log('cancel')
-          })
+          },
+          () => {}
+        )
       }
+      // if (!this.getSaveFlg) {
+      //   const tempIndex = this.index
+      //   const timer = setTimeout(() => {
+      //     this.index = tempIndex
+      //     clearTimeout(timer)
+      //     this.$router.push(link)
+      //   }, 0)
+      // } else {
+      //   const content = '入力中のデータが失われます。画面遷移をしますか？'
+      //   const okBtn = '遷移する'
+      //   this.$confirm(content, {
+      //     buttons: {
+      //       ok: {
+      //         text: okBtn,
+      //       },
+      //     },
+      //   })
+      //     .then(() => {
+      //       this.$store.dispatch('popup/setFlg', false)
+      //       this.status = []
+      //       this.$router.push(link)
+      //     })
+      //     .catch(() => {
+      //       // console.log('cancel')
+      //     })
+      // }
     },
     async getStoreList() {
       await this.$api
         .get(`/v1/store`)
         .then((res) => {
           const storeList = res.results[0].area
-          const storeCode = $nuxt.$store.state.auth.storeCode
+          const storeCode = this.storeCode
           if (storeCode) {
             this.selectList = storeList
               .filter((item) => item.store.storeCode === storeCode)

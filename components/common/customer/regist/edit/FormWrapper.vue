@@ -334,6 +334,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import WhiteBox from '../../common/WhiteBox'
 import ColumnTitle from '../../common/ColumnTitle'
 import FamilyItem from './FamilyItem'
@@ -343,6 +344,7 @@ import {
   CAR_LIVES_ENUM,
   SELECTION_POINT_ENUM,
 } from './constants'
+import { browserMixin } from '~/mixins/browser'
 
 export default {
   components: {
@@ -350,6 +352,7 @@ export default {
     WhiteBox,
     FamilyItem,
   },
+  mixins: [browserMixin],
   data() {
     const query = this.$route.query
     return {
@@ -374,6 +377,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('popup', ['getSaveFlg']),
     carLives() {
       return this.$ui.getBasicData('car_life').map((item) => {
         return {
@@ -399,7 +403,7 @@ export default {
     },
   },
   mounted() {
-    this.addWindowPopstateEvent()
+    this.addWindowPopstateEvent(this.clickBrowserSystemButton)
   },
   created() {
     this.getDetail()
@@ -410,39 +414,34 @@ export default {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
-    addWindowPopstateEvent() {
-      history.pushState(null, null, window.location.href)
-      window.addEventListener(
-        'popstate',
-        () => {
-          this.clickBrowserSystemButton()
-        },
-        false
-      )
-    },
-    removeWindowPopstateEvent() {
-      window.removeEventListener('popstate', () => {
-        this.clickBrowserSystemButton()
-      })
-    },
 
     clickBrowserSystemButton() {
-      if (!this.$store.getters['popup/getSaveFlg']) return
-      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
-        buttons: {
-          ok: {
-            text: '遷移する',
-          },
-        },
-      })
-        .then(() => {
-          this.$store.dispatch('popup/setFlg', false)
-          this.removeWindowPopstateEvent()
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
-        })
-        .catch(() => {
-          this.addWindowPopstateEvent()
-        })
+        },
+        () => {
+          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+        }
+      )
+      // if (!this.$store.getters['popup/getSaveFlg']) return
+      // this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+      //   buttons: {
+      //     ok: {
+      //       text: '遷移する',
+      //     },
+      //   },
+      // })
+      //   .then(() => {
+      //     this.$store.dispatch('popup/setFlg', false)
+      //     this.removeWindowPopstateEvent()
+      //     this.$router.back()
+      //   })
+      //   .catch(() => {
+      //     this.addWindowPopstateEvent()
+      //   })
     },
     async handleConfirm() {
       this.$store.dispatch('popup/setFlg', false)
@@ -498,34 +497,45 @@ export default {
       }
       this.isSubmitting = false
     },
-    popup(callback) {
-      if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
-          buttons: {
-            ok: {
-              text: '遷移する',
-            },
-          },
-        })
-          .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            callback()
-          })
-          .catch((error) => {
-            console.error({ error })
-          })
-      } else {
-        callback()
-      }
-    },
+    // popup(callback) {
+    //   if (this.$store.getters['popup/getSaveFlg']) {
+    //     this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+    //       buttons: {
+    //         ok: {
+    //           text: '遷移する',
+    //         },
+    //       },
+    //     })
+    //       .then(() => {
+    //         this.$store.dispatch('popup/setFlg', false)
+    //         callback()
+    //       })
+    //       .catch((error) => {
+    //         console.error({ error })
+    //       })
+    //   } else {
+    //     callback()
+    //   }
+    // },
     handleBack() {
-      this.popup(() =>
-        setTimeout(() => {
-          this.$router.push(
-            `/customer/detail/?customerCode=${this.query.customerCode}`
-          )
-        }, 300)
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          setTimeout(() => {
+            this.$router.push(
+              `/customer/detail/?customerCode=${this.query.customerCode}`
+            )
+          }, 300)
+        },
+        () => {}
       )
+      // this.popup(() =>
+      //   setTimeout(() => {
+      //     this.$router.push(
+      //       `/customer/detail/?customerCode=${this.query.customerCode}`
+      //     )
+      //   }, 300)
+      // )
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {

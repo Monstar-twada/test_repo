@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import throttle from 'lodash.throttle'
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
@@ -75,6 +76,9 @@ export default {
     maStatus: {},
     stateCode: null,
   }),
+  computed: {
+    ...mapGetters('auth', ['getStoreCode']),
+  },
   watch: {
     searchParams: {
       deep: true,
@@ -85,7 +89,7 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      this.storeCode = $nuxt.$store.state.auth.storeCode
+      this.storeCode = this.getStoreCode
       this.$nuxt.$loading.start()
       this.apiParams = {
         ...this.$route.query,
@@ -107,7 +111,7 @@ export default {
       params.offset = (params.page - 1) * params.limit
       try {
         const res = await this.$api.get(
-          `/v1/attractingCustomers/${this.storeCode}/${this.apiParams.date}`,
+          `/v1/attractingCustomers/${this.getStoreCode}/${this.apiParams.date}`,
           params
         )
         this.maResultList = res

@@ -111,6 +111,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'ActiveList',
   components: {},
@@ -130,6 +131,9 @@ export default {
     currentMonth: '',
     storeCode: null,
   }),
+  computed: {
+    ...mapGetters('auth', ['getStoreCode']),
+  },
   watch: {
     value(val) {
       this.currentPage = val
@@ -145,7 +149,6 @@ export default {
   },
   created() {
     this.getCurrentMonth()
-    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
       this.getMaIndexResult()
@@ -166,7 +169,7 @@ export default {
       const params = {}
       await this.$api
         .post(
-          `/v1/attractingCustomersMonth/${this.storeCode}/${this.currentMonth}`,
+          `/v1/attractingCustomersMonth/${this.getStoreCode}/${this.currentMonth}`,
           params
         )
         .then((res) => {
