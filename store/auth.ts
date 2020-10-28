@@ -1,4 +1,15 @@
-import Auth from '@aws-amplify/auth'
+import { RootState } from './index';
+import Auth from '@aws-amplify/auth' 
+import { ActionTree, GetterTree, MutationTree } from 'vuex' 
+
+export interface State {
+  isAuthenticated: boolean,
+  user: string | null,
+  token: string | null,
+  storeCode: string | null,
+  companyCode: string | null,
+  userCode: string | null,
+}
 
 export const state = () => ({
   isAuthenticated: false,
@@ -9,7 +20,28 @@ export const state = () => ({
   userCode: null,
 })
 
-export const mutations = {
+const getters: GetterTree<State, RootState> = {
+  isAuthenticated: (state: State) => {
+    return state.isAuthenticated;
+  },
+  user: (state: State) => {
+    return state.user;
+  },
+  token: (state: State) => {
+    return state.token;
+  },
+  userCode: (state: State) => {
+    return state.userCode;
+  },
+  storeCode: (state: State) => {
+    return state.storeCode;
+  },
+  companyCode: (state: State) => {
+    return state.companyCode;
+  },
+};
+
+export const mutations: MutationTree<State>  = {
   setUser(state, user) {
     state.isAuthenticated = !!user
     state.user = user
@@ -28,7 +60,7 @@ export const mutations = {
   },
 }
 
-export const actions = {
+export const actions : ActionTree<State, RootState> = {
   async load({ commit }) {
     try {
       const user = await Auth.currentAuthenticatedUser()

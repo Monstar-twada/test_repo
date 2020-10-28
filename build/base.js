@@ -146,4 +146,8 @@ export const baseConfig = {
       }
     },
   },
+  /*
+   ** Nuxt.js typescript
+   */
+  buildModules: ['@nuxt/typescript-build'],
 }
