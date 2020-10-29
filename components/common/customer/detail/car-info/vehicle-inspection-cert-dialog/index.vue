@@ -7,11 +7,8 @@
     title="車検証"
   >
     <div class="body-wrapper">
-      <pdf :src="url" />
-      <!-- <pdf
-        src="https://cdn.rawgit.com/mozilla/pdf.js/c6e8ca86/test/pdfs/freeculture.pdf"
-      /> -->
-      <!-- <img :src="url" alt="" /> -->
+      <pdf v-if="isPdf" :src="url" />
+      <img v-else :src="url" alt="" />
     </div>
   </fg-dialog>
 </template>
@@ -36,6 +33,7 @@ export default {
   data() {
     return {
       visible: this.value,
+      isPdf: null,
       url: '',
     }
   },
@@ -52,7 +50,6 @@ export default {
   },
   mounted() {
     this.getImage()
-    console.log(this.url)
   },
   methods: {
     async getImage() {
@@ -62,10 +59,14 @@ export default {
           `/v1/customers/${this.customerCode}/cars/${this.carCode}/registrationImage`
         )
         this.url = res.url
-        this.url = encodeURI(this.url)
+        this.checkFile(this.url)
       } catch (err) {
         this.$ui.error('[vehicle-inspection-cert-dialog]', err)
       }
+    },
+    // checks if the file is PDF
+    checkFile(link) {
+      link.indexOf('.pdf') > 0 ? (this.isPdf = true) : (this.isPdf = false)
     },
   },
 }
