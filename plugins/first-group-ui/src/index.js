@@ -19,6 +19,7 @@ import FgIcon from './packages/icon/index'
 import FgImage from './packages/image/index'
 import FgImageProcessor from './packages/image-processor/index'
 import FgInput from './packages/input/index'
+import FgLoading from './packages/loading/index'
 import FgMessage from './packages/message/index'
 import FgMessageBox from './packages/message-box/index'
 import FgMonthPicker from './packages/month-picker/index'
@@ -60,6 +61,7 @@ const components = [
   FgImage,
   FgImageProcessor,
   FgInput,
+  FgLoading,
   FgMessage,
   // FgMessageBox,
   FgMonthPicker,
