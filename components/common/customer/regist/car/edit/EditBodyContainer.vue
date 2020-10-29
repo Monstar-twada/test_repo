@@ -624,17 +624,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { DEF_CAR_FORM } from './constants'
 import { FORM_RULES } from './validate'
 import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import { REG_IMAGE_MIME, REG_PDF_MIME } from '~/assets/constants'
+import { browserMixin } from '~/mixins/browser'
 
 export default {
   components: {
     WhiteBox,
     ColumnTitle,
   },
+  mixins: [browserMixin],
   data() {
     const query = this.$route.query
     return {
@@ -646,6 +649,8 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('popup', ['getSaveFlg']),
+    ...mapGetters('auth', ['getStoreCode']),
     saleNewOldCarTypes() {
       return this.$ui.getBasicData('sale_new_old_car_type')
     },
@@ -673,39 +678,34 @@ export default {
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
-    addWindowPopstateEvent() {
-      history.pushState(null, null, window.location.href)
-      window.addEventListener(
-        'popstate',
-        () => {
-          this.clickBrowserSystemButton()
-        },
-        false
-      )
-    },
-    removeWindowPopstateEvent() {
-      window.removeEventListener('popstate', () => {
-        this.clickBrowserSystemButton()
-      })
-    },
 
     clickBrowserSystemButton() {
-      if (!this.$store.getters['popup/getSaveFlg']) return
-      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
-        buttons: {
-          ok: {
-            text: '遷移する',
-          },
-        },
-      })
-        .then(() => {
-          this.$store.dispatch('popup/setFlg', false)
-          this.removeWindowPopstateEvent()
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
-        })
-        .catch(() => {
-          this.addWindowPopstateEvent()
-        })
+        },
+        () => {
+          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+        }
+      )
+      // if (!this.$store.getters['popup/getSaveFlg']) return
+      // this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+      //   buttons: {
+      //     ok: {
+      //       text: '遷移する',
+      //     },
+      //   },
+      // })
+      //   .then(() => {
+      //     this.$store.dispatch('popup/setFlg', false)
+      //     this.removeWindowPopstateEvent()
+      //     this.$router.back()
+      //   })
+      //   .catch(() => {
+      //     this.addWindowPopstateEvent()
+      //   })
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
@@ -736,7 +736,7 @@ export default {
         this.isSubmitting = false
         return
       }
-      this.form.storeCode = $nuxt.$store.state.auth.storeCode
+      this.form.storeCode = this.storeCode
       // String  => Integer (API設計)
       this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
         this.form.tmpRegistrationImageFileCode
@@ -790,12 +790,16 @@ export default {
       this.isSubmitting = false
     },
     handleBack() {
-      this.popup(() =>
-        setTimeout(() => {
-          this.$router.push(
-            `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
-          )
-        }, 300)
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          setTimeout(() => {
+            this.$router.push(
+              `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+            )
+          }, 300)
+        },
+        () => {}
       )
     },
     filerChange(res, type) {

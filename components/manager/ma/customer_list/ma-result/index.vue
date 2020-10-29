@@ -15,7 +15,7 @@
         border
         bold
         width="110"
-        :disabled="disabledBtn"
+        :disabled="!getSaveFlg"
         @click="saveChange"
         >保存</fg-button
       >
@@ -211,7 +211,7 @@
         <template v-slot="item">
           <fg-select
             :value="Number(item.outflow)"
-            :items="options"
+            :items="outflowList"
             placeholder="選択"
             @change="
               handleChangeSelect(
@@ -239,7 +239,7 @@
         border
         bold
         width="110"
-        :disabled="disabledBtn"
+        :disabled="!getSaveFlg"
         @click="saveChange"
         >保存</fg-button
       >
@@ -247,8 +247,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { browserMixin } from '~/mixins/browser'
 export default {
   name: 'MaResult',
+  mixins: [browserMixin],
   props: {
     itemList: {
       type: [Object, Array],
@@ -261,36 +264,28 @@ export default {
   },
   data: () => ({
     currentPage: 1,
-    options: [
-      {
-        text: '選択',
-        value: null,
-      },
-      {
-        text: '買替',
-        value: 1,
-      },
-      {
-        text: '車検',
-        value: 2,
-      },
-      {
-        text: '廃車',
-        value: 3,
-      },
-      {
-        text: '不明',
-        value: 4,
-      },
-    ],
     status: {},
-    saveFlg: false,
-    storeCode: '',
   }),
   computed: {
-    disabledBtn() {
-      return this.$store.getters['popup/getSaveFlg'] === false
+    ...mapGetters('popup', ['getSaveFlg']),
+    ...mapGetters('auth', ['getStoreCode']),
+    outflowList() {
+      const outflowData = this.$ui.getBasicData('outflow')
+      const outflowDefault = {
+        text: '選択',
+        value: null,
+      }
+      outflowData.map((item) => {
+        return {
+          text: item.text,
+          value: item.value + 1,
+        }
+      })
+      return [outflowDefault, ...outflowData]
     },
+    // disabledBtn() {
+    //   return this.$store.getters['popup/getSaveFlg'] === false
+    // },
   },
   watch: {
     value(val) {
@@ -301,29 +296,13 @@ export default {
     },
   },
   mounted() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
-    this.addWindowPopstateEvent()
+    // this.addWindowPopstateEvent()
+    this.addWindowPopstateEvent(this.clickBrowserSystemButton)
   },
   destroyed() {
     // TODO
-    // 2改目バックボターを押したら、前のページを戻すという事象があるのため
-    // 他のページテストが必要
-    // window.removeEventListener('popstate', this.clickBrowserSystemButton)
   },
   methods: {
-    addWindowPopstateEvent() {
-      history.pushState(null, null, window.location.href)
-      window.addEventListener(
-        'popstate',
-        () => {
-          this.clickBrowserSystemButton()
-        },
-        false
-      )
-    },
-    removeWindowPopstateEvent() {
-      window.removeEventListener('popstate', this.clickBrowserSystemButton)
-    },
     handleChange(property, id, val, isToString = false) {
       let value = Number(val)
       if (isToString) value = value.toString()
@@ -371,13 +350,21 @@ export default {
       Object.keys(this.status).forEach((index) => {
         const itemData = this.findItemInfoById(index.toString())
         const {
+          // 納車済
           deliveredFlag,
+          // 車検入庫
           carInspectionFlag,
+          // 本予約
           reservationFlag,
+          // 仮予約
           tentiveReservationFlag,
+          // 検討中
           underReviewFlag,
+          // 不通
           failureFlag,
+          // 他社流出
           outflow,
+          // 買換意向
           purchaseIntention,
         } = itemData
         const params = {
@@ -393,7 +380,7 @@ export default {
         }
         promises.push(
           this.$api.put(
-            `/v1/attractingCustomer/${this.storeCode}/${index}`,
+            `/v1/attractingCustomer/${this.getStoreCode}/${index}`,
             params
           )
         )
@@ -407,87 +394,94 @@ export default {
       })
     },
 
-    saveChangeDailog() {
-      if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('入力したデータを保存しますか？')
-          .then(() => {
-            this.saveChangeDai()
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
-          })
-          .catch((error) => {
-            console.error({ error })
-          })
-      }
-    },
+    /*
+     * 保存用ConfirmDailog
+     */
+    // saveChangeDailog() {
+    //   const flg = this.$store.getters['popup/getSaveFlg']
+    //   this.popupConfirm(
+    //     flg,
+    //     () => {
+    //       this.$store.dispatch('popup/setFlg', false)
+    //       this.status = []
+    //     },
+    //     () => {}
+    //   )
+    // },
     handleClickName(item) {
-      if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
-          buttons: {
-            ok: {
-              text: '遷移する',
-            },
-          },
-        })
-          .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
-            this.$router.push({
-              path: `/customer/detail/`,
-              query: { customerCode: item.customerCode },
-            })
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          this.status = []
+          this.$router.push({
+            path: `/customer/detail/`,
+            query: { customerCode: item.customerCode },
           })
-          .catch(() => {
-            // console.log('cancel')
-          })
-      } else {
-        this.$router.push({
-          path: `/customer/detail/`,
-          query: { customerCode: item.customerCode },
-        })
-      }
+        },
+        () => {}
+      )
     },
 
     clickBrowserSystemButton() {
-      if (!this.$store.getters['popup/getSaveFlg']) return
-      this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
-        buttons: {
-          ok: {
-            text: '遷移する',
-          },
-        },
-      })
-        .then(() => {
-          this.$store.dispatch('popup/setFlg', false)
-          this.removeWindowPopstateEvent()
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
           this.status = []
+          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
-        })
-        .catch(() => {
-          this.addWindowPopstateEvent()
-        })
+        },
+        () => {
+          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+        }
+      )
+
+      // if (!this.$store.getters['popup/getSaveFlg']) return
+      // this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+      //   buttons: {
+      //     ok: {
+      //       text: '遷移する',
+      //     },
+      //   },
+      // })
+      //   .then(() => {
+      //     this.$store.dispatch('popup/setFlg', false)
+      //     this.$ui.removeWindowPopstateEvent(this.clickBrowserSystemButton)
+      //     this.status = []
+      //     this.$router.back()
+      //   })
+      //   .catch(() => {
+      //     // console.log('cancel')
+      //   })
     },
 
     handleBeforeChange(next) {
-      if (this.$store.getters['popup/getSaveFlg']) {
-        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
-          buttons: {
-            ok: {
-              text: '遷移する',
-            },
-          },
-        })
-          .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
-            next()
-          })
-          .catch(() => {
-            // console.log('cancel')
-          })
-      } else {
-        next()
-      }
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          this.status = []
+          next()
+        },
+        () => {}
+      )
+      // if (this.$store.getters['popup/getSaveFlg']) {
+      //   this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+      //     buttons: {
+      //       ok: {
+      //         text: '遷移する',
+      //       },
+      //     },
+      //   })
+      //     .then(() => {
+      //       this.$store.dispatch('popup/setFlg', false)
+      //       this.status = []
+      //       next()
+      //     })
+      //     .catch(() => {
+      //       // console.log('cancel')
+      //     })
+      // } else {
+      //   next()
+      // }
     },
     findItemInfoById(id) {
       return this.itemList.results.find(
