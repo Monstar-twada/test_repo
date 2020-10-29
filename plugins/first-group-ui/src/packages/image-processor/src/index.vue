@@ -44,11 +44,13 @@
       :url="blobUrl"
       @change="cropChange"
     />
+    <fg-loading :is-visable="isShowLoading" />
   </div>
 </template>
 
 <script>
 import { handleMediaFile, utils } from 'image-process'
+import heic2any from 'heic2any'
 import { isFunction, isNumberLike } from '../../../libs/index'
 import Cropper from './cropper/index'
 
@@ -60,7 +62,7 @@ export default {
   props: {
     accept: {
       type: String,
-      default: 'image/*',
+      default: 'image/* .heic',
     },
     readonly: Boolean,
     url: {
@@ -114,6 +116,7 @@ export default {
       cropperVisible: false,
       blobUrl: null,
       file: null,
+      isShowLoading: false,
     }
   },
   computed: {
@@ -163,8 +166,17 @@ export default {
       this.input.click()
     },
     inputChange(e) {
+      this.isShowLoading = true
       const file = e.target.files[0]
-      if (isFunction(this.validate)) {
+      if (file.type === 'image/heic') {
+        heic2any({ blob: file, toType: 'image/jpeg' })
+          .then((conversionResult) => {
+            this.handleFile(conversionResult)
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+      } else if (isFunction(this.validate)) {
         this.validate(file, () => {
           this.handleFile(file)
         })
@@ -191,6 +203,7 @@ export default {
         this.$emit('change', { ...this.data })
         return
       }
+      this.isShowLoading = false
       const { width, height } = this.options
       if (width && height) {
         this.blobUrl = url
