@@ -7,13 +7,18 @@
     title="車検証"
   >
     <div class="body-wrapper">
-      <img :src="url" alt="" />
+      <pdf v-if="isPdf" :src="url" />
+      <img v-else :src="url" alt="" />
     </div>
   </fg-dialog>
 </template>
 
 <script>
+import pdf from 'vue-pdf'
 export default {
+  components: {
+    pdf,
+  },
   props: {
     value: Boolean,
     customerCode: {
@@ -28,6 +33,7 @@ export default {
   data() {
     return {
       visible: this.value,
+      isPdf: null,
       url: '',
     }
   },
@@ -53,9 +59,14 @@ export default {
           `/v1/customers/${this.customerCode}/cars/${this.carCode}/registrationImage`
         )
         this.url = res.url
+        this.checkFile(this.url)
       } catch (err) {
         this.$ui.error('[vehicle-inspection-cert-dialog]', err)
       }
+    },
+    // checks if the file is PDF
+    checkFile(link) {
+      link.indexOf('.pdf') > 0 ? (this.isPdf = true) : (this.isPdf = false)
     },
   },
 }

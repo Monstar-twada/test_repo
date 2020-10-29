@@ -56,8 +56,8 @@
         <fg-form-item label="車検証">
           <fg-image-processor
             accept="*"
-            icon="license-front"
-            :url="registrationImage"
+            :icon="isPdf ? 'pdf' : 'license-front'"
+            :url="isPdf ? '' : registrationImage"
             :validate="customValidate"
             @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
@@ -646,6 +646,7 @@ export default {
       errors: {},
       registrationImage: '',
       isSubmitting: false,
+      isPdf: null,
     }
   },
   computed: {
@@ -668,6 +669,7 @@ export default {
       .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
       .then((res) => {
         this.registrationImage = res.url
+        this.checkFile(res.url)
       })
       .catch(console.error)
   },
@@ -675,6 +677,10 @@ export default {
     this.addWindowPopstateEvent()
   },
   methods: {
+    // checks if the file is PDF
+    checkFile(link) {
+      link.indexOf('.pdf') > 0 ? (this.isPdf = true) : (this.isPdf = false)
+    },
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
     },
@@ -803,6 +809,10 @@ export default {
       )
     },
     filerChange(res, type) {
+      this.isPdf = false
+      // if (res.type === 'application/pdf') {
+      //   this.isPdf = true
+      // }
       if (!res.data) {
         this.deleteFile(type)
       }
