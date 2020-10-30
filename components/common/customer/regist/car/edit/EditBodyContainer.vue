@@ -670,6 +670,7 @@ export default {
       .then((res) => {
         this.registrationImage = res.url
         this.checkFile(res.url)
+        console.log('res-url', res)
       })
       .catch(console.error)
   },
@@ -679,7 +680,7 @@ export default {
   methods: {
     // checks if the file is PDF
     checkFile(link) {
-      this.isPdf = !!link.indexOf('.pdf') > 0
+      this.isPdf = !!(link.indexOf('.pdf') > 0)
     },
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
