@@ -22,7 +22,7 @@ export const getters = {
   getStoreCode(state) {
     return state.storeCode
   },
-  getUserCcode(state) {
+  getUserCode(state) {
     return state.userCode
   },
   getCompanyCode(state) {

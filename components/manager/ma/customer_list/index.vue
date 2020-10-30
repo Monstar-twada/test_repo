@@ -89,7 +89,6 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      this.storeCode = this.getStoreCode
       this.$nuxt.$loading.start()
       this.apiParams = {
         ...this.$route.query,
@@ -126,7 +125,7 @@ export default {
       }
       try {
         const res = await this.$api.post(
-          `/v1/attractingCustomersMonth/${this.storeCode}/${this.apiParams.date}`,
+          `/v1/attractingCustomersMonth/${this.getStoreCode}/${this.apiParams.date}`,
           params
         )
         this.maStatus = res.results[0]

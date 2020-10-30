@@ -84,7 +84,7 @@ export default {
   },
   computed: {
     ...mapGetters('popup', ['getSaveFlg']),
-    ...mapGetters('auth', ['getStortCode']),
+    ...mapGetters('auth', ['getStoreCode']),
     isFirstIndex() {
       return this.index === 0
     },
@@ -173,7 +173,7 @@ export default {
         .get(`/v1/store`)
         .then((res) => {
           const storeList = res.results[0].area
-          const storeCode = this.storeCode
+          const storeCode = this.getStoreCode
           if (storeCode) {
             this.selectList = storeList
               .filter((item) => item.store.storeCode === storeCode)
