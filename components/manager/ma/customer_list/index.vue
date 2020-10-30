@@ -89,7 +89,7 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-      this.storeCode = this.getStoreCode
+      // this.storeCode = this.getStoreCode
       this.$nuxt.$loading.start()
       this.apiParams = {
         ...this.$route.query,
