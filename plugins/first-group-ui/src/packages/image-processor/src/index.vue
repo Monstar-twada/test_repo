@@ -2,7 +2,7 @@
   <div class="fg-image-processor">
     <div class="__view-wrapper" :style="viewStyle" :class="bgIconClass">
       <fg-image
-        v-if="picUrl"
+        v-show="picUrl && data.type !== 'application/pdf'"
         :src="picUrl"
         :width="width"
         :height="height"
@@ -171,15 +171,24 @@ export default {
       if (file.type === 'image/heic') {
         heic2any({ blob: file, toType: 'image/jpeg' })
           .then((conversionResult) => {
-            this.handleFile(conversionResult)
+            if (isFunction(this.validate)) {
+              this.validate(conversionResult, () => {
+                this.handleFile(conversionResult)
+              })
+              this.isShowLoading = false
+            } else {
+              this.handleFile(conversionResult)
+            }
           })
           .catch((err) => {
+            this.isShowLoading = false
             console.error(err)
           })
       } else if (isFunction(this.validate)) {
         this.validate(file, () => {
           this.handleFile(file)
         })
+        this.isShowLoading = false
       } else {
         this.handleFile(file)
       }
@@ -189,6 +198,7 @@ export default {
       this.file = file
       const url = utils.toBlobUrl(file)
       // image file
+      this.isShowLoading = false
       const { type, size } = file
       if (!/^image\/\w+/i.test(type)) {
         this.data = {
@@ -203,7 +213,6 @@ export default {
         this.$emit('change', { ...this.data })
         return
       }
-      this.isShowLoading = false
       const { width, height } = this.options
       if (width && height) {
         this.blobUrl = url

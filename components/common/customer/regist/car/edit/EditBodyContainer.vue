@@ -646,7 +646,7 @@ export default {
       errors: {},
       registrationImage: '',
       isSubmitting: false,
-      isPdf: null,
+      isPdf: false,
     }
   },
   computed: {
@@ -679,7 +679,7 @@ export default {
   methods: {
     // checks if the file is PDF
     checkFile(link) {
-      link.indexOf('.pdf') > 0 ? (this.isPdf = true) : (this.isPdf = false)
+      this.isPdf = !!link.indexOf('.pdf') > 0
     },
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
@@ -742,7 +742,7 @@ export default {
         this.isSubmitting = false
         return
       }
-      this.form.storeCode = this.storeCode
+      this.form.storeCode = this.getStoreCode
       // String  => Integer (API設計)
       this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
         this.form.tmpRegistrationImageFileCode
@@ -810,9 +810,6 @@ export default {
     },
     filerChange(res, type) {
       this.isPdf = false
-      // if (res.type === 'application/pdf') {
-      //   this.isPdf = true
-      // }
       if (!res.data) {
         this.deleteFile(type)
       }
