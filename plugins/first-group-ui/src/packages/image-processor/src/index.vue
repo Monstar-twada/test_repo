@@ -2,7 +2,7 @@
   <div class="fg-image-processor">
     <div class="__view-wrapper" :style="viewStyle" :class="bgIconClass">
       <fg-image
-        v-if="picUrl"
+        v-show="picUrl && data.type !== 'application/pdf'"
         :src="picUrl"
         :width="width"
         :height="height"
@@ -44,11 +44,13 @@
       :url="blobUrl"
       @change="cropChange"
     />
+    <fg-loading :is-visable="isShowLoading" />
   </div>
 </template>
 
 <script>
 import { handleMediaFile, utils } from 'image-process'
+import heic2any from 'heic2any'
 import { isFunction, isNumberLike } from '../../../libs/index'
 import Cropper from './cropper/index'
 
@@ -60,7 +62,7 @@ export default {
   props: {
     accept: {
       type: String,
-      default: 'image/*',
+      default: 'image/* .heic',
     },
     readonly: Boolean,
     url: {
@@ -114,6 +116,7 @@ export default {
       cropperVisible: false,
       blobUrl: null,
       file: null,
+      isShowLoading: false,
     }
   },
   computed: {
@@ -163,11 +166,29 @@ export default {
       this.input.click()
     },
     inputChange(e) {
+      this.isShowLoading = true
       const file = e.target.files[0]
-      if (isFunction(this.validate)) {
+      if (file.type === 'image/heic') {
+        heic2any({ blob: file, toType: 'image/jpeg' })
+          .then((conversionResult) => {
+            if (isFunction(this.validate)) {
+              this.validate(conversionResult, () => {
+                this.handleFile(conversionResult)
+              })
+              this.isShowLoading = false
+            } else {
+              this.handleFile(conversionResult)
+            }
+          })
+          .catch((err) => {
+            this.isShowLoading = false
+            console.error(err)
+          })
+      } else if (isFunction(this.validate)) {
         this.validate(file, () => {
           this.handleFile(file)
         })
+        this.isShowLoading = false
       } else {
         this.handleFile(file)
       }
@@ -177,6 +198,7 @@ export default {
       this.file = file
       const url = utils.toBlobUrl(file)
       // image file
+      this.isShowLoading = false
       const { type, size } = file
       if (!/^image\/\w+/i.test(type)) {
         this.data = {

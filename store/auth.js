@@ -9,6 +9,27 @@ export const state = () => ({
   userCode: null,
 })
 
+export const getters = {
+  isAuthenticated(state) {
+    return !!state.user
+  },
+  getUser(state) {
+    return state.user
+  },
+  getToken(state) {
+    return state.token
+  },
+  getStoreCode(state) {
+    return state.storeCode
+  },
+  getUserCode(state) {
+    return state.userCode
+  },
+  getCompanyCode(state) {
+    return state.companyCode
+  },
+}
+
 export const mutations = {
   setUser(state, user) {
     state.isAuthenticated = !!user

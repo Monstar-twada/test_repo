@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { DEF_FORM } from './constants'
 
 export default {
@@ -89,6 +90,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('auth', ['getStoreCode', 'getUserCode']),
     transactionTypes() {
       return this.$ui.getBasicData('transaction_type')
     },
@@ -112,8 +114,8 @@ export default {
     },
   },
   created() {
-    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
-    this.form.contactStaffId = $nuxt.$store.state.auth.userCode
+    this.form.contactStoreCode = this.getStoreCode
+    this.form.contactStaffCode = this.getUserCode
   },
   methods: {
     async save() {

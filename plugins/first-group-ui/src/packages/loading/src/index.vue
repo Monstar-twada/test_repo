@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading" class="loading-page" @scroll.prevent @touchmove.prevent>
+  <div v-if="isVisable" class="loading-page" @scroll.prevent @touchmove.prevent>
     <div class="spinner">
       <div class="rect1"></div>
       <div class="rect2"></div>
@@ -12,15 +12,11 @@
 
 <script>
 export default {
-  data: () => ({
-    loading: false,
-  }),
-  methods: {
-    start() {
-      this.loading = true
-    },
-    finish() {
-      this.loading = false
+  name: 'FgLoading',
+  props: {
+    isVisable: {
+      type: Boolean,
+      default: false,
     },
   },
 }

@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Logo from '~/components/common/logo/index'
 export default {
   components: {
@@ -104,6 +105,9 @@ export default {
       },
     }
   },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated']),
+  },
   watch: {
     email(val) {
       this.validation()
@@ -117,7 +121,7 @@ export default {
     // console.log(this.$store)
     try {
       // await this.$store.dispatch('auth/load')
-      if (this.$store.state.auth.isAuthenticated === false) {
+      if (this.isAuthenticated === false) {
         await this.$store.dispatch('auth/load')
       }
     } catch (err) {
@@ -144,7 +148,9 @@ export default {
       const count = this.validation()
       if (count === 0) {
         try {
+          this.$nuxt.$loading.start()
           await this.$store.dispatch('auth/login', this.form)
+          this.$nuxt.$loading.finish()
           this.$login.success.call(this)
         } catch (error) {
           if (
