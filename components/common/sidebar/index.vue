@@ -112,7 +112,6 @@ export default {
     },
   },
   created() {
-    console.log(this.storeCode)
     this.resetRouteIndex()
     this.getStoreList().then(() => {
       this.selectedResult = 1
