@@ -670,7 +670,6 @@ export default {
       .then((res) => {
         this.registrationImage = res.url
         this.checkFile(res.url)
-        console.log('res-url', res)
       })
       .catch(console.error)
   },
