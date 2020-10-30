@@ -4,7 +4,7 @@
     <div class="signin-index-form-wrapper">
       <fg-form label-width="140px">
         <fg-form-item label="所属部署">
-          <fg-row gutter="20">
+          <fg-row gutter="0">
             <fg-col span="12">
               <fg-select
                 v-model="selectValue1"
@@ -15,21 +15,21 @@
           </fg-row>
         </fg-form-item>
         <fg-form-item label="氏名">
-          <fg-row gutter="20">
-            <fg-col span="12">
+          <fg-row gutter="0">
+            <fg-col span="11">
               <fg-input placeholder="姓"></fg-input>
             </fg-col>
-            <fg-col span="12">
+            <fg-col span="11" offset="2">
               <fg-input placeholder="名"></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
         <fg-form-item label="フリガナ">
-          <fg-row gutter="20">
-            <fg-col span="12">
+          <fg-row gutter="0">
+            <fg-col span="11">
               <fg-input placeholder="セイ"></fg-input>
             </fg-col>
-            <fg-col span="12">
+            <fg-col span="11" offset="2">
               <fg-input placeholder="メイ"></fg-input>
             </fg-col>
           </fg-row>

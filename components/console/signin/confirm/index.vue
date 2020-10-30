@@ -94,6 +94,9 @@ export default {
   .signin-index-form-wrapper {
     .fg-form {
       padding: 20px 40px;
+      .fg-form-item {
+        margin-bottom: 5px;
+      }
     }
     .signin-index-form-items {
       display: flex;
