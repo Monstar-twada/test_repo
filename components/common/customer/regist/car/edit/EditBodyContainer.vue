@@ -57,7 +57,7 @@
           <fg-image-processor
             accept="*"
             :icon="isPdf ? 'pdf' : 'license-front'"
-            :url="isPdf ? '' : registrationImage"
+            :url="registrationImage"
             :validate="customValidate"
             @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
