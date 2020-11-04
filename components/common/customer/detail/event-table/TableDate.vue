@@ -12,11 +12,11 @@ export default {
   },
   computed: {
     date() {
-      const str = this.$ui.formatDate(this.value, 'yyyy/MM/dd (W)|hh:mm')
-      return str.split('|')
+      const str = this.$ui.formatDate(this.value, 'yyyy/MM/dd (W)|hh:mm');
+      return str.split('|');
     },
   },
-}
+};
 </script>
 
 <style></style>

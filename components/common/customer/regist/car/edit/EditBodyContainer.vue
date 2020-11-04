@@ -624,11 +624,11 @@
 </template>
 
 <script>
-import { DEF_CAR_FORM } from './constants'
-import { FORM_RULES } from './validate'
-import WhiteBox from '~/components/common/customer/common/WhiteBox'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { REG_IMAGE_MIME, REG_PDF_MIME } from '~/assets/constants'
+import { DEF_CAR_FORM } from './constants';
+import { FORM_RULES } from './validate';
+import WhiteBox from '~/components/common/customer/common/WhiteBox';
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
+import { REG_IMAGE_MIME, REG_PDF_MIME } from '~/assets/constants';
 
 export default {
   components: {
@@ -636,61 +636,61 @@ export default {
     ColumnTitle,
   },
   data() {
-    const query = this.$route.query
+    const query = this.$route.query;
     return {
       query,
       form: {},
       errors: {},
       registrationImage: '',
       isSubmitting: false,
-    }
+    };
   },
   computed: {
     saleNewOldCarTypes() {
-      return this.$ui.getBasicData('sale_new_old_car_type')
+      return this.$ui.getBasicData('sale_new_old_car_type');
     },
   },
   watch: {
     form() {
-      this.$store.dispatch('popup/setFlg', true)
+      this.$store.dispatch('popup/setFlg', true);
     },
   },
   created() {
-    this.getCarInfo()
+    this.getCarInfo();
     // 車検証画像取得
-    const { customerCode, carCode } = this.query
+    const { customerCode, carCode } = this.query;
     this.$api
       .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
       .then((res) => {
-        this.registrationImage = res.url
+        this.registrationImage = res.url;
       })
-      .catch(console.error)
+      .catch(console.error);
   },
   mounted() {
-    this.addWindowPopstateEvent()
+    this.addWindowPopstateEvent();
   },
   methods: {
     formChange() {
-      this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form);
     },
     addWindowPopstateEvent() {
-      history.pushState(null, null, window.location.href)
+      history.pushState(null, null, window.location.href);
       window.addEventListener(
         'popstate',
         () => {
-          this.clickBrowserSystemButton()
+          this.clickBrowserSystemButton();
         },
         false
-      )
+      );
     },
     removeWindowPopstateEvent() {
       window.removeEventListener('popstate', () => {
-        this.clickBrowserSystemButton()
-      })
+        this.clickBrowserSystemButton();
+      });
     },
 
     clickBrowserSystemButton() {
-      if (!this.$store.getters['popup/getSaveFlg']) return
+      if (!this.$store.getters['popup/getSaveFlg']) return;
       this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
         buttons: {
           ok: {
@@ -699,13 +699,13 @@ export default {
         },
       })
         .then(() => {
-          this.$store.dispatch('popup/setFlg', false)
-          this.removeWindowPopstateEvent()
-          this.$router.back()
+          this.$store.dispatch('popup/setFlg', false);
+          this.removeWindowPopstateEvent();
+          this.$router.back();
         })
         .catch(() => {
-          this.addWindowPopstateEvent()
-        })
+          this.addWindowPopstateEvent();
+        });
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
@@ -717,107 +717,107 @@ export default {
           },
         })
           .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            callback()
+            this.$store.dispatch('popup/setFlg', false);
+            callback();
           })
           .catch((error) => {
-            console.error({ error })
-          })
+            console.error({ error });
+          });
       } else {
-        callback()
+        callback();
       }
     },
     async handleConfirm() {
-      if (this.isSubmitting) return
-      this.isSubmitting = true
-      this.formChange()
+      if (this.isSubmitting) return;
+      this.isSubmitting = true;
+      this.formChange();
       if (this.errors.length) {
-        this.$alert('入力項目にはエラーが発生しました、チェックしてください！')
-        this.isSubmitting = false
-        return
+        this.$alert('入力項目にはエラーが発生しました、チェックしてください！');
+        this.isSubmitting = false;
+        return;
       }
-      this.form.storeCode = $nuxt.$store.state.auth.storeCode
+      this.form.storeCode = $nuxt.$store.state.auth.storeCode;
       // String  => Integer (API設計)
       this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
         this.form.tmpRegistrationImageFileCode
-      )
-      this.form.carMileage = this.fmtDataToNumber(this.form.carMileage)
+      );
+      this.form.carMileage = this.fmtDataToNumber(this.form.carMileage);
       // Integer => String (API設計)
-      this.form.carTax = this.fmtDataToString(this.form.carTax)
+      this.form.carTax = this.fmtDataToString(this.form.carTax);
 
-      this.form.weightTax = this.fmtDataToString(this.form.weightTax)
+      this.form.weightTax = this.fmtDataToString(this.form.weightTax);
       this.form.libilityInsurance = this.fmtDataToString(
         this.form.libilityInsurance
-      )
-      this.form.recycleFee = this.fmtDataToString(this.form.recycleFee)
+      );
+      this.form.recycleFee = this.fmtDataToString(this.form.recycleFee);
       this.form.monthlyGasolineCost = this.fmtDataToString(
         this.form.monthlyGasolineCost
-      )
+      );
       this.form.monthlyParkingFee = this.fmtDataToString(
         this.form.monthlyParkingFee
-      )
+      );
       this.form.carInsuranceFee = this.fmtDataToString(
         this.form.carInsuranceFee
-      )
+      );
 
       // Boolean => String (API設計)
       if (typeof this.form.purchaseIntention === 'boolean') {
         this.form.purchaseIntention = Number(
           this.form.purchaseIntention
-        ).toString()
+        ).toString();
       }
       Object.keys(this.form).forEach((key) => {
         if (typeof this.form[key] === 'string' && this.form[key] === '') {
-          this.form[key] = null
+          this.form[key] = null;
         }
-      })
-      const { customerCode, carCode } = this.query
+      });
+      const { customerCode, carCode } = this.query;
       try {
         await this.$api.put(
           `/v1/customers/${customerCode}/cars/${carCode}`,
           this.form
-        )
+        );
         // await this.$alert('車両編集成功しました！', { type: 'success' })
         setTimeout(() => {
-          this.$store.dispatch('popup/setFlg', false)
+          this.$store.dispatch('popup/setFlg', false);
           this.$router.push(
             `/customer/detail/?customerCode=${this.query.customerCode}`
-          )
-        }, 300)
+          );
+        }, 300);
       } catch (err) {
-        if (err) this.$alert(err.message)
+        if (err) this.$alert(err.message);
       }
-      this.isSubmitting = false
+      this.isSubmitting = false;
     },
     handleBack() {
       this.popup(() =>
         setTimeout(() => {
           this.$router.push(
             `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
-          )
+          );
         }, 300)
-      )
+      );
     },
     filerChange(res, type) {
       if (!res.data) {
-        this.deleteFile(type)
+        this.deleteFile(type);
       }
 
       this.$api
         .upload(res)
         .then((data) => {
-          this.deleteFile(type)
-          this.form[type] = data.id
+          this.deleteFile(type);
+          this.form[type] = data.id;
         })
         .catch((err) => {
-          this.$alert(err.message)
-        })
+          this.$alert(err.message);
+        });
     },
     deleteFile(type) {
-      const fileId = this.form[type]
-      if (!fileId) return
-      console.error('delete file:', fileId)
-      const customerCode = this.query.customerCode
+      const fileId = this.form[type];
+      if (!fileId) return;
+      console.error('delete file:', fileId);
+      const customerCode = this.query.customerCode;
       switch (type) {
         case 'facePhoto':
           this.$api
@@ -826,9 +826,9 @@ export default {
               // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
-              console.error(err)
-            })
-          break
+              console.error(err);
+            });
+          break;
         case 'licenseImageFront':
         case 'licenseImageBack':
           this.$api
@@ -837,58 +837,58 @@ export default {
               // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
-              console.error(err)
-            })
-          break
+              console.error(err);
+            });
+          break;
       }
     },
     customValidate(file, next) {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
-        return
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください');
+        return;
       }
 
       if (file.size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルを選択してください')
-        return
+        this.$alert('5MBまでのファイルを選択してください');
+        return;
       }
-      next()
+      next();
     },
     async getCarInfo() {
       try {
-        const { carCode, customerCode } = this.query
+        const { carCode, customerCode } = this.query;
         const res = await this.$api.get(
           `/v1/customers/${customerCode}/cars/${carCode}`
-        )
-        const form = {}
+        );
+        const form = {};
         Object.keys(DEF_CAR_FORM).forEach((key) => {
-          form[key] = res[key]
-        })
+          form[key] = res[key];
+        });
         // string to boolean
         if (form.purchaseIntention) {
-          form.purchaseIntention = form.purchaseIntention === '1'
+          form.purchaseIntention = form.purchaseIntention === '1';
         }
 
-        this.form = form
+        this.form = form;
       } catch (err) {
-        this.$alert(err.message)
-        console.error(err)
+        this.$alert(err.message);
+        console.error(err);
       }
     },
 
     fmtDataToNumber(data) {
-      if (data === null) return null
-      if (typeof data === 'number') return data
-      if (typeof data === 'string') return Number(data)
+      if (data === null) return null;
+      if (typeof data === 'number') return data;
+      if (typeof data === 'string') return Number(data);
     },
 
     fmtDataToString(data) {
-      if (data === null) return null
-      if (typeof data === 'string') return data
-      if (typeof data === 'number') return data.toString()
+      if (data === null) return null;
+      if (typeof data === 'string') return data;
+      if (typeof data === 'number') return data.toString();
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

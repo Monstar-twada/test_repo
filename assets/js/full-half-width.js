@@ -4,7 +4,7 @@
  * Date: 2020-08-26 14:53
  */
 function isString(s) {
-  return typeof s === 'string'
+  return typeof s === 'string';
 }
 
 // kane map

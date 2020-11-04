@@ -1,5 +1,5 @@
 <script>
-import FgBreadcrumbsItem from './BreadcrumbsItem.vue'
+import FgBreadcrumbsItem from './BreadcrumbsItem.vue';
 export default {
   name: 'FgBreadcrumbs',
 
@@ -12,15 +12,15 @@ export default {
 
   methods: {
     genItems(createElement) {
-      const items = []
-      const hasSlot = !!this.$scopedSlots.item
-      const keys = []
+      const items = [];
+      const hasSlot = !!this.$scopedSlots.item;
+      const keys = [];
       for (let i = 0; i < this.items.length; i++) {
-        const item = this.items[i]
-        keys.push(item.text)
+        const item = this.items[i];
+        keys.push(item.text);
 
         if (hasSlot) {
-          items.push(item)
+          items.push(item);
         } else {
           items.push(
             createElement(
@@ -31,25 +31,25 @@ export default {
               },
               [item.text]
             )
-          )
+          );
         }
       }
 
-      return items
+      return items;
     },
   },
 
   render(createElement) {
-    const children = this.$slots.default || this.genItems(createElement)
+    const children = this.$slots.default || this.genItems(createElement);
     return createElement(
       'ul',
       {
         staticClass: 'fg-breadcrumbs',
       },
       children
-    )
+    );
   },
-}
+};
 </script>
 <style lang="scss">
 .fg-breadcrumbs {

@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import CustomerPart from '~/components/manager/send/common/CustomerPart.vue'
-import RequestKindPart from '~/components/manager/send/common/RequestKindPart.vue'
-import TextAreaInfo from '~/components/manager/send/common/TextAreaInfo.vue'
-import SubmitButton from '~/components/manager/send/common/SubmitButton.vue'
+import CustomerPart from '~/components/manager/send/common/CustomerPart.vue';
+import RequestKindPart from '~/components/manager/send/common/RequestKindPart.vue';
+import TextAreaInfo from '~/components/manager/send/common/TextAreaInfo.vue';
+import SubmitButton from '~/components/manager/send/common/SubmitButton.vue';
 
 export default {
   name: 'FormContainer',
@@ -39,7 +39,7 @@ export default {
         '・日時場所などの取り決めがある場合は記載してください\n・対応車両のメーカー・車種・ナンバー等の特徴はお書きください\n・対応してほしい作業内容',
     },
   }),
-}
+};
 </script>
 
 <style lang="scss" scoped>

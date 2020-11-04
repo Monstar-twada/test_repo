@@ -3,7 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-08-14 14:50
  */
-import { arrowLeft, children } from './arrow-left'
+import { arrowLeft, children } from './arrow-left';
 
 export const arrowTop = {
   w: arrowLeft.h,
@@ -17,4 +17,4 @@ export const arrowTop = {
       c: children,
     },
   ],
-}
+};

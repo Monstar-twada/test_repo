@@ -29,8 +29,8 @@
   </div>
 </template>
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import CarList from '~/components/manager/send/form-9/car-list/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
+import CarList from '~/components/manager/send/form-9/car-list/index';
 export default {
   components: {
     Breadcrumbs,
@@ -43,7 +43,7 @@ export default {
         return {
           lastName: '',
           firstName: '',
-        }
+        };
       },
     },
   },
@@ -79,9 +79,9 @@ export default {
           iconSrc: 'sale',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .context {

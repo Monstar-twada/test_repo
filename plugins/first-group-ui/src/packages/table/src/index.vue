@@ -47,11 +47,11 @@
 </template>
 
 <script>
-import Column from './js/column.js'
-import Row from './js/row.js'
-import { classList } from './js/utils.js'
-import TableColumnHeader from './TableColumnHeader'
-import TableRow from './TableRow'
+import Column from './js/column.js';
+import Row from './js/row.js';
+import { classList } from './js/utils.js';
+import TableColumnHeader from './TableColumnHeader';
+import TableRow from './TableRow';
 
 export default {
   name: 'FgTable',
@@ -64,7 +64,7 @@ export default {
     data: {
       type: Array,
       default: () => {
-        return []
+        return [];
       },
     },
     tableClass: {
@@ -99,79 +99,79 @@ export default {
 
   computed: {
     fullTableClass() {
-      return classList('fg-table__table', this.tableClass)
+      return classList('fg-table__table', this.tableClass);
     },
 
     fullTableHeadClass() {
-      return classList('fg-table__table__head', this.theadClass)
+      return classList('fg-table__table__head', this.theadClass);
     },
 
     fullTableBodyClass() {
-      return classList('fg-table__table__body', this.tbodyClass)
+      return classList('fg-table__table__body', this.tbodyClass);
     },
 
     usesLocalData() {
-      return Array.isArray(this.data)
+      return Array.isArray(this.data);
     },
 
     isGroupBy() {
-      return !!this.groupBy
+      return !!this.groupBy;
     },
 
     displayedRows() {
       if (!this.isGroupBy) {
-        return this.sortedRows
+        return this.sortedRows;
       } else {
-        let groupIndexCode = 0
+        let groupIndexCode = 0;
         this.sortedRows.forEach((row, index) => {
           if (
             index === 0 ||
             row.data[this.groupBy] !==
               this.sortedRows[index - 1].data[this.groupBy]
           ) {
-            groupIndexCode += 1
+            groupIndexCode += 1;
           }
-          row.data.groupIndex = groupIndexCode
-        })
-        return this.sortedRows
+          row.data.groupIndex = groupIndexCode;
+        });
+        return this.sortedRows;
       }
     },
 
     sortedRows() {
       if (!this.usesLocalData) {
-        return this.rows
+        return this.rows;
       }
 
       if (this.sort.fieldName === '') {
-        return this.rows
+        return this.rows;
       }
 
       if (this.sort.order === '') {
-        return this.rows
+        return this.rows;
       }
 
       if (this.columns.length === 0) {
-        return this.rows
+        return this.rows;
       }
 
-      const sortColumn = this.getColumn(this.sort.fieldName)
+      const sortColumn = this.getColumn(this.sort.fieldName);
 
       if (!sortColumn) {
-        return this.rows
+        return this.rows;
       }
 
-      const sortedRow = this.sortRows
+      const sortedRow = this.sortRows;
 
       return sortedRow.sort(
         sortColumn.getSortPredicate(this.sort.order, this.columns)
-      )
+      );
     },
   },
 
   watch: {
     data() {
       if (this.usesLocalData) {
-        this.mapDataToRows()
+        this.mapDataToRows();
       }
     },
   },
@@ -179,90 +179,90 @@ export default {
   mounted() {
     const columnComponents = this.$slots.default
       .filter((column) => column.componentInstance)
-      .map((column) => column.componentInstance)
+      .map((column) => column.componentInstance);
 
-    this.columns = columnComponents.map((column) => new Column(column))
+    this.columns = columnComponents.map((column) => new Column(column));
 
     columnComponents.forEach((columnCom) => {
       Object.keys(columnCom.$options.props).forEach((prop) =>
         columnCom.$watch(prop, () => {
-          this.columns = columnComponents.map((column) => new Column(column))
+          this.columns = columnComponents.map((column) => new Column(column));
         })
-      )
-    })
+      );
+    });
 
-    this.mapDataToRows()
+    this.mapDataToRows();
   },
 
   methods: {
     mapDataToRows() {
-      this.rows = this.getRowsData()
-      this.sortRows = this.getRowsData()
+      this.rows = this.getRowsData();
+      this.sortRows = this.getRowsData();
     },
 
     getRowsData() {
-      const data = this.prepareLocalData()
-      let rowId = 0
+      const data = this.prepareLocalData();
+      let rowId = 0;
 
       return data
         .map((rowData) => {
-          rowData.vueTableComponentInternalRowId = rowId++
-          return rowData
+          rowData.vueTableComponentInternalRowId = rowId++;
+          return rowData;
         })
-        .map((rowData) => new Row(rowData, this.columns))
+        .map((rowData) => new Row(rowData, this.columns));
     },
 
     prepareLocalData() {
-      return this.data
+      return this.data;
     },
 
     changeSorting(column) {
       if (this.sort.fieldName !== column.show) {
-        this.sort.fieldName = column.show
-        this.sort.order = 'asc'
+        this.sort.fieldName = column.show;
+        this.sort.order = 'asc';
       } else if (this.sort.order === '') {
-        this.sort.order = 'asc'
+        this.sort.order = 'asc';
       } else {
-        this.sort.order = this.sort.order === 'asc' ? 'desc' : ''
+        this.sort.order = this.sort.order === 'asc' ? 'desc' : '';
       }
 
       if (!this.usesLocalData) {
-        this.mapDataToRows()
+        this.mapDataToRows();
       }
     },
 
     getColumn(columnName) {
-      return this.columns.find((column) => column.show === columnName)
+      return this.columns.find((column) => column.show === columnName);
     },
 
     emitRowClick(row) {
-      this.$emit('rowClick', row)
+      this.$emit('rowClick', row);
     },
-    handleToggle(pdom, e) {
+    handleToggle(pdom) {
       // TODO
-      const dom = `${pdom}-children`
-      const list = this.$refs[dom]
-      const clickIcon = this.$refs[pdom][0]
-      clickIcon.classList.toggle('is-close')
+      const dom = `${pdom}-children`;
+      const list = this.$refs[dom];
+      const clickIcon = this.$refs[pdom][0];
+      clickIcon.classList.toggle('is-close');
       for (const i in list) {
         if (list[i].$el.style.display === 'none') {
-          list[i].$el.style.display = ''
+          list[i].$el.style.display = '';
         } else {
-          list[i].$el.style.display = 'none'
+          list[i].$el.style.display = 'none';
         }
       }
     },
     beforeGroupByFlg(row, beforeRow, index) {
-      let flg = false
+      let flg = false;
       if (this.isGroupBy) {
         if (index === 0 || row.data.groupIndex !== beforeRow.data.groupIndex) {
-          flg = true
+          flg = true;
         }
       }
-      return flg
+      return flg;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

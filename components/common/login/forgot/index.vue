@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
@@ -79,51 +79,51 @@ export default {
         email: '',
         birthday: '',
       },
-    }
+    };
   },
   watch: {
-    email(val) {
-      this.validation()
+    email() {
+      this.validation();
     },
-    birthday(val) {
-      this.validation()
+    birthday() {
+      this.validation();
     },
   },
   methods: {
     nextUrl(url) {
-      this.$router.push({ path: url })
+      this.$router.push({ path: url });
     },
     isEmailValid() {
       return this.email === ''
         ? ''
         : this.reg.test(this.email)
         ? false
-        : ['forgot-form__input-box__error', true]
+        : ['forgot-form__input-box__error', true];
     },
     isValid() {
       if (this.isEmailValid() === false && this.birthday !== '') {
-        return false
+        return false;
       } else {
-        return true
+        return true;
       }
     },
     validation() {
-      let count = 0
+      let count = 0;
       if (this.email === '') {
-        this.validationMessage.email = 'メールアドレスが空欄です'
-        count += 1
+        this.validationMessage.email = 'メールアドレスが空欄です';
+        count += 1;
       } else if (!this.reg.test(this.email)) {
-        this.validationMessage.email = '正しい形式で入力してください'
-        count += 1
-      } else this.validationMessage.email = ''
-      return count
+        this.validationMessage.email = '正しい形式で入力してください';
+        count += 1;
+      } else this.validationMessage.email = '';
+      return count;
     },
     handleSend() {
-      const count = this.validation()
-      if (count === 0) this.nextUrl('/login/pin')
+      const count = this.validation();
+      if (count === 0) this.nextUrl('/login/pin');
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

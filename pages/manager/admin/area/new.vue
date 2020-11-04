@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Area from '~/components/common/admin/manager/area/new/index'
+import Area from '~/components/common/admin/manager/area/new/index';
 
 export default {
   layout: 'manager',
@@ -11,5 +11,5 @@ export default {
   components: {
     Area,
   },
-}
+};
 </script>

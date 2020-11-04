@@ -18,8 +18,8 @@
   </div>
 </template>
 <script>
-import Increase from '~/components/common/increase/index'
-import Decrease from '~/components/common/decrease/index'
+import Increase from '~/components/common/increase/index';
+import Decrease from '~/components/common/decrease/index';
 
 export default {
   name: 'SalesStats',
@@ -27,7 +27,7 @@ export default {
     Increase,
     Decrease,
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .count {

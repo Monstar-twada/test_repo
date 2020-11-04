@@ -3,10 +3,10 @@
  * https://github.com/capricorncd
  * Date: 2020-07-30 17:57
  */
-import FgDialog from './src/index'
+import FgDialog from './src/index';
 
 FgDialog.install = function (Vue) {
-  Vue.component(FgDialog.name, FgDialog)
-}
+  Vue.component(FgDialog.name, FgDialog);
+};
 
-export default FgDialog
+export default FgDialog;

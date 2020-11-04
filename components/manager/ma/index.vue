@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import ActiveList from '~/components/manager/ma/index/ActiveList'
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
+import ActiveList from '~/components/manager/ma/index/ActiveList';
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
@@ -24,7 +24,7 @@ export default {
       },
     ],
   }),
-}
+};
 </script>
 <style lang="scss" scoped>
 .subTitle {

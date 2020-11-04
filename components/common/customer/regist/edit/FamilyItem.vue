@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { DEF_CUSTOMER_FAMILY } from './constants'
+import { DEF_CUSTOMER_FAMILY } from './constants';
 export default {
   props: {
     items: {
@@ -72,19 +72,19 @@ export default {
     return {
       familyRelationships: this.$ui.getBasicData('family_relationship'),
       list: [],
-    }
+    };
   },
   watch: {
     items() {
-      this.initList()
+      this.initList();
     },
   },
   created() {
-    this.initList()
+    this.initList();
   },
   methods: {
     initList() {
-      const val = this.items
+      const val = this.items;
       this.list =
         Array.isArray(val) && val.length > 0
           ? [...val]
@@ -92,36 +92,36 @@ export default {
               {
                 ...DEF_CUSTOMER_FAMILY,
               },
-            ]
+            ];
     },
     addItem() {
-      if (this.list.length > 5) return null
+      if (this.list.length > 5) return null;
       this.list.push({
         ...DEF_CUSTOMER_FAMILY,
-      })
-      this.handleChange()
+      });
+      this.handleChange();
     },
     delItem(index) {
-      this.list.splice(index, 1)
-      this.handleChange()
+      this.list.splice(index, 1);
+      this.handleChange();
     },
     handleChange() {
-      const keys = Object.keys(DEF_CUSTOMER_FAMILY)
-      let temp
+      const keys = Object.keys(DEF_CUSTOMER_FAMILY);
+      let temp;
       this.$emit(
         'change',
         this.list.map((item) => {
-          temp = {}
+          temp = {};
           keys.forEach((key) => {
-            temp[key] = item[key]
-          })
-          temp.familyCustomerCode = this.customerCode
-          return temp
+            temp[key] = item[key];
+          });
+          temp.familyCustomerCode = this.customerCode;
+          return temp;
         })
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style lang="scss"></style>

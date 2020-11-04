@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import StatusTitle from '~/components/manager/send/detail/send-status/status-title/index'
-import StatusBar from '~/components/manager/send/detail/send-status/status-bar/index'
-import StatusProgress from '~/components/manager/send/detail/send-status/StatusProgress'
+import StatusTitle from '~/components/manager/send/detail/send-status/status-title/index';
+import StatusBar from '~/components/manager/send/detail/send-status/status-bar/index';
+import StatusProgress from '~/components/manager/send/detail/send-status/StatusProgress';
 export default {
   name: 'SendStatusItem',
   components: {
@@ -64,9 +64,9 @@ export default {
         type: 'プリウス',
       },
       price: 40000,
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

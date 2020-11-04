@@ -147,35 +147,35 @@ export default {
         phone: '',
         email: '',
       },
-    }
+    };
   },
   watch: {
-    zipcode(val) {
-      this.validation()
+    zipcode() {
+      this.validation();
     },
-    phone(val) {
-      this.validation()
+    phone() {
+      this.validation();
     },
-    email(val) {
-      this.validation()
+    email() {
+      this.validation();
     },
   },
   methods: {
     validation() {
-      let count = 0
+      let count = 0;
       if (!this.reg.zipcode.test(this.zipcode)) {
-        this.validationMessage.zipcode = '正しい形式で入力してください'
-        count += 1
-      } else this.validationMessage.zipcode = ''
+        this.validationMessage.zipcode = '正しい形式で入力してください';
+        count += 1;
+      } else this.validationMessage.zipcode = '';
       if (!this.reg.phone.test(this.phone)) {
-        this.validationMessage.phone = '正しい形式で入力してください'
-        count += 1
-      } else this.validationMessage.phone = ''
+        this.validationMessage.phone = '正しい形式で入力してください';
+        count += 1;
+      } else this.validationMessage.phone = '';
       if (!this.reg.email.test(this.email)) {
-        this.validationMessage.email = '正しい形式で入力してください'
-        count += 1
-      } else this.validationMessage.email = ''
-      return count
+        this.validationMessage.email = '正しい形式で入力してください';
+        count += 1;
+      } else this.validationMessage.email = '';
+      return count;
     },
     handleSubmit() {
       // const count = this.validation()
@@ -183,7 +183,7 @@ export default {
       // if (count === 0) this.nextUrl('/login/passwordreset')
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

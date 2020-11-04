@@ -3,15 +3,15 @@
  * https://github.com/capricorncd
  * Date: 2020-09-14 16:17
  */
-import { getCache, setCache, removeCache, clearCache } from './storage'
-import { logStr, log, warn, error } from './console'
+import { getCache, setCache, removeCache, clearCache } from './storage';
+import { logStr, log, warn, error } from './console';
 import {
   getMaxZIndex,
   getStyleValue,
   getScrollBarWidth,
   resetZIndex,
   getScrollParents,
-} from './dom'
+} from './dom';
 import {
   hasOwn,
   isArray,
@@ -23,11 +23,11 @@ import {
   isString,
   isNumber,
   isNumberLike,
-} from './check'
-import { createUrlQuery } from './url'
-import { slice } from './array'
-import { getParentComponent } from './component'
-import { windowDispatcher } from './events'
+} from './check';
+import { createUrlQuery } from './url';
+import { slice } from './array';
+import { getParentComponent } from './component';
+import { windowDispatcher } from './events';
 import {
   booleanToNumber,
   formatDate,
@@ -39,16 +39,16 @@ import {
   createRandomStr,
   merge,
   getFileType,
-} from './format'
-import { fmtSort, clearBasicData, getBasicData } from './extends/index'
-import { formSyncValidator } from './extends/validate'
+} from './format';
+import { fmtSort, clearBasicData, getBasicData } from './extends/index';
+import { formSyncValidator } from './extends/validate';
 
 /**
  * init app
  * @param project
  */
 function init(project = 'fg') {
-  this.project = project
+  this.project = project;
 }
 
 export {
@@ -94,4 +94,4 @@ export {
   toHumpStr,
   warn,
   windowDispatcher,
-}
+};

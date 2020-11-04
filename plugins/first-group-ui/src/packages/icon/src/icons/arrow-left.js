@@ -12,7 +12,7 @@ export const children = [
       fillRule: 'evenodd',
     },
   },
-]
+];
 
 export const arrowLeft = {
   w: 6.9,
@@ -26,4 +26,4 @@ export const arrowLeft = {
       c: children,
     },
   ],
-}
+};

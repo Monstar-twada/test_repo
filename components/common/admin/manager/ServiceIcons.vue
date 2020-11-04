@@ -10,24 +10,24 @@
 export default {
   name: 'ServiceIcons',
   props: {
-    item: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
+    // item: {
+    //   type: Object,
+    //   default() {
+    //     return {}
+    //   },
+    // },
   },
   data() {
     return {
       icons: ['car', 'cost', 'wrench', 'hammer', 'heart', 'tire'],
-    }
+    };
   },
   methods: {
-    handleClick(type) {
+    handleClick() {
       // console.log(type, this.item)
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

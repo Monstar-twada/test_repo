@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import TableCell from './TableCell.vue'
+import TableCell from './TableCell.vue';
 
 export default {
   components: {
@@ -24,13 +24,13 @@ export default {
     columns: {
       type: Array,
       default: () => {
-        return []
+        return [];
       },
     },
     row: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       },
     },
     groupBy: {
@@ -43,22 +43,22 @@ export default {
     visibleColumns() {
       return this.columns.filter(
         (column) => !column.hidden && column.show !== this.groupBy
-      )
+      );
     },
 
     getGroupByIndex() {
-      return this.columns.findIndex((column) => column.show === this.groupBy)
+      return this.columns.findIndex((column) => column.show === this.groupBy);
     },
   },
   watch: {
     value(val) {
-      this.gronpByName = val
+      this.gronpByName = val;
     },
     groupByName(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
 
   methods: {},
-}
+};
 </script>

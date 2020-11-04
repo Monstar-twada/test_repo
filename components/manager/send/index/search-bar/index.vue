@@ -69,8 +69,8 @@
 </template>
 
 <script>
-import SearchBar from '~/components/common/customer/index/search-bar/index'
-import Maker from '~/components/common/customer/common/maker-select-cols/index'
+import SearchBar from '~/components/common/customer/index/search-bar/index';
+import Maker from '~/components/common/customer/common/maker-select-cols/index';
 export default {
   components: {
     SearchBar,
@@ -80,7 +80,7 @@ export default {
     query: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
@@ -91,14 +91,14 @@ export default {
       },
       makerItems: [],
       carModels: [],
-    }
+    };
   },
   methods: {
     search() {
-      this.$emit('change', this.form)
+      this.$emit('change', this.form);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

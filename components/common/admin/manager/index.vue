@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import Company from './Company'
-import Shop from './Shop'
-import Staff from './Staff'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import Company from './Company';
+import Shop from './Shop';
+import Staff from './Staff';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 
 export default {
   components: {
@@ -57,9 +57,9 @@ export default {
           content: 'bbbb',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import Send from '~/components/manager/send/index'
+import Send from '~/components/manager/send/index';
 
 export default {
   layout: 'manager',
   components: {
     Send,
   },
-}
+};
 </script>

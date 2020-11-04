@@ -9,9 +9,9 @@ export default {
   middleware: 'authenticated',
   layout: 'login',
   beforeCreate() {
-    this.$router.push('/login/')
+    this.$router.push('/login/');
   },
-}
+};
 </script>
 
 <style lang="scss">

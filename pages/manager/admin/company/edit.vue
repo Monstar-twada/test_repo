@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Edit from '~/components/common/admin/manager/company/edit/index'
+import Edit from '~/components/common/admin/manager/company/edit/index';
 
 export default {
   layout: 'manager',
@@ -11,5 +11,5 @@ export default {
   components: {
     Edit,
   },
-}
+};
 </script>

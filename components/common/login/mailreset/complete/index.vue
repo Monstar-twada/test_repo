@@ -23,20 +23,20 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
   },
   methods: {
     nextUrl(url) {
-      this.$router.push({ path: url })
+      this.$router.push({ path: url });
     },
     handleSubmit() {
-      this.nextUrl('/login/')
+      this.nextUrl('/login/');
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

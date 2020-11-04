@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import SearchConditions from './index/SearchConditions'
-import TaskBoard from './index/task-board/index'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import SearchConditions from './index/SearchConditions';
+import TaskBoard from './index/task-board/index';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
@@ -32,6 +32,6 @@ export default {
       },
     ],
   }),
-}
+};
 </script>
 <style lang="scss" scoped></style>

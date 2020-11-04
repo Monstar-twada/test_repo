@@ -10,18 +10,18 @@ export default {
     users: {
       type: [Object, Array],
       default() {
-        return { test1: [1], test2: [2] }
+        return { test1: [1], test2: [2] };
       },
     },
   },
   data() {
-    return { userAvatar: '/common/person_default.svg' }
+    return { userAvatar: '/common/person_default.svg' };
   },
   mounted() {
     // console.log(this.user)
   },
   methods: {},
-}
+};
 </script>
 
 <style lang="scss">

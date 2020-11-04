@@ -69,16 +69,16 @@ export default {
     return {
       currentItem: {},
       headers: [],
-    }
+    };
   },
   methods: {
     moveToEdit() {
       this.$router.push({
         path: `/admin/company/edit/`,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

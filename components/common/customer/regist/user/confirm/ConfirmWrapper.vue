@@ -176,10 +176,10 @@
 </template>
 
 <script>
-import WhiteBox from '~/components/common/customer/common/WhiteBox'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
+import WhiteBox from '~/components/common/customer/common/WhiteBox';
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
 
-import { customerMixin } from '~/mixins/customer'
+import { customerMixin } from '~/mixins/customer';
 export default {
   components: {
     ColumnTitle,
@@ -193,46 +193,46 @@ export default {
         ...this.$route.query,
       },
       form: {},
-    }
+    };
   },
   computed: {
     customerType() {
-      const data = this.$ui.getBasicData('private_business', true) || {}
-      return data[this.form.privateBusiness]
+      const data = this.$ui.getBasicData('private_business', true) || {};
+      return data[this.form.privateBusiness];
     },
     gender() {
-      const data = this.$ui.getBasicData('sex', true) || {}
-      return data[this.form.sex]
+      const data = this.$ui.getBasicData('sex', true) || {};
+      return data[this.form.sex];
     },
     prefecture() {
-      const data = this.$ui.getBasicData('prefectures', true) || {}
-      return data[this.form.prefecturesCode]
+      const data = this.$ui.getBasicData('prefectures', true) || {};
+      return data[this.form.prefecturesCode];
     },
     residenceType() {
-      const data = this.$ui.getBasicData('residence_type', true) || {}
-      return data[this.form.residenceType]
+      const data = this.$ui.getBasicData('residence_type', true) || {};
+      return data[this.form.residenceType];
     },
     licenseColor() {
-      const data = this.$ui.getBasicData('license_color', true) || {}
-      return data[this.form.licenseColor]
+      const data = this.$ui.getBasicData('license_color', true) || {};
+      return data[this.form.licenseColor];
     },
     carLifeContent() {
-      const data = this.$ui.getBasicData('car_life', true)
-      const formData = this.form.carLives || []
-      return formData.map((item) => data[item.carLife]).join('、')
+      const data = this.$ui.getBasicData('car_life', true);
+      const formData = this.form.carLives || [];
+      return formData.map((item) => data[item.carLife]).join('、');
     },
     selectionPointsContent() {
-      const data = this.$ui.getBasicData('selection_points', true)
-      const formData = this.form.selectionPoints || []
-      return formData.map((item) => data[item.selectionPoints]).join('、')
+      const data = this.$ui.getBasicData('selection_points', true);
+      const formData = this.form.selectionPoints || [];
+      return formData.map((item) => data[item.selectionPoints]).join('、');
     },
   },
   methods: {
     goBack() {
-      this.$router.push(`/customer/regist/edit/?id=${this.query.id}&edit=1`)
+      this.$router.push(`/customer/regist/edit/?id=${this.query.id}&edit=1`);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

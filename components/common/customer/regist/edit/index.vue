@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import FormWrapper from './FormWrapper'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import FormWrapper from './FormWrapper';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 export default {
   components: {
     Breadcrumbs,
@@ -32,9 +32,9 @@ export default {
           href: '',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

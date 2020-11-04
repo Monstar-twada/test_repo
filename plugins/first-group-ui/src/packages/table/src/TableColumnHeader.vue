@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { classList } from './js/utils.js'
+import { classList } from './js/utils.js';
 
 export default {
   props: {
@@ -39,62 +39,62 @@ export default {
   computed: {
     ariaDisabled() {
       if (!this.column.isSortable()) {
-        return 'true'
+        return 'true';
       }
 
-      return false
+      return false;
     },
 
     ariaSort() {
       if (!this.column.isSortable()) {
-        return false
+        return false;
       }
 
       if (this.column.show !== this.sort.fieldName) {
-        return 'none'
+        return 'none';
       }
 
-      return this.sort.order === 'asc' ? 'ascending' : 'descending'
+      return this.sort.order === 'asc' ? 'ascending' : 'descending';
     },
 
     headerClass() {
       if (!this.column.isSortable()) {
-        return classList('fg-table__th', this.column.headerClass)
+        return classList('fg-table__th', this.column.headerClass);
       }
 
       if (this.column.show !== this.sort.fieldName) {
-        return classList('fg-table__th--sort', this.column.headerClass)
+        return classList('fg-table__th--sort', this.column.headerClass);
       }
 
       return classList(
         `fg-table__th--sort fg-table__th--sort-${this.sort.order}`,
         this.column.headerClass
-      )
+      );
     },
 
     isVisible() {
-      return !this.column.hidden
+      return !this.column.hidden;
     },
 
     isGroupBy() {
-      return this.column.show === this.groupBy
+      return this.column.show === this.groupBy;
     },
 
     label() {
       if (this.column.label === null) {
-        return this.column.show
+        return this.column.show;
       }
 
-      return this.column.label
+      return this.column.label;
     },
   },
 
   methods: {
     handleClicked() {
       if (this.column.isSortable()) {
-        this.$emit('click', this.column)
+        this.$emit('click', this.column);
       }
     },
   },
-}
+};
 </script>

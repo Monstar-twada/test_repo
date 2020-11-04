@@ -51,11 +51,11 @@ export const FORM_RULES = {
   carFullLength: 30,
   carFullWidth: 30,
   carTotalHeight: 30,
-}
+};
 
 function halfWidthNumber(value) {
   if (value && !/^\d+$/.test(value)) {
-    return '半角数値のみ'
+    return '半角数値のみ';
   }
-  return null
+  return null;
 }

@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import LeftWrapper from './company/index/LeftWrapper'
-import MiddleWrapper from './company/index/MiddleWrapper'
-import RightWrapper from './company/index/RightWrapper'
+import LeftWrapper from './company/index/LeftWrapper';
+import MiddleWrapper from './company/index/MiddleWrapper';
+import RightWrapper from './company/index/RightWrapper';
 
 export default {
   name: 'Company',
@@ -22,21 +22,21 @@ export default {
     return {
       currentItem: {},
       headers: [],
-    }
+    };
   },
   methods: {
     moveToForm() {
       this.$router.push({
         path: `/admin/area/new/`,
-      })
+      });
     },
     moveToEdit(id) {
       this.$router.push({
         path: `/admin/area/edit/${id}`,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

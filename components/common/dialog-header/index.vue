@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import CloseButton from './CloseButton'
+import CloseButton from './CloseButton';
 export default {
   name: 'DialogHeader',
   components: {
@@ -23,7 +23,7 @@ export default {
       default: false,
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

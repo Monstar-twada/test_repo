@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import ConfirmBodyContainer from './ConfirmBodyContainer'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import ConfirmBodyContainer from './ConfirmBodyContainer';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 export default {
   components: {
     Breadcrumbs,
@@ -30,8 +30,8 @@ export default {
           // href: '/customer/car',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss"></style>

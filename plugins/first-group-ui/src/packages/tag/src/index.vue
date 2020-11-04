@@ -54,51 +54,51 @@ export default {
   data() {
     return {
       checked: this.value || this.selected,
-    }
+    };
   },
   computed: {
     style() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width
+        ret.width = this.width;
       }
       if (this.bgColor) {
-        ret.background = this.bgColor
+        ret.background = this.bgColor;
         if (this.noBorder) {
-          ret.borderColor = this.bgColor
+          ret.borderColor = this.bgColor;
         }
       }
       if (this.color) {
-        ret.color = this.color
+        ret.color = this.color;
       }
       if (this.borderColor) {
-        ret.borderColor = this.borderColor
+        ret.borderColor = this.borderColor;
       }
       if (this.border) {
-        ret.border = this.border
+        ret.border = this.border;
       }
 
-      return ret
+      return ret;
     },
   },
   watch: {
     selected(val) {
       if (this.checked !== val) {
-        this.checked = val
+        this.checked = val;
       }
     },
     checked(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     handleClick() {
       if (this.selectable) {
-        this.checked = !this.checked
+        this.checked = !this.checked;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

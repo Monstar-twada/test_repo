@@ -9,13 +9,13 @@
  * @returns {Vue}
  */
 export function getParentComponent(fgParentName) {
-  let parent = this.$parent
+  let parent = this.$parent;
   while (parent) {
     if (parent.$options.name !== fgParentName) {
-      parent = parent.$parent
+      parent = parent.$parent;
     } else {
-      return parent
+      return parent;
     }
   }
-  return parent
+  return parent;
 }

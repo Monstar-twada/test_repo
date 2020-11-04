@@ -31,9 +31,9 @@
   </div>
 </template>
 <script>
-import FgButton from '../../button/index'
-import FgIcon from '../../icon/index'
-import { resetZIndex } from '../../../libs/index'
+import FgButton from '../../button/index';
+import FgIcon from '../../icon/index';
+import { resetZIndex } from '../../../libs/index';
 export default {
   name: 'FgMessageBox',
   components: {
@@ -54,67 +54,67 @@ export default {
       maskColor: '',
       maskOpacity: '',
       boxShadow: '',
-    }
+    };
   },
   computed: {
     content() {
       if (!Array.isArray(this.message)) {
-        return [this.message]
+        return [this.message];
       }
-      return this.message
+      return this.message;
     },
     el() {
-      return this.$refs.el
+      return this.$refs.el;
     },
     innerStyle() {
-      const ret = {}
+      const ret = {};
       if (this.boxShadow) {
-        ret.boxShadow = this.boxShadow
+        ret.boxShadow = this.boxShadow;
       }
-      return ret
+      return ret;
     },
     maskStyle() {
-      const ret = {}
+      const ret = {};
       if (this.maskColor) {
-        ret.backgroundColor = this.maskColor
+        ret.backgroundColor = this.maskColor;
       }
       if (this.maskOpacity) {
-        ret.opacity = this.maskOpacity
+        ret.opacity = this.maskOpacity;
       }
-      return ret
+      return ret;
     },
     iconInfo() {
-      const { warning, primaryActive } = this.$colors
-      let name = 'exclamation'
-      let color = warning
-      let size = 8
+      const { warning, primaryActive } = this.$colors;
+      let name = 'exclamation';
+      let color = warning;
+      let size = 8;
       switch (this.type) {
         case 'success':
-          color = primaryActive
-          name = 'hook'
-          size = 24
-          break
+          color = primaryActive;
+          name = 'hook';
+          size = 24;
+          break;
       }
       return {
         name,
         color,
         size,
-      }
+      };
     },
   },
   watch: {
     visible(val) {
       if (val) {
-        resetZIndex(this.el)
+        resetZIndex(this.el);
       }
     },
   },
   methods: {
     handleClick(type) {
-      this.callback(type)
+      this.callback(type);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

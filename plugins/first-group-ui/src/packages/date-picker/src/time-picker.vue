@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { toTwoDigits } from '../../../libs/index'
+import { toTwoDigits } from '../../../libs/index';
 export default {
   name: 'FgTimePicker',
   props: {
@@ -50,7 +50,7 @@ export default {
     },
   },
   data() {
-    const arr = this.value.split(':')
+    const arr = this.value.split(':');
     return {
       hour: arr[0],
       minute: arr[1],
@@ -58,47 +58,47 @@ export default {
       hours: createArr(24),
       minutes: createArr(60),
       seconds: createArr(60),
-    }
+    };
   },
   computed: {
     selectValue() {
-      return [this.hour || '00', this.minute || '00', this.second || '00']
+      return [this.hour || '00', this.minute || '00', this.second || '00'];
     },
   },
   watch: {
     selectValue(val) {
       if (this.value !== val.join(':')) {
-        this.$emit('change', val)
+        this.$emit('change', val);
       }
     },
     value(val) {
-      this.fmtValue(val)
+      this.fmtValue(val);
     },
   },
   methods: {
     fmtValue(val) {
-      const arr = val.split(':')
-      this.hour = arr[0] || '00'
-      this.minute = arr[1] || '00'
-      this.second = arr[2] || '00'
+      const arr = val.split(':');
+      this.hour = arr[0] || '00';
+      this.minute = arr[1] || '00';
+      this.second = arr[2] || '00';
     },
     clickSelect(e) {
-      e.stopPropagation()
+      e.stopPropagation();
     },
   },
-}
+};
 
 function createArr(len) {
-  const arr = []
-  let val
+  const arr = [];
+  let val;
   for (let i = 0; i < len; i++) {
-    val = toTwoDigits(i)
+    val = toTwoDigits(i);
     arr.push({
       text: val,
       value: val,
-    })
+    });
   }
-  return arr
+  return arr;
 }
 </script>
 

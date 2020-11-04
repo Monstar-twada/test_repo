@@ -41,17 +41,17 @@ export default {
   }),
   computed: {
     header() {
-      return this.prefix + this.name + this.suffix
+      return this.prefix + this.name + this.suffix;
     },
     computedId() {
-      return this.id ? this.id : this.name.toLowerCase().replace(/ /g, '-')
+      return this.id ? this.id : this.name.toLowerCase().replace(/ /g, '-');
     },
     hash() {
       if (this.disabled) {
-        return '#'
+        return '#';
       }
-      return '#' + this.computedId
+      return '#' + this.computedId;
     },
   },
-}
+};
 </script>

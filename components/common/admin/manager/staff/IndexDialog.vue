@@ -41,23 +41,23 @@ export default {
     return {
       carModel: '',
       visible: this.value,
-    }
+    };
   },
   computed: {},
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     save() {
-      this.visible = false
+      this.visible = false;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

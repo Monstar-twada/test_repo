@@ -22,7 +22,7 @@ export default {
     items: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     disabled: Boolean,
@@ -31,41 +31,44 @@ export default {
     return {
       index: this.value,
       elItems: [],
-    }
+    };
   },
   watch: {
     value(val) {
       if (this.index !== val) {
-        this.index = val
+        this.index = val;
       }
     },
     index(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   mounted() {
-    this.initItems()
-    this.resetLinePosition()
+    this.initItems();
+    this.resetLinePosition();
   },
   methods: {
     initItems() {
-      const el = this.$refs.el
-      this.elItems = Array.prototype.slice.call(el.querySelectorAll('.item'), 0)
+      const el = this.$refs.el;
+      this.elItems = Array.prototype.slice.call(
+        el.querySelectorAll('.item'),
+        0
+      );
     },
     handleClick(i) {
-      if (this.disabled || this.index === i) return
-      this.index = i
-      this.resetLinePosition()
+      if (this.disabled || this.index === i) return;
+      this.index = i;
+      this.resetLinePosition();
     },
     resetLinePosition() {
-      const el = this.elItems[this.index]
-      if (!el) return
-      const line = this.$refs.line
-      line.style.width = el.offsetWidth + 'px'
-      line.style.transform = `translateX(${el.offsetLeft}px)`
+      const el = this.elItems[this.index];
+      if (!el) return;
+      const line = this.$refs.line;
+      line.style.width = el.offsetWidth + 'px';
+      line.style.transform = `translateX(${el.offsetLeft}px)`;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

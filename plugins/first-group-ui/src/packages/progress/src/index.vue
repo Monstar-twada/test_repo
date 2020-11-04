@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'FgProgress',
-}
+};
 </script>
 
 <style lang="scss">

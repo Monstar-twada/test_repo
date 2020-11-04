@@ -221,9 +221,9 @@
 </template>
 
 <script>
-import WhiteBox from '~/components/common/customer/common/WhiteBox'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { customerMixin } from '~/mixins/customer'
+import WhiteBox from '~/components/common/customer/common/WhiteBox';
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
+import { customerMixin } from '~/mixins/customer';
 
 export default {
   name: 'ConfirmBodyContainer',
@@ -239,52 +239,52 @@ export default {
       },
       form: this.$ui.getCache('carEditCacheData'),
       registrationImage: '',
-    }
+    };
   },
   computed: {
     saleNewOldCarType() {
-      const classes = this.$ui.getBasicData('sale_new_old_car_type', true)
-      return classes[this.form.saleNewOldCarType]
+      const classes = this.$ui.getBasicData('sale_new_old_car_type', true);
+      return classes[this.form.saleNewOldCarType];
     },
     tireSize() {
-      const arr = []
-      const { tireSizeFront, tireSizeRear } = this.form
+      const arr = [];
+      const { tireSizeFront, tireSizeRear } = this.form;
       if (tireSizeFront) {
-        arr.push(`フロント : ${tireSizeFront}`)
+        arr.push(`フロント : ${tireSizeFront}`);
       }
       if (tireSizeRear) {
-        arr.push(`リア : ${tireSizeRear}`)
+        arr.push(`リア : ${tireSizeRear}`);
       }
-      return arr.join(' / ')
+      return arr.join(' / ');
     },
     tireCreateDate() {
-      const { tireCreateYear, tireCreateWeek } = this.form
-      return `${tireCreateYear || '-'}年${tireCreateWeek || '-'}週目`
+      const { tireCreateYear, tireCreateWeek } = this.form;
+      return `${tireCreateYear || '-'}年${tireCreateWeek || '-'}週目`;
     },
     batterySize() {
-      const { batterySize, batteryCreateDate } = this.form
-      return `${batterySize} 製造：${batteryCreateDate}`
+      const { batterySize, batteryCreateDate } = this.form;
+      return `${batterySize} 製造：${batteryCreateDate}`;
     },
   },
   created() {
     // 車検証画像取得
-    const { customerCode, carCode } = this.query
+    const { customerCode, carCode } = this.query;
     this.$api
       .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
       .then((res) => {
-        this.registrationImage = res.url
+        this.registrationImage = res.url;
       })
-      .catch(console.error)
+      .catch(console.error);
   },
   methods: {
     goBack() {
-      const { carCode, customerCode } = this.query
+      const { carCode, customerCode } = this.query;
       this.$router.push(
         `/customer/regist/car/edit/?customerCode=${customerCode}&carCode=${carCode}&edit=1`
-      )
+      );
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .customer-regist-confirm-form-wrapper {

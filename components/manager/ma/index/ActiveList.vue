@@ -111,7 +111,7 @@
   </div>
 </template>
 <script>
-import throttle from 'lodash.throttle'
+import throttle from 'lodash.throttle';
 export default {
   name: 'ActiveList',
   components: {},
@@ -133,58 +133,58 @@ export default {
   }),
   watch: {
     value(val) {
-      this.currentPage = val
+      this.currentPage = val;
     },
     currentPage(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
     currentMonth(val, oldVal) {
       if (val !== oldVal) {
-        this.getDatawithThrottle()
+        this.getDatawithThrottle();
       }
     },
   },
   created() {
-    this.getCurrentMonth()
-    this.storeCode = $nuxt.$store.state.auth.storeCode
+    this.getCurrentMonth();
+    this.storeCode = $nuxt.$store.state.auth.storeCode;
     this.$nextTick(() => {
-      this.$nuxt.$loading.start()
-      this.getMaIndexResult()
-    })
+      this.$nuxt.$loading.start();
+      this.getMaIndexResult();
+    });
   },
   methods: {
     getCurrentMonth() {
-      const date = new Date()
-      const year = date.getFullYear()
+      const date = new Date();
+      const year = date.getFullYear();
       const month =
         date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
-          : date.getMonth() + 1
-      this.currentMonth = year.toString() + month.toString()
+          : date.getMonth() + 1;
+      this.currentMonth = year.toString() + month.toString();
     },
     getDatawithThrottle: throttle(async function () {
-      await this.getMaIndexResult()
+      await this.getMaIndexResult();
     }, 3000),
     async getMaIndexResult() {
-      const params = {}
+      const params = {};
       await this.$api
         .post(
           `/v1/attractingCustomersMonth/${this.storeCode}/${this.currentMonth}`,
           params
         )
         .then((res) => {
-          this.maIndexResultList = res.results
-          this.$nuxt.$loading.finish()
+          this.maIndexResultList = res.results;
+          this.$nuxt.$loading.finish();
         })
         .catch((err) => {
-          console.error(err)
-        })
+          console.error(err);
+        });
     },
     fmtRatio(ratio) {
-      return Math.round(ratio * 100) + '%'
+      return Math.round(ratio * 100) + '%';
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .ma-index {

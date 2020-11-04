@@ -8,7 +8,7 @@ module.exports = {
     parser: "babel-eslint"
   },
   extends: [
-    "@nuxtjs",
+    '@nuxtjs/eslint-config-typescript',
     "prettier",
     "prettier/vue",
     "plugin:prettier/recommended",
@@ -17,8 +17,9 @@ module.exports = {
   plugins: ["prettier"],
   rules: {
     "vue/component-name-in-template-casing": ["error", "PascalCase"],
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+    "no-console": process.env.NODE_ENV === "production" ? "error" : 0,
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : 0,
+    "semi": 0
   },
   globals: {
     $nuxt: true

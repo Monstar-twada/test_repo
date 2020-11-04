@@ -18,25 +18,25 @@ export default {
   data() {
     return {
       text: this.value,
-    }
+    };
   },
   watch: {
     value(val) {
       if (this.text !== val) {
-        this.text = val
+        this.text = val;
       }
     },
     text(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
-    handleClick(type) {
-      // if (!this.clickable) return
-      // console.log(type)
-    },
+    // handleClick(type) {
+    //   if (!this.clickable) return
+    //   console.log(type)
+    // },
   },
-}
+};
 </script>
 
 <style lang="scss">

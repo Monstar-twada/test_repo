@@ -55,7 +55,7 @@
 <script>
 export default {
   name: 'CustomerPart',
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { resetZIndex, toNumber, isNumberLike } from '../../../libs/index'
+import { resetZIndex, toNumber, isNumberLike } from '../../../libs/index';
 
 export default {
   name: 'FgDialog',
@@ -71,101 +71,102 @@ export default {
       visible: this.value,
       isPersistentClick: false,
       timer: null,
-    }
+    };
   },
   computed: {
     el() {
-      return this.$refs.el
+      return this.$refs.el;
     },
     outerClass() {
-      return this.visible ? 'is-show' : ''
+      return this.visible ? 'is-show' : '';
     },
     innerClass() {
-      const arr = []
+      const arr = [];
       if (this.isPersistentClick) {
-        arr.push('fg-dialog__anime')
+        arr.push('fg-dialog__anime');
       }
       if (this.hideHeaderBorder) {
-        arr.push('hide-header-border')
+        arr.push('hide-header-border');
       }
-      return arr
+      return arr;
     },
     innerStyle() {
-      const ret = {}
+      const ret = {};
       if (this.maxWidth) {
-        ret.maxWidth = this.maxWidth + (isNumberLike(this.maxWidth) ? 'px' : '')
+        ret.maxWidth =
+          this.maxWidth + (isNumberLike(this.maxWidth) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
     bodyStyle() {
-      const ret = {}
+      const ret = {};
       if (window) {
-        const offset = toNumber(this.headerHeight) + 60
-        ret.maxHeight = window.innerHeight - offset + 'px'
+        const offset = toNumber(this.headerHeight) + 60;
+        ret.maxHeight = window.innerHeight - offset + 'px';
       }
       if (this.boxShadow) {
-        ret.boxShadow = this.boxShadow
+        ret.boxShadow = this.boxShadow;
       }
-      return ret
+      return ret;
     },
     maskStyle() {
-      const ret = {}
+      const ret = {};
       if (this.maskColor) {
-        ret.backgroundColor = this.maskColor
+        ret.backgroundColor = this.maskColor;
       }
       if (this.maskOpacity) {
-        ret.opacity = this.maskOpacity
+        ret.opacity = this.maskOpacity;
       }
-      return ret
+      return ret;
     },
   },
   watch: {
     value(val) {
       if (this.visible !== val) {
-        this.visible = val
+        this.visible = val;
       }
-      this.setBodyHide(val)
+      this.setBodyHide(val);
       if (val) {
-        resetZIndex(this.el)
+        resetZIndex(this.el);
       }
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   mounted() {
     this.$nextTick(() => {
-      this.domBody = document.querySelector('body')
-      this.domBody.appendChild(this.el)
-    })
+      this.domBody = document.querySelector('body');
+      this.domBody.appendChild(this.el);
+    });
   },
   beforeDestroy() {
-    if (this.domBody) this.domBody.removeChild(this.$refs.el)
-    if (this.timer) clearTimeout(this.timer)
+    if (this.domBody) this.domBody.removeChild(this.$refs.el);
+    if (this.timer) clearTimeout(this.timer);
   },
   methods: {
     handleClose(type) {
       if (type === 'bg' && this.persistent) {
-        this.isPersistentClick = true
+        this.isPersistentClick = true;
         this.timer = setTimeout(() => {
-          this.isPersistentClick = false
-        }, 50)
-        return
+          this.isPersistentClick = false;
+        }, 50);
+        return;
       }
-      this.visible = false
+      this.visible = false;
     },
     setBodyHide(flag) {
-      if (!this.domBody) return
+      if (!this.domBody) return;
       if (flag) {
         this.$nextTick(() => {
-          this.domBody.style.overflow = 'hidden'
-        })
+          this.domBody.style.overflow = 'hidden';
+        });
       } else {
-        this.domBody.style.overflow = ''
+        this.domBody.style.overflow = '';
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

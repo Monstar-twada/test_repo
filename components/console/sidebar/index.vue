@@ -53,53 +53,53 @@ export default {
           text: 'スタッフ管理',
         },
       ],
-    }
+    };
   },
   computed: {
     isFirstIndex() {
-      return this.index === 0
+      return this.index === 0;
     },
     isLastIndex() {
-      return this.index === this.menuItems.length - 1
+      return this.index === this.menuItems.length - 1;
     },
     popupPosition() {
-      return this.collapsed ? 'right' : ''
+      return this.collapsed ? 'right' : '';
     },
   },
   watch: {
-    selectedResult(val) {
+    selectedResult() {
       // console.log('selectedResult change', val)
     },
     $route() {
-      this.resetRouteIndex()
+      this.resetRouteIndex();
     },
     value(val) {
       if (this.collapsed !== val) {
-        this.collapsed = val
+        this.collapsed = val;
       }
     },
     collapsed(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   created() {
-    this.resetRouteIndex()
+    this.resetRouteIndex();
   },
   methods: {
     resetRouteIndex() {
-      const route = this.$route
-      const path = '/' + route.path.split('/')[1]
-      this.index = this.menuItems.findIndex((item) => item.link === path)
+      const route = this.$route;
+      const path = '/' + route.path.split('/')[1];
+      this.index = this.menuItems.findIndex((item) => item.link === path);
     },
-    handleMenuClick(e) {
-      const tempIndex = this.index
+    handleMenuClick() {
+      const tempIndex = this.index;
       const timer = setTimeout(() => {
-        this.index = tempIndex
-        clearTimeout(timer)
-      }, 0)
+        this.index = tempIndex;
+        clearTimeout(timer);
+      }, 0);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

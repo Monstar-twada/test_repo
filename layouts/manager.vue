@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import Sidebar from '~/components/common/sidebar/index'
+import Sidebar from '~/components/common/sidebar/index';
 // import NextAction from '~/components/manager/next-action/index'
 // import OnePointAdvice from '~/components/manager/one-point-advice/index'
-import { managerMenuItems } from '~/components/common/sidebar/menu-manager'
-import { basicDataMixin } from '~/mixins/basic-data/index'
+import { managerMenuItems } from '~/components/common/sidebar/menu-manager';
+import { basicDataMixin } from '~/mixins/basic-data/index';
 
 export default {
   components: {
@@ -35,9 +35,9 @@ export default {
       isCollapsed: false,
       isMenuCollapsed: false,
       menuItems: managerMenuItems,
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

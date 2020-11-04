@@ -1,10 +1,10 @@
 /**
  * author: bunhyoLI
  */
-import FgDatePicker from './src/index'
+import FgDatePicker from './src/index';
 
 FgDatePicker.install = function (Vue) {
-  Vue.component(FgDatePicker.name, FgDatePicker)
-}
+  Vue.component(FgDatePicker.name, FgDatePicker);
+};
 
-export default FgDatePicker
+export default FgDatePicker;

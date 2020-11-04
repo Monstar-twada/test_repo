@@ -18,7 +18,7 @@ function fmtCarNumber(item) {
     item.carRegistrationNumberType,
     item.carRegistrationNumberKana,
     item.carRegistrationNumber,
-  ].join(' ')
+  ].join(' ');
 }
 
 /**
@@ -29,7 +29,7 @@ function fmtCarNumber(item) {
  * @returns {string}
  */
 function fmtCustomerName(data) {
-  return [data.lastName, data.firstName].join(' ')
+  return [data.lastName, data.firstName].join(' ');
 }
 
 /**
@@ -42,7 +42,7 @@ function fmtAvatar(data) {
     name: fmtCustomerName(data),
     summary: `（${data.age || '-'}歳）`,
     url: data.facePhoto || '/common/person_default.svg',
-  }
+  };
 }
 
 /**
@@ -53,7 +53,7 @@ function fmtAvatar(data) {
  * @returns {string}
  */
 function fmtNameKana(data) {
-  return [data.lastNameKana, data.firstNameKana].join(' ')
+  return [data.lastNameKana, data.firstNameKana].join(' ');
 }
 
 /**
@@ -62,7 +62,7 @@ function fmtNameKana(data) {
  * @returns {*|string}
  */
 function fmtHyphen(text) {
-  return text || '-'
+  return text || '-';
 }
 
 /**
@@ -72,7 +72,7 @@ function fmtHyphen(text) {
  * @returns {string}
  */
 function fmtPurchaseTarget(purchaseTarget) {
-  return purchaseTarget >> 0 ? '対象' : 'なし'
+  return purchaseTarget >> 0 ? '対象' : 'なし';
 }
 
 /**
@@ -80,13 +80,13 @@ function fmtPurchaseTarget(purchaseTarget) {
  * @param value
  * @returns {string}
  */
-function fmtTransactionType(value) {
+function fmtTransactionType() {
   // 20200901
   // 取引種別のエリアですが、
   // ここはProto・V1ではデータが存在しないため空欄になりますが、
   // 左のようなデザインで、すべてグレー固定で表示可能でしょうか？
   // return value >> 0 ? '#1E5199' : '#aaa'
-  return '#aaa'
+  return '#aaa';
 }
 
 /**
@@ -95,9 +95,9 @@ function fmtTransactionType(value) {
  * @param value
  */
 function fmtMoney(value, noMark = false) {
-  const mark = noMark ? '' : '¥'
-  const result = $nuxt.$ui.toCommaNumber(value)
-  return result ? mark + result : '-'
+  const mark = noMark ? '' : '¥';
+  const result = $nuxt.$ui.toCommaNumber(value);
+  return result ? mark + result : '-';
 }
 
 /**
@@ -110,8 +110,8 @@ function fmtMoney(value, noMark = false) {
  */
 function sumCost(cost) {
   const result =
-    cost.monthlyGasolineCost + cost.monthlyParkingFee + cost.carInsuranceFee
-  return fmtMoney(result ? result.toString() : '')
+    cost.monthlyGasolineCost + cost.monthlyParkingFee + cost.carInsuranceFee;
+  return fmtMoney(result ? result.toString() : '');
 }
 
 /**
@@ -120,7 +120,7 @@ function sumCost(cost) {
  * @param value
  */
 function fmtCarWeight(value) {
-  return value >> 0 ? $nuxt.$ui.toCommaNumber(value) + 'Kg' : '-'
+  return value >> 0 ? $nuxt.$ui.toCommaNumber(value) + 'Kg' : '-';
 }
 
 /**
@@ -129,8 +129,8 @@ function fmtCarWeight(value) {
  * @param value
  */
 function fmtCarSize(value) {
-  const result = $nuxt.$ui.toCommaNumber(value)
-  return result ? result + 'cm' : '-'
+  const result = $nuxt.$ui.toCommaNumber(value);
+  return result ? result + 'cm' : '-';
 }
 
 /**
@@ -139,8 +139,8 @@ function fmtCarSize(value) {
  * @param value
  */
 function fmtCarSizeMm(value) {
-  const result = $nuxt.$ui.toCommaNumber(value)
-  return result ? result + 'mm' : '-'
+  const result = $nuxt.$ui.toCommaNumber(value);
+  return result ? result + 'mm' : '-';
 }
 
 /**
@@ -150,12 +150,12 @@ function fmtCarSizeMm(value) {
  * @returns {*}
  */
 function fmtDate(value) {
-  if (!value) return '-'
+  if (!value) return '-';
   // 202006
   if (/^\d+$/.test(value) && value.length > 4) {
-    value = value.substr(0, 4) + '/' + value.substr(4)
+    value = value.substr(0, 4) + '/' + value.substr(4);
   }
-  return value.replace(/-/g, '/')
+  return value.replace(/-/g, '/');
 }
 
 /**
@@ -164,7 +164,7 @@ function fmtDate(value) {
  * @returns {*}
  */
 function fmtAddress(data) {
-  const prefectures = $nuxt.$ui.getBasicData('prefectures', true)
+  const prefectures = $nuxt.$ui.getBasicData('prefectures', true);
   return data
     ? [
         prefectures[data.prefecturesCode] || data.prefecturesCode,
@@ -172,7 +172,7 @@ function fmtAddress(data) {
         data.address2,
         data.address3,
       ].join('')
-    : data
+    : data;
 }
 
 /**
@@ -182,19 +182,19 @@ function fmtAddress(data) {
  * @returns {string}
  */
 function fmtWork(data) {
-  const arr = []
+  const arr = [];
   if (data.organizationName) {
-    arr.push(data.organizationName)
+    arr.push(data.organizationName);
   }
   if (data.organizationPhoneNumber) {
-    arr.push(`(${data.organizationPhoneNumber})`)
+    arr.push(`(${data.organizationPhoneNumber})`);
   }
-  return fmtHyphen(arr.join(''))
+  return fmtHyphen(arr.join(''));
 }
 
 function fmtSex(code) {
-  const genders = $nuxt.$ui.getBasicData('sex', true)
-  return genders[code] || '-'
+  const genders = $nuxt.$ui.getBasicData('sex', true);
+  return genders[code] || '-';
 }
 
 export const customerMixin = {
@@ -216,4 +216,4 @@ export const customerMixin = {
     fmtWork,
     sumCost,
   },
-}
+};

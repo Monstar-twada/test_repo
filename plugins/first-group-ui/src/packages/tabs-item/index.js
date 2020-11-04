@@ -1,6 +1,6 @@
-import FgTabsItem from '../tabs/src/TabsItem.vue'
+import FgTabsItem from '../tabs/src/TabsItem.vue';
 FgTabsItem.install = function (Vue) {
-  Vue.component(FgTabsItem.name, FgTabsItem)
-}
+  Vue.component(FgTabsItem.name, FgTabsItem);
+};
 
-export default FgTabsItem
+export default FgTabsItem;

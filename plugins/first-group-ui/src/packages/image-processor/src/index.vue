@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import { handleMediaFile, utils } from 'image-process'
-import { isFunction, isNumberLike } from '../../../libs/index'
-import Cropper from './cropper/index'
+import { handleMediaFile, utils } from 'image-process';
+import { isFunction, isNumberLike } from '../../../libs/index';
+import Cropper from './cropper/index';
 
 export default {
   name: 'FgImageProcessor',
@@ -82,7 +82,7 @@ export default {
     options: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
     viewMode: {
@@ -114,34 +114,34 @@ export default {
       cropperVisible: false,
       blobUrl: null,
       file: null,
-    }
+    };
   },
   computed: {
     picUrl() {
-      return this.data.url || this.data.base64
+      return this.data.url || this.data.base64;
     },
     viewStyle() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
       }
       if (this.height) {
-        ret.height = this.height + (isNumberLike(this.height) ? 'px' : '')
+        ret.height = this.height + (isNumberLike(this.height) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
     bgIconClass() {
       // pdf
       if (/application\/pdf/i.test(this.data.type)) {
-        return '__icon-pdf'
+        return '__icon-pdf';
       }
       const flg =
         this.icon &&
-        ['car', 'license-back', 'license-front', 'pdf'].includes(this.icon)
-      return flg ? `__icon-${this.icon}` : ''
+        ['car', 'license-back', 'license-front', 'pdf'].includes(this.icon);
+      return flg ? `__icon-${this.icon}` : '';
     },
     input() {
-      return this.$refs.input
+      return this.$refs.input;
     },
   },
   watch: {
@@ -150,34 +150,34 @@ export default {
         this.data = {
           url: val,
           type: this.$ui.getFileType(val, true),
-        }
+        };
       }
     },
   },
   methods: {
     del() {
-      this.data = {}
-      this.$emit('change', {})
+      this.data = {};
+      this.$emit('change', {});
     },
     edit() {
-      this.input.click()
+      this.input.click();
     },
     inputChange(e) {
-      const file = e.target.files[0]
+      const file = e.target.files[0];
       if (isFunction(this.validate)) {
         this.validate(file, () => {
-          this.handleFile(file)
-        })
+          this.handleFile(file);
+        });
       } else {
-        this.handleFile(file)
+        this.handleFile(file);
       }
-      e.target.value = ''
+      e.target.value = '';
     },
     handleFile(file) {
-      this.file = file
-      const url = utils.toBlobUrl(file)
+      this.file = file;
+      const url = utils.toBlobUrl(file);
       // image file
-      const { type, size } = file
+      const { type, size } = file;
       if (!/^image\/\w+/i.test(type)) {
         this.data = {
           type,
@@ -187,46 +187,46 @@ export default {
           raw: {
             file,
           },
-        }
-        this.$emit('change', { ...this.data })
-        return
+        };
+        this.$emit('change', { ...this.data });
+        return;
       }
-      const { width, height } = this.options
+      const { width, height } = this.options;
       if (width && height) {
-        this.blobUrl = url
-        this.cropperVisible = true
+        this.blobUrl = url;
+        this.cropperVisible = true;
       } else {
         handleMediaFile(file, this.options)
           .then((res) => {
-            res.raw.file = file
+            res.raw.file = file;
             if (!res.data) {
-              res.data = utils.base64ToBlob(res.base64)
+              res.data = utils.base64ToBlob(res.base64);
             }
             if (!res.url) {
-              res.url = utils.toBlobUrl(res.data)
+              res.url = utils.toBlobUrl(res.data);
             }
-            this.data = res
-            this.$emit('change', { ...this.data })
+            this.data = res;
+            this.$emit('change', { ...this.data });
           })
           .catch((err) => {
-            this.$emit('error', err)
-          })
+            this.$emit('error', err);
+          });
       }
     },
     cropChange(cropInfo) {
-      this.cropperVisible = false
+      this.cropperVisible = false;
       handleMediaFile(this.file, { ...this.options, cropInfo })
         .then((res) => {
-          res.raw.file = this.file
-          this.data = res
-          this.$emit('change', { ...this.data })
+          res.raw.file = this.file;
+          this.data = res;
+          this.$emit('change', { ...this.data });
         })
         .catch((err) => {
-          this.$emit('error', err)
-        })
+          this.$emit('error', err);
+        });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

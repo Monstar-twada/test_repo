@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import MarkIcon from '~/components/common/mark-icon/index'
+import MarkIcon from '~/components/common/mark-icon/index';
 export default {
   name: 'UserDropDown',
   components: {
@@ -71,7 +71,7 @@ export default {
           },
         ],
       },
-    }
+    };
   },
   methods: {
     handleLogout() {
@@ -83,14 +83,14 @@ export default {
         },
       })
         .then(() => {
-          this.$store.dispatch('auth/logout')
+          this.$store.dispatch('auth/logout');
         })
         .catch(() => {
           // console.log('cancel')
-        })
+        });
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .user-drop-down {

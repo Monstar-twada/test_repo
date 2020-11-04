@@ -6,62 +6,62 @@
 import {
   BASIC_MASTER_CACHE_KEY,
   BASIC_PREFECTURE_CACHE_KEY,
-} from '~/assets/constants'
+} from '~/assets/constants';
 
 /**
  * init basic data
  */
 export function initBasicData() {
   // master
-  let basicData = this.$ui.getCache(BASIC_MASTER_CACHE_KEY)
+  let basicData = this.$ui.getCache(BASIC_MASTER_CACHE_KEY);
   if (!basicData) {
     this.$api
       .get('/v1/code/all', { limit: 9999, offset: 0 })
       .then((res) => {
-        basicData = formatMasterList(res.results)
+        basicData = formatMasterList(res.results);
         if (basicData) {
-          this.$ui.setCache(BASIC_MASTER_CACHE_KEY, basicData)
+          this.$ui.setCache(BASIC_MASTER_CACHE_KEY, basicData);
         }
       })
       .catch((err) => {
-        console.error(err)
-      })
+        console.error(err);
+      });
   }
 
   // prefectures
-  let prefectureData = this.$ui.getCache(BASIC_PREFECTURE_CACHE_KEY)
+  let prefectureData = this.$ui.getCache(BASIC_PREFECTURE_CACHE_KEY);
   if (!prefectureData) {
     this.$api
       .get('/v1/prefectures', { limit: 9999, offset: 0 })
       .then((res) => {
-        prefectureData = formatPrefectureList(res.results)
+        prefectureData = formatPrefectureList(res.results);
         if (prefectureData) {
-          this.$ui.setCache(BASIC_PREFECTURE_CACHE_KEY, prefectureData)
+          this.$ui.setCache(BASIC_PREFECTURE_CACHE_KEY, prefectureData);
         }
       })
       .catch((err) => {
-        console.error(err)
-      })
+        console.error(err);
+      });
   }
 }
 
 function formatMasterList(res) {
-  let data
+  let data;
   if (Array.isArray(res) && res.length > 0) {
-    data = {}
+    data = {};
     res.forEach(({ codeId, codeType, codeValue, codeName, sortNumber }) => {
       if (!data[codeType]) {
-        data[codeType] = []
+        data[codeType] = [];
       }
       data[codeType].push({
         type: codeId,
         value: codeValue,
         text: codeName,
         sort: sortNumber,
-      })
-    })
+      });
+    });
   }
-  return data
+  return data;
 }
 
 function formatPrefectureList(res) {
@@ -70,8 +70,8 @@ function formatPrefectureList(res) {
       return {
         text: name,
         value: prefecturesCode,
-      }
-    })
+      };
+    });
   }
-  return null
+  return null;
 }

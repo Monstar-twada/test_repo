@@ -63,13 +63,13 @@ export default {
     menuItems: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
   },
   data() {
-    const isManager = this.$isManager
-    const isConsole = this.$isConsole
+    const isManager = this.$isManager;
+    const isConsole = this.$isConsole;
     return {
       collapsed: this.value,
       selectedResult: 0,
@@ -77,17 +77,17 @@ export default {
       index: -1,
       logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
       selectList: [],
-    }
+    };
   },
   computed: {
     isFirstIndex() {
-      return this.index === 0
+      return this.index === 0;
     },
     isLastIndex() {
-      return this.index === this.menuItems.length - 1
+      return this.index === this.menuItems.length - 1;
     },
     popupPosition() {
-      return this.collapsed ? 'right' : ''
+      return this.collapsed ? 'right' : '';
     },
   },
   watch: {
@@ -95,40 +95,40 @@ export default {
     //   console.log('selectedResult change', val)
     // },
     $route() {
-      this.resetRouteIndex()
+      this.resetRouteIndex();
     },
     value(val) {
       if (this.collapsed !== val) {
-        this.collapsed = val
+        this.collapsed = val;
       }
     },
     collapsed(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   created() {
-    this.resetRouteIndex()
+    this.resetRouteIndex();
     this.getStoreList().then(() => {
-      this.selectedResult = 1
-    })
+      this.selectedResult = 1;
+    });
   },
   methods: {
     resetRouteIndex() {
-      const route = this.$route
-      const path = '/' + route.path.split('/')[1] + '/'
-      this.index = this.menuItems.findIndex((item) => item.link === path)
+      const route = this.$route;
+      const path = '/' + route.path.split('/')[1] + '/';
+      this.index = this.menuItems.findIndex((item) => item.link === path);
     },
     handleMenuClick(link) {
       if (!this.$store.getters['popup/getSaveFlg']) {
-        const tempIndex = this.index
+        const tempIndex = this.index;
         const timer = setTimeout(() => {
-          this.index = tempIndex
-          clearTimeout(timer)
-          this.$router.push(link)
-        }, 0)
+          this.index = tempIndex;
+          clearTimeout(timer);
+          this.$router.push(link);
+        }, 0);
       } else {
-        const content = '入力中のデータが失われます。画面遷移をしますか？'
-        const okBtn = '遷移する'
+        const content = '入力中のデータが失われます。画面遷移をしますか？';
+        const okBtn = '遷移する';
         this.$confirm(content, {
           buttons: {
             ok: {
@@ -137,21 +137,21 @@ export default {
           },
         })
           .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
-            this.$router.push(link)
+            this.$store.dispatch('popup/setFlg', false);
+            this.status = [];
+            this.$router.push(link);
           })
           .catch(() => {
             // console.log('cancel')
-          })
+          });
       }
     },
     async getStoreList() {
       await this.$api
         .get(`/v1/store`)
         .then((res) => {
-          const storeList = res.results[0].area
-          const storeCode = $nuxt.$store.state.auth.storeCode
+          const storeList = res.results[0].area;
+          const storeCode = $nuxt.$store.state.auth.storeCode;
           if (storeCode) {
             this.selectList = storeList
               .filter((item) => item.store.storeCode === storeCode)
@@ -159,17 +159,17 @@ export default {
                 return {
                   value: index + 1,
                   text: `${item.store.storeName}`,
-                }
-              })
-            this.$ui.setCache('store_list', this.selectList)
+                };
+              });
+            this.$ui.setCache('store_list', this.selectList);
           }
         })
         .catch((err) => {
-          console.error(err)
-        })
+          console.error(err);
+        });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

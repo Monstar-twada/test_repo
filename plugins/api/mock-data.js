@@ -3,7 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-09-14 16:15
  */
-import YAML from 'yaml'
+import YAML from 'yaml';
 
 /**
  * get mock data
@@ -14,10 +14,10 @@ import YAML from 'yaml'
  * @returns {Promise<unknown>}
  */
 export function getMockData(api, params = {}, load, method) {
-  console.log('[MOCK REQUEST]', method, api, params)
+  console.log('[MOCK REQUEST]', method, api, params);
   return new Promise((resolve, reject) => {
     if (/put|post|delete/i.test(method)) {
-      console.warn('[MOCK METHOD] handle put|post|delete', api)
+      console.warn('[MOCK METHOD] handle put|post|delete', api);
     }
     /* eslint-disable */
     const { hasOwn } = $nuxt.$ui

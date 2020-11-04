@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import PageInfo from './PageInfo'
-import Pagination from './Pagination'
+import PageInfo from './PageInfo';
+import Pagination from './Pagination';
 export default {
   name: 'FgPagination',
   components: {
@@ -57,30 +57,30 @@ export default {
   data() {
     return {
       page: this.value,
-    }
+    };
   },
   computed: {
     currentPageText() {
-      let start = (this.page - 1) * this.pageSize
+      let start = (this.page - 1) * this.pageSize;
       if (this.total) {
-        start += 1
+        start += 1;
       }
-      const end = Math.min(this.page * this.pageSize, this.total)
-      return `${start}〜${end}`
+      const end = Math.min(this.page * this.pageSize, this.total);
+      return `${start}〜${end}`;
     },
   },
   watch: {
     value(val) {
       if (this.page !== val) {
-        this.page = val
+        this.page = val;
       }
     },
     page(val) {
-      this.$emit('input', val)
-      this.$emit('change', val)
+      this.$emit('input', val);
+      this.$emit('change', val);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

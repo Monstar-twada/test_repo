@@ -26,18 +26,18 @@ export default {
   data() {
     return {
       selected: this.value,
-    }
+    };
   },
   watch: {
     value(val) {
-      this.selected = val
+      this.selected = val;
     },
     selected(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {},
-}
+};
 </script>
 <style lang="scss" scoped>
 .mark-icon {

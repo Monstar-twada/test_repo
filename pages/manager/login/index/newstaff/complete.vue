@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import Complete from '~/components/common/login/mailreset/complete/index'
+import Complete from '~/components/common/login/mailreset/complete/index';
 export default {
   components: {
     Complete,
   },
-}
+};
 </script>

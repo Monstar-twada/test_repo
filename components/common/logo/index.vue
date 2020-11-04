@@ -21,9 +21,9 @@ export default {
         : this.$isConsole
         ? 'console'
         : 'dashboard',
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .logo {

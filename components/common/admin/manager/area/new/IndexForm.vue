@@ -56,9 +56,9 @@ export default {
           area: '奈良エリア',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -112,8 +112,8 @@
 </template>
 
 <script>
-import TextContent from '../../../common/TextContent'
-import SubTitle from '../../../common/SubTitle'
+import TextContent from '../../../common/TextContent';
+import SubTitle from '../../../common/SubTitle';
 export default {
   components: {
     TextContent,
@@ -125,19 +125,19 @@ export default {
   data() {
     return {
       visible: this.value,
-    }
+    };
   },
   computed: {},
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {},
-}
+};
 </script>
 
 <style lang="scss">

@@ -66,9 +66,9 @@
 </template>
 
 <script>
-import { CAR_LIST_QUERY } from '../common/base'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { customerMixin } from '~/mixins/customer'
+import { CAR_LIST_QUERY } from '../common/base';
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
+import { customerMixin } from '~/mixins/customer';
 
 export default {
   components: {
@@ -151,67 +151,67 @@ export default {
         ...CAR_LIST_QUERY,
       },
       carListData: {},
-    }
+    };
   },
   computed: {
     list() {
-      return this.carListData.results || []
+      return this.carListData.results || [];
     },
   },
   watch: {
     query: {
       deep: true,
       handler() {
-        this.getCarList()
+        this.getCarList();
       },
     },
   },
   created() {
-    this.getCarList()
+    this.getCarList();
     // To be called function when Activity added
     this.$root.$on('getCarList', () => {
-      this.getCarList()
-    })
+      this.getCarList();
+    });
   },
   methods: {
     clickRow(row) {
-      this.$emit('change', row)
+      this.$emit('change', row);
     },
     async getCarList() {
       const params = {
         ...this.query,
-      }
+      };
       // sort
-      params.sort = this.$ui.fmtSort(this.query.sort)
+      params.sort = this.$ui.fmtSort(this.query.sort);
       // offset
-      params.offset = (params.page - 1) * params.limit
-      delete params.page
+      params.offset = (params.page - 1) * params.limit;
+      delete params.page;
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.customerCode}/cars`,
           params
-        )
-        this.carListData = res || {}
+        );
+        this.carListData = res || {};
         // cache cars, use to 活動報告編集
         // if (this.query.page === 1) {
-        this.$ui.setCache('cars_customer_' + this.customerCode, res)
+        this.$ui.setCache('cars_customer_' + this.customerCode, res);
         // }
       } catch (err) {
-        this.$ui.error('[CarTable.vue::getCarList]', err)
-        this.$alert(err.message)
+        this.$ui.error('[CarTable.vue::getCarList]', err);
+        this.$alert(err.message);
       }
     },
     sortChange(field, sort) {
       this.headers.map((item) => {
-        item.sortactive = item.field === field
-      })
+        item.sortactive = item.field === field;
+      });
       for (const item in this.query.sort) {
-        this.query.sort[item] = item === field ? sort : ''
+        this.query.sort[item] = item === field ? sort : '';
       }
-      this.query.page = 1
+      this.query.page = 1;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -100,8 +100,8 @@
 </template>
 
 <script>
-import Header from '~/components/common/account/common/Header'
-import MarkIcon from '~/components/common/mark-icon/index'
+import Header from '~/components/common/account/common/Header';
+import MarkIcon from '~/components/common/mark-icon/index';
 export default {
   components: {
     Header,
@@ -141,12 +141,12 @@ export default {
           icon: 'paper',
         },
       ],
-    }
+    };
   },
   methods: {
     avatarChange() {},
   },
-}
+};
 </script>
 
 <style lang="scss">

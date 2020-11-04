@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import SubTitle from '~/components/common/customer/common/SubTitle.vue'
-import TextContent from '~/components/common/customer/common/TextContent.vue'
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
+import SubTitle from '~/components/common/customer/common/SubTitle.vue';
+import TextContent from '~/components/common/customer/common/TextContent.vue';
 
 export default {
   name: 'DetailContainer',
@@ -91,7 +91,7 @@ export default {
       ],
     },
   }),
-}
+};
 </script>
 
 <style lang="scss" scoped>

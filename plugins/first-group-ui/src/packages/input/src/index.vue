@@ -91,14 +91,14 @@
 </template>
 
 <script>
-import Broadcaster from '../../../assets/js/broadcaster'
-import { isFunction, isNumberLike } from '../../../libs/index'
-import { formEmitterMixin } from '../../../mixins/form-emitter'
+import Broadcaster from '../../../assets/js/broadcaster';
+import { isFunction, isNumberLike } from '../../../libs/index';
+import { formEmitterMixin } from '../../../mixins/form-emitter';
 import {
   DEF_PADDING,
   DEF_SIDE_PADDING,
   DEF_CLEAR_ICON_OFFSET,
-} from './constants'
+} from './constants';
 
 export default {
   name: 'FgInput',
@@ -191,31 +191,31 @@ export default {
     errorMessageNowrap: Boolean,
   },
   data() {
-    const clearOffset = DEF_CLEAR_ICON_OFFSET[this.size]
+    const clearOffset = DEF_CLEAR_ICON_OFFSET[this.size];
     return {
       text: this.value,
       viewText: this.value,
       clearableOffset: this.clearable ? clearOffset : 0,
       isFocus: false,
-    }
+    };
   },
   computed: {
     input() {
-      return this.type === 'textarea' ? this.$refs.textarea : this.$refs.input
+      return this.type === 'textarea' ? this.$refs.textarea : this.$refs.input;
     },
     isNonEmpty() {
-      return !!this.text
+      return !!this.text;
     },
     elStyle() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
     inputStyle() {
-      const defaultPadding = DEF_SIDE_PADDING[this.size] || DEF_PADDING
-      const lenWidth = this.length > 0 ? this.length.toString().length * 20 : 0
+      const defaultPadding = DEF_SIDE_PADDING[this.size] || DEF_PADDING;
+      const lenWidth = this.length > 0 ? this.length.toString().length * 20 : 0;
       const ret = {
         paddingLeft: this.offsetLeft + defaultPadding + 'px',
         paddingRight:
@@ -223,101 +223,101 @@ export default {
           (this.clearableOffset || defaultPadding) +
           lenWidth +
           'px',
-      }
+      };
       if (this.type === 'textarea' && !this.resizable) {
-        ret.resize = 'none'
+        ret.resize = 'none';
       }
-      return ret
+      return ret;
     },
     clearIconColor() {
-      return this.iconColor || this.$colors.primary
+      return this.iconColor || this.$colors.primary;
     },
     _isError() {
-      let flag = false
+      let flag = false;
       if (this.length) {
-        flag = this.text.length > this.length
+        flag = this.text.length > this.length;
       }
       // has error message
       if (this.errorMessage) {
-        flag = true
+        flag = true;
       }
-      return flag
+      return flag;
     },
     lengthText() {
-      const len = this.text.length
-      return len > 0 ? `${len}/${this.length}` : ''
+      const len = this.text.length;
+      return len > 0 ? `${len}/${this.length}` : '';
     },
   },
   watch: {
     text(val) {
-      this.viewText = val
-      this.$emit('input', val)
+      this.viewText = val;
+      this.$emit('input', val);
     },
     value(val) {
       if (this.text !== val) {
-        this.text = val
-        this.dispatch('FgFormItem', 'fg.form.change', [val])
+        this.text = val;
+        this.dispatch('FgFormItem', 'fg.form.change', [val]);
       }
     },
     isFocus(val) {
-      this.fmtViewText(val)
+      this.fmtViewText(val);
     },
   },
   created() {
-    this.fmtViewText()
+    this.fmtViewText();
   },
   methods: {
     fmtViewText(isFocus) {
       if (isFocus) {
-        this.viewText = this.text
+        this.viewText = this.text;
       } else {
         this.viewText = isFunction(this.customFormatter)
           ? this.customFormatter(this.text, this)
-          : this.text
+          : this.text;
       }
     },
     handleClear(e) {
-      e.stopPropagation()
-      this.input.value = ''
-      this.text = ''
+      e.stopPropagation();
+      this.input.value = '';
+      this.text = '';
       this.$nextTick(() => {
-        this.input.focus()
-      })
-      this.$emit('clear', e)
-      this.$emit('change', '')
-      this.emitFormChange()
+        this.input.focus();
+      });
+      this.$emit('clear', e);
+      this.$emit('change', '');
+      this.emitFormChange();
     },
     handleClick(e) {
-      this.$emit('click', e)
+      this.$emit('click', e);
     },
     handleInput() {
-      this.text = this.input.value
+      this.text = this.input.value;
       if (!this.clearVisible) {
-        this.clearVisible = true
+        this.clearVisible = true;
       }
     },
     handleChange(e) {
-      this.text = e.target.value
-      this.$emit('change', this.text)
-      this.emitFormChange()
+      this.text = e.target.value;
+      this.$emit('change', this.text);
+      this.emitFormChange();
     },
     focus() {
-      if (this.readonly || this.disabled) return
+      if (this.readonly || this.disabled) return;
       this.$nextTick(() => {
-        this.input.focus()
-      })
+        this.input.focus();
+      });
     },
     unitClick(e) {
-      e.stopPropagation()
+      e.stopPropagation();
     },
     handleFocus() {
-      this.isFocus = true
+      this.isFocus = true;
     },
     handleBlur() {
-      this.isFocus = false
+      this.isFocus = false;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -3,10 +3,10 @@
  * https://github.com/capricorncd
  * Date: 2020-07-30 17:57
  */
-import FgForm from './src/index'
+import FgForm from './src/index';
 
 FgForm.install = function (Vue) {
-  Vue.component(FgForm.name, FgForm)
-}
+  Vue.component(FgForm.name, FgForm);
+};
 
-export default FgForm
+export default FgForm;

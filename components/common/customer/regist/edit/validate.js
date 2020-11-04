@@ -26,11 +26,11 @@ export const FORM_RULES = {
   parentsHomeAddress: 255,
   drink: 255,
   hobby: 255,
-}
+};
 
 function halfWidthNumber(value) {
   if (value && !/^\d+$/.test(value)) {
-    return '半角数値のみ'
+    return '半角数値のみ';
   }
-  return null
+  return null;
 }

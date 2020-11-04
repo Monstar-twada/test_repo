@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { DEF_FORM } from './constants'
+import { DEF_FORM } from './constants';
 
 export default {
   props: {
@@ -105,25 +105,25 @@ export default {
         carCode: this.currentCarCode,
       },
       isSubmitting: false,
-    }
+    };
   },
   computed: {
     transactionTypes() {
-      return this.$ui.getBasicData('transaction_type')
+      return this.$ui.getBasicData('transaction_type');
     },
     channels() {
-      return this.$ui.getBasicData('channel')
+      return this.$ui.getBasicData('channel');
     },
   },
   watch: {
     value(val) {
       if (this.visible !== val) {
-        this.visible = val
+        this.visible = val;
       }
       if (val) {
         // currentCarCode
         if (this.currentCarCode && this.currentCarCode !== this.form.carCode) {
-          this.form.carCode = this.currentCarCode
+          this.form.carCode = this.currentCarCode;
         }
         // 「担当店舗コード」と「担当者コード」のセット
         // 取得方法：QAのNo.11を参照してください
@@ -133,65 +133,65 @@ export default {
       }
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   created() {
-    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
-    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
+    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode;
+    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode;
   },
   methods: {
     resetForm() {
       const reset = {
         ...DEF_FORM,
         carCode: this.currentCarCode,
-      }
-      this.form = reset
+      };
+      this.form = reset;
       if (this.currentCarCode && this.currentCarCode !== this.form.carCode) {
-        this.form.carCode = this.currentCarCode
+        this.form.carCode = this.currentCarCode;
       }
-      this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
-      this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
+      this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode;
+      this.form.contactStaffCode = $nuxt.$store.state.auth.userCode;
     },
     checkFormVal() {
-      let index = 0
+      let index = 0;
       for (const key in this.form) {
         if (
           this.form[key] === '' &&
           (key !== 'carCode' || key !== 'checkFlag')
         ) {
-          index += 1
+          index += 1;
         }
       }
-      this.isSubmitting = index === 0
+      this.isSubmitting = index === 0;
     },
     async save() {
-      if (!this.isSubmitting) return
-      const form = { ...this.form }
-      form.checkFlag = +form.checkFlag
+      if (!this.isSubmitting) return;
+      const form = { ...this.form };
+      form.checkFlag = +form.checkFlag;
       // eslint-disable-next-line promise/param-names
-      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
       await this.$api
         .post(
           `/v1/customers/${this.customerData.customerCode}/activityReports`,
           form
         )
         .then(() => {
-          this.visible = false
-          this.isSubmitting = false
-          this.resetForm()
+          this.visible = false;
+          this.isSubmitting = false;
+          this.resetForm();
         })
         .catch((err) => {
-          if (err) this.$alert(err.message)
-          this.isSubmitting = false
-        })
-      this.$alert('活動報告追加成功しました！')
-      await delay()
-      this.$root.$emit('getCarList')
-      this.$emit('change')
+          if (err) this.$alert(err.message);
+          this.isSubmitting = false;
+        });
+      this.$alert('活動報告追加成功しました！');
+      await delay();
+      this.$root.$emit('getCarList');
+      this.$emit('change');
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

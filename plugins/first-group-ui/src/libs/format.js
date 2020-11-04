@@ -3,8 +3,8 @@
  * https://github.com/capricorncd
  * Date: 2020-09-15 12:39
  */
-import ZxCalendar from 'zx-calendar'
-import { isBoolean, isArray, isString } from './check'
+import ZxCalendar from 'zx-calendar';
+import { isBoolean, isArray, isString } from './check';
 
 /**
  * to number
@@ -12,8 +12,8 @@ import { isBoolean, isArray, isString } from './check'
  * @returns {*}
  */
 export function toNumber(a) {
-  const n = parseFloat(a)
-  return isNaN(n) ? 0 : n
+  const n = parseFloat(a);
+  return isNaN(n) ? 0 : n;
 }
 
 /**
@@ -23,17 +23,15 @@ export function toNumber(a) {
  * @returns {string}
  */
 export function toHumpStr(attr, spacer = '-') {
-  if (!attr) return ''
+  if (!attr) return '';
   if (typeof attr !== 'string') {
-    attr = attr.toString()
+    attr = attr.toString();
   }
   if ('.?*^$'.includes(spacer)) {
-    spacer = '\\' + spacer
+    spacer = '\\' + spacer;
   }
-  const reg = new RegExp(`${spacer}(.)`, 'g')
-  return attr
-    .toLowerCase()
-    .replace(reg, (match, group1) => group1.toUpperCase())
+  const reg = new RegExp(`${spacer}(.)`, 'g');
+  return attr.toLowerCase().replace(reg, (group1) => group1.toUpperCase());
 }
 
 /**
@@ -42,22 +40,22 @@ export function toHumpStr(attr, spacer = '-') {
  * @returns {string}
  */
 export function toTwoDigits(s) {
-  s = s + ''
-  return s[1] ? s : '0' + s
+  s = s + '';
+  return s[1] ? s : '0' + s;
 }
 
 export function merge(target) {
   for (let i = 1, j = arguments.length; i < j; i++) {
-    const source = arguments[i] || {}
+    const source = arguments[i] || {};
     for (const prop in source) {
-      const value = source[prop]
+      const value = source[prop];
       if (value !== undefined) {
-        target[prop] = value
+        target[prop] = value;
       }
     }
   }
 
-  return target
+  return target;
 }
 
 /**
@@ -66,7 +64,7 @@ export function merge(target) {
  * @returns {string}
  */
 export function createRandomStr(prefix) {
-  return prefix + '_' + Math.random().toString().substr(2)
+  return prefix + '_' + Math.random().toString().substr(2);
 }
 
 /**
@@ -76,18 +74,18 @@ export function createRandomStr(prefix) {
  * @returns {string|*}
  */
 export function toCommaNumber(value, keepDecimalPlaces = false) {
-  if (!value) return value
-  const arr = value.toString().split('.')
-  const integerPartArray = arr[0].split('').reverse()
-  const result = []
+  if (!value) return value;
+  const arr = value.toString().split('.');
+  const integerPartArray = arr[0].split('').reverse();
+  const result = [];
   for (let i = 0; i < integerPartArray.length; i++) {
     if (i && i % 3 === 0) {
-      result.push(',')
+      result.push(',');
     }
-    result.push(integerPartArray[i])
+    result.push(integerPartArray[i]);
   }
-  arr[0] = result.reverse().join('')
-  return keepDecimalPlaces ? arr.join('.') : arr[0]
+  arr[0] = result.reverse().join('');
+  return keepDecimalPlaces ? arr.join('.') : arr[0];
 }
 
 /**
@@ -97,28 +95,28 @@ export function toCommaNumber(value, keepDecimalPlaces = false) {
  * @returns {number}
  */
 export function booleanToNumber(o, props) {
-  if (isBoolean(o)) return +o
+  if (isBoolean(o)) return +o;
   if (!isArray(props)) {
-    props = [props]
+    props = [props];
   }
   Object.keys(o).forEach((key) => {
     if (props.includes(key) && isBoolean(o[key])) {
-      o[key] = +o[key]
+      o[key] = +o[key];
     }
-  })
+  });
 }
 
 export function formatDate(str, fmt) {
   return ZxCalendar.prototype.formatDate(str, fmt, {
     weeks: ['日', '月', '火', '水', '木', '金', '土'],
-  })
+  });
 }
 
 export function toDate(str) {
   try {
-    return ZxCalendar.prototype.toDate(str)
+    return ZxCalendar.prototype.toDate(str);
   } catch (e) {
-    return null
+    return null;
   }
 }
 
@@ -128,7 +126,7 @@ const MIME_TYPES = {
   jpeg: 'image',
   png: 'image',
   pneg: 'image',
-}
+};
 
 /**
  * get file type
@@ -137,12 +135,12 @@ const MIME_TYPES = {
  * @returns {string}
  */
 export function getFileType(url, isMimeType) {
-  let result = ''
+  let result = '';
   if (isString(url)) {
-    result = url.toLowerCase().split('?')[0].split('.').pop()
+    result = url.toLowerCase().split('?')[0].split('.').pop();
     if (isMimeType) {
-      result = MIME_TYPES[result] + '/' + result
+      result = MIME_TYPES[result] + '/' + result;
     }
   }
-  return result
+  return result;
 }

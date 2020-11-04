@@ -35,7 +35,7 @@
 <script>
 export default {
   name: 'ImportButton',
-}
+};
 </script>
 
 <style lang="scss" scoped>

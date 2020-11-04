@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import SalesProductivityGraph from './sales-productivity-graph.js'
+import SalesProductivityGraph from './sales-productivity-graph.js';
 export default {
   name: 'Sales',
   components: {
@@ -88,22 +88,22 @@ export default {
                 beginAtZero: true,
                 fontColor: '#1258BC',
                 fontSize: 10,
-                callback(value, index, values) {
-                  return '¥' + value
+                callback(value) {
+                  return '¥' + value;
                 },
               },
             },
           ],
         },
       },
-    }
+    };
   },
   methods: {
     childToParent(value) {
-      this.gradient = value
+      this.gradient = value;
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .tab {

@@ -29,36 +29,36 @@ export default {
     return {
       visible: this.value,
       url: '',
-    }
+    };
   },
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
     carCode() {
-      this.getImage()
+      this.getImage();
     },
   },
   mounted() {
-    this.getImage()
+    this.getImage();
   },
   methods: {
     async getImage() {
-      if (!this.customerCode || !this.carCode) return
+      if (!this.customerCode || !this.carCode) return;
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.customerCode}/cars/${this.carCode}/registrationImage`
-        )
-        this.url = res.url
+        );
+        this.url = res.url;
       } catch (err) {
-        this.$ui.error('[vehicle-inspection-cert-dialog]', err)
+        this.$ui.error('[vehicle-inspection-cert-dialog]', err);
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

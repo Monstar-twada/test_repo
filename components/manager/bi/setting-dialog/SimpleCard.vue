@@ -145,13 +145,13 @@
   </div>
 </template>
 <script>
-import Input from '~/components/common/Input.vue'
+import Input from '~/components/common/Input.vue';
 export default {
   name: 'DetailsCard',
   components: {
     Input,
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Confirm from '~/components/common/customer/regist/user/confirm/index'
+import Confirm from '~/components/common/customer/regist/user/confirm/index';
 
 export default {
   layout: 'manager',
@@ -11,5 +11,5 @@ export default {
   components: {
     Confirm,
   },
-}
+};
 </script>

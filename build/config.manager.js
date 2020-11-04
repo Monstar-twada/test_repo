@@ -36,4 +36,5 @@ export default merge(baseConfig, {
     { src: '~/plugins/global-manager-properties.js', ssr: false },
     '~/plugins/aws',
   ],
+  buildModules: ['@nuxt/typescript-build']
 })

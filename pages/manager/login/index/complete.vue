@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import Complete from '~/components/common/login/complete/index'
+import Complete from '~/components/common/login/complete/index';
 export default {
   components: {
     Complete,
   },
-}
+};
 </script>

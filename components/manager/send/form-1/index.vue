@@ -19,8 +19,8 @@
   </div>
 </template>
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import SendCard from '~/components/manager/send/form-1/card/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
+import SendCard from '~/components/manager/send/form-1/card/index';
 export default {
   components: {
     SendCard,
@@ -53,9 +53,9 @@ export default {
           link: '',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .context {

@@ -116,12 +116,12 @@
   </div>
 </template>
 <script>
-import LicenceDialog from '../licence-dialog/index'
-import SubTitle from '../../common/SubTitle.vue'
-import TextContent from '../../common/TextContent.vue'
-import ColumnTitle from '../../common/ColumnTitle'
-import FamilyList from './FamilyList'
-import { customerMixin } from '~/mixins/customer'
+import LicenceDialog from '../licence-dialog/index';
+import SubTitle from '../../common/SubTitle.vue';
+import TextContent from '../../common/TextContent.vue';
+import ColumnTitle from '../../common/ColumnTitle';
+import FamilyList from './FamilyList';
+import { customerMixin } from '~/mixins/customer';
 
 export default {
   name: 'CustomerInfo',
@@ -137,65 +137,65 @@ export default {
     data: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
   data() {
     return {
       licenceVisible: false,
-    }
+    };
   },
   computed: {
     carLives() {
-      const classes = this.$ui.getBasicData('car_life')
+      const classes = this.$ui.getBasicData('car_life');
       const selectedItems = (this.data.carLives || []).map((item) => {
-        return item.carLife
-      })
+        return item.carLife;
+      });
       return classes.map((item) => {
         return {
           ...item,
           selected: selectedItems.includes(item.value),
-        }
-      })
+        };
+      });
     },
     selectionPoints() {
-      const classes = this.$ui.getBasicData('selection_points')
+      const classes = this.$ui.getBasicData('selection_points');
       const selectedItems = (this.data.selectionPoints || []).map((item) => {
-        return item.selectionPoints
-      })
+        return item.selectionPoints;
+      });
       return classes.map((item) => {
         return {
           ...item,
           selected: selectedItems.includes(item.value),
-        }
-      })
+        };
+      });
     },
     houseInfo() {
-      const classes = this.$ui.getBasicData('residence_type', true)
-      const { residenceType, residenceTerm } = this.data
+      const classes = this.$ui.getBasicData('residence_type', true);
+      const { residenceType, residenceTerm } = this.data;
       return [
         classes[residenceType] ? classes[residenceType] : '- ',
         residenceTerm !== null ? residenceTerm + '年' : '-',
-      ].join('/ ')
+      ].join('/ ');
     },
     workingTerm() {
-      const { workingTerm } = this.data
-      return workingTerm !== null ? workingTerm + '年' : '-'
+      const { workingTerm } = this.data;
+      return workingTerm !== null ? workingTerm + '年' : '-';
     },
     annualIncome() {
-      const { annualIncome } = this.data
-      return annualIncome ? `${annualIncome}万円` : '-'
+      const { annualIncome } = this.data;
+      return annualIncome ? `${annualIncome}万円` : '-';
     },
     privateBusiness() {
-      const classes = this.$ui.getBasicData('private_business', true)
-      const { privateBusiness } = this.data
-      return classes[privateBusiness] || '-'
+      const classes = this.$ui.getBasicData('private_business', true);
+      const { privateBusiness } = this.data;
+      return classes[privateBusiness] || '-';
     },
     licence() {
-      const { licenseColor, licenseNumber } = this.data
-      const classes = this.$ui.getBasicData('license_color', true)
-      return [classes[licenseColor], licenseNumber].join(' ')
+      const { licenseColor, licenseNumber } = this.data;
+      const classes = this.$ui.getBasicData('license_color', true);
+      return [classes[licenseColor], licenseNumber].join(' ');
     },
   },
   methods: {
@@ -204,15 +204,15 @@ export default {
      * 免許証
      */
     clickLicence() {
-      this.licenceVisible = true
+      this.licenceVisible = true;
     },
     handleEdit() {
       this.$router.push(
         '/customer/regist/edit/?customerCode=' + this.data.customerCode
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

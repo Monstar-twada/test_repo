@@ -289,20 +289,20 @@ export default {
   }),
   computed: {
     disabledBtn() {
-      return this.$store.getters['popup/getSaveFlg'] === false
+      return this.$store.getters['popup/getSaveFlg'] === false;
     },
   },
   watch: {
     value(val) {
-      this.currentPage = val
+      this.currentPage = val;
     },
     currentPage(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   mounted() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
-    this.addWindowPopstateEvent()
+    this.storeCode = $nuxt.$store.state.auth.storeCode;
+    this.addWindowPopstateEvent();
   },
   destroyed() {
     // TODO
@@ -312,64 +312,64 @@ export default {
   },
   methods: {
     addWindowPopstateEvent() {
-      history.pushState(null, null, window.location.href)
+      history.pushState(null, null, window.location.href);
       window.addEventListener(
         'popstate',
         () => {
-          this.clickBrowserSystemButton()
+          this.clickBrowserSystemButton();
         },
         false
-      )
+      );
     },
     removeWindowPopstateEvent() {
-      window.removeEventListener('popstate', this.clickBrowserSystemButton)
+      window.removeEventListener('popstate', this.clickBrowserSystemButton);
     },
     handleChange(property, id, val, isToString = false) {
-      let value = Number(val)
-      if (isToString) value = value.toString()
+      let value = Number(val);
+      if (isToString) value = value.toString();
       if (!this.status[id]) {
-        this.status[id] = {}
-        this.status[id][property] = value
+        this.status[id] = {};
+        this.status[id][property] = value;
       } else if (!this.status[id][property]) {
-        this.status[id][property] = value
+        this.status[id][property] = value;
       } else {
-        delete this.status[id][property]
+        delete this.status[id][property];
         if (Object.keys(this.status[id]).length === 0) {
-          delete this.status[id]
+          delete this.status[id];
         }
       }
       this.$store.dispatch(
         'popup/setFlg',
         !!Object.keys(this.status).length > 0
-      )
+      );
     },
 
     handleChangeSelect(property, id, val) {
-      const value = val === null ? val : val.toString()
-      const item = this.findItemInfoById(id)
+      const value = val === null ? val : val.toString();
+      const item = this.findItemInfoById(id);
       if (value !== item[property]) {
         if (!this.status[id]) {
-          this.status[id] = {}
-          this.status[id][property] = value
+          this.status[id] = {};
+          this.status[id][property] = value;
         } else if (!this.status[id][property]) {
-          this.status[id][property] = value
+          this.status[id][property] = value;
         }
       } else if (this.status[id][property]) {
-        delete this.status[id][property]
+        delete this.status[id][property];
         if (Object.keys(this.status[id]).length === 0) {
-          delete this.status[id]
+          delete this.status[id];
         }
       }
       this.$store.dispatch(
         'popup/setFlg',
         !!Object.keys(this.status).length > 0
-      )
+      );
     },
 
     async saveChange() {
-      const promises = []
+      const promises = [];
       Object.keys(this.status).forEach((index) => {
-        const itemData = this.findItemInfoById(index.toString())
+        const itemData = this.findItemInfoById(index.toString());
         const {
           deliveredFlag,
           carInspectionFlag,
@@ -379,7 +379,7 @@ export default {
           failureFlag,
           outflow,
           purchaseIntention,
-        } = itemData
+        } = itemData;
         const params = {
           deliveredFlag,
           carInspectionFlag,
@@ -390,34 +390,34 @@ export default {
           outflow,
           purchaseIntention,
           ...this.status[index],
-        }
+        };
         promises.push(
           this.$api.put(
             `/v1/attractingCustomer/${this.storeCode}/${index}`,
             params
           )
-        )
-      })
+        );
+      });
       await Promise.all(promises).then(() => {
-        this.$store.dispatch('popup/setFlg', false)
-        this.status = []
+        this.$store.dispatch('popup/setFlg', false);
+        this.status = [];
         setTimeout(() => {
-          this.$emit('update-event')
-        }, 800)
-      })
+          this.$emit('update-event');
+        }, 800);
+      });
     },
 
     saveChangeDailog() {
       if (this.$store.getters['popup/getSaveFlg']) {
         this.$confirm('入力したデータを保存しますか？')
           .then(() => {
-            this.saveChangeDai()
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
+            this.saveChangeDai();
+            this.$store.dispatch('popup/setFlg', false);
+            this.status = [];
           })
           .catch((error) => {
-            console.error({ error })
-          })
+            console.error({ error });
+          });
       }
     },
     handleClickName(item) {
@@ -430,26 +430,26 @@ export default {
           },
         })
           .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
+            this.$store.dispatch('popup/setFlg', false);
+            this.status = [];
             this.$router.push({
               path: `/customer/detail/`,
               query: { customerCode: item.customerCode },
-            })
+            });
           })
           .catch(() => {
             // console.log('cancel')
-          })
+          });
       } else {
         this.$router.push({
           path: `/customer/detail/`,
           query: { customerCode: item.customerCode },
-        })
+        });
       }
     },
 
     clickBrowserSystemButton() {
-      if (!this.$store.getters['popup/getSaveFlg']) return
+      if (!this.$store.getters['popup/getSaveFlg']) return;
       this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
         buttons: {
           ok: {
@@ -458,14 +458,14 @@ export default {
         },
       })
         .then(() => {
-          this.$store.dispatch('popup/setFlg', false)
-          this.removeWindowPopstateEvent()
-          this.status = []
-          this.$router.back()
+          this.$store.dispatch('popup/setFlg', false);
+          this.removeWindowPopstateEvent();
+          this.status = [];
+          this.$router.back();
         })
         .catch(() => {
-          this.addWindowPopstateEvent()
-        })
+          this.addWindowPopstateEvent();
+        });
     },
 
     handleBeforeChange(next) {
@@ -478,24 +478,24 @@ export default {
           },
         })
           .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            this.status = []
-            next()
+            this.$store.dispatch('popup/setFlg', false);
+            this.status = [];
+            next();
           })
           .catch(() => {
             // console.log('cancel')
-          })
+          });
       } else {
-        next()
+        next();
       }
     },
     findItemInfoById(id) {
       return this.itemList.results.find(
         (item) => item.attractingCustomersId === Number(id)
-      )
+      );
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .user {

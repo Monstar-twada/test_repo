@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
@@ -102,14 +102,14 @@ export default {
         email: '',
         password: '',
       },
-    }
+    };
   },
   watch: {
-    email(val) {
-      this.validation()
+    email() {
+      this.validation();
     },
-    password(val) {
-      this.validation()
+    password() {
+      this.validation();
     },
   },
   // checks if already logged in AWS COGNITO
@@ -118,57 +118,57 @@ export default {
     try {
       // await this.$store.dispatch('auth/load')
       if (this.$store.state.auth.isAuthenticated === false) {
-        await this.$store.dispatch('auth/load')
+        await this.$store.dispatch('auth/load');
       }
     } catch (err) {
-      console.error({ err })
+      console.error({ err });
     }
   },
   methods: {
     validation() {
-      const { email, password } = this.form
-      let count = 0
+      const { email, password } = this.form;
+      let count = 0;
       if (email === '') {
-        this.emailError = true
-        this.validationMessage.email = 'メールアドレスが空欄です'
-        count += 1
-      } else this.validationMessage.email = ''
+        this.emailError = true;
+        this.validationMessage.email = 'メールアドレスが空欄です';
+        count += 1;
+      } else this.validationMessage.email = '';
       if (password === '') {
-        this.passwordError = true
-        this.validationMessage.password = 'パスワードが空欄です'
-        count += 1
-      } else this.validationMessage.password = ''
-      return count
+        this.passwordError = true;
+        this.validationMessage.password = 'パスワードが空欄です';
+        count += 1;
+      } else this.validationMessage.password = '';
+      return count;
     },
     async login() {
-      const count = this.validation()
+      const count = this.validation();
       if (count === 0) {
         try {
-          this.$nuxt.$loading.start()
-          await this.$store.dispatch('auth/login', this.form)
-          this.$nuxt.$loading.finish()
-          this.$login.success.call(this)
+          this.$nuxt.$loading.start();
+          await this.$store.dispatch('auth/login', this.form);
+          this.$nuxt.$loading.finish();
+          this.$login.success.call(this);
         } catch (error) {
           if (
             // eslint-disable-next-line no-constant-condition
             error.message === 'Incorrect username or password.' ||
             error.message === "PreAuthentication failed with error 'email'."
           ) {
-            this.count += 1
-            this.emailError = true
-            this.passwordError = true
+            this.count += 1;
+            this.emailError = true;
+            this.passwordError = true;
             this.validationMessage.password =
-              'メールアドレスまたはパスワードが一致しないか、ユーザーが存在しません'
-            console.error({ error })
+              'メールアドレスまたはパスワードが一致しないか、ユーザーが存在しません';
+            console.error({ error });
           } else {
-            this.$alert(error.message)
-            console.error({ error })
+            this.$alert(error.message);
+            console.error({ error });
           }
         }
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

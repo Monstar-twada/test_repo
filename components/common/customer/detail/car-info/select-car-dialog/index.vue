@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { customerMixin } from '~/mixins/customer'
+import { customerMixin } from '~/mixins/customer';
 
 export default {
   mixins: [customerMixin],
@@ -50,7 +50,7 @@ export default {
       default() {
         return {
           total: 0,
-        }
+        };
       },
     },
     currentCarCode: {
@@ -70,32 +70,32 @@ export default {
         { text: '車種', width: 150 },
         { text: '登録ナンバー' },
       ],
-    }
+    };
   },
   computed: {
     list() {
-      return this.data.results || []
+      return this.data.results || [];
     },
   },
   watch: {
     value(val) {
       if (this.visible !== val) {
-        this.visible = val
+        this.visible = val;
       }
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     handleSelect(item) {
       if (item.carCode !== this.currentCarCode) {
-        this.$emit('change', item)
-        this.visible = false
+        this.$emit('change', item);
+        this.visible = false;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -40,7 +40,7 @@ export const DEFAULT_QUERY = {
   // nearInspection: 0,
   // // 6カ月内接点
   // sixMonthContact: 0,
-}
+};
 
 export const CAR_LIST_QUERY = {
   page: 1,
@@ -53,4 +53,4 @@ export const CAR_LIST_QUERY = {
     reservationFlag: '',
     tentiveReservationFlag: '',
   },
-}
+};

@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import SearchBar from './search-bar/index'
+import SearchBar from './search-bar/index';
 export default {
   components: {
     SearchBar,
@@ -157,7 +157,7 @@ export default {
     query: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
@@ -166,31 +166,31 @@ export default {
       form: {
         ...this.query,
       },
-    }
+    };
   },
   computed: {
     registrationDateError() {
-      const { registrationFirstDateFrom, registrationFirstDateTo } = this.form
-      const frFrom = new Date(registrationFirstDateFrom)
-      const frTo = new Date(registrationFirstDateTo)
-      return frFrom > frTo ? '日付を正しく設定してください' : ''
+      const { registrationFirstDateFrom, registrationFirstDateTo } = this.form;
+      const frFrom = new Date(registrationFirstDateFrom);
+      const frTo = new Date(registrationFirstDateTo);
+      return frFrom > frTo ? '日付を正しく設定してください' : '';
     },
     registrationEndDateError() {
-      const { registrationEndDateFrom, registrationEndDateTo } = this.form
-      const frFrom = new Date(registrationEndDateFrom)
-      const frTo = new Date(registrationEndDateTo)
-      return frFrom > frTo ? '日付を正しく設定してください' : ''
+      const { registrationEndDateFrom, registrationEndDateTo } = this.form;
+      const frFrom = new Date(registrationEndDateFrom);
+      const frTo = new Date(registrationEndDateTo);
+      return frFrom > frTo ? '日付を正しく設定してください' : '';
     },
   },
   methods: {
     search() {
-      if (this.registrationDateError || this.registrationEndDateError) return
+      if (this.registrationDateError || this.registrationEndDateError) return;
       const form = {
         ...this.form,
-      }
+      };
       for (const property in form) {
         if (form[property] === '') {
-          form[property] = null
+          form[property] = null;
         }
       }
       this.$ui.booleanToNumber(form, [
@@ -198,11 +198,11 @@ export default {
         'transferTarget',
         'nearInspection',
         'sixMonthContact',
-      ])
-      this.$emit('change', form)
+      ]);
+      this.$emit('change', form);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

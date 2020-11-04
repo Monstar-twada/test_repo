@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import TableItem from './TableItem'
+import TableItem from './TableItem';
 
 export default {
   components: {
@@ -48,7 +48,7 @@ export default {
     query: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
     tableData: {
@@ -56,7 +56,7 @@ export default {
       default() {
         return {
           total: 0,
-        }
+        };
       },
     },
   },
@@ -95,11 +95,11 @@ export default {
         { text: '最終取引日', align: 'center', width: '10%' },
         { text: 'フラグ', align: 'center', width: '12%' },
       ],
-    }
+    };
   },
   computed: {
     list() {
-      return this.tableData.results || []
+      return this.tableData.results || [];
     },
   },
   methods: {
@@ -107,20 +107,20 @@ export default {
       this.$router.push({
         path: `/customer/detail/`,
         query: { customerCode: item.customerCode },
-      })
+      });
     },
     sortChange(field, sort) {
-      this.$nuxt.$loading.start()
+      this.$nuxt.$loading.start();
       this.headers.map((item) => {
-        item.sortactive = item.field === field
-      })
+        item.sortactive = item.field === field;
+      });
       for (const item in this.query.sort) {
-        this.query.sort[item] = item === field ? sort : ''
+        this.query.sort[item] = item === field ? sort : '';
       }
-      this.query.page = 1
+      this.query.page = 1;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

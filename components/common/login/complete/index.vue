@@ -21,17 +21,17 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
   },
   methods: {
     nextUrl(url) {
-      this.$router.push({ path: url })
+      this.$router.push({ path: url });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

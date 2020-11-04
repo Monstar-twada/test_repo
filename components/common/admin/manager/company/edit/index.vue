@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Form from './Form'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import Form from './Form';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 
 export default {
   components: {
@@ -30,9 +30,9 @@ export default {
           text: '管理',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss"></style>

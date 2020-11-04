@@ -1,6 +1,6 @@
 <script>
-const ATTRS = ['span', 'offset', 'pull', 'push']
-const SIZES = ['xs', 'sm', 'md', 'lg', 'xl']
+const ATTRS = ['span', 'offset', 'pull', 'push'];
+const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
 export default {
   name: 'FgCol',
   props: {

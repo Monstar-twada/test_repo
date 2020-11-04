@@ -11,7 +11,7 @@
 
 <script>
 // import VSelect from 'vue-select'
-import Dropdown from '~/components/common/drop-down/index'
+import Dropdown from '~/components/common/drop-down/index';
 // import 'vue-select/dist/vue-select.css'
 export default {
   name: 'Select',
@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       OpenIndicator: Dropdown,
-    }
+    };
   },
   computed: {
     SelectStyle() {
@@ -59,10 +59,10 @@ export default {
         '--width': this.customwidth + 'px',
         '--height': this.customheight + 'px',
         '--background': this.custombackground,
-      }
+      };
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .selectStyle {

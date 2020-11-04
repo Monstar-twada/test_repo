@@ -47,8 +47,8 @@
 </template>
 
 <script>
-import { formEmitterMixin } from '../../../mixins/form-emitter'
-import TimePicker from './time-picker'
+import { formEmitterMixin } from '../../../mixins/form-emitter';
+import TimePicker from './time-picker';
 
 export default {
   name: 'FgDatePicker',
@@ -117,75 +117,75 @@ export default {
       date: null,
       ymd: '',
       time: '',
-    }
+    };
   },
   computed: {
     inputValue() {
-      return this.date ? this.calendar.formatDate(this.date, this.format) : ''
+      return this.date ? this.calendar.formatDate(this.date, this.format) : '';
     },
   },
   watch: {
     date(val) {
-      const format = this.valueFormat || this.format
-      const res = val ? this.calendar.formatDate(val, format) : ''
-      this.$emit('input', res)
-      this.$emit('change', res, val)
-      this.emitFormChange()
+      const format = this.valueFormat || this.format;
+      const res = val ? this.calendar.formatDate(val, format) : '';
+      this.$emit('input', res);
+      this.$emit('change', res, val);
+      this.emitFormChange();
     },
     value(val) {
-      this.resetDateTime(val)
+      this.resetDateTime(val);
     },
     calendar() {
-      this.resetDateTime(this.value)
+      this.resetDateTime(this.value);
     },
   },
   created() {
-    this.resetDateTime(this.value)
+    this.resetDateTime(this.value);
   },
   methods: {
     resetDateTime(val) {
-      if (!this.calendar) return
-      const { toDate, formatDate } = this.calendar
-      const date = toDate(val)
-      if ((!date && !this.date) || this.date === date) return
+      if (!this.calendar) return;
+      const { toDate, formatDate } = this.calendar;
+      const date = toDate(val);
+      if ((!date && !this.date) || this.date === date) return;
       if (!date) {
-        this.date = null
-        this.ymd = ''
-        this.time = '00:00:00'
+        this.date = null;
+        this.ymd = '';
+        this.time = '00:00:00';
       } else {
-        this.date = date
-        this.ymd = formatDate(date, 'yyyy/MM/dd')
-        this.time = formatDate(date, 'hh:mm:ss')
+        this.date = date;
+        this.ymd = formatDate(date, 'yyyy/MM/dd');
+        this.time = formatDate(date, 'hh:mm:ss');
       }
-      this.calendar.setDate(this.ymd)
+      this.calendar.setDate(this.ymd);
     },
     clickTimeWrapper(e) {
-      e.stopPropagation()
+      e.stopPropagation();
     },
     timePickerChange(val) {
-      this.time = val.join(':')
+      this.time = val.join(':');
     },
     cancel() {
-      this.calendar.hidePop()
+      this.calendar.hidePop();
     },
     confirm() {
       this.date = this.calendar.formatDate(
         [this.ymd, this.time].join(' '),
         this.format
-      )
-      this.calendar.hidePop()
+      );
+      this.calendar.hidePop();
     },
     calendarValueFormat(val) {
-      this.ymd = val ? this.calendar.formatDate(val, 'yyyy/MM/dd') : ''
-      return this.inputValue
+      this.ymd = val ? this.calendar.formatDate(val, 'yyyy/MM/dd') : '';
+      return this.inputValue;
     },
     handleClear() {
-      this.date = null
-      this.ymd = ''
-      this.time = '00:00:00'
+      this.date = null;
+      this.ymd = '';
+      this.time = '00:00:00';
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

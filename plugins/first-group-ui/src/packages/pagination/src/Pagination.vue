@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import { isFunction, toNumber } from '../../../libs/index'
-import FirstIconSvg from './FirstIconSvg'
-import PrevNextIcon from './PrevNextIcon'
+import { isFunction, toNumber } from '../../../libs/index';
+import FirstIconSvg from './FirstIconSvg';
+import PrevNextIcon from './PrevNextIcon';
 
 export default {
   components: {
@@ -86,7 +86,7 @@ export default {
     return {
       page: this.value,
       themeColor: this.theme,
-    }
+    };
   },
   computed: {
     /**
@@ -94,12 +94,12 @@ export default {
      * @returns {[]}
      */
     pages() {
-      const len = Math.ceil(this.total / this.pageSize)
-      const arr = []
+      const len = Math.ceil(this.total / this.pageSize);
+      const arr = [];
       for (let i = 1; i <= len; i++) {
-        arr.push(i)
+        arr.push(i);
       }
-      return arr
+      return arr;
     },
     /**
      * show page item array
@@ -107,58 +107,61 @@ export default {
      */
     showItems() {
       if (this.pages.length <= this.showNumber) {
-        return [...this.pages]
+        return [...this.pages];
       }
-      let start = Math.max(this.page - Math.ceil(this.showNumber / 2), 0)
-      const end = Math.min(this.pages.length, toNumber(this.showNumber) + start)
+      let start = Math.max(this.page - Math.ceil(this.showNumber / 2), 0);
+      const end = Math.min(
+        this.pages.length,
+        toNumber(this.showNumber) + start
+      );
       if (end - start < this.showNumber) {
-        start = end - this.showNumber
+        start = end - this.showNumber;
       }
-      return this.pages.slice(start, end)
+      return this.pages.slice(start, end);
     },
     /**
      * line that current page underline
      * @returns {*}
      */
     $line() {
-      return this.$refs.line
+      return this.$refs.line;
     },
     /**
      * current page is first page
      * @returns {boolean}
      */
     isFirstPage() {
-      return this.page === 1
+      return this.page === 1;
     },
     /**
      * current page is last page
      * @returns {boolean}
      */
     isLastPage() {
-      return this.page === this.pages.length || this.pages.length === 0
+      return this.page === this.pages.length || this.pages.length === 0;
     },
     isMultiplePages() {
-      return this.pages.length > 1
+      return this.pages.length > 1;
     },
   },
   watch: {
     value(val) {
       if (this.page !== val) {
-        this.page = val
+        this.page = val;
       }
     },
     page(val) {
-      this.$emit('input', val)
-      this.$emit('change', val)
-      this.resetLinePosition()
+      this.$emit('input', val);
+      this.$emit('change', val);
+      this.resetLinePosition();
     },
     total() {
       // データ数が変わった時
-      this.resetLinePosition()
+      this.resetLinePosition();
     },
   },
   mounted() {
-    this.resetLinePosition()
+    this.resetLinePosition();
   },
   methods: {
     handleClick(page) {
@@ -166,42 +169,42 @@ export default {
         if (isFunction(this.beforeChange)) {
           this.beforeChange(
             () => {
-              this.page = page
+              this.page = page;
             },
             page,
             this.page
-          )
-          return
+          );
+          return;
         }
-        this.page = page
+        this.page = page;
       }
     },
     changePage(type) {
       switch (type) {
         case 'prev':
           if (!this.isFirstPage) {
-            this.handleClick(this.page - 1)
+            this.handleClick(this.page - 1);
           }
-          break
+          break;
         case 'next':
           if (!this.isLastPage) {
-            this.handleClick(this.page + 1)
+            this.handleClick(this.page + 1);
           }
-          break
+          break;
       }
     },
     resetLinePosition() {
       this.$nextTick(() => {
-        const pageItems = this.$refs.pageItems.querySelectorAll('i')
-        const index = this.showItems.findIndex((page) => page === this.page)
-        const el = pageItems[index]
-        if (!el) return
-        this.$line.style.width = el.offsetWidth + 'px'
-        this.$line.style.transform = `translateX(${el.offsetLeft}px) scaleX(0.5)`
-      })
+        const pageItems = this.$refs.pageItems.querySelectorAll('i');
+        const index = this.showItems.findIndex((page) => page === this.page);
+        const el = pageItems[index];
+        if (!el) return;
+        this.$line.style.width = el.offsetWidth + 'px';
+        this.$line.style.transform = `translateX(${el.offsetLeft}px) scaleX(0.5)`;
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

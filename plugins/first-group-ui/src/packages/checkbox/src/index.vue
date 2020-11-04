@@ -37,7 +37,7 @@
   </label>
 </template>
 <script>
-import { formEmitterMixin } from '../../../mixins/form-emitter'
+import { formEmitterMixin } from '../../../mixins/form-emitter';
 export default {
   name: 'FgCheckbox',
   mixins: [formEmitterMixin],
@@ -71,23 +71,23 @@ export default {
       selfModel: false,
       focus: false,
       isLimitExceeded: false,
-    }
+    };
   },
   watch: {
     value(value) {
-      this.checked = value
+      this.checked = value;
     },
   },
   methods: {
     handleChange() {
-      const value = !this.checked
-      if (!this.sync) this.checked = value
-      this.$emit('change', value)
-      this.$emit('input', value)
-      this.emitFormChange()
+      const value = !this.checked;
+      if (!this.sync) this.checked = value;
+      this.$emit('change', value);
+      this.$emit('input', value);
+      this.emitFormChange();
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .fg-checkbox {

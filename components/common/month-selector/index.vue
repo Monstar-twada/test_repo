@@ -26,7 +26,7 @@ export default {
     items: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     placeholder: {
@@ -42,35 +42,35 @@ export default {
   data() {
     console.error(
       'This common/month-selector will be removed, please use "~/components/common/global-selector/index" component instead'
-    )
-    const item = this.items.find((item) => item.value === this.value) || {}
+    );
+    const item = this.items.find((item) => item.value === this.value) || {};
     return {
       selectValue: this.value,
       selectText: item.text,
       listVisible: false,
-    }
+    };
   },
   watch: {
     value(val) {
       if (this.selectValue !== val) {
-        this.selectValue = val
+        this.selectValue = val;
       }
     },
     selectValue(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     handleClick() {
-      if (this.disabled) return
-      this.listVisible = !this.listVisible
+      if (this.disabled) return;
+      this.listVisible = !this.listVisible;
     },
     handleSelect(item) {
-      this.selectValue = item.value
-      this.selectText = item.text
+      this.selectValue = item.value;
+      this.selectText = item.text;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

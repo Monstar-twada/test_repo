@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Sidebar from '~/components/console/sidebar/index'
+import Sidebar from '~/components/console/sidebar/index';
 
 export default {
   components: {
@@ -18,9 +18,9 @@ export default {
     return {
       isCollapsed: false,
       isMenuCollapsed: false,
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

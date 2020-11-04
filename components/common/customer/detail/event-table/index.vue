@@ -86,14 +86,14 @@
   </div>
 </template>
 <script>
-import { ACTIVITY_LIST_QUERY } from './constants'
-import AddDialog from './AddDialog'
-import EditDialog from './EditDialog'
-import DetailDialog from './DetailDialog'
-import AddButton from './add-button/index'
-import TableDate from './TableDate'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { customerMixin } from '~/mixins/customer'
+import { ACTIVITY_LIST_QUERY } from './constants';
+import AddDialog from './AddDialog';
+import EditDialog from './EditDialog';
+import DetailDialog from './DetailDialog';
+import AddButton from './add-button/index';
+import TableDate from './TableDate';
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
+import { customerMixin } from '~/mixins/customer';
 
 export default {
   components: {
@@ -171,99 +171,99 @@ export default {
       detailVisible: false,
       currentItem: {},
       carList: [],
-    }
+    };
   },
   computed: {
     transactionTypes() {
-      return this.$ui.getBasicData('transaction_type', true)
+      return this.$ui.getBasicData('transaction_type', true);
     },
     channels() {
-      return this.$ui.getBasicData('channel', true)
+      return this.$ui.getBasicData('channel', true);
     },
   },
   watch: {
     query: {
       deep: true,
       handler() {
-        this.getList()
+        this.getList();
       },
     },
     editVisible(val) {
-      if (val) this.getCarList()
+      if (val) this.getCarList();
     },
     addVisible(val) {
-      if (val) this.getCarList()
+      if (val) this.getCarList();
     },
   },
   created() {
-    this.getList()
+    this.getList();
   },
   methods: {
     async getList() {
       const params = {
         ...this.query,
-      }
+      };
 
       // sort
-      params.sort = this.$ui.fmtSort(this.query.sort)
+      params.sort = this.$ui.fmtSort(this.query.sort);
       // offset
-      params.offset = (params.page - 1) * params.limit
-      delete params.page
+      params.offset = (params.page - 1) * params.limit;
+      delete params.page;
 
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.customerCode}/activityReports`,
           params
-        )
-        this.list = (res.results || []).map((item) => item.activity)
-        this.total = res.total
-        this.$nuxt.$loading.finish()
+        );
+        this.list = (res.results || []).map((item) => item.activity);
+        this.total = res.total;
+        this.$nuxt.$loading.finish();
       } catch (err) {
-        this.$ui.error('[event-table/index.vue]', err)
-        this.$alert(err.message)
+        this.$ui.error('[event-table/index.vue]', err);
+        this.$alert(err.message);
       }
     },
     clickRow(row) {
-      this.currentItem = row
-      this.detailVisible = true
+      this.currentItem = row;
+      this.detailVisible = true;
     },
     handleEdit() {
-      this.detailVisible = false
-      this.editVisible = true
+      this.detailVisible = false;
+      this.editVisible = true;
     },
     sortChange(field, sort) {
-      this.$nuxt.$loading.start()
+      this.$nuxt.$loading.start();
       this.headers.map((item) => {
-        item.sortactive = item.field === field
-      })
+        item.sortactive = item.field === field;
+      });
       for (const item in this.query.sort) {
-        this.query.sort[item] = item === field ? sort : ''
+        this.query.sort[item] = item === field ? sort : '';
       }
-      this.query.page = 1
+      this.query.page = 1;
     },
     async delEvent(item, e) {
-      e.stopPropagation()
+      e.stopPropagation();
       // eslint-disable-next-line promise/param-names
-      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
       try {
-        await this.$confirm('この活動情報を削除してもよろしいですか？')
+        await this.$confirm('この活動情報を削除してもよろしいですか？');
         await this.$api.delete(
           `/v1/customers/${item.customerCode}/activityReports/${item.activityId}`
-        )
+        );
         // this.$alert('削除成功！')
       } catch (err) {
-        if (err) this.$alert(err.message)
+        if (err) this.$alert(err.message);
       }
-      await delay()
-      this.getCarList()
-      this.getList()
-      this.$root.$emit('getCarList')
+      await delay();
+      this.getCarList();
+      this.getList();
+      this.$root.$emit('getCarList');
     },
     getCarList() {
       try {
         /* eslint-disable prefer-const */
         let { results } =
-          this.$ui.getCache('cars_customer_' + this.customerCode) || {}
+          this.$ui.getCache('cars_customer_' + this.customerCode) || {};
         // let { total, results } =
         //   this.$ui.getCache('cars_customer_' + this.customerCode) || {}
         // if (!Array.isArray(results) || results.length !== total) {
@@ -281,18 +281,18 @@ export default {
                 item.carType ? item.carType : ''
               }`,
             value: item.value || item.carCode,
-          }
-        })
+          };
+        });
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     },
     _getAllCars() {
       return new Promise((resolve, reject) => {
-        const limit = 500
-        let page = 1
-        let arr = []
-        let $this = this
+        const limit = 500;
+        let page = 1;
+        let arr = [];
+        let $this = this;
         function getData() {
           $this.$api
             .get(`/v1/customers/${$this.customerCode}/cars`, {
@@ -300,26 +300,26 @@ export default {
               offset: (page - 1) * limit,
             })
             .then(({ total, results }) => {
-              arr = arr.concat(results)
+              arr = arr.concat(results);
               if (total && arr.length < total) {
-                page++
-                getData()
+                page++;
+                getData();
               } else {
-                resolve(arr)
+                resolve(arr);
               }
             })
-            .catch(reject)
+            .catch(reject);
         }
-        getData()
-      })
+        getData();
+      });
     },
     handleChange() {
       this.query = {
         ...ACTIVITY_LIST_QUERY,
-      }
+      };
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

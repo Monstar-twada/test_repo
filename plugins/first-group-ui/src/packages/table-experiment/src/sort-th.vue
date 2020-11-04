@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Icon from './sort-icon'
-const DESC = 'desc'
-const ASC = 'asc'
+import Icon from './sort-icon';
+const DESC = 'desc';
+const ASC = 'asc';
 export default {
   components: {
     Icon,
@@ -32,50 +32,50 @@ export default {
     item: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
   data() {
     return {
       sort: this.value,
-    }
+    };
   },
   computed: {
     isAsc() {
-      return this.sort === ASC
+      return this.sort === ASC;
     },
     isDesc() {
-      return this.sort === DESC
+      return this.sort === DESC;
     },
   },
   watch: {
     value(val) {
       if (this.sort !== val) {
-        this.sort = val
+        this.sort = val;
       }
     },
     sort(val) {
-      this.$emit('input', val)
-      this.$emit('change', val, this.item)
+      this.$emit('input', val);
+      this.$emit('change', val, this.item);
     },
   },
   methods: {
     sortClick(sort, e) {
-      e.stopPropagation()
-      this.sort = sort
+      e.stopPropagation();
+      this.sort = sort;
     },
     handleClick() {
       if (this.sort === DESC) {
-        this.sort = ASC
+        this.sort = ASC;
       } else if (this.sort === ASC) {
-        this.sort = ''
+        this.sort = '';
       } else {
-        this.sort = DESC
+        this.sort = DESC;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -48,45 +48,45 @@ export default {
     item: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
   data() {
     return {
       visible: this.value,
-    }
+    };
   },
   computed: {
     date() {
-      const date = this.$ui.toDate(this.item.activityReportDatetime)
-      return date ? this.$ui.formatDate(date, 'yyyy/MM/dd (W) hh:mm') : '-'
+      const date = this.$ui.toDate(this.item.activityReportDatetime);
+      return date ? this.$ui.formatDate(date, 'yyyy/MM/dd (W) hh:mm') : '-';
     },
     carInfo() {
-      const { car } = this.item
-      return car ? [car.maker, car.carType].join(' ') : '-'
+      const { car } = this.item;
+      return car ? [car.maker, car.carType].join(' ') : '-';
     },
     transactionTypes() {
-      return this.$ui.getBasicData('transaction_type', true)
+      return this.$ui.getBasicData('transaction_type', true);
     },
     channels() {
-      return this.$ui.getBasicData('channel', true)
+      return this.$ui.getBasicData('channel', true);
     },
   },
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     handleEdit() {
-      this.$emit('edit', this.item)
+      this.$emit('edit', this.item);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

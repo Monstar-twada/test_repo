@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import ProjectProgress from '~/components/manager/send/index/send-list/ProjectProgress.vue'
+import ProjectProgress from '~/components/manager/send/index/send-list/ProjectProgress.vue';
 export default {
   name: 'SendList',
   components: {
@@ -261,10 +261,10 @@ export default {
   }),
   methods: {
     updatePageNumber(newPage) {
-      this.currentPage = newPage
+      this.currentPage = newPage;
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .send-list {

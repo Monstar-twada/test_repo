@@ -28,9 +28,9 @@ export default {
       newData: ['12', '16', '19', '20', '18', '0'],
       repeatData: ['88', '84', '81', '80', '82', '0'],
       withrawData: ['5', '7', '5', '9', '12', '0'],
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .content {

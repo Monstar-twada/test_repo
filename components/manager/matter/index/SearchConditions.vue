@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import SearchBar from './search-bar/index'
+import SearchBar from './search-bar/index';
 export default {
   components: {
     SearchBar,
@@ -162,7 +162,7 @@ export default {
     query: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
@@ -175,7 +175,7 @@ export default {
       value2: '',
       makerItems: [],
       carModels: [],
-    }
+    };
   },
   watch: {
     // value1(val) {
@@ -187,10 +187,10 @@ export default {
   },
   methods: {
     search() {
-      this.$emit('change', this.form)
+      this.$emit('change', this.form);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

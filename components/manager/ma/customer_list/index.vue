@@ -23,18 +23,18 @@
 </template>
 
 <script>
-import throttle from 'lodash.throttle'
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
-import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
-import ExportButton from '~/components/manager/ma/customer_list/ExportButton.vue'
-import ExportDialog from '~/components/manager/ma/customer_list/export-dialog/index'
+import throttle from 'lodash.throttle';
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
+import MaResult from '~/components/manager/ma/customer_list/ma-result/index';
+import StatusBar from '~/components/manager/ma/customer_list/status-bar/index';
+import ExportButton from '~/components/manager/ma/customer_list/ExportButton.vue';
+import ExportDialog from '~/components/manager/ma/customer_list/export-dialog/index';
 
 const SEARCH_PARAMS = {
   offset: 0,
   limit: 10,
   page: 1,
-}
+};
 export default {
   layout: 'manager',
   components: {
@@ -51,7 +51,7 @@ export default {
         return {
           month: '09',
           year: '2020',
-        }
+        };
       },
     },
   },
@@ -79,77 +79,77 @@ export default {
     searchParams: {
       deep: true,
       handler() {
-        this.getDatawithThrottle()
+        this.getDatawithThrottle();
       },
     },
   },
   created() {
     this.$nextTick(() => {
-      this.storeCode = $nuxt.$store.state.auth.storeCode
-      this.$nuxt.$loading.start()
+      this.storeCode = $nuxt.$store.state.auth.storeCode;
+      this.$nuxt.$loading.start();
       this.apiParams = {
         ...this.$route.query,
-      }
-      this.getMaResult()
-      this.getMaStatus()
-      this.updateBreadCrumbs()
-    })
+      };
+      this.getMaResult();
+      this.getMaStatus();
+      this.updateBreadCrumbs();
+    });
   },
   methods: {
     getDatawithThrottle: throttle(async function () {
-      await this.getMaResult()
+      await this.getMaResult();
     }, 3000),
     async getMaResult() {
       const params = {
         ...SEARCH_PARAMS,
         ...this.searchParams,
-      }
-      params.offset = (params.page - 1) * params.limit
+      };
+      params.offset = (params.page - 1) * params.limit;
       try {
         const res = await this.$api.get(
           `/v1/attractingCustomers/${this.storeCode}/${this.apiParams.date}`,
           params
-        )
-        this.maResultList = res
+        );
+        this.maResultList = res;
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     },
 
     async getMaStatus() {
       const params = {
         additionalDataNumber: 0,
-      }
+      };
       try {
         const res = await this.$api.post(
           `/v1/attractingCustomersMonth/${this.storeCode}/${this.apiParams.date}`,
           params
-        )
-        this.maStatus = res.results[0]
-        this.$nuxt.$loading.finish()
+        );
+        this.maStatus = res.results[0];
+        this.$nuxt.$loading.finish();
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     },
     handleExportClick() {
-      this.exportVisible = true
+      this.exportVisible = true;
     },
     updateBreadCrumbs() {
-      const date = this.$route.query.date
-      const year = `${date.slice(0, 4)}年`
-      const month = `${date.slice(4, 6)}月`
-      const crumb = {}
-      crumb.text = `対象者リスト：${year}${month}車検満期`
-      crumb.href = ''
-      this.breadcrumbs.push(crumb)
-      this.page = crumb.text
+      const date = this.$route.query.date;
+      const year = `${date.slice(0, 4)}年`;
+      const month = `${date.slice(4, 6)}月`;
+      const crumb = {};
+      crumb.text = `対象者リスト：${year}${month}車検満期`;
+      crumb.href = '';
+      this.breadcrumbs.push(crumb);
+      this.page = crumb.text;
     },
     updateStatusBar() {
-      this.getMaStatus()
-      this.getMaResult()
+      this.getMaStatus();
+      this.getMaResult();
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .subTitle {

@@ -82,10 +82,10 @@
 </template>
 
 <script>
-import Popup from '../../popup/index'
-import { isFunction, isNumberLike } from '../../../libs/index'
-import { formEmitterMixin } from '../../../mixins/form-emitter'
-import Mixin from './mixin'
+import Popup from '../../popup/index';
+import { isFunction, isNumberLike } from '../../../libs/index';
+import { formEmitterMixin } from '../../../mixins/form-emitter';
+import Mixin from './mixin';
 
 export default {
   name: 'FgSelect',
@@ -105,7 +105,7 @@ export default {
     items: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     size: {
@@ -168,8 +168,8 @@ export default {
     errorMessageNowrap: Boolean,
   },
   data() {
-    const item = this.items.find((item) => item.value === this.value) || {}
-    const { white, primary, primaryActive } = this.$colors
+    const item = this.items.find((item) => item.value === this.value) || {};
+    const { white, primary, primaryActive } = this.$colors;
     return {
       list: this.items,
       popVisible: false,
@@ -183,99 +183,99 @@ export default {
       },
       timer: null,
       isLeaved: true,
-    }
+    };
   },
   computed: {
     iconColor() {
-      return this.iconColors[this.theme]
+      return this.iconColors[this.theme];
     },
     elStyle() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
       }
       if (this.inline) {
-        ret.display = 'inline-flex'
+        ret.display = 'inline-flex';
       }
-      return ret
+      return ret;
     },
     isNonEmpty() {
-      return !!this.selectText
+      return !!this.selectText;
     },
   },
   watch: {
     items(val) {
-      this.list = val
+      this.list = val;
     },
     value(val) {
       if (this.selectValue !== val) {
-        const item = this.items.find((item) => item.value === this.value) || {}
-        this.selectValue = val
-        this.selectText = item.text
+        const item = this.items.find((item) => item.value === this.value) || {};
+        this.selectValue = val;
+        this.selectText = item.text;
       }
     },
     selectValue(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
     popVisible(val) {
-      this.$emit('pop-visible', val)
+      this.$emit('pop-visible', val);
     },
   },
   methods: {
     toggleList() {
-      if (this.disabled) return
+      if (this.disabled) return;
       if (!this.popVisible) {
         let timer = setTimeout(() => {
-          this.popVisible = true
-          clearTimeout(timer)
-          timer = null
-        }, 0)
+          this.popVisible = true;
+          clearTimeout(timer);
+          timer = null;
+        }, 0);
       } else {
-        this.popVisible = false
+        this.popVisible = false;
       }
     },
     handleSelect(item, e) {
       if (item.disabled) {
-        e.stopPropagation()
-        return
+        e.stopPropagation();
+        return;
       }
-      this.selectText = item.text
-      this.selectValue = item.value
-      this.popVisible = false
-      this.$emit('change', item)
-      this.emitFormChange()
+      this.selectText = item.text;
+      this.selectValue = item.value;
+      this.popVisible = false;
+      this.$emit('change', item);
+      this.emitFormChange();
     },
     addPrefix(t) {
-      return this.itemPrefix + t
+      return this.itemPrefix + t;
     },
     inputClear() {
-      this.selectText = ''
-      this.selectValue = ''
+      this.selectText = '';
+      this.selectValue = '';
       // reset list
-      this.list = this.items
+      this.list = this.items;
       // emit change
-      this.$emit('change', null)
-      this.emitFormChange()
+      this.$emit('change', null);
+      this.emitFormChange();
     },
     handleInput(e) {
-      if (!this.filterable) return
-      const value = e.target.value
+      if (!this.filterable) return;
+      const value = e.target.value;
       // default filter
-      const reg = new RegExp(value, 'i')
+      const reg = new RegExp(value, 'i');
       this.list = !value
         ? this.items
         : this.items.filter((item, i) => {
             // custom filter
             return isFunction(this.customFilter)
               ? this.customFilter(value, item, i)
-              : reg.test(item.text)
-          })
+              : reg.test(item.text);
+          });
     },
     resetPopPosition() {
-      this.$refs.popup.resetPopPosition()
+      this.$refs.popup.resetPopPosition();
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

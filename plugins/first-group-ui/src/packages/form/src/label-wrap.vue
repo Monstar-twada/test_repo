@@ -10,28 +10,28 @@ export default {
   data() {
     return {
       computedWidth: 0,
-    }
+    };
   },
 
   watch: {
     computedWidth(val, oldVal) {
       if (this.updateAll) {
-        this.FgForm.registerLabelWidth(val, oldVal)
-        this.FgFormItem.updateComputedLabelWidth(val)
+        this.FgForm.registerLabelWidth(val, oldVal);
+        this.FgFormItem.updateComputedLabelWidth(val);
       }
     },
   },
 
   mounted() {
-    this.updateLabelWidth('update')
+    this.updateLabelWidth('update');
   },
 
   updated() {
-    this.updateLabelWidth('update')
+    this.updateLabelWidth('update');
   },
 
   beforeDestroy() {
-    this.updateLabelWidth('remove')
+    this.updateLabelWidth('remove');
   },
 
   methods: {
@@ -39,10 +39,10 @@ export default {
       if (this.$el && this.$el.firstElementChild) {
         const computedWidth = window.getComputedStyle(
           this.$el.firstElementChild
-        ).width
-        return Math.ceil(parseFloat(computedWidth))
+        ).width;
+        return Math.ceil(parseFloat(computedWidth));
       } else {
-        return 0
+        return 0;
       }
     },
     updateLabelWidth(action = 'update') {
@@ -52,32 +52,32 @@ export default {
         this.$el.firstElementChild
       ) {
         if (action === 'update') {
-          this.computedWidth = this.getLabelWidth()
+          this.computedWidth = this.getLabelWidth();
         } else if (action === 'remove') {
-          this.FgForm.deregisterLabelWidth(this.computedWidth)
+          this.FgForm.deregisterLabelWidth(this.computedWidth);
         }
       }
     },
   },
   render(h) {
-    const slots = this.$slots.default
-    if (!slots) return null
+    const slots = this.$slots.default;
+    if (!slots) return null;
     if (this.isAutoWidth) {
-      const autoLabelWidth = this.FgForm.autoLabelWidth
-      const style = {}
+      const autoLabelWidth = this.FgForm.autoLabelWidth;
+      const style = {};
       if (autoLabelWidth && autoLabelWidth !== 'auto') {
-        const marginLeft = parseInt(autoLabelWidth, 10) - this.computedWidth
+        const marginLeft = parseInt(autoLabelWidth, 10) - this.computedWidth;
         if (marginLeft) {
-          style.marginLeft = marginLeft + 'px'
+          style.marginLeft = marginLeft + 'px';
         }
       }
       return h('div', {
         class: 'fg-form-item__label-wrap',
         style,
-      })
+      });
     } else {
-      return slots[0]
+      return slots[0];
     }
   },
-}
+};
 </script>

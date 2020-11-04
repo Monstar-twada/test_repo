@@ -334,15 +334,15 @@
 </template>
 
 <script>
-import WhiteBox from '../../common/WhiteBox'
-import ColumnTitle from '../../common/ColumnTitle'
-import FamilyItem from './FamilyItem'
-import { FORM_RULES } from './validate'
+import WhiteBox from '../../common/WhiteBox';
+import ColumnTitle from '../../common/ColumnTitle';
+import FamilyItem from './FamilyItem';
+import { FORM_RULES } from './validate';
 import {
   DEF_CUSTOMER_FORM,
   CAR_LIVES_ENUM,
   SELECTION_POINT_ENUM,
-} from './constants'
+} from './constants';
 
 export default {
   components: {
@@ -351,7 +351,7 @@ export default {
     FamilyItem,
   },
   data() {
-    const query = this.$route.query
+    const query = this.$route.query;
     return {
       query,
       customerTypes: this.$ui.getBasicData('private_business'),
@@ -371,7 +371,7 @@ export default {
       facePhoto: '',
       licenseImages: {},
       strLength: {},
-    }
+    };
   },
   computed: {
     carLives() {
@@ -380,8 +380,8 @@ export default {
           ...item,
           checked: this.selectedCarLives.includes(item.value),
           field: CAR_LIVES_ENUM[item.value],
-        }
-      })
+        };
+      });
     },
     selectionPoints() {
       return this.$ui.getBasicData('selection_points').map((item) => {
@@ -389,45 +389,45 @@ export default {
           ...item,
           checked: this.selectedSelectionPoints.includes(item.value),
           field: SELECTION_POINT_ENUM[item.value],
-        }
-      })
+        };
+      });
     },
   },
   watch: {
     form() {
-      this.$store.dispatch('popup/setFlg', true)
+      this.$store.dispatch('popup/setFlg', true);
     },
   },
   mounted() {
-    this.addWindowPopstateEvent()
+    this.addWindowPopstateEvent();
   },
   created() {
-    this.getDetail()
-    this.getFacePhoto()
-    this.getLicenseImage()
+    this.getDetail();
+    this.getFacePhoto();
+    this.getLicenseImage();
   },
   methods: {
     formChange() {
-      this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form);
     },
     addWindowPopstateEvent() {
-      history.pushState(null, null, window.location.href)
+      history.pushState(null, null, window.location.href);
       window.addEventListener(
         'popstate',
         () => {
-          this.clickBrowserSystemButton()
+          this.clickBrowserSystemButton();
         },
         false
-      )
+      );
     },
     removeWindowPopstateEvent() {
       window.removeEventListener('popstate', () => {
-        this.clickBrowserSystemButton()
-      })
+        this.clickBrowserSystemButton();
+      });
     },
 
     clickBrowserSystemButton() {
-      if (!this.$store.getters['popup/getSaveFlg']) return
+      if (!this.$store.getters['popup/getSaveFlg']) return;
       this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
         buttons: {
           ok: {
@@ -436,67 +436,67 @@ export default {
         },
       })
         .then(() => {
-          this.$store.dispatch('popup/setFlg', false)
-          this.removeWindowPopstateEvent()
-          this.$router.back()
+          this.$store.dispatch('popup/setFlg', false);
+          this.removeWindowPopstateEvent();
+          this.$router.back();
         })
         .catch(() => {
-          this.addWindowPopstateEvent()
-        })
+          this.addWindowPopstateEvent();
+        });
     },
     async handleConfirm() {
-      this.$store.dispatch('popup/setFlg', false)
-      if (this.isSubmitting) return
-      this.isSubmitting = true
+      this.$store.dispatch('popup/setFlg', false);
+      if (this.isSubmitting) return;
+      this.isSubmitting = true;
       const form = {
         ...this.form,
         family: this.family,
-      }
+      };
       // car lives
       this.carLives.forEach((item) => {
-        form[item.field] = +item.checked
-      })
+        form[item.field] = +item.checked;
+      });
       // selection points
       this.selectionPoints.forEach((item) => {
-        form[item.field] = +item.checked
-      })
+        form[item.field] = +item.checked;
+      });
       // if the form in family is empty change to null
       for (const property in form) {
         if (form[property] === '') {
-          form[property] = null
+          form[property] = null;
         }
       }
       // if the family is empty change to null
-      const family = this.family
+      const family = this.family;
       for (let i = 0; i < family.length; i++) {
-        const childArray = family[i]
+        const childArray = family[i];
         for (const property in childArray) {
           if (childArray[property] === '') {
-            childArray[property] = null
+            childArray[property] = null;
           }
         }
       }
       // validate data
-      this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, form);
       if (this.errors.length > 0) {
         this.$alert(
           '必須項目が未入力か、入力データに誤りがあります。エラーを確認してください。'
-        )
-        this.isSubmitting = false
-        return
+        );
+        this.isSubmitting = false;
+        return;
       }
 
       // submit
-      const customer = { ...form }
-      const data = { customer }
+      const customer = { ...form };
+      const data = { customer };
       try {
-        await this.$api.put(`/v1/customers/${this.query.customerCode}`, data)
+        await this.$api.put(`/v1/customers/${this.query.customerCode}`, data);
         // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
-        this.handleBack()
+        this.handleBack();
       } catch (err) {
-        if (err) this.$alert(err.message)
+        if (err) this.$alert(err.message);
       }
-      this.isSubmitting = false
+      this.isSubmitting = false;
     },
     popup(callback) {
       if (this.$store.getters['popup/getSaveFlg']) {
@@ -508,14 +508,14 @@ export default {
           },
         })
           .then(() => {
-            this.$store.dispatch('popup/setFlg', false)
-            callback()
+            this.$store.dispatch('popup/setFlg', false);
+            callback();
           })
           .catch((error) => {
-            console.error({ error })
-          })
+            console.error({ error });
+          });
       } else {
-        callback()
+        callback();
       }
     },
     handleBack() {
@@ -523,82 +523,82 @@ export default {
         setTimeout(() => {
           this.$router.push(
             `/customer/detail/?customerCode=${this.query.customerCode}`
-          )
+          );
         }, 300)
-      )
+      );
     },
     avatarValidator(file, callback) {
       if (!/^image\/\w+/.test(file.type)) {
-        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
-        return
+        this.$alert('JPEG・PNG・HEICファイルのみ選択できます');
+        return;
       }
-      callback()
+      callback();
     },
     licenseValidator({ type, size }, callback) {
       if (
         !/^image\/(jpeg|png|pdf|heic)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
-        return
+        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます');
+        return;
       }
       if (size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルが使用できます')
-        return
+        this.$alert('5MBまでのファイルが使用できます');
+        return;
       }
-      callback()
+      callback();
     },
     async getDetail() {
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.query.customerCode}`
-        )
-        this.resetForm(res)
+        );
+        this.resetForm(res);
       } catch (err) {
-        this.$alert(err.message)
-        console.error(err)
+        this.$alert(err.message);
+        console.error(err);
       }
     },
     async getFacePhoto() {
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.query.customerCode}/facePhoto`
-        )
-        this.facePhoto = res.url
+        );
+        this.facePhoto = res.url;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     },
     async getLicenseImage() {
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.query.customerCode}/licenseImage`
-        )
-        this.licenseImages = res
+        );
+        this.licenseImages = res;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     },
     fileChange(res, type) {
       if (!res.data) {
-        this.deleteFile(type)
+        this.deleteFile(type);
       }
 
       this.$api
         .upload(res)
         .then((data) => {
-          this.deleteFile(type)
-          this.form[type] = data.id
+          this.deleteFile(type);
+          this.form[type] = data.id;
         })
         .catch((err) => {
-          this.$alert(err.message)
-        })
+          this.$alert(err.message);
+        });
     },
     deleteFile(type) {
-      const fileId = this.form[type]
-      if (!fileId) return
-      console.error('delete file:', fileId)
-      const customerCode = this.query.customerCode
+      const fileId = this.form[type];
+      if (!fileId) return;
+      console.error('delete file:', fileId);
+      const customerCode = this.query.customerCode;
       switch (type) {
         case 'facePhoto':
           this.$api
@@ -607,9 +607,9 @@ export default {
               // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
-              console.error(err)
-            })
-          break
+              console.error(err);
+            });
+          break;
         case 'licenseImageFront':
         case 'licenseImageBack':
           this.$api
@@ -618,62 +618,62 @@ export default {
               // console.log(`delete ${type}: ${fileId} successfully!`)
             })
             .catch((err) => {
-              console.error(err)
-            })
-          break
+              console.error(err);
+            });
+          break;
       }
     },
     uploadFile(file) {
       return new Promise((resolve, reject) => {
         this.$api
           .upload(file, {
-            onProgress(per) {
+            onProgress() {
               // console.log('onProgress', per + '%')
             },
           })
           .then((res) => {
-            resolve(res.id)
+            resolve(res.id);
           })
           .catch((err) => {
-            reject(err)
-          })
-      })
+            reject(err);
+          });
+      });
     },
     resetForm(res) {
-      const form = {}
+      const form = {};
       Object.keys(DEF_CUSTOMER_FORM).forEach((key) => {
         // licenseColor
         if (key === 'licenseColor' && res[key]) {
           const item =
-            this.licenseColors.find((item) => item.text === res[key]) || {}
-          form[key] = item.value || '1'
-          return
+            this.licenseColors.find((item) => item.text === res[key]) || {};
+          form[key] = item.value || '1';
+          return;
         }
         if (res[key]) {
-          form[key] = res[key]
+          form[key] = res[key];
         }
-      })
+      });
       // car life
       if (Array.isArray(res.carLives)) {
-        this.selectedCarLives = res.carLives.map((item) => item.carLife)
+        this.selectedCarLives = res.carLives.map((item) => item.carLife);
       } else {
-        this.selectedCarLives = []
+        this.selectedCarLives = [];
       }
       // selection points
       if (Array.isArray(res.selectionPoints)) {
         this.selectedSelectionPoints = res.selectionPoints.map(
           (item) => item.selectionPoints
-        )
+        );
       } else {
-        this.selectedSelectionPoints = []
+        this.selectedSelectionPoints = [];
       }
-      this.form = form
+      this.form = form;
     },
     familyChange(arr) {
-      this.family = arr
+      this.family = arr;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

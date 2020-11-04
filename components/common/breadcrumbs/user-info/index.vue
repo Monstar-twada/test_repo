@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import UserDropDown from '~/components/common/breadcrumbs/user-info/user-drop-down/index'
+import UserDropDown from '~/components/common/breadcrumbs/user-info/user-drop-down/index';
 export default {
   components: {
     UserDropDown,
@@ -33,53 +33,53 @@ export default {
       userAvatar: '/common/person_default.svg',
       userDropdownVisible: false,
       taskNumber: 14,
-    }
+    };
   },
   beforeDestroy() {
-    this.clearTimeout()
-    document.removeEventListener('click', this.docClick, false)
+    this.clearTimeout();
+    document.removeEventListener('click', this.docClick, false);
   },
   mounted() {
-    document.addEventListener('click', this.docClick, false)
+    document.addEventListener('click', this.docClick, false);
   },
   methods: {
     imgOnLoad(e) {
-      const el = e.target
+      const el = e.target;
       if (el.width > el.height) {
-        el.style.width = 'auto'
-        el.style.height = '100%'
+        el.style.width = 'auto';
+        el.style.height = '100%';
       }
     },
     mouseLeave() {
-      if (!this.userDropdownVisible) return
-      this.clearTimeout()
+      if (!this.userDropdownVisible) return;
+      this.clearTimeout();
       this.timer = setTimeout(() => {
-        this.userDropdownVisible = false
-      }, 2000)
+        this.userDropdownVisible = false;
+      }, 2000);
     },
     mouseEnter() {
-      this.userDropdownVisible = true
-      this.clearTimeout()
+      this.userDropdownVisible = true;
+      this.clearTimeout();
     },
     clearTimeout() {
       if (this.timer) {
-        clearTimeout(this.timer)
-        this.timer = null
+        clearTimeout(this.timer);
+        this.timer = null;
       }
     },
     avatarClick(e) {
-      e.stopPropagation()
-      this.userDropdownVisible = !this.userDropdownVisible
+      e.stopPropagation();
+      this.userDropdownVisible = !this.userDropdownVisible;
     },
     docClick() {
-      if (!this.userDropdownVisible) return
-      this.userDropdownVisible = false
+      if (!this.userDropdownVisible) return;
+      this.userDropdownVisible = false;
     },
     handleLogout() {
-      this.$store.commit('user/signOut', false)
+      this.$store.commit('user/signOut', false);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

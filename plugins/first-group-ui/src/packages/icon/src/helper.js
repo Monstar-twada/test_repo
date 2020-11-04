@@ -3,22 +3,22 @@
  * https://github.com/capricorncd
  * Date: 2020-08-14 12:40
  */
-import { isString } from '../../../libs/index'
+import { isString } from '../../../libs/index';
 
 function createPathHtml(items) {
-  let arr
+  let arr;
   const result = items.reduce((prev, item) => {
     if (isString(item)) {
-      prev.push(item)
-      return prev
+      prev.push(item);
+      return prev;
     }
     // t: tag
-    arr = [`<${item.t}`]
+    arr = [`<${item.t}`];
     // a: attrs
     if (item.a) {
       Object.keys(item.a).forEach((key) => {
-        arr.push(`${fmtCamelCase(key)}="${item.a[key]}"`)
-      })
+        arr.push(`${fmtCamelCase(key)}="${item.a[key]}"`);
+      });
     }
     // color
     // if (/path|rect|text/.test(item.t) && isUndefined(item.fill)) {
@@ -28,22 +28,22 @@ function createPathHtml(items) {
     // }
     // c: children
     if (item.c) {
-      arr.push('>')
-      arr.push(createPathHtml(item.c))
-      arr.push(`</${item.t}>`)
+      arr.push('>');
+      arr.push(createPathHtml(item.c));
+      arr.push(`</${item.t}>`);
     } else {
-      arr.push('/>')
+      arr.push('/>');
     }
-    prev.push(arr.join(' '))
-    return prev
-  }, [])
-  return result.join('')
+    prev.push(arr.join(' '));
+    return prev;
+  }, []);
+  return result.join('');
 }
 
 function fmtCamelCase(str) {
   return str.replace(/[A-Z]/g, (match) => {
-    return '-' + match.toLowerCase()
-  })
+    return '-' + match.toLowerCase();
+  });
 }
 
-export { createPathHtml }
+export { createPathHtml };

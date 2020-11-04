@@ -48,10 +48,10 @@ export default {
         '--height': this.customheight + 'px',
         '--fontsize': this.customfontsize + 'px',
         '--textalign': this.customtextalign,
-      }
+      };
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

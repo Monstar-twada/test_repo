@@ -3,10 +3,10 @@
  * https://github.com/capricorncd
  * Date: 2020-08-23 13:11
  */
-import RadioGroup from './src/index'
+import RadioGroup from './src/index';
 
 RadioGroup.install = function (Vue) {
-  Vue.component(RadioGroup.name, RadioGroup)
-}
+  Vue.component(RadioGroup.name, RadioGroup);
+};
 
-export default RadioGroup
+export default RadioGroup;

@@ -209,7 +209,7 @@ export default {
     status: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       },
     },
   },
@@ -217,14 +217,14 @@ export default {
     return {
       storeCode: null,
       showDataFlg: false,
-    }
+    };
   },
   mounted() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
+    this.storeCode = $nuxt.$store.state.auth.storeCode;
     // display data wait 1000ms
     setTimeout(() => {
-      this.showDataFlg = true
-    }, 1000)
+      this.showDataFlg = true;
+    }, 1000);
   },
   methods: {
     handleClick(property, val) {
@@ -232,22 +232,22 @@ export default {
       const params = {
         smsSendFlag: this.status.smsSendFlag,
         dmSendFlag: this.status.dmSendFlag,
-      }
+      };
 
-      params[property] = Number(val)
+      params[property] = Number(val);
       this.$api.put(
         `/v1/attractingCustomers/${this.storeCode}/${this.$route.query.date}`,
         params
-      )
+      );
     },
     fmtNumber(number) {
-      return number.toLocaleString()
+      return number.toLocaleString();
     },
     fmtRatio(ratio) {
-      return Math.round(ratio * 100) + '%'
+      return Math.round(ratio * 100) + '%';
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 [v-cloak] {

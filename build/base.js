@@ -1,6 +1,6 @@
-require('dotenv').config()
+require('dotenv').config();
 // development
-let isDevelopment = process.env.NODE_ENV === 'development'
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 export const baseConfig = {
   // we need to have universal
@@ -81,7 +81,7 @@ export const baseConfig = {
     trailingSlash: true,
     extendRoutes(routes, resolve) {
       for (const route of routes) {
-        route.alias = resolve(route.path, 'index.html')
+        route.alias = resolve(route.path, 'index.html');
       }
     },
   },
@@ -139,11 +139,15 @@ export const baseConfig = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
-        })
+        });
       }
       config.externals = {
         // vue: 'Vue',
-      }
+      };
     },
   },
-}
+  typescript: {
+    typeCheck: true,
+    ignoreNotFoundWarnings: true,
+  },
+};

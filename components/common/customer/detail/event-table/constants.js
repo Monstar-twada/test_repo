@@ -13,7 +13,7 @@ export const ACTIVITY_LIST_QUERY = {
     channel: '',
     contactStaffId: '',
   },
-}
+};
 
 export const DEF_FORM = {
   // 活動日時
@@ -32,4 +32,4 @@ export const DEF_FORM = {
   contactStoreCode: '',
   // 担当者コード
   contactStaffCode: '',
-}
+};

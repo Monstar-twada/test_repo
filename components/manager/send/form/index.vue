@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import FormContainer from '~/components/manager/send/form/form-container/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
+import FormContainer from '~/components/manager/send/form/form-container/index';
 
 export default {
   layout: 'manager',
@@ -34,5 +34,5 @@ export default {
       },
     ],
   }),
-}
+};
 </script>

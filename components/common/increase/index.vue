@@ -18,7 +18,7 @@ export default {
       default: '1.10%',
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .percentage {

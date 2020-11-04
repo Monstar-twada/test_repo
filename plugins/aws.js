@@ -1,4 +1,4 @@
-import Auth from '@aws-amplify/auth'
+import Auth from '@aws-amplify/auth';
 
 const plugin = () => {
   Auth.configure({
@@ -7,7 +7,7 @@ const plugin = () => {
       userPoolId: process.env.COGNITO_USERPOOL_ID,
       userPoolWebClientId: process.env.COGNITO_USERPOOL_CLIENT_ID,
     },
-  })
-}
+  });
+};
 
-export default plugin
+export default plugin;

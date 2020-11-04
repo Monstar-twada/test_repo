@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import ConfirmWrapper from './ConfirmWrapper'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import ConfirmWrapper from './ConfirmWrapper';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 export default {
   components: {
     Breadcrumbs,
@@ -32,7 +32,7 @@ export default {
           href: '',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>

@@ -72,8 +72,8 @@
 </template>
 
 <script>
-import Header from '~/components/common/signin/common/Header'
-import MarkIcon from '~/components/common/mark-icon/index'
+import Header from '~/components/common/signin/common/Header';
+import MarkIcon from '~/components/common/mark-icon/index';
 export default {
   components: {
     Header,
@@ -114,10 +114,10 @@ export default {
         },
       ],
       selectedJob: [0, 1, 2],
-    }
+    };
   },
   methods: {},
-}
+};
 </script>
 
 <style lang="scss">

@@ -114,4 +114,4 @@ export const DEF_CAR_FORM = {
   carFullWidth: '',
   // 車両寸法.全高(単位： mm)
   carTotalHeight: '',
-}
+};

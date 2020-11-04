@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import CustomerInfo from '~/components/manager/send/detail/customer-info/index'
-import SendStatusItem from '~/components/manager/send/detail/send-status/index'
+import CustomerInfo from '~/components/manager/send/detail/customer-info/index';
+import SendStatusItem from '~/components/manager/send/detail/send-status/index';
 export default {
   name: 'DetailContainer',
   components: {
@@ -85,9 +85,9 @@ export default {
         },
         progress: [],
       },
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

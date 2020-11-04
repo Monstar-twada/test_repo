@@ -70,16 +70,16 @@
 </template>
 
 <script>
-import { ZxVueCalendar } from 'zx-calendar/lib/vue-calendar'
-import Input from '../../input/index'
-import Popup from '../../popup/index'
-import { isFunction, isNumberLike } from '../../../libs/index'
-import { formEmitterMixin } from '../../../mixins/form-emitter'
+import { ZxVueCalendar } from 'zx-calendar/lib/vue-calendar';
+import Input from '../../input/index';
+import Popup from '../../popup/index';
+import { isFunction, isNumberLike } from '../../../libs/index';
+import { formEmitterMixin } from '../../../mixins/form-emitter';
 import {
   DEF_ITEM_SUFFIXES,
   DEF_TITLE_FORMATTERS,
   DEF_VALUE_FORMATTERS,
-} from './constants'
+} from './constants';
 
 export default {
   name: 'FgCalendar',
@@ -131,7 +131,7 @@ export default {
     dateRange: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     format: {
@@ -168,185 +168,185 @@ export default {
       currentDate: this.valueFormat ? null : this.value,
       calendar: null,
       dashColor: this.$colors.primary,
-    }
+    };
   },
   computed: {
     wrapper() {
-      return this.$refs.wrapper
+      return this.$refs.wrapper;
     },
     formatter() {
-      return this.format || DEF_VALUE_FORMATTERS[this.type]
+      return this.format || DEF_VALUE_FORMATTERS[this.type];
     },
     titleFormatter() {
-      return DEF_TITLE_FORMATTERS[this.type]
+      return DEF_TITLE_FORMATTERS[this.type];
     },
     itemSuffix() {
-      return DEF_ITEM_SUFFIXES[this.type]
+      return DEF_ITEM_SUFFIXES[this.type];
     },
     inputValue() {
-      let currentDate = this.currentDate
-      let date
+      let currentDate = this.currentDate;
+      let date;
       if (isFunction(this.valueFormatter)) {
-        currentDate = this.valueFormatter(currentDate)
+        currentDate = this.valueFormatter(currentDate);
       } else if (Array.isArray(currentDate)) {
         currentDate = currentDate
           .map((item) => {
-            date = this.toDate(item)
-            return date ? this.formatDate(date, this.formatter) : ''
+            date = this.toDate(item);
+            return date ? this.formatDate(date, this.formatter) : '';
           })
-          .join(' ~ ')
+          .join(' ~ ');
       } else {
-        date = this.toDate(currentDate)
-        currentDate = date ? this.formatDate(date, this.formatter) : ''
+        date = this.toDate(currentDate);
+        currentDate = date ? this.formatDate(date, this.formatter) : '';
       }
 
-      return currentDate
+      return currentDate;
     },
     elStyle() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
       }
       if (this.inline) {
-        ret.display = 'inline-flex'
+        ret.display = 'inline-flex';
       }
-      return ret
+      return ret;
     },
     dashStyle() {
-      const ret = {}
+      const ret = {};
       if (typeof this.dashOffset !== 'undefined') {
         ret.right =
-          this.dashOffset + (isNumberLike(this.dashOffset) ? 'px' : '')
+          this.dashOffset + (isNumberLike(this.dashOffset) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
   },
   watch: {
     currentDate(val) {
-      const format = this.valueFormat || this.formatter
-      let res, date
+      const format = this.valueFormat || this.formatter;
+      let res, date;
       if (Array.isArray(val)) {
-        res = []
+        res = [];
         val.forEach((item) => {
-          date = this.toDate(item)
+          date = this.toDate(item);
           if (date) {
-            res.push(this.formatDate(date, format))
+            res.push(this.formatDate(date, format));
           }
-        })
+        });
       } else {
-        date = this.toDate(val)
-        res = date ? this.formatDate(date, format) : ''
+        date = this.toDate(val);
+        res = date ? this.formatDate(date, format) : '';
       }
       // フォマット後の値をチェックする
       if (
         res === this.value ||
         JSON.stringify(res) === JSON.stringify(this.value)
       )
-        return
+        return;
 
-      this.$emit('input', res)
-      this.$emit('change', res)
-      this.emitFormChange()
+      this.$emit('input', res);
+      this.$emit('change', res);
+      this.emitFormChange();
     },
     value(val) {
       if (
         this.currentDate !== val &&
         JSON.stringify(this.currentDate) !== JSON.stringify(val)
       ) {
-        this.currentDate = val
-        this.calendar.setDate(val)
+        this.currentDate = val;
+        this.calendar.setDate(val);
       }
     },
     dateRange(val) {
       if (Array.isArray(val)) {
-        this.calendar.setRange(val[0], val[1])
+        this.calendar.setRange(val[0], val[1]);
       } else {
-        this.calendar.setRange()
+        this.calendar.setRange();
       }
     },
   },
   mounted() {
     if (this.valueFormat) {
-      this.currentDate = this.formatDate(this.value, this.valueFormat)
+      this.currentDate = this.formatDate(this.value, this.valueFormat);
     }
   },
   methods: {
     getCalendar(calendar) {
-      this.calendar = calendar
+      this.calendar = calendar;
       // initial defaultView
       if (!this.value && this.defaultView) {
-        calendar.setCurrentDate(this.defaultView)
+        calendar.setCurrentDate(this.defaultView);
       }
-      this.$emit('calendar', this)
+      this.$emit('calendar', this);
     },
     formatDate(str, fmt) {
-      if (!this.calendar) return str
-      return this.calendar.formatDate(str, fmt)
+      if (!this.calendar) return str;
+      return this.calendar.formatDate(str, fmt);
     },
     toDate(str) {
-      if (!this.calendar) return null
-      return this.calendar.toDate(str)
+      if (!this.calendar) return null;
+      return this.calendar.toDate(str);
     },
     setDate(str) {
-      if (!this.calendar) return null
-      return this.calendar.setDate(str)
+      if (!this.calendar) return null;
+      return this.calendar.setDate(str);
     },
     handleToggle() {
       if (!this.popVisible) {
         let timer = setTimeout(() => {
-          this.popVisible = true
-          clearTimeout(timer)
-          timer = null
-        }, 0)
+          this.popVisible = true;
+          clearTimeout(timer);
+          timer = null;
+        }, 0);
       } else {
-        this.popVisible = false
+        this.popVisible = false;
       }
     },
     formatValue(list) {
-      const arr = []
+      const arr = [];
       switch (this.selectMode) {
         case 'multiple':
         case 'range':
           /* eslint-disable no-case-declarations */
-          let date
+          let date;
           list.forEach((item) => {
-            date = this.fmtDate(item)
+            date = this.fmtDate(item);
             if (date) {
-              arr.push(date)
+              arr.push(date);
             }
-          })
-          break
+          });
+          break;
         default:
-          return list[0] ? this.fmtDate(list[0]) : null
+          return list[0] ? this.fmtDate(list[0]) : null;
       }
-      return arr
+      return arr;
     },
     fmtDate(item) {
-      if (!item) return null
-      return this.calendar.formatDate(item.date, this.formatter)
+      if (!item) return null;
+      return this.calendar.formatDate(item.date, this.formatter);
     },
     inputChange(val) {
-      const date = this.calendar.toDate(val)
+      const date = this.calendar.toDate(val);
       this.currentDate = date
         ? this.calendar.formatDate(date, this.formatter)
-        : ''
-      this.calendar.setDate(date)
+        : '';
+      this.calendar.setDate(date);
     },
     hidePop() {
-      this.popVisible = false
+      this.popVisible = false;
     },
     calendarError(err) {
-      this.$emit('error', err)
+      this.$emit('error', err);
     },
-    calendarChange(res, original) {
-      this.currentDate = this.formatValue(original)
+    calendarChange(original) {
+      this.currentDate = this.formatValue(original);
       if (!this.isTimePicker) {
         // hide popup
-        this.popVisible = false
+        this.popVisible = false;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

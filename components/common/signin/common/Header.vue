@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   name: 'Header',
   components: {
@@ -20,7 +20,7 @@ export default {
       default: '',
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

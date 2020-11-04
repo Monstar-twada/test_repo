@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import CloseButton from '~/components/common/dialog-header/CloseButton'
-import Select from '~/components/common/Select.vue'
-import SwitchButton from '~/components/manager/bi/setting-dialog/SwitchButton'
+import CloseButton from '~/components/common/dialog-header/CloseButton';
+import Select from '~/components/common/Select.vue';
+import SwitchButton from '~/components/manager/bi/setting-dialog/SwitchButton';
 export default {
   name: 'DialogHeader',
   components: {
@@ -38,15 +38,15 @@ export default {
   data() {
     return {
       stateSwitch: false,
-    }
+    };
   },
   methods: {
     doEvent() {
-      this.stateSwitch = !this.stateSwitch
-      this.$emit('eventtriggered')
+      this.stateSwitch = !this.stateSwitch;
+      this.$emit('eventtriggered');
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

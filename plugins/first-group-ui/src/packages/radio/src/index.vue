@@ -54,9 +54,9 @@
   </label>
 </template>
 <script>
-import Broadcaster from '../../../assets/js/broadcaster'
-import { getParentComponent } from '../../../libs/index'
-import { formEmitterMixin } from '../../../mixins/form-emitter'
+import Broadcaster from '../../../assets/js/broadcaster';
+import { getParentComponent } from '../../../libs/index';
+import { formEmitterMixin } from '../../../mixins/form-emitter';
 
 export default {
   name: 'FgRadio',
@@ -90,55 +90,55 @@ export default {
   data() {
     return {
       focus: false,
-    }
+    };
   },
   computed: {
     radioGroup() {
-      return getParentComponent.call(this, 'FgRadioGroup')
+      return getParentComponent.call(this, 'FgRadioGroup');
     },
     isGroup() {
-      return !!this.radioGroup
+      return !!this.radioGroup;
     },
     model: {
       get() {
-        return this.isGroup ? this.radioGroup.value : this.value
+        return this.isGroup ? this.radioGroup.value : this.value;
       },
       set(val) {
         if (this.isGroup) {
-          this.dispatch('FgRadioGroup', 'input', [val])
+          this.dispatch('FgRadioGroup', 'input', [val]);
         } else {
-          this.$emit('input', val)
+          this.$emit('input', val);
         }
         this.$refs.radio &&
-          (this.$refs.radio.checked = this.model === this.label)
+          (this.$refs.radio.checked = this.model === this.label);
       },
     },
     radioSize() {
-      const temRadioSize = this.size
-      return this.isGroup ? this.radioGroup.size || temRadioSize : temRadioSize
+      const temRadioSize = this.size;
+      return this.isGroup ? this.radioGroup.size || temRadioSize : temRadioSize;
     },
     isDisabled() {
       return this.isGroup
         ? this.radioGroup.disabled || this.disabled
-        : this.disabled
+        : this.disabled;
     },
     tabIndex() {
       return this.isDisabled || (this.isGroup && this.model !== this.label)
         ? -1
-        : 0
+        : 0;
     },
   },
   methods: {
     handleChange() {
       this.$nextTick(() => {
-        this.$emit('change', this.model)
-        this.emitFormChange()
+        this.$emit('change', this.model);
+        this.emitFormChange();
         this.isGroup &&
-          this.dispatch('FgRadioGroup', 'handleChange', this.model)
-      })
+          this.dispatch('FgRadioGroup', 'handleChange', this.model);
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

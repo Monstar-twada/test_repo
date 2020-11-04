@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'WhiteBox',
-}
+};
 </script>
 
 <style lang="scss" scoped>

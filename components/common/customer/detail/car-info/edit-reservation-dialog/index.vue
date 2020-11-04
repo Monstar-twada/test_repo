@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ReservationTable from './ReservationTable'
+import ReservationTable from './ReservationTable';
 export default {
   components: {
     ReservationTable,
@@ -52,18 +52,18 @@ export default {
           warehousing: true,
         },
       ],
-    }
+    };
   },
   computed: {},
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

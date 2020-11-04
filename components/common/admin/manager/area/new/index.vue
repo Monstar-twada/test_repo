@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import IndexForm from './IndexForm'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import IndexForm from './IndexForm';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 
 export default {
   components: {
@@ -28,9 +28,9 @@ export default {
           text: '管理',
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss"></style>

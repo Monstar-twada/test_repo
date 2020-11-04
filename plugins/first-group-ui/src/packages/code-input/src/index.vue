@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { isNumberLike } from '../../../libs/index'
+import { isNumberLike } from '../../../libs/index';
 
 export default {
   name: 'FgCodeInput',
@@ -54,64 +54,64 @@ export default {
       text: this.value,
       isDisabled: false,
       isFocus: false,
-    }
+    };
   },
   computed: {
     currentIndex() {
-      return this.text.length
+      return this.text.length;
     },
     list() {
-      const arr = new Array(this.length)
+      const arr = new Array(this.length);
       if (this.text) {
         this.text.split('').forEach((s, i) => {
           if (i < this.length) {
-            arr[i] = s
+            arr[i] = s;
           }
-        })
+        });
       }
-      return arr
+      return arr;
     },
     style() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
     labelStyle() {
-      const ret = {}
+      const ret = {};
       if (this.itemWidth) {
-        ret.width = this.itemWidth + (isNumberLike(this.itemWidth) ? 'px' : '')
+        ret.width = this.itemWidth + (isNumberLike(this.itemWidth) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
   },
   watch: {
     text(val) {
-      this.$emit('input', val)
-      this.$emit('change', this.text)
+      this.$emit('input', val);
+      this.$emit('change', this.text);
     },
     value(val) {
       if (this.text !== val) {
-        this.text = val
+        this.text = val;
       }
     },
   },
   methods: {
     handleChange(e) {
-      let value = e.target.value
+      let value = e.target.value;
       if (value && value.length >= this.length) {
-        this.isDisabled = true
-        value = value.substr(0, this.length)
+        this.isDisabled = true;
+        value = value.substr(0, this.length);
       }
-      this.text = value
+      this.text = value;
     },
     handleClick() {
-      this.isDisabled = false
-      this.$refs.input.focus()
+      this.isDisabled = false;
+      this.$refs.input.focus();
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

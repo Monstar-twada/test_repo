@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import TextContent from '../../common/TextContent'
+import TextContent from '../../common/TextContent';
 export default {
   components: {
     TextContent,
@@ -29,12 +29,12 @@ export default {
   },
   computed: {
     list() {
-      const data = this.$ui.getBasicData('family_relationship', true)
-      const temp = {}
+      const data = this.$ui.getBasicData('family_relationship', true);
+      const temp = {};
       this.items.forEach((item) => {
-        const type = (data[item.familyRelationship] || '').replace('・', '')
+        const type = (data[item.familyRelationship] || '').replace('・', '');
         if (!temp[type]) {
-          temp[type] = []
+          temp[type] = [];
         }
         temp[type].push({
           ...item,
@@ -43,12 +43,12 @@ export default {
             item.firstName,
             ` (${item.age ? item.age : ' - '}歳)`,
           ].join(''),
-        })
-      })
-      return temp
+        });
+      });
+      return temp;
     },
   },
-}
+};
 </script>
 
 <style></style>

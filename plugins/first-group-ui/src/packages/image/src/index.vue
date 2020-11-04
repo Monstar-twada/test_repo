@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { isNumberLike, toNumber } from '../../../libs/index'
+import { isNumberLike, toNumber } from '../../../libs/index';
 
 export default {
   name: 'FgImage',
@@ -50,75 +50,76 @@ export default {
   data() {
     return {
       isError: false,
-    }
+    };
   },
   computed: {
     elStyle() {
-      const ret = {}
+      const ret = {};
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
       }
       if (this.height) {
-        ret.height = this.height + (isNumberLike(this.height) ? 'px' : '')
+        ret.height = this.height + (isNumberLike(this.height) ? 'px' : '');
       }
       if (this.bgColor) {
-        ret.background = this.bgColor
+        ret.background = this.bgColor;
       }
       if (this.radius) {
-        ret.borderRadius = this.radius + (isNumberLike(this.radius) ? 'px' : '')
+        ret.borderRadius =
+          this.radius + (isNumberLike(this.radius) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
   },
   methods: {
     handleClick(e) {
-      this.$emit('click', e)
+      this.$emit('click', e);
     },
     _load(e) {
-      const el = e.target
-      const width = el.naturalWidth
-      const height = el.naturalHeight
-      const parent = el.parentElement
-      const parentWidth = toNumber(this.width) || parent.offsetWidth
-      const parentHeight = toNumber(this.height) || parent.offsetHeight
-      const radio = width / height
-      const parentRadio = parentWidth / parentHeight
+      const el = e.target;
+      const width = el.naturalWidth;
+      const height = el.naturalHeight;
+      const parent = el.parentElement;
+      const parentWidth = toNumber(this.width) || parent.offsetWidth;
+      const parentHeight = toNumber(this.height) || parent.offsetHeight;
+      const radio = width / height;
+      const parentRadio = parentWidth / parentHeight;
 
       switch (this.viewMode) {
         case 'fill':
-          el.style.width = '100%'
-          el.style.height = '100%'
-          break
+          el.style.width = '100%';
+          el.style.height = '100%';
+          break;
         case 'crop':
           if (radio > parentRadio) {
-            el.style.width = 'auto'
-            el.style.height = '100%'
+            el.style.width = 'auto';
+            el.style.height = '100%';
           } else {
-            el.style.width = '100%'
-            el.style.height = 'auto'
+            el.style.width = '100%';
+            el.style.height = 'auto';
           }
-          this._setCenter(parent)
-          break
+          this._setCenter(parent);
+          break;
         default:
           if (radio > parentRadio) {
-            el.style.width = '100%'
-            el.style.height = 'auto'
+            el.style.width = '100%';
+            el.style.height = 'auto';
           } else {
-            el.style.width = 'auto'
-            el.style.height = '100%'
+            el.style.width = 'auto';
+            el.style.height = '100%';
           }
-          this._setCenter(parent)
+          this._setCenter(parent);
       }
     },
     _setCenter(parent) {
       if (!this.flex && !this.inlineFlex) {
-        parent.style.display = 'inline-flex'
+        parent.style.display = 'inline-flex';
       }
-      parent.style.alignItems = 'center'
-      parent.style.justifyContent = 'center'
+      parent.style.alignItems = 'center';
+      parent.style.justifyContent = 'center';
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

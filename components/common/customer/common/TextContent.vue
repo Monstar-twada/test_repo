@@ -61,31 +61,31 @@ export default {
   },
   computed: {
     dtStyle() {
-      const ret = {}
+      const ret = {};
       if (this.height) {
-        ret.height = this.height
+        ret.height = this.height;
       }
       if (this.labelFontWeight) {
-        ret.fontWeight = this.labelFontWeight
+        ret.fontWeight = this.labelFontWeight;
       }
       if (this.labelWidth) {
-        ret.flex = `0 0 ${this.labelWidth}`
+        ret.flex = `0 0 ${this.labelWidth}`;
       }
       if (this.labelFlex) {
-        ret.display = 'flex'
-        ret.alignItems = 'center'
+        ret.display = 'flex';
+        ret.alignItems = 'center';
       }
-      return ret
+      return ret;
     },
   },
   methods: {
     ddClick() {
       if (this.copyable) {
-        this.$emit('click')
+        this.$emit('click');
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -39,4 +39,4 @@ export const managerMenuItems = [
     text: '管理',
     width: 16,
   }, */
-]
+];

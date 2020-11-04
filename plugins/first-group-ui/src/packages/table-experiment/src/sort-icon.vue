@@ -9,14 +9,14 @@ export default {
   },
   computed: {
     style() {
-      const ret = {}
+      const ret = {};
       if (this.active) {
-        ret.borderTopColor = this.$colors.primary
+        ret.borderTopColor = this.$colors.primary;
       }
-      return ret
+      return ret;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

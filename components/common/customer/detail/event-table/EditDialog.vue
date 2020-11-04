@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { DEF_FORM } from './constants'
+import { DEF_FORM } from './constants';
 
 export default {
   props: {
@@ -86,65 +86,65 @@ export default {
         ...DEF_FORM,
       },
       isDisabled: false,
-    }
+    };
   },
   computed: {
     transactionTypes() {
-      return this.$ui.getBasicData('transaction_type')
+      return this.$ui.getBasicData('transaction_type');
     },
     channels() {
-      return this.$ui.getBasicData('channel')
+      return this.$ui.getBasicData('channel');
     },
   },
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
       if (val) {
         this.form = {
           ...this.item,
           activityReportDatetime: this.item.activityReportDatetime,
           checkFlag: +this.item.checkFlag,
-        }
+        };
       }
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   created() {
-    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode
-    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode
+    this.form.contactStoreCode = $nuxt.$store.state.auth.storeCode;
+    this.form.contactStaffCode = $nuxt.$store.state.auth.userCode;
   },
   methods: {
     async save() {
-      if (this.isDisabled) return
-      this.isDisabled = true
-      const form = {}
+      if (this.isDisabled) return;
+      this.isDisabled = true;
+      const form = {};
       Object.keys(DEF_FORM).forEach((key) => {
-        form[key] = this.form[key]
-      })
-      form.checkFlag = +form.checkFlag
+        form[key] = this.form[key];
+      });
+      form.checkFlag = +form.checkFlag;
       // eslint-disable-next-line promise/param-names
-      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms))
+      const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
       await this.$api
         .put(
           `/v1/customers/${this.form.customerCode}/activityReports/${this.form.activityId}`,
           form
         )
         .then(() => {
-          this.visible = false
-          this.isDisabled = false
+          this.visible = false;
+          this.isDisabled = false;
         })
         .catch((err) => {
-          if (err) this.$alert(err.message)
-          this.isDisabled = false
-        })
-      this.$alert('活動報告編集成功しました！')
-      await delay()
-      this.$emit('change')
+          if (err) this.$alert(err.message);
+          this.isDisabled = false;
+        });
+      this.$alert('活動報告編集成功しました！');
+      await delay();
+      this.$emit('change');
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -28,10 +28,10 @@ export default {
       return {
         fill: 'currentColor',
         color: this.$colors.primaryActive,
-      }
+      };
     },
   },
-}
+};
 </script>
 
 <style></style>

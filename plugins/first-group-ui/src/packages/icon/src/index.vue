@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import { toNumber } from '../../../libs/index'
-import icons from './icons/index'
-import { createPathHtml } from './helper'
+import { toNumber } from '../../../libs/index';
+import icons from './icons/index';
+import { createPathHtml } from './helper';
 
 export default {
   name: 'FgIcon',
@@ -34,52 +34,52 @@ export default {
   },
   computed: {
     svg() {
-      return this.$refs.svg
+      return this.$refs.svg;
     },
     item() {
-      const item = icons[this.name]
+      const item = icons[this.name];
       if (!item) {
-        throw new Error(`Icon[${this.name}] dose not exist.`)
+        throw new Error(`Icon[${this.name}] dose not exist.`);
       }
-      return item
+      return item;
     },
     svgWidth() {
-      return toNumber(this.size) || this.item.w
+      return toNumber(this.size) || this.item.w;
     },
     svgHeight() {
-      const { w, h } = this.item
-      return this.svgWidth !== w ? (this.svgWidth / w) * h : h
+      const { w, h } = this.item;
+      return this.svgWidth !== w ? (this.svgWidth / w) * h : h;
     },
     viewBox() {
-      const { w, h } = this.item
-      return `0 0 ${w} ${h}`
+      const { w, h } = this.item;
+      return `0 0 ${w} ${h}`;
     },
     html() {
-      return createPathHtml(this.item.i)
+      return createPathHtml(this.item.i);
     },
     svgStyle() {
       const ret = {
         color: this.color || this.$colors.primary,
-      }
-      return ret
+      };
+      return ret;
     },
   },
   watch: {
     html(val) {
-      this.svg.innerHTML = val
+      this.svg.innerHTML = val;
     },
   },
   created() {
     this.$nextTick(() => {
-      this.svg.innerHTML = this.html
-    })
+      this.svg.innerHTML = this.html;
+    });
   },
   methods: {
     handleClick(e) {
-      this.$emit('click', e)
+      this.$emit('click', e);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

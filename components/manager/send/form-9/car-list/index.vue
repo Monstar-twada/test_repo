@@ -220,11 +220,11 @@ export default {
     },
   }),
   methods: {
-    handleChange(id) {
+    handleChange() {
       // console.log('id', id)
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .v-application--is-ltr

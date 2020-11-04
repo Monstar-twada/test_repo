@@ -9,14 +9,14 @@ export default {
   data() {
     return {
       stateSwitch: true,
-    }
+    };
   },
   watch: {
-    stateSwitch(newValue) {
-      this.$emit('eventtriggered')
+    stateSwitch() {
+      this.$emit('eventtriggered');
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .v-application--is-ltr

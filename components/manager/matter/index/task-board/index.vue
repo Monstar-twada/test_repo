@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import taskBoard from './taskBoard'
+import taskBoard from './taskBoard';
 export default {
   components: {
     taskBoard,
@@ -264,8 +264,8 @@ export default {
           ],
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss"></style>

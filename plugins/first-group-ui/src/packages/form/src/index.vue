@@ -15,7 +15,7 @@
   </form>
 </template>
 <script>
-import Broadcaster from '../../../assets/js/broadcaster'
+import Broadcaster from '../../../assets/js/broadcaster';
 
 export default {
   name: 'FgForm',
@@ -23,7 +23,7 @@ export default {
   provide() {
     return {
       FgForm: this,
-    }
+    };
   },
   props: {
     labelPosition: {
@@ -56,45 +56,45 @@ export default {
   data() {
     return {
       potentialLabelWidthArr: [],
-    }
+    };
   },
   computed: {
     autoLabelWidth() {
-      if (!this.potentialLabelWidthArr.length) return 0
-      const max = Math.max(...this.potentialLabelWidthArr)
-      return max ? `${max}px` : ''
+      if (!this.potentialLabelWidthArr.length) return 0;
+      const max = Math.max(...this.potentialLabelWidthArr);
+      return max ? `${max}px` : '';
     },
     svlStyle() {
-      const ret = {}
+      const ret = {};
       if (this.labelWidth && /(\d+)/.test(this.labelWidth)) {
-        ret.left = RegExp.$1 - 30 + 'px'
+        ret.left = RegExp.$1 - 30 + 'px';
       }
-      return ret
+      return ret;
     },
   },
   methods: {
     getLabelWidthIndex(width) {
-      const index = this.potentialLabelWidthArr.indexOf(width)
+      const index = this.potentialLabelWidthArr.indexOf(width);
       // it's impossible
       if (index === -1) {
-        throw new Error('unexpected width ' + width)
+        throw new Error('unexpected width ' + width);
       }
-      return index
+      return index;
     },
     registerLabelWidth(val, oldVal) {
       if (val && oldVal) {
-        const index = this.getLabelWidthIndex(oldVal)
-        this.potentialLabelWidthArr.splice(index, 1, val)
+        const index = this.getLabelWidthIndex(oldVal);
+        this.potentialLabelWidthArr.splice(index, 1, val);
       } else if (val) {
-        this.potentialLabelWidthArr.push(val)
+        this.potentialLabelWidthArr.push(val);
       }
     },
     deregisterLabelWidth(val) {
-      const index = this.getLabelWidthIndex(val)
-      this.potentialLabelWidthArr.splice(index, 1)
+      const index = this.getLabelWidthIndex(val);
+      this.potentialLabelWidthArr.splice(index, 1);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

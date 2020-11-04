@@ -30,12 +30,12 @@ export default {
       const COLORS = {
         white: this.$colors.white,
         blue: this.$colors.primaryActive,
-      }
+      };
       return {
         fill: 'currentColor',
         color: COLORS[this.theme],
-      }
+      };
     },
   },
-}
+};
 </script>

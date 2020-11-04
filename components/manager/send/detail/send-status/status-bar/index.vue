@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import StatusIcon from '~/components/manager/send/detail/send-status/status-bar/StatusIcon'
+import StatusIcon from '~/components/manager/send/detail/send-status/status-bar/StatusIcon';
 export default {
   name: 'DetailContainer',
   components: {
@@ -28,7 +28,7 @@ export default {
       default: () => {},
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

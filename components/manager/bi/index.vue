@@ -26,14 +26,14 @@
 </template>
 
 <script>
-import Sales from './sales/index'
-import SalesProductivity from './sales-productivity/index'
-import SalesBreakdown from './sales-breakdown/index'
-import TopRightTab from './TopRightTab'
-import CarSales from './car-sales/index'
-import DateViewer from '~/components/common/date-viewer/index'
-import MonthSelector from '~/components/common/month-selector/index'
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
+import Sales from './sales/index';
+import SalesProductivity from './sales-productivity/index';
+import SalesBreakdown from './sales-breakdown/index';
+import TopRightTab from './TopRightTab';
+import CarSales from './car-sales/index';
+import DateViewer from '~/components/common/date-viewer/index';
+import MonthSelector from '~/components/common/month-selector/index';
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
@@ -74,7 +74,7 @@ export default {
     selectedMonth: 1,
   }),
   mounted() {
-    this.isMounted = true
+    this.isMounted = true;
   },
-}
+};
 </script>

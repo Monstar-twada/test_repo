@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import ListUsers from '../list-user/index'
+import ListUsers from '../list-user/index';
 export default {
   components: {
     ListUsers,
@@ -25,7 +25,7 @@ export default {
     users: {
       type: [Object, Array],
       default() {
-        return { users: [1, 2, 3, 4, 5] }
+        return { users: [1, 2, 3, 4, 5] };
       },
     },
   },
@@ -37,9 +37,9 @@ export default {
         green: '売却',
         orange: '購入',
       },
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss">
 .matter-index-task-card {

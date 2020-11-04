@@ -99,9 +99,9 @@ export default {
           expectedAmount: 392800,
         },
       ],
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

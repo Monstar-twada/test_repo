@@ -35,7 +35,7 @@ export default {
       default: '次へ',
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .send-card {

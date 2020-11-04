@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import SortTh from './sort-th'
+import SortTh from './sort-th';
 export default {
   name: 'FgTableExperiment',
   components: {
@@ -79,13 +79,13 @@ export default {
     headers: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     list: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     rounded: {
@@ -136,51 +136,51 @@ export default {
     smallHeader: Boolean,
   },
   data() {
-    const headWidthList = this.headers.map((item) => item.width)
+    const headWidthList = this.headers.map((item) => item.width);
     return {
       headWidthList,
       headOffsetRight: '0',
-    }
+    };
   },
   computed: {
     isEmpty() {
-      return this.list.length === 0
+      return this.list.length === 0;
     },
   },
   watch: {
     list() {
-      this.initTableItemWidth()
+      this.initTableItemWidth();
     },
   },
   mounted() {
-    this.initTableItemWidth()
+    this.initTableItemWidth();
   },
   methods: {
     initTableItemWidth() {
       let timer = setTimeout(() => {
-        const head = this.$refs.head
-        if (!head) return
-        const headWidth = head.offsetWidth
-        const body = this.$refs.body
-        const bodyWidth = body.offsetWidth
+        const head = this.$refs.head;
+        if (!head) return;
+        const headWidth = head.offsetWidth;
+        const body = this.$refs.body;
+        const bodyWidth = body.offsetWidth;
         // reset head offset right when body has scroll bar
-        this.headOffsetRight = headWidth - bodyWidth + 'px'
+        this.headOffsetRight = headWidth - bodyWidth + 'px';
         // reset th and td width from th width
         if (body.children[0]) {
           // from td width
           this.headWidthList = [...body.children[0].querySelectorAll('td')].map(
             (el) => el.offsetWidth
-          )
+          );
         }
-        clearTimeout(timer)
-        timer = null
-      }, 0)
+        clearTimeout(timer);
+        timer = null;
+      }, 0);
     },
     sortChange(sort, item) {
-      this.$emit('sort-change', item.field, sort)
+      this.$emit('sort-change', item.field, sort);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

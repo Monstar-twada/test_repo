@@ -67,9 +67,9 @@
   </div>
 </template>
 <script>
-import SalesCount from './SalesCount.vue'
-import Increase from '~/components/common/increase/index'
-import Decrease from '~/components/common/decrease/index'
+import SalesCount from './SalesCount.vue';
+import Increase from '~/components/common/increase/index';
+import Decrease from '~/components/common/decrease/index';
 
 export default {
   name: 'SalesStats',
@@ -78,7 +78,7 @@ export default {
     Decrease,
     SalesCount,
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .content {

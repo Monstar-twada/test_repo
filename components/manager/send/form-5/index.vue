@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
 export default {
   components: {
     Breadcrumbs,
@@ -54,15 +54,15 @@ export default {
       ],
       commit:
         '・日時場所などの取り決めがある場合は記載してください\n・対応車両のメーカー・車種・ナンバー等の特徴はお書きください\n・対応してほしい作業内容',
-    }
+    };
   },
 
   methods: {
-    handleClick: (e) => {
+    handleClick: () => {
       // console.log(e)
     },
   },
-}
+};
 </script>
 <style>
 .form-5 .fg-input textarea {

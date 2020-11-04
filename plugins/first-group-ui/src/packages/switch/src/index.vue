@@ -40,32 +40,32 @@ export default {
   data() {
     return {
       checked: this.value,
-    }
+    };
   },
   computed: {
     switchDisabled() {
-      return this.disabled
+      return this.disabled;
     },
   },
   watch: {
     value(val) {
-      this.checked = val
+      this.checked = val;
     },
   },
   methods: {
-    handleChange(event) {
-      const val = !this.checked
+    handleChange() {
+      const val = !this.checked;
       if (!this.sync) {
-        this.checked = val
+        this.checked = val;
       }
-      this.$emit('input', val)
-      this.$emit('change', val)
+      this.$emit('input', val);
+      this.$emit('change', val);
     },
     switchValue() {
-      !this.switchDisabled && this.handleChange()
+      !this.switchDisabled && this.handleChange();
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .fg-switch {

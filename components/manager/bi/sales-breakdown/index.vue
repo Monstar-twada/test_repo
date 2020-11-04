@@ -66,9 +66,9 @@ export default {
         { profit: '2,266', loss: '' },
         { profit: '¥6,344', loss: '' },
       ],
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .tab {

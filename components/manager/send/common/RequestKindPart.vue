@@ -65,22 +65,22 @@ export default {
           svg: 'send-tire-icon',
         },
       ],
-    }
+    };
   },
   methods: {
     handleClick(index) {
-      this.selected = this.icons[index].target
+      this.selected = this.icons[index].target;
     },
     isSelected(index) {
-      return this.selected === this.icons[index].target
+      return this.selected === this.icons[index].target;
     },
     isSelectedIcon(index) {
       return this.isSelected(index)
         ? `${this.icons[index].svg}-white`
-        : `${this.icons[index].svg}`
+        : `${this.icons[index].svg}`;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@
  * https://github.com/capricorncd
  * Date: 2020-09-14 18:23
  */
-import { hasOwn } from './check'
+import { hasOwn } from './check';
 /**
  * create url query
  * @param params
@@ -12,13 +12,13 @@ import { hasOwn } from './check'
  */
 export function createUrlQuery(params, fields) {
   if (!Array.isArray(fields)) {
-    fields = Object.keys(params)
+    fields = Object.keys(params);
   }
   const str = fields.reduce((prev, key) => {
     if (hasOwn(params, key)) {
-      prev += `${key}=${params[key]}&`
+      prev += `${key}=${params[key]}&`;
     }
-    return prev
-  }, '?')
-  return str.substr(0, str.length - 1)
+    return prev;
+  }, '?');
+  return str.substr(0, str.length - 1);
 }

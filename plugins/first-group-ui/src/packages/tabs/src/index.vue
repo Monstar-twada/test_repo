@@ -38,74 +38,74 @@ export default {
     lastActiveTabHash: '',
   }),
   created() {
-    this.tabs = this.$children
+    this.tabs = this.$children;
   },
   mounted() {
     if (this.tabs.length) {
-      this.selectTab(this.tabs[0].hash)
+      this.selectTab(this.tabs[0].hash);
     }
   },
   methods: {
     findTab(hash) {
-      return this.tabs.find((tab) => tab.hash === hash)
+      return this.tabs.find((tab) => tab.hash === hash);
     },
     selectTab(selectedTabHash, event) {
-      const selectedTab = this.findTab(selectedTabHash)
+      const selectedTab = this.findTab(selectedTabHash);
       if (!selectedTab) {
-        return
+        return;
       }
       if (selectedTab.isDisabled) {
-        event.preventDefault()
-        return
+        event.preventDefault();
+        return;
       }
       if (this.lastActiveTabHash === selectedTab.hash) {
         // this.$emit('clicked', { tab: selectedTab })
-        return
+        return;
       }
       this.tabs.forEach((tab) => {
-        tab.isActive = tab.hash === selectedTab.hash
-      })
-      this.activeTabHash = selectedTab.hash
-      this.activeTabIndex = this.getTabIndex(selectedTabHash)
-      this.lastActiveTabHash = this.activeTabHash = selectedTab.hash
-      this.resetLinePosition()
+        tab.isActive = tab.hash === selectedTab.hash;
+      });
+      this.activeTabHash = selectedTab.hash;
+      this.activeTabIndex = this.getTabIndex(selectedTabHash);
+      this.lastActiveTabHash = this.activeTabHash = selectedTab.hash;
+      this.resetLinePosition();
     },
 
     getTabIndex(hash) {
-      const tab = this.findTab(hash)
-      return this.tabs.indexOf(tab)
+      const tab = this.findTab(hash);
+      return this.tabs.indexOf(tab);
     },
 
     getTabHash(index) {
-      const tab = this.tabs.find((tab) => this.tabs.indexOf(tab) === index)
+      const tab = this.tabs.find((tab) => this.tabs.indexOf(tab) === index);
 
       if (!tab) {
-        return
+        return;
       }
 
-      return tab.hash
+      return tab.hash;
     },
 
     getActiveTab() {
-      return this.findTab(this.activeTabHash)
+      return this.findTab(this.activeTabHash);
     },
 
     getActiveTabIndex() {
-      return this.getTabIndex(this.activeTabHash)
+      return this.getTabIndex(this.activeTabHash);
     },
 
     resetLinePosition() {
       this.$nextTick(() => {
-        const tabsItems = this.$refs.tabsItems.querySelectorAll('li')
-        const index = this.tabs.findIndex((tab) => tab.isActive)
-        const el = tabsItems[index]
-        if (!el) return
-        this.$refs.line.style.width = el.offsetWidth + 'px'
-        this.$refs.line.style.transform = `translateX(${el.offsetLeft}px)`
-      })
+        const tabsItems = this.$refs.tabsItems.querySelectorAll('li');
+        const index = this.tabs.findIndex((tab) => tab.isActive);
+        const el = tabsItems[index];
+        if (!el) return;
+        this.$refs.line.style.width = el.offsetWidth + 'px';
+        this.$refs.line.style.transform = `translateX(${el.offsetLeft}px)`;
+      });
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .fg-tabs {

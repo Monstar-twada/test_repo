@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index'
-import CustomerInfo from '~/components/common/customer/detail/customer-info/index.vue'
-import CarInfo from '~/components/common/customer/detail/car-info/index.vue'
-import EventTable from '~/components/common/customer/detail/event-table/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index';
+import CustomerInfo from '~/components/common/customer/detail/customer-info/index.vue';
+import CarInfo from '~/components/common/customer/detail/car-info/index.vue';
+import EventTable from '~/components/common/customer/detail/event-table/index.vue';
 
 export default {
   components: {
@@ -71,10 +71,10 @@ export default {
       query: this.$route.query || {},
       customerData: {},
       currentCarCode: null,
-    }
+    };
   },
   created() {
-    this.getDetail()
+    this.getDetail();
   },
   methods: {
     sendingRequestClick() {},
@@ -82,17 +82,17 @@ export default {
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.query.customerCode}`
-        )
+        );
         this.customerData = {
           ...res,
-        }
+        };
       } catch (err) {
-        this.$alert(err.message)
-        console.error(err)
+        this.$alert(err.message);
+        console.error(err);
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

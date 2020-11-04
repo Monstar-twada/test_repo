@@ -37,9 +37,9 @@
 </template>
 
 <script>
-import Progress from './Progress'
-import Success from './Success'
-import DialogHeader from '~/components/common/dialog-header/index'
+import Progress from './Progress';
+import Success from './Success';
+import DialogHeader from '~/components/common/dialog-header/index';
 export default {
   name: 'ImportDialog',
   components: {
@@ -62,7 +62,7 @@ export default {
       '車両データ（ブロードリーフ NSクラウド）',
       '顧客データ（ブロードリーフ NSオンプレ）',
       '車両データ（ブロードリーフ NSオンプレ）',
-    ]
+    ];
     return {
       dataType: dataTypeList[0],
       visible: this.value,
@@ -70,43 +70,43 @@ export default {
       isUploading: false,
       progress: 0,
       isSuccess: false,
-    }
+    };
   },
   computed: {
     fileInput() {
-      return this.$refs.fileInput
+      return this.$refs.fileInput;
     },
   },
   watch: {
     value(val) {
       if (val) {
-        this.isSuccess = false
+        this.isSuccess = false;
       }
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     selectFile() {
-      this.fileInput.click()
+      this.fileInput.click();
     },
     handleImport() {
-      this.isUploading = true
-      this.progress = 0
+      this.isUploading = true;
+      this.progress = 0;
       const timer = setInterval(() => {
         if (this.progress >= 100) {
-          this.isUploading = false
-          this.isSuccess = true
-          clearInterval(timer)
-          return
+          this.isUploading = false;
+          this.isSuccess = true;
+          clearInterval(timer);
+          return;
         }
-        this.progress += 2
-      }, 100)
+        this.progress += 2;
+      }, 100);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

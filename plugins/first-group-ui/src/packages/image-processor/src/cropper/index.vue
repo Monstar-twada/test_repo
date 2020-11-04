@@ -31,13 +31,13 @@
 </template>
 
 <script>
-import { getStyleValue } from '../../../../libs/index'
-import cropperMixin, { resetCropImagePosition } from './mixin'
+import { getStyleValue } from '../../../../libs/index';
+import cropperMixin, { resetCropImagePosition } from './mixin';
 import {
   resetImageAttrs,
   SCALE_BAR_BTN_HALF_WIDTH,
   setElStyles,
-} from './helper'
+} from './helper';
 
 export default {
   name: 'FgImageProcessorCropper',
@@ -57,82 +57,82 @@ export default {
     return {
       visible: this.value,
       imageInfo: {},
-    }
+    };
   },
   watch: {
     value(val) {
       if (this.visible !== val) {
-        this.visible = val
+        this.visible = val;
       }
       if (!val) {
-        resetImageAttrs(this.$refs.img)
+        resetImageAttrs(this.$refs.img);
       }
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     handleScale(isPlus) {
-      const perChangePx = isPlus ? 30 : -30
+      const perChangePx = isPlus ? 30 : -30;
       // scale bar
-      const $bar = this.$refs.scaleBar
-      const $barCtrlBtn = this.$refs.barCtrlBtn
-      const maxWidth = getStyleValue($bar.parentElement, 'width', true)
-      let currentWidth = getStyleValue($bar, 'width', true) + perChangePx
+      const $bar = this.$refs.scaleBar;
+      const $barCtrlBtn = this.$refs.barCtrlBtn;
+      const maxWidth = getStyleValue($bar.parentElement, 'width', true);
+      let currentWidth = getStyleValue($bar, 'width', true) + perChangePx;
       if (currentWidth < 0) {
-        currentWidth = 0
+        currentWidth = 0;
       }
       if (currentWidth > maxWidth) {
-        currentWidth = maxWidth
+        currentWidth = maxWidth;
       }
       setElStyles($bar, {
         width: currentWidth,
-      })
+      });
 
       // reset crop image position
-      const $img = this.$refs.img
-      this.imageInfo.width = getStyleValue($img, 'width', true)
-      this.imageInfo.height = getStyleValue($img, 'height', true)
-      this.imageInfo.left = getStyleValue($img, 'left', true)
-      this.imageInfo.top = getStyleValue($img, 'top', true)
+      const $img = this.$refs.img;
+      this.imageInfo.width = getStyleValue($img, 'width', true);
+      this.imageInfo.height = getStyleValue($img, 'height', true);
+      this.imageInfo.left = getStyleValue($img, 'left', true);
+      this.imageInfo.top = getStyleValue($img, 'top', true);
       resetCropImagePosition(
         $img,
         this.$refs.cropBox,
         this.imageInfo,
         currentWidth / maxWidth
-      )
+      );
 
       // scale ctrl btn
-      let currentLeft = getStyleValue($barCtrlBtn, 'left', true) + perChangePx
+      let currentLeft = getStyleValue($barCtrlBtn, 'left', true) + perChangePx;
       if (currentLeft < -SCALE_BAR_BTN_HALF_WIDTH) {
-        currentLeft = -SCALE_BAR_BTN_HALF_WIDTH
+        currentLeft = -SCALE_BAR_BTN_HALF_WIDTH;
       }
       if (currentLeft > maxWidth - SCALE_BAR_BTN_HALF_WIDTH) {
-        currentLeft = maxWidth - SCALE_BAR_BTN_HALF_WIDTH
+        currentLeft = maxWidth - SCALE_BAR_BTN_HALF_WIDTH;
       }
       setElStyles($barCtrlBtn, {
         left: currentLeft,
-      })
+      });
     },
     save() {
-      const box = this.$refs.cropBox.getBoundingClientRect()
-      const $img = this.$refs.img
-      const imgLeft = Math.abs(getStyleValue($img, 'left', true))
-      const imgTop = Math.abs(getStyleValue($img, 'top', true))
-      const imgWidth = getStyleValue($img, 'width', true)
-      const radio = $img.naturalWidth / imgWidth
+      const box = this.$refs.cropBox.getBoundingClientRect();
+      const $img = this.$refs.img;
+      const imgLeft = Math.abs(getStyleValue($img, 'left', true));
+      const imgTop = Math.abs(getStyleValue($img, 'top', true));
+      const imgWidth = getStyleValue($img, 'width', true);
+      const radio = $img.naturalWidth / imgWidth;
       const cropInfo = {
         sx: imgLeft * radio,
         sy: imgTop * radio,
         sw: box.width * radio,
         sh: box.height * radio,
-      }
-      this.$emit('change', cropInfo)
-      resetImageAttrs($img)
+      };
+      this.$emit('change', cropInfo);
+      resetImageAttrs($img);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

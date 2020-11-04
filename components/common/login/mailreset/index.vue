@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
@@ -71,46 +71,46 @@ export default {
       validationMessage: {
         email: '',
       },
-    }
+    };
   },
   watch: {
-    email1(val) {
-      this.validation()
+    email1() {
+      this.validation();
     },
-    email2(val) {
-      this.validation()
+    email2() {
+      this.validation();
     },
   },
   methods: {
     passwordValidation() {
       if (this.email1 === this.email2) {
-        this.matchPassword = false
+        this.matchPassword = false;
       } else {
-        this.matchPassword = true
+        this.matchPassword = true;
       }
     },
     validation() {
-      let count = 0
+      let count = 0;
       if (
         this.email1 === '' ||
         this.email2 === '' ||
         this.email1 !== this.email2
       ) {
         this.validationMessage.email =
-          'メールアドレスが空欄か一致していません。'
-        count += 1
+          'メールアドレスが空欄か一致していません。';
+        count += 1;
       } else if (!this.reg.test(this.email1)) {
-        this.validationMessage.email = '正しい形式で入力してください'
-        count += 1
-      } else this.validationMessage.email = ''
-      return count
+        this.validationMessage.email = '正しい形式で入力してください';
+        count += 1;
+      } else this.validationMessage.email = '';
+      return count;
     },
     confirm() {
       // const count = this.validation()
       // if (count === 0) console.log('submitted')
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

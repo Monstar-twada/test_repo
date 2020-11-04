@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import DetailContainer from './detail-container/index'
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
+import DetailContainer from './detail-container/index';
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
 
 export default {
   layout: 'manager',
@@ -39,5 +39,5 @@ export default {
       },
     ],
   }),
-}
+};
 </script>

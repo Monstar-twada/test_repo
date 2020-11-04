@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Detail from '~/components/manager/send/detail/index'
+import Detail from '~/components/manager/send/detail/index';
 
 export default {
   layout: 'manager',
@@ -13,5 +13,5 @@ export default {
   components: {
     Detail,
   },
-}
+};
 </script>

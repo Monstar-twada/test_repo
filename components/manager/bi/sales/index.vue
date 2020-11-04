@@ -49,13 +49,13 @@
   </div>
 </template>
 <script>
-import SalesGraph from './sales-graph.js'
-import SalesPercent from './SalesPercent.vue'
-import SalesStats from './SalesStats.vue'
-import ImportButton from '~/components/common/customer/ImportButton'
-import SettingsButton from '~/components/manager/bi/SettingsButton'
-import SettingsDialog from '~/components/manager/bi/setting-dialog/index'
-import ImportDialog from '~/components/common/customer/import-dialog/index'
+import SalesGraph from './sales-graph.js';
+import SalesPercent from './SalesPercent.vue';
+import SalesStats from './SalesStats.vue';
+import ImportButton from '~/components/common/customer/ImportButton';
+import SettingsButton from '~/components/manager/bi/SettingsButton';
+import SettingsDialog from '~/components/manager/bi/setting-dialog/index';
+import ImportDialog from '~/components/common/customer/import-dialog/index';
 export default {
   name: 'Sales',
   components: {
@@ -166,8 +166,8 @@ export default {
                 beginAtZero: true,
                 fontColor: '#1258BC',
                 fontSize: 10,
-                callback(value, index, values) {
-                  return '¥' + value
+                callback(value) {
+                  return '¥' + value;
                 },
               },
             },
@@ -189,17 +189,17 @@ export default {
           ],
         },
       },
-    }
+    };
   },
   methods: {
     handleImportClick() {
-      this.importVisible = true
+      this.importVisible = true;
     },
     handleSettingsClick() {
-      this.SettingsVisible = true
+      this.SettingsVisible = true;
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .sales_container {

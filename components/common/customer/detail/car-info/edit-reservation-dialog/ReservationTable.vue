@@ -25,16 +25,16 @@ export default {
     list: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
   },
   methods: {
     fmtValue(val) {
-      return val ? '○' : 'ー'
+      return val ? '○' : 'ー';
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

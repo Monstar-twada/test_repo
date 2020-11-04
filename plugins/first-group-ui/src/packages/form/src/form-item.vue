@@ -30,9 +30,9 @@
   </div>
 </template>
 <script>
-import Broadcaster from '../../../assets/js/broadcaster'
-import { isNumberLike } from '../../../libs/index'
-import LabelWrap from './label-wrap'
+import Broadcaster from '../../../assets/js/broadcaster';
+import { isNumberLike } from '../../../libs/index';
+import LabelWrap from './label-wrap';
 
 export default {
   name: 'FgFormItem',
@@ -43,7 +43,7 @@ export default {
   provide() {
     return {
       FgFormItem: this,
-    }
+    };
   },
   inject: ['FgForm'],
   props: {
@@ -80,80 +80,82 @@ export default {
   data() {
     return {
       computedLabelWidth: '',
-    }
+    };
   },
   computed: {
     itemStyle() {
-      const ret = {}
-      const itemSpacing = this.itemSpacing || this.form.itemSpacing
+      const ret = {};
+      const itemSpacing = this.itemSpacing || this.form.itemSpacing;
       if (itemSpacing || typeof itemSpacing === 'number') {
-        ret.marginBottom = itemSpacing + (isNumberLike(itemSpacing) ? 'px' : '')
+        ret.marginBottom =
+          itemSpacing + (isNumberLike(itemSpacing) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
     labelStyle() {
-      const ret = {}
-      const labelFontSize = this.labelFontSize || this.form.labelFontSize
+      const ret = {};
+      const labelFontSize = this.labelFontSize || this.form.labelFontSize;
       if (labelFontSize) {
-        ret.fontSize = labelFontSize + (isNumberLike(labelFontSize) ? 'px' : '')
+        ret.fontSize =
+          labelFontSize + (isNumberLike(labelFontSize) ? 'px' : '');
       }
-      const labelFontWeight = this.labelFontWeight || this.form.labelFontWeight
+      const labelFontWeight = this.labelFontWeight || this.form.labelFontWeight;
       if (labelFontWeight) {
         ret.fontWeight =
-          labelFontWeight + (isNumberLike(labelFontWeight) ? 'px' : '')
+          labelFontWeight + (isNumberLike(labelFontWeight) ? 'px' : '');
       }
-      if (this.form.labelPosition === 'top') return ret
-      const labelWidth = this.labelWidth || this.form.labelWidth
+      if (this.form.labelPosition === 'top') return ret;
+      const labelWidth = this.labelWidth || this.form.labelWidth;
       if (labelWidth) {
-        ret.width = labelWidth + (isNumberLike(labelWidth) ? 'px' : '')
+        ret.width = labelWidth + (isNumberLike(labelWidth) ? 'px' : '');
       }
-      return ret
+      return ret;
     },
     contentStyle() {
-      const ret = {}
-      const label = this.label
-      if (this.form.labelPosition === 'top' || this.form.inline) return ret
-      if (!label && !this.labelWidth && this.isNested) return ret
-      const labelWidth = this.labelWidth || this.form.labelWidth
+      const ret = {};
+      const label = this.label;
+      if (this.form.labelPosition === 'top' || this.form.inline) return ret;
+      if (!label && !this.labelWidth && this.isNested) return ret;
+      const labelWidth = this.labelWidth || this.form.labelWidth;
       if (labelWidth === 'auto') {
         if (this.labelWidth === 'auto') {
-          ret.marginLeft = this.computedLabelWidth
+          ret.marginLeft = this.computedLabelWidth;
         } else if (this.form.labelWidth === 'auto') {
-          ret.marginLeft = this.FgForm.autoLabelWidth
+          ret.marginLeft = this.FgForm.autoLabelWidth;
         }
       } else {
-        ret.marginLeft = labelWidth
+        ret.marginLeft = labelWidth;
       }
-      return ret
+      return ret;
     },
     isNested() {
-      let parent = this.$parent
-      let parentName = parent.$options.name
+      let parent = this.$parent;
+      let parentName = parent.$options.name;
       while (parentName !== 'FgForm') {
         if (parentName === 'FgFormItem') {
-          return true
+          return true;
         }
-        parent = parent.$parent
-        parentName = parent.$options.name
+        parent = parent.$parent;
+        parentName = parent.$options.name;
       }
-      return false
+      return false;
     },
     form() {
-      let parent = this.$parent
-      let parentName = parent.$options.name
+      let parent = this.$parent;
+      let parentName = parent.$options.name;
       while (parentName !== 'FgForm') {
-        parent = parent.$parent
-        parentName = parent.$options.name
+        parent = parent.$parent;
+        parentName = parent.$options.name;
       }
-      return parent
+      return parent;
     },
   },
   methods: {
     updateComputedLabelWidth(width) {
-      this.computedLabelWidth = width ? `${width}px` : ''
+      this.computedLabelWidth = width ? `${width}px` : '';
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

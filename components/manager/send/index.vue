@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
-import SendSales from '~/components/manager/send/index/send-sales/index'
-import SearchBar from '~/components/manager/send/index/search-bar/index'
-import SendList from '~/components/manager/send/index/send-list/index'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
+import SendSales from '~/components/manager/send/index/send-sales/index';
+import SearchBar from '~/components/manager/send/index/search-bar/index';
+import SendList from '~/components/manager/send/index/send-list/index';
 
 export default {
   layout: 'manager',
@@ -48,5 +48,5 @@ export default {
       },
     ],
   }),
-}
+};
 </script>

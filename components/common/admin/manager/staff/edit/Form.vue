@@ -136,9 +136,9 @@ export default {
           'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2700073372,1831939333&fm=26&gp=0.jpg',
         authority: '1',
       },
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

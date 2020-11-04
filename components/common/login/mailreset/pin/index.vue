@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
@@ -53,33 +53,33 @@ export default {
       validationMessage: {
         code: '',
       },
-    }
+    };
   },
   methods: {
     nextUrl(url) {
-      this.$router.push({ path: url })
+      this.$router.push({ path: url });
     },
     isValid() {
       if (this.code.length === 6) {
-        return false
+        return false;
       } else {
-        return true
+        return true;
       }
     },
     validation() {
-      let count = 0
+      let count = 0;
       if (this.code.length !== 6) {
-        this.validationMessage.code = 'すべての確認コードを入力してください'
-        count += 1
-      } else this.validationMessage.code = ''
-      return count
+        this.validationMessage.code = 'すべての確認コードを入力してください';
+        count += 1;
+      } else this.validationMessage.code = '';
+      return count;
     },
     handleSubmit() {
-      const count = this.validation()
-      if (count === 0) this.nextUrl('/login/mailreset/complete')
+      const count = this.validation();
+      if (count === 0) this.nextUrl('/login/mailreset/complete');
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

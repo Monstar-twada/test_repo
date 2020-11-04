@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import UserInfo from './user-info/index'
+import UserInfo from './user-info/index';
 export default {
   components: {
     UserInfo,
@@ -39,7 +39,7 @@ export default {
     breadcrumbs: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
     page: {
@@ -70,10 +70,10 @@ export default {
           text: 'home',
         },
         ...this.breadcrumbs,
-      ]
+      ];
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

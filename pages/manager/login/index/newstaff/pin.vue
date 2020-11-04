@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import Pin from '~/components/common/login/newstaff/pin/index'
+import Pin from '~/components/common/login/newstaff/pin/index';
 export default {
   components: {
     Pin,
   },
-}
+};
 </script>

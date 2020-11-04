@@ -6,7 +6,7 @@
 import {
   BASIC_MASTER_CACHE_KEY,
   BASIC_PREFECTURE_CACHE_KEY,
-} from '~/assets/constants'
+} from '~/assets/constants';
 
 /**
  * format query.sort object, to array
@@ -19,14 +19,14 @@ import {
  * @returns {[]}
  */
 export function fmtSort(sortData) {
-  const arr = []
+  const arr = [];
   Object.keys(sortData).forEach((key) => {
-    const sort = sortData[key]
+    const sort = sortData[key];
     if (sort) {
-      arr.push((sort === 'desc' ? '-' : '') + key)
+      arr.push((sort === 'desc' ? '-' : '') + key);
     }
-  })
-  return arr
+  });
+  return arr;
 }
 
 /**
@@ -36,29 +36,29 @@ export function fmtSort(sortData) {
  * @returns {*|*[]}
  */
 export function getBasicData(key, isNeedObject = false) {
-  let result
+  let result;
   // prefecture
   if (key === 'prefectures') {
-    result = this.getCache(BASIC_PREFECTURE_CACHE_KEY) || []
+    result = this.getCache(BASIC_PREFECTURE_CACHE_KEY) || [];
   } else {
     // master
-    const cache = this.getCache(BASIC_MASTER_CACHE_KEY) || {}
-    result = cache[key] || []
+    const cache = this.getCache(BASIC_MASTER_CACHE_KEY) || {};
+    result = cache[key] || [];
   }
 
   if (isNeedObject) {
-    const obj = {}
+    const obj = {};
     result.forEach(({ text, value }) => {
-      obj[value] = text
-    })
-    return obj
+      obj[value] = text;
+    });
+    return obj;
   }
-  return result
+  return result;
 }
 
 /**
  * clear local basic data
  */
 export function clearBasicData() {
-  this.removeCache([BASIC_MASTER_CACHE_KEY, BASIC_PREFECTURE_CACHE_KEY])
+  this.removeCache([BASIC_MASTER_CACHE_KEY, BASIC_PREFECTURE_CACHE_KEY]);
 }

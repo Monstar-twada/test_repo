@@ -38,10 +38,10 @@ export default {
     InputStyle() {
       return {
         '--borderbottom': this.customborderbottom,
-      }
+      };
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

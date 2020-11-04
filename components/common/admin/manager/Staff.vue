@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import IndexDialog from '~/components/common/admin/manager/staff/IndexDialog'
+import IndexDialog from '~/components/common/admin/manager/staff/IndexDialog';
 
 export default {
   name: 'Staff',
@@ -217,19 +217,19 @@ export default {
       ],
       currentPage: 1,
       itemsPerPage: 10,
-    }
+    };
   },
   created() {
-    this.currentItem = this.itemList[0] || {}
+    this.currentItem = this.itemList[0] || {};
   },
   methods: {
     moveToEdit(id) {
       this.$router.push({
         path: `/admin/staff/edit/${id}`,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

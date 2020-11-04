@@ -120,7 +120,7 @@
   </div>
 </template>
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
 export default {
   components: {
     Breadcrumbs,
@@ -132,7 +132,7 @@ export default {
         return {
           lastName: '',
           firstName: '',
-        }
+        };
       },
     },
   },
@@ -150,9 +150,9 @@ export default {
         },
       ],
       genders: this.$ui.getBasicData('sex'),
-    }
+    };
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .context {

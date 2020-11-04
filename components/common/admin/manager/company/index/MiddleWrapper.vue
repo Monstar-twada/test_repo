@@ -28,21 +28,21 @@ export default {
     return {
       currentItem: {},
       headers: [],
-    }
+    };
   },
   methods: {
     moveToForm() {
       this.$router.push({
         path: `/admin/area/new/`,
-      })
+      });
     },
     moveToEdit(id) {
       this.$router.push({
         path: `/admin/area/edit/${id}`,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -3,10 +3,10 @@
  * https://github.com/capricorncd
  * Date: 2020-07-30 17:57
  */
-import FgAvatar from './src/index'
+import FgAvatar from './src/index';
 
 FgAvatar.install = function (Vue) {
-  Vue.component(FgAvatar.name, FgAvatar)
-}
+  Vue.component(FgAvatar.name, FgAvatar);
+};
 
-export default FgAvatar
+export default FgAvatar;

@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import ServiceIcons from './ServiceIcons'
+import ServiceIcons from './ServiceIcons';
 export default {
   name: 'Shop',
   components: {
@@ -72,7 +72,7 @@ export default {
       mail: 'aaaa@cars-enjoy.com',
       company_name: '株式会社ファーストグループ',
       company_katakana: 'カブシキガイシャファーストグループ',
-    }
+    };
     const item2 = {
       id: 10000005,
       area: '奈良エリア',
@@ -83,20 +83,20 @@ export default {
       mail: 'aaaa@cars-enjoy.com',
       company_name: '株式会社ファーストグループ',
       company_katakana: 'カブシキガイシャファーストグループ',
-    }
+    };
 
-    const itemList = []
+    const itemList = [];
     for (let i = 0; i < 4; i++) {
       itemList.push({
         ...item,
         id: item.id + i,
-      })
+      });
     }
     for (let i = 0; i < 4; i++) {
       itemList.push({
         ...item2,
         id: item2.id + i,
-      })
+      });
     }
 
     return {
@@ -139,24 +139,24 @@ export default {
       itemList,
       currentPage: 1,
       itemsPerPage: 10,
-    }
+    };
   },
   created() {
-    this.currentItem = this.itemList[0] || {}
+    this.currentItem = this.itemList[0] || {};
   },
   methods: {
     moveToForm() {
       this.$router.push({
         path: `/admin/area/new/`,
-      })
+      });
     },
     moveToEdit(id) {
       this.$router.push({
         path: `/admin/area/edit/${id}`,
-      })
+      });
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

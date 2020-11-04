@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import Logo from '~/components/common/logo/index'
+import Logo from '~/components/common/logo/index';
 export default {
   components: {
     Logo,
@@ -59,45 +59,46 @@ export default {
       validationMessage: {
         password: '',
       },
-    }
+    };
   },
   watch: {
-    password1(val) {
-      this.validation()
+    password1() {
+      this.validation();
     },
-    password2(val) {
-      this.validation()
+    password2() {
+      this.validation();
     },
   },
   methods: {
     nextUrl(url) {
-      this.$router.push({ path: url })
+      this.$router.push({ path: url });
     },
     passwordValidation() {
       if (this.password1 === this.password2) {
-        this.matchPassword = false
+        this.matchPassword = false;
       } else {
-        this.matchPassword = true
+        this.matchPassword = true;
       }
     },
     validation() {
-      let count = 0
+      let count = 0;
       if (this.password2 !== '' && this.password1 !== this.password2) {
-        this.validationMessage.password = 'パスワードが空欄か一致していません。'
-        count += 1
+        this.validationMessage.password =
+          'パスワードが空欄か一致していません。';
+        count += 1;
       } else if (!this.reg.test(this.password1)) {
         this.validationMessage.password =
-          'パスワードは英数混合で8文字以上で設定してください。'
-        count += 1
-      } else this.validationMessage.password = ''
-      return count
+          'パスワードは英数混合で8文字以上で設定してください。';
+        count += 1;
+      } else this.validationMessage.password = '';
+      return count;
     },
     confirm() {
-      const count = this.validation()
-      if (count === 0) this.nextUrl('/login/complete')
+      const count = this.validation();
+      if (count === 0) this.nextUrl('/login/complete');
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

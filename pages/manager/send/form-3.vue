@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import Form3 from '~/components/manager/send/form-3/index'
+import Form3 from '~/components/manager/send/form-3/index';
 export default {
   layout: 'manager',
   // middleware: 'authenticated',
   components: {
     Form3,
   },
-}
+};
 </script>

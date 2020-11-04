@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { isNumberLike } from '../../../libs/index'
+import { isNumberLike } from '../../../libs/index';
 export default {
   name: 'FgAvatar',
   props: {
@@ -66,7 +66,7 @@ export default {
     data: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
     textFlexDirectionColumn: {
@@ -84,52 +84,52 @@ export default {
   },
   computed: {
     imgUrl() {
-      return this.src || this.data.url
+      return this.src || this.data.url;
     },
     wrapperStyle() {
-      const ret = {}
+      const ret = {};
       if (this.size) {
-        ret.height = isNumberLike(this.size) ? this.size + 'px' : this.size
+        ret.height = isNumberLike(this.size) ? this.size + 'px' : this.size;
       }
-      return ret
+      return ret;
     },
     avatarStyle() {
-      const ret = {}
+      const ret = {};
       if (this.size) {
-        ret.width = isNumberLike(this.size) ? this.size + 'px' : this.size
-        ret.height = ret.width
-        ret.flex = `0 0 ${ret.width}`
+        ret.width = isNumberLike(this.size) ? this.size + 'px' : this.size;
+        ret.height = ret.width;
+        ret.flex = `0 0 ${ret.width}`;
       }
-      return ret
+      return ret;
     },
     textStyle() {
-      const ret = {}
+      const ret = {};
       if (this.textWidth) {
         ret.maxWidth =
-          this.textWidth + (isNumberLike(this.textWidth) ? 'px' : '')
+          this.textWidth + (isNumberLike(this.textWidth) ? 'px' : '');
       }
-      ret.height = this.wrapperStyle.height
-      return ret
+      ret.height = this.wrapperStyle.height;
+      return ret;
     },
     content() {
-      const { name, lastName, firstName } = this.data
-      return name || [lastName, firstName].join('')
+      const { name, lastName, firstName } = this.data;
+      return name || [lastName, firstName].join('');
     },
   },
   methods: {
     handleLoad(e) {
-      const el = e.target
+      const el = e.target;
       if (el.width > el.height) {
-        el.style.width = 'auto'
-        el.style.height = '100%'
+        el.style.width = 'auto';
+        el.style.height = '100%';
       }
     },
     handleClick(e) {
-      if (!this.clickable) return
-      this.$emit('click', this.imgUrl, e)
+      if (!this.clickable) return;
+      this.$emit('click', this.imgUrl, e);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

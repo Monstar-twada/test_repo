@@ -31,17 +31,17 @@ export default {
   data() {
     return {
       visible: this.value,
-    }
+    };
   },
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

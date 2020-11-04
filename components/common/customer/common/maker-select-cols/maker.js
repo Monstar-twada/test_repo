@@ -1,5 +1,5 @@
-import { storage } from '~/assets/js/storage'
-import { fmtJpCharacter } from '~/assets/js/full-half-width'
+import { storage } from '~/assets/js/storage';
+import { fmtJpCharacter } from '~/assets/js/full-half-width';
 
 const manufacturersString = `
   ＢＭＷ	１シリーズ
@@ -870,35 +870,35 @@ const manufacturersString = `
   日野	ＲＸ
   日野	デュトロ
   日野	リエッセⅡ
-  日野	レンジャー`
+  日野	レンジャー`;
 
-const arr = []
-const data = {}
-let tempArr, tempName
+const arr = [];
+const data = {};
+let tempArr, tempName;
 manufacturersString.split(/[\n\r]/).forEach((item) => {
-  tempArr = item.trim().split(/\t/)
-  tempName = tempArr[0]
+  tempArr = item.trim().split(/\t/);
+  tempName = tempArr[0];
   if (tempName) {
     if (!data[tempName]) {
-      data[tempName] = []
-      arr.push(tempName)
+      data[tempName] = [];
+      arr.push(tempName);
     }
     data[tempName].push({
       text: tempArr[1],
       value: tempArr[1],
-    })
+    });
   }
-})
+});
 
 const manufacturerList = arr.map((item) => {
   return {
     text: fmtJpCharacter(item),
     value: item,
     child: data[item],
-  }
-})
+  };
+});
 
-const CACHE_KEY = 'MANUFACTURE_OPTIONS'
+const CACHE_KEY = 'MANUFACTURE_OPTIONS';
 
 /**
  * get manufacturer list
@@ -906,11 +906,11 @@ const CACHE_KEY = 'MANUFACTURE_OPTIONS'
  */
 function getManufacturerList() {
   if (storage.get(CACHE_KEY)) {
-    return storage.get(CACHE_KEY)
+    return storage.get(CACHE_KEY);
   } else {
-    storage.set(CACHE_KEY, manufacturerList)
-    return manufacturerList
+    storage.set(CACHE_KEY, manufacturerList);
+    return manufacturerList;
   }
 }
 
-export { getManufacturerList }
+export { getManufacturerList };

@@ -39,4 +39,4 @@ export const dashboardMenuItems = [
     text: '管理',
     width: 16,
   },
-]
+];

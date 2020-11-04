@@ -21,4 +21,4 @@ export default {
   shadowGray: 'rgba(44, 44, 44, 0.1)',
   disabledOpacity: '0.5',
   radioChecked: '#1E5199',
-}
+};

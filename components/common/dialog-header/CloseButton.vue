@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import IconPlus from '~/components/common/breadcrumbs/IconPlus'
+import IconPlus from '~/components/common/breadcrumbs/IconPlus';
 export default {
   name: 'CloseButton',
   components: {
     IconPlus,
   },
-}
+};
 </script>
 
 <style lang="scss">

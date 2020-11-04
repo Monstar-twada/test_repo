@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'FgMessage',
-}
+};
 </script>
 
 <style lang="scss">

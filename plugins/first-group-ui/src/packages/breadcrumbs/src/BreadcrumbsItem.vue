@@ -24,15 +24,15 @@ export default {
     },
   },
   mounted() {
-    const link = this.$refs.link
-    link.setAttribute('role', 'link')
+    const link = this.$refs.link;
+    link.setAttribute('role', 'link');
     link.addEventListener('click', (_) => {
-      const { item, $router } = this
-      if (!item.href || !$router) return
-      $router.replace(item.href)
-    })
+      const { item, $router } = this;
+      if (!item.href || !$router) return;
+      $router.replace(item.href);
+    });
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .fg-breadcrumb-item {

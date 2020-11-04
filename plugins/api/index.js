@@ -3,8 +3,8 @@
  * https://github.com/capricorncd
  * Date: 2020-07-20 12:19
  */
-import Axios from 'axios'
-import { getMockData } from './mock-data'
+import Axios from 'axios';
+import { getMockData } from './mock-data';
 
 // https://github.com/axios/axios#request-config
 // Axios.defaults.withCredentials = true
@@ -15,14 +15,14 @@ import { getMockData } from './mock-data'
 
 export class RequestApi {
   constructor(headers = []) {
-    this.headers = headers
+    this.headers = headers;
   }
 
   /**
    * get request headers
    */
   getHeaders() {
-    let temp
+    let temp;
     return this.headers.reduce((prev, key) => {
       /* eslint-disable */
       temp = $nuxt.$ui.getCache(key)

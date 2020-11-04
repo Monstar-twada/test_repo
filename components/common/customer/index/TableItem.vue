@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { customerMixin } from '~/mixins/customer'
+import { customerMixin } from '~/mixins/customer';
 
 export default {
   mixins: [customerMixin],
@@ -102,11 +102,11 @@ export default {
   },
   computed: {
     carItem() {
-      const { car } = this.item
-      return Array.isArray(car) ? car[0] || {} : {}
+      const { car } = this.item;
+      return Array.isArray(car) ? car[0] || {} : {};
     },
   },
-}
+};
 </script>
 
 <style></style>

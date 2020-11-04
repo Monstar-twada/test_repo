@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { isNumberLike } from '../../../libs/index'
+import { isNumberLike } from '../../../libs/index';
 
 export default {
   name: 'FgButton',
@@ -122,58 +122,58 @@ export default {
     whiteTransparent: Boolean,
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     hasIcon() {
-      return this.prefixIcon || this.suffixIcon
+      return this.prefixIcon || this.suffixIcon;
     },
     buttonStyle() {
-      const ret = {}
+      const ret = {};
       if (this.textColor) {
-        ret.color = this.textColor
+        ret.color = this.textColor;
       }
       if (this.bgColor) {
-        ret.background = this.bgColor
+        ret.background = this.bgColor;
       }
       if (this.fontSize) {
-        ret.fontSize = this.fontSize
+        ret.fontSize = this.fontSize;
       }
       if (this.width) {
-        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '')
+        ret.width = this.width + (isNumberLike(this.width) ? 'px' : '');
         if (this.circle) {
-          ret.height = ret.width
+          ret.height = ret.width;
         }
       }
       if (this.justify) {
-        ret.justifyContent = this.justify
+        ret.justifyContent = this.justify;
       }
       // no prefix and suffix
       if (!this.hasIcon) {
-        ret.justifyContent = 'center'
+        ret.justifyContent = 'center';
       }
-      return ret
+      return ret;
     },
     iconArrowRightColor() {
       if (this.type === 'primary') {
-        if (!this.border) return this.$colors.white
+        if (!this.border) return this.$colors.white;
       }
       if (this.whiteTransparent) {
-        return this.$colors.white
+        return this.$colors.white;
       }
-      return this.$colors.primaryActive
+      return this.$colors.primaryActive;
     },
   },
   methods: {
     handleClick(e) {
       // e.stopPropagation()
       if (this.disabled) {
-        return
+        return;
       }
-      this.$emit('click', e)
+      this.$emit('click', e);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

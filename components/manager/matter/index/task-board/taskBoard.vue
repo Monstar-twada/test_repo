@@ -22,8 +22,8 @@
   </div>
 </template>
 <script>
-import ListUsers from './list-user/index'
-import TaskCard from './task-card/index'
+import ListUsers from './list-user/index';
+import TaskCard from './task-card/index';
 export default {
   name: 'TaskBoard',
   components: {
@@ -36,7 +36,7 @@ export default {
       default() {
         return {
           total: 0,
-        }
+        };
       },
     },
   },
@@ -46,7 +46,7 @@ export default {
       listOfTasks: this.boardList,
       showLess: false,
       taskList: this.task,
-    }
+    };
   },
   // computed: {
   //   tasks() {
@@ -54,7 +54,7 @@ export default {
   //   },
   // },
   methods: {
-    loadMore(task, i) {
+    loadMore(task) {
       task.push(
         {
           number: '11111',
@@ -104,11 +104,11 @@ export default {
           assignee: [1, 2, 3],
           status: 1,
         }
-      )
+      );
       // console.log(task.push)
     },
   },
-}
+};
 </script>
 <style lang="scss">
 .matter-index-task-board {

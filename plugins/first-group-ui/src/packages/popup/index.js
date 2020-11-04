@@ -3,10 +3,10 @@
  * https://github.com/capricorncd
  * Date: 2020-08-05 12:00
  */
-import FgPopup from './src/index'
+import FgPopup from './src/index';
 
 FgPopup.install = function (Vue) {
-  Vue.component(FgPopup.name, FgPopup)
-}
+  Vue.component(FgPopup.name, FgPopup);
+};
 
-export default FgPopup
+export default FgPopup;

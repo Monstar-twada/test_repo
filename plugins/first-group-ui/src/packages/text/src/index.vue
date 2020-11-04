@@ -35,21 +35,21 @@ export default {
     style() {
       return {
         height: this.rows * this.lineHeight + this.unit,
-      }
+      };
     },
     innerStyle() {
       const ret = {
         height: this.rows * this.lineHeight + this.unit,
         fontSize: this.fontSize,
         lineHeight: this.lineHeight + this.unit,
-      }
+      };
       if (this.rows > 1) {
-        ret['-webkit-line-clamp'] = this.rows
+        ret['-webkit-line-clamp'] = this.rows;
       }
-      return ret
+      return ret;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -374,21 +374,21 @@
   </div>
 </template>
 <script>
-import SelectCarDialog from './select-car-dialog/index'
-import CarInfoSide from './CarInfoSide'
-import VICDialog from './vehicle-inspection-cert-dialog/index'
-import InsuranceDialog from './insurance-dialog/index'
-import SubTitle from '~/components/common/customer/common/SubTitle.vue'
-import TextContent from '~/components/common/customer/common/TextContent.vue'
-import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import EditReservationDialog from '~/components/common/customer/detail/car-info/edit-reservation-dialog'
-import CarTable from '~/components/common/customer/detail/CarTable'
-import { customerMixin } from '~/mixins/customer'
+import SelectCarDialog from './select-car-dialog/index';
+import CarInfoSide from './CarInfoSide';
+import VICDialog from './vehicle-inspection-cert-dialog/index';
+import InsuranceDialog from './insurance-dialog/index';
+import SubTitle from '~/components/common/customer/common/SubTitle.vue';
+import TextContent from '~/components/common/customer/common/TextContent.vue';
+import ColumnTitle from '~/components/common/customer/common/ColumnTitle';
+import EditReservationDialog from '~/components/common/customer/detail/car-info/edit-reservation-dialog';
+import CarTable from '~/components/common/customer/detail/CarTable';
+import { customerMixin } from '~/mixins/customer';
 
 const CAR_TABLE_QUERY = {
   page: 1,
   limit: 10,
-}
+};
 
 export default {
   components: {
@@ -421,115 +421,117 @@ export default {
       currentCarCode: null,
       vicVisible: false,
       insuranceVisible: false,
-    }
+    };
   },
   computed: {
     carLives() {
-      const classes = this.$ui.getBasicData('car_life')
-      const arr = (this.data.carLifeCodes || []).map((item) => item.carLifeCode)
+      const classes = this.$ui.getBasicData('car_life');
+      const arr = (this.data.carLifeCodes || []).map(
+        (item) => item.carLifeCode
+      );
       return classes.map((item) => {
-        item.selected = arr.includes(item.value)
-        return item
-      })
+        item.selected = arr.includes(item.value);
+        return item;
+      });
     },
     transactionTypes() {
-      const classes = this.$ui.getBasicData('transaction_type')
+      const classes = this.$ui.getBasicData('transaction_type');
       const arr = (this.data.transactionTypes || []).map(
         (item) => item.transactionType
-      )
+      );
       return classes.map((item) => {
-        item.selected = arr.includes(item.value)
-        return item
-      })
+        item.selected = arr.includes(item.value);
+        return item;
+      });
     },
     saleNewOldCarType() {
-      const data = this.$ui.getBasicData('sale_new_old_car_type', true)
-      return data[this.data.saleNewOldCarType]
+      const data = this.$ui.getBasicData('sale_new_old_car_type', true);
+      return data[this.data.saleNewOldCarType];
     },
     companyClassification() {
-      const data = this.$ui.getBasicData('company_classification', true)
-      return data[this.data.companyClassification]
+      const data = this.$ui.getBasicData('company_classification', true);
+      return data[this.data.companyClassification];
     },
     carMileage() {
       // 90,000km (2020/09/07時点)
-      const arr = []
-      const { carMileage, carMileageRegistrationDate } = this.data
+      const arr = [];
+      const { carMileage, carMileageRegistrationDate } = this.data;
       if (carMileage) {
-        arr.push(this.$ui.toCommaNumber(carMileage) + 'km')
+        arr.push(this.$ui.toCommaNumber(carMileage) + 'km');
       }
       if (carMileageRegistrationDate) {
-        arr.push(`(${carMileageRegistrationDate}時点)`)
+        arr.push(`(${carMileageRegistrationDate}時点)`);
       }
-      return arr.join(' ') || '-'
+      return arr.join(' ') || '-';
     },
     tireCreateYear() {
       // 2015年27週目
-      const { tireCreateYear, tireCreateWeek } = this.data
+      const { tireCreateYear, tireCreateWeek } = this.data;
       if (tireCreateYear) {
-        return `${tireCreateYear}年${tireCreateWeek}週目`
+        return `${tireCreateYear}年${tireCreateWeek}週目`;
       }
-      return '-'
+      return '-';
     },
   },
   watch: {
     carQuery: {
       deep: true,
       handler() {
-        this.getCarList()
+        this.getCarList();
       },
     },
     currentCarCode(val) {
-      this.$emit('current-car-code', val)
+      this.$emit('current-car-code', val);
     },
   },
   created() {
     if (this.$route.query.carCode) {
-      this.currentCarCode = this.$route.query.carCode
-      this.getCarInfo()
+      this.currentCarCode = this.$route.query.carCode;
+      this.getCarInfo();
     }
-    this.getCarList()
+    this.getCarList();
   },
   methods: {
     async getCarInfo() {
       if (!this.currentCarCode) {
-        this.data = {}
-        return
+        this.data = {};
+        return;
       }
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}`
-        )
-        this.data = res
+        );
+        this.data = res;
       } catch (err) {
-        console.error(err)
-        this.$alert(err.message)
+        console.error(err);
+        this.$alert(err.message);
       }
     },
     async getCarList() {
-      const { page, limit } = this.carQuery
+      const { page, limit } = this.carQuery;
       const params = {
         limit,
         offset: (page - 1) * limit,
-      }
+      };
       try {
         const res = await this.$api.get(
           `/v1/customers/${this.customerCode}/cars`,
           params
-        )
-        this.carListData = res || {}
-        const carList = this.carListData.results || []
+        );
+        this.carListData = res || {};
+        const carList = this.carListData.results || [];
         if (!this.currentCarCode && carList.length > 0) {
-          this.currentCarCode = carList[0].carCode
-          await this.getCarInfo()
+          this.currentCarCode = carList[0].carCode;
+          await this.getCarInfo();
         }
       } catch (err) {
-        console.error(err)
-        this.$alert(err.message)
+        console.error(err);
+        this.$alert(err.message);
       }
     },
     changeCar(item) {
-      this.currentCarCode = item.carCode
-      this.getCarInfo()
+      this.currentCarCode = item.carCode;
+      this.getCarInfo();
       if (
         this.$route.query.carCode &&
         this.$route.query.carCode !== this.currentCarCode
@@ -539,18 +541,18 @@ export default {
             customerCode: this.customerCode,
             carCode: this.currentCarCode,
           },
-        })
+        });
       }
     },
     goEditCar() {
       if (this.carListData.results && this.carListData.results.length > 0) {
         this.$router.push(
           `/customer/regist/car/edit/?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
-        )
+        );
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

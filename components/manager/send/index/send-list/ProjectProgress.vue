@@ -24,11 +24,11 @@ export default {
     project: {
       type: Array,
       default: () => {
-        return []
+        return [];
       },
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
 .projetc-progress {

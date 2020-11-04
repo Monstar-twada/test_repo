@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import DetailsCard from './DetailsCard'
-import SimpleCard from './SimpleCard'
-import SettingDialogHeader from '~/components/manager/bi/setting-dialog/SettingDialogHeader.vue'
+import DetailsCard from './DetailsCard';
+import SimpleCard from './SimpleCard';
+import SettingDialogHeader from '~/components/manager/bi/setting-dialog/SettingDialogHeader.vue';
 export default {
   name: 'ImportDialog',
   components: {
@@ -37,31 +37,31 @@ export default {
       toggle: false,
       visible: this.value,
       width: '450px',
-    }
+    };
   },
   watch: {
     value(val) {
-      this.visible = val
+      this.visible = val;
     },
     visible(val) {
-      this.$emit('input', val)
+      this.$emit('input', val);
     },
   },
   methods: {
     performAction() {
-      this.toggle = !this.toggle
+      this.toggle = !this.toggle;
     },
     maxWidth() {
       if (this.toggle) {
-        this.width = '950px'
-        return this.width
+        this.width = '950px';
+        return this.width;
       } else {
-        this.width = '450px'
-        return this.width
+        this.width = '450px';
+        return this.width;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

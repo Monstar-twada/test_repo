@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import TextContent from '../../common/TextContent.vue'
+import TextContent from '../../common/TextContent.vue';
 export default {
   components: {
     TextContent,
@@ -60,16 +60,16 @@ export default {
     data: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
   data() {
     return {
       labelWidth: '80px',
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -61,7 +61,7 @@
   </div>
 </template>
 <script>
-import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
+import Breadcrumbs from '~/components/common/breadcrumbs/index.vue';
 export default {
   components: {
     Breadcrumbs,
@@ -73,7 +73,7 @@ export default {
         return {
           lastName: '',
           firstName: '',
-        }
+        };
       },
     },
   },
@@ -97,9 +97,9 @@ export default {
         firstNameKana: 'ミチハル',
         age: 31,
       },
-    }
+    };
   },
-}
+};
 </script>
 <style>
 .form-3 .text-wrapper.text-flex-direction-column .__summary {

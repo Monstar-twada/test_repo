@@ -113,7 +113,7 @@ export const DEF_CUSTOMER_FORM = {
   pointSmoke: 0,
   // 車検年数
   pointInspection: 0,
-}
+};
 
 export const CAR_LIVES_ENUM = {
   // 通勤
@@ -140,7 +140,7 @@ export const CAR_LIVES_ENUM = {
   11: 'useBuissiness',
   // 運搬
   12: 'useTrasfer',
-}
+};
 
 export const SELECTION_POINT_ENUM = {
   // 価格
@@ -167,7 +167,7 @@ export const SELECTION_POINT_ENUM = {
   11: 'pointSmoke',
   // 車検年数
   12: 'pointInspection',
-}
+};
 
 // family
 export const DEF_CUSTOMER_FAMILY = {
@@ -178,4 +178,4 @@ export const DEF_CUSTOMER_FAMILY = {
   birthday: null,
   // 家族顧客コード
   familyCustomerCode: null,
-}
+};

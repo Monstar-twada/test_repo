@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { getManufacturerList } from './maker'
-import { fmtJpCharacter } from '~/assets/js/full-half-width'
+import { getManufacturerList } from './maker';
+import { fmtJpCharacter } from '~/assets/js/full-half-width';
 export default {
   props: {
     span: {
@@ -35,33 +35,33 @@ export default {
     form: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
     },
   },
   data() {
     return {
       makerItems: [...getManufacturerList()],
-    }
+    };
   },
   computed: {
     carModels() {
       const data =
-        this.makerItems.find((item) => item.text === this.form.maker) || {}
-      return data.child || []
+        this.makerItems.find((item) => item.text === this.form.maker) || {};
+      return data.child || [];
     },
   },
   watch: {
     'form.maker'() {
-      this.form.class = ''
+      this.form.class = '';
     },
   },
   methods: {
     customFilter(value, item) {
-      const str = fmtJpCharacter(value)
-      const reg = new RegExp(`(${str})`, 'i')
-      return value ? reg.test(item.text) : true
+      const str = fmtJpCharacter(value);
+      const reg = new RegExp(`(${str})`, 'i');
+      return value ? reg.test(item.text) : true;
     },
   },
-}
+};
 </script>

@@ -6,35 +6,35 @@ export default {
     column: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       },
     },
     row: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       },
     },
   },
 
   render(createElement, { props }) {
-    const data = {}
+    const data = {};
 
     if (props.column.cellClass) {
-      data.class = props.column.cellClass
+      data.class = props.column.cellClass;
     }
 
     if (props.column.template) {
-      return createElement('td', data, props.column.template(props.row.data))
+      return createElement('td', data, props.column.template(props.row.data));
     }
 
-    data.domProps = {}
+    data.domProps = {};
     data.domProps.innerHTML = props.column.formatter(
       props.row.getValue(props.column.show),
       props.row.data
-    )
+    );
 
-    return createElement('td', data)
+    return createElement('td', data);
   },
-}
+};
 </script>
