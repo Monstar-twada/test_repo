@@ -57,7 +57,7 @@
           <fg-image-processor
             accept="*"
             :icon="isPdf ? 'pdf' : 'license-front'"
-            :url="isPdf ? '' : registrationImage"
+            :url="registrationImage"
             :validate="customValidate"
             @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
           ></fg-image-processor>
@@ -679,7 +679,7 @@ export default {
   methods: {
     // checks if the file is PDF
     checkFile(link) {
-      this.isPdf = !!link.indexOf('.pdf') > 0
+      this.isPdf = !!(link.indexOf('.pdf') > 0)
     },
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
