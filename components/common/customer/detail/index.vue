@@ -27,7 +27,11 @@
       </template>
     </Breadcrumbs>
 
-    <CustomerInfo class="customer-info" :data="customerData" />
+    <CustomerInfo
+      class="customer-info"
+      :data="customerData"
+      :customer-code="query.customerCode"
+    />
     <CarInfo
       :customer-code="query.customerCode"
       @current-car-code="(code) => (currentCarCode = code)"

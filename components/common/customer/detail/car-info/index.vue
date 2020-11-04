@@ -421,6 +421,7 @@ export default {
       currentCarCode: null,
       vicVisible: false,
       insuranceVisible: false,
+      carPhoto: {},
     }
   },
   computed: {
@@ -486,10 +487,22 @@ export default {
     if (this.$route.query.carCode) {
       this.currentCarCode = this.$route.query.carCode
       this.getCarInfo()
+      this.getCarPhoto()
     }
     this.getCarList()
   },
   methods: {
+    async getCarPhoto() {
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
+        )
+        console.log(res)
+      } catch (err) {
+        this.$alert(err.message)
+        console.error(err)
+      }
+    },
     async getCarInfo() {
       if (!this.currentCarCode) {
         this.data = {}
