@@ -204,7 +204,12 @@ export default {
     },
   },
   created() {
-    this.getFacePhoto()
+    this.$api
+      .get(`/v1/customers/${this.customerCode}/facePhoto`)
+      .then((res) => {
+        this.customerPhoto = res.url
+      })
+      .catch(console.error)
   },
   methods: {
     /**
@@ -218,18 +223,6 @@ export default {
       this.$router.push(
         '/customer/regist/edit/?customerCode=' + this.data.customerCode
       )
-    },
-    async getFacePhoto() {
-      try {
-        const res = await this.$api.get(
-          `/v1/customers/${this.customerCode}/facePhoto`
-        )
-        this.customerPhoto = res.url
-        console.log(this.customerPhoto)
-      } catch (err) {
-        this.$alert(err.message)
-        console.error(err)
-      }
     },
   },
 }

@@ -645,6 +645,7 @@ export default {
       form: {},
       errors: {},
       registrationImage: '',
+      carPhoto: '',
       isSubmitting: false,
       isPdf: false,
     }
@@ -670,6 +671,13 @@ export default {
       .then((res) => {
         this.registrationImage = res.url
         this.checkFile(res.url)
+      })
+      .catch(console.error)
+    this.$api
+      .get(`/v1/customers/${customerCode}/cars/${carCode}/carPhoto`)
+      .then((res) => {
+        this.carPhoto = res.url
+        console.log(res)
       })
       .catch(console.error)
   },
