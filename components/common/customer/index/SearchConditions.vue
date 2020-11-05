@@ -199,6 +199,11 @@ export default {
         'nearInspection',
         'sixMonthContact',
       ])
+      // for (const item in form) {
+      //   if (form[item] === 0) {
+      //     form[item] = null
+      //   }
+      // }
       this.$emit('change', form)
     },
   },
