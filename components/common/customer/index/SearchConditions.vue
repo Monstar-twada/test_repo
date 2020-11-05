@@ -201,6 +201,12 @@ export default {
         'nearInspection',
         'sixMonthContact',
       ])
+      this.$ui.allTypeToNull(form, [
+        'purchaseIntention',
+        'transferTarget',
+        'nearInspection',
+        'sixMonthContact',
+      ])
       this.$emit('change', form)
     },
   },

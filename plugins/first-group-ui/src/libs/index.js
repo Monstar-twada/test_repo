@@ -29,6 +29,7 @@ import { slice } from './array'
 import { getParentComponent } from './component'
 import { windowDispatcher } from './events'
 import {
+  allTypeToNull,
   booleanToNumber,
   formatDate,
   toDate,
@@ -52,6 +53,7 @@ function init(project = 'fg') {
 }
 
 export {
+  allTypeToNull,
   booleanToNumber,
   clearBasicData,
   clearCache,
