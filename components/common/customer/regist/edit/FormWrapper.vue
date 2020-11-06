@@ -664,16 +664,14 @@ export default {
         }
       })
       // car life
-      if (Array.isArray(res.carLives)) {
-        this.selectedCarLives = res.carLives.map((item) => item.carLife)
+      if (Array.isArray(res.carLifeCodes)) {
+        this.selectedCarLives = res.carLifeCodes
       } else {
         this.selectedCarLives = []
       }
       // selection points
       if (Array.isArray(res.selectionPoints)) {
-        this.selectedSelectionPoints = res.selectionPoints.map(
-          (item) => item.selectionPoints
-        )
+        this.selectedSelectionPoints = res.selectionPoints
       } else {
         this.selectedSelectionPoints = []
       }
