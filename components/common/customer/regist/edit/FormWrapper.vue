@@ -496,10 +496,9 @@ export default {
       // submit
       const customer = { ...form }
       const data = { customer }
-      console.log('this.updateCarLifeCodes', this.updateCarLifeCodes)
       try {
         await this.$api.put(`/v1/customers/${this.query.customerCode}`, data)
-        if (this.updateCarLifeCodes.length > 0) {
+        if (this.updateCarLifeCodes !== this.selectedCarLives) {
           await this.$api
             .put(`/v1/customers/${this.query.customerCode}/carLife`, {
               carLifeCodes: this.updateCarLifeCodes,
@@ -508,7 +507,7 @@ export default {
               this.updateCarLifeCodes = []
             })
         }
-        if (this.updateSelectionPoints.length > 0) {
+        if (this.updateSelectionPoints !== this.selectedSelectionPoints) {
           await this.$api
             .put(`/v1/customers/${this.query.customerCode}/selectionPoint`, {
               selectionPoints: this.updateSelectionPoints,
