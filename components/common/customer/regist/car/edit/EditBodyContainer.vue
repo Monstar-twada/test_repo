@@ -99,7 +99,7 @@
             icon="car"
             :validate="customValidate"
             url=""
-            @change="(res) => filerChange(res, 'carPhoto')"
+            @change="(res) => filerChange(res, 'tmpCarPhotoCode')"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="ナンバー">

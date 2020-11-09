@@ -345,7 +345,7 @@
               >編集</fg-button
             >
           </div>
-          <CarInfoSide :data="data" />
+          <CarInfoSide :data="carPhoto" />
         </fg-col>
       </fg-row>
     </div>
@@ -487,26 +487,23 @@ export default {
     if (this.$route.query.carCode) {
       this.currentCarCode = this.$route.query.carCode
       this.getCarInfo()
-      this.getCarPhoto()
     }
     this.getCarList()
   },
   methods: {
-    async getCarPhoto() {
-      try {
-        const res = await this.$api.get(
-          `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
-        )
-        console.log(res)
-      } catch (err) {
-        this.$alert(err.message)
-        console.error(err)
-      }
-    },
     async getCarInfo() {
       if (!this.currentCarCode) {
         this.data = {}
         return
+      }
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
+        )
+        this.carPhoto = res
+      } catch (err) {
+        this.$alert(err.message)
+        console.error(err)
       }
       try {
         const res = await this.$api.get(

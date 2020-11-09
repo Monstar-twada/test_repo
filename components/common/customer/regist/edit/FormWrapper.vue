@@ -14,7 +14,7 @@
             :options="{ width: 720, height: 720 }"
             :url="facePhoto"
             :validate="avatarValidator"
-            @change="(res) => fileChange(res, 'facePhoto')"
+            @change="(res) => fileChange(res, 'tmpFacePhoto')"
           ></fg-image-processor>
         </fg-form-item>
 
