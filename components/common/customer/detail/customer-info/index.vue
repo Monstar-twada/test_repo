@@ -210,12 +210,6 @@ export default {
         this.customerPhoto = res.url
       })
       .catch(console.error)
-    this.$api
-      .get(`/v1/customers/${this.customerCode}/licenseImage`)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch(console.error)
   },
   methods: {
     /**
