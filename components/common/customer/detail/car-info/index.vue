@@ -502,7 +502,6 @@ export default {
         )
         this.carPhoto = res
       } catch (err) {
-        this.$alert(err.message)
         console.error(err)
       }
       try {

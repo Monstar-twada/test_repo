@@ -1,13 +1,7 @@
 <template>
   <div class="customer-car-info-right-side-wrapper mr20">
     <div class="car-photos-wrapper">
-      <fg-image
-        v-if="data"
-        view-mode="fill"
-        width="100%"
-        height="100%"
-        :src="data.url"
-      />
+      <fg-image v-if="data.url" height="210" width="100%" :src="data.url" />
     </div>
     <h3 class="mt30">
       マッチング情報

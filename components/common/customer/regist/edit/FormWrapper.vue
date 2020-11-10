@@ -11,6 +11,7 @@
           <fg-image-processor
             width="80"
             height="80"
+            view-mode="crop"
             :options="{ width: 720, height: 720 }"
             :url="facePhoto"
             :validate="avatarValidator"

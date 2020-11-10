@@ -98,7 +98,7 @@
           <fg-image-processor
             icon="car"
             :validate="customValidate"
-            url=""
+            :url="carPhoto"
             @change="(res) => filerChange(res, 'tmpCarPhotoCode')"
           ></fg-image-processor>
         </fg-form-item>
@@ -677,7 +677,6 @@ export default {
       .get(`/v1/customers/${customerCode}/cars/${carCode}/carPhoto`)
       .then((res) => {
         this.carPhoto = res.url
-        console.log(res)
       })
       .catch(console.error)
   },
