@@ -8,7 +8,15 @@
       </div>
     </div>
     <fg-form ref="form" label-width="110px">
-      <fg-form-item label="基本情報" class="__long"></fg-form-item>
+      <fg-form-item label="基本情報" class="__long">
+        <span class="edit-button">
+          <nuxt-link to="/account/edit/">
+            <fg-button size="mini" width="63" border prefix-icon="edit"
+              >編集</fg-button
+            >
+          </nuxt-link>
+        </span>
+      </fg-form-item>
       <fg-form-item label="所属店舗" class="__short">
         <span>{{ staff.companyName }}</span>
       </fg-form-item>
@@ -18,7 +26,11 @@
         ></span>
       </fg-form-item>
       <fg-form-item label="氏名" class="__short">
-        <span>{{ staff.lastName }}{{ staff.firstName }}</span>
+        <span
+          >{{ staff.lastName }}&nbsp;&nbsp;{{ staff.firstName }}（{{
+            staff.lastNameKana
+          }}&nbsp;&nbsp;{{ staff.firstNameKana }}））</span
+        >
       </fg-form-item>
       <fg-form-item label="cars Manage ID" class="__short">
         <span>{{ staff.staffCode }}</span>
@@ -37,11 +49,11 @@
       </fg-form-item>
       <fg-form-item label="資格" class="__short">
         <fg-tag
-          v-for="(item, index) in staff.qualification"
+          v-for="(item, index) in qualificationList"
           :key="index"
           :value="true"
         >
-          {{ item.text }}
+          {{ item.qualificationName }}
         </fg-tag>
       </fg-form-item>
       <fg-form-item label="電話番号" class="__short">
@@ -49,9 +61,23 @@
       </fg-form-item>
       <fg-form-item label="メールアドレス" class="__long">
         <span>{{ staff.email }}</span>
+        <!-- <span class="edit-button">
+          <nuxt-link to="">
+            <fg-button size="mini" width="63" border prefix-icon="edit"
+              >編集</fg-button
+            >
+          </nuxt-link>
+        </span> -->
       </fg-form-item>
       <fg-form-item label="パスワード" class="__long">
         <span>*********</span>
+        <!-- <span class="edit-button">
+          <nuxt-link to="">
+            <fg-button size="mini" width="63" border prefix-icon="edit"
+              >編集</fg-button
+            >
+          </nuxt-link>
+        </span> -->
       </fg-form-item>
     </fg-form>
   </div>
@@ -67,7 +93,8 @@ export default {
   data() {
     return {
       staff: {},
-      occupationSelected: [],
+      occupationCodes: [],
+      qualificationList: [],
     }
   },
   computed: {
@@ -76,7 +103,7 @@ export default {
       return this.$ui.getBasicData('service_code').map((item) => {
         return {
           ...item,
-          checked: this.occupationSelected.includes(item.value),
+          checked: this.occupationCodes.includes(item.value),
         }
       })
     },
@@ -85,10 +112,9 @@ export default {
     },
   },
   created() {
-    this.getStaffProfile().then(() => {
-      this.getStaffOccupation()
-      this.getStaffQualification()
-    })
+    this.getStaffProfile()
+    this.getStaffOccupation()
+    this.getStaffQualification()
   },
   methods: {
     async getStaffProfile() {
@@ -105,7 +131,7 @@ export default {
         const res = await this.$api.get(
           `/v1/account/${this.getUserCode}/occupation`
         )
-        this.occupationSelected = res.occupationCodes || []
+        this.occupationCodes = res.occupationCodes || []
       } catch (err) {
         console.error('err', err)
       }
@@ -116,7 +142,7 @@ export default {
         const res = await this.$api.get(
           `/v1/account/${this.getUserCode}/qualification`
         )
-        this.staff.qualification = res.quarification || []
+        this.qualificationList = res.qualification || []
       } catch (err) {
         console.error('err', err)
       }
@@ -195,6 +221,9 @@ export default {
     border-top: 1px $--color-background solid;
     padding: 15px 20px;
     margin: 0;
+    .edit-button {
+      float: right;
+    }
   }
   .fg-form-item.__long:nth-child(1) {
     padding: 15px 20px 0;

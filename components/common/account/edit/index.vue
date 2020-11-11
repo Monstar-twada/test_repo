@@ -45,7 +45,7 @@
           <p>{{ staff.staffCode }}</p>
         </fg-form-item>
         <fg-form-item label="権限">
-          <p>{{ carsRole[staff.role] }}</p>
+          <p>{{ carsRole.text }}</p>
         </fg-form-item>
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
@@ -60,7 +60,13 @@
         </fg-form-item>
         <fg-form-item label="資格">
           <template v-for="(item, i) in qualificationList">
-            <fg-row :key="i" gutter="20" type="flex" class="mb10">
+            <fg-row
+              v-if="item.status !== 'delete'"
+              :key="i"
+              gutter="20"
+              type="flex"
+              class="mb10"
+            >
               <fg-col span="21">
                 <fg-input
                   v-model="item.qualificationName"
@@ -132,6 +138,7 @@ import Header from '~/components/common/account/common/Header'
 import MarkIcon from '~/components/common/mark-icon/index'
 const DEF_QUALIFICATION = {
   qualificationName: '',
+  status: 'add',
 }
 export default {
   components: {
@@ -159,17 +166,19 @@ export default {
       })
     },
     carsRole() {
-      return this.$ui.getBasicData('cars_role')
+      const role = this.$ui.getBasicData('cars_role').filter((item) => {
+        return item.value === this.staff.role
+      })
+      return role[0] || {}
     },
   },
   created() {
-    this.getStaffProfile().then(() => {
-      Promise.all([
-        this.getStaffOccupation(),
-        this.getStaffQualification(),
-      ]).then(() => {
-        this.initList()
-      })
+    Promise.all([
+      this.getStaffProfile(),
+      this.getStaffOccupation(),
+      this.getStaffQualification(),
+    ]).then(() => {
+      this.initList()
     })
   },
   methods: {
@@ -187,7 +196,7 @@ export default {
         const res = await this.$api.get(
           `/v1/account/${this.getUserCode}/occupation`
         )
-        this.occupationSelected = Array.isArray(res.carLifeCodes)
+        this.occupationSelected = Array.isArray(res.occupationCodes)
           ? res.occupationCodes
           : []
       } catch (err) {
@@ -201,7 +210,7 @@ export default {
           `/v1/account/${this.getUserCode}/qualification`
         )
 
-        this.qualification = res.qualificationName || {}
+        this.qualification = res.qualification || []
       } catch (err) {
         console.error('err', err)
       }
@@ -223,6 +232,15 @@ export default {
     },
     initList() {
       const val = this.qualification
+        .map((item) => {
+          return {
+            ...item,
+            status: 'update',
+          }
+        })
+        .filter((item) => {
+          return item.status !== 'delete'
+        })
       this.qualificationList =
         Array.isArray(val) && val.length > 0
           ? [...val]
@@ -240,16 +258,23 @@ export default {
     },
     delItem(index) {
       // 資格を削除
-      if (this.qualificationList[index].id) {
-        const deletePromise = this.$api.delete('url')
-        this.promises.push(deletePromise)
+      const id = this.qualificationList[index].id
+      if (id) {
+        // this.promises.push(
+        //   await this.$api.delete(
+        //     `/v1/account/${this.getUserCode}/qualification/${id}`
+        //   )
+        // )
+        this.qualificationList[index].status = 'delete'
+      } else {
+        this.qualificationList.splice(index, 1)
       }
-      this.qualificationList.splice(index, 1)
     },
 
     // 変更データ更新
     async saveChange() {
       this.updateStaffQualification()
+      this.updateStaffOccupation()
       const {
         id,
         companyCode,
@@ -260,11 +285,8 @@ export default {
         ...params
       } = this.staff
       await this.$api
-        .put(`/v1/customer/${this.getUserCode}`, { account: { ...params } })
-        .then((res) => {
-          this.updateStaffOccupation()
-          console.log('res', res)
-        })
+        .put(`/v1/account/${this.getUserCode}`, { account: { ...params } })
+        .then((res) => {})
         .catch((err) => {
           console.error(err)
         })
@@ -272,14 +294,17 @@ export default {
 
     // 職種データ更新
     async updateStaffOccupation() {
+      const selectedOccupation = []
+      this.serviceContent.forEach((item) => {
+        if (item.checked) {
+          selectedOccupation.push(item.value)
+        }
+      })
       await this.$api
-        .put(
-          `/v1/customer/${this.getUserCode}//v1/account/{staffCode}/occupation`,
-          { account: { occupationCodes: [] } }
-        )
-        .then((res) => {
-          console.log('res', res)
+        .put(`/v1/account/${this.getUserCode}/occupation`, {
+          occupationCodes: selectedOccupation,
         })
+        .then((res) => {})
         .catch((err) => {
           console.error(err)
         })
@@ -287,9 +312,8 @@ export default {
 
     // 資格データ更新
     async updateStaffQualification() {
-      console.log('this.qualificationList', this.qualificationList)
       this.qualificationList.forEach((item) => {
-        if (item.id) {
+        if (item.status === 'update' && item.qualificationName !== '') {
           this.promises.push(
             this.$api.put(
               `/v1/account/${this.getUserCode}/qualification/${item.id}`,
@@ -298,17 +322,23 @@ export default {
               }
             )
           )
-        } else {
+        } else if (item.status === 'add' && item.qualificationName !== '') {
           this.promises.push(
             this.$api.post(`/v1/account/${this.getUserCode}/qualification/`, {
               qualificationName: item.qualificationName,
             })
           )
+        } else if (item.status === 'delete') {
+          this.promises.push(
+            this.$api.delete(
+              `/v1/account/${this.getUserCode}/qualification/${item.id}`
+            )
+          )
         }
       })
-
-      await Promise.all(this.promise).then((res) => {
-        console.log(res)
+      console.log('promise', this.promises)
+      await Promise.all(this.promises).then((res) => {
+        this.promises = []
       })
     },
   },
