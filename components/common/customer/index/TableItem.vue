@@ -39,7 +39,7 @@
     <td>{{ carItem | fmtCarNumber }}</td>
     <td>{{ carItem.registrationEndDate | fmtDate }}</td>
     <td>{{ carItem.registrationFirstDate | fmtDate }}</td>
-    <td>{{ carItem.sellingDatetime | fmtDate }}</td>
+    <td>{{ item.sellingDatetime | fmtDate }}</td>
     <td>
       <div style="text-align: center">
         <fg-tag
@@ -75,7 +75,7 @@
           >車検</fg-tag
         >
         <fg-tag
-          :class="{ hide: carItem.sixMonthContact !== '1' }"
+          :class="{ hide: item.sixMonthContact !== '1' }"
           color="#fff"
           size="small"
           round
