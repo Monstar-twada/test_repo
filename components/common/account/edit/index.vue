@@ -11,7 +11,7 @@
             width="80px"
             height="80px"
             :options="{ width: 720, height: 720 }"
-            url
+            :url="staffImage"
             @change="(res) => avatarChange(res, 'staffPhoto')"
           ></fg-image-processor>
         </fg-form-item>
@@ -148,7 +148,7 @@ export default {
   data() {
     return {
       staff: {},
-      staffCode: '',
+      staffImage: null,
       qualification: [],
       qualificationList: [],
       occupationSelected: [],
@@ -186,6 +186,9 @@ export default {
       try {
         const res = await this.$api.get(`/v1/account/${this.getUserCode}`)
         this.staff = res || {}
+        if (res && res.staffPhoto) {
+          this.getStaffImage()
+        }
       } catch (err) {
         console.error('err', err)
       }
@@ -216,15 +219,28 @@ export default {
       }
     },
 
+    // Staff 写真
+    async getStaffImage() {
+      try {
+        const res = await this.$api.get(
+          `/v1/staff/${this.getUserCode}/staffPhoto`
+        )
+        this.staffImage = res.url || ''
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
+
     avatarChange(res, type) {
+      console.log('res-data', res)
       if (!res.data) {
-        this.deleteFile(type)
+        // this.deleteFile(type)
       }
       this.$api
-        .upload(res)
+        .upload(res, { imageType: '1' })
         .then((data) => {
-          this.deleteFile(type)
-          this.form[type] = data.id
+          // this.deleteFile(type)
+          this.staff.tmpStaffPhoto = data.id
         })
         .catch((err) => {
           this.$alert(err.message)
@@ -251,7 +267,12 @@ export default {
             ]
     },
     addItem() {
-      if (this.qualificationList.length >= 3) return null
+      if (
+        this.qualificationList.filter((item) => {
+          return item.status !== 'delete'
+        }).length >= 3
+      )
+        return null
       this.qualificationList.push({
         ...DEF_QUALIFICATION,
       })
@@ -260,11 +281,6 @@ export default {
       // 資格を削除
       const id = this.qualificationList[index].id
       if (id) {
-        // this.promises.push(
-        //   await this.$api.delete(
-        //     `/v1/account/${this.getUserCode}/qualification/${id}`
-        //   )
-        // )
         this.qualificationList[index].status = 'delete'
       } else {
         this.qualificationList.splice(index, 1)
@@ -282,6 +298,7 @@ export default {
         companyName,
         role,
         email,
+        staffPhoto,
         ...params
       } = this.staff
       await this.$api
@@ -336,7 +353,6 @@ export default {
           )
         }
       })
-      console.log('promise', this.promises)
       await Promise.all(this.promises).then((res) => {
         this.promises = []
       })

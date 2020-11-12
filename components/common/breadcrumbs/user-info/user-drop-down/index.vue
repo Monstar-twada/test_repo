@@ -22,7 +22,7 @@
       </fg-form-item>
       <fg-form-item label="写真" class="__short">
         <span
-          ><fg-image width="60" height="60" :src="staff.staffImage"></fg-image
+          ><fg-image width="60" height="60" :src="staffImage"></fg-image
         ></span>
       </fg-form-item>
       <fg-form-item label="氏名" class="__short">
@@ -93,6 +93,7 @@ export default {
   data() {
     return {
       staff: {},
+      staffImage: {},
       occupationCodes: [],
       qualificationList: [],
     }
@@ -121,6 +122,9 @@ export default {
       try {
         const res = await this.$api.get(`/v1/account/${this.getUserCode}`)
         this.staff = res || {}
+        if (res && res.staffPhoto) {
+          this.getStaffImage()
+        }
       } catch (err) {
         console.error('err', err)
       }
@@ -147,13 +151,13 @@ export default {
         console.error('err', err)
       }
     },
-    // Staff Image
+    // Staff 写真
     async getStaffImage() {
       try {
         const res = await this.$api.get(
           `/v1/staff/${this.getUserCode}/staffPhoto`
         )
-        this.staff.staffImage = res.url || ''
+        this.staffImage = res.url || ''
       } catch (err) {
         console.error('err', err)
       }
