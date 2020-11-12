@@ -154,9 +154,7 @@ export default {
   computed: {
     carLives() {
       const classes = this.$ui.getBasicData('car_life')
-      const selectedItems = (this.data.carLives || []).map((item) => {
-        return item.carLife
-      })
+      const selectedItems = this.data.carLifeCodes || []
       return classes.map((item) => {
         return {
           ...item,
@@ -166,9 +164,7 @@ export default {
     },
     selectionPoints() {
       const classes = this.$ui.getBasicData('selection_points')
-      const selectedItems = (this.data.selectionPoints || []).map((item) => {
-        return item.selectionPoints
-      })
+      const selectedItems = this.data.selectionPoints || []
       return classes.map((item) => {
         return {
           ...item,

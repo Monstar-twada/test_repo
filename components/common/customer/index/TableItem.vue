@@ -39,11 +39,11 @@
     <td>{{ carItem | fmtCarNumber }}</td>
     <td>{{ carItem.registrationEndDate | fmtDate }}</td>
     <td>{{ carItem.registrationFirstDate | fmtDate }}</td>
-    <td>{{ carItem.sellingDatetime | fmtDate }}</td>
+    <td>{{ item.sellingDatetime | fmtDate }}</td>
     <td>
       <div style="text-align: center">
         <fg-tag
-          :class="{ hide: carItem.purchaseIntention === '0' }"
+          :class="{ hide: carItem.purchaseIntention !== '1' }"
           color="#fff"
           size="small"
           round
@@ -53,7 +53,7 @@
           >買換</fg-tag
         >
         <fg-tag
-          :class="{ hide: carItem.nearTransfer === '0' }"
+          :class="{ hide: carItem.transferTarget !== '1' }"
           color="#fff"
           size="small"
           round
@@ -65,7 +65,7 @@
       </div>
       <div style="text-align: center">
         <fg-tag
-          :class="{ hide: carItem.nearRegistration === '0' }"
+          :class="{ hide: carItem.nearInspection !== '1' }"
           color="#fff"
           size="small"
           round
@@ -75,7 +75,7 @@
           >車検</fg-tag
         >
         <fg-tag
-          :class="{ hide: carItem.activityReportDatetime === '0' }"
+          :class="{ hide: item.sixMonthContact !== '1' }"
           color="#fff"
           size="small"
           round

@@ -4,7 +4,7 @@
  * Date: 2020-09-15 12:39
  */
 import ZxCalendar from 'zx-calendar'
-import { isBoolean, isArray, isString } from './check'
+import { isBoolean, isArray, isString, isUndefined } from './check'
 
 /**
  * to number
@@ -104,6 +104,27 @@ export function booleanToNumber(o, props) {
   Object.keys(o).forEach((key) => {
     if (props.includes(key) && isBoolean(o[key])) {
       o[key] = +o[key]
+    }
+  })
+}
+
+/**
+ * all type to null
+ * @param o
+ * @param props
+ * @returns null
+ */
+export function allTypeToNull(o, props) {
+  if (isUndefined(o) || o === '' || o === '0' || o === 0) return null
+  if (!isArray(props)) {
+    props = [props]
+  }
+  Object.keys(o).forEach((key) => {
+    if (
+      props.includes(key) &&
+      (o[key] === '' || o[key] === '0' || o[key] === 0 || isUndefined(o[key]))
+    ) {
+      o[key] = null
     }
   })
 }

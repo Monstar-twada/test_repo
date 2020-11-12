@@ -376,6 +376,8 @@ export default {
       strLength: {},
       licenseImageFront: '',
       licenseImageBack: '',
+      updateCarLifeCodes: [],
+      updateSelectionPoints: [],
     }
   },
   computed: {
@@ -452,12 +454,18 @@ export default {
         family: this.family,
       }
       // car lives
+      this.updateCarLifeCodes = []
       this.carLives.forEach((item) => {
-        form[item.field] = +item.checked
+        if (item.checked) {
+          this.updateCarLifeCodes.push(item.value)
+        }
       })
       // selection points
+      this.updateSelectionPoints = []
       this.selectionPoints.forEach((item) => {
-        form[item.field] = +item.checked
+        if (item.checked) {
+          this.updateSelectionPoints.push(item.value)
+        }
       })
       // if the form in family is empty change to null
       for (const property in form) {
@@ -490,6 +498,24 @@ export default {
       const data = { customer }
       try {
         await this.$api.put(`/v1/customers/${this.query.customerCode}`, data)
+        if (this.updateCarLifeCodes !== this.selectedCarLives) {
+          await this.$api
+            .put(`/v1/customers/${this.query.customerCode}/carLife`, {
+              carLifeCodes: this.updateCarLifeCodes,
+            })
+            .then(() => {
+              this.updateCarLifeCodes = []
+            })
+        }
+        if (this.updateSelectionPoints !== this.selectedSelectionPoints) {
+          await this.$api
+            .put(`/v1/customers/${this.query.customerCode}/selectionPoint`, {
+              selectionPoints: this.updateSelectionPoints,
+            })
+            .then(() => {
+              this.updateSelectionPoints = []
+            })
+        }
         // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
         this.handleBack()
       } catch (err) {
@@ -683,16 +709,14 @@ export default {
         }
       })
       // car life
-      if (Array.isArray(res.carLives)) {
-        this.selectedCarLives = res.carLives.map((item) => item.carLife)
+      if (Array.isArray(res.carLifeCodes)) {
+        this.selectedCarLives = res.carLifeCodes
       } else {
         this.selectedCarLives = []
       }
       // selection points
       if (Array.isArray(res.selectionPoints)) {
-        this.selectedSelectionPoints = res.selectionPoints.map(
-          (item) => item.selectionPoints
-        )
+        this.selectedSelectionPoints = res.selectionPoints
       } else {
         this.selectedSelectionPoints = []
       }
