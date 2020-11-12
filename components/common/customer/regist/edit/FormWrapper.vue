@@ -11,10 +11,11 @@
           <fg-image-processor
             width="80"
             height="80"
+            view-mode="crop"
             :options="{ width: 720, height: 720 }"
             :url="facePhoto"
             :validate="avatarValidator"
-            @change="(res) => fileChange(res, 'facePhoto')"
+            @change="(res) => fileChange(res, 'tmpFacePhoto', 4)"
           ></fg-image-processor>
         </fg-form-item>
 
@@ -210,17 +211,17 @@
         <fg-form-item label="免許証">
           <fg-image-processor
             accept="*"
-            :url="licenseImages.frontUrl"
+            :url="licenseImageFront.url"
             icon="license-front"
             :validate="licenseValidator"
-            @change="(res) => fileChange(res, 'licenseImageFront')"
+            @change="(res) => fileChange(res, 'tmpLicenseImageFront', 6)"
           ></fg-image-processor>
           <fg-image-processor
             accept="*"
-            :url="licenseImages.backUrl"
+            :url="licenseImageBack.url"
             icon="license-back"
             :validate="licenseValidator"
-            @change="(res) => fileChange(res, 'licenseImageBack')"
+            @change="(res) => fileChange(res, 'tmpLicenseImageBack', 7)"
           ></fg-image-processor>
         </fg-form-item>
 
@@ -372,8 +373,11 @@ export default {
       family: [],
       isSubmitting: false,
       facePhoto: '',
-      licenseImages: {},
       strLength: {},
+      licenseImageFront: '',
+      licenseImageBack: '',
+      updateCarLifeCodes: [],
+      updateSelectionPoints: [],
     }
   },
   computed: {
@@ -407,8 +411,6 @@ export default {
   },
   created() {
     this.getDetail()
-    this.getFacePhoto()
-    this.getLicenseImage()
   },
   methods: {
     formChange() {
@@ -452,12 +454,18 @@ export default {
         family: this.family,
       }
       // car lives
+      this.updateCarLifeCodes = []
       this.carLives.forEach((item) => {
-        form[item.field] = +item.checked
+        if (item.checked) {
+          this.updateCarLifeCodes.push(item.value)
+        }
       })
       // selection points
+      this.updateSelectionPoints = []
       this.selectionPoints.forEach((item) => {
-        form[item.field] = +item.checked
+        if (item.checked) {
+          this.updateSelectionPoints.push(item.value)
+        }
       })
       // if the form in family is empty change to null
       for (const property in form) {
@@ -490,6 +498,24 @@ export default {
       const data = { customer }
       try {
         await this.$api.put(`/v1/customers/${this.query.customerCode}`, data)
+        if (this.updateCarLifeCodes !== this.selectedCarLives) {
+          await this.$api
+            .put(`/v1/customers/${this.query.customerCode}/carLife`, {
+              carLifeCodes: this.updateCarLifeCodes,
+            })
+            .then(() => {
+              this.updateCarLifeCodes = []
+            })
+        }
+        if (this.updateSelectionPoints !== this.selectedSelectionPoints) {
+          await this.$api
+            .put(`/v1/customers/${this.query.customerCode}/selectionPoint`, {
+              selectionPoints: this.updateSelectionPoints,
+            })
+            .then(() => {
+              this.updateSelectionPoints = []
+            })
+        }
         // await this.$alert(`顧客編集成功しました！`, { type: 'success' })
         this.handleBack()
       } catch (err) {
@@ -563,6 +589,15 @@ export default {
         const res = await this.$api.get(
           `/v1/customers/${this.query.customerCode}`
         )
+        if (res.facePhoto !== null) {
+          this.getFacePhoto()
+        }
+        if (res.licenseImageBack !== null) {
+          this.getLicenseImageBack()
+        }
+        if (res.licenseImageFront !== null) {
+          this.getLicenseImageFront()
+        }
         this.resetForm(res)
       } catch (err) {
         this.$alert(err.message)
@@ -579,23 +614,33 @@ export default {
         console.error(err)
       }
     },
-    async getLicenseImage() {
+    async getLicenseImageFront() {
       try {
         const res = await this.$api.get(
-          `/v1/customers/${this.query.customerCode}/licenseImage`
+          `/v1/customers/${this.query.customerCode}/licenseImage/front`
         )
-        this.licenseImages = res
+        this.licenseImageFront = res
       } catch (err) {
         console.error(err)
       }
     },
-    fileChange(res, type) {
+    async getLicenseImageBack() {
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}/licenseImage/back`
+        )
+        this.licenseImageBack = res
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    fileChange(res, type, imageType) {
       if (!res.data) {
         this.deleteFile(type)
       }
 
       this.$api
-        .upload(res)
+        .upload(res, { imageType })
         .then((data) => {
           this.deleteFile(type)
           this.form[type] = data.id
@@ -664,16 +709,14 @@ export default {
         }
       })
       // car life
-      if (Array.isArray(res.carLives)) {
-        this.selectedCarLives = res.carLives.map((item) => item.carLife)
+      if (Array.isArray(res.carLifeCodes)) {
+        this.selectedCarLives = res.carLifeCodes
       } else {
         this.selectedCarLives = []
       }
       // selection points
       if (Array.isArray(res.selectionPoints)) {
-        this.selectedSelectionPoints = res.selectionPoints.map(
-          (item) => item.selectionPoints
-        )
+        this.selectedSelectionPoints = res.selectionPoints
       } else {
         this.selectedSelectionPoints = []
       }
