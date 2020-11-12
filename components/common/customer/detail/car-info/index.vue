@@ -498,17 +498,19 @@ export default {
       }
       try {
         const res = await this.$api.get(
-          `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
-        )
-        this.carPhoto = res
-      } catch (err) {
-        console.error(err)
-      }
-      try {
-        const res = await this.$api.get(
           `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}`
         )
         this.data = res
+        if (res.imageFileCode !== null) {
+          try {
+            const res = await this.$api.get(
+              `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
+            )
+            this.carPhoto = res
+          } catch (err) {
+            console.error(err)
+          }
+        }
       } catch (err) {
         console.error(err)
         this.$alert(err.message)

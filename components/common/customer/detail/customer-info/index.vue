@@ -203,13 +203,15 @@ export default {
       return [classes[licenseColor], licenseNumber].join(' ')
     },
   },
-  created() {
-    this.$api
-      .get(`/v1/customers/${this.customerCode}/facePhoto`)
-      .then((res) => {
-        this.customerPhoto = res.url
-      })
-      .catch(console.error)
+  mounted() {
+    if (this.data.facePhoto !== null) {
+      this.$api
+        .get(`/v1/customers/${this.customerCode}/facePhoto`)
+        .then((res) => {
+          this.customerPhoto = res.url
+        })
+        .catch(console.error)
+    }
   },
   methods: {
     /**

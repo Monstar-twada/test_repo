@@ -59,7 +59,9 @@
             :icon="isPdf ? 'pdf' : 'license-front'"
             :url="isPdf ? '' : registrationImage"
             :validate="customValidate"
-            @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
+            @change="
+              (res) => filerChange(res, 'tmpRegistrationImageFileCode', 2)
+            "
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="車検証番号">
@@ -99,7 +101,7 @@
             icon="car"
             :validate="customValidate"
             :url="carPhoto"
-            @change="(res) => filerChange(res, 'tmpCarPhotoCode')"
+            @change="(res) => filerChange(res, 'tmpCarPhotoCode', 3)"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="ナンバー">
@@ -665,20 +667,6 @@ export default {
   created() {
     this.getCarInfo()
     // 車検証画像取得
-    const { customerCode, carCode } = this.query
-    this.$api
-      .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
-      .then((res) => {
-        this.registrationImage = res.url
-        this.checkFile(res.url)
-      })
-      .catch(console.error)
-    this.$api
-      .get(`/v1/customers/${customerCode}/cars/${carCode}/carPhoto`)
-      .then((res) => {
-        this.carPhoto = res.url
-      })
-      .catch(console.error)
   },
   mounted() {
     this.addWindowPopstateEvent()
@@ -739,6 +727,26 @@ export default {
       } else {
         callback()
       }
+    },
+
+    getRegistrationImage() {
+      const { customerCode, carCode } = this.query
+      this.$api
+        .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
+        .then((res) => {
+          this.registrationImage = res.url
+          this.checkFile(res.url)
+        })
+        .catch(console.error)
+    },
+    getCarPhoto() {
+      const { customerCode, carCode } = this.query
+      this.$api
+        .get(`/v1/customers/${customerCode}/cars/${carCode}/carPhoto`)
+        .then((res) => {
+          this.carPhoto = res.url
+        })
+        .catch(console.error)
     },
     async handleConfirm() {
       if (this.isSubmitting) return
@@ -815,14 +823,14 @@ export default {
         () => {}
       )
     },
-    filerChange(res, type) {
+    filerChange(res, type, imageType) {
       this.isPdf = false
       if (!res.data) {
         this.deleteFile(type)
       }
 
       this.$api
-        .upload(res)
+        .upload(res, { imageType })
         .then((data) => {
           this.deleteFile(type)
           this.form[type] = data.id
@@ -878,6 +886,12 @@ export default {
         const res = await this.$api.get(
           `/v1/customers/${customerCode}/cars/${carCode}`
         )
+        if (res.registrationImageFileCode !== null) {
+          this.getRegistrationImage()
+        }
+        if (res.imageFileCode !== null) {
+          this.getCarPhoto()
+        }
         const form = {}
         Object.keys(DEF_CAR_FORM).forEach((key) => {
           form[key] = res[key]
