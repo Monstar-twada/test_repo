@@ -12,7 +12,7 @@
             height="80px"
             :options="{ width: 720, height: 720 }"
             :url="staffImage"
-            @change="(res) => avatarChange(res, 'staffPhoto')"
+            @change="(res) => avatarChange(res)"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="氏名">
@@ -98,9 +98,12 @@
         </fg-form-item>
         <fg-form-item label="生年月日">
           <fg-calendar
-            v-model="staff.birthday"
+            v-model="staff.birthDay"
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd"
             width="160px"
-            placeholder="1989/1/1"
+            clearable
+            placeholder="1989-1-1"
           ></fg-calendar>
         </fg-form-item>
         <fg-form-item label="電話番号">
@@ -230,22 +233,35 @@ export default {
         console.error('err', err)
       }
     },
-
-    avatarChange(res, type) {
-      console.log('res-data', res)
+    // Staff 写真変更
+    avatarChange(res) {
       if (!res.data) {
-        // this.deleteFile(type)
+        this.deleteFile()
+      } else {
+        this.$api
+          .upload(res, { imageType: '1' })
+          .then((data) => {
+            this.deleteFile()
+            this.staff.tmpStaffPhoto = data.id
+          })
+          .catch((err) => {
+            this.$alert(err.message)
+          })
       }
+    },
+    // Staff 写真削除
+    deleteFile() {
       this.$api
-        .upload(res, { imageType: '1' })
-        .then((data) => {
-          // this.deleteFile(type)
-          this.staff.tmpStaffPhoto = data.id
+        .delete(`/v1/staff/${this.getUserCode}/staffPhoto`)
+        .then(() => {
+          // console.log(`delete ${type}: ${fileId} successfully!`)
         })
         .catch((err) => {
-          this.$alert(err.message)
+          console.error(err)
         })
     },
+
+    // 資格欄初期化
     initList() {
       const val = this.qualification
         .map((item) => {
@@ -266,6 +282,7 @@ export default {
               },
             ]
     },
+    // 資格欄追加
     addItem() {
       if (
         this.qualificationList.filter((item) => {
@@ -277,6 +294,7 @@ export default {
         ...DEF_QUALIFICATION,
       })
     },
+    // 資格欄削除
     delItem(index) {
       // 資格を削除
       const id = this.qualificationList[index].id
