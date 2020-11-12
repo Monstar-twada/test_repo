@@ -5,7 +5,7 @@
  */
 export const DEF_CUSTOMER_FORM = {
   // 顔写真
-  // facePhoto: '',
+  tmpFacePhoto: '',
   // 個人法人区分
   privateBusiness: '1',
   // 姓

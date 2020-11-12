@@ -11,10 +11,11 @@
           <fg-image-processor
             width="80"
             height="80"
+            view-mode="crop"
             :options="{ width: 720, height: 720 }"
             :url="facePhoto"
             :validate="avatarValidator"
-            @change="(res) => fileChange(res, 'facePhoto')"
+            @change="(res) => fileChange(res, 'tmpFacePhoto', 4)"
           ></fg-image-processor>
         </fg-form-item>
 
@@ -210,17 +211,17 @@
         <fg-form-item label="免許証">
           <fg-image-processor
             accept="*"
-            :url="licenseImages.frontUrl"
+            :url="licenseImageFront.url"
             icon="license-front"
             :validate="licenseValidator"
-            @change="(res) => fileChange(res, 'licenseImageFront')"
+            @change="(res) => fileChange(res, 'tmpLicenseImageFront', 6)"
           ></fg-image-processor>
           <fg-image-processor
             accept="*"
-            :url="licenseImages.backUrl"
+            :url="licenseImageBack.url"
             icon="license-back"
             :validate="licenseValidator"
-            @change="(res) => fileChange(res, 'licenseImageBack')"
+            @change="(res) => fileChange(res, 'tmpLicenseImageBack', 7)"
           ></fg-image-processor>
         </fg-form-item>
 
@@ -372,8 +373,9 @@ export default {
       family: [],
       isSubmitting: false,
       facePhoto: '',
-      licenseImages: {},
       strLength: {},
+      licenseImageFront: '',
+      licenseImageBack: '',
       updateCarLifeCodes: [],
       updateSelectionPoints: [],
     }
@@ -409,8 +411,6 @@ export default {
   },
   created() {
     this.getDetail()
-    this.getFacePhoto()
-    this.getLicenseImage()
   },
   methods: {
     formChange() {
@@ -589,6 +589,15 @@ export default {
         const res = await this.$api.get(
           `/v1/customers/${this.query.customerCode}`
         )
+        if (res.facePhoto !== null) {
+          this.getFacePhoto()
+        }
+        if (res.licenseImageBack !== null) {
+          this.getLicenseImageBack()
+        }
+        if (res.licenseImageFront !== null) {
+          this.getLicenseImageFront()
+        }
         this.resetForm(res)
       } catch (err) {
         this.$alert(err.message)
@@ -605,23 +614,33 @@ export default {
         console.error(err)
       }
     },
-    async getLicenseImage() {
+    async getLicenseImageFront() {
       try {
         const res = await this.$api.get(
-          `/v1/customers/${this.query.customerCode}/licenseImage`
+          `/v1/customers/${this.query.customerCode}/licenseImage/front`
         )
-        this.licenseImages = res
+        this.licenseImageFront = res
       } catch (err) {
         console.error(err)
       }
     },
-    fileChange(res, type) {
+    async getLicenseImageBack() {
+      try {
+        const res = await this.$api.get(
+          `/v1/customers/${this.query.customerCode}/licenseImage/back`
+        )
+        this.licenseImageBack = res
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    fileChange(res, type, imageType) {
       if (!res.data) {
         this.deleteFile(type)
       }
 
       this.$api
-        .upload(res)
+        .upload(res, { imageType })
         .then((data) => {
           this.deleteFile(type)
           this.form[type] = data.id

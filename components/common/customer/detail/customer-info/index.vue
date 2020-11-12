@@ -74,7 +74,7 @@
         <div class="side-customer-profile-wrapper">
           <fg-avatar
             size="80"
-            :src="data.facePhoto || '/common/person_default.svg'"
+            :src="customerPhoto || '/common/person_default.svg'"
           />
           <dl>
             <dt>
@@ -140,9 +140,14 @@ export default {
         return {}
       },
     },
+    customerCode: {
+      type: [String, Number],
+      default: 0,
+    },
   },
   data() {
     return {
+      customerPhoto: null,
       licenceVisible: false,
     }
   },
@@ -193,6 +198,16 @@ export default {
       const classes = this.$ui.getBasicData('license_color', true)
       return [classes[licenseColor], licenseNumber].join(' ')
     },
+  },
+  mounted() {
+    if (this.data.facePhoto !== null) {
+      this.$api
+        .get(`/v1/customers/${this.customerCode}/facePhoto`)
+        .then((res) => {
+          this.customerPhoto = res.url
+        })
+        .catch(console.error)
+    }
   },
   methods: {
     /**

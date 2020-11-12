@@ -100,11 +100,26 @@ export default {
       default: () => {},
     },
   },
+  data() {
+    return {
+      facePhoto: '',
+    }
+  },
   computed: {
     carItem() {
       const { car } = this.item
       return Array.isArray(car) ? car[0] || {} : {}
     },
+  },
+  created() {
+    if (this.item.facePhoto !== null) {
+      this.$api
+        .get(`/v1/customers/${this.item.customerCode}/facePhoto`)
+        .then((res) => {
+          this.item.facePhoto = res.url
+        })
+        .catch(console.error)
+    }
   },
 }
 </script>

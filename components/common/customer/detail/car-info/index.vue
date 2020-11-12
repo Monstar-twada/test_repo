@@ -345,7 +345,7 @@
               >編集</fg-button
             >
           </div>
-          <CarInfoSide :data="data" />
+          <CarInfoSide :data="carPhoto" />
         </fg-col>
       </fg-row>
     </div>
@@ -421,6 +421,7 @@ export default {
       currentCarCode: null,
       vicVisible: false,
       insuranceVisible: false,
+      carPhoto: {},
     }
   },
   computed: {
@@ -500,6 +501,16 @@ export default {
           `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}`
         )
         this.data = res
+        if (res.imageFileCode !== null) {
+          try {
+            const res = await this.$api.get(
+              `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
+            )
+            this.carPhoto = res
+          } catch (err) {
+            console.error(err)
+          }
+        }
       } catch (err) {
         console.error(err)
         this.$alert(err.message)

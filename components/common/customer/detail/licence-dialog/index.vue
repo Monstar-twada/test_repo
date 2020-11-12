@@ -9,10 +9,10 @@
     <div class="body-wrapper">
       <fg-row gutter="20">
         <fg-col span="12">
-          <img :src="data.licenseImageFront" alt="" />
+          <img :src="licenseImageFront" alt="" />
         </fg-col>
         <fg-col span="12">
-          <img :src="data.licenseImageBack" alt="" />
+          <img :src="licenseImageBack" alt="" />
         </fg-col>
       </fg-row>
     </div>
@@ -31,6 +31,8 @@ export default {
   data() {
     return {
       visible: this.value,
+      licenseImageFront: '',
+      licenseImageBack: '',
     }
   },
   watch: {
@@ -39,6 +41,27 @@ export default {
     },
     visible(val) {
       this.$emit('input', val)
+    },
+    data: {
+      handler(data) {
+        // calls only if image is not null
+        if (this.data.licenseImageBack !== null) {
+          this.$api
+            .get(`/v1/customers/${this.data.customerCode}/licenseImage/back`)
+            .then((res) => {
+              this.licenseImageBack = res.url
+            })
+            .catch(console.error)
+        }
+        if (this.data.licenseImageFront !== null) {
+          this.$api
+            .get(`/v1/customers/${this.data.customerCode}/licenseImage/front`)
+            .then((res) => {
+              this.licenseImageFront = res.url
+            })
+            .catch(console.error)
+        }
+      },
     },
   },
 }
