@@ -578,8 +578,8 @@ export default {
         this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
         return
       }
-      if (size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルが使用できます')
+      if (size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルが使用できます')
         return
       }
       callback()

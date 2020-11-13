@@ -874,8 +874,8 @@ export default {
         return
       }
 
-      if (file.size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルを選択してください')
+      if (file.size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       next()
