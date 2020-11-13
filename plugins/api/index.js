@@ -60,7 +60,7 @@ export class RequestApi {
 
     const formData = new FormData()
     formData.append('image-type', params.imageType || '')
-    formData.append('filename', file.blob, file.raw.file.name)
+    formData.append('filename', file.data, file.raw.file.name)
     formData.append('content-type', file.data.type)
 
     return new Promise((resolve, reject) => {
