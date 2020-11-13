@@ -636,57 +636,17 @@ export default {
     },
     fileChange(res, type, imageType) {
       if (!res.data) {
-        this.deleteFile(type)
+        this.form[type] = null
       } else {
         this.$api
           .upload(res, { imageType })
           .then((data) => {
-            // this.deleteFile(type)
             this.form[type] = data.id
           })
           .catch((err) => {
             this.$alert(err.message)
           })
       }
-    },
-    deleteFile(type) {
-      switch (type) {
-        case 'tmpFacePhoto':
-          this.form[type] = null
-          break
-        case 'tmpLicenseImageFront':
-          this.form[type] = null
-          break
-        case 'tmpLicenseImageBack':
-          this.form[type] = null
-          break
-      }
-      // if (!fileId) return
-      // console.error('delete file:', fileId)
-      // const customerCode = this.query.customerCode
-      // switch (type) {
-      //   case 'facePhoto':
-      //     this.$api
-      //       .delete(`/v1/customers/${customerCode}/facePhoto`)
-      //       .then(() => {
-      //         // console.log(`delete ${type}: ${fileId} successfully!`)
-      //       })
-      //       .catch((err) => {
-      //         console.error(err)
-      //       })
-      //     break
-      //   case 'licenseImageFront':
-      //   case 'licenseImageBack':
-      //     this.$api
-      //       .delete(`/v1/customers/${customerCode}/licenseImage`)
-      //       .then(() => {
-      //         // console.log(`delete ${type}: ${fileId} successfully!`)
-      //       })
-      //       .catch((err) => {
-      //         console.error(err)
-      //       })
-      //     break
-      // }
     },
     uploadFile(file) {
       return new Promise((resolve, reject) => {
