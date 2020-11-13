@@ -631,7 +631,7 @@ import { DEF_CAR_FORM } from './constants'
 import { FORM_RULES } from './validate'
 import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
-import { REG_IMAGE_MIME, REG_PDF_MIME } from '~/assets/constants'
+import { REG_IMAGE_MIME } from '~/assets/constants'
 import { browserMixin } from '~/mixins/browser'
 
 export default {
@@ -869,8 +869,8 @@ export default {
       }
     },
     customValidate(file, next) {
-      if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
+      if (!REG_IMAGE_MIME.test(file.type)) {
+        this.$alert('JPEG・PNG・HEICファイルを選択してください')
         return
       }
 
