@@ -230,7 +230,7 @@ export default {
         const res = await this.$api.get(
           `/v1/staff/${this.getUserCode}/staffPhoto`
         )
-        this.staffImage = res.url || ''
+        this.staffImage = res.url || null
       } catch (err) {
         console.error('err', err)
       }
