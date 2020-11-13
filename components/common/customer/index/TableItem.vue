@@ -111,15 +111,33 @@ export default {
       return Array.isArray(car) ? car[0] || {} : {}
     },
   },
+  watch: {
+    value(val) {
+      this.visible = val
+    },
+    visible(val) {
+      this.$emit('input', val)
+    },
+    item: {
+      handler(item) {
+        this.getFacePhoto()
+      },
+    },
+  },
   created() {
-    if (this.item.facePhoto !== null) {
-      this.$api
-        .get(`/v1/customers/${this.item.customerCode}/facePhoto`)
-        .then((res) => {
-          this.item.facePhoto = res.url
-        })
-        .catch(console.error)
-    }
+    this.getFacePhoto()
+  },
+  methods: {
+    getFacePhoto() {
+      if (this.item.facePhoto !== null) {
+        this.$api
+          .get(`/v1/customers/${this.item.customerCode}/facePhoto`)
+          .then((res) => {
+            this.item.facePhoto = res.url
+          })
+          .catch(console.error)
+      }
+    },
   },
 }
 </script>

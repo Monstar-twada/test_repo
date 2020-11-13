@@ -9,10 +9,12 @@
     <div class="body-wrapper">
       <fg-row gutter="20">
         <fg-col span="12">
-          <img :src="licenseImageFront" alt="" />
+          <pdf v-if="isPdfFront" :src="licenseImageFront" />
+          <img v-else :src="licenseImageFront" alt="" />
         </fg-col>
         <fg-col span="12">
-          <img :src="licenseImageBack" alt="" />
+          <pdf v-if="isPdfBack" :src="licenseImageBack" />
+          <img v-else :src="licenseImageBack" alt="" />
         </fg-col>
       </fg-row>
     </div>
@@ -20,7 +22,11 @@
 </template>
 
 <script>
+import pdf from 'vue-pdf'
 export default {
+  components: {
+    pdf,
+  },
   props: {
     value: Boolean,
     data: {
@@ -33,6 +39,8 @@ export default {
       visible: this.value,
       licenseImageFront: '',
       licenseImageBack: '',
+      isPdfFront: null,
+      isPdfBack: null,
     }
   },
   watch: {
@@ -49,6 +57,7 @@ export default {
           this.$api
             .get(`/v1/customers/${this.data.customerCode}/licenseImage/back`)
             .then((res) => {
+              this.checkFile(res.url, 'back')
               this.licenseImageBack = res.url
             })
             .catch(console.error)
@@ -57,11 +66,26 @@ export default {
           this.$api
             .get(`/v1/customers/${this.data.customerCode}/licenseImage/front`)
             .then((res) => {
+              this.checkFile(res.url, 'front')
               this.licenseImageFront = res.url
             })
             .catch(console.error)
         }
       },
+    },
+  },
+  methods: {
+    // checks if the file is PDF
+    checkFile(link, ImageType) {
+      if (ImageType === 'front') {
+        link.indexOf('.pdf') > 0
+          ? (this.isPdfFront = true)
+          : (this.isPdfFront = false)
+      } else if (ImageType === 'Back') {
+        link.indexOf('.pdf') > 0
+          ? (this.isPdfBack = true)
+          : (this.isPdfBack = false)
+      }
     },
   },
 }
