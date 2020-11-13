@@ -4,7 +4,7 @@
     <div class="signin-index-form-wrapper">
       <fg-form label-width="140px">
         <fg-form-item label="会社名">
-          <p>株式会社ファーストグループ</p>
+          <p>{{ staff.companyName }}</p>
         </fg-form-item>
         <fg-form-item label="お客様の写真">
           <fg-image-processor
@@ -71,6 +71,7 @@
                 <fg-input
                   v-model="item.qualificationName"
                   placeholder="例）1級小型自動車整備士"
+                  @change="editItem(i)"
                 ></fg-input>
               </fg-col>
               <fg-col span="3">
@@ -128,6 +129,7 @@
           border
           bold
           width="220px"
+          @click="back"
           >戻る</fg-button
         >
       </div>
@@ -228,7 +230,7 @@ export default {
         const res = await this.$api.get(
           `/v1/staff/${this.getUserCode}/staffPhoto`
         )
-        this.staffImage = res.url || ''
+        this.staffImage = res.url || null
       } catch (err) {
         console.error('err', err)
       }
@@ -236,29 +238,18 @@ export default {
     // Staff 写真変更
     avatarChange(res) {
       if (!res.data) {
-        this.deleteFile()
+        this.staffPhoto = null
+        this.staff.tmpStaffPhoto = null
       } else {
         this.$api
           .upload(res, { imageType: '1' })
           .then((data) => {
-            this.deleteFile()
             this.staff.tmpStaffPhoto = data.id
           })
           .catch((err) => {
             this.$alert(err.message)
           })
       }
-    },
-    // Staff 写真削除
-    deleteFile() {
-      this.$api
-        .delete(`/v1/staff/${this.getUserCode}/staffPhoto`)
-        .then(() => {
-          // console.log(`delete ${type}: ${fileId} successfully!`)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
     },
 
     // 資格欄初期化
@@ -267,7 +258,7 @@ export default {
         .map((item) => {
           return {
             ...item,
-            status: 'update',
+            status: 'default',
           }
         })
         .filter((item) => {
@@ -294,6 +285,13 @@ export default {
         ...DEF_QUALIFICATION,
       })
     },
+    editItem(index) {
+      // 資格を編集
+      const status = this.qualificationList[index].status
+      if (status === 'default') {
+        this.qualificationList[index].status = 'update'
+      }
+    },
     // 資格欄削除
     delItem(index) {
       // 資格を削除
@@ -319,12 +317,26 @@ export default {
         staffPhoto,
         ...params
       } = this.staff
+      this.$ui.allTypeToNull(params, [
+        'birthDay',
+        'firstName',
+        'lastName',
+        'firstNameKana',
+        'lastNameKana',
+        'phoneNumber',
+      ])
       await this.$api
         .put(`/v1/account/${this.getUserCode}`, { account: { ...params } })
-        .then((res) => {})
+        .then(() => {
+          this.$router.back()
+        })
         .catch((err) => {
           console.error(err)
         })
+    },
+
+    back() {
+      this.$router.back()
     },
 
     // 職種データ更新
