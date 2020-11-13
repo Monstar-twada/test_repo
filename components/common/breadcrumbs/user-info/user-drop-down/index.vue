@@ -29,7 +29,7 @@
         <span
           >{{ staff.lastName }}&nbsp;&nbsp;{{ staff.firstName }}（{{
             staff.lastNameKana
-          }}&nbsp;&nbsp;{{ staff.firstNameKana }}））</span
+          }}&nbsp;&nbsp;{{ staff.firstNameKana }}）</span
         >
       </fg-form-item>
       <fg-form-item label="cars Manage ID" class="__short">
@@ -93,7 +93,7 @@ export default {
   data() {
     return {
       staff: {},
-      staffImage: {},
+      staffImage: null,
       occupationCodes: [],
       qualificationList: [],
     }
@@ -157,7 +157,7 @@ export default {
         const res = await this.$api.get(
           `/v1/staff/${this.getUserCode}/staffPhoto`
         )
-        this.staffImage = res.url || ''
+        this.staffImage = res.url || null
       } catch (err) {
         console.error('err', err)
       }

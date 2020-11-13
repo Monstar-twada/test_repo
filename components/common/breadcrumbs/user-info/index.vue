@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="avatar-wrapper" @click="avatarClick">
-      <img :src="userAvatar" alt @load="imgOnLoad" />
+      <img :src="staffImage" alt @load="imgOnLoad" />
     </div>
     <div v-show="userDropdownVisible" class="user-dropdown-wrapper">
       <UserDropDown />
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import UserDropDown from '~/components/common/breadcrumbs/user-info/user-drop-down/index'
 export default {
   components: {
@@ -30,10 +31,16 @@ export default {
   },
   data() {
     return {
-      userAvatar: '/common/person_default.svg',
       userDropdownVisible: false,
       taskNumber: 14,
+      staffImage: '/common/person_default.svg',
     }
+  },
+  computed: {
+    ...mapGetters('auth', ['getUserCode']),
+  },
+  created() {
+    this.getStaffImage()
   },
   beforeDestroy() {
     this.clearTimeout()
@@ -43,6 +50,19 @@ export default {
     document.addEventListener('click', this.docClick, false)
   },
   methods: {
+    // Staff 写真
+    async getStaffImage() {
+      try {
+        const res = await this.$api.get(
+          `/v1/staff/${this.getUserCode}/staffPhoto`
+        )
+        if (res.url) {
+          this.staffImage = res.url
+        }
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
     imgOnLoad(e) {
       const el = e.target
       if (el.width > el.height) {
