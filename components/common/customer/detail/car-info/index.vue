@@ -510,6 +510,8 @@ export default {
           } catch (err) {
             console.error(err)
           }
+        } else {
+          this.carPhoto = {}
         }
       } catch (err) {
         console.error(err)
