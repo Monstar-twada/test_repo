@@ -17,7 +17,7 @@
           </nuxt-link>
         </span>
       </fg-form-item>
-      <fg-form-item label="所属店舗" class="__short">
+      <fg-form-item label="会社名" class="__short">
         <span>{{ staff.companyName }}</span>
       </fg-form-item>
       <fg-form-item label="写真" class="__short">

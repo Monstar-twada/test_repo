@@ -58,7 +58,7 @@
             accept="*"
             :icon="isPdf ? 'pdf' : 'license-front'"
             :url="registrationImage"
-            :validate="customValidate"
+            :validate="customPDFValidate"
             @change="
               (res) => filerChange(res, 'tmpRegistrationImageFileCode', 2)
             "
@@ -839,13 +839,24 @@ export default {
       }
     },
     customValidate(file, next) {
-      if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
+      if (!REG_IMAGE_MIME.test(file.type)) {
+        this.$alert('JPEG・PNG・HEICファイルを選択してください')
         return
       }
 
-      if (file.size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルを選択してください')
+      if (file.size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
+        return
+      }
+      next()
+    },
+
+    customPDFValidate(file, next) {
+      if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
+      }
+      if (file.size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       next()

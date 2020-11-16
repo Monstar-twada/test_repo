@@ -113,6 +113,18 @@ export default {
           `/v1/attractingCustomers/${this.getStoreCode}/${this.apiParams.date}`,
           params
         )
+        if (res && Array.isArray(res.results)) {
+          for (const item of res.results) {
+            if (item.facePhoto !== null) {
+              const res = await this.$api.get(
+                `/v1/customers/${item.customerCode}/facePhoto`
+              )
+              item.imageUrl = res.url
+            } else {
+              item.imageUrl = '/common/person_default.svg'
+            }
+          }
+        }
         this.maResultList = res
       } catch (e) {
         console.error(e)
