@@ -33,7 +33,7 @@
             <fg-avatar
               class="user"
               :data="{
-                url: '/common/person_default.svg',
+                url: `${item.imageUrl}`,
                 name: `${item.lastName} ${item.firstName}`,
                 summary: `（${item.age || '-'}歳）`,
               }"
@@ -303,6 +303,19 @@ export default {
     // TODO
   },
   methods: {
+    // getUserImage(itemList) {
+    //   itemList.results.forEach((item) => {
+    //     if (item.facePhoto !== null) {
+    //       this.$api
+    //         .get(`/v1/customers/${item.customerCode}/facePhoto`)
+    //         .then((res) => {
+    //           this.userImages[item.customerCode] = res.url
+    //         })
+    //     } else {
+    //       this.userImages[item.customerCode] = '/common/person_default.svg'
+    //     }
+    //   })
+    // },
     handleChange(property, id, val, isToString = false) {
       let value = Number(val)
       if (isToString) value = value.toString()

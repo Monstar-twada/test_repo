@@ -10,8 +10,10 @@
           <fg-image-processor
             width="80px"
             height="80px"
+            view-mode="crop"
             :options="{ width: 720, height: 720 }"
             :url="staffImage"
+            :validate="avatarValidator"
             @change="(res) => avatarChange(res)"
           ></fg-image-processor>
         </fg-form-item>
@@ -104,7 +106,8 @@
             value-format="yyyy-MM-dd"
             width="160px"
             clearable
-            placeholder="1989-1-1"
+            default-view="1985/01/01"
+            placeholder="1985/01/01"
           ></fg-calendar>
         </fg-form-item>
         <fg-form-item label="電話番号">
@@ -250,6 +253,18 @@ export default {
             this.$alert(err.message)
           })
       }
+    },
+
+    avatarValidator({ type, size }, callback) {
+      if (!/^image\/(jpeg|png|heic)/.test(type)) {
+        this.$alert('JPEG・PNG・HEICファイルを選択してください')
+        return
+      }
+      if (size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
+        return
+      }
+      callback()
     },
 
     // 資格欄初期化
