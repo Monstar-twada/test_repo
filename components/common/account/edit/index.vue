@@ -256,12 +256,12 @@ export default {
     },
 
     avatarValidator({ type, size }, callback) {
-      if (!/^image\/\w+/.test(type)) {
-        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
+      if (!/^image\/(jpeg|png|heic)/.test(type)) {
+        this.$alert('JPEG・PNG・ファイルを選択してください')
         return
       }
       if (size / 1024 > 10240) {
-        this.$alert('10MBまでのファイルが使用できます')
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       callback()

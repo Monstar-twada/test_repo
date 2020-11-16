@@ -564,12 +564,12 @@ export default {
       // )
     },
     avatarValidator({ type, size }, callback) {
-      if (!/^image\/\w+/.test(type)) {
-        this.$alert('JPEG・PNG・HEICファイルのみ選択できます')
+      if (!/^image\/(jpeg|png|heic)/.test(type)) {
+        this.$alert('JPEG・PNG・HEICファイルを選択してください')
         return
       }
       if (size / 1024 > 10240) {
-        this.$alert('10MBまでのファイルが使用できます')
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       callback()
@@ -579,11 +579,11 @@ export default {
         !/^image\/(jpeg|png|pdf|heic)/i.test(type) &&
         !/^application\/pdf/i.test(type)
       ) {
-        this.$alert('PDF・JPEG・PNG・HEICファイルのみ選択できます')
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
         return
       }
       if (size / 1024 > 10240) {
-        this.$alert('10MBまでのファイルが使用できます')
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       callback()
