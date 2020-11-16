@@ -885,8 +885,8 @@ export default {
       if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
         this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
       }
-      if (!REG_IMAGE_MIME.test(file.type)) {
-        this.$alert('JPEG・PNG・HEICファイルを選択してください')
+      if (file.size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       next()
