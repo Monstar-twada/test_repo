@@ -15,10 +15,14 @@
             @change="(res) => avatarChange(res)"
           ></fg-image-processor>
         </fg-form-item>
-        <fg-form-item label="氏名">
+        <fg-form-item label="氏名" required>
           <fg-row gutter="20" type="flex">
             <fg-col span="12">
-              <fg-input v-model="staff.lastName" placeholder="姓"></fg-input>
+              <fg-input
+                v-model="staff.lastName"
+                placeholder="姓"
+                :error-message="errors.lastName"
+              ></fg-input>
             </fg-col>
             <fg-col span="12">
               <fg-input v-model="staff.firstName" placeholder="名"></fg-input>
@@ -31,12 +35,14 @@
               <fg-input
                 v-model="staff.lastNameKana"
                 placeholder="セイ"
+                :error-message="errors.lastNameKana"
               ></fg-input>
             </fg-col>
             <fg-col span="12">
               <fg-input
                 v-model="staff.firstNameKana"
                 placeholder="メイ"
+                :error-message="errors.firstNameKana"
               ></fg-input>
             </fg-col>
           </fg-row>
@@ -97,7 +103,7 @@
             </fg-col>
           </fg-row>
         </fg-form-item>
-        <fg-form-item label="生年月日">
+        <fg-form-item label="生年月日" required>
           <fg-calendar
             v-model="staff.birthDay"
             format="yyyy-MM-dd"
@@ -105,12 +111,14 @@
             width="160px"
             clearable
             placeholder="1989-1-1"
+            :error-message="errors.birthDay"
           ></fg-calendar>
         </fg-form-item>
         <fg-form-item label="電話番号">
           <fg-input
             v-model="staff.phoneNumber"
             placeholder="03-3960-7776"
+            :error-message="errors.phoneNumber"
           ></fg-input>
         </fg-form-item>
       </fg-form>
@@ -139,6 +147,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { FORM_RULES } from './validate'
 import Header from '~/components/common/account/common/Header'
 import MarkIcon from '~/components/common/mark-icon/index'
 const DEF_QUALIFICATION = {
@@ -152,6 +161,8 @@ export default {
   },
   data() {
     return {
+      errors: {},
+      isSubmitting: false,
       staff: {},
       staffImage: null,
       qualification: [],
@@ -187,6 +198,9 @@ export default {
     })
   },
   methods: {
+    formChange(form) {
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
+    },
     async getStaffProfile() {
       try {
         const res = await this.$api.get(`/v1/account/${this.getUserCode}`)
@@ -305,8 +319,6 @@ export default {
 
     // 変更データ更新
     async saveChange() {
-      this.updateStaffQualification()
-      this.updateStaffOccupation()
       const {
         id,
         companyCode,
@@ -317,7 +329,18 @@ export default {
         staffPhoto,
         ...params
       } = this.staff
-      this.$ui.allTypeToNull(params, [
+      const form = { ...params }
+      if (this.isSubmitting) return
+      this.isSubmitting = true
+      this.formChange(form)
+      if (this.errors.length) {
+        this.$alert(
+          '必須項目が未入力か、入力データに誤りがあります。エラーを確認してください。'
+        )
+        this.isSubmitting = false
+        return
+      }
+      this.$ui.allTypeToNull(form, [
         'birthDay',
         'firstName',
         'lastName',
@@ -325,8 +348,10 @@ export default {
         'lastNameKana',
         'phoneNumber',
       ])
+      this.updateStaffQualification()
+      this.updateStaffOccupation()
       await this.$api
-        .put(`/v1/account/${this.getUserCode}`, { account: { ...params } })
+        .put(`/v1/account/${this.getUserCode}`, { account: form })
         .then(() => {
           this.$router.back()
         })
