@@ -140,9 +140,11 @@
                 <TextContent
                   label="車検証有無"
                   :content="data.registrationNumber | fmtHyphen"
-                  :copyable="!!data.registrationNumber"
-                  high-light
-                  @click="vicVisible = true"
+                  :copyable="!!data.registrationImageFileCode"
+                  :high-light="!!data.registrationImageFileCode"
+                  @click="
+                    data.registrationImageFileCode ? (vicVisible = true) : ''
+                  "
                 />
                 <TextContent
                   label="乗換対象"
@@ -359,6 +361,7 @@
     />
     <EditReservationDialog v-model="reservationVisible" />
     <VICDialog
+      v-if="data.registrationImageFileCode"
       v-model="vicVisible"
       :car-code="data.carCode"
       :customer-code="data.customerCode"
