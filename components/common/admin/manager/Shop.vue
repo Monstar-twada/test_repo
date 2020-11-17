@@ -147,7 +147,7 @@ export default {
   methods: {
     moveToForm() {
       this.$router.push({
-        path: `/admin/area/new`,
+        path: `/admin/area/new/`,
       })
     },
     moveToEdit(id) {

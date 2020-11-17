@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import throttle from 'lodash.throttle'
 import Breadcrumbs from '~/components/common/breadcrumbs/index.vue'
 import MaResult from '~/components/manager/ma/customer_list/ma-result/index'
 import StatusBar from '~/components/manager/ma/customer_list/status-bar/index'
@@ -74,24 +76,32 @@ export default {
     maStatus: {},
     stateCode: null,
   }),
+  computed: {
+    ...mapGetters('auth', ['getStoreCode']),
+  },
   watch: {
     searchParams: {
       deep: true,
       handler() {
-        this.getMaResult()
+        this.getDatawithThrottle()
       },
     },
   },
   created() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
-    this.apiParams = {
-      ...this.$route.query,
-    }
-    this.getMaResult()
-    this.getMaStatus()
-    this.updateBreadCrumbs()
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      this.apiParams = {
+        ...this.$route.query,
+      }
+      this.getMaResult()
+      this.getMaStatus()
+      this.updateBreadCrumbs()
+    })
   },
   methods: {
+    getDatawithThrottle: throttle(async function () {
+      await this.getMaResult()
+    }, 3000),
     async getMaResult() {
       const params = {
         ...SEARCH_PARAMS,
@@ -100,9 +110,21 @@ export default {
       params.offset = (params.page - 1) * params.limit
       try {
         const res = await this.$api.get(
-          `/v1/attractingCustomers/${this.storeCode}/${this.apiParams.date}`,
+          `/v1/attractingCustomers/${this.getStoreCode}/${this.apiParams.date}`,
           params
         )
+        if (res && Array.isArray(res.results)) {
+          for (const item of res.results) {
+            if (item.facePhoto !== null) {
+              const res = await this.$api.get(
+                `/v1/customers/${item.customerCode}/facePhoto`
+              )
+              item.imageUrl = res.url
+            } else {
+              item.imageUrl = '/common/person_default.svg'
+            }
+          }
+        }
         this.maResultList = res
       } catch (e) {
         console.error(e)
@@ -115,10 +137,11 @@ export default {
       }
       try {
         const res = await this.$api.post(
-          `/v1/attractingCustomersMonth/${this.storeCode}/${this.apiParams.date}`,
+          `/v1/attractingCustomersMonth/${this.getStoreCode}/${this.apiParams.date}`,
           params
         )
         this.maStatus = res.results[0]
+        this.$nuxt.$loading.finish()
       } catch (e) {
         console.error(e)
       }

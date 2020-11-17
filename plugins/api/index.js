@@ -59,7 +59,8 @@ export class RequestApi {
     const token = $nuxt.$store.state.auth.token
 
     const formData = new FormData()
-    formData.append('filename', file.raw.file)
+    formData.append('image-type', params.imageType || '')
+    formData.append('filename', file.data, file.raw.file.name)
     formData.append('content-type', file.data.type)
 
     return new Promise((resolve, reject) => {

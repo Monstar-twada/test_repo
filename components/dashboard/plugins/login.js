@@ -5,6 +5,6 @@
  */
 export const login = {
   success() {
-    this.$router.push('/bi')
+    this.$router.push('/bi/')
   },
 }

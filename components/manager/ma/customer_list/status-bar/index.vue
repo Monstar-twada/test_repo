@@ -203,6 +203,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'StatusBar',
   props: {
@@ -219,8 +220,10 @@ export default {
       showDataFlg: false,
     }
   },
+  computed: {
+    ...mapGetters('auth', ['getStoreCode']),
+  },
   mounted() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
     // display data wait 1000ms
     setTimeout(() => {
       this.showDataFlg = true
@@ -236,7 +239,7 @@ export default {
 
       params[property] = Number(val)
       this.$api.put(
-        `/v1/attractingCustomers/${this.storeCode}/${this.$route.query.date}`,
+        `/v1/attractingCustomers/${this.getStoreCode}/${this.$route.query.date}`,
         params
       )
     },

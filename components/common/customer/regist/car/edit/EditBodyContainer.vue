@@ -56,10 +56,12 @@
         <fg-form-item label="車検証">
           <fg-image-processor
             accept="*"
-            icon="license-front"
+            :icon="isPdf ? 'pdf' : 'license-front'"
             :url="registrationImage"
-            :validate="customValidate"
-            @change="(res) => filerChange(res, 'tmpRegistrationImageFileCode')"
+            :validate="customPDFValidate"
+            @change="
+              (res) => filerChange(res, 'tmpRegistrationImageFileCode', 2)
+            "
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="車検証番号">
@@ -98,8 +100,8 @@
           <fg-image-processor
             icon="car"
             :validate="customValidate"
-            url=""
-            @change="(res) => filerChange(res, 'carPhoto')"
+            :url="carPhoto"
+            @change="(res) => filerChange(res, 'tmpCarPhotoCode', 3)"
           ></fg-image-processor>
         </fg-form-item>
         <fg-form-item label="ナンバー">
@@ -196,7 +198,7 @@
       </fg-form>
     </WhiteBox>
 
-    <WhiteBox class="mt30">
+    <!-- <WhiteBox class="mt30">
       <ColumnTitle>
         <template v-slot:title>
           <h3>売買情報</h3>
@@ -330,7 +332,7 @@
           />
         </fg-form-item>
       </fg-form>
-    </WhiteBox>
+    </WhiteBox> -->
 
     <WhiteBox class="mt30">
       <ColumnTitle>
@@ -624,17 +626,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { DEF_CAR_FORM } from './constants'
 import { FORM_RULES } from './validate'
 import WhiteBox from '~/components/common/customer/common/WhiteBox'
 import ColumnTitle from '~/components/common/customer/common/ColumnTitle'
 import { REG_IMAGE_MIME, REG_PDF_MIME } from '~/assets/constants'
+import { browserMixin } from '~/mixins/browser'
 
 export default {
   components: {
     WhiteBox,
     ColumnTitle,
   },
+  mixins: [browserMixin],
   data() {
     const query = this.$route.query
     return {
@@ -642,28 +647,106 @@ export default {
       form: {},
       errors: {},
       registrationImage: '',
+      carPhoto: '',
       isSubmitting: false,
+      isPdf: false,
     }
   },
   computed: {
+    ...mapGetters('popup', ['getSaveFlg']),
+    ...mapGetters('auth', ['getStoreCode']),
     saleNewOldCarTypes() {
       return this.$ui.getBasicData('sale_new_old_car_type')
+    },
+  },
+  watch: {
+    form() {
+      this.$store.dispatch('popup/setFlg', true)
     },
   },
   created() {
     this.getCarInfo()
     // 車検証画像取得
-    const { customerCode, carCode } = this.query
-    this.$api
-      .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
-      .then((res) => {
-        this.registrationImage = res.url
-      })
-      .catch(console.error)
+  },
+  mounted() {
+    this.addWindowPopstateEvent()
   },
   methods: {
+    // checks if the file is PDF
+    checkFile(link) {
+      this.isPdf = !!(link.indexOf('.pdf') > 0)
+    },
     formChange() {
       this.errors = this.$ui.formSyncValidator(FORM_RULES, this.form)
+    },
+
+    clickBrowserSystemButton() {
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
+          this.$router.back()
+        },
+        () => {
+          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+        }
+      )
+      // if (!this.$store.getters['popup/getSaveFlg']) return
+      // this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+      //   buttons: {
+      //     ok: {
+      //       text: '遷移する',
+      //     },
+      //   },
+      // })
+      //   .then(() => {
+      //     this.$store.dispatch('popup/setFlg', false)
+      //     this.removeWindowPopstateEvent()
+      //     this.$router.back()
+      //   })
+      //   .catch(() => {
+      //     this.addWindowPopstateEvent()
+      //   })
+    },
+    popup(callback) {
+      if (this.$store.getters['popup/getSaveFlg']) {
+        this.$confirm('入力中のデータが失われます。画面遷移をしますか？', {
+          buttons: {
+            ok: {
+              text: '遷移する',
+            },
+          },
+        })
+          .then(() => {
+            this.$store.dispatch('popup/setFlg', false)
+            callback()
+          })
+          .catch((error) => {
+            console.error({ error })
+          })
+      } else {
+        callback()
+      }
+    },
+
+    getRegistrationImage() {
+      const { customerCode, carCode } = this.query
+      this.$api
+        .get(`/v1/customers/${customerCode}/cars/${carCode}/registrationImage`)
+        .then((res) => {
+          this.registrationImage = res.url
+          this.checkFile(res.url)
+        })
+        .catch(console.error)
+    },
+    getCarPhoto() {
+      const { customerCode, carCode } = this.query
+      this.$api
+        .get(`/v1/customers/${customerCode}/cars/${carCode}/carPhoto`)
+        .then((res) => {
+          this.carPhoto = res.url
+        })
+        .catch(console.error)
     },
     async handleConfirm() {
       if (this.isSubmitting) return
@@ -674,7 +757,7 @@ export default {
         this.isSubmitting = false
         return
       }
-      this.form.storeCode = $nuxt.$store.state.auth.storeCode
+      this.form.storeCode = this.getStoreCode
       // String  => Integer (API設計)
       this.form.tmpRegistrationImageFileCode = this.fmtDataToNumber(
         this.form.tmpRegistrationImageFileCode
@@ -715,72 +798,65 @@ export default {
           `/v1/customers/${customerCode}/cars/${carCode}`,
           this.form
         )
-        await this.$alert('車両編集成功しました！', { type: 'success' })
-        this.handleBack()
+        // await this.$alert('車両編集成功しました！', { type: 'success' })
+        setTimeout(() => {
+          this.$store.dispatch('popup/setFlg', false)
+          this.$router.push(
+            `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+          )
+        }, 300)
       } catch (err) {
         if (err) this.$alert(err.message)
       }
       this.isSubmitting = false
     },
     handleBack() {
-      setTimeout(() => {
-        this.$router.push(
-          `/customer/detail?customerCode=${this.query.customerCode}`
-        )
-      }, 300)
+      this.popupConfirm(
+        this.getSaveFlg,
+        () => {
+          setTimeout(() => {
+            this.$router.push(
+              `/customer/detail/?customerCode=${this.query.customerCode}&carCode=${this.query.carCode}`
+            )
+          }, 300)
+        },
+        () => {}
+      )
     },
-    filerChange(res, type) {
+    filerChange(res, type, imageType) {
+      this.isPdf = false
       if (!res.data) {
-        this.deleteFile(type)
-      }
-
-      this.$api
-        .upload(res)
-        .then((data) => {
-          this.deleteFile(type)
-          this.form[type] = data.id
-        })
-        .catch((err) => {
-          this.$alert(err.message)
-        })
-    },
-    deleteFile(type) {
-      const fileId = this.form[type]
-      if (!fileId) return
-      console.error('delete file:', fileId)
-      const customerCode = this.query.customerCode
-      switch (type) {
-        case 'facePhoto':
-          this.$api
-            .delete(`/v1/customers/${customerCode}/facePhoto`)
-            .then(() => {
-              // console.log(`delete ${type}: ${fileId} successfully!`)
-            })
-            .catch((err) => {
-              console.error(err)
-            })
-          break
-        case 'licenseImageFront':
-        case 'licenseImageBack':
-          this.$api
-            .delete(`/v1/customers/${customerCode}/licenseImage`)
-            .then(() => {
-              // console.log(`delete ${type}: ${fileId} successfully!`)
-            })
-            .catch((err) => {
-              console.error(err)
-            })
-          break
+        this.form[type] = null
+      } else {
+        this.$api
+          .upload(res, { imageType })
+          .then((data) => {
+            this.form[type] = data.id
+          })
+          .catch((err) => {
+            this.$alert(err.message)
+          })
       }
     },
     customValidate(file, next) {
-      if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
-        this.$alert('PDF・JPEG・PNG・HEIFファイルを選択してください')
+      if (!REG_IMAGE_MIME.test(file.type)) {
+        this.$alert('JPEG・PNG・HEICファイルを選択してください')
         return
       }
 
-      if (file.size / 1024 > 5120) {
-        this.$alert('5MBまでのファイルを選択してください')
+      if (file.size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
+        return
+      }
+      next()
+    },
+
+    customPDFValidate(file, next) {
+      if (!REG_IMAGE_MIME.test(file.type) && !REG_PDF_MIME.test(file.type)) {
+        this.$alert('PDF・JPEG・PNG・HEICファイルを選択してください')
+      }
+      if (file.size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
         return
       }
       next()
@@ -791,6 +867,12 @@ export default {
         const res = await this.$api.get(
           `/v1/customers/${customerCode}/cars/${carCode}`
         )
+        if (res.registrationImageFileCode !== null) {
+          this.getRegistrationImage()
+        }
+        if (res.imageFileCode !== null) {
+          this.getCarPhoto()
+        }
         const form = {}
         Object.keys(DEF_CAR_FORM).forEach((key) => {
           form[key] = res[key]

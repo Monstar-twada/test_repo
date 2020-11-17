@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 // development
 let isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -10,8 +9,8 @@ export const baseConfig = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name || '',
-    title: process.env.npm_package_name || '',
+    // titleTemplate: '%s - ' + process.env.npm_package_name || '',
+    // title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -22,7 +21,7 @@ export const baseConfig = {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       {
         rel: 'stylesheet',
         href:
@@ -37,7 +36,8 @@ export const baseConfig = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '$--color-background' },
+  // loading: { color: '$--color-background' },
+  loading: '~/components/common/loading/index.vue',
   /*
    ** Global CSS
    */
@@ -68,13 +68,21 @@ export const baseConfig = {
     ['@nuxtjs/eslint-module', { fix: true }],
   ],
   env: {
-    //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     useMockData: process.env.MOCK_DATA === '1',
     NODE_ENV: process.env.NODE_ENV,
+    COGNITO_REGION: process.env.COGNITO_REGION,
+    COGNITO_USERPOOL_ID: process.env.COGNITO_USERPOOL_ID,
+    COGNITO_USERPOOL_CLIENT_ID: process.env.COGNITO_USERPOOL_CLIENT_ID,
   },
   router: {
     base: process.env.BASE_URL,
+    trailingSlash: true,
+    extendRoutes(routes, resolve) {
+      for (const route of routes) {
+        route.alias = resolve(route.path, 'index.html')
+      }
+    },
   },
   // vuetify: {
   //   customVariables: ['~/assets/scss/variables.scss'],
@@ -90,12 +98,10 @@ export const baseConfig = {
   axios: {
     proxy: true,
   },
-  // ? 'https://manager.cars-enjoy.com'
-  // : 'https://manager.cars-enjoy.com',
   proxy: {
     '/api/': isDevelopment
-      ? 'https://manager.cars-enjoy.com'
-      : 'https://manager.cars-enjoy.com',
+      ? 'https://test.manager.test-mars.com'
+      : process.env.BASE_URL,
   },
   /*
    ** vuetify module configuration
@@ -119,6 +125,7 @@ export const baseConfig = {
    ** Build configuration
    */
   build: {
+    // test another for caching
     publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
     /*
      ** You can extend webpack config here

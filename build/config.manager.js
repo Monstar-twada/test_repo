@@ -10,6 +10,11 @@ export default merge(baseConfig, {
   dir: {
     pages: 'pages/manager',
   },
+  head: {
+    // titleTemplate: '%s - ' + process.env.npm_package_name || '',
+    title: 'Cars Manager' || '',
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
   // import color css
   styleResources: {
     scss: [
@@ -29,6 +34,7 @@ export default merge(baseConfig, {
   buildDir: 'dist/.manager',
   plugins: [
     { src: '~/plugins/global-manager-properties.js', ssr: false },
+    { src: '~/plugins/route/index.js', ssr: false },
     '~/plugins/aws',
   ],
 })

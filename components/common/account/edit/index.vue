@@ -4,86 +4,134 @@
     <div class="signin-index-form-wrapper">
       <fg-form label-width="140px">
         <fg-form-item label="会社名">
-          <p>株式会社ファーストグループ</p>
+          <p>{{ staff.companyName }}</p>
         </fg-form-item>
-        <fg-form-item label="お客様の写真">
+        <fg-form-item label="写真">
           <fg-image-processor
             width="80px"
             height="80px"
+            view-mode="crop"
             :options="{ width: 720, height: 720 }"
-            url
-            @change="avatarChange"
+            :url="staffImage"
+            :validate="avatarValidator"
+            @change="(res) => avatarChange(res)"
           ></fg-image-processor>
         </fg-form-item>
-        <fg-form-item label="氏名">
+        <fg-form-item label="氏名" required>
           <fg-row gutter="20" type="flex">
             <fg-col span="12">
-              <fg-input placeholder="姓"></fg-input>
+              <fg-input
+                v-model="staff.lastName"
+                placeholder="姓"
+                :error-message="errors.lastName"
+              ></fg-input>
             </fg-col>
             <fg-col span="12">
-              <fg-input placeholder="名"></fg-input>
+              <fg-input v-model="staff.firstName" placeholder="名"></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
         <fg-form-item label="フリガナ">
           <fg-row gutter="20" type="flex">
             <fg-col span="12">
-              <fg-input placeholder="セイ"></fg-input>
+              <fg-input
+                v-model="staff.lastNameKana"
+                placeholder="セイ"
+                :error-message="errors.lastNameKana"
+              ></fg-input>
             </fg-col>
             <fg-col span="12">
-              <fg-input placeholder="メイ"></fg-input>
+              <fg-input
+                v-model="staff.firstNameKana"
+                placeholder="メイ"
+                :error-message="errors.firstNameKana"
+              ></fg-input>
             </fg-col>
           </fg-row>
         </fg-form-item>
-        <fg-form-item label="cars Manager ID">
-          <p>df1s13823400</p>
+        <fg-form-item label="スタッフコード">
+          <p>{{ staff.staffCode }}</p>
         </fg-form-item>
         <fg-form-item label="権限">
-          <p>スタッフ</p>
+          <p>{{ carsRole.text }}</p>
         </fg-form-item>
         <fg-form-item label="職種">
           <div class="signin-index-form-items">
-            <div v-for="(item, i) in icons" :key="`${item.title}-${i}`">
-              <!-- <div class="signin-index-form-item">
-                <div class="signin-index-form-item_img">
-                  <fg-avatar
-                    :src="require(`./img/${item.icon}-icon-white.svg`)"
-                    size="25"
-                    fillet
-                  ></fg-avatar>
-                </div>
-                <div class="signin-index-form-item_title">
-                  <p>{{ item.title }}</p>
-                </div>
-              </div> -->
-              <MarkIcon :value="true" :icon-src="item.icon" :text="item.text" />
+            <div v-for="(item, i) in serviceContent" :key="`service-${i}`">
+              <MarkIcon
+                v-model="item.checked"
+                :icon-src="`service-${item.value}`"
+                :text="item.text"
+              />
             </div>
           </div>
         </fg-form-item>
         <fg-form-item label="資格">
-          <fg-row gutter="20" type="flex">
-            <fg-col span="21">
-              <fg-input placeholder="例）1級小型自動車整備士"></fg-input>
-            </fg-col>
-            <fg-col span="3">
-              <fg-button circle border icon="less" width="30px" />
-            </fg-col>
-          </fg-row>
+          <template v-for="(item, i) in qualificationList">
+            <fg-row
+              v-if="item.status !== 'delete'"
+              :key="i"
+              gutter="20"
+              type="flex"
+              class="mb10"
+            >
+              <fg-col span="21">
+                <fg-input
+                  v-model="item.qualificationName"
+                  placeholder="例）1級小型自動車整備士"
+                  @change="editItem(i)"
+                ></fg-input>
+              </fg-col>
+              <fg-col span="3">
+                <fg-button
+                  circle
+                  border
+                  icon="less"
+                  width="30px"
+                  @click="delItem(i)"
+                />
+              </fg-col>
+            </fg-row>
+          </template>
           <fg-row gutter="20">
             <fg-col span="3">
-              <fg-button circle border icon="plus" width="30px" />
+              <fg-button
+                circle
+                border
+                icon="plus"
+                width="30px"
+                @click="addItem"
+              />
             </fg-col>
           </fg-row>
         </fg-form-item>
-        <fg-form-item label="生年月日">
-          <fg-calendar width="160px" placeholder="1989/1/1"></fg-calendar>
+        <fg-form-item label="生年月日" required>
+          <fg-calendar
+            v-model="staff.birthDay"
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd"
+            width="160px"
+            clearable
+            :error-message="errors.birthDay"
+            default-view="1985/01/01"
+            placeholder="1985/01/01"
+          ></fg-calendar>
         </fg-form-item>
         <fg-form-item label="電話番号">
-          <fg-input placeholder="03-3960-7776"></fg-input>
+          <fg-input
+            v-model="staff.phoneNumber"
+            placeholder="03-3960-7776"
+            :error-message="errors.phoneNumber"
+          ></fg-input>
         </fg-form-item>
       </fg-form>
       <div class="signin-index-submit-button">
-        <fg-button type="primary" suffix-icon="arrow-right" bold width="220px"
+        <fg-button
+          type="primary"
+          suffix-icon="arrow-right"
+          bold
+          width="220px"
+          @click="saveChange"
           >更新</fg-button
         >
         <fg-button
@@ -92,6 +140,7 @@
           border
           bold
           width="220px"
+          @click="back"
           >戻る</fg-button
         >
       </div>
@@ -100,8 +149,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { FORM_RULES } from './validate'
 import Header from '~/components/common/account/common/Header'
 import MarkIcon from '~/components/common/mark-icon/index'
+const DEF_QUALIFICATION = {
+  qualificationName: '',
+  status: 'add',
+}
 export default {
   components: {
     Header,
@@ -109,42 +164,269 @@ export default {
   },
   data() {
     return {
-      showPassword1: false,
-      showPassword2: false,
-      icons: [
-        {
-          text: '購入',
-          icon: 'car',
-        },
-        {
-          text: '売却',
-          icon: 'money',
-        },
-        {
-          text: '整備',
-          icon: 'wrench',
-        },
-        {
-          text: '鈑金',
-          icon: 'hammer',
-        },
-        {
-          text: '保険',
-          icon: 'heart',
-        },
-        {
-          text: 'アクセサリー',
-          icon: 'tire',
-        },
-        {
-          text: '車検',
-          icon: 'paper',
-        },
-      ],
+      errors: {},
+      isSubmitting: false,
+      staff: {},
+      staffImage: null,
+      qualification: [],
+      qualificationList: [],
+      occupationSelected: [],
+      promises: [],
     }
   },
+  computed: {
+    ...mapGetters('auth', ['getUserCode']),
+    serviceContent() {
+      return this.$ui.getBasicData('service_code').map((item) => {
+        return {
+          ...item,
+          checked: this.occupationSelected.includes(item.value),
+        }
+      })
+    },
+    carsRole() {
+      const role = this.$ui.getBasicData('cars_role').filter((item) => {
+        return item.value === this.staff.role
+      })
+      return role[0] || {}
+    },
+  },
+  created() {
+    Promise.all([
+      this.getStaffProfile(),
+      this.getStaffOccupation(),
+      this.getStaffQualification(),
+    ]).then(() => {
+      this.initList()
+    })
+  },
   methods: {
-    avatarChange() {},
+    formChange(form) {
+      this.errors = this.$ui.formSyncValidator(FORM_RULES, form)
+    },
+    async getStaffProfile() {
+      try {
+        const res = await this.$api.get(`/v1/account/${this.getUserCode}`)
+        this.staff = res || {}
+        if (res && res.staffPhoto) {
+          this.getStaffImage()
+        }
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
+    // Staff 職種
+    async getStaffOccupation() {
+      try {
+        const res = await this.$api.get(
+          `/v1/account/${this.getUserCode}/occupation`
+        )
+        this.occupationSelected = Array.isArray(res.occupationCodes)
+          ? res.occupationCodes
+          : []
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
+    // Staff 資格
+    async getStaffQualification() {
+      try {
+        const res = await this.$api.get(
+          `/v1/account/${this.getUserCode}/qualification`
+        )
+
+        this.qualification = res.qualification || []
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
+
+    // Staff 写真
+    async getStaffImage() {
+      try {
+        const res = await this.$api.get(
+          `/v1/staff/${this.getUserCode}/staffPhoto`
+        )
+        this.staffImage = res.url || null
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
+    // Staff 写真変更
+    avatarChange(res) {
+      if (!res.data) {
+        this.staffPhoto = null
+        this.staff.tmpStaffPhoto = null
+      } else {
+        this.$api
+          .upload(res, { imageType: '1' })
+          .then((data) => {
+            this.staff.tmpStaffPhoto = data.id
+          })
+          .catch((err) => {
+            this.$alert(err.message)
+          })
+      }
+    },
+
+    avatarValidator({ type, size }, callback) {
+      if (!/^image\/(jpeg|png|heic)/.test(type)) {
+        this.$alert('JPEG・PNG・HEICファイルを選択してください')
+        return
+      }
+      if (size / 1024 > 10240) {
+        this.$alert('10MBまでのファイルを選択してください')
+        return
+      }
+      callback()
+    },
+
+    // 資格欄初期化
+    initList() {
+      const val = this.qualification
+        .map((item) => {
+          return {
+            ...item,
+            status: 'default',
+          }
+        })
+        .filter((item) => {
+          return item.status !== 'delete'
+        })
+      this.qualificationList =
+        Array.isArray(val) && val.length > 0
+          ? [...val]
+          : [
+              {
+                ...DEF_QUALIFICATION,
+              },
+            ]
+    },
+    // 資格欄追加
+    addItem() {
+      if (
+        this.qualificationList.filter((item) => {
+          return item.status !== 'delete'
+        }).length >= 3
+      )
+        return null
+      this.qualificationList.push({
+        ...DEF_QUALIFICATION,
+      })
+    },
+    editItem(index) {
+      // 資格を編集
+      const status = this.qualificationList[index].status
+      if (status === 'default') {
+        this.qualificationList[index].status = 'update'
+      }
+    },
+    // 資格欄削除
+    delItem(index) {
+      // 資格を削除
+      const id = this.qualificationList[index].id
+      if (id) {
+        this.qualificationList[index].status = 'delete'
+      } else {
+        this.qualificationList.splice(index, 1)
+      }
+    },
+
+    // 変更データ更新
+    async saveChange() {
+      const {
+        id,
+        companyCode,
+        staffCode,
+        companyName,
+        role,
+        email,
+        staffPhoto,
+        ...params
+      } = this.staff
+      const form = { ...params }
+      if (this.isSubmitting) return
+      this.isSubmitting = true
+      this.formChange(form)
+      if (this.errors.length) {
+        this.$alert(
+          '必須項目が未入力か、入力データに誤りがあります。エラーを確認してください。'
+        )
+        this.isSubmitting = false
+        return
+      }
+      this.$ui.allTypeToNull(form, [
+        'birthDay',
+        'firstName',
+        'lastName',
+        'firstNameKana',
+        'lastNameKana',
+        'phoneNumber',
+      ])
+      this.updateStaffQualification()
+      this.updateStaffOccupation()
+      await this.$api
+        .put(`/v1/account/${this.getUserCode}`, { account: form })
+        .then(() => {
+          this.$router.back()
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+
+    back() {
+      this.$router.back()
+    },
+
+    // 職種データ更新
+    async updateStaffOccupation() {
+      const selectedOccupation = []
+      this.serviceContent.forEach((item) => {
+        if (item.checked) {
+          selectedOccupation.push(item.value)
+        }
+      })
+      await this.$api
+        .put(`/v1/account/${this.getUserCode}/occupation`, {
+          occupationCodes: selectedOccupation,
+        })
+        .then((res) => {})
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+
+    // 資格データ更新
+    async updateStaffQualification() {
+      this.qualificationList.forEach((item) => {
+        if (item.status === 'update' && item.qualificationName !== '') {
+          this.promises.push(
+            this.$api.put(
+              `/v1/account/${this.getUserCode}/qualification/${item.id}`,
+              {
+                qualificationName: item.qualificationName,
+              }
+            )
+          )
+        } else if (item.status === 'add' && item.qualificationName !== '') {
+          this.promises.push(
+            this.$api.post(`/v1/account/${this.getUserCode}/qualification/`, {
+              qualificationName: item.qualificationName,
+            })
+          )
+        } else if (item.status === 'delete') {
+          this.promises.push(
+            this.$api.delete(
+              `/v1/account/${this.getUserCode}/qualification/${item.id}`
+            )
+          )
+        }
+      })
+      await Promise.all(this.promises).then((res) => {
+        this.promises = []
+      })
+    },
   },
 }
 </script>

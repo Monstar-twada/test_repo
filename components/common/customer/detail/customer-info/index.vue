@@ -37,17 +37,18 @@
           <fg-col span="12" align-self="start" class="p20 pb-0">
             <TextContent label="勤務先" :content="data | fmtWork" />
             <TextContent label="勤続年数" :content="workingTerm" />
-            <TextContent
-              label="年収"
-              :content="data.annualIncome | fmtHyphen"
-            />
+            <TextContent label="年収" :content="annualIncome" />
             <TextContent label="住宅" :content="houseInfo" />
             <TextContent
               label="免許証"
               :content="licence | fmtHyphen"
-              high-light
-              :copyable="!!licence"
-              @click="clickLicence"
+              :high-light="!!data.licenseImageBack || !!data.licenseImageFront"
+              :copyable="!!data.licenseImageBack || !!data.licenseImageFront"
+              @click="
+                !!data.licenseImageBack || !!data.licenseImageFront
+                  ? (licenceVisible = true)
+                  : ''
+              "
             />
             <TextContent
               label="cars ID "
@@ -77,12 +78,12 @@
         <div class="side-customer-profile-wrapper">
           <fg-avatar
             size="80"
-            :src="data.facePhoto || '/common/person_default.svg'"
+            :src="customerPhoto || '/common/person_default.svg'"
           />
           <dl>
             <dt>
               {{ data | fmtCustomerName }}
-              <span style="font-size: 10px;"
+              <span style="font-size: 10px"
                 >（{{ data.age | fmtHyphen }}歳）</span
               >
             </dt>
@@ -143,18 +144,21 @@ export default {
         return {}
       },
     },
+    customerCode: {
+      type: [String, Number],
+      default: 0,
+    },
   },
   data() {
     return {
+      customerPhoto: null,
       licenceVisible: false,
     }
   },
   computed: {
     carLives() {
       const classes = this.$ui.getBasicData('car_life')
-      const selectedItems = (this.data.carLives || []).map((item) => {
-        return item.carLife
-      })
+      const selectedItems = this.data.carLifeCodes || []
       return classes.map((item) => {
         return {
           ...item,
@@ -164,9 +168,7 @@ export default {
     },
     selectionPoints() {
       const classes = this.$ui.getBasicData('selection_points')
-      const selectedItems = (this.data.selectionPoints || []).map((item) => {
-        return item.selectionPoints
-      })
+      const selectedItems = this.data.selectionPoints || []
       return classes.map((item) => {
         return {
           ...item,
@@ -177,11 +179,18 @@ export default {
     houseInfo() {
       const classes = this.$ui.getBasicData('residence_type', true)
       const { residenceType, residenceTerm } = this.data
-      return [classes[residenceType], residenceTerm + '年'].join('/ ')
+      return [
+        classes[residenceType] ? classes[residenceType] : '- ',
+        residenceTerm !== null ? residenceTerm + '年' : '-',
+      ].join('/ ')
     },
     workingTerm() {
       const { workingTerm } = this.data
-      return workingTerm ? workingTerm + '年' : '-'
+      return workingTerm !== null ? workingTerm + '年' : '-'
+    },
+    annualIncome() {
+      const { annualIncome } = this.data
+      return annualIncome ? `${annualIncome}万円` : '-'
     },
     privateBusiness() {
       const classes = this.$ui.getBasicData('private_business', true)
@@ -194,17 +203,24 @@ export default {
       return [classes[licenseColor], licenseNumber].join(' ')
     },
   },
+  mounted() {
+    if (this.data.facePhoto !== null) {
+      this.$api
+        .get(`/v1/customers/${this.customerCode}/facePhoto`)
+        .then((res) => {
+          this.customerPhoto = res.url
+        })
+        .catch(console.error)
+    }
+  },
   methods: {
     /**
      * show licence
      * 免許証
      */
-    clickLicence() {
-      this.licenceVisible = true
-    },
     handleEdit() {
       this.$router.push(
-        '/customer/regist/edit?customerCode=' + this.data.customerCode
+        '/customer/regist/edit/?customerCode=' + this.data.customerCode
       )
     },
   },

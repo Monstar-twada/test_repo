@@ -90,7 +90,7 @@
       <fg-table-column label width="16%" :sortable="false">
         <template v-slot="item">
           <nuxt-link
-            :to="`/ma/customer_list?type=0000&date=${item.registrationEndMonth}`"
+            :to="`/ma/customer_list/?date=${item.registrationEndMonth}`"
           >
             <fg-button
               v-if="item.listCount != 0"
@@ -111,6 +111,8 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import throttle from 'lodash.throttle'
 export default {
   name: 'ActiveList',
   components: {},
@@ -130,6 +132,9 @@ export default {
     currentMonth: '',
     storeCode: null,
   }),
+  computed: {
+    ...mapGetters('auth', ['getStoreCode']),
+  },
   watch: {
     value(val) {
       this.currentPage = val
@@ -139,14 +144,16 @@ export default {
     },
     currentMonth(val, oldVal) {
       if (val !== oldVal) {
-        this.getMaIndexResult()
+        this.getDatawithThrottle()
       }
     },
   },
   created() {
-    this.storeCode = $nuxt.$store.state.auth.storeCode
     this.getCurrentMonth()
-    this.getMaIndexResult()
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      this.getMaIndexResult()
+    })
   },
   methods: {
     getCurrentMonth() {
@@ -158,16 +165,19 @@ export default {
           : date.getMonth() + 1
       this.currentMonth = year.toString() + month.toString()
     },
-
+    getDatawithThrottle: throttle(async function () {
+      await this.getMaIndexResult()
+    }, 3000),
     async getMaIndexResult() {
       const params = {}
       await this.$api
         .post(
-          `/v1/attractingCustomersMonth/${this.storeCode}/${this.currentMonth}`,
+          `/v1/attractingCustomersMonth/${this.getStoreCode}/${this.currentMonth}`,
           params
         )
         .then((res) => {
           this.maIndexResultList = res.results
+          this.$nuxt.$loading.finish()
         })
         .catch((err) => {
           console.error(err)

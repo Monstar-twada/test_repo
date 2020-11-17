@@ -140,9 +140,11 @@
                 <TextContent
                   label="車検証有無"
                   :content="data.registrationNumber | fmtHyphen"
-                  :copyable="!!data.registrationNumber"
-                  high-light
-                  @click="vicVisible = true"
+                  :copyable="!!data.registrationImageFileCode"
+                  :high-light="!!data.registrationImageFileCode"
+                  @click="
+                    data.registrationImageFileCode ? (vicVisible = true) : ''
+                  "
                 />
                 <TextContent
                   label="乗換対象"
@@ -304,10 +306,7 @@
                   label="タイヤサイズ"
                   :content="data.tireSizeRear | fmtHyphen"
                 />
-                <TextContent
-                  label="タイヤ製造"
-                  :content="`${data.tireCreateYear}年${data.tireCreateWeek}週目`"
-                />
+                <TextContent label="タイヤ製造" :content="tireCreateYear" />
                 <TextContent
                   label="バッテリーサイズ"
                   :content="data.batterySize | fmtHyphen"
@@ -337,7 +336,7 @@
           </fg-row>
         </fg-col>
         <fg-col span="8">
-          <div class="mt15 pb15 pr20" style="text-align: right;">
+          <div class="mt15 pb15 pr20" style="text-align: right">
             <fg-button
               prefix-icon="edit"
               size="mini"
@@ -348,7 +347,7 @@
               >編集</fg-button
             >
           </div>
-          <CarInfoSide :data="data" />
+          <CarInfoSide :data="carPhoto" />
         </fg-col>
       </fg-row>
     </div>
@@ -362,6 +361,7 @@
     />
     <EditReservationDialog v-model="reservationVisible" />
     <VICDialog
+      v-if="data.registrationImageFileCode"
       v-model="vicVisible"
       :car-code="data.carCode"
       :customer-code="data.customerCode"
@@ -424,6 +424,7 @@ export default {
       currentCarCode: null,
       vicVisible: false,
       insuranceVisible: false,
+      carPhoto: {},
     }
   },
   computed: {
@@ -465,11 +466,11 @@ export default {
       }
       return arr.join(' ') || '-'
     },
-    tireCreateYearMonth() {
+    tireCreateYear() {
       // 2015年27週目
-      const { tireCreateYearMonth, tireCreateWeek } = this.data
-      if (tireCreateYearMonth) {
-        return `${tireCreateYearMonth}年${tireCreateWeek}週目`
+      const { tireCreateYear, tireCreateWeek } = this.data
+      if (tireCreateYear) {
+        return `${tireCreateYear}年${tireCreateWeek}週目`
       }
       return '-'
     },
@@ -486,6 +487,10 @@ export default {
     },
   },
   created() {
+    if (this.$route.query.carCode) {
+      this.currentCarCode = this.$route.query.carCode
+      this.getCarInfo()
+    }
     this.getCarList()
   },
   methods: {
@@ -499,6 +504,18 @@ export default {
           `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}`
         )
         this.data = res
+        if (res.imageFileCode !== null) {
+          try {
+            const res = await this.$api.get(
+              `/v1/customers/${this.customerCode}/cars/${this.currentCarCode}/carPhoto`
+            )
+            this.carPhoto = res
+          } catch (err) {
+            console.error(err)
+          }
+        } else {
+          this.carPhoto = {}
+        }
       } catch (err) {
         console.error(err)
         this.$alert(err.message)
@@ -529,11 +546,22 @@ export default {
     changeCar(item) {
       this.currentCarCode = item.carCode
       this.getCarInfo()
+      if (
+        this.$route.query.carCode &&
+        this.$route.query.carCode !== this.currentCarCode
+      ) {
+        this.$router.replace({
+          query: {
+            customerCode: this.customerCode,
+            carCode: this.currentCarCode,
+          },
+        })
+      }
     },
     goEditCar() {
       if (this.carListData.results && this.carListData.results.length > 0) {
         this.$router.push(
-          `/customer/regist/car/edit?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
+          `/customer/regist/car/edit/?carCode=${this.currentCarCode}&customerCode=${this.customerCode}`
         )
       }
     },

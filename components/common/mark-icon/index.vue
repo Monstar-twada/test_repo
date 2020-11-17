@@ -1,6 +1,10 @@
 <template>
-  <div class="mark-icon">
-    <div class="icon" :class="selected ? '__selected' : ''">
+  <div class="mark-icon" :class="`__${size}`">
+    <div
+      class="icon"
+      :class="selected ? '__selected' : ''"
+      @click="handleClick"
+    >
       <img :src="require(`./img/${iconSrc}.svg`)" />
     </div>
     <span>{{ text }}</span>
@@ -13,6 +17,10 @@ export default {
     value: {
       type: Boolean,
       default: false,
+    },
+    size: {
+      type: String,
+      default: 'middle', // small/middle/large
     },
     iconSrc: {
       type: String,
@@ -28,6 +36,7 @@ export default {
       selected: this.value,
     }
   },
+  computed: {},
   watch: {
     value(val) {
       this.selected = val
@@ -36,13 +45,16 @@ export default {
       this.$emit('input', val)
     },
   },
-  methods: {},
+  methods: {
+    handleClick() {
+      this.selected = !this.selected
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
 .mark-icon {
-  width: 80px;
-  height: 80px;
+  // width: 80px;
   text-align: center;
   margin: 0 -20px;
   // display: flex;
@@ -50,8 +62,6 @@ export default {
   // justify-content: center;
   // align-items: flex-start;
   .icon {
-    width: 40px;
-    height: 40px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -67,10 +77,37 @@ export default {
     background: $--color-primary;
   }
   span {
+    display: block;
     width: 100%;
     text-align: center;
     font-size: 12px;
     font-weight: normal;
+  }
+
+  &.__small {
+    width: 34px;
+    margin: 0 10px 0 0;
+    .icon {
+      width: 34px;
+      height: 34px;
+
+      img {
+        width: 20px;
+      }
+    }
+  }
+
+  &.__middle {
+    width: 80px;
+    margin: 0 -20px;
+    .icon {
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: 25px;
+      }
+    }
   }
 }
 </style>

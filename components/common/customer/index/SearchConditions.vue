@@ -10,7 +10,6 @@
               size="small"
               placeholder="顧客名（姓）"
               clearable
-              @keyup.native.enter="search"
             ></fg-input>
           </fg-col>
           <fg-col span="8">
@@ -97,6 +96,7 @@
           <fg-col span="6">
             <fg-calendar
               v-model="form.registrationFirstDateFrom"
+              type="month"
               size="small"
               placeholder="初度登録年月"
               show-after-dash
@@ -110,9 +110,10 @@
           <fg-col span="6">
             <fg-calendar
               v-model="form.registrationFirstDateTo"
+              type="month"
               size="small"
+              placeholder=""
               clearable
-              show-after-dash
               format="yyyy-MM"
               value-format="yyyy-MM"
               :is-error="!!registrationDateError"
@@ -195,6 +196,12 @@ export default {
         }
       }
       this.$ui.booleanToNumber(form, [
+        'purchaseIntention',
+        'transferTarget',
+        'nearInspection',
+        'sixMonthContact',
+      ])
+      this.$ui.allTypeToNull(form, [
         'purchaseIntention',
         'transferTarget',
         'nearInspection',

@@ -35,9 +35,9 @@
           i === index ? 'sidebar-list-item--active' : '',
           i === index + 1 ? 'radius-tr' : '',
         ]"
-        @click="handleMenuClick"
+        @click="handleMenuClick(item.link)"
       >
-        <nuxt-link :to="item.link">
+        <a>
           <div class="sidebar-list-item__icon">
             <img
               :width="item.width"
@@ -49,7 +49,7 @@
           <div class="sidebar-list-item__content">
             <h4 class="sidebar-list-item__title">{{ item.text }}</h4>
           </div>
-        </nuxt-link>
+        </a>
       </li>
     </ul>
     <div :class="['bottom-space', isLastIndex ? 'radius-tr' : '']"></div>
@@ -57,7 +57,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { browserMixin } from '~/mixins/browser'
 export default {
+  mixins: [browserMixin],
   props: {
     value: Boolean,
     menuItems: {
@@ -80,6 +83,8 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('popup', ['getSaveFlg']),
+    ...mapGetters('auth', ['getStoreCode']),
     isFirstIndex() {
       return this.index === 0
     },
@@ -115,22 +120,60 @@ export default {
   methods: {
     resetRouteIndex() {
       const route = this.$route
-      const path = '/' + route.path.split('/')[1]
+      const path = '/' + route.path.split('/')[1] + '/'
       this.index = this.menuItems.findIndex((item) => item.link === path)
     },
-    handleMenuClick(e) {
-      const tempIndex = this.index
-      const timer = setTimeout(() => {
-        this.index = tempIndex
-        clearTimeout(timer)
-      }, 0)
+    handleMenuClick(link) {
+      if (!this.getSaveFlg) {
+        const tempIndex = this.index
+        const timer = setTimeout(() => {
+          this.index = tempIndex
+          clearTimeout(timer)
+          this.$router.push(link)
+        }, 0)
+      } else {
+        this.popupConfirm(
+          this.getSaveFlg,
+          () => {
+            this.status = []
+            this.$router.push(link)
+          },
+          () => {}
+        )
+      }
+      // if (!this.getSaveFlg) {
+      //   const tempIndex = this.index
+      //   const timer = setTimeout(() => {
+      //     this.index = tempIndex
+      //     clearTimeout(timer)
+      //     this.$router.push(link)
+      //   }, 0)
+      // } else {
+      //   const content = '入力中のデータが失われます。画面遷移をしますか？'
+      //   const okBtn = '遷移する'
+      //   this.$confirm(content, {
+      //     buttons: {
+      //       ok: {
+      //         text: okBtn,
+      //       },
+      //     },
+      //   })
+      //     .then(() => {
+      //       this.$store.dispatch('popup/setFlg', false)
+      //       this.status = []
+      //       this.$router.push(link)
+      //     })
+      //     .catch(() => {
+      //       // console.log('cancel')
+      //     })
+      // }
     },
     async getStoreList() {
       await this.$api
         .get(`/v1/store`)
         .then((res) => {
           const storeList = res.results[0].area
-          const storeCode = $nuxt.$store.state.auth.storeCode
+          const storeCode = this.getStoreCode
           if (storeCode) {
             this.selectList = storeList
               .filter((item) => item.store.storeCode === storeCode)
