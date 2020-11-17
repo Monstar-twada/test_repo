@@ -81,7 +81,7 @@ export default {
         link.indexOf('.pdf') > 0
           ? (this.isPdfFront = true)
           : (this.isPdfFront = false)
-      } else if (ImageType === 'Back') {
+      } else if (ImageType === 'back') {
         link.indexOf('.pdf') > 0
           ? (this.isPdfBack = true)
           : (this.isPdfBack = false)
