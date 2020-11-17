@@ -42,9 +42,13 @@
             <TextContent
               label="免許証"
               :content="licence | fmtHyphen"
-              high-light
-              :copyable="!!licence"
-              @click="clickLicence"
+              :high-light="!!data.licenseImageBack || !!data.licenseImageFront"
+              :copyable="!!data.licenseImageBack || !!data.licenseImageFront"
+              @click="
+                !!data.licenseImageBack || !!data.licenseImageFront
+                  ? (licenceVisible = true)
+                  : ''
+              "
             />
             <TextContent
               label="cars ID "
@@ -214,9 +218,6 @@ export default {
      * show licence
      * 免許証
      */
-    clickLicence() {
-      this.licenceVisible = true
-    },
     handleEdit() {
       this.$router.push(
         '/customer/regist/edit/?customerCode=' + this.data.customerCode
