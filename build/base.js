@@ -68,7 +68,6 @@ export const baseConfig = {
     ['@nuxtjs/eslint-module', { fix: true }],
   ],
   env: {
-    //   APIServer: process.env.API_URL,
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     useMockData: process.env.MOCK_DATA === '1',
     NODE_ENV: process.env.NODE_ENV,
@@ -99,10 +98,10 @@ export const baseConfig = {
   axios: {
     proxy: true,
   },
-  // ? 'https://manager.cars-enjoy.com'
-  // : 'https://manager.cars-enjoy.com',
   proxy: {
-    '/api/': isDevelopment ? process.env.API_URL : process.env.API_URL,
+    '/api/': isDevelopment
+      ? 'https://test.manager.test-mars.com'
+      : process.env.BASE_URL,
   },
   /*
    ** vuetify module configuration
