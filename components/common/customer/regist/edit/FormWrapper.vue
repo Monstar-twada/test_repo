@@ -674,7 +674,7 @@ export default {
         // licenseColor
         if (key === 'licenseColor' && res[key]) {
           const item =
-            this.licenseColors.find((item) => item.text === res[key]) || {}
+            this.licenseColors.find((item) => item.value === res[key]) || {}
           form[key] = item.value || '1'
           return
         }
@@ -682,6 +682,10 @@ export default {
           form[key] = res[key]
         }
       })
+      // Family構成
+      if (Array.isArray(res.family) && res.family.length > 0) {
+        this.family = [...res.family]
+      }
       // car life
       if (Array.isArray(res.carLifeCodes)) {
         this.selectedCarLives = res.carLifeCodes
