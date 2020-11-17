@@ -4,8 +4,8 @@ export const browserMixin = {
      * Add Browsers Back button Event
      * @param callback
      */
-    addWindowPopstateEvent(callback) {
-      history.pushState(null, null, window.location.href)
+    addWindowPopstateEvent(url, callback) {
+      history.pushState(null, null, url)
       window.addEventListener('popstate', () => callback(), false)
     },
     /**

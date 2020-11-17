@@ -296,8 +296,10 @@ export default {
     },
   },
   mounted() {
-    // this.addWindowPopstateEvent()
-    this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+    this.addWindowPopstateEvent(
+      window.location.href,
+      this.clickBrowserSystemButton
+    )
   },
   destroyed() {
     // TODO
@@ -444,7 +446,10 @@ export default {
           this.$router.back()
         },
         () => {
-          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+          this.addWindowPopstateEvent(
+            window.location.href,
+            this.clickBrowserSystemButton
+          )
         }
       )
 
