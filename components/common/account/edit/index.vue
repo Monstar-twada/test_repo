@@ -6,7 +6,7 @@
         <fg-form-item label="会社名">
           <p>{{ staff.companyName }}</p>
         </fg-form-item>
-        <fg-form-item label="お客様の写真">
+        <fg-form-item label="写真">
           <fg-image-processor
             width="80px"
             height="80px"
@@ -49,7 +49,7 @@
             </fg-col>
           </fg-row>
         </fg-form-item>
-        <fg-form-item label="cars Manager ID">
+        <fg-form-item label="スタッフコード">
           <p>{{ staff.staffCode }}</p>
         </fg-form-item>
         <fg-form-item label="権限">

@@ -32,7 +32,7 @@
           }}&nbsp;&nbsp;{{ staff.firstNameKana }}）</span
         >
       </fg-form-item>
-      <fg-form-item label="cars Manage ID" class="__short">
+      <fg-form-item label="スタッフコード" class="__short">
         <span>{{ staff.staffCode }}</span>
       </fg-form-item>
       <fg-form-item label="職種" class="__short">
