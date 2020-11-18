@@ -673,6 +673,7 @@ export default {
       window.location.href,
       this.clickBrowserSystemButton
     )
+    console.log('this.$route', this.$router)
   },
   methods: {
     // checks if the file is PDF
@@ -687,7 +688,7 @@ export default {
       this.popupConfirm(
         this.getSaveFlg,
         () => {
-          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
+          // this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
         },
         () => {

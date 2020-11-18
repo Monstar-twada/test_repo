@@ -442,7 +442,7 @@ export default {
         this.getSaveFlg,
         () => {
           this.status = []
-          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
+          // this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
         },
         () => {
