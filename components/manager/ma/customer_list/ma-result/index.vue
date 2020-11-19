@@ -210,7 +210,7 @@
       >
         <template v-slot="item">
           <fg-select
-            :value="Number(item.outflow)"
+            :value="item.outflow"
             :items="outflowList"
             placeholder="選択"
             @change="
@@ -442,7 +442,7 @@ export default {
         this.getSaveFlg,
         () => {
           this.status = []
-          // this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
+          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
         },
         () => {

@@ -6,14 +6,14 @@ export const browserMixin = {
      */
     addWindowPopstateEvent(url, callback) {
       history.pushState(null, null, url)
-      window.addEventListener('popstate', () => callback(), false)
+      window.addEventListener('popstate', callback, false)
     },
     /**
      * Remove Browsers Back button Event
      * @param callback
      */
     removeWindowPopstateEvent(callback) {
-      window.removeEventListener('popstate', () => callback())
+      window.removeEventListener('popstate', callback)
     },
 
     popupConfirm(flg, next, back) {

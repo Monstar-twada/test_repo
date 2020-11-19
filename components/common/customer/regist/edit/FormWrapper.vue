@@ -425,7 +425,7 @@ export default {
       this.popupConfirm(
         this.getSaveFlg,
         () => {
-          // this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
+          this.removeWindowPopstateEvent(this.clickBrowserSystemButton)
           this.$router.back()
         },
         () => {
