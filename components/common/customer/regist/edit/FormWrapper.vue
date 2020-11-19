@@ -411,7 +411,6 @@ export default {
       window.location.href,
       this.clickBrowserSystemButton
     )
-    console.log('this.$route', this.$router)
   },
   created() {
     this.getDetail()
