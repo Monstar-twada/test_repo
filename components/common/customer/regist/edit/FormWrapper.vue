@@ -407,7 +407,10 @@ export default {
     },
   },
   mounted() {
-    this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+    this.addWindowPopstateEvent(
+      window.location.href,
+      this.clickBrowserSystemButton
+    )
   },
   created() {
     this.getDetail()
@@ -425,7 +428,10 @@ export default {
           this.$router.back()
         },
         () => {
-          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+          this.addWindowPopstateEvent(
+            window.location.href,
+            this.clickBrowserSystemButton
+          )
         }
       )
       // if (!this.$store.getters['popup/getSaveFlg']) return

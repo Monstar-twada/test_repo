@@ -669,7 +669,10 @@ export default {
     // 車検証画像取得
   },
   mounted() {
-    this.addWindowPopstateEvent()
+    this.addWindowPopstateEvent(
+      window.location.href,
+      this.clickBrowserSystemButton
+    )
   },
   methods: {
     // checks if the file is PDF
@@ -688,7 +691,10 @@ export default {
           this.$router.back()
         },
         () => {
-          this.addWindowPopstateEvent(this.clickBrowserSystemButton)
+          this.addWindowPopstateEvent(
+            window.location.href,
+            this.clickBrowserSystemButton
+          )
         }
       )
       // if (!this.$store.getters['popup/getSaveFlg']) return
