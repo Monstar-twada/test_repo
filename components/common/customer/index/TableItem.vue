@@ -25,7 +25,7 @@
         </fg-text>
       </div>
     </td>
-    <td>
+    <td class="is-left">
       <dl style="display: inline-block; text-align: left">
         <dd>{{ carItem.maker }}</dd>
         <dd>
