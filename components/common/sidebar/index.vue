@@ -7,7 +7,7 @@
       <div class="logo">
         <img :src="require(`./img/logo-${logoName}.svg`)" alt />
       </div>
-      <div class="company">株式会社ファーストグループ</div>
+      <div class="company">{{ companyName }}</div>
 
       <div class="select-wrapper">
         <fg-select
@@ -79,12 +79,13 @@ export default {
       // item's index in menu
       index: -1,
       logoName: isManager ? 'manager' : isConsole ? 'console' : 'dashboard',
+      companyName: null,
       selectList: [],
     }
   },
   computed: {
     ...mapGetters('popup', ['getSaveFlg']),
-    ...mapGetters('auth', ['getStoreCode']),
+    ...mapGetters('auth', ['getStoreCode', 'getUserCode']),
     isFirstIndex() {
       return this.index === 0
     },
@@ -112,12 +113,24 @@ export default {
     },
   },
   created() {
+    this.getCompanyName()
     this.resetRouteIndex()
     this.getStoreList().then(() => {
       this.selectedResult = 1
     })
   },
   methods: {
+    // Staff 写真
+    async getCompanyName() {
+      try {
+        const res = await this.$api.get(`/v1/account/${this.getUserCode}`)
+        if (res) {
+          this.companyName = res.companyName
+        }
+      } catch (err) {
+        console.error('err', err)
+      }
+    },
     resetRouteIndex() {
       const route = this.$route
       const path = '/' + route.path.split('/')[1] + '/'
