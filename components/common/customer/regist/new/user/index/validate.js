@@ -1,0 +1,17 @@
+export const FORM_RULES = {
+  // privateBusiness: [{ required: true }],
+  customerType: [{ required: true, max: 100 }],
+  lastName: [{ required: true, max: 255 }],
+  firstName: [{ required: true, max: 255 }],
+  lastNameKana: [{ required: true, max: 255 }],
+  firstNameKana: [{ required: true, max: 255 }],
+  sex: [{ required: true }],
+  cellphoneNumber: 100,
+  phoneNumber: 100,
+  email: 254,
+  zipCode: 20,
+  // prefecturesCode: [{ required: true }],
+  address1: 255,
+  address2: 255,
+  address3: 255,
+}

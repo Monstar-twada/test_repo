@@ -1,0 +1,34 @@
+export const DEF_CUSTOMER_FORM = {
+  // 担当店舗
+  storeInCharge: null,
+  // 個人法人区分
+  corporate: null,
+  // 姓
+  lastName: null,
+  // 名
+  firstName: null,
+  // 姓カナ
+  lastNameKana: null,
+  // 名カナ
+  firstNameKana: null,
+  // 性別(コード)
+  // 生年月日
+  birthday: null,
+  sex: null,
+  // 携帯番号
+  cellphoneNumber: null,
+  // 電話番号
+  phoneNumber: null,
+  // メール
+  email: null,
+  // 郵便番号
+  zipCode: null,
+  // 住所（都道府県コード）
+  prefecturesCode: null,
+  // 住所（市区町村）
+  address1: null,
+  // 住所（番地）
+  address2: null,
+  // 住所（建物名）
+  address3: null,
+}
