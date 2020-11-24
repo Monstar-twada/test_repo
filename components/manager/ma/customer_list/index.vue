@@ -8,7 +8,6 @@
       <template v-slot:right>
         <div class="export-area">
           <ExportButton @click="handleExportClick" />
-          <ExportDialog v-model="exportVisible" :export-list="maStatus" />
         </div>
       </template>
     </Breadcrumbs>
@@ -19,6 +18,7 @@
       :item-list="maResultList"
       @update-event="updateStatusBar"
     />
+    <ExportDialog v-model="exportVisible" :export-data="apiParams.date" />
   </div>
 </template>
 
@@ -75,6 +75,7 @@ export default {
     exportVisible: false,
     maStatus: {},
     stateCode: null,
+    apiParams: {},
   }),
   computed: {
     ...mapGetters('auth', ['getStoreCode']),
