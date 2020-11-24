@@ -82,9 +82,6 @@ export default {
   components: {
     Logo,
   },
-  // USER
-  // shinobu.takai@firstgroup.jp
-  // (Kw2!u_NA3~D
   data() {
     return {
       form: {
